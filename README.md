@@ -20,6 +20,12 @@ docker compose up --build -d
 - Trained-artifact readiness: http://localhost:8000/ready
 - Stop: `docker compose down`
 
+On this workstation, another application occupies port 8000. The ignored local
+`.env` sets `QSART_API_PORT=18000` and `QSART_DASHBOARD_PORT=18501`. The verified
+running URLs here are http://localhost:18000/docs and http://localhost:18501.
+Compose defaults remain 8000/8501 on a fresh checkout; either port can be
+overridden in `.env`. The local PowerShell launcher also reads these port settings.
+
 The API is alive without checkpoints, but readiness and prediction fail explicitly. There is no generated or random prediction fallback. Compose mounts `./checkpoints` read-only; it never downloads weights at startup. Ports are bound to the local machine. The API and dashboard have independent health checks; liveness does not imply model readiness.
 
 Required artifacts: `checkpoints/dr/best.pt`, `checkpoints/quality/best.pt`, `checkpoints/calibration.json`. The calibration artifact is bound to checkpoint and manifest checksums. Test fixtures are refused by production loading.

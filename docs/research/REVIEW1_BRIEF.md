@@ -16,11 +16,11 @@ The principal hypothesis is fewer missed referable cases among automated negativ
 | Primary-source audit | All 28 original IDs retained, 43 total records with primary URLs and DOI/status limits; bibliography source generated | More than 20 primary citation records independently retrieved; individual experimental replications are outside this audit |
 | Dataset acquisition | 260 actual DeepDRiD JPEGs from 65 patients; source revision and repository CC BY-SA 4.0 retained | Class-enriched feasibility subset, not representative screening prevalence |
 | Patient-disjoint partitions | 160 training images/40 patients; 20 selection images/5 patients; 20 calibration images/5 patients; 60 official-validation holdout images/15 patients | All four known views per patient stay together; final official test untouched |
-| Software behavior | Targeted starter, parser/data, model, cohort-policy and API tests passed; final full-suite and real-artifact integration verification pending at this update | Generated fixtures test software; the separate real-image results below test the pilot artifacts |
+| Software behavior | 78 tests passed with real-image integration enabled; Ruff passed; actual API response rendered across the five-page Streamlit interface | Generated fixtures test software; the separate real-image results below test the pilot artifacts |
 | Real training | DR and overall-quality MobileNetV3-small models, random initialization, 96px, three epochs, batch 8, two CPU threads, seed 42 | 60 optimizer updates per run; validation loss selected DR epoch 1 and quality epoch 2 |
 | Calibration | Temperatures fitted on 20 separate calibration images; checkpoint/manifest hashes recorded | DR calibration-fit NLL improved but ECE worsened; these are fitting diagnostics |
 | CPU measurement | Real artifact-backed validation inference benchmark completed on Intel i5-12500H | No reliable speed advantage or clinical benefit demonstrated |
-| Docker | Initial image built; latest-source rebuild and container verification pending at this update | An image build does not establish verified running deployment |
+| Docker | Latest CPU image built; API and dashboard healthy; readiness, real-image single/batch/TTA and dashboard HTTP checks passed on local ports 18000/18501 | Runtime verification establishes engineering execution, not useful screening performance |
 
 The API/dashboard, checkpoint validation, exact cohort budget allocation and evaluation scripts are implemented. Readiness means required artifacts loaded successfully; it does not certify useful predictions. A single-image routing decision does not guarantee population action budgets. [The architecture source](ARCHITECTURE.md) shows the actual data, model and request flow.
 
@@ -54,4 +54,4 @@ For the review, demonstrate the actual preprocessing, learned checkpoints, calib
 
 No confirmatory improvement, external robustness, successful clinical recapture, specialist diagnosis, prospective utility or deployment approval is established. Optional EyePACS photographs require official access terms. IDRiD primary download/archive terms were not retrieved in this audit; DDR is available through a larger author-provided split archive. These optional access limits do not block the initial DeepDRiD pilot.
 
-Use `PROTOCOL_V0_2.md` for the detailed study design and `MANUSCRIPT_DRAFT.md` for the paper source. Update only the pending final-test/container verification status from the final execution log before presenting; do not reinterpret the pilot's measured failures as research benefit.
+Use `PROTOCOL_V0_2.md` for the detailed study design and `MANUSCRIPT_DRAFT.md` for the paper source. Final local test/container evidence is recorded in PROGRESS.md and reports/deployment.json. Do not reinterpret the pilot's measured failures as research benefit.

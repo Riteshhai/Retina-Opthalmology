@@ -9,15 +9,15 @@
 - [x] Implement three actions and independent cohort budget enforcement.
 - [x] Implement pilot research evaluation and conditional CPU inference.
 - [x] Connect FastAPI and Streamlit; verify unavailable, fixture and real-model states.
-- [ ] Build Docker image and verify with a genuinely trained checkpoint.
+- [x] Build Docker image and verify with genuinely trained pilot checkpoints.
 - [ ] Run real baselines, ablations, external validation and uncertainty analysis.
 - [x] Update literature verification, Review-1 brief and exploratory pilot evidence.
-- [ ] Record final tests and publish a reviewable GitHub branch/PR.
+- [x] Record final tests and publish a reviewable GitHub branch/draft PR.
 
 No checkbox for real-image research or deployment may be checked using synthetic
 software tests. Full completion depends on execution evidence, not code presence.
 
-The real pilot models are weak (DR16.67% holdout accuracy, all grade3; quality50%,
+The real pilot models are weak (DR 16.67% holdout accuracy, all grade 3; quality 50%,
 all poor). They verify plumbing only. Next: larger predeclared model development,
 natural-defect modeling, new untouched confirmatory data, full research ablations
 and independent external evaluation. The publication contribution is unproven.

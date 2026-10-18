@@ -1,6 +1,6 @@
 # QSART implemented architecture
 
-This describes the current source and completed real-image pilot, 18 October 2026. Diagrams show implemented paths; they do not imply predictive quality, clinical authorization or verified container deployment.
+This describes the current source and completed real-image pilot, 18 October 2026. Diagrams show implemented paths; they do not imply predictive quality, clinical authorization or clinical deployment approval.
 
 ## Data and training path
 
@@ -71,6 +71,6 @@ The selected second pass is horizontal-flip mean logits, not a separate deeper m
 | Dashboard | `dashboard/app.py` |
 | Container definition | `Dockerfile`, `docker-compose.yml` |
 
-Compose defines separate API and dashboard services using the same image, loopback-bound host ports 8000 and 8501, read-only checkpoint/report mounts and writable temporary filesystems. The dashboard calls the API service. The first image built successfully; latest-source rebuild and real-artifact container checks were pending at this documentation update. Container deployment is unverified until those checks complete.
+Compose defines separate API and dashboard services using the same image, configurable loopback-bound host ports (defaults 8000/8501; this workstation uses 18000/18501), read-only checkpoint/report mounts and writable temporary filesystems. The dashboard calls the API service. The final image built successfully; both services were healthy, real-artifact readiness and single/batch/TTA requests passed, and dashboard health returned 200. Container runtime source matches all 27 local Python files. This verifies the local engineering deployment with the weak pilot checkpoints, not clinical use.
 
 See [model status](../MODEL_STATUS.md), [data status](../DATA_STATUS.md), [the Review-1 briefing](REVIEW1_BRIEF.md) and the [pilot report](../../reports/pilot/evaluation.json) for measured results and limitations. The held-out DR model predicts grade 3 for all 60 inputs; diagram completeness must not be interpreted as a clinically useful classifier.

@@ -3,7 +3,7 @@ services:
     build: .
     image: qsart:local
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:${QSART_API_PORT:-8000}:8000"
     environment:
       QSART_DR_CHECKPOINT: /checkpoints/dr/best.pt
       QSART_QUALITY_CHECKPOINT: /checkpoints/quality/best.pt
@@ -23,7 +23,7 @@ services:
     image: qsart:local
     command: ["python", "-m", "streamlit", "run", "dashboard/app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]
     ports:
-      - "127.0.0.1:8501:8501"
+      - "127.0.0.1:${QSART_DASHBOARD_PORT:-8501}:8501"
     environment:
       QSART_API_URL: http://api:8000
       QSART_REPORTS_DIR: /reports

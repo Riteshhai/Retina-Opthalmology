@@ -101,7 +101,7 @@ Actual CPU benchmarks in `artifacts/pilot_cpu_benchmark.json` use 20 selection-v
 
 Timing includes shared image preprocessing and both DR/quality model passes, excluding JPEG decoding, HTTP transport and triage. RSS sampled at chunk boundaries was approximately 636–638 MiB and is not a continuously measured peak. Workstation-load variation and sequential measurement order prevent a reliable efficiency comparison; fewer second passes did not consistently mean lower observed time. No clinical or diagnostic advantage follows.
 
-Full-cohort training, useful model discrimination, independent comparator tuning, matched-rate confirmation, real defect-head learning and external testing remain outstanding. The initial Docker image has built; latest-source container rebuild/runtime checks and final software/real-artifact integration tests were pending at this manuscript update. Deployment remains unverified until their actual results are recorded.
+Full-cohort training, useful model discrimination, independent comparator tuning, matched-rate confirmation, real defect-head learning and external testing remain outstanding. The latest CPU Docker image built and both services became healthy. Real-image single/batch uploads, artifact readiness, conditional second pass and dashboard HTTP checks passed against the containers. All 78 local tests passed with real-image integration enabled. These are engineering checks, not evidence of useful screening performance; reports/deployment.json and PROGRESS.md record execution.
 
 ## VII Discussion
 

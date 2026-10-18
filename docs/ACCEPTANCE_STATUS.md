@@ -16,8 +16,13 @@
 - Five CPU strategies timed on validation images, with hardware and timing limitations.
 - FastAPI upload, readiness, typed responses, batch limits and privacy-conscious errors tested.
 - Five Streamlit pages rendered; actual HTTP real-image result rendered with export widgets.
-- Full test run with real-image opt-in: 67 passed, one upstream deprecation warning.
+- Full test run with real-image opt-in: 78 passed, one upstream deprecation warning.
 - Ruff checks passed. Environment, source and result provenance recorded locally.
+- Docker CPU image built and both services reported healthy. Actual real-image
+  HTTP prediction and batch/TTA passed against the containers; readiness, model
+  info, docs and dashboard health returned 200. Container source hashes match
+  all 27 local runtime Python files. See reports/deployment.json and
+  reports/container_source_verification.json. Local ports are 18000/18501.
 
 These checks establish execution, not screening usefulness. The pilot DR model predicted
 grade 3 for every holdout image: accuracy 16.67%, macro-F1 0.0571, kappa 0. Quality
@@ -35,7 +40,6 @@ cases to recapture than simple policies. No settings were retuned using this hol
 
 ## PARTIALLY COMPLETE
 
-- Docker: initial CPU image built; final-source container verification is being completed.
 - Research evaluation: exploratory pilot artifacts exist. They cannot substantiate the
   proposed contribution. Many ablations correctly report infeasibility with weak scores.
 - Literature: 43 primary-linked records, 43 BibTeX entries, 28 original IDs retained, with
