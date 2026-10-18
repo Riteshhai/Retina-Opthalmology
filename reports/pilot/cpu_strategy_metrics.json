@@ -1,0 +1,1230 @@
+{
+  "split": "validation",
+  "images": 20,
+  "strategies": {
+    "single": {
+      "images": 20,
+      "grading": {
+        "n": 20,
+        "accuracy": 0.2,
+        "macro_f1": 0.06666666666666667,
+        "quadratic_weighted_kappa": 0.0,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "per_class": [
+          {
+            "grade": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 10
+          },
+          {
+            "grade": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 2,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 3,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.3333333333333333,
+            "support": 4
+          },
+          {
+            "grade": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          }
+        ],
+        "referable_auroc": 0.578125,
+        "referable_auprc": 0.5599845201238389,
+        "ece": 0.03208597153425216,
+        "reliability_bins": [
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 20,
+            "accuracy": 0.2,
+            "confidence": 0.23208597153425217
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          }
+        ],
+        "brier": 0.7920043457110936
+      },
+      "referable": {
+        "grade_threshold": 2,
+        "decision": "argmax_grade >= grade_threshold",
+        "true_positive": 8,
+        "true_negative": 0,
+        "false_positive": 12,
+        "false_negative": 0,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "precision": 0.4,
+        "f1": 0.5714285714285714
+      },
+      "quality_accuracy": 0.7,
+      "predicted_insufficient_quality_count": 20,
+      "second_pass_count": 0,
+      "second_pass_fraction": 0.0,
+      "cpu_measurement": {
+        "mean_ms_per_image": 230.9446833332307,
+        "median_ms_per_image": 227.1674499988876,
+        "p95_ms_per_image": 328.39301499971043,
+        "mean_batch_wall_ms": 1540.8479777773512,
+        "amortized_wall_ms_per_image": 231.12719666660269,
+        "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+        "second_pass_fraction": 0,
+        "max_observed_rss_mb": 635.91796875,
+        "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+        "images": 20,
+        "repeats": 3,
+        "population_second_pass_budget": 0.0
+      },
+      "triage": [
+        {
+          "configuration": {
+            "review_budget": 0.4,
+            "recapture_budget": 0.2,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "infeasible",
+          "reason": "Required quality deferrals exceed fixed capacities"
+        },
+        {
+          "configuration": {
+            "review_budget": 0.6,
+            "recapture_budget": 0.4,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "evaluated",
+          "n": 20,
+          "auto_count": 0,
+          "review_rate": 0.6,
+          "recapture_rate": 0.4,
+          "coverage": 0.0,
+          "missed_referable_auto": 0,
+          "missed_severe_auto": 0,
+          "referable_deferred_to_recapture": 2,
+          "severe_deferred_to_recapture": 0,
+          "auto_sensitivity": null,
+          "auto_specificity": null,
+          "weighted_auto_error_per_image": 0.0,
+          "selective_grade_error": null,
+          "review_budget_violation": false,
+          "recapture_budget_violation": false,
+          "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.",
+          "action_counts": {
+            "AUTO_SCREEN": 0,
+            "RECAPTURE": 8,
+            "SPECIALIST_REVIEW": 12
+          }
+        }
+      ]
+    },
+    "all": {
+      "images": 20,
+      "grading": {
+        "n": 20,
+        "accuracy": 0.2,
+        "macro_f1": 0.06666666666666667,
+        "quadratic_weighted_kappa": 0.0,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "per_class": [
+          {
+            "grade": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 10
+          },
+          {
+            "grade": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 2,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 3,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.3333333333333333,
+            "support": 4
+          },
+          {
+            "grade": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          }
+        ],
+        "referable_auroc": 0.4583333333333333,
+        "referable_auprc": 0.38125,
+        "ece": 0.03208519220352171,
+        "reliability_bins": [
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 20,
+            "accuracy": 0.2,
+            "confidence": 0.23208519220352172
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          }
+        ],
+        "brier": 0.7920043792402806
+      },
+      "referable": {
+        "grade_threshold": 2,
+        "decision": "argmax_grade >= grade_threshold",
+        "true_positive": 8,
+        "true_negative": 0,
+        "false_positive": 12,
+        "false_negative": 0,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "precision": 0.4,
+        "f1": 0.5714285714285714
+      },
+      "quality_accuracy": 0.7,
+      "predicted_insufficient_quality_count": 20,
+      "second_pass_count": 20,
+      "second_pass_fraction": 1.0,
+      "cpu_measurement": {
+        "mean_ms_per_image": 242.83514500075398,
+        "median_ms_per_image": 233.58700000062527,
+        "p95_ms_per_image": 345.98721499642124,
+        "mean_batch_wall_ms": 1620.0725444436507,
+        "amortized_wall_ms_per_image": 243.0108816665476,
+        "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+        "second_pass_fraction": 1,
+        "max_observed_rss_mb": 636.484375,
+        "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+        "images": 20,
+        "repeats": 3,
+        "population_second_pass_budget": 1.0
+      },
+      "triage": [
+        {
+          "configuration": {
+            "review_budget": 0.4,
+            "recapture_budget": 0.2,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "infeasible",
+          "reason": "Required quality deferrals exceed fixed capacities"
+        },
+        {
+          "configuration": {
+            "review_budget": 0.6,
+            "recapture_budget": 0.4,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "evaluated",
+          "n": 20,
+          "auto_count": 0,
+          "review_rate": 0.6,
+          "recapture_rate": 0.4,
+          "coverage": 0.0,
+          "missed_referable_auto": 0,
+          "missed_severe_auto": 0,
+          "referable_deferred_to_recapture": 4,
+          "severe_deferred_to_recapture": 2,
+          "auto_sensitivity": null,
+          "auto_specificity": null,
+          "weighted_auto_error_per_image": 0.0,
+          "selective_grade_error": null,
+          "review_budget_violation": false,
+          "recapture_budget_violation": false,
+          "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.",
+          "action_counts": {
+            "AUTO_SCREEN": 0,
+            "RECAPTURE": 8,
+            "SPECIALIST_REVIEW": 12
+          }
+        }
+      ]
+    },
+    "uncertainty": {
+      "images": 20,
+      "grading": {
+        "n": 20,
+        "accuracy": 0.2,
+        "macro_f1": 0.06666666666666667,
+        "quadratic_weighted_kappa": 0.0,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "per_class": [
+          {
+            "grade": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 10
+          },
+          {
+            "grade": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 2,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 3,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.3333333333333333,
+            "support": 4
+          },
+          {
+            "grade": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          }
+        ],
+        "referable_auroc": 0.6875,
+        "referable_auprc": 0.6151315789473684,
+        "ece": 0.03208577632904053,
+        "reliability_bins": [
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 20,
+            "accuracy": 0.2,
+            "confidence": 0.23208577632904054
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          }
+        ],
+        "brier": 0.79200416963477
+      },
+      "referable": {
+        "grade_threshold": 2,
+        "decision": "argmax_grade >= grade_threshold",
+        "true_positive": 8,
+        "true_negative": 0,
+        "false_positive": 12,
+        "false_negative": 0,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "precision": 0.4,
+        "f1": 0.5714285714285714
+      },
+      "quality_accuracy": 0.7,
+      "predicted_insufficient_quality_count": 20,
+      "second_pass_count": 5,
+      "second_pass_fraction": 0.25,
+      "cpu_measurement": {
+        "mean_ms_per_image": 289.7285083332463,
+        "median_ms_per_image": 262.7859999993234,
+        "p95_ms_per_image": 458.9484099993569,
+        "mean_batch_wall_ms": 1933.9341555549051,
+        "amortized_wall_ms_per_image": 290.0901233332358,
+        "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+        "second_pass_fraction": 0.25,
+        "max_observed_rss_mb": 637.73046875,
+        "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+        "images": 20,
+        "repeats": 3,
+        "population_second_pass_budget": 0.25
+      },
+      "triage": [
+        {
+          "configuration": {
+            "review_budget": 0.4,
+            "recapture_budget": 0.2,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "infeasible",
+          "reason": "Required quality deferrals exceed fixed capacities"
+        },
+        {
+          "configuration": {
+            "review_budget": 0.6,
+            "recapture_budget": 0.4,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "evaluated",
+          "n": 20,
+          "auto_count": 0,
+          "review_rate": 0.6,
+          "recapture_rate": 0.4,
+          "coverage": 0.0,
+          "missed_referable_auto": 0,
+          "missed_severe_auto": 0,
+          "referable_deferred_to_recapture": 1,
+          "severe_deferred_to_recapture": 0,
+          "auto_sensitivity": null,
+          "auto_specificity": null,
+          "weighted_auto_error_per_image": 0.0,
+          "selective_grade_error": null,
+          "review_budget_violation": false,
+          "recapture_budget_violation": false,
+          "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.",
+          "action_counts": {
+            "AUTO_SCREEN": 0,
+            "RECAPTURE": 8,
+            "SPECIALIST_REVIEW": 12
+          }
+        }
+      ]
+    },
+    "severity": {
+      "images": 20,
+      "grading": {
+        "n": 20,
+        "accuracy": 0.2,
+        "macro_f1": 0.06666666666666667,
+        "quadratic_weighted_kappa": 0.0,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "per_class": [
+          {
+            "grade": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 10
+          },
+          {
+            "grade": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 2,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 3,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.3333333333333333,
+            "support": 4
+          },
+          {
+            "grade": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          }
+        ],
+        "referable_auroc": 0.6875,
+        "referable_auprc": 0.6151315789473684,
+        "ece": 0.03208577632904053,
+        "reliability_bins": [
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 20,
+            "accuracy": 0.2,
+            "confidence": 0.23208577632904054
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          }
+        ],
+        "brier": 0.79200416963477
+      },
+      "referable": {
+        "grade_threshold": 2,
+        "decision": "argmax_grade >= grade_threshold",
+        "true_positive": 8,
+        "true_negative": 0,
+        "false_positive": 12,
+        "false_negative": 0,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "precision": 0.4,
+        "f1": 0.5714285714285714
+      },
+      "quality_accuracy": 0.7,
+      "predicted_insufficient_quality_count": 20,
+      "second_pass_count": 5,
+      "second_pass_fraction": 0.25,
+      "cpu_measurement": {
+        "mean_ms_per_image": 280.74594500000484,
+        "median_ms_per_image": 248.36459999824,
+        "p95_ms_per_image": 490.6303249988922,
+        "mean_batch_wall_ms": 1873.3216999996027,
+        "amortized_wall_ms_per_image": 280.9982549999404,
+        "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+        "second_pass_fraction": 0.25,
+        "max_observed_rss_mb": 636.65234375,
+        "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+        "images": 20,
+        "repeats": 3,
+        "population_second_pass_budget": 0.25
+      },
+      "triage": [
+        {
+          "configuration": {
+            "review_budget": 0.4,
+            "recapture_budget": 0.2,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "infeasible",
+          "reason": "Required quality deferrals exceed fixed capacities"
+        },
+        {
+          "configuration": {
+            "review_budget": 0.6,
+            "recapture_budget": 0.4,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "evaluated",
+          "n": 20,
+          "auto_count": 0,
+          "review_rate": 0.6,
+          "recapture_rate": 0.4,
+          "coverage": 0.0,
+          "missed_referable_auto": 0,
+          "missed_severe_auto": 0,
+          "referable_deferred_to_recapture": 1,
+          "severe_deferred_to_recapture": 0,
+          "auto_sensitivity": null,
+          "auto_specificity": null,
+          "weighted_auto_error_per_image": 0.0,
+          "selective_grade_error": null,
+          "review_budget_violation": false,
+          "recapture_budget_violation": false,
+          "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.",
+          "action_counts": {
+            "AUTO_SCREEN": 0,
+            "RECAPTURE": 8,
+            "SPECIALIST_REVIEW": 12
+          }
+        }
+      ]
+    },
+    "budget": {
+      "images": 20,
+      "grading": {
+        "n": 20,
+        "accuracy": 0.2,
+        "macro_f1": 0.06666666666666667,
+        "quadratic_weighted_kappa": 0.0,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "per_class": [
+          {
+            "grade": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 10
+          },
+          {
+            "grade": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 2,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          },
+          {
+            "grade": 3,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.3333333333333333,
+            "support": 4
+          },
+          {
+            "grade": 4,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 2
+          }
+        ],
+        "referable_auroc": 0.6875,
+        "referable_auprc": 0.6151315789473684,
+        "ece": 0.03208577632904053,
+        "reliability_bins": [
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 20,
+            "accuracy": 0.2,
+            "confidence": 0.23208577632904054
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          }
+        ],
+        "brier": 0.79200416963477
+      },
+      "referable": {
+        "grade_threshold": 2,
+        "decision": "argmax_grade >= grade_threshold",
+        "true_positive": 8,
+        "true_negative": 0,
+        "false_positive": 12,
+        "false_negative": 0,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "precision": 0.4,
+        "f1": 0.5714285714285714
+      },
+      "quality_accuracy": 0.7,
+      "predicted_insufficient_quality_count": 20,
+      "second_pass_count": 5,
+      "second_pass_fraction": 0.25,
+      "cpu_measurement": {
+        "mean_ms_per_image": 231.0512583328697,
+        "median_ms_per_image": 217.85459999955492,
+        "p95_ms_per_image": 342.37338000166346,
+        "mean_batch_wall_ms": 1541.396455555514,
+        "amortized_wall_ms_per_image": 231.2094683333271,
+        "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+        "second_pass_fraction": 0.25,
+        "max_observed_rss_mb": 636.5859375,
+        "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+        "images": 20,
+        "repeats": 3,
+        "population_second_pass_budget": 0.25
+      },
+      "triage": [
+        {
+          "configuration": {
+            "review_budget": 0.4,
+            "recapture_budget": 0.2,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "infeasible",
+          "reason": "Required quality deferrals exceed fixed capacities"
+        },
+        {
+          "configuration": {
+            "review_budget": 0.6,
+            "recapture_budget": 0.4,
+            "minimum_quality": 0.5,
+            "review_risk": 0.5,
+            "uncertainty_threshold": 0.75,
+            "referable_grade": 2,
+            "severity_costs": [
+              1.0,
+              1.0,
+              3.0,
+              6.0,
+              10.0
+            ]
+          },
+          "method": "dual_budget",
+          "status": "evaluated",
+          "n": 20,
+          "auto_count": 0,
+          "review_rate": 0.6,
+          "recapture_rate": 0.4,
+          "coverage": 0.0,
+          "missed_referable_auto": 0,
+          "missed_severe_auto": 0,
+          "referable_deferred_to_recapture": 1,
+          "severe_deferred_to_recapture": 0,
+          "auto_sensitivity": null,
+          "auto_specificity": null,
+          "weighted_auto_error_per_image": 0.0,
+          "selective_grade_error": null,
+          "review_budget_violation": false,
+          "recapture_budget_violation": false,
+          "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.",
+          "action_counts": {
+            "AUTO_SCREEN": 0,
+            "RECAPTURE": 8,
+            "SPECIALIST_REVIEW": 12
+          }
+        }
+      ]
+    }
+  },
+  "common_triage_configurations": [
+    {
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "minimum_quality": 0.5,
+      "review_risk": 0.5,
+      "uncertainty_threshold": 0.75,
+      "referable_grade": 2,
+      "severity_costs": [
+        1.0,
+        1.0,
+        3.0,
+        6.0,
+        10.0
+      ]
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "minimum_quality": 0.5,
+      "review_risk": 0.5,
+      "uncertainty_threshold": 0.75,
+      "referable_grade": 2,
+      "severity_costs": [
+        1.0,
+        1.0,
+        3.0,
+        6.0,
+        10.0
+      ]
+    }
+  ],
+  "conditional_activation_sets_identical": true,
+  "conditional_grade_probabilities_equal_within_tolerance": true,
+  "limitations": [
+    "Only the 20-image pilot validation partition is used in this recorded run; it is not a test superiority study.",
+    "Grading/triage metrics use the first recorded prediction repeat; latency summarizes all timed repeats.",
+    "Each strategy is evaluated on the same images and fixed triage configurations.",
+    "Latency varies with order, scheduling and preprocessing; same activation fraction is not evidence of a speed advantage.",
+    "Identical selected records/predictions across conditional strategies cannot support effectiveness superiority.",
+    "Deferred cases are recommendations, not completed review/recapture or correct diagnoses.",
+    "Exploratory severity weights are research proxies, not established clinical costs."
+  ],
+  "manifest_sha256": "e7e349903964f3c64935092b205647a2153b79c6ae18e4d0a4179cf54af285f0",
+  "prediction_artifact_sha256": "7c53b89bc46a917c33bec104615c93314d4b304361c0ecc3124f9c184d3e37a1",
+  "benchmark_artifact_sha256": "962df2dbc73e6c5c94a8e731a010edddda44cf375f56e4ebe138e37bf9ba4724",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12500H",
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.0",
+    "torch": "2.14.1+cpu",
+    "logical_cpus": 16
+  },
+  "inference_configuration": {
+    "model_version": "dr-mobilenet_v3_small-seed42-epoch1",
+    "backbone": "mobilenet_v3_small",
+    "image_size": 96,
+    "device": "cpu",
+    "cpu_threads": 2,
+    "data_purpose": "real_research",
+    "quality_model_version": "quality-mobilenet_v3_small-seed42-epoch2",
+    "calibration_method": "temperature_scaling",
+    "second_pass_strategy": "horizontal_flip_mean_logits",
+    "batch_size": 8,
+    "model_forward_batch_size": 1,
+    "cohort_chunk_size": 8,
+    "split": "validation",
+    "warmup_images": 1
+  }
+}
