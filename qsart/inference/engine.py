@@ -85,6 +85,10 @@ class InferenceEngine:
                 "image_size": self.dr_metadata["image_size"], "device": "cpu",
                 "cpu_threads": self.cpu_threads, "data_purpose": self.dr_metadata["data_purpose"],
                 "quality_model_version": self.quality_metadata["model_version"],
+                "quality_heads": self.quality_metadata["heads"],
+                "quality_label_mappings": self.quality_metadata.get("label_mappings", {}),
+                "training_strategy": self.dr_metadata.get("training_strategy", "end_to_end"),
+                "source_sha256": self.dr_metadata.get("source_sha256"),
                 "training_provenance": {
                     task: {"split_counts": metadata.get("split_counts", {}), "seed": metadata["seed"],
                            "optimizer_steps": metadata["optimizer_steps"],
@@ -120,7 +124,7 @@ class InferenceEngine:
 
     def predict_images(self, images: list[Image.Image], *, second_pass_budget: float = 0.0,
                        second_pass_policy: str = "budget", uncertainty_threshold: float = 0.7,
-                       severity_threshold: float = 0.5) -> list[dict]:
+                       severity_threshold: float = 0.5, include_uncalibrated: bool = False) -> list[dict]:
         """Budget applies to this request population; floor(B*N) guarantees the cap.
 
         Single-image requests with B < 1 receive no extra pass. This is explicit
@@ -191,4 +195,8 @@ class InferenceEngine:
                            "second_pass_activated": row["second"],
                            "processing_time_ms": row["elapsed"],
                            "data_purpose": self.dr_metadata["data_purpose"]})
+            if include_uncalibrated:
+                output[-1]["uncalibrated"] = {
+                    "grade_probabilities": row["dr_logits"]["dr_grade"].softmax(1)[0].tolist(),
+                    "quality_probabilities": row["quality_logits"]["quality_grade"].softmax(1)[0].tolist()}
         return output

@@ -86,10 +86,17 @@ def binary_quality_metrics(labels, probabilities):
             or not np.allclose(p.sum(1), 1)):
         raise ValueError('Invalid binary labels or probabilities')
     pred = p.argmax(1)
+    confidence = p.max(1)
+    ece = 0.
+    for index in range(10):
+        mask = (confidence >= index/10) & ((confidence < (index+1)/10) if index < 9 else confidence <= 1)
+        if mask.any():
+            ece += mask.mean()*abs((pred[mask] == y[mask]).mean()-confidence[mask].mean())
     return {'n': len(y), 'accuracy': float(accuracy_score(y, pred)),
             'macro_f1': float(f1_score(y, pred, labels=[0, 1], average='macro', zero_division=0)),
             'confusion_matrix': confusion_matrix(y, pred, labels=[0, 1]).tolist(),
             'poor_auroc': float(roc_auc_score(y == 0, p[:, 0])) if len(set(y)) == 2 else None,
+            'ece': float(ece), 'nll': float(-np.log(p[np.arange(len(y)), y.astype(int)].clip(1e-12)).mean()),
             'brier': float(((p-np.eye(2)[y.astype(int)])**2).sum(1).mean())}
 
 

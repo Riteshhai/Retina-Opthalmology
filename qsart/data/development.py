@@ -137,3 +137,26 @@ def check_confirmation_independence(confirmation: pd.DataFrame, development: pd.
         raise ValueError('Confirmation contains non-validation source records')
     if confirmation.empty or np.any(confirmation.annotation_status.ne('verified')):
         raise ValueError('Confirmation must contain nonempty verified source annotations')
+
+
+def confirmation_image_overlap(confirmation: pd.DataFrame, development: pd.DataFrame,
+                               distance: int = 2) -> dict:
+    """Audit source-pixel fingerprints across cohorts before opening model outcomes."""
+    if distance < 0:
+        raise ValueError('Fingerprint distance must be nonnegative')
+    for frame in (confirmation, development):
+        if not {'sha256', 'phash', 'image_id'}.issubset(frame.columns):
+            raise ValueError('Actual image SHA256 and pHash fields required')
+        if frame[['sha256', 'phash']].isna().any().any():
+            raise ValueError('Missing image fingerprint')
+    exact = set(confirmation.sha256) & set(development.sha256)
+    candidates = []
+    for first in confirmation.itertuples():
+        fingerprint = int(first.phash, 16)
+        for second in development.itertuples():
+            difference = (fingerprint ^ int(second.phash, 16)).bit_count()
+            if difference <= distance:
+                candidates.append({'confirmation_image': first.image_id,
+                                   'development_image': second.image_id, 'distance': difference})
+    return {'exact_shared_hashes': len(exact), 'perceptual_candidates': candidates,
+            'perceptual_distance': distance, 'passed': not exact and not candidates}

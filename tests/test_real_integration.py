@@ -25,8 +25,9 @@ def test_real_trained_pipeline_and_batch_export():
     with Image.open(image_path) as image:
         buffer = BytesIO()
         image.convert('RGB').save(buffer, format='JPEG')
-    engine = InferenceEngine('checkpoints/dr/best.pt', 'checkpoints/quality/best.pt',
-                             'checkpoints/calibration.json')
+    engine = InferenceEngine(os.environ.get('QSART_DR_CHECKPOINT', 'checkpoints/dr/best.pt'),
+                             os.environ.get('QSART_QUALITY_CHECKPOINT', 'checkpoints/quality/best.pt'),
+                             os.environ.get('QSART_CALIBRATION', 'checkpoints/calibration.json'))
     assert engine.info()['data_purpose'] == 'real_research'
     with TestClient(create_app(engine)) as client:
         assert client.get('/ready').status_code == 200
