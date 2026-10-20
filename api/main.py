@@ -1,8 +1,10 @@
 """Temporary uploads are closed; production never substitutes generated predictions."""
 from contextlib import asynccontextmanager
 from io import BytesIO
+import json
 import logging
 import os
+from pathlib import Path
 from threading import Lock
 import uuid
 import warnings
@@ -66,6 +68,17 @@ def create_app(engine=None):
         e = app.state.engine
         info = e.info() if callable(getattr(e, 'info', None)) else {
             'model_version': getattr(e, 'model_version', 'unknown')}
+        card_path = os.environ.get('QSART_MODEL_CARD')
+        if card_path:
+            try:
+                card = json.loads(Path(card_path).read_text(encoding='utf-8'))
+                if (card['dr_checkpoint_sha256'] != e.calibration['dr']['checkpoint_sha256']
+                        or card['quality_checkpoint_sha256'] != e.calibration['quality']['checkpoint_sha256']):
+                    raise ValueError('Model card does not match loaded checkpoints')
+                info['model_card'] = card
+                info['model_card_status'] = 'matched'
+            except (OSError, ValueError, KeyError, AttributeError):
+                info['model_card_status'] = 'unavailable_or_mismatched'
         return {'ready': True, **info, 'supported_types': list(ALLOWED),
                 'max_upload_bytes': MAX_BYTES, 'max_batch': MAX_BATCH,
                 'disclaimer': DISCLAIMER}

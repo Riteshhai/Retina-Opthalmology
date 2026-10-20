@@ -39,14 +39,20 @@ def main():
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--repeats", type=int, default=3)
     parser.add_argument("--second-pass-budget", type=float, default=0.25)
+    parser.add_argument("--max-images", type=int, help="Deterministic manifest-prefix timing sample; default all")
     args = parser.parse_args()
     if min(args.batch_size, args.repeats) < 1:
         parser.error("Batch size and repeats must be positive")
+    if args.max_images is not None and args.max_images < 1:
+        parser.error("max-images must be positive")
     engine = InferenceEngine(args.dr_checkpoint, args.quality_checkpoint, args.calibration,
                              cpu_threads=args.cpu_threads)
     manifest_path = Path(args.manifest).resolve()
     frame = pd.read_csv(manifest_path)
     frame = frame.loc[frame.split == args.split].reset_index(drop=True)
+    available_images = len(frame)
+    if args.max_images:
+        frame = frame.head(args.max_images)
     if frame.empty:
         raise ValueError("Requested benchmark partition is empty")
     images = []
@@ -98,7 +104,10 @@ def main():
                             "torch": str(torch.__version__), "logical_cpus": psutil.cpu_count()},
               "configuration": {**engine.info(), "batch_size": args.batch_size, "split": args.split,
                                 "model_forward_batch_size": 1, "cohort_chunk_size": args.batch_size,
-                                "warmup_images": 1}, "strategies": measurements,
+                                "warmup_images": 1, "available_partition_images": available_images,
+                                "timing_sample_images": len(frame),
+                                "timing_sample_rule": "manifest prefix" if args.max_images else "entire partition"},
+              "strategies": measurements,
               "limitations": ["Pilot latency measurements do not establish clinical performance.",
                                "Resolution/model selection requires larger independent validation."]}
     output = Path(args.output)

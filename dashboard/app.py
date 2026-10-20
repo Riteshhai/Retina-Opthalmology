@@ -112,6 +112,7 @@ elif page == 'Retinal Image Analysis':
     row = (st.session_state.get('single_result')
            if current_digest == st.session_state.get('single_result_digest') and file else None)
     if row:
+        st.caption('Processed with model: '+row['model_version'])
         a, b, c = st.columns(3)
         a.metric('Provisional DR grade', row['predicted_grade'])
         b.metric('Referable DR probability', f"{row['referable_probability']:.1%}")
@@ -169,6 +170,6 @@ else:
     st.subheader('Model information and limitations')
     st.json(api_get('/model/info'))
     st.write('Supported uploads: PNG and JPEG, up to 12 MiB each; batches up to 64 images.')
-    st.write('A small pilot establishes software execution only. It cannot establish clinical '
-             'screening performance. Entropy is a predictive uncertainty score, not the probability '
+    st.write('Training provenance and the model card describe the measured evaluation scope. '
+             'These research models are not clinically validated. Entropy is a predictive uncertainty score, not the probability '
              'that an individual result is correct. Single-image routing has no cohort budget guarantee.')

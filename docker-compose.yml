@@ -5,9 +5,10 @@ services:
     ports:
       - "127.0.0.1:${QSART_API_PORT:-8000}:8000"
     environment:
-      QSART_DR_CHECKPOINT: /checkpoints/dr/best.pt
-      QSART_QUALITY_CHECKPOINT: /checkpoints/quality/best.pt
-      QSART_CALIBRATION: /checkpoints/calibration.json
+      QSART_DR_CHECKPOINT: ${QSART_CONTAINER_DR_CHECKPOINT:-/checkpoints/dr/best.pt}
+      QSART_QUALITY_CHECKPOINT: ${QSART_CONTAINER_QUALITY_CHECKPOINT:-/checkpoints/quality/best.pt}
+      QSART_CALIBRATION: ${QSART_CONTAINER_CALIBRATION:-/checkpoints/calibration.json}
+      QSART_MODEL_CARD: ${QSART_CONTAINER_MODEL_CARD:-/checkpoints/model_card.json}
       QSART_CPU_THREADS: "2"
     volumes:
       - ./checkpoints:/checkpoints:ro
