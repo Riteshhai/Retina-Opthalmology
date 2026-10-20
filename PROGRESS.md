@@ -102,3 +102,91 @@
   The local engineering pilot is verified; useful model performance, complete
   confirmatory experiments, natural-defect modeling and external validation
   remain open. No clinical or scientific superiority is claimed.
+
+
+## 2026-10-20 — larger development and locked internal confirmation
+
+- Continued in the same local QSART directory. Preserved original assets and
+  all v0 manifests, checkpoints and reports. Recovered interrupted transfer/data
+  implementation; fixed the official source-split value and finite-config checks.
+- Declared docs/research/DEVELOPMENT_V1_PROTOCOL.md before new confirmation
+  predictions. Used all 296 unambiguous official-training patients (1,184 images):
+  fitting 848/212 patients, selection 168/42, calibration 168/42. Four ambiguous
+  subjects excluded. Conservative connected pHash groups stay together.
+- Acquired the remaining authorized pinned images with verified metadata, byte
+  budget, per-file SHA/readability checks and reuse of local files. Development
+  download added about 384.7 MiB; new confirmation added 177.4 MiB. No images,
+  identifiers, patient manifests, feature caches or weights are published.
+- Reserved 340 official-validation images / 85 patients, excluding all 15 inspected
+  pilot holdout patients. No exact/pHash cross-cohort candidates at the declared
+  distance. Development SHA 45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d;
+  confirmation SHA 21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7.
+- Downloaded official torchvision ImageNet MobileNetV3-small and ResNet18 weights
+  locally, with URLs/full hashes recorded. Code and pretrained-weight licensing
+  are distinguished; no broad commercial/redistribution permission is asserted.
+- Real frozen-backbone CPU training at 224px used original/flipped fitting
+  features, fixed BatchNorm statistics, new linear heads, class-balanced AdamW,
+  seed 2026, batch 64, maximum 100 epochs and patience 15. Caches bind actual
+  input bytes, manifests, transformations, source and pretrained-weight hashes.
+- MobileNet DR: 30 total epochs / 810 updates; best epoch 15 / 405 updates,
+  selection accuracy 63.10%, macro-F1 0.53724. ResNet18: 35 epochs / 945 updates;
+  best epoch 20, selection accuracy 61.31%, macro-F1 0.51601. The declared
+  selection macro-F1/NLL rule chose MobileNet without confirmation predictions.
+- Quality MobileNet: 18 epochs / 486 updates; selected epoch 3 / 81 updates,
+  selection accuracy 74.40%, macro-F1 0.73726. Actual overall-quality, clarity,
+  field-definition and artifact labels were learned. Fixed training-only
+  statistical logistic comparator achieved selection accuracy 72.62%.
+- Committed transfer source before these runs (51eae27); checkpoints also record
+  exact training-source, pretrained weights, feature and input-content hashes.
+  `finalize_development.py` audited cross-cohort independence, selected models,
+  calibrated on the dedicated 168 images and froze artifact/protocol/evaluation
+  source hashes before confirmation. Calibration-fit diagnostics are separate
+  from independent prediction performance.
+- `evaluate_confirmation.py` validated every frozen hash and inferred 340 images.
+  DR: 204/340 = 60.00% accuracy, macro-F1 0.53176, QWK 0.72650, referable AUROC
+  0.92482 / AUPRC 0.90789. Patient-cluster accuracy interval: 52.65–67.06%,
+  1,000 resamples, seed 2026. Raw/calibrated ECE: 0.08790/0.03999.
+- Quality: 74.12% accuracy, macro-F1 0.74028; classical comparator 73.24%,
+  macro-F1 0.73133. Defect accuracy: clarity 49.41%, field 48.53%, artifact 35.59%.
+  Artifact accuracy is below majority-class accuracy (47.94%); field class 0
+  is absent and grade 4 has only 14 images. No defect reliability claim.
+- Seven methods / nine fixed budget pairs: 27 of 63 infeasible. At actual review
+  .4 / recapture .2, quality-only/naive/joint missed-referable counts are 12/5/5,
+  severe recapture 18/18/0, automated coverage .4 each. Exploratory paired patient
+  intervals are conditional on fixed assignments, without multiplicity correction.
+  No model, temperature, proxy-cost or threshold tuning followed confirmation.
+- Supplementary post-confirmation analysis reuses the locked predictions, checks
+  cohort/lock identity and reproduces the confusion matrix before 97 natural-code
+  strata. Poor/good accuracy 58.51%/61.84%, referable false-negative rates
+  18.92%/20.00%, entropy error AUROC 0.76521. This does not establish universally
+  higher false negatives with poor quality. Fixed a pandas 3 read-only mask error
+  in the new aggregation script and reran it successfully; no inference changed.
+- Ran five CPU strategies on a deterministic 48-image selection prefix, three
+  repeats, two threads, i5-12500H, model-forward batch 1 / cohort chunk 8. Mean
+  ms/image: single 194.72, all TTA 188.15, uncertainty 182.78, severity 169.51,
+  budget 182.29. Training and confirmation inference had finished; normal
+  workstation/report activity remained. Sequential strategy order, excluded
+  decode/HTTP/triage and batch-boundary RSS (~1,015–1,016 MiB) prevent a reliable
+  speed claim. The selection subset is not confirmation. Published aggregate
+  strategy performance/workloads and all timing qualifications.
+- Full suite with QSART_REAL_MANIFEST=confirmation_v1.csv and all three selected
+  checkpoint/calibration environment variables: 89 passed, 39.07 seconds, one
+  upstream AnyIO deprecation warning. Ruff and Compose configuration checks pass.
+- Rebuilt `qsart:local`, configured ignored .env to selected v1 artifact paths,
+  kept old pilot weights, and verified actual Docker HTTP JPEG single/batch/TTA,
+  readiness/info/docs, unsupported upload and dashboard health. Card status is
+  matched; wrong weights or temperatures suppress recorded metrics. All 31
+  container runtime Python hashes match host; actual dependencies captured.
+- Browser showed current internal results/model version; saved
+  reports/dashboard_v1_preview.png. Dashboard and API remain on 18501/18000.
+- Restarted the API container and repeated all real HTTP checks successfully;
+  reports/deployment_v1_after_restart.json confirms selected artifact persistence.
+- Updated README, current Review-1 brief, manuscript, architecture and acceptance
+  evidence. Historical pilot status documents are marked as historical. Public
+  reports contain aggregate evidence only. The new and old protocols/cohorts
+  differ; no paired accuracy-improvement estimate is claimed.
+- Overall research acceptance remains PARTIALLY COMPLETE. External data/transport,
+  independently developed comparator tuning, repeated seeds, controlled quality
+  stress tests, stronger defect models, patient-level referral and prospective
+  specialist/recapture outcomes remain open. Current confirmation is consumed
+  evidence and must not become an undisclosed tuning target.

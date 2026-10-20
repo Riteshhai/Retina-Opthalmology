@@ -1,5 +1,6 @@
 """Exercise a running deployment using an authorized local retinal image."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -25,6 +26,8 @@ def main():
         assert all(status == 200 for status in checks.values()), checks
         info = client.get('/model/info').json()
         assert info['device'] == 'cpu' and info['data_purpose'] == 'real_research'
+        if info.get('model_card_status'):
+            assert info['model_card_status'] == 'matched', info['model_card_status']
         single = client.post('/predict?second_pass=true',
                              files={'file': ('retina.jpg', body, 'image/jpeg')})
         single.raise_for_status()
@@ -43,7 +46,9 @@ def main():
         dashboard = httpx.get(args.dashboard+'/_stcore/health', timeout=30)
         dashboard.raise_for_status()
     report = {'status': 'verified', 'scope': 'actual HTTP against running deployment',
-              'image_source': 'authorized DeepDRiD pilot holdout; input not retained by this script',
+              'image_source': 'authorized DeepDRiD manifest holdout; input not retained by this script',
+              'manifest_sha256': hashlib.sha256(args.manifest.read_bytes()).hexdigest(),
+              'model_card_status': info.get('model_card_status', 'not_configured'),
               'get_statuses': checks, 'predict_status': single.status_code,
               'batch_status': batch.status_code, 'unsupported_status': unsupported.status_code,
               'dashboard_health_status': dashboard.status_code,

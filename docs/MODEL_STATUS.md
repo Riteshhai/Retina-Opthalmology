@@ -1,3 +1,5 @@
+> Historical 18 October pilot record. Current development and confirmation: [transfer status](TRANSFER_STATUS.md) and [results](research/CONFIRMATION_V1_RESULTS.md).
+
 # Model implementation and measured evidence
 
 This is a research prototype, not a clinically validated diagnostic system.

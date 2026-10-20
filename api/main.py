@@ -1,6 +1,7 @@
 """Temporary uploads are closed; production never substitutes generated predictions."""
 from contextlib import asynccontextmanager
 from io import BytesIO
+import hashlib
 import json
 import logging
 import os
@@ -73,7 +74,9 @@ def create_app(engine=None):
             try:
                 card = json.loads(Path(card_path).read_text(encoding='utf-8'))
                 if (card['dr_checkpoint_sha256'] != e.calibration['dr']['checkpoint_sha256']
-                        or card['quality_checkpoint_sha256'] != e.calibration['quality']['checkpoint_sha256']):
+                        or card['quality_checkpoint_sha256'] != e.calibration['quality']['checkpoint_sha256']
+                        or card['calibration_content_sha256'] != hashlib.sha256(json.dumps(
+                            e.calibration, sort_keys=True, separators=(',', ':')).encode()).hexdigest()):
                     raise ValueError('Model card does not match loaded checkpoints')
                 info['model_card'] = card
                 info['model_card_status'] = 'matched'

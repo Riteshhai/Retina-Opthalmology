@@ -43,5 +43,57 @@ fixtures only; the metrics above come from actual retinal images.
 
 Source was committed before training; checkpoints additionally hash the exact
 training source, pretrained weights, input bytes and feature-cache metadata.
-Calibration and confirmation execution statuses will be appended from artifacts.
+Calibration and reserved confirmation have now completed; details follow.
 No confirmation results have been used to choose or tune these models.
+
+
+## Completed calibration and confirmation
+
+`finalize_development.py` selected MobileNet, copied selected artifacts, fitted
+original/flip temperatures on 168 calibration images and froze the selection lock.
+Calibration-fit DR temperature 1.46215 reduced NLL 1.13744 → 1.08790 and ECE
+0.12982 → 0.06202. These are fitting diagnostics only.
+
+`evaluate_confirmation.py` then validated all frozen hashes and predicted all
+340 images / 85 patients. DR accuracy is 60.00%, macro-F1 0.53176, QWK 0.72650,
+referable AUROC 0.92482 and calibrated ECE 0.03999. The patient-cluster accuracy
+interval is 52.65–67.06%. Quality accuracy is 74.12%; classical quality is 73.24%.
+Natural defect accuracies are 49.41% clarity, 48.53% field definition and 35.59%
+artifact. Artifact accuracy falls below majority-class accuracy. All 63 fixed
+policy/scenario rows and 27 infeasibilities are retained. No confirmation tuning
+occurred. [Full results and limits](research/CONFIRMATION_V1_RESULTS.md) describe
+exploratory matched-workload comparisons and the consumed-evaluation boundary.
+
+Selected artifacts remain local in `checkpoints/development_v1/selected`:
+
+- DR SHA256: f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527.
+- Quality SHA256: a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43.
+- Calibration SHA256: 674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737.
+
+`package_confirmation.py` creates a checkpoint/calibration-bound public model card
+and all-grid workload plot from frozen aggregate reports, without fitting anything.
+The API refuses to show recorded metrics for mismatched weights or calibration.
+Local `.env` now selects v1 container paths; original pilot checkpoints remain.
+
+## Current deployment and verification
+
+- Full real-model opt-in suite: 89 passed, 39.07 seconds, one upstream deprecation
+  warning. `python -m ruff check .` passed.
+- Rebuilt Docker CPU image; both services healthy. Actual new-model JPEG single,
+  batch, second-pass, unsupported-upload, readiness, docs and dashboard checks
+  passed. Model card matches the loaded weights/calibration.
+- All 31 container runtime Python hashes match host; actual dependencies captured.
+- Browser displays current model/version, 60.0% DR and 74.1% quality results with
+  internal-scope text. Screenshot: reports/dashboard_v1_preview.png.
+- CPU strategy benchmark: 48-image deterministic selection prefix, batch/cohort
+  chunk 8, model forward 1, 3 repeats, 2 CPU threads, 224px. Training/confirmation
+  inference had finished. Ordinary workstation/report activity remained. The
+  sequential timing order does not support a speed-advantage claim; all strategy
+  accuracy/workload comparisons and timing notes are in reports/development_v1.
+
+Reproduction commands for the new CPU evidence and deployment check:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/benchmark_cpu.py --dr-checkpoint checkpoints/development_v1/selected/dr.pt --quality-checkpoint checkpoints/development_v1/selected/quality.pt --calibration checkpoints/development_v1/selected/calibration.json --manifest data/processed/deepdrid/development_v1.csv --split validation --output artifacts/development_v1/cpu_benchmark.json --max-images 48 --batch-size 8 --repeats 3
+.\.venv\Scripts\python.exe scripts/verify_deployment.py --manifest data/processed/deepdrid/confirmation_v1.csv --api http://127.0.0.1:18000 --dashboard http://127.0.0.1:18501 --output reports/deployment_v1.json
+```

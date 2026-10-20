@@ -1,0 +1,314 @@
+{
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12500H",
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.0",
+    "torch": "2.14.1+cpu",
+    "logical_cpus": 16
+  },
+  "configuration": {
+    "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+    "backbone": "mobilenet_v3_small",
+    "image_size": 224,
+    "device": "cpu",
+    "cpu_threads": 2,
+    "data_purpose": "real_research",
+    "quality_model_version": "development-v1-quality-mobilenet_v3_small-seed2026-epoch3",
+    "quality_heads": {
+      "quality_grade": 2,
+      "clarity_class": 5,
+      "field_definition_class": 5,
+      "artifact_class": 6
+    },
+    "quality_label_mappings": {
+      "clarity_class": {
+        "source_column": "clarity",
+        "source_codes": [
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "better clarity",
+        "code_to_class": {
+          "1": 0,
+          "4": 1,
+          "6": 2,
+          "8": 3,
+          "10": 4
+        },
+        "class_to_code": {
+          "0": 1,
+          "1": 4,
+          "2": 6,
+          "3": 8,
+          "4": 10
+        },
+        "classes": 5
+      },
+      "field_definition_class": {
+        "source_column": "field_definition",
+        "source_codes": [
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "better field definition",
+        "code_to_class": {
+          "1": 0,
+          "4": 1,
+          "6": 2,
+          "8": 3,
+          "10": 4
+        },
+        "class_to_code": {
+          "0": 1,
+          "1": 4,
+          "2": 6,
+          "3": 8,
+          "4": 10
+        },
+        "classes": 5
+      },
+      "artifact_class": {
+        "source_column": "artifact",
+        "source_codes": [
+          0,
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "more extensive artifact; class 0 is no artifact",
+        "code_to_class": {
+          "0": 0,
+          "1": 1,
+          "4": 2,
+          "6": 3,
+          "8": 4,
+          "10": 5
+        },
+        "class_to_code": {
+          "0": 0,
+          "1": 1,
+          "2": 4,
+          "3": 6,
+          "4": 8,
+          "5": 10
+        },
+        "classes": 6
+      }
+    },
+    "training_strategy": "frozen_imagenet_cached_features",
+    "source_sha256": "51e93f1c705cc2856511573fe6509610aac521a99284c7fbcf140057f0313cbe",
+    "training_provenance": {
+      "dr": {
+        "split_counts": {
+          "calibration": 168,
+          "train": 848,
+          "validation": 168
+        },
+        "seed": 2026,
+        "optimizer_steps": 405,
+        "selected_epoch": 15,
+        "selection_metric": "macro_f1_then_unweighted_nll",
+        "configured_epochs": 100,
+        "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+        "code_version": "51eae274c70ba29007257689c886982c5298fd1d"
+      },
+      "quality": {
+        "split_counts": {
+          "calibration": 168,
+          "train": 848,
+          "validation": 168
+        },
+        "seed": 2026,
+        "optimizer_steps": 81,
+        "selected_epoch": 3,
+        "selection_metric": "macro_f1_then_unweighted_nll",
+        "configured_epochs": 100,
+        "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+        "code_version": "51eae274c70ba29007257689c886982c5298fd1d"
+      }
+    },
+    "calibration_fit_metrics": {
+      "dr": {
+        "dr_grade": {
+          "temperature": 1.4621494531656656,
+          "before": {
+            "n": 168,
+            "nll": 1.1374393371223832,
+            "ece": 0.12982246879787107,
+            "brier": 0.6158116792964793
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.087902967976227,
+            "ece": 0.06202297856547488,
+            "brier": 0.5892906552052573
+          }
+        }
+      },
+      "quality": {
+        "quality_grade": {
+          "temperature": 1.0349426972146167,
+          "before": {
+            "n": 168,
+            "nll": 0.5299913480232195,
+            "ece": 0.13033933026530406,
+            "brier": 0.3574397158487079
+          },
+          "after": {
+            "n": 168,
+            "nll": 0.5298645098855822,
+            "ece": 0.12489716635021726,
+            "brier": 0.3571593627730074
+          }
+        },
+        "clarity_class": {
+          "temperature": 1.0381431361500668,
+          "before": {
+            "n": 168,
+            "nll": 1.162961802535261,
+            "ece": 0.059044997962916256,
+            "brier": 0.6438256787604649
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.162633751205279,
+            "ece": 0.05315903629499816,
+            "brier": 0.6425830183961272
+          }
+        },
+        "field_definition_class": {
+          "temperature": 1.7814232126859433,
+          "before": {
+            "n": 168,
+            "nll": 1.2773017937715028,
+            "ece": 0.15857411695482168,
+            "brier": 0.6695214040927929
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.1965139472847162,
+            "ece": 0.10980891260251437,
+            "brier": 0.6418186608314946
+          }
+        },
+        "artifact_class": {
+          "temperature": 1.2949429647308723,
+          "before": {
+            "n": 168,
+            "nll": 1.3829430790382593,
+            "ece": 0.13127698477797137,
+            "brier": 0.7009266192865734
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.363045364323737,
+            "ece": 0.07049040621653405,
+            "brier": 0.6887713346683132
+          }
+        }
+      }
+    },
+    "calibration_method": "temperature_scaling",
+    "second_pass_strategy": "horizontal_flip_mean_logits",
+    "limitations": [
+      "Research prototype; not clinically validated.",
+      "Calibration-fit metrics are not independent test performance.",
+      "Checkpoint provenance markers do not establish model accuracy.",
+      "Second-pass activation is limited per request population."
+    ],
+    "research_only": true,
+    "batch_size": 8,
+    "split": "validation",
+    "model_forward_batch_size": 1,
+    "cohort_chunk_size": 8,
+    "warmup_images": 1,
+    "available_partition_images": 168,
+    "timing_sample_images": 48,
+    "timing_sample_rule": "manifest prefix"
+  },
+  "strategies": {
+    "single": {
+      "mean_ms_per_image": 194.71509513944815,
+      "median_ms_per_image": 166.51170000841375,
+      "p95_ms_per_image": 317.44978998904116,
+      "mean_batch_wall_ms": 1559.0544055594364,
+      "amortized_wall_ms_per_image": 194.88180069492955,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0,
+      "max_observed_rss_mb": 1014.6640625,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 48,
+      "repeats": 3,
+      "population_second_pass_budget": 0.0
+    },
+    "all": {
+      "mean_ms_per_image": 188.14835555329208,
+      "median_ms_per_image": 170.90925000957213,
+      "p95_ms_per_image": 311.9800350017612,
+      "mean_batch_wall_ms": 1506.4182666699505,
+      "amortized_wall_ms_per_image": 188.30228333374382,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 1,
+      "max_observed_rss_mb": 1014.859375,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 48,
+      "repeats": 3,
+      "population_second_pass_budget": 1.0
+    },
+    "uncertainty": {
+      "mean_ms_per_image": 182.77560833101032,
+      "median_ms_per_image": 162.61574999953154,
+      "p95_ms_per_image": 281.34805998852244,
+      "mean_batch_wall_ms": 1463.4098833307185,
+      "amortized_wall_ms_per_image": 182.9262354163398,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0.22916666666666666,
+      "max_observed_rss_mb": 1016.078125,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 48,
+      "repeats": 3,
+      "population_second_pass_budget": 0.25
+    },
+    "severity": {
+      "mean_ms_per_image": 169.5051798613147,
+      "median_ms_per_image": 157.56935000536032,
+      "p95_ms_per_image": 281.2545149921789,
+      "mean_batch_wall_ms": 1357.2145500010165,
+      "amortized_wall_ms_per_image": 169.65181875012706,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0.25,
+      "max_observed_rss_mb": 1016.08203125,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 48,
+      "repeats": 3,
+      "population_second_pass_budget": 0.25
+    },
+    "budget": {
+      "mean_ms_per_image": 182.28620347165108,
+      "median_ms_per_image": 159.19510000094306,
+      "p95_ms_per_image": 298.1114500100375,
+      "mean_batch_wall_ms": 1459.8242555528284,
+      "amortized_wall_ms_per_image": 182.47803194410355,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0.25,
+      "max_observed_rss_mb": 1016.08203125,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 48,
+      "repeats": 3,
+      "population_second_pass_budget": 0.25
+    }
+  },
+  "limitations": [
+    "Pilot latency measurements do not establish clinical performance.",
+    "Resolution/model selection requires larger independent validation.",
+    "Training and confirmation inference had finished; this was a live workstation with normal background and report-generation activity, not an isolated repeated crossover benchmark."
+  ]
+}

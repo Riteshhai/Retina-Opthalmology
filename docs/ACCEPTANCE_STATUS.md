@@ -1,67 +1,61 @@
-# Acceptance evidence — 18 October 2026
+# Acceptance evidence — 20 October 2026
 
-## VERIFIED COMPLETE — scoped engineering pilot
+## Verified engineering and internal research milestone
 
-- Existing assets audited and preserved; dedicated local project and Git history established.
-- Official DeepDRiD metadata and terms inspected; 260 real images acquired with provenance.
-- Patient-separated train/selection/calibration/holdout manifest validated against actual files.
-- Corruption, missing-label, source ambiguity, subject overlap and duplicate checks exercised.
-- Two MobileNetV3-small models genuinely trained on 160 images for three CPU epochs.
-- Checkpoints selected on validation loss, loaded on CPU with schema/checksum validation.
-- Binary quality pathway and temperature scaling fitted on 20 separate calibration images.
-- Three actions, independent integer cohort capacity limits and explicit infeasibility verified.
-- Horizontal-flip second pass with separate calibration and exact activation capacity verified.
-- Actual held-out pilot grading, calibration, seven policy comparisons, natural quality/severity
-  tables, operating points, ablation availability/infeasibility, and patient bootstrap recorded.
-- Five CPU strategies timed on validation images, with hardware and timing limitations.
-- FastAPI upload, readiness, typed responses, batch limits and privacy-conscious errors tested.
-- Five Streamlit pages rendered; actual HTTP real-image result rendered with export widgets.
-- Full test run with real-image opt-in: 78 passed, one upstream deprecation warning.
-- Ruff checks passed. Environment, source and result provenance recorded locally.
-- Docker CPU image built and both services reported healthy. Actual real-image
-  HTTP prediction and batch/TTA passed against the containers; readiness, model
-  info, docs and dashboard health returned 200. Container source hashes match
-  all 27 local runtime Python files. See reports/deployment.json and
-  reports/container_source_verification.json. Local ports are 18000/18501.
+- Original Office assets, literature library, starter and pilot evidence preserved.
+- Pinned DeepDRiD photos, metadata, source terms and per-image checksums recorded.
+- Development: 1,184 images / 296 patients, with fitting 848, selection 168 and
+  calibration 168. Ambiguous subjects excluded; patient and fingerprint groups
+  remain together. Fresh confirmation: 340 images / 85 patients, excluding all
+  inspected pilot holdout patients. Cross-cohort image audit passed.
+- Declared ImageNet transfer protocol executed on CPU at 224px. Frozen MobileNet
+  and ResNet18 DR candidates compared on selection only; MobileNet selected.
+- Binary quality and three mapped natural-defect heads genuinely trained. Fixed
+  classical statistical quality comparator fitted on training data only.
+- Dedicated calibration and pre-confirmation artifact/source lock completed.
+- Internal confirmation: 60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK, 0.925
+  referable AUROC; accuracy patient-cluster interval 52.6–67.1%. Overall-quality
+  accuracy 74.1%, versus 73.2% classical. Defect heads remain weak; artifact-head
+  accuracy falls below the constant majority comparator.
+- All seven policies across nine budget pairs reported; 27/63 cases infeasible.
+  Matched-realized-workload comparisons use exploratory patient-cluster intervals,
+  with no confirmation tuning. Review and recapture remain unresolved outcomes.
+- Five CPU strategies executed on 48 selection images, three repeats, two CPU
+  threads. Sequential live-workstation timings do not establish a speed advantage.
+- API, five-page dashboard, calibrated inference, integer capacity enforcement,
+  upload rejection and temporary upload handling verified. Dashboard recorded
+  metrics require a model card matching both loaded weights and calibration.
+- Full suite with new real-model opt-in: **89 passed**, 39.07 seconds; one upstream
+  AnyIO deprecation warning. Ruff passed.
+- Docker rebuilt and actual new-model HTTP readiness, single/batch/second-pass,
+  upload rejection and dashboard health passed. Local ports: **18000 / 18501**.
+  See `reports/deployment_v1.json`; service readiness does not certify accuracy.
 
-These checks establish execution, not screening usefulness. The pilot DR model predicted
-grade 3 for every holdout image: accuracy 16.67%, macro-F1 0.0571, kappa 0. Quality
-predicted all images poor (50% accuracy). Most capacity settings were infeasible.
-At review 0.6 / recapture 0.4, full deferral gives zero automated coverage; missed-auto
-counts cannot be interpreted as screening success. One joint allocation sent more severe
-cases to recapture than simple policies. No settings were retuned using this holdout.
+Current evidence: [results and limits](research/CONFIRMATION_V1_RESULTS.md),
+[frozen report](../reports/confirmation_v1/evaluation.json),
+[model card](../reports/development_v1/model_card.json), and PROGRESS.md.
+Original pilot results remain in reports/pilot and the historical execution log.
+The new and old cohorts/protocols differ; no paired improvement estimate is made.
 
-## IMPLEMENTED BUT NOT VERIFIED
+## Partially complete — overall research project
 
-- Optional pretrained initialization, optional GPU/mixed precision and deployment on other
-  operating systems/hardware have not been exercised as scientific experiments.
-- General quality multi-head support exists, but the initial real model trains the overall
-  binary quality label only; mapped natural-defect heads have not been genuinely trained.
+The literature audit retains 43 primary-linked records and all 28 original IDs,
+with record-specific limits. The manuscript, methodology, current Review-1 brief
+and architecture source exist. Source, scripts and aggregate evidence are kept
+in the GitHub draft PR; datasets, identifiers, per-image artifacts and weights
+remain local. Internal results support further study, not publication readiness.
 
-## PARTIALLY COMPLETE
+## Remaining evidence gates
 
-- Research evaluation: exploratory pilot artifacts exist. They cannot substantiate the
-  proposed contribution. Many ablations correctly report infeasibility with weak scores.
-- Literature: 43 primary-linked records, 43 BibTeX entries, 28 original IDs retained, with
-  record-specific verification limits. This is not a replication of all cited papers.
-- Paper: structured manuscript draft and methodology exist; confirmatory results remain open.
-- Review 1: actual progress brief and architecture source exist; original Office materials
-  are preserved, not overwritten with stronger claims.
+- Independent external-domain validation and overlap/label harmonization.
+- Independently tuned comparators, repeated seeds, expanded model development,
+  controlled degradation experiments and full robustness ablations.
+- Reliable natural-defect prediction; small/absent defect strata limit inference.
+- Patient-level referral logic, DME/other disease handling and reader uncertainty.
+- Prospective workflow evaluation, actual specialist diagnoses, paired recapture
+  benefit and clinical authorization: not established.
+- Optional GPU/mixed precision and other hardware/OS deployments: not exercised.
 
-## BLOCKED OR NOT STARTED — final scientific acceptance
-
-- Useful model validation, full-size training and backbone comparison: NOT STARTED beyond pilot.
-- Independent external-domain experiment: NOT STARTED. IDRiD source access/terms could not
-  be retrieved by the audit; EyePACS needs its own terms; DDR author archive requires a
-  separately planned larger acquisition. None is replaced with synthetic clinical evidence.
-- Full natural defect training, controlled degradation experiments and complete ablations:
-  PARTIALLY COMPLETE in software; final real research experiments NOT STARTED.
-- Matched realized-workload superiority, paired patient-level statistical comparisons and
-  a defensible publication contribution: NOT ESTABLISHED.
-- Clinical validation, actual specialist diagnoses and paired recapture benefit: NOT STARTED.
-
-Next executable research task: predeclare a larger model-development experiment on the
-remaining official training patients, train with an appropriate image resolution and
-optional licensed pretrained initialization, select using development data, and reserve
-a new untouched confirmatory cohort. Do not turn the consumed pilot holdout into a tuning set
-while still calling its performance final.
+The overall acceptance remains **PARTIALLY COMPLETE**. Future model/policy tuning
+must acknowledge the now-inspected confirmation population and reserve independent
+evaluation data. No clinical benefit or universal policy superiority is claimed.

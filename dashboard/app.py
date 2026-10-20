@@ -70,6 +70,18 @@ with st.sidebar:
 
 results = st.session_state.get('batch_results', [])
 if page == 'Screening Dashboard':
+    info = api_get('/model/info') if ready.get('ready') else {}
+    card = info.get('model_card', {})
+    confirmation = card.get('confirmation')
+    if confirmation:
+        st.subheader('Recorded internal confirmation')
+        a, b, c = st.columns(3)
+        a.metric('Five-grade DR accuracy', f"{confirmation['dr_accuracy']:.1%}")
+        b.metric('DR macro-F1', f"{confirmation['dr_macro_f1']:.3f}")
+        c.metric('Overall-quality accuracy', f"{confirmation['overall_quality']['accuracy']:.1%}")
+        st.caption(f"{confirmation['images']} images from {confirmation['patients']} reserved patients. "
+                   'Same-domain research evaluation; external and clinical validation remain outstanding.')
+        st.caption('Loaded model: '+card['model_version'])
     st.subheader('Current screening session')
     if not results:
         st.info('No batch has been processed in this session. Use Batch Screening to begin.')

@@ -1,8 +1,8 @@
 # QSART — Quality- and Severity-Aware Retinal Triage
 
-A local, CPU-compatible **research prototype** with genuine pilot-trained DR and image-quality models, temperature calibration, three-action triage, independent cohort budgets, a FastAPI service and a Streamlit client.
+A local, CPU-compatible **research prototype** with trained DR and image-quality models, temperature calibration, three-action triage, independent cohort budgets, a FastAPI service and a Streamlit client.
 
-**Status: PARTIALLY COMPLETE.** The initial real-image engineering pipeline works; it does not establish useful screening performance or clinical validity. The first 96-pixel, three-epoch, randomly initialized DR model predicted one grade on the 60-image pilot holdout (accuracy 16.67%, macro-F1 0.0571, kappa 0). It must not be used for patient care. Full research experiments and external validation remain outstanding. See [acceptance evidence](docs/ACCEPTANCE_STATUS.md), [pilot report](reports/pilot/evaluation.json), and [model limitations](docs/MODEL_STATUS.md).
+**Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
 All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.
 
@@ -28,7 +28,7 @@ overridden in `.env`. The local PowerShell launcher also reads these port settin
 
 The API is alive without checkpoints, but readiness and prediction fail explicitly. There is no generated or random prediction fallback. Compose mounts `./checkpoints` read-only; it never downloads weights at startup. Ports are bound to the local machine. The API and dashboard have independent health checks; liveness does not imply model readiness.
 
-Required artifacts: `checkpoints/dr/best.pt`, `checkpoints/quality/best.pt`, `checkpoints/calibration.json`. The calibration artifact is bound to checkpoint and manifest checksums. Test fixtures are refused by production loading.
+This workstation uses `checkpoints/development_v1/selected/dr.pt`, `quality.pt`, `calibration.json` and `model_card.json`. The ignored local `.env` selects these with `QSART_CONTAINER_DR_CHECKPOINT`, `QSART_CONTAINER_QUALITY_CHECKPOINT`, `QSART_CONTAINER_CALIBRATION` and `QSART_CONTAINER_MODEL_CARD`. Fresh Compose defaults retain the historical pilot paths (`checkpoints/dr/best.pt`, `checkpoints/quality/best.pt`, `checkpoints/calibration.json`). The calibration artifact is bound to checkpoint/manifest checksums; recorded dashboard metrics appear only when the model card matches the loaded weights and calibration. Production loading refuses software-test fixtures.
 
 ## Local Python setup
 
@@ -47,7 +47,30 @@ Alternatively, `./scripts/start_local.ps1` launches both local services. Use eit
 
 Direct dependencies are pinned in requirements.txt; Docker resolves compatible transitive dependencies and its executed environment is captured in the deployment report. The development venv initially inherited existing host libraries, while the container provides an independent clean installation. No paid service is required.
 
-## Reproduce the real-image pilot
+## Reproduce development v1
+
+Read the [declared protocol](docs/research/DEVELOPMENT_V1_PROTOCOL.md) and [execution details](docs/TRANSFER_STATUS.md). From the prepared pinned metadata and preserved pilot reservation:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare_development_data.py
+.\.venv\Scripts\python.exe scripts/train_transfer.py --manifest data/processed/deepdrid/development_v1.csv --output checkpoints/development_v1/dr_mobilenet --task dr --allow-download
+.\.venv\Scripts\python.exe scripts/train_transfer.py --manifest data/processed/deepdrid/development_v1.csv --output checkpoints/development_v1/dr_resnet18 --task dr --backbone resnet18 --allow-download
+.\.venv\Scripts\python.exe scripts/train_transfer.py --manifest data/processed/deepdrid/development_v1.csv --output checkpoints/development_v1/quality_mobilenet --task quality --quality-defects --allow-download
+.\.venv\Scripts\python.exe scripts/train_classical_quality.py --manifest data/processed/deepdrid/development_v1.csv
+.\.venv\Scripts\python.exe scripts/prepare_development_data.py --confirmation-only
+.\.venv\Scripts\python.exe scripts/finalize_development.py
+.\.venv\Scripts\python.exe scripts/evaluate_confirmation.py
+.\.venv\Scripts\python.exe scripts/package_confirmation.py
+```
+
+The manifest and selection lock are intentionally frozen and refuse overwriting.
+Do not rerun training against already evaluated experiment paths. A new experiment
+needs its own declared protocol and output directories. Confirmation is now
+consumed evidence; future tuning must be disclosed. Official test data remain
+untouched. Pretrained weight URLs and hashes are recorded separately from code
+licensing; weights and photos are not redistributed by this repository.
+
+## Historical real-image pilot
 
 The official DeepDRiD repository is pinned to commit `56d8af71319803150d0e7b90533e0918c7bf85ee`. Read [data terms](docs/research/DATA_ACCESS_AND_TERMS.md) and [schema](docs/DATA_SCHEMA.md). Images are downloaded locally from the author repository, with attribution and per-file checksums; no private archive or gated access is bypassed.
 
@@ -80,7 +103,7 @@ Conditional inference uses horizontal-flip logit averaging and dedicated TTA cal
 .\.venv\Scripts\python.exe scripts/benchmark_cpu.py --dr-checkpoint checkpoints/dr/best.pt --quality-checkpoint checkpoints/quality/best.pt --calibration checkpoints/calibration.json --manifest data/processed/deepdrid/pilot_manifest.csv --split validation --output artifacts/pilot_cpu_benchmark.json --batch-size 8 --repeats 3
 ```
 
-The inference loop forwards one image at a time; benchmark batch size means request cohort chunk size. RSS is sampled, not a continuous peak. See the report for CPU, thread count, resolution and timing variability. Larger tests, mapped natural-defect heads, robustness experiments, matched-workload statistical comparisons, model selection across backbones, and independent external-domain testing remain research work.
+The inference loop forwards one image at a time; benchmark batch size means request cohort chunk size. RSS is sampled, not a continuous peak. See the report for CPU, thread count, resolution and timing variability. Development v1 additionally compares two backbones, trains mapped natural-defect heads, includes a classical quality comparator and reports exploratory matched-workload patient-cluster intervals. Robustness studies, independently tuned comparator experiments and external-domain testing remain research work.
 
 ## API and interface
 
@@ -107,10 +130,10 @@ Ordinary tests use explicitly labeled software fixtures and do not require the I
 - `qsart/triage.py`, `evaluation.py`: budget allocator and held-out reporting.
 - `api`, `dashboard`: service and client.
 - `scripts`, `configs`, `tests`, `.github/workflows`: reproducible commands and verification.
-- `reports/pilot`: aggregate measured results and figures.
+- `reports/development_v1`, `reports/confirmation_v1`: current aggregate measured results, model card and figures; `reports/pilot` preserves the original round.
 - `docs/research`: 43-record literature audit, bibliography, protocol, Review-1 briefing and manuscript draft.
 - `PROJECT_AUDIT.md`, `TASKS.md`, `PROGRESS.md`: status and evidence.
 
 The original starter `app.py`, `qsart/policy.py`, `qsart/cli.py` remain a separate **synthetic-score policy bench**. Its `routine` means auto-clearance, unlike the new provisional AUTO_SCREEN action. Its legacy tuning constrains calibration workloads, not future cohorts. Do not use its built-in mock CSVs as clinical results. See docs/LEGACY_STARTER_README.md.
 
-No broad novelty or clinical benefit is claimed. Close prior work already covers quality-aware grading, ordinal uncertainty and screening integration. The manuscript is a research draft; its confirmatory results remain incomplete. GitHub is used for source history and review, while local images, manifests, training logs and checkpoints remain outside version control.
+No broad novelty or clinical benefit is claimed. Close prior work already covers quality-aware grading, ordinal uncertainty and screening integration. The manuscript includes internal confirmation but remains a research draft; independent external and prospective results are incomplete. GitHub is used for source history and review, while local images, manifests, training logs and checkpoints remain outside version control.

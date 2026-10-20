@@ -1,3 +1,5 @@
+> Historical 18 October pilot record. Current development and confirmation: [transfer status](TRANSFER_STATUS.md) and [results](research/CONFIRMATION_V1_RESULTS.md).
+
 # Data pipeline evidence — 2026-10-18
 
 **VERIFIED COMPLETE — scoped real-image engineering pilot and ingestion software.**
