@@ -15,8 +15,10 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Train an actual EfficientNet-B0 DeepDRiD candidate and compare three genuine models.
 - [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
 - [ ] P1 BLOCKED: official APTOS images/access; user confirmed not downloaded.
-- [ ] P1 NOT STARTED: APTOS EfficientNet study and exact randomized base-paper reproduction.
-- [ ] P1 NOT STARTED: useful ordinal-set study, independently tuned policy comparators and repeated seeds.
+- [ ] P1 BLOCKED/NOT STARTED: APTOS EfficientNet study and full base-paper reproduction; the randomized score component is now implemented separately.
+- [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
+- [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
+- [ ] P1 NOT STARTED: independently tuned policy comparators and useful validated automatic triage.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [ ] P1 NOT STARTED: independent IDRiD external evaluation and broader distribution-shift studies.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.

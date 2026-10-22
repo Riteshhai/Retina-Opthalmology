@@ -18,6 +18,14 @@ quality scores did not reliably track compression damage. These are development
 stress diagnostics. The unchanged models remain selected while weaknesses are
 investigated. Reports/plots appear in Research Analytics and Experiment Explorer.
 
+Two further [ordinal diagnostics](docs/research/ORDINAL_STUDY_V1_RESULTS.md) and
+[three-seed training results](docs/research/REPEATED_SEEDS_V1_RESULTS.md) are saved
+locally and exposed through the experiment explorer. Randomized ordinal sets are
+narrower but show variable empirical patient coverage; the production sidecar is
+retained. A cache-dependent RNG issue was fixed before all six new DR/quality
+runs. DR macro-F1 across seeds is 0.5301 ±0.0078 (sample SD); no deployment switch
+or fresh-confirmation claim follows from this development study.
+
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
 All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.

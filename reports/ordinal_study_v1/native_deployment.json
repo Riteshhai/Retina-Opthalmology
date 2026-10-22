@@ -1,0 +1,37 @@
+{
+  "status": "verified",
+  "scope": "actual HTTP against running deployment",
+  "runtime": "native_python",
+  "runtime_scope": "Declared by invoker from startup evidence; HTTP checks alone do not identify runtime",
+  "verifier_sha256": "113d39e2009327ad410657e8d8c1da990b0bca0ce81819662ff4bb50246c25c8",
+  "image_source": "authorized DeepDRiD manifest; input not retained by this script",
+  "partition": "validation",
+  "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "model_card_status": "matched",
+  "policy_version": "2.0",
+  "conformal_status": "available",
+  "research_get_statuses": {
+    "/triage/config": 200,
+    "/research/experiments": 200,
+    "/research/metrics?experiment_id=confirmation_v1": 200
+  },
+  "simulator_status": "evaluated",
+  "overload_checked": true,
+  "get_statuses": {
+    "/health": 200,
+    "/ready": 200,
+    "/model/info": 200,
+    "/docs": 200
+  },
+  "predict_status": 200,
+  "batch_status": 200,
+  "unsupported_status": 415,
+  "dashboard_health_status": 200,
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "device": "cpu",
+  "second_pass_single": true,
+  "batch_review_rate": 1.0,
+  "batch_recapture_rate": 0.0,
+  "batch_second_pass_rate": 0.5,
+  "note": "Health/readiness and schema execution do not establish model usefulness or clinical validity."
+}

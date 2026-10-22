@@ -10,6 +10,10 @@
   fixed seven-condition selection-data degradation VERIFIED COMPLETE. Full
   [results and limitations](research/ROBUSTNESS_V1_RESULTS.md) retain the observed
   blur/compression failures and non-monotonic quality response.
+- **Further verified executions:** ordinal diagnostics at `16bd809` and six real
+  repeated-seed training runs at clean `99a6cbb`. All fixed outcomes are preserved;
+  see [ordinal study](research/ORDINAL_STUDY_V1_RESULTS.md) and
+  [training variability](research/REPEATED_SEEDS_V1_RESULTS.md).
 
 ## Implemented and actually tested
 
@@ -120,8 +124,8 @@ additional disk space. Source/environment and restart checks accompany deploymen
 APTOS and independent IDRiD results, clinical review/recapture outcomes and
 prospective utility have not been produced.
 
-**IN PROGRESS overall:** useful conformal/triage behavior, independently tuned
-comparators, repeated seeds, additional robustness/ablations and external-domain
+**IN PROGRESS overall:** useful validated conformal/triage behavior, independently
+tuned comparators, additional robustness/ablations and external-domain
 evaluation. A future experiment must predeclare changes; consumed v1 confirmation
 cannot become an undisclosed tuning set. Formal manuscript writing stays deferred.
 
@@ -159,3 +163,26 @@ The native HTTP workflow passed again after restarting the launcher, and the new
 experiment was retrieved through the actual research endpoint. Evidence is in
 reports/robustness_v1; the previously measured 198-test/container results remain
 historical records rather than being overwritten.
+
+Further 22 October verification: **299 passed**, no failures/skips, 59.59 seconds,
+with genuine-model/sidecar integration enabled; Ruff and Compose config passed.
+The intermediate pre-registry full run was 297 passed, 72.75 seconds. Both new
+experiments are exposed through the real API after a native launcher restart;
+the original model card and sidecar remain matched. Current Docker startup remains
+unavailable, and APTOS is still not acquired.
+
+The ordinal diagnostic reproduces the original four baseline fits exactly and
+explains the threshold-one atom with three images from two patients. At alpha .10,
+five randomized patient-max runs average size 3.644, image coverage 96.07% and
+patient all-views coverage 86.19% (range 80.95–92.86%). These are randomization
+replicates, not training seeds or formal coverage guarantees. Only 2–7 images
+receive guarded pointwise automatic recommendations; no budget utility is claimed.
+All 28 comparisons and independent 4,704-set reconstruction are retained.
+
+The new head initialization rule is independent of feature-cache existence.
+All six real DR/quality runs use seeds 2026/2027/2028, one source-valid new cache,
+848 fitting and 168 selection images; calibration/confirmation were unused.
+DR macro-F1 is .53009 ±.00782 and overall-quality accuracy 76.79% ±.60 percentage
+points (sample SD). Defect heads remain weak, including field/artifact means below
+training-majority constants. No favorable seed was selected or deployed. Exact
+artifact hashes distinguish these runs from historical version-string collisions.

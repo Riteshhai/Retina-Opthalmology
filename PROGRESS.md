@@ -1,5 +1,73 @@
 # Execution log
 
+## 2026-10-22 — ordinal randomization and repeated training seeds
+
+- Verified prior published commit4659374: GitHub PR workflow39814919309 completed
+  successfully. Declared both new protocols in commit99a47b5 before new outputs.
+- Added explicit-uniform randomized ordinal research scores, separate from the
+  unchanged production artifact/schema. Mathematical tests cover candidate-score
+  ordering, ties, contiguous inversion, exact ranks, grouped maxima, empty fallback,
+  alpha nesting and safe artifact/provenance handling. New and existing conformal/
+  transfer regression subset: 120 passed, 12.96s. Ruff passed.
+- Diagnosed and fixed cache-dependent classifier-head RNG. The feature extractor's
+  DataLoader iterator advances Torch RNG on cache misses; head construction now
+  reseeds immediately afterward with the declared training seed. Meaningful fixture
+  cache-miss/hit DR+four-head quality states/history/probabilities match exactly;
+  different seeds remain distinct. Existing source/cache resume guards remain.
+- Executed scripts/run_ordinal_study.py at16bd809 on 84 original calibration images
+  /21 independently reserved patients, with unchanged independent temperature;
+  reused bound clean raw scores for 168 selection images/42 patients. Verified 252
+  actual original image hashes and old model/calibration/cache/split bindings.
+- Reproduced four original LAC/deterministic ordinal fits and selection sets with
+  zero threshold error. Three terminal true-label images from two patients give
+  two patient maxima at 1, forcing both ordinal rank20/rank21 thresholds to 1.
+- All 28 declared method/unit/alpha/seed rows retained. At alpha .10 randomized
+  patient-max mean size 3.644, image coverage 96.07%, patient-all-views 86.19%
+  (range 80.95–92.86). At alpha .05: size 4.029, image 98.45%, patient 94.29%.
+  Randomization seeds 2026–2030 are not model-training replicates. Pooled-image
+  diagnostic is narrower but changes the target and contains correlated views.
+  Guarded primary alpha .10 automatic counts are 6/2/7/5/7 in seed order,
+  range 2–7 of 168; no automatic true-referable case, with no safety/utility claim.
+  Original deployed deterministic sidecar stays unchanged.
+- Independent audit without project scoring code reconstructed 28 fits and 4,704
+  sets plus raw sets, all metrics/actions, all seed summaries and 252 image hashes.
+  Maximum threshold error 4.44e-16. Source/protocol/cache/package/privacy bindings
+  passed. Public audit is in reports/ordinal_study_v1.
+- Committed ordinal aggregates and froze clean training source99a6cbbce0204c965c8221d237cf7cf644e57ddf.
+  Ran scripts/run_repeated_seeds.py --execute --protocol
+  docs/research/REPEATED_SEEDS_V1_PROTOCOL.md --source-commit
+  99a6cbbce0204c965c8221d237cf7cf644e57ddf. All 6 DR/quality runs at seeds
+  2026/2027/2028 completed; every provenance dirty flag is false. Fresh MobileNet
+  extraction 119.08s, then five source-valid cache hits with identical official
+  weights/features. All 1016 training
+  and selection image bytes were checked. Calibration/confirmation were unused.
+- DR seeds: selected epochs 15/24/25, executed epochs 30/39/40, updates 810/1053/1080;
+  macro-F1 .536774/.521493/.531992, mean .5300866, sample SD .0078167.
+  Accuracy 62.8968% ±.3437 percentage points. Overall quality selected epochs 4/10/7,
+  executed 19/25/22, updates 513/675/594; accuracy mean 76.7857% ±.5952 points.
+  Defect clarity/field/artifact means 48.81/51.59/41.87%, sample SD 5.29/6.56/9.68 points.
+  Field/artifact fall below post-run audit training-majority constants 69.05/47.62%.
+  All seed outcomes retained; historical seed2026 excluded from the new procedure mean.
+- Independent repeated-seed audit checked all 6 sources/configs/caches/weights,
+  prediction rows/labels, all metrics/supports and 21 means/sample SDs, epoch/update
+  counts and 48 run-artifact hashes. Direct saved-head/frozen-feature probabilities
+  agree within 1.63e-7; best/last backbone tensors match official weights. Original
+  selected DR/Q/basecalibration/card/conformal hashes are unchanged. These checks
+  use saved evidence, not OS-level I/O tracing or a new retinal inference run.
+- Full real-model/conformal suite before registry update: 297 passed, 72.75s.
+  Final suite after both aggregate endpoints: 299 passed, 59.59s, zero failures/skips,
+  one upstream AnyIO warning. Ruff and Compose config passed. Exact JUnit and
+  public summary are preserved separately from prior test evidence.
+- Restarted native PowerShell launcher; actual real JPEG single/batch/TTA,
+  card/sidecar matching, readiness/docs, unsupported uploads, simulator evaluated/
+  overloaded and dashboard health all passed. HTTP research discovery returned
+  all 28 ordinal comparisons and all 6 training runs. No new Docker execution is claimed.
+- Browser verification displayed nine experiment records, selected repeated_seeds_v1
+  and rendered its actual three-seed mean/SD. Saved aggregate-only explorer proof.
+- Remaining: independently tuned policies and useful validated triage, official
+  APTOS acquisition/full reproduction, external IDRiD and additional robustness.
+  Overall research remains IN PROGRESS; formal manuscript work stays deferred.
+
 ## 2026-10-22 — controlled degradation and publication
 
 - Published specification alignment as commit 20009517f79eefc1c7bd2f34474781de7ad10f79

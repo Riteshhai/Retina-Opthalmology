@@ -1,5 +1,20 @@
 # QSART change log
 
+## Ordinal diagnostics and repeated seeds — 2026-10-22
+
+- Independently implemented explicit randomized greedy ordinal scores in a
+  separate research module, preserving production sidecar semantics/artifacts.
+- Reproduced four original baseline fits exactly; three terminal-label images in
+  two patients explain the deterministic threshold at one. All 28 fixed comparisons
+  retain five randomization seeds, two alpha values and both calibration units.
+- Fixed head initialization's dependency on feature-cache existence, with actual
+  cache-miss/hit software regressions. Executed all six new DR/quality training
+  runs at seeds 2026/2027/2028 under the new procedure and one verified cache.
+- Added complete aggregate results, plots and experiment discovery. Historical
+  weights/results, selected deployment and consumed confirmation remain preserved.
+- Randomization variability is distinct from training-seed SD. Neither study
+  establishes external validity, calibrated patient coverage or useful triage.
+
 ## MASTER_SPEC_v1.0 adoption — 2026-10-20
 
 - Adopted the user's updated master specification; exact root/versioned copies

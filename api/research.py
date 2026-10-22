@@ -33,7 +33,9 @@ def experiment_registry(root):
         ('pilot/evaluation.json', 'pilot', 'holdout', 'historical_engineering_pilot'),
         ('spec_v1/development_evaluation.json', 'spec_v1_alignment', 'validation', 'development_exploration'),
         ('spec_v1/efficientnet_selection.json', 'selection_dr_efficientnet', 'validation', 'development_selection'),
-        ('robustness_v1/evaluation.json', 'controlled_degradation_v1', 'validation', 'development_model_input_stress')]
+        ('robustness_v1/evaluation.json', 'controlled_degradation_v1', 'validation', 'development_model_input_stress'),
+        ('ordinal_study_v1/evaluation.json', 'ordinal_randomization_v1', 'validation', 'development_ordinal_diagnostics'),
+        ('repeated_seeds_v1/summary.json', 'repeated_seeds_v1', 'validation', 'development_selection')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -43,7 +45,9 @@ def experiment_registry(root):
         raw = json.loads(path.read_text(encoding='utf-8'))
         metrics = {key: raw[key] for key in ('grading', 'quality', 'classical_quality', 'conformal',
                    'budgets', 'images', 'patients', 'selection_metrics', 'conditions', 'paired_changes',
-                   'condition_parameters', 'clean_equivalence') if key in raw}
+                   'condition_parameters', 'clean_equivalence', 'comparisons', 'randomization_summaries',
+                   'deterministic_score_diagnostics', 'baseline_reproduction', 'summary', 'runs',
+                   'population', 'head_rng_version') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         records.append(ExperimentSummary(experiment_id=name, dataset='DeepDRiD', partition=partition,

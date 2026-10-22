@@ -81,6 +81,29 @@ def test_saved_stress_experiment_preserves_scope_and_unfavorable_paired_results(
         assert 'no independent clinical validation' in detail['notes'][0]
 
 
+@pytest.mark.parametrize('relative,experiment,scope,payload', [
+    ('ordinal_study_v1/evaluation.json', 'ordinal_randomization_v1', 'development_ordinal_diagnostics',
+     {'comparisons': [{'metrics': {'patient_all_views_coverage': .81}}],
+      'randomization_summaries': [{'mean_set_size': 3.6}]}),
+    ('repeated_seeds_v1/summary.json', 'repeated_seeds_v1', 'development_selection',
+     {'summary': {'dr': {'macro_f1': {'mean': .53, 'sample_standard_deviation': .01}}},
+      'runs': [{'seed': 2026, 'head_rng_version': 'software_fixture_rng'}]}),
+])
+def test_randomization_and_training_seed_reports_retain_distinct_evidence(tmp_path, monkeypatch,
+                                                                         relative, experiment, scope, payload):
+    """Generated contract fixtures are not measured research outputs."""
+    report = tmp_path/relative
+    report.parent.mkdir()
+    report.write_text(json.dumps({**payload, 'limitations': ['Development fixture; no deployment selection.']}))
+    monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))
+    with TestClient(create_app()) as client:
+        data = client.get('/research/metrics', params={'experiment_id': experiment})
+        assert data.status_code == 200
+        assert data.json()['scope'] == scope
+        assert data.json()['metrics'] == payload
+        assert data.json()['notes'] == ['Development fixture; no deployment selection.']
+
+
 class PositiveFixture:
     """Dependency-injected fixture bypasses artifact loading for an endpoint contract."""
     model_version = 'software-positive-fixture'
