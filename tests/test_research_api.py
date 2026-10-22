@@ -88,6 +88,14 @@ def test_saved_stress_experiment_preserves_scope_and_unfavorable_paired_results(
     ('repeated_seeds_v1/summary.json', 'repeated_seeds_v1', 'development_selection',
      {'summary': {'dr': {'macro_f1': {'mean': .53, 'sample_standard_deviation': .01}}},
       'runs': [{'seed': 2026, 'head_rng_version': 'software_fixture_rng'}]}),
+    ('policy_comparison_v1/dashboard_summary.json', 'policy_comparison_v1', 'development_out_of_fold_policy',
+     {'summary': {'fully_evaluated_scenarios': 1, 'incomplete_scenarios': 1},
+      'evaluation_ledger': {'review_cost': .25}, 'source_report_sha256': 'software_fixture',
+      'paired_bootstrap': {'repeats': 1000, 'direction': 'left_minus_right', 'multiplicity_adjusted': False},
+      'scenarios': [{'mode': 'ordinal', 'status': 'incomplete', 'pooled_metrics': None},
+                    {'mode': 'no_cp', 'status': 'evaluated', 'pooled_metrics': {'missed_referable_auto': 1}}],
+      'paired_comparisons': [{'status': 'evaluated',
+                             'matched_realized_workload_within_every_fold': False}]}),
 ])
 def test_randomization_and_training_seed_reports_retain_distinct_evidence(tmp_path, monkeypatch,
                                                                          relative, experiment, scope, payload):

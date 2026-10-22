@@ -26,6 +26,14 @@ retained. A cache-dependent RNG issue was fixed before all six new DR/quality
 runs. DR macro-F1 across seeds is 0.5301 ±0.0078 (sample SD); no deployment switch
 or fresh-confirmation claim follows from this development study.
 
+The [independently tuned policy study](docs/research/POLICY_COMPARISON_V1_RESULTS.md)
+uses three patient folds, eight guarded policies and a fixed evaluation cost ledger.
+Of 192 scenarios, 78 fully evaluated and 114 remained incomplete because of overload
+or untunable folds. All 19 comparisons with matching actual workloads produced
+identical actions. Tuning sometimes increased cost; no validated triage benefit or
+deployment change follows. The experiment explorer distinguishes unavailable
+outcomes from measured zero misses.
+
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
 All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.

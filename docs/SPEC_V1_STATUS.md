@@ -124,8 +124,8 @@ additional disk space. Source/environment and restart checks accompany deploymen
 APTOS and independent IDRiD results, clinical review/recapture outcomes and
 prospective utility have not been produced.
 
-**IN PROGRESS overall:** useful validated conformal/triage behavior, independently
-tuned comparators, additional robustness/ablations and external-domain
+**IN PROGRESS overall:** useful validated conformal/triage behavior,
+additional robustness/ablations and external-domain
 evaluation. A future experiment must predeclare changes; consumed v1 confirmation
 cannot become an undisclosed tuning set. Formal manuscript writing stays deferred.
 
@@ -186,3 +186,27 @@ DR macro-F1 is .53009 ±.00782 and overall-quality accuracy 76.79% ±.60 percent
 points (sample SD). Defect heads remain weak, including field/artifact means below
 training-majority constants. No favorable seed was selected or deployed. Exact
 artifact hashes distinguish these runs from historical version-string collisions.
+
+The independently tuned guarded-policy study is **VERIFIED COMPLETE** as a
+development experiment. Protocol commit `4167118` preceded execution source
+`c2f8fbb50622631c6001092f7b1da008498f421b`. Three patient folds independently tune
+six decision prices for eight policies under three uncertainty modes and four
+budget pairs, while all outcomes use the same fixed evaluation ledger. There are
+1,728 candidate allocations and 192 tuned/default scenarios: 78 fully evaluated,
+114 incomplete with null pooled outcomes. All 19 comparisons with matching actual
+per-fold workloads have identical actions; the other 54 estimable pairs have
+unequal workloads. The deployed ordinal gate permits no automatic clearance.
+Independent reconstruction checked all candidate choices, 576 fold records,
+capacities, paired outcomes and 219 intervals. Full
+[results](research/POLICY_COMPARISON_V1_RESULTS.md) preserve unfavorable tuning
+outcomes. These previously inspected selection patients do not provide fresh
+end-to-end validation; no policy or artifact was selected for deployment.
+
+Final comparator integration verification: **371 passed**, zero failures/skips,
+61.26 seconds with genuine-model/conformal integration enabled; Ruff and Compose
+configuration passed. Actual native HTTP checks and Streamlit AppTest against the
+running API verified all ten experiment records, the new192-scenario report,
+null incomplete outcomes and diagnostic labels. A nested-table serialization bug
+found by that integration was fixed with a regression fixture. Browser observation
+was rejected by its URL policy, so this session has no new browser-rendering proof.
+Native checks do not replace a new container run; current Docker remains blocked.

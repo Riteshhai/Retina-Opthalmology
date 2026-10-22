@@ -1,5 +1,65 @@
 # Execution log
 
+## 2026-10-22 — independently tuned guarded-policy comparison
+
+- Verified prior published e23a18b and successful PR workflow39822233255.
+  Declared POLICY_COMPARISON_V1_PROTOCOL.md at4167118 before implementation and
+  execution. Frozen execution source is c2f8fbb50622631c6001092f7b1da008498f421b.
+- Added research-only fixed-ledger evaluation, explicit ordinal/LAC/no-CP modes,
+  complete patient folds, independent six-price tuning and overload accounting.
+  Allocator prices cannot change outcome evaluation prices. Production triage,
+  selected weights, independent temperatures and sidecar bytes are unchanged.
+  New helper/runner plus existing triage regressions:94 passed,8.57s; Ruff passed.
+- Ran `.venv/Scripts/python.exe scripts/run_policy_comparison.py` successfully in
+  19.38s. Reused frozen genuine first-pass scores for168 selection images/42
+  patients and verified all original image bytes/source/input/artifact bindings.
+  No new model/calibration/confirmation/test/external predictions were generated.
+  Three folds each exclude14 patients/56 images and tune on28/112. These patients
+  previously selected the classifier; this is development policy cross-fitting.
+- Retained all1,728 candidates (786 evaluated,942 overloaded),192 tuned/default
+  scenarios (78 complete,114 incomplete with null pooled metrics),576 fold records
+  (256 evaluated,163 held overloads,157 skipped untunable). Untunable diagnostics
+  describe tuning N112, not an attempted held-fold allocation. Pooled capacities
+  sum actual fold floors. No unsafe forced clearance or failed-fold exclusion.
+- Independent reconstruction verified all allocations, all131 selected prices,
+  fixed ledgers, exact caps, folds,180 planned comparisons/73 estimable pairs and
+  all219 descriptive bootstrap intervals. All19 actual-workload-matched pairs
+  have identical individual actions and zero pointwise outcome deltas. The other
+  54 estimable pairs have unequal workloads. No resource-matched advantage found.
+- Ordinal production mode permits zero automatic cases; only full review is
+  feasible. LAC dual tuning at B1/.4 raises fixed proxy .25 to .316369, with two
+  automatic cases and two severe recaptures. No-CP B.6/.4 tuning clears18/168,
+  with one referable automatic miss and five severe recaptures. Negative outcomes
+  are preserved; no method, uncertainty mode or price was promoted to deployment.
+- Added SHA-bound compact summary and192-cell feasibility/coverage figure via
+  scripts/summarize_policy_comparison.py (14 tests passed). Full measured JSON
+  SHA4dfd99d535d7f7413596caab5ca1fa47629a62126a488b907563656bf5834085
+  stays unchanged. Public reports contain aggregates only; private fold/actions,
+  original execution plot and reproduction scripts remain local under artifacts.
+- Initial full genuine-model/conformal suite:371 passed,64.60s, one upstream
+  AnyIO warning. Later real-API Streamlit integration exposed heterogeneous
+  nested arrays in the experiment inventory table; scalar-only summaries fix
+  Arrow serialization while full detail views retain all comparisons. Added a
+  regression fixture. Final post-fix verification is recorded below.
+- Final full post-fix suite with all six genuine artifact integration environment
+  settings:371 passed, zero failures/skips,61.26s, one upstream AnyIO warning.
+  Command: `.venv/Scripts/python.exe -m pytest -q
+  --junitxml=reports/policy_comparison_v1_tests.xml`. Final Ruff, Compose config and
+  Git whitespace checks passed. API/dashboard targeted subset also passed19 tests
+  in42.41s before the later inventory-table fix; final full run includes that fix.
+- Native launcher restarted on18000/18501. First verifier attempt preceded API
+  readiness and was refused; after actual startup, real JPEG single/batch/TTA,
+  card/sidecar matching, readiness/docs, unsupported upload, evaluated/overloaded
+  simulator and dashboard HTTP health passed. Actual research endpoint returns
+  all192 scenarios,180 comparisons,114 null outcomes and exact bootstrap settings.
+  Streamlit AppTest against the running API loaded all10 experiments, verified
+  ordinal24 incomplete/null plus8 full-review tuned rows and ablation notes.
+- Browser URL access policy rejected observation; no workaround or new browser
+  screenshot claim. UI evidence is explicitly Streamlit component testing, not
+  browser rendering. Current Docker startup remains unavailable; prior container
+  evidence is preserved. APTOS is still not acquired, IDRiD unassessed, useful
+  validated triage unproven, and formal manuscript work remains deferred.
+
 ## 2026-10-22 — ordinal randomization and repeated training seeds
 
 - Verified prior published commit4659374: GitHub PR workflow39814919309 completed

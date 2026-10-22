@@ -18,7 +18,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [ ] P1 BLOCKED/NOT STARTED: APTOS EfficientNet study and full base-paper reproduction; the randomized score component is now implemented separately.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
-- [ ] P1 NOT STARTED: independently tuned policy comparators and useful validated automatic triage.
+- [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
+- [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [ ] P1 NOT STARTED: independent IDRiD external evaluation and broader distribution-shift studies.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
@@ -42,7 +43,8 @@ review every case and yield zero automatic coverage. This is not triage utility.
 - [x] Predeclare larger development, compare two pretrained backbones and reserve fresh internal confirmation.
 - [x] Train natural-defect heads and a fixed classical quality comparator.
 - [x] Execute locked internal confirmation, full budget grid and exploratory patient-cluster comparisons.
-- [ ] Complete independently tuned comparators, robustness ablations, repeated seeds and external validation.
+- [x] Complete development comparator tuning, controlled degradation and repeated seeds; retain negative findings.
+- [ ] Complete independent external validation and establish useful triage evidence.
 - [x] Update literature verification, Review-1 brief and exploratory pilot evidence.
 - [x] Record final tests and publish a reviewable GitHub branch/draft PR.
 

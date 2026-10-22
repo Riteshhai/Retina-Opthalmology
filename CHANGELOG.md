@@ -1,5 +1,18 @@
 # QSART change log
 
+## Independently tuned guarded policies — 2026-10-22
+
+- Declared three patient folds, eight guarded wrappers, three conformal modes,
+  four budget pairs and six decision-price candidates before execution.
+- Separated tunable allocator prices from a fixed observed-outcome ledger.
+  Retained all 1,728 candidate outcomes and 192 tuned/default scenarios, including
+  114 incomplete scenarios without invented pooled metrics.
+- Independently reconstructed all allocations, price choices, exact capacities
+  and 219 intervals. All 19 actual-workload-matched pairs have identical actions;
+  no consistent tuning benefit or useful deployed ordinal clearance was found.
+- Added compact aggregate discovery and readable dashboard policy tables.
+  LAC/no-CP remain diagnostic ablations; selected artifacts and guards are unchanged.
+
 ## Ordinal diagnostics and repeated seeds — 2026-10-22
 
 - Independently implemented explicit randomized greedy ordinal scores in a

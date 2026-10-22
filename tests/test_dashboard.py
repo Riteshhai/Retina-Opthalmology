@@ -32,7 +32,8 @@ def dashboard_api(monkeypatch):
          'metrics': {'accuracy': .5, 'macro_f1': .4}, 'notes': ['Synthetic software-test record.']},
         {'experiment_id': 'historical_fixture', 'dataset': 'other_fixture', 'partition': 'holdout',
          'scope': 'historical_software_test', 'model_version': 'fixture_old',
-         'metrics': {'accuracy': .3}, 'notes': ['Synthetic historical record.']},
+         'metrics': {'accuracy': .3, 'paired_comparisons': [{'left': ['ordinal', .9, .4, 'plain']}]},
+         'notes': ['Synthetic historical record.']},
     ]
 
     def get(url, **kwargs):
@@ -80,6 +81,7 @@ def test_new_pages_display_stored_metrics_and_send_development_only_simulation(d
         'selection_dr_fixture_a', 'selection_dr_fixture_b'}
     app.sidebar.radio[0].set_value('Experiment Explorer').run(timeout=25)
     assert not app.exception
+    assert 'metrics.paired_comparisons' not in app.dataframe[0].value
     app.selectbox[0].set_value('other_fixture').run(timeout=25)
     assert list(app.dataframe[0].value['experiment_id']) == ['historical_fixture']
     app.sidebar.radio[0].set_value('Triage Policy Simulator').run(timeout=25)
@@ -145,3 +147,37 @@ def test_session_overview_and_batch_filters_use_actual_stored_rows(dashboard_api
     displayed = app.dataframe[0].value
     assert len(displayed) == 2
     assert displayed.iloc[0]['referable_probability'] == .9
+
+
+@pytest.mark.skipif(importlib.util.find_spec('streamlit') is None, reason='Streamlit not installed')
+def test_policy_explorer_preserves_missing_metrics_and_labels_ablation(monkeypatch, dashboard_api):
+    """Synthetic contract fixture distinguishes missing outcomes from measured zeros."""
+    from streamlit.testing.v1 import AppTest
+    original_get = httpx.get
+    metrics = {'summary': {'fully_evaluated_scenarios': 1, 'incomplete_scenarios': 1, 'estimable_pairs': 0},
+        'scenarios': [{'mode': 'no_cp', 'variant': 'tuned', 'method': 'dual_budget',
+                       'status': 'incomplete', 'pooled_metrics': None},
+                      {'mode': 'no_cp', 'variant': 'tuned', 'method': 'plain', 'status': 'evaluated',
+                       'pooled_metrics': {'missed_referable_auto': 0, 'severe_deferred_to_recapture': 1,
+                                          'proxy_total_cost_per_image': .4}}]}
+    record = {'experiment_id': 'policy_comparison_v1', 'dataset': 'synthetic_fixture',
+              'scope': 'development_out_of_fold_policy', 'metrics': metrics, 'notes': ['Synthetic fixture.']}
+
+    def get(url, **kwargs):
+        if urlparse(url).path == '/research/experiments':
+            return httpx.Response(200, json={'experiments': [record]})
+        if urlparse(url).path == '/research/metrics':
+            return httpx.Response(200, json=record)
+        return original_get(url, **kwargs)
+
+    monkeypatch.setattr(httpx, 'get', get)
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/'dashboard/app.py')).run(timeout=25)
+    app.sidebar.radio[0].set_value('Experiment Explorer').run(timeout=25)
+    next(box for box in app.selectbox if box.label == 'Conformal mode').set_value('no_cp').run(timeout=25)
+    assert not app.exception
+    table = app.dataframe[-1].value
+    assert table['Referable automatic misses'].isna().tolist() == [True, False]
+    assert table.iloc[1]['Referable automatic misses'] == 0
+    assert table.iloc[1]['Severe recaptures'] == 1
+    assert any('Diagnostic ablation' in item.value for item in app.info)
+    assert any('Blank pooled metrics' in item.value for item in app.caption)

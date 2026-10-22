@@ -63,8 +63,55 @@ def experiment_table(records):
     columns = ['experiment_id', 'dataset', 'partition', 'scope', 'model_version']
     table = pd.json_normalize(records)
     present = [column for column in columns if column in table]
-    present += [column for column in table if column.startswith('metrics.')]
+    # Nested scenarios/pairs have their own detail view. Mixing their heterogeneous
+    # lists with scalar summary cells is not representable by Arrow's table schema.
+    present += [column for column in table if column.startswith('metrics.')
+                and all(pd.api.types.is_scalar(value) for value in table[column])]
     return table[present]
+
+
+def show_policy_comparison(metrics):
+    """Keep failed allocations distinct from genuine zero-miss outcomes."""
+    summary = metrics.get('summary', {})
+    left, middle, right = st.columns(3)
+    left.metric('Fully evaluated scenarios', summary.get('fully_evaluated_scenarios'))
+    middle.metric('Incomplete scenarios', summary.get('incomplete_scenarios'))
+    right.metric('Estimable paired comparisons', summary.get('estimable_pairs'))
+    st.warning('Development policy cross-fitting on previously inspected selection patients. '
+               'The production ordinal gate still requires full review. No validated triage benefit follows.')
+    left, right = st.columns(2)
+    mode = left.selectbox('Conformal mode', ['ordinal', 'lac', 'no_cp'])
+    variant = right.selectbox('Policy variant', ['tuned', 'default'])
+    if mode != 'ordinal':
+        st.info('Diagnostic ablation only; this uncertainty setting is not deployed.')
+    rows = [row for row in metrics.get('scenarios', [])
+            if row.get('mode') == mode and row.get('variant') == variant]
+    table = pd.json_normalize(rows)
+    columns = ['method', 'review_budget', 'recapture_budget', 'status', 'evaluated_folds',
+               'untunable_folds', 'evaluation_overload_folds',
+               'pooled_metrics.auto_nonreferable_count', 'pooled_metrics.review_count',
+               'pooled_metrics.recapture_count', 'pooled_metrics.missed_referable_auto',
+               'pooled_metrics.severe_deferred_to_recapture', 'pooled_metrics.proxy_total_cost_per_image']
+    if rows:
+        labels = {'method': 'Policy', 'review_budget': 'Review budget', 'recapture_budget': 'Recapture budget',
+                  'status': 'Status', 'evaluated_folds': 'Evaluated folds', 'untunable_folds': 'Untunable folds',
+                  'evaluation_overload_folds': 'Overloaded evaluation folds',
+                  'pooled_metrics.auto_nonreferable_count': 'Automatic',
+                  'pooled_metrics.review_count': 'Reviews', 'pooled_metrics.recapture_count': 'Recaptures',
+                  'pooled_metrics.missed_referable_auto': 'Referable automatic misses',
+                  'pooled_metrics.severe_deferred_to_recapture': 'Severe recaptures',
+                  'pooled_metrics.proxy_total_cost_per_image': 'Fixed proxy / image'}
+        st.dataframe(table[[column for column in columns if column in table]].rename(columns=labels),
+                     width='stretch', hide_index=True)
+    st.caption('Blank pooled metrics mean incomplete allocation, never zero misses. '
+               'Untunable means all six candidates overloaded on the tuning patients; '
+               'evaluation overload is a separate held-fold failure. Fixed evaluation prices: '
+               'review 0.25, recapture 0.20, plus declared severity penalties.')
+    st.caption('Matching budget caps does not imply matching actual workloads. '
+               'All 19 comparisons with matched per-fold workloads produced identical actions.')
+    with st.expander('Aggregate paired comparisons and provenance'):
+        st.json({key: metrics[key] for key in ('evaluation_ledger', 'source_report_sha256',
+                                               'paired_bootstrap', 'paired_comparisons') if key in metrics})
 
 
 def submit(files, params=None, batch=False):
@@ -383,7 +430,10 @@ elif page == 'Experiment Explorer':
             detail = api_get('/research/metrics?' + urlencode({'experiment_id': chosen}))
             if detail.get('experiment_id') == chosen:
                 st.caption('Evidence scope: '+str(detail.get('scope', 'Unreported')))
-                st.json(detail.get('metrics', {}))
+                if chosen == 'policy_comparison_v1':
+                    show_policy_comparison(detail.get('metrics', {}))
+                else:
+                    st.json(detail.get('metrics', {}))
                 for note in detail.get('notes', []):
                     st.caption(str(note))
                 st.download_button('Export experiment JSON', json.dumps(detail, indent=2),
