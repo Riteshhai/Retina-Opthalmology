@@ -31,6 +31,7 @@ from qsart.training.data import MEAN, STD, image_to_tensor, read_manifest, split
 from qsart.training.trainer import set_seed
 
 CACHE_VERSION = 1
+HEAD_RNG_VERSION = "torch_seed_before_linear_heads_v1"
 
 
 @dataclass
@@ -282,6 +283,10 @@ def fit_cached_heads(model: nn.Module, cache: dict, frame: pd.DataFrame, output:
         train_targets = {name: torch.cat((values, values)) for name, values in train_targets.items()}
     validation_features = features[validation_mask]
     validation_targets = {name: values[validation_mask] for name, values in targets.items()}
+    # Feature extraction creates a DataLoader iterator, which advances Torch's
+    # global RNG on a cache miss. Head initialization must not depend on that
+    # incidental cache state. Resume restores its saved RNG after initialization.
+    torch.manual_seed(config.seed)
     model.heads = nn.ModuleDict({name: nn.Linear(features.shape[1], count) for name, count in heads.items()})
     model.backbone.requires_grad_(False)
     model.backbone.eval()
@@ -372,6 +377,7 @@ def fit_cached_heads(model: nn.Module, cache: dict, frame: pd.DataFrame, output:
         metadata = {**base_metadata, "trained": True, "optimizer_steps": steps, "task": task,
                     "heads": heads, "image_size": config.image_size, "normalization_mean": MEAN,
                     "normalization_std": STD, "preprocessing": "fundus_crop_rgb_v1", "seed": config.seed,
+                    "head_rng_version": HEAD_RNG_VERSION, "head_initialization_seed": config.seed,
                     "training_config": asdict(config), "training_strategy": "frozen_imagenet_cached_features",
                     "backbone_frozen": True, "class_counts": class_counts,
                     "original_train_images": original_train_count, "train_feature_views": len(train_features),
