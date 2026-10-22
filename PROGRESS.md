@@ -190,3 +190,93 @@
   stress tests, stronger defect models, patient-level referral and prospective
   specialist/recapture outcomes remain open. Current confirmation is consumed
   evidence and must not become an undisclosed tuning target.
+
+
+## 2026-10-20–21 — MASTER_SPEC_v1.0 adoption and execution
+
+- Adopted the exact new user specification in MASTER_SPEC.md and a versioned
+  copy; SHA256 1b6af695af482d43d763e7e5cb74d4fe1002f3778fba8abc55872500a5a8c275.
+  Created CHANGELOG.md, specification alignment and current status; updated
+  AGENTS/TASKS/README. Preserved original assets and all v1 measurements.
+- Preserved exact pre-adoption Git source cedf182 in an ignored local archive;
+  recorded archive SHA in docs/SPEC_ALIGNMENT.md. Historical replay uses that
+  source rather than rewriting the old lock after source extension.
+- User specification section26 explicitly authorized parallel workstreams.
+  Separate ownership covered triage, conformal/base-paper study, data/models and
+  root API/deployment integration. No agents overwrote another's owned files.
+- CR-001 implemented current AUTO_NONREFERABLE semantics in new triage_v2.py;
+  old triage.py unchanged. Predicted referable/severe risk, poor quality,
+  uncertainty and conformal guards restrict clearance. Exact independent floor
+  capacities and structured BudgetOverloaded diagnostics never force clearance.
+  True referable clearances are misses; deferred care remains unresolved.
+- Read the full selected primary paper and authors' code; recorded the critical
+  study and updated P24 in the 43-record literature matrix. Independently
+  implemented LAC and deterministic adjacent ordinal construction, exact kth
+  quantiles, ties, patient-max scores and bound JSON. Public-code quantile/batch
+  discrepancies and GPL author-code exclusion are recorded. No exact randomized
+  replication or external coverage guarantee is claimed.
+- Ran scripts/calibrate_conformal.py with separate 84-image/21-patient temperature
+  and 84/21 conformal groups. Independent DR temperatures: 1.251752 first-pass,
+  1.262026 all-flip. The final sidecar uses the same raw-softmax transformation
+  during fitting and inference; an initial pre-integration artifact was retained
+  locally, with the corrected reproducible artifact named conformal_r1.json.
+  Patient/photo/pHash overlap audit passed and all 168 actual image hashes matched.
+  Existing evaluated grade/quality probabilities and all v1 artifact bytes remain.
+- Ran scripts/prepare_research_scores.py on 168 real selection images/42 patients,
+  for first-pass, 25%-budget and all-flip profiles. Private score cache remains
+  under checkpoints/spec_v1. Public development diagnostics: LAC image coverage
+  94.64%, mean set size 3.345 and all-views patient coverage 85.71%. Ordinal quantile
+  1.0 gives every grade for every image, 100% coverage but no information.
+  Independent audit reproduced all 168 sets in every profile and found no
+  credible algorithm/integration bug; the unfavorable outcome is retained.
+- Evaluated all 360 declared profile/budget/policy combinations:288 overloaded;
+  all 72 feasible combinations review every image and have zero auto coverage.
+  No thresholds/costs were retuned to hide this failure. These are development
+  diagnostics, not a fresh test, triage benefit or clinical safety result.
+- Integrated typed /triage/config, /triage/simulate, /research/experiments and
+  /research/metrics, with current prediction/schema policy version 2.0. Simulation
+  only admits cached selection datasets; supplied score experiments are labeled
+  caller-supplied/exploratory. Configured mismatched/missing CP fails readiness.
+- Eight dashboard modules now include actual CP/reasons, selection-only simulator,
+  real-model comparison and experiment explorer, session quality/latency metrics,
+  quality/risk filtering and exports. Browser displayed all 8 modules and actual
+  overload. No patient-image screenshots were committed.
+- Added and executed actual EfficientNet-B0 frozen-feature training on 848 fitting
+  images, with168 selection images, seed 2026. 28 epochs/756 updates, selectedepoch 13:
+  accuracy 64.29%, macro-F1 0.524924, NLL 1.271143. MobileNet retains .537238 macro-F1
+  under the declared rule. No APTOS/confirmation evaluation or model switch.
+  Official pretrained SHA verified; exact training source/input hashes recorded.
+- scripts/build_model_comparison.py recomputed all three genuine candidates'
+  selection metrics from saved probabilities/labels, plus actual model sizes.
+  Unmeasured candidate latencies remain null; legacy MobileNet latency is scoped
+  separately. Five private-copy corruption/provenance checks passed.
+- Strict local APTOS adapter/inventory implemented: source labels, SHA/pHash
+  groups, conflicting-label rejection and no invented patient/quality fields.
+  Added split_group_id leakage guard to the common reader. The user confirmed
+  APTOS is not downloaded; no credentials/access bypass or mirror substitution.
+  APTOS training remains BLOCKED; acquisition steps are in docs/APTOS_SETUP.md.
+- Initial full integration run exposed 2 obsolete tests expecting string overload
+  errors. Updated them to assert current structured code/count/shortfall semantics.
+  Final full real-model+CP suite: 198 passed, no skips/failures, 78.51s, one upstream
+  AnyIO warning. Ruff/Compose passed. Subsequent default chart metric check:
+  1 passed,4 deselected,8.87s. Launcher syntax passed; selected container artifact
+  paths now map to local Python paths, but the launcher was not used as proof.
+- Rebuilt actual Docker CPU services and verified new real JPEG single/batch/TTA,
+  CP/card matching, readiness/docs, unsupported upload, real cached simulation
+  evaluated/overloaded and research routes. Local URLs remain 18000/18501.
+- scripts/benchmark_deployment.py measured 12 selection JPEGs, two warmups excluded,
+  full loopback HTTP preprocessing/model/CP/routing/JSON chain: mean first-pass
+  request 304.64ms, extra-pass 210.44ms; batch 4 budget 25% 1004.29ms/request
+  (251.07ms/image). API kernel peak RSS 644,980 kB since startup. Fixed order,
+  small sample and live-machine variability prevent a speed-superiority claim.
+  Training and full tests had finished before this timing run.
+- Formal manuscript work remains deferred under the adopted specification.
+  Existing draft/Review1 evidence is preserved and clearly historical. Overall
+  research remains IN PROGRESS; useful conformal/triage, independent comparator
+  tuning, repeated seeds, controlled degradation and external IDRiD still open.
+
+- Final Docker source verification matched all 37 runtime Python files; captured
+  actual container dependencies. Repeated real HTTP/conformal/simulator checks
+  after API restart passed. Specification-byte, public-aggregate privacy and local
+  documentation-link audits passed. Exact new report/spec bytes are preserved by
+  scoped Git attributes, so their recorded hashes survive checkout.

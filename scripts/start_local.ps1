@@ -9,9 +9,31 @@ if (-not (Test-Path -LiteralPath $pythonPath)) {
 $localEnvPath = Join-Path $projectRoot '.env'
 if (Test-Path -LiteralPath $localEnvPath) {
     foreach ($line in Get-Content -LiteralPath $localEnvPath) {
-        if ($line -match '^(QSART_API_PORT|QSART_DASHBOARD_PORT)=(\d+)$') {
+        if ($line -match '^(QSART_[A-Z0-9_]+)=(.*)$') {
             [Environment]::SetEnvironmentVariable($Matches[1], $Matches[2], 'Process')
         }
+    }
+}
+$artifactSettings = @{
+    'QSART_DR_CHECKPOINT' = 'QSART_CONTAINER_DR_CHECKPOINT'
+    'QSART_QUALITY_CHECKPOINT' = 'QSART_CONTAINER_QUALITY_CHECKPOINT'
+    'QSART_CALIBRATION' = 'QSART_CONTAINER_CALIBRATION'
+    'QSART_MODEL_CARD' = 'QSART_CONTAINER_MODEL_CARD'
+    'QSART_CONFORMAL' = 'QSART_CONTAINER_CONFORMAL'
+    'QSART_SIMULATION_DATA' = 'QSART_CONTAINER_SIMULATION_DATA'
+}
+$localCheckpointRoot = [System.IO.Path]::GetFullPath((Join-Path $projectRoot 'checkpoints'))
+foreach ($settingName in $artifactSettings.Keys) {
+    $explicitLocalValue = [Environment]::GetEnvironmentVariable($settingName, 'Process')
+    $containerValue = [Environment]::GetEnvironmentVariable($artifactSettings[$settingName], 'Process')
+    if (-not $explicitLocalValue -and $containerValue -and $containerValue.StartsWith('/checkpoints/')) {
+        $relativeArtifact = $containerValue.Substring('/checkpoints/'.Length)
+        $localArtifact = [System.IO.Path]::GetFullPath((Join-Path $localCheckpointRoot $relativeArtifact))
+        if (-not $localArtifact.StartsWith($localCheckpointRoot + [System.IO.Path]::DirectorySeparatorChar,
+                                           [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw 'Container artifact mappings must stay within the local checkpoints folder.'
+        }
+        [Environment]::SetEnvironmentVariable($settingName, $localArtifact, 'Process')
     }
 }
 $apiPort = if ($env:QSART_API_PORT) { [int]$env:QSART_API_PORT } else { 8000 }

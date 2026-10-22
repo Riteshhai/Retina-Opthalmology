@@ -1,5 +1,10 @@
 # Acceptance evidence — 20 October 2026
 
+> Preserved v1 evidence. The current MASTER_SPEC_v1.0 alignment, policy-version2
+> behavior, conformal limitations and deployment checks are recorded in
+> [SPEC_V1_STATUS.md](SPEC_V1_STATUS.md). Historical AUTO_SCREEN results are not
+> current AUTO_NONREFERABLE policy results.
+
 ## Verified engineering and internal research milestone
 
 - Original Office assets, literature library, starter and pilot evidence preserved.

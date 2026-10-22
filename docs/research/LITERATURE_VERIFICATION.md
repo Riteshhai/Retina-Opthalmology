@@ -360,3 +360,11 @@ Audit limit: primary abstract/record audit. Official accepted-paper record; DOI 
 Compares restoration and quality-aware triage under synthetic degradation. Synthetic restoration and triage evidence does not establish outcomes of actual clinical recapture.
 
 Audit limit: primary abstract/record audit. Official camera-ready record; DOI and final pages unavailable/pending.
+
+
+## Selected base-paper follow-up — 21 October 2026
+
+P24 now has a full primary-text and authors-code critical study in
+[BASE_PAPER_STUDY.md](BASE_PAPER_STUDY.md). The CSV/JSON record is updated; the
+original citation identity/count remain unchanged. Method adaptations and code
+discrepancies are explicit, with no exact reproduction claim.

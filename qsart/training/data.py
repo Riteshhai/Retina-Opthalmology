@@ -46,7 +46,7 @@ def read_manifest(path: str | Path) -> pd.DataFrame:
         else str(Path(str(item)).resolve()))
     if frame.image_path.str.casefold().duplicated().any():
         raise ValueError("Manifest contains duplicate image paths")
-    for group_column in ("subject_id", "eye_id", "sha256"):
+    for group_column in ("subject_id", "eye_id", "sha256", "split_group_id"):
         if group_column in frame:
             groups = frame.dropna(subset=[group_column]).groupby(group_column)["split"].nunique()
             if (groups > 1).any():

@@ -51,7 +51,7 @@ class TransferConfig:
     horizontal_flip: bool = True
 
     def validate(self):
-        if self.backbone not in {"mobilenet_v3_small", "resnet18"}:
+        if self.backbone not in {"mobilenet_v3_small", "resnet18", "efficientnet_b0"}:
             raise ValueError("Unsupported transfer backbone")
         if self.image_size < 32 or min(self.extraction_batch_size, self.batch_size, self.epochs,
                                        self.patience, self.cpu_threads) < 1:
@@ -99,6 +99,8 @@ def pretrained_spec(backbone: str) -> dict:
         weights = models.MobileNet_V3_Small_Weights.IMAGENET1K_V1
     elif backbone == "resnet18":
         weights = models.ResNet18_Weights.IMAGENET1K_V1
+    elif backbone == "efficientnet_b0":
+        weights = models.EfficientNet_B0_Weights.IMAGENET1K_V1
     else:
         raise ValueError("Unsupported transfer backbone")
     filename = weights.url.rsplit("/", 1)[-1]

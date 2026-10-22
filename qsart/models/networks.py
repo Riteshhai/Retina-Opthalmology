@@ -30,6 +30,11 @@ class RetinalClassifier(nn.Module):
                 weights=models.MobileNet_V3_Small_Weights.DEFAULT if pretrained else None)
             features = self.backbone.classifier[0].in_features
             self.backbone.classifier = nn.Identity()
+        elif backbone == "efficientnet_b0":
+            self.backbone = models.efficientnet_b0(
+                weights=models.EfficientNet_B0_Weights.IMAGENET1K_V1 if pretrained else None)
+            features = self.backbone.classifier[1].in_features
+            self.backbone.classifier = nn.Identity()
         else:
             raise ValueError(f"Unsupported backbone: {backbone}")
         self.heads = nn.ModuleDict({name: nn.Linear(features, int(size))

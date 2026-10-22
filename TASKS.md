@@ -1,5 +1,31 @@
 # Prioritized executable backlog
 
+Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
+docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
+
+## Specification-v1 priorities — 20–21 October 2026
+
+- [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
+- [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
+- [x] P0 Integrate current API/client/simulator semantics and real-model checks.
+- [x] P1 Read the full selected base paper and audit authors' implementation differences.
+- [x] P1 Fit independent-temperature, patient-max LAC and ordinal conformal sidecars on real data.
+- [x] P1 Record vacuous five-grade ordinal sets and every overloaded scenario without retuning.
+- [x] P1 Add all eight dashboard modules and typed config/simulation/research endpoints.
+- [x] P1 Train an actual EfficientNet-B0 DeepDRiD candidate and compare three genuine models.
+- [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
+- [ ] P1 BLOCKED: official APTOS images/access; user confirmed not downloaded.
+- [ ] P1 NOT STARTED: APTOS EfficientNet study and exact randomized base-paper reproduction.
+- [ ] P1 NOT STARTED: useful ordinal-set study, independently tuned policy comparators and repeated seeds.
+- [ ] P1 NOT STARTED: controlled degradation and independent IDRiD external evaluation.
+- [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
+
+Conformal integration is VERIFIED COMPLETE as software/calibration execution; its
+current ordinal sets are uninformative. All feasible selection-grid allocations
+review every case and yield zero automatic coverage. This is not triage utility.
+
+## Preserved pre-adoption execution
+
 - [x] Inspect and preserve starter and review assets; inspect connected GitHub.
 - [x] Repair project environment and run original tests.
 - [x] Verify official DeepDRiD metadata, image access, terms and quality-label semantics.

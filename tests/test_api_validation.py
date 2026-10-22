@@ -123,7 +123,10 @@ def test_low_quality_infeasible_budget_never_silently_auto_screens(count, review
                                params={'review_budget': review, 'recapture_budget': recapture},
                                files=upload_batch(count))
     assert response.status_code == 422
-    assert 'cannot accommodate' in response.json()['detail']
+    detail = response.json()['detail']
+    assert detail['code'] == 'BUDGET_OVERLOADED'
+    assert detail['diagnostics']['needed_total'] == count
+    assert detail['diagnostics']['total_shortfall'] > 0
     assert 'results' not in response.json()
     assert engine.calls == [(count, 0.)]
 

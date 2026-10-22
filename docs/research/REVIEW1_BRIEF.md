@@ -1,5 +1,10 @@
 # QSART Review 1 briefing
 
+> MASTER_SPEC_v1.0 was adopted on 20–21 October. See
+> [current status](../SPEC_V1_STATUS.md) for strict non-referable routing,
+> conformal results, EfficientNet candidate and eight-page dashboard. The
+> classification and historical v1 policy findings below remain unchanged.
+
 Updated 20 October 2026 for the 20–23 October review window. The current deliverable
 includes genuine training, locked internal confirmation and a verified local
 Docker application. This is a research prototype with no clinical validation.

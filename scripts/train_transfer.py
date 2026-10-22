@@ -16,7 +16,7 @@ def main():
     parser.add_argument('--manifest', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--task', choices=['dr', 'quality'], default='dr')
-    parser.add_argument('--backbone', choices=['mobilenet_v3_small', 'resnet18'])
+    parser.add_argument('--backbone', choices=['mobilenet_v3_small', 'resnet18', 'efficientnet_b0'])
     parser.add_argument('--config', type=Path, default=Path('configs/development_v1.yaml'))
     parser.add_argument('--cache-dir', type=Path, default=Path('artifacts/development_v1/features'))
     parser.add_argument('--allow-download', action='store_true')

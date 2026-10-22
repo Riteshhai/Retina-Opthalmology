@@ -1,5 +1,10 @@
 # Evaluating quality and severity aware retinal triage under separate review and recapture budgets
 
+> Historical working draft retained. Under MASTER_SPEC_v1.0, formal manuscript
+> writing follows substantive implementation and main experiments. Current
+> implementation evidence lives in ../SPEC_V1_STATUS.md; old AUTO_SCREEN results
+> must not be relabeled as current AUTO_NONREFERABLE evaluation.
+
 **Research manuscript draft, updated 20 October 2026.** This source contains the preserved engineering pilot and a separately declared internal confirmation study. It is not a completed external or prospective study. Citation keys refer to `references.bib`; venue formatting, author metadata and required declarations remain for the authors. Current methods/results are distinguished from historical pilot evidence.
 
 ## Abstract

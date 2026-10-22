@@ -19,7 +19,7 @@ def test_real_trained_pipeline_and_batch_export():
     import pandas as pd
     from qsart.inference.engine import InferenceEngine
     frame = pd.read_csv(manifest)
-    row = frame.loc[frame.split == 'holdout'].iloc[0]
+    row = frame.loc[frame.split == os.environ.get('QSART_REAL_SPLIT', 'holdout')].iloc[0]
     image_path = Path(row.image_path)
     assert image_path.is_file()
     with Image.open(image_path) as image:
@@ -29,7 +29,13 @@ def test_real_trained_pipeline_and_batch_export():
                              os.environ.get('QSART_QUALITY_CHECKPOINT', 'checkpoints/quality/best.pt'),
                              os.environ.get('QSART_CALIBRATION', 'checkpoints/calibration.json'))
     assert engine.info()['data_purpose'] == 'real_research'
-    with TestClient(create_app(engine)) as client:
+    conformal = None
+    if os.environ.get('QSART_REAL_CONFORMAL'):
+        from qsart.inference.conformal_sidecar import ConformalSidecar
+        conformal = ConformalSidecar(os.environ['QSART_REAL_CONFORMAL'],
+            dr_checkpoint=os.environ['QSART_DR_CHECKPOINT'], quality_checkpoint=os.environ['QSART_QUALITY_CHECKPOINT'],
+            calibration=os.environ['QSART_CALIBRATION'])
+    with TestClient(create_app(engine, conformal=conformal)) as client:
         assert client.get('/ready').status_code == 200
         r = client.post('/predict?second_pass=true', files={
             'file': ('retina.jpg', buffer.getvalue(), 'image/jpeg')})
@@ -38,6 +44,12 @@ def test_real_trained_pipeline_and_batch_export():
         assert len(result['grade_probabilities']) == 5
         assert abs(sum(result['grade_probabilities'])-1) < 1e-5
         assert result['second_pass_activated']
+        assert result['policy_version'] == '2.0'
+        if conformal is not None:
+            assert result['conformal']['status'] == 'available'
+            assert result['conformal']['path'] == 'all_flip'
+        if result['action'] == 'AUTO_NONREFERABLE':
+            assert result['predicted_grade'] < 2
         batch = client.post('/predict/batch?review_budget=1&recapture_budget=1&second_pass_budget=.5',
             files=[('files', ('retina.jpg', buffer.getvalue(), 'image/jpeg'))]*2)
         assert batch.status_code == 200, batch.text

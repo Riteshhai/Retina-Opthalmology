@@ -1,0 +1,66 @@
+{
+  "date_utc": "2026-10-20T18:41:07.449382+00:00",
+  "scope": "Measured loopback HTTP CPU workflow",
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "policy_version": "2.0",
+  "cpu_threads": 2,
+  "image_size": 224,
+  "model_forward_batch_size": 1,
+  "partition": "validation",
+  "sample_rule": "First12 frozen selection-manifest rows; two warmup requests excluded",
+  "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "source_sha256": "3e29ef51cc1c4389072be65bdc6364260bcfca023a080c8844fcb160fcc44109",
+  "profiles": {
+    "single_first": {
+      "requests": 12,
+      "images": 12,
+      "request_batch_size": 1,
+      "mean_request_ms": 304.6357999992324,
+      "p50_request_ms": 264.89419999415986,
+      "p95_request_ms": 425.55790500337025,
+      "amortized_wall_ms_per_image": 304.6357999992324,
+      "mean_preprocessing_model_ms_per_image": 231.96234983326272,
+      "second_pass_fraction": 0,
+      "requested_second_pass_budget": 0.0
+    },
+    "single_extra": {
+      "requests": 12,
+      "images": 12,
+      "request_batch_size": 1,
+      "mean_request_ms": 210.43989999452606,
+      "p50_request_ms": 204.72604999667965,
+      "p95_request_ms": 242.32467499241466,
+      "amortized_wall_ms_per_image": 210.43989999452606,
+      "mean_preprocessing_model_ms_per_image": 168.01036066666106,
+      "second_pass_fraction": 1,
+      "requested_second_pass_budget": 1.0
+    },
+    "batch_budget25": {
+      "requests": 3,
+      "images": 12,
+      "request_batch_size": 4,
+      "mean_request_ms": 1004.2913666596481,
+      "p50_request_ms": 911.2691000045743,
+      "p95_request_ms": 1262.664019985823,
+      "amortized_wall_ms_per_image": 251.07284166491203,
+      "mean_preprocessing_model_ms_per_image": 210.42030433341097,
+      "second_pass_fraction": 0.25,
+      "requested_second_pass_budget": 0.25
+    }
+  },
+  "memory": {
+    "scope": "Actual API process/kernel high-water since container start, including startup and earlier verification",
+    "api_proc_status": {
+      "VmHWM": "644980 kB",
+      "VmRSS": "504600 kB"
+    },
+    "container_cgroup_memory_peak_bytes": 517529600
+  },
+  "limitations": [
+    "Includes upload, JPEG decode, preprocessing, model, conformal, routing and JSON HTTP response.",
+    "Excludes client disk reads/browser rendering and remote-network effects.",
+    "Fixed sequential profile order on a live workstation; no architecture/strategy speed superiority claim.",
+    "Twelve images and three batch requests do not establish stable production-tail latency.",
+    "This is a timing study on development data, not clinical or external validation."
+  ]
+}

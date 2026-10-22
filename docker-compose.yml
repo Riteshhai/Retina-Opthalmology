@@ -9,9 +9,13 @@ services:
       QSART_QUALITY_CHECKPOINT: ${QSART_CONTAINER_QUALITY_CHECKPOINT:-/checkpoints/quality/best.pt}
       QSART_CALIBRATION: ${QSART_CONTAINER_CALIBRATION:-/checkpoints/calibration.json}
       QSART_MODEL_CARD: ${QSART_CONTAINER_MODEL_CARD:-/checkpoints/model_card.json}
+      QSART_CONFORMAL: ${QSART_CONTAINER_CONFORMAL:-}
+      QSART_SIMULATION_DATA: ${QSART_CONTAINER_SIMULATION_DATA:-/checkpoints/spec_v1/development_scores.json}
+      QSART_REPORTS_DIR: /reports
       QSART_CPU_THREADS: "2"
     volumes:
       - ./checkpoints:/checkpoints:ro
+      - ./reports:/reports:ro
     read_only: true
     tmpfs:
       - /tmp
