@@ -1,0 +1,25 @@
+{
+  "spec_version": "1.0",
+  "date_local": "2026-10-22",
+  "tests": 299,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "junit_seconds": 59.545,
+  "pytest_reported_seconds": 59.59,
+  "real_integration": "Genuine selected DR/quality and original conformal_r1 on development selection JPEG",
+  "ruff": "passed",
+  "compose_configuration": "passed",
+  "deployment": "native Python HTTP workflow and both aggregate endpoints after launcher restart; current Docker unavailable",
+  "source_sha256": {
+    "api/research.py": "dea587c35192c8729e97a65dfaf99c4b5ee335ce225dcc0a2a40bd07c845a0fb",
+    "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+    "qsart/uncertainty/randomized_ordinal.py": "c8350d55f41d7abc21215d0979a8d9d385f7f4cff6350ba8c9e4697ac76bc030",
+    "scripts/run_ordinal_study.py": "22f315394674628f52300548b5fb2104dc61876d3fc331a2e2eb894d2d1de5ca",
+    "scripts/run_repeated_seeds.py": "f04da8bb5412cd33149328d8d0a77b99a158e6e7f2b926f405fb427ddd7ad54f",
+    "tests/test_research_api.py": "6190313b5e196e7daf162fa9d9d44f54cc29dc443935b9346f006f4f858dc72e",
+    "tests/test_transfer_rng.py": "e1d8c04b848681fc41021ef18519be2855612235c77a63e6e37746a075df6eeb",
+    "tests/test_randomized_ordinal.py": "2592187e3f066c76ac03a7be61b7e778a268eb4f815fceea75e95b472cd7951c"
+  },
+  "scope": "Software and genuine model execution; not independent clinical validation"
+}

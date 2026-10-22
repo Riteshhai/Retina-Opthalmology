@@ -1,0 +1,14 @@
+# CLI --root or QSART_DATA_ROOT supplies the private local image location.
+dataset: deepdrid_regular_fundus
+dataset_root: data/raw/deepdrid
+train_annotations: metadata/regular-fundus-training.csv
+holdout_annotations: metadata/regular-fundus-validation.csv
+manifest: data/processed/deepdrid/manifest.csv
+seed: 2026
+calibration_fraction: 0.15
+validation_fraction: 0.15
+official_validation_role: holdout
+image_size: 224
+quality_good_code: 1
+quarantine_eye_filename_conflicts: true
+perceptual_duplicate_max_hamming_distance: 2

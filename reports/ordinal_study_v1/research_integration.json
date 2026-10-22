@@ -1,0 +1,14 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "ordinal_comparisons": 28,
+  "training_runs": 6,
+  "original_sidecar_sha256": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221",
+  "model_card_status": "matched",
+  "api_research_source_sha256": "dea587c35192c8729e97a65dfaf99c4b5ee335ce225dcc0a2a40bd07c845a0fb",
+  "observed_scopes": {
+    "ordinal_randomization_v1": "development_ordinal_diagnostics",
+    "repeated_seeds_v1": "development_selection"
+  },
+  "scope": "Actual local HTTP against restarted native API; does not establish clinical validity or Docker execution"
+}

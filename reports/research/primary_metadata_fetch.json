@@ -1,0 +1,878 @@
+[
+  {
+    "id": "P01",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10858054/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10858054/",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "Eye"
+      ],
+      "citation_title": [
+        "Image quality assessment of retinal fundus photographs for diabetic retinopathy in the machine learning era: a review"
+      ],
+      "citation_author": [
+        "Mariana Batista Gonçalves",
+        "Luis Filipe Nakayama",
+        "Daniel Ferraz",
+        "Hanna Faber",
+        "Edward Korot",
+        "Fernando Korn Malerbi",
+        "Caio Vinicius Regatieri",
+        "Mauricio Maia",
+        "Leo Anthony Celi",
+        "Pearse A Keane",
+        "Rubens Belfort Jr"
+      ],
+      "citation_publication_date": [
+        "2023 Sep 4"
+      ],
+      "citation_volume": [
+        "38"
+      ],
+      "citation_issue": [
+        "3"
+      ],
+      "citation_firstpage": [
+        "426"
+      ],
+      "citation_doi": [
+        "10.1038/s41433-023-02717-3"
+      ]
+    },
+    "page_title": "Image quality assessment of retinal fundus photographs for diabetic retinopathy in the machine learning era: a review - PMC"
+  },
+  {
+    "id": "P02",
+    "url": "https://doi.org/10.1016/j.cmpb.2023.107522",
+    "resolved_url": "https://linkinghub.elsevier.com/retrieve/pii/S0169260723001876",
+    "http_ok": true,
+    "meta": {},
+    "page_title": "Redirecting"
+  },
+  {
+    "id": "P03",
+    "url": "https://arxiv.org/abs/2307.04378",
+    "resolved_url": "https://arxiv.org/abs/2307.04378",
+    "http_ok": true,
+    "meta": {
+      "citation_title": [
+        "Towards Generalizable Diabetic Retinopathy Grading in Unseen Domains"
+      ],
+      "citation_author": [
+        "Che, Haoxuan",
+        "Cheng, Yuhan",
+        "Jin, Haibo",
+        "Chen, Hao"
+      ],
+      "citation_date": [
+        "2023/07/10"
+      ],
+      "citation_online_date": [
+        "2023/07/21"
+      ],
+      "citation_arxiv_id": [
+        "2307.04378"
+      ]
+    },
+    "page_title": "[2307.04378] Towards Generalizable Diabetic Retinopathy Grading in Unseen Domains"
+  },
+  {
+    "id": "P04",
+    "url": "https://arxiv.org/abs/2309.15493",
+    "resolved_url": "https://arxiv.org/abs/2309.15493",
+    "http_ok": true,
+    "meta": {
+      "citation_title": [
+        "CauDR: A Causality-inspired Domain Generalization Framework for Fundus-based Diabetic Retinopathy Grading"
+      ],
+      "citation_author": [
+        "Wei, Hao",
+        "Shi, Peilun",
+        "Miao, Juzheng",
+        "Zhang, Minqing",
+        "Bai, Guitao",
+        "Qiu, Jianing",
+        "Liu, Furui",
+        "Yuan, Wu"
+      ],
+      "citation_date": [
+        "2023/09/27"
+      ],
+      "citation_online_date": [
+        "2023/09/27"
+      ],
+      "citation_arxiv_id": [
+        "2309.15493"
+      ]
+    },
+    "page_title": "[2309.15493] CauDR: A Causality-inspired Domain Generalization Framework for Fundus-based Diabetic Retinopathy Grading"
+  },
+  {
+    "id": "P05",
+    "url": "https://arxiv.org/abs/2309.11301",
+    "resolved_url": "https://arxiv.org/abs/2309.11301",
+    "http_ok": true,
+    "meta": {
+      "citation_title": [
+        "Generalizing Across Domains in Diabetic Retinopathy via Variational Autoencoders"
+      ],
+      "citation_author": [
+        "Chokuwa, Sharon",
+        "Khan, Muhammad H."
+      ],
+      "citation_date": [
+        "2023/09/20"
+      ],
+      "citation_online_date": [
+        "2023/09/20"
+      ],
+      "citation_arxiv_id": [
+        "2309.11301"
+      ]
+    },
+    "page_title": "[2309.11301] Generalizing Across Domains in Diabetic Retinopathy via Variational Autoencoders"
+  },
+  {
+    "id": "P06",
+    "url": "https://www.nature.com/articles/s41586-023-06555-x",
+    "resolved_url": "https://www.nature.com/articles/s41586-023-06555-x?error=cookies_not_supported&code=c2de58a2-b5f7-40af-b6c9-cef573150816",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "Nature"
+      ],
+      "citation_title": [
+        "A foundation model for generalizable disease detection from retinal images"
+      ],
+      "citation_volume": [
+        "622"
+      ],
+      "citation_issue": [
+        "7981"
+      ],
+      "citation_publication_date": [
+        "2023/10"
+      ],
+      "citation_online_date": [
+        "2023/09/13"
+      ],
+      "citation_firstpage": [
+        "156"
+      ],
+      "citation_lastpage": [
+        "163"
+      ],
+      "citation_doi": [
+        "10.1038/s41586-023-06555-x"
+      ],
+      "citation_author": [
+        "Zhou, Yukun",
+        "Chia, Mark A.",
+        "Wagner, Siegfried K.",
+        "Ayhan, Murat S.",
+        "Williamson, Dominic J.",
+        "Struyven, Robbert R.",
+        "Liu, Timing",
+        "Xu, Moucheng",
+        "Lozano, Mateo G.",
+        "Woodward-Court, Peter",
+        "Kihara, Yuka",
+        "Altmann, Andre",
+        "Lee, Aaron Y.",
+        "Topol, Eric J.",
+        "Denniston, Alastair K.",
+        "Alexander, Daniel C.",
+        "Keane, Pearse A."
+      ]
+    },
+    "page_title": "A foundation model for generalizable disease detection from retinal images | Nature"
+  },
+  {
+    "id": "P07",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10749075/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10749075/",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "BMJ Open Ophthalmology"
+      ],
+      "citation_title": [
+        "Real-world evaluation of smartphone-based artificial intelligence to screen for diabetic retinopathy in Dominica: a clinical validation study"
+      ],
+      "citation_author": [
+        "Oliver Kemp",
+        "Covadonga Bascaran",
+        "Edyta Cartwright",
+        "Lauren McQuillan",
+        "Nanda Matthew",
+        "Hazel Shillingford-Ricketts",
+        "Marcia Zondervan",
+        "Allen Foster",
+        "Matthew Burton"
+      ],
+      "citation_publication_date": [
+        "2023 Dec 22"
+      ],
+      "citation_volume": [
+        "8"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_firstpage": [
+        "e001491"
+      ],
+      "citation_doi": [
+        "10.1136/bmjophth-2023-001491"
+      ]
+    },
+    "page_title": "Real-world evaluation of smartphone-based artificial intelligence to screen for diabetic retinopathy in Dominica: a clinical validation study - PMC"
+  },
+  {
+    "id": "P08",
+    "url": "https://doi.org/10.1007/s13410-023-01296-z",
+    "resolved_url": "https://link.springer.com/article/10.1007/s13410-023-01296-z?error=cookies_not_supported&code=2553e28e-fe7e-4b66-b3b6-568b1bfecfe5",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "International Journal of Diabetes in Developing Countries"
+      ],
+      "citation_title": [
+        "Diabetic retinopathy screening guidelines for Physicians in India: position statement by the Research Society for the Study of Diabetes in India (RSSDI) and the Vitreoretinal Society of India (VRSI)-2023"
+      ],
+      "citation_volume": [
+        "44"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_publication_date": [
+        "2024/03"
+      ],
+      "citation_online_date": [
+        "2024/01/20"
+      ],
+      "citation_firstpage": [
+        "32"
+      ],
+      "citation_lastpage": [
+        "39"
+      ],
+      "citation_doi": [
+        "10.1007/s13410-023-01296-z"
+      ],
+      "citation_author": [
+        "Agarwal, Manisha",
+        "Rani, Padmaja Kumari",
+        "Raman, Rajiv",
+        "Narayanan, Raja",
+        "L., Sreenivasamurthy",
+        "Virmani, Anil",
+        "Rajalakshmi, Ramachandan",
+        "Chandrashekhar, Sudha",
+        "Makkar, Brij Mohan",
+        "Agarwal, Sanjay",
+        "Palanivelu, Mahesh Shanmugam",
+        "Srinivasa, Muralidhar Naveenam",
+        "Ramasamy, Kim"
+      ]
+    },
+    "page_title": "Diabetic retinopathy screening guidelines for Physicians in India: position statement by the Research Society for the Study of Diabetes in India (RSSDI) and the Vitreoretinal Society of India (VRSI)-2023 | International Journal of Diabetes in Developing Countries | Springer Nature Link"
+  },
+  {
+    "id": "P09",
+    "url": "https://arxiv.org/abs/2406.06384",
+    "resolved_url": "https://arxiv.org/abs/2406.06384",
+    "http_ok": true,
+    "meta": {
+      "citation_title": [
+        "Generalizing to Unseen Domains in Diabetic Retinopathy with Disentangled Representations"
+      ],
+      "citation_author": [
+        "Xia, Peng",
+        "Hu, Ming",
+        "Tang, Feilong",
+        "Li, Wenxue",
+        "Zheng, Wenhao",
+        "Ju, Lie",
+        "Duan, Peibo",
+        "Yao, Huaxiu",
+        "Ge, Zongyuan"
+      ],
+      "citation_date": [
+        "2024/06/10"
+      ],
+      "citation_online_date": [
+        "2024/06/10"
+      ],
+      "citation_arxiv_id": [
+        "2406.06384"
+      ]
+    },
+    "page_title": "[2406.06384] Generalizing to Unseen Domains in Diabetic Retinopathy with Disentangled Representations"
+  },
+  {
+    "id": "P10",
+    "url": "https://www.nature.com/articles/s41746-024-01109-5",
+    "resolved_url": "https://www.nature.com/articles/s41746-024-01109-5?error=cookies_not_supported&code=5b5c9969-fe7a-4e9e-a80b-7985ec2e9510",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "npj Digital Medicine"
+      ],
+      "citation_title": [
+        "RETFound-enhanced community-based fundus disease screening: real-world evidence and decision curve analysis"
+      ],
+      "citation_volume": [
+        "7"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_online_date": [
+        "2024/04/30"
+      ],
+      "citation_firstpage": [
+        "108"
+      ],
+      "citation_lastpage": [
+        ""
+      ],
+      "citation_doi": [
+        "10.1038/s41746-024-01109-5"
+      ],
+      "citation_author": [
+        "Zhang, Juzhao",
+        "Lin, Senlin",
+        "Cheng, Tianhao",
+        "Xu, Yi",
+        "Lu, Lina",
+        "He, Jiangnan",
+        "Yu, Tao",
+        "Peng, Yajun",
+        "Zhang, Yuejie",
+        "Zou, Haidong",
+        "Ma, Yingyan"
+      ]
+    },
+    "page_title": "RETFound-enhanced community-based fundus disease screening: real-world evidence and decision curve analysis | npj Digital Medicine"
+  },
+  {
+    "id": "P11",
+    "url": "https://www.nature.com/articles/s41746-023-00991-9",
+    "resolved_url": "https://www.nature.com/articles/s41746-023-00991-9?error=cookies_not_supported&code=12fc55dd-1c58-4984-bda5-8e9c5d0a60f8",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "npj Digital Medicine"
+      ],
+      "citation_title": [
+        "The performance of a deep learning system in assisting junior ophthalmologists in diagnosing 13 major fundus diseases: a prospective multi-center clinical trial"
+      ],
+      "citation_volume": [
+        "7"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_online_date": [
+        "2024/01/11"
+      ],
+      "citation_firstpage": [
+        "8"
+      ],
+      "citation_lastpage": [
+        ""
+      ],
+      "citation_doi": [
+        "10.1038/s41746-023-00991-9"
+      ],
+      "citation_author": [
+        "Li, Bing",
+        "Chen, Huan",
+        "Yu, Weihong",
+        "Zhang, Ming",
+        "Lu, Fang",
+        "Ma, Jingxue",
+        "Hao, Yuhua",
+        "Li, Xiaorong",
+        "Hu, Bojie",
+        "Shen, Lijun",
+        "Mao, Jianbo",
+        "He, Xixi",
+        "Wang, Hao",
+        "Ding, Dayong",
+        "Li, Xirong",
+        "Chen, Youxin"
+      ]
+    },
+    "page_title": "The performance of a deep learning system in assisting junior ophthalmologists in diagnosing 13 major fundus diseases: a prospective multi-center clinical trial | npj Digital Medicine"
+  },
+  {
+    "id": "P12",
+    "url": "https://www.nature.com/articles/s41597-024-04113-2",
+    "resolved_url": "https://www.nature.com/articles/s41597-024-04113-2?error=cookies_not_supported&code=7411b49d-f00b-44bc-a306-85eadd73baef",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "Scientific Data"
+      ],
+      "citation_title": [
+        "Open ultrawidefield fundus image dataset with disease diagnosis and clinical image quality assessment"
+      ],
+      "citation_volume": [
+        "11"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_online_date": [
+        "2024/11/20"
+      ],
+      "citation_firstpage": [
+        "1251"
+      ],
+      "citation_lastpage": [
+        ""
+      ],
+      "citation_doi": [
+        "10.1038/s41597-024-04113-2"
+      ],
+      "citation_author": [
+        "He, Shucheng",
+        "Ye, Xin",
+        "Xie, Wenbin",
+        "Shen, Yingjiao",
+        "Yang, Shangchao",
+        "Zhong, Xiaxing",
+        "Guan, Hanyi",
+        "Zhou, Xiangpeng",
+        "Wu, Jiang",
+        "Shen, Lijun"
+      ]
+    },
+    "page_title": "Open ultrawidefield fundus image dataset with disease diagnosis and clinical image quality assessment | Scientific Data"
+  },
+  {
+    "id": "P13",
+    "url": "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2024.1396160/full",
+    "resolved_url": "https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2024.1396160/full",
+    "http_ok": true,
+    "meta": {
+      "citation_volume": [
+        "7"
+      ],
+      "citation_journal_title": [
+        "Frontiers in Artificial Intelligence"
+      ],
+      "citation_doi": [
+        "10.3389/frai.2024.1396160"
+      ],
+      "citation_firstpage": [
+        "1396160"
+      ],
+      "citation_title": [
+        "Smart grading of diabetic retinopathy: an intelligent recommendation-based fine-tuned EfficientNetB0 framework"
+      ],
+      "citation_online_date": [
+        "2024/03/27"
+      ],
+      "citation_publication_date": [
+        "2024/04/16"
+      ],
+      "citation_author": [
+        "Anand, Vatsala ",
+        "Koundal, Deepika ",
+        "Alghamdi, Wael Y. ",
+        "Alsharbi, Bayan M. "
+      ]
+    },
+    "page_title": "Frontiers | Smart grading of diabetic retinopathy: an intelligent recommendation-based fine-tuned EfficientNetB0 framework"
+  },
+  {
+    "id": "P14",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11065411/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11065411/",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "PeerJ Computer Science"
+      ],
+      "citation_title": [
+        "A systematic review on diabetic retinopathy detection and classification based on deep learning techniques using fundus images"
+      ],
+      "citation_author": [
+        "Dasari Bhulakshmi",
+        "Dharmendra Singh Rajput"
+      ],
+      "citation_publication_date": [
+        "2024 Apr 29"
+      ],
+      "citation_volume": [
+        "10"
+      ],
+      "citation_firstpage": [
+        "e1947"
+      ],
+      "citation_doi": [
+        "10.7717/peerj-cs.1947"
+      ]
+    },
+    "page_title": "A systematic review on diabetic retinopathy detection and classification based on deep learning techniques using fundus images - PMC"
+  },
+  {
+    "id": "P15",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11426980/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11426980/",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "Current Opinion in Ophthalmology"
+      ],
+      "citation_title": [
+        "Novel artificial intelligence for diabetic retinopathy and diabetic macular edema: what is new in 2024?"
+      ],
+      "citation_author": [
+        "Stela Vujosevic",
+        "Celeste Limoli",
+        "Paolo Nucci"
+      ],
+      "citation_publication_date": [
+        "2024 Sep 9"
+      ],
+      "citation_volume": [
+        "35"
+      ],
+      "citation_issue": [
+        "6"
+      ],
+      "citation_firstpage": [
+        "472"
+      ],
+      "citation_doi": [
+        "10.1097/ICU.0000000000001084"
+      ]
+    },
+    "page_title": "Novel artificial intelligence for diabetic retinopathy and diabetic macular edema: what is new in 2024? - PMC"
+  },
+  {
+    "id": "P16",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11304031/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11304031/",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "Radiology: Artificial Intelligence"
+      ],
+      "citation_title": [
+        "Checklist for Artificial Intelligence in Medical Imaging (CLAIM): 2024 Update"
+      ],
+      "citation_author": [
+        "Ali S Tejani",
+        "Michail E Klontzas",
+        "Anthony A Gatti",
+        "John T Mongan",
+        "Linda Moy",
+        "Seong Ho Park",
+        "Charles E Kahn, Jr",
+        "for the CLAIM 2024 Update Panel"
+      ],
+      "citation_publication_date": [
+        "2024 May 29"
+      ],
+      "citation_volume": [
+        "6"
+      ],
+      "citation_issue": [
+        "4"
+      ],
+      "citation_firstpage": [
+        "e240300"
+      ],
+      "citation_doi": [
+        "10.1148/ryai.240300"
+      ]
+    },
+    "page_title": "Checklist for Artificial Intelligence in Medical Imaging (CLAIM): 2024 Update - PMC"
+  },
+  {
+    "id": "P17",
+    "url": "https://journals.plos.org/digitalhealth/article?id=10.1371/journal.pdig.0000649",
+    "resolved_url": "https://journals.plos.org/digitalhealth/article?id=10.1371/journal.pdig.0000649",
+    "http_ok": true,
+    "meta": {
+      "citation_doi": [
+        "10.1371/journal.pdig.0000649"
+      ],
+      "citation_author": [
+        "Rida Shahzad",
+        "Arshad Mehmood",
+        "Danish Shabbir",
+        "M. A. Rehman Siddiqui"
+      ],
+      "citation_title": [
+        "Diagnostic accuracy of a smartphone-based device (VistaView) for detection of diabetic retinopathy: A prospective study"
+      ],
+      "citation_journal_title": [
+        "PLOS Digital Health"
+      ],
+      "citation_date": [
+        "Nov 8, 2024"
+      ],
+      "citation_firstpage": [
+        "e0000649"
+      ],
+      "citation_issue": [
+        "11"
+      ],
+      "citation_volume": [
+        "3"
+      ]
+    },
+    "page_title": "Diagnostic accuracy of a smartphone-based device (VistaView) for detection of diabetic retinopathy: A prospective study | PLOS Digital Health"
+  },
+  {
+    "id": "P18",
+    "url": "https://www.nature.com/articles/s41598-024-84478-x",
+    "resolved_url": "https://www.nature.com/articles/s41598-024-84478-x?error=cookies_not_supported&code=68ea2419-dfa9-415e-928e-e944d770fe29",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "Scientific Reports"
+      ],
+      "citation_title": [
+        "Uncertainty-aware diabetic retinopathy detection using deep learning enhanced by Bayesian approaches"
+      ],
+      "citation_volume": [
+        "15"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_online_date": [
+        "2025/01/08"
+      ],
+      "citation_firstpage": [
+        "1342"
+      ],
+      "citation_lastpage": [
+        ""
+      ],
+      "citation_doi": [
+        "10.1038/s41598-024-84478-x"
+      ],
+      "citation_author": [
+        "Akram, Mohsin",
+        "Adnan, Muhammad",
+        "Ali, Syed Farooq",
+        "Ahmad, Jameel",
+        "Yousef, Amr",
+        "Alshalali, Tagrid Abdullah N.",
+        "Shaikh, Zaffar Ahmed"
+      ]
+    },
+    "page_title": "Uncertainty-aware diabetic retinopathy detection using deep learning enhanced by Bayesian approaches | Scientific Reports"
+  },
+  {
+    "id": "P19",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12096960/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12096960/",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "BMJ Open"
+      ],
+      "citation_title": [
+        "Deep learning-based automatic image quality assessment in ultra-widefield fundus photographs"
+      ],
+      "citation_author": [
+        "Richul Oh",
+        "Un Chul Park",
+        "Kyu Hyung Park",
+        "Sang Jun Park",
+        "Chang Ki Yoon"
+      ],
+      "citation_publication_date": [
+        "2025 May 21"
+      ],
+      "citation_volume": [
+        "15"
+      ],
+      "citation_issue": [
+        "5"
+      ],
+      "citation_firstpage": [
+        "e100058"
+      ],
+      "citation_doi": [
+        "10.1136/bmjopen-2025-100058"
+      ]
+    },
+    "page_title": "Deep learning-based automatic image quality assessment in ultra-widefield fundus photographs - PMC"
+  },
+  {
+    "id": "P20",
+    "url": "https://arxiv.org/abs/2506.20303",
+    "resolved_url": "https://arxiv.org/abs/2506.20303",
+    "http_ok": true,
+    "meta": {
+      "citation_title": [
+        "FundaQ-8: A Clinically-Inspired Scoring Framework for Automated Fundus Image Quality Assessment"
+      ],
+      "citation_author": [
+        "Zun, Lee Qi",
+        "Hao, Oscar Wong Jin",
+        "Omar, Nor Anita Binti Che",
+        "Asnir, Zalifa Zakiah Binti",
+        "Zainal, Mohamad Sabri bin Sinal",
+        "Fye, Goh Man"
+      ],
+      "citation_date": [
+        "2025/06/25"
+      ],
+      "citation_online_date": [
+        "2025/06/25"
+      ],
+      "citation_arxiv_id": [
+        "2506.20303"
+      ]
+    },
+    "page_title": "[2506.20303] FundaQ-8: A Clinically-Inspired Scoring Framework for Automated Fundus Image Quality Assessment"
+  },
+  {
+    "id": "P21",
+    "url": "https://arxiv.org/abs/2511.05529",
+    "resolved_url": "https://arxiv.org/abs/2511.05529",
+    "http_ok": true,
+    "meta": {
+      "citation_title": [
+        "Selective Diabetic Retinopathy Screening with Accuracy-Weighted Deep Ensembles and Entropy-Guided Abstention"
+      ],
+      "citation_author": [
+        "Lin, Jophy"
+      ],
+      "citation_date": [
+        "2025/10/29"
+      ],
+      "citation_online_date": [
+        "2025/11/11"
+      ],
+      "citation_arxiv_id": [
+        "2511.05529"
+      ]
+    },
+    "page_title": "[2511.05529] Selective Diabetic Retinopathy Screening with Accuracy-Weighted Deep Ensembles and Entropy-Guided Abstention"
+  },
+  {
+    "id": "P22",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167062/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167062/",
+    "http_ok": true,
+    "meta": {},
+    "page_title": "Checking your browser - reCAPTCHA"
+  },
+  {
+    "id": "P23",
+    "url": "https://link.springer.com/article/10.1186/s40942-025-00670-9",
+    "resolved_url": "https://link.springer.com/article/10.1186/s40942-025-00670-9?error=cookies_not_supported&code=46c2fd3d-f82e-4119-95a9-d8b1b957e2d9",
+    "http_ok": true,
+    "meta": {
+      "citation_journal_title": [
+        "International Journal of Retina and Vitreous"
+      ],
+      "citation_title": [
+        "The efficacy of artificial intelligence in diabetic retinopathy screening: a systematic review and meta-analysis"
+      ],
+      "citation_volume": [
+        "11"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_publication_date": [
+        "2025/12"
+      ],
+      "citation_online_date": [
+        "2025/04/22"
+      ],
+      "citation_firstpage": [
+        "48"
+      ],
+      "citation_lastpage": [
+        ""
+      ],
+      "citation_doi": [
+        "10.1186/s40942-025-00670-9"
+      ],
+      "citation_author": [
+        "Alqahtani, Abdullah S.",
+        "Alshareef, Wasan M.",
+        "Aljadani, Hanan T.",
+        "Hawsawi, Wesal O.",
+        "Shaheen, Marya H."
+      ]
+    },
+    "page_title": "The efficacy of artificial intelligence in diabetic retinopathy screening: a systematic review and meta-analysis | International Journal of Retina and Vitreous | Springer Nature Link"
+  },
+  {
+    "id": "P24",
+    "url": "https://www.mdpi.com/2075-4418/16/16/2645",
+    "http_ok": false,
+    "error": "HTTP Error 403: Forbidden",
+    "meta": {}
+  },
+  {
+    "id": "P25",
+    "url": "https://arxiv.org/abs/2609.33158",
+    "resolved_url": "https://arxiv.org/abs/2609.33158",
+    "http_ok": true,
+    "meta": {
+      "citation_title": [
+        "FOCUS: Benchmarking Retinal Model Generalization from Foundation Vision Encoders to Multimodal LLMs"
+      ],
+      "citation_author": [
+        "Restrepo, David",
+        "Wu, Chenwei",
+        "Nakayama, Luis Filipe",
+        "Martins, Miguel L.",
+        "Christodoulidis, Stergios",
+        "Vakalopoulou, Maria",
+        "Ferrante, Enzo"
+      ],
+      "citation_date": [
+        "2026/09/27"
+      ],
+      "citation_online_date": [
+        "2026/09/27"
+      ],
+      "citation_arxiv_id": [
+        "2609.33158"
+      ]
+    },
+    "page_title": "[2609.33158] FOCUS: Benchmarking Retinal Model Generalization from Foundation Vision Encoders to Multimodal LLMs"
+  },
+  {
+    "id": "P26",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13218245/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13218245/",
+    "http_ok": true,
+    "meta": {},
+    "page_title": "Checking your browser - reCAPTCHA"
+  },
+  {
+    "id": "P27",
+    "url": "https://www.sciencedirect.com/science/article/pii/S1877050922021895",
+    "http_ok": false,
+    "error": "HTTP Error 403: Forbidden",
+    "meta": {}
+  },
+  {
+    "id": "P28",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12403315/",
+    "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12403315/",
+    "http_ok": true,
+    "meta": {},
+    "page_title": "Checking your browser - reCAPTCHA"
+  }
+]

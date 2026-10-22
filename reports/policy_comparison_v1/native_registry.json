@@ -1,0 +1,55 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "research_http_status": 200,
+  "experiment_records": 10,
+  "experiment_id": "policy_comparison_v1",
+  "scope": "development_out_of_fold_policy",
+  "summary": {
+    "scenarios": 192,
+    "fully_evaluated_scenarios": 78,
+    "incomplete_scenarios": 114,
+    "planned_tuning_candidates": 1728,
+    "paired_comparisons": 180,
+    "estimable_pairs": 73,
+    "tuning_candidate_statuses": {
+      "overloaded": 942,
+      "evaluated": 786
+    },
+    "matched_realized_workload_pairs": 19,
+    "unmatched_realized_workload_pairs": 54,
+    "not_estimable_pairs": 107,
+    "matched_workload_pairs_with_nonzero_mean_delta": 0,
+    "mode_status_counts": {
+      "ordinal": {
+        "incomplete": 48,
+        "evaluated": 16
+      },
+      "lac": {
+        "incomplete": 48,
+        "evaluated": 16
+      },
+      "no_cp": {
+        "incomplete": 18,
+        "evaluated": 46
+      }
+    }
+  },
+  "source_report_sha256": "4dfd99d535d7f7413596caab5ca1fa47629a62126a488b907563656bf5834085",
+  "pooled_nulls_preserved": 114,
+  "bootstrap_settings_match": true,
+  "model_card_status": "matched",
+  "conformal_status": "available",
+  "ui_verification": {
+    "method": "Streamlit AppTest against running local API",
+    "browser_rendering_verified": false,
+    "browser_limitation": "Browser observation rejected by browser URL access policy; no workaround attempted.",
+    "ordinal_tuned_rows": 32,
+    "incomplete_null_rows": 24,
+    "evaluated_full_review_rows": 8,
+    "diagnostic_ablation_note_displayed": true,
+    "no_ui_exceptions": true
+  },
+  "verifier_sha256": "1a802fca77605f3db4113c2992a6a2e6abed858cb43950242dc90313a136b6eb",
+  "note": "Engineering integration checks do not establish independent research validation or clinical utility."
+}

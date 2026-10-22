@@ -1,0 +1,64 @@
+method,review_budget,recapture_budget,status,n,auto_count,review_rate,recapture_rate,coverage,missed_referable_auto,missed_severe_auto,referable_deferred_to_recapture,severe_deferred_to_recapture,auto_sensitivity,auto_specificity,weighted_auto_error_per_image,selective_grade_error,review_budget_violation,recapture_budget_violation,interpretation,reason
+plain,0.2,0.1,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.2,0.2,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.2,0.4,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.2,0.4,evaluated,340.0,136.0,0.2,0.4,0.4,12.0,1.0,60.0,40.0,0.7818181818181819,0.7654320987654321,0.43529411764705883,0.4411764705882353,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+severity_only,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.2,0.4,evaluated,340.0,136.0,0.2,0.4,0.4,5.0,0.0,60.0,40.0,0.8837209302325582,0.7741935483870968,0.38235294117647056,0.41911764705882354,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+dual_budget,0.2,0.4,evaluated,340.0,157.0,0.2,0.3382352941176471,0.46176470588235297,10.0,1.0,20.0,9.0,0.8333333333333334,0.7525773195876289,0.5235294117647059,0.445859872611465,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+plain,0.4,0.1,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.4,0.2,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.4,0.2,evaluated,340.0,136.0,0.4,0.2,0.4,12.0,1.0,30.0,18.0,0.7818181818181819,0.7654320987654321,0.43529411764705883,0.4411764705882353,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+severity_only,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.4,0.2,evaluated,340.0,136.0,0.4,0.2,0.4,5.0,0.0,30.0,18.0,0.8837209302325582,0.7741935483870968,0.38235294117647056,0.41911764705882354,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+dual_budget,0.4,0.2,evaluated,340.0,136.0,0.4,0.2,0.4,5.0,0.0,3.0,0.0,0.8837209302325582,0.7741935483870968,0.38235294117647056,0.41911764705882354,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+plain,0.4,0.4,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.4,0.4,evaluated,340.0,94.0,0.4,0.3235294117647059,0.27647058823529413,3.0,0.0,46.0,31.0,0.9166666666666666,0.7413793103448276,0.24705882352941178,0.425531914893617,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+severity_only,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.4,0.4,evaluated,340.0,68.0,0.4,0.4,0.2,0.0,0.0,60.0,40.0,1.0,0.8103448275862069,0.08235294117647059,0.27941176470588236,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+dual_budget,0.4,0.4,evaluated,340.0,115.0,0.4,0.26176470588235295,0.3382352941176471,4.0,0.0,9.0,2.0,0.8571428571428571,0.7931034482758621,0.25588235294117645,0.3826086956521739,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+plain,0.6,0.1,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.6,0.1,evaluated,340.0,136.0,0.6,0.0,0.4,5.0,0.0,0.0,0.0,0.8979591836734694,0.7816091954022989,0.4147058823529412,0.40441176470588236,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+quality_only,0.6,0.1,evaluated,340.0,102.0,0.6,0.1,0.3,5.0,1.0,17.0,10.0,0.8717948717948718,0.746031746031746,0.2852941176470588,0.43137254901960786,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+severity_only,0.6,0.1,evaluated,340.0,136.0,0.6,0.0,0.4,12.0,2.0,0.0,0.0,0.7,0.7604166666666666,0.3029411764705882,0.39705882352941174,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+single_budget,0.6,0.1,evaluated,340.0,136.0,0.6,0.0,0.4,5.0,0.0,0.0,0.0,0.8837209302325582,0.7741935483870968,0.38235294117647056,0.41911764705882354,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+naive,0.6,0.1,evaluated,340.0,102.0,0.6,0.1,0.3,3.0,0.0,17.0,10.0,0.875,0.7948717948717948,0.21176470588235294,0.37254901960784315,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+dual_budget,0.6,0.1,evaluated,340.0,102.0,0.6,0.1,0.3,3.0,0.0,1.0,0.0,0.875,0.7948717948717948,0.21176470588235294,0.37254901960784315,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+plain,0.6,0.2,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.6,0.2,evaluated,340.0,136.0,0.6,0.0,0.4,5.0,0.0,0.0,0.0,0.8979591836734694,0.7816091954022989,0.4147058823529412,0.40441176470588236,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+quality_only,0.6,0.2,evaluated,340.0,77.0,0.5735294117647058,0.2,0.22647058823529412,1.0,0.0,30.0,18.0,0.9629629629629629,0.72,0.15588235294117647,0.4025974025974026,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+severity_only,0.6,0.2,evaluated,340.0,136.0,0.6,0.0,0.4,12.0,2.0,0.0,0.0,0.7,0.7604166666666666,0.3029411764705882,0.39705882352941174,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+single_budget,0.6,0.2,evaluated,340.0,136.0,0.6,0.0,0.4,5.0,0.0,0.0,0.0,0.8837209302325582,0.7741935483870968,0.38235294117647056,0.41911764705882354,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+naive,0.6,0.2,evaluated,340.0,68.0,0.6,0.2,0.2,0.0,0.0,30.0,18.0,1.0,0.8103448275862069,0.08235294117647059,0.27941176470588236,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+dual_budget,0.6,0.2,evaluated,340.0,80.0,0.6,0.16470588235294117,0.23529411764705882,2.0,0.0,2.0,0.0,0.8666666666666667,0.8,0.12352941176470589,0.3375,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+plain,0.6,0.4,evaluated,340.0,340.0,0.0,0.0,1.0,28.0,7.0,0.0,0.0,0.8055555555555556,0.8061224489795918,1.1676470588235295,0.4,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.6,0.4,evaluated,340.0,136.0,0.6,0.0,0.4,5.0,0.0,0.0,0.0,0.8979591836734694,0.7816091954022989,0.4147058823529412,0.40441176470588236,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+quality_only,0.6,0.4,evaluated,340.0,77.0,0.5029411764705882,0.27058823529411763,0.22647058823529412,1.0,0.0,39.0,27.0,0.9629629629629629,0.72,0.15588235294117647,0.4025974025974026,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+severity_only,0.6,0.4,evaluated,340.0,136.0,0.6,0.0,0.4,12.0,2.0,0.0,0.0,0.7,0.7604166666666666,0.3029411764705882,0.39705882352941174,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+single_budget,0.6,0.4,evaluated,340.0,136.0,0.6,0.0,0.4,5.0,0.0,0.0,0.0,0.8837209302325582,0.7741935483870968,0.38235294117647056,0.41911764705882354,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+naive,0.6,0.4,evaluated,340.0,0.0,0.6,0.4,0.0,0.0,0.0,60.0,40.0,,,0.0,,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+dual_budget,0.6,0.4,evaluated,340.0,80.0,0.6,0.16470588235294117,0.23529411764705882,2.0,0.0,2.0,0.0,0.8666666666666667,0.8,0.12352941176470589,0.3375,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,

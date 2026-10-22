@@ -1,0 +1,127 @@
+[
+  {
+    "id": "R10",
+    "url": "https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2026.1795484/full",
+    "meta": {
+      "citation_volume": [
+        "13"
+      ],
+      "citation_journal_title": [
+        "Frontiers in Medicine"
+      ],
+      "citation_doi": [
+        "10.3389/fmed.2026.1795484"
+      ],
+      "citation_firstpage": [
+        "1795484"
+      ],
+      "citation_title": [
+        "From discarding to leveraging: quality-aware collaborative learning for robust diabetic retinopathy grading"
+      ],
+      "citation_online_date": [
+        "2026/05/06"
+      ],
+      "citation_publication_date": [
+        "2026/05/29"
+      ],
+      "citation_author": [
+        "Pan, Yuan ",
+        "Cai, Xiangwen ",
+        "Xiong, Pan ",
+        "Mei, Fang ",
+        "Wang, Zhengfei ",
+        "Hong, Jiaming "
+      ]
+    }
+  },
+  {
+    "id": "R11",
+    "url": "https://arxiv.org/abs/2412.14221",
+    "meta": {
+      "citation_title": [
+        "Improving diabetic retinopathy screening using Artificial Intelligence: design, evaluation and before-and-after study of a custom development"
+      ],
+      "citation_author": [
+        "Pinto, Imanol",
+        "Olazarán, Álvaro",
+        "Jurío, David",
+        "de la Osa, Borja",
+        "Sainz, Miguel",
+        "Oscoz, Aritz",
+        "Ballaz, Jerónimo",
+        "Gorricho, Javier",
+        "Galar, Mikel",
+        "Andonegui, José"
+      ],
+      "citation_date": [
+        "2024/12/18"
+      ],
+      "citation_online_date": [
+        "2024/12/18"
+      ],
+      "citation_arxiv_id": [
+        "2412.14221"
+      ]
+    }
+  },
+  {
+    "id": "R13",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42281668/",
+    "meta": {}
+  },
+  {
+    "id": "P22",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/40520476/",
+    "meta": {}
+  },
+  {
+    "id": "P24",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42651046/",
+    "meta": {}
+  },
+  {
+    "id": "P26",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42222586/",
+    "meta": {}
+  },
+  {
+    "id": "P28",
+    "url": "https://link.springer.com/article/10.1186/s42490-025-00098-0",
+    "meta": {
+      "citation_journal_title": [
+        "BMC Biomedical Engineering"
+      ],
+      "citation_title": [
+        "Diabetic retinopathy screening using machine learning: a systematic review"
+      ],
+      "citation_volume": [
+        "7"
+      ],
+      "citation_issue": [
+        "1"
+      ],
+      "citation_publication_date": [
+        "2025/12"
+      ],
+      "citation_online_date": [
+        "2025/09/02"
+      ],
+      "citation_firstpage": [
+        "12"
+      ],
+      "citation_lastpage": [
+        ""
+      ],
+      "citation_doi": [
+        "10.1186/s42490-025-00098-0"
+      ],
+      "citation_author": [
+        "Dejene, Fitsum Mesfin",
+        "Debelee, Taye Girma",
+        "Schwenker, Friedhelm",
+        "Ayano, Yehualashet Megersa",
+        "Feyisa, Degaga Wolde"
+      ]
+    }
+  }
+]
