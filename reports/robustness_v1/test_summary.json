@@ -1,0 +1,24 @@
+{
+  "spec_version": "1.0",
+  "date_local": "2026-10-22",
+  "tests": 223,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "junit_seconds": 67.022,
+  "pytest_reported_seconds": 67.03,
+  "real_integration": "Genuine selected DR/quality and conformal_r1 on development selection JPEG",
+  "ruff": "passed",
+  "compose_configuration": "passed",
+  "deployment": "native_python; current Docker startup blocked; historical Docker results preserved",
+  "working_tree_source_sha256": {
+    "api/research.py": "7fbb785dd65c77fae0ec4f9f2fecb84121ce9415825d26964a9655cc398e68dd",
+    "qsart/evaluation_robustness.py": "2aed3fc48b0dbf5b28ac02146af8b0caf1f42ddbd9904e3013b0ae6d55bff8f9",
+    "qsart/uncertainty/conformal.py": "e8469ac637b913a984098c24fb543ae434b52d80c23647d78fa30e1d0548ffa4",
+    "scripts/run_controlled_degradation.py": "71bd1abdd60ba634361e72cfb329e30d3cb650f635635e4adff6871873ac57fb",
+    "tests/test_robustness.py": "c8d26389457ef0954e570450114a66684002c333956b2fbd9df36b8d37ef4165",
+    "tests/test_conformal.py": "85ec5ff6bfd5f00c6850556990cebda7f00b69076d9baa943a553069b9a91f50",
+    "tests/test_research_api.py": "8c62a98945fdaab1b1a20719e3ecdae15215056d5909361573869a6c811e1cfb"
+  },
+  "scope": "Software verification and genuine model execution; not independent clinical validation"
+}

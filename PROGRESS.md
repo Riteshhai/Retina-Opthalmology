@@ -1,5 +1,69 @@
 # Execution log
 
+## 2026-10-22 — controlled degradation and publication
+
+- Published specification alignment as commit 20009517f79eefc1c7bd2f34474781de7ad10f79
+  on the existing draft PR #1. GitHub push and pull-request verification both
+  succeeded; PR run 39812507691 passed install, Ruff, pytest and Compose checks.
+  Main is unchanged; photos, manifests, individual scores and weights stay local.
+- Declared ROBUSTNESS_V1_PROTOCOL.md at commit 8c0c83b before any new condition
+  scores. Research-only canonical-input helper and exact decimal conformal-rank
+  fix are at execution commit 493ad7c6e37d16dc338e00280d8ac714ee23a0c8.
+  The rank fix prevents an extra conservative rank at n=9/alpha=.7; current
+  n=21 alpha .10/.05 sidecar and numerical outputs remain unchanged. Image/grouped
+  boundary tests plus conformal sidecar tests: 43 passed, 7.75s.
+- Ran `.venv/Scripts/python.exe scripts/run_controlled_degradation.py` on the
+  complete frozen selection population: 168 real images / 42 patients, seven
+  conditions, 1,176 predictions. Canonical crop/resize occurs once, followed by
+  identity, blur radii 1/2, intensity factors .5/1.5 and JPEG qualities 50/20.
+  Clean DR/quality/three-defect/raw-DR probabilities matched ordinary inference
+  exactly on all 168 images. Original SHA bytes and all selected artifact hashes
+  were verified. No training, recalibration, gate changes, TTA or condition tuning.
+- Actual DR accuracy: clean 63.10%, blur1 48.21%, blur2 34.52%, dark 59.52%,
+  bright 58.33%, JPEG50 44.64%, JPEG20 22.02%. JPEG20 paired accuracy change is
+  -41.07 percentage points, descriptive patient-bootstrap interval [-53.59,-26.79].
+  Mean poor-quality score is .541 clean and .511 JPEG20; its difference interval
+  crosses zero, so no statistically established decrease is asserted. Its failure
+  to rise with compression damage exposes a model-response weakness. Blur raises
+  referable sensitivity while reducing specificity; no benefit is claimed.
+- Fixed LAC alpha .10 image coverage falls from 94.64% to 73.21% for JPEG20;
+  all-views coverage falls from 85.71% to 45.24%. All ordinal sets remain all five
+  grades, and all pointwise actions recommend review. No shifted coverage,
+  automatic-triage utility, capacity feasibility or successful care is established.
+  Natural-quality labels are context strata; only clean quality accuracy (74.40%)
+  is assessed against them. Original disease labels remain underlying-disease
+  labels even where corruption hides visible evidence.
+- Private per-image caches/hashes remain under artifacts/robustness_v1. Public
+  aggregates, three plots and study notes are under reports/robustness_v1 and
+  docs/research/ROBUSTNESS_V1_RESULTS.md. Independent audit reconstructed all
+  1,176 LAC sets, seven conditions' metrics, six paired accuracy bootstrap intervals,
+  first/last canonical pixels and all 14 corresponding transformed-image hashes;
+  input/artifact/cache/protocol/nine-source bindings and privacy checks passed.
+- Added aggregate robustness discovery to /research/experiments and /research/metrics
+  for the existing dashboard explorer. Fixture contract test preserves an unfavorable
+  result and development-only scope. Targeted endpoint tests: 10 passed, 14.08s.
+- Full verification command used QSART_REAL_MANIFEST=development_v1.csv,
+  QSART_REAL_SPLIT=validation, genuine selected DR/quality/calibration and
+  QSART_REAL_CONFORMAL=conformal_r1.json, then `python -m pytest -q
+  --junitxml=reports/robustness_v1_tests.xml`: **223 passed**, no failures/skips,
+  67.03s, one upstream AnyIO deprecation warning. Ruff and Compose config passed.
+- Docker Desktop startup failed before the Linux engine: inaccessible stale
+  sailor-ingest socket. Rename failed; automatic approval review rejected socket
+  removal. No factory reset or data deletion occurred. Current Docker execution
+  remains blocked; historical Oct21 container proof stays unchanged.
+- Started the existing PowerShell local launcher in the background, then restarted
+  it after API integration. Real JPEG single/batch/TTA, readiness, matched model
+  card/conformal, unsupported uploads, simulator evaluated/overloaded and dashboard
+  health checks passed at 18000/18501. scripts/verify_deployment.py now records the
+  invoker-established runtime explicitly; current evidence is native_python, not
+  a new container run. The real research endpoint returned all seven conditions.
+  Browser verification selected controlled_degradation_v1 in Experiment Explorer
+  and displayed development_model_input_stress, 168 images and 42 patients;
+  aggregate-only screenshot is saved as explorer_preview.png.
+- APTOS is still not downloaded, and IDRiD is not evaluated. Useful ordinal sets,
+  independently tuned policies, repeated seeds and external evidence remain open.
+  Formal manuscript drafting remains deferred. Overall research is IN PROGRESS.
+
 ## 2026-10-18 — audit and bootstrap
 
 - Inspected parent directory and all starter ZIP member names; read starter

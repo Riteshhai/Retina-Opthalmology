@@ -18,6 +18,8 @@ def main():
     parser.add_argument('--output', type=Path, default=Path('reports/deployment.json'))
     parser.add_argument('--split', default='holdout')
     parser.add_argument('--require-conformal', action='store_true')
+    parser.add_argument('--runtime', choices=('unspecified', 'native_python', 'docker'), default='unspecified',
+                        help='Record the independently established deployment mode; HTTP alone does not detect it')
     args = parser.parse_args()
     frame = pd.read_csv(args.manifest)
     image = Path(frame.loc[frame.split == args.split].iloc[0].image_path)
@@ -75,6 +77,9 @@ def main():
         dashboard = httpx.get(args.dashboard+'/_stcore/health', timeout=30)
         dashboard.raise_for_status()
     report = {'status': 'verified', 'scope': 'actual HTTP against running deployment',
+              'runtime': args.runtime,
+              'runtime_scope': 'Declared by invoker from startup evidence; HTTP checks alone do not identify runtime',
+              'verifier_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
               'image_source': 'authorized DeepDRiD manifest; input not retained by this script',
               'partition': args.split,
               'manifest_sha256': hashlib.sha256(args.manifest.read_bytes()).hexdigest(),

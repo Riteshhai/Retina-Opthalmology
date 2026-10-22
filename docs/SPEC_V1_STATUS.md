@@ -1,4 +1,4 @@
-# QSART Development Status — 21 October 2026
+# QSART Development Status — updated 22 October 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,6 +6,10 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **New execution source:** `493ad7c6e37d16dc338e00280d8ac714ee23a0c8`;
+  fixed seven-condition selection-data degradation VERIFIED COMPLETE. Full
+  [results and limitations](research/ROBUSTNESS_V1_RESULTS.md) retain the observed
+  blur/compression failures and non-monotonic quality response.
 
 ## Implemented and actually tested
 
@@ -117,7 +121,7 @@ APTOS and independent IDRiD results, clinical review/recapture outcomes and
 prospective utility have not been produced.
 
 **IN PROGRESS overall:** useful conformal/triage behavior, independently tuned
-comparators, repeated seeds, controlled degradation/ablations and external-domain
+comparators, repeated seeds, additional robustness/ablations and external-domain
 evaluation. A future experiment must predeclare changes; consumed v1 confirmation
 cannot become an undisclosed tuning set. Formal manuscript writing stays deferred.
 
@@ -138,3 +142,20 @@ Evidence: [base-paper critical study](research/BASE_PAPER_STUDY.md),
 Final deployment checks: all **37 runtime Python files** match container/host
 hashes. Actual JPEG/conformal/batch/simulator/research checks passed again after
 API restart; see reports/spec_v1/deployment_after_restart.json.
+
+The Docker paragraph above records 21 October execution. On 22 October the host
+engine failed to start because of an inaccessible stale socket. Automatic approval
+review blocked socket removal; no factory reset was attempted. Native services
+were restored using the existing PowerShell launcher on ports 18000/18501, with
+real-image/model/conformal/batch/simulator HTTP checks. A current container run is
+**BLOCKED** by that host startup failure. Historical Docker evidence is preserved.
+
+22 October verification: **223 passed**, no failures/skips, 67.03 seconds with
+genuine-model/sidecar integration enabled; Ruff and Compose configuration passed.
+The added real development experiment has exact clean-equivalence checks on all
+168 images. Independent reconstruction verified all 1,176 LAC sets, all seven
+conditions' metrics, six paired accuracy intervals and the recorded hash bindings.
+The native HTTP workflow passed again after restarting the launcher, and the new
+experiment was retrieved through the actual research endpoint. Evidence is in
+reports/robustness_v1; the previously measured 198-test/container results remain
+historical records rather than being overwritten.

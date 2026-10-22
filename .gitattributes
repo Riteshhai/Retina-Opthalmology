@@ -10,3 +10,4 @@ Dockerfile text eol=lf
 MASTER_SPEC.md -text whitespace=-blank-at-eol,cr-at-eol
 docs/specifications/MASTER_SPEC_v1.0.md -text whitespace=-blank-at-eol,cr-at-eol
 reports/spec_v1/** -text whitespace=cr-at-eol
+reports/robustness_v1/** -text whitespace=cr-at-eol

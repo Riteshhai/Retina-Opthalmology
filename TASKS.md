@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — 20–21 October 2026
+## Specification-v1 priorities — 20–22 October 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -17,7 +17,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [ ] P1 BLOCKED: official APTOS images/access; user confirmed not downloaded.
 - [ ] P1 NOT STARTED: APTOS EfficientNet study and exact randomized base-paper reproduction.
 - [ ] P1 NOT STARTED: useful ordinal-set study, independently tuned policy comparators and repeated seeds.
-- [ ] P1 NOT STARTED: controlled degradation and independent IDRiD external evaluation.
+- [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
+- [ ] P1 NOT STARTED: independent IDRiD external evaluation and broader distribution-shift studies.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
 
 Conformal integration is VERIFIED COMPLETE as software/calibration execution; its

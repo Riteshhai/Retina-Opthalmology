@@ -1,5 +1,6 @@
 """Generated software scores exercise current API semantics, never research evidence."""
 from io import BytesIO
+import json
 
 from fastapi.testclient import TestClient
 from PIL import Image
@@ -59,6 +60,25 @@ def test_config_and_aggregate_experiments_are_typed_and_no_arbitrary_paths(tmp_p
         schema = client.get('/openapi.json').json()
         for path in ('/triage/config', '/triage/simulate', '/research/experiments', '/research/metrics'):
             assert path in schema['paths']
+
+
+def test_saved_stress_experiment_preserves_scope_and_unfavorable_paired_results(tmp_path, monkeypatch):
+    """Software fixture verifies discovery, not a measured retinal experiment."""
+    report = tmp_path/'robustness_v1/evaluation.json'
+    report.parent.mkdir()
+    report.write_text(json.dumps({'images': 2, 'patients': 1, 'model_version': 'software_fixture',
+        'conditions': {'blur_2': {'grading': {'accuracy': 0.}}},
+        'paired_changes': {'blur_2': {'accuracy': {'mean_delta': -.5}}},
+        'limitations': ['Synthetic-input development stress; no independent clinical validation.']}))
+    monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))
+    with TestClient(create_app()) as client:
+        listed = client.get('/research/experiments').json()['experiments']
+        assert len(listed) == 1 and listed[0]['experiment_id'] == 'controlled_degradation_v1'
+        detail = client.get('/research/metrics?experiment_id=controlled_degradation_v1').json()
+        assert detail['scope'] == 'development_model_input_stress'
+        assert detail['metrics']['conditions']['blur_2']['grading']['accuracy'] == 0.
+        assert detail['metrics']['paired_changes']['blur_2']['accuracy']['mean_delta'] == -.5
+        assert 'no independent clinical validation' in detail['notes'][0]
 
 
 class PositiveFixture:

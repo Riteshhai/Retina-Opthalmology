@@ -31,3 +31,19 @@ EfficientNet trained on DeepDRiD but did not win the selection macro-F1 rule.
 Conservative ordinal sets were vacuous; all feasible grid cases used full review.
 These unfavorable research findings are preserved. APTOS is not downloaded.
 Overall scientific acceptance remains IN PROGRESS; see docs/SPEC_V1_STATUS.md.
+
+## Controlled degradation development study — 2026-10-22
+
+- Predeclared and executed seven fixed 224px model-input conditions on all 168
+  selection images / 42 patients. Clean predictions exactly match ordinary
+  inference, with one geometric preprocessing pass. No parameters were retuned.
+- Added descriptive paired patient-cluster intervals, quality/severity strata,
+  full grading/calibration/CP metrics and aggregate plots. Strong blur and JPEG
+  reduced accuracy; JPEG did not raise the mean poor-quality score. Ordinal sets
+  remain vacuous. Confirmation/test/external data remain unused in this study.
+- Added aggregate stress results to research discovery for the dashboard explorer.
+- Fixed a decimal-alpha conformal rank boundary with grouped/image regressions;
+  current alpha .10/.05 sidecar bytes and predictions are unchanged.
+- Docker Desktop failed before the engine started because of a stale socket.
+  Native PowerShell services passed real HTTP/CP/simulator checks on 18000/18501.
+  Current Docker execution is pending; historical 21 October proof is preserved.
