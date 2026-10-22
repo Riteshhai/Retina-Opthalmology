@@ -29,6 +29,29 @@ def test_exact_finite_sample_rank_and_infinite_small_sample():
     assert predict_sets([[.99, .01]], artifact) == [[0, 1]]
 
 
+@pytest.mark.parametrize("grouped", [False, True])
+def test_decimal_alpha_integer_rank_boundary_survives_artifact_roundtrip(tmp_path, grouped):
+    scores = np.arange(1, 10) / 10
+    # Binary float arithmetic gives 10*(1-.7)=3.0000000000000004. The
+    # declared decimal alpha instead requires the third score, not the fourth.
+    assert conformal_quantile(scores, .7) == .3
+    probabilities = np.column_stack((1 - scores, scores))
+    groups = None
+    if grouped:
+        probabilities = np.repeat(probabilities, 2, axis=0)
+        groups = np.repeat(np.arange(9), 2)
+    artifact = fit_conformal(probabilities, np.zeros(len(probabilities), dtype=int),
+                             alpha=.7, groups=groups, empty_policy="allow")
+    assert artifact["n_calibration_units"] == 9
+    assert artifact["rank"] == 3
+    assert artifact["qhat"] == pytest.approx(.3)
+    path = tmp_path / "boundary.json"
+    save_conformal(path, artifact)
+    assert load_conformal(path) == artifact
+    with pytest.raises(ValueError, match="rank"):
+        validate_artifact({**artifact, "rank": 4})
+
+
 @pytest.mark.parametrize("alpha", [0, 1, -.01, float("nan"), float("inf"), True, ".1"])
 def test_invalid_alpha_is_not_accepted(alpha):
     with pytest.raises(ValueError):

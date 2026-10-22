@@ -15,6 +15,7 @@ metadata; this module cannot infer those identities from probability arrays.
 """
 from __future__ import annotations
 
+from decimal import Decimal, ROUND_CEILING
 import json
 import math
 from pathlib import Path
@@ -99,6 +100,13 @@ def _metadata(value: Any) -> dict:
         raise ValueError("Metadata must contain finite JSON values") from exc
 
 
+def _conformal_rank(n: int, alpha: float) -> int:
+    # Treat the declared decimal alpha consistently with integer budget limits.
+    # Binary rounding can otherwise turn an exact integer rank into its successor.
+    value = Decimal(n + 1) * (Decimal(1) - Decimal(str(alpha)))
+    return int(value.to_integral_value(rounding=ROUND_CEILING))
+
+
 def conformal_quantile(scores: Any, alpha: float) -> float:
     """Return the kth score, k=ceil((n+1)*(1-alpha)); infinity if k>n.
 
@@ -110,7 +118,7 @@ def conformal_quantile(scores: Any, alpha: float) -> float:
     scores = np.asarray(scores, dtype=np.float64)
     if scores.ndim != 1 or not len(scores) or not np.isfinite(scores).all():
         raise ValueError("Calibration requires a nonempty vector of finite scores")
-    rank = math.ceil((len(scores) + 1) * (1 - alpha))
+    rank = _conformal_rank(len(scores), alpha)
     return math.inf if rank > len(scores) else float(np.partition(scores, rank - 1)[rank - 1])
 
 
@@ -172,7 +180,7 @@ def fit_conformal(probabilities: Any, labels: Any, *, alpha: float = 0.1,
         "schema": _SCHEMA, "method": method, "alpha": alpha,
         "num_classes": int(probabilities.shape[1]), "n_images": int(len(labels)),
         "n_calibration_units": int(len(scores)), "unit": "patient_max" if groups is not None else "image",
-        "rank": math.ceil((len(scores) + 1) * (1 - alpha)),
+        "rank": _conformal_rank(len(scores), alpha),
         # JSON null is explicitly +infinity, avoiding nonstandard Infinity/NaN.
         "qhat": None if math.isinf(qhat) else qhat,
         "empty_policy": empty_policy, "tie_policy": _TIES,
@@ -200,7 +208,7 @@ def validate_artifact(artifact: Any, *, expected_metadata: dict | None = None) -
     if artifact["num_classes"] < 2 or artifact["n_calibration_units"] > artifact["n_images"]:
         raise ValueError("Invalid conformal class or sample counts")
     n = artifact["n_calibration_units"]
-    if artifact["rank"] != math.ceil((n + 1) * (1 - alpha)):
+    if artifact["rank"] != _conformal_rank(n, alpha):
         raise ValueError("Conformal rank does not match sample count and alpha")
     qhat = artifact["qhat"]
     if qhat is None:
