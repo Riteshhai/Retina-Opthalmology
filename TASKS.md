@@ -15,7 +15,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Train an actual EfficientNet-B0 DeepDRiD candidate and compare three genuine models.
 - [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
 - [x] P1 Locate downloaded APTOS competition archive; user confirmed official Kaggle source on 3 November.
-- [ ] P1 IN PROGRESS: validate actual APTOS images, freeze duplicate-aware partitions and execute declared EfficientNet-B0/MobileNet development baselines.
+- [x] P1 Validate all3,662 APTOS images and freeze duplicate-aware partitions; quarantine148 conflicting-component images without relabeling.
+- [ ] P1 IN PROGRESS: execute declared APTOS EfficientNet-B0/MobileNet development baselines and independent temperature/conformal diagnostics.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.

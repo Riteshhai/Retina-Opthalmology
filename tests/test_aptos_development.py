@@ -2,6 +2,8 @@
 from copy import deepcopy
 from dataclasses import asdict
 import hashlib
+import json
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -10,7 +12,8 @@ import yaml
 
 from scripts.run_aptos_development import (BACKBONES, ROLE_PREFIX, REPRESENTATIVE_PREFIX,
     choose_candidate, conformal_comparisons, fixed_configs, infer_logits, representative_mask,
-    set_metrics, validate_development, write_json)
+    set_metrics, validate_development, validate_inputs, write_json)
+from qsart.models.checkpoint import sha256_file
 from qsart.training.transfer import TransferConfig
 
 
@@ -155,3 +158,33 @@ def test_existing_research_outputs_are_preserved(tmp_path):
     write_json(output, {'status': 'fixture'})
     with pytest.raises(ValueError, match='Preserve existing'):
         write_json(output, {'status': 'replacement'})
+
+
+def test_input_binding_compares_columns_by_name_without_reading_reserved_grade(development, tmp_path):
+    frame, roles = development
+    frame['image_path'] = frame.image_id.map(lambda value: str((tmp_path/f'{value}.png').resolve()))
+    roles['image_path'] = roles.image_id.map(frame.set_index('image_id').image_path)
+    reserved = frame.iloc[:1].copy()
+    reserved['image_id'] = 'generated_reserved'
+    reserved['image_path'] = str((tmp_path/'reserved.png').resolve())
+    reserved['split'] = 'test'
+    reserved['split_group_id'] = 'generated_reserved_component'
+    reserved['sha256'] = 'f'*64
+    # The runner is allowed to compare reserved metadata, but must not require or
+    # inspect its grade values as part of this development experiment.
+    reserved['dr_grade'] = 'reserved_label_not_needed_by_development'
+    full = pd.concat([frame, reserved], ignore_index=True)
+    # Deliberately use CSV field order different from the comparison field order.
+    full = full[sorted(full.columns, reverse=True)]
+    args = SimpleNamespace(manifest=tmp_path/'development.csv', full_manifest=tmp_path/'full.csv',
+                           calibration_roles=tmp_path/'roles.csv', data_audit=tmp_path/'audit.json')
+    frame.to_csv(args.manifest, index=False)
+    roles.to_csv(args.calibration_roles, index=False)
+    full.to_csv(args.full_manifest, index=False)
+    args.data_audit.write_text(json.dumps({'manifest_sha256': sha256_file(args.full_manifest),
+        'development_manifest_sha256': sha256_file(args.manifest),
+        'calibration_roles_sha256': sha256_file(args.calibration_roles), 'archive_sha256': 'a'*64}))
+    actual, _, _, bindings = validate_inputs(args)
+    assert len(actual) == len(frame)
+    assert set(actual.split) == {'train', 'validation', 'calibration'}
+    assert bindings['archive_sha256'] == 'a'*64

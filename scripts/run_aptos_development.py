@@ -128,7 +128,8 @@ def validate_inputs(args):
     # Do not read the reserved test DR-label column. Full-manifest identities are
     # used only to check that its non-test rows exactly match development.
     columns = ['image_id', 'image_path', 'split', 'split_group_id', 'sha256']
-    full = pd.read_csv(args.full_manifest, usecols=columns)
+    # pandas usecols filters columns but preserves their original CSV order.
+    full = pd.read_csv(args.full_manifest, usecols=columns)[columns]
     if set(full.split) != {'train', 'validation', 'calibration', 'test'}:
         raise ValueError('Complete source manifest needs an explicitly reserved internal test partition')
     if full.image_id.duplicated().any() or full.groupby('split_group_id').split.nunique().gt(1).any():

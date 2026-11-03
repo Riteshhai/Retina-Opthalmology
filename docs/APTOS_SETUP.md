@@ -1,9 +1,12 @@
 # APTOS 2019 acquisition and local preparation
 
-Status on 3 November 2026: **IN PROGRESS — official-source archive located**.
+Status on 3 November 2026: **VERIFIED COMPLETE — source validation and partitions**.
 The user confirmed downloading the APTOS 2019 competition archive from Kaggle.
-Its inventory contains 3,662 labeled training-image members. Archive extraction,
-real-image validation and the newly declared development study follow
+All 3,662 labeled training images passed archive/decode/hash checks. Under the
+declared quarantine rule, 148 images in 51 conflicting-label fingerprint
+components are excluded without relabeling. The 3,514 retained images are split
+into 2,115 training, 521 selection, 527 calibration and 351 reserved test images.
+The development training/uncertainty study remains IN PROGRESS. Preparation follows
 [APTOS_V1_PROTOCOL.md](research/APTOS_V1_PROTOCOL.md). The earlier 21 October
 missing-data blocker is superseded. No credentials need to be shared.
 

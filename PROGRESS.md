@@ -44,6 +44,27 @@
   Data/archive subset:27passed,18.89s; research-runner subset:12passed,51.75s.
 - Actual data preparation and subsequent training outcomes are recorded below
   after execution; no result is inferred from implementation or fixture tests.
+- Real data preparation completed in856.26s. All3,662 source training PNGs passed
+  decode and extracted-byte hash checks. The fixed fingerprint graph found255
+  candidate pairs,134 byte-exact pairs and51 label-conflicting components with
+  148images. Entire conflicting components were quarantined without relabeling;
+  this exclusion changes the study population and may include false candidates.
+- Retained3,514images/3,399components. Fixed partitions:train2,115/2,048groups,
+  selection521/507,calibration527/507,reserved internal test351/337. Temperature
+  role262images/253groups; conformal role265/254,with254representatives used for
+  score-threshold calibration. Development manifest has3,163non-test rows andSHA
+  681799c7ee5f04e988dc607f6cf296fd882c5f55f2603dcd0a2ccd8148951fab.
+  Source train.csv SHA b2a3479695922e62c83c94a1a9ef669b4b6d68cc26a1d7090ebedecdd7dd79a5.
+  Exact manifests, group membership and exclusions stay ignored; public data
+  audit is aggregate-only. No competition test was extracted and no internal
+  reserved-test model inference was performed.
+- Independent data reconstruction verified the entire source fingerprint graph,
+  every whole-component exclusion, all partitions/representatives/roles and all
+  3,662 original image byte hashes. Actual readiness found a pandas CSV column
+  ordering comparison defect before training. Explicit column ordering fixed it;
+  a regression covers reordered full-manifest columns without accessing reserved
+  grades for model preparation. Updated runner subset:13passed,11.41s; Ruff passed.
+  Actual readiness then passed with the frozen manifests and no model inference.
 
 ## 2026-10-22 — independently tuned guarded-policy comparison
 
