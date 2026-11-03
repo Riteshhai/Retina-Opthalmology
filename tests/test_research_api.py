@@ -96,13 +96,19 @@ def test_saved_stress_experiment_preserves_scope_and_unfavorable_paired_results(
                     {'mode': 'no_cp', 'status': 'evaluated', 'pooled_metrics': {'missed_referable_auto': 1}}],
       'paired_comparisons': [{'status': 'evaluated',
                              'matched_realized_workload_within_every_fold': False}]}),
+    ('aptos_v1/evaluation.json', 'aptos_development_v1', 'development_selection_and_independent_calibration',
+     {'grading': {'macro_f1': .7}, 'candidates': [{'backbone': 'efficientnet_b0', 'macro_f1': .7}],
+      'selected_candidate': 'efficientnet_b0',
+      'comparisons': [{'method': 'lac', 'unit': 'image', 'calibration_unit_definition': 'fingerprint representative'}]}),
 ])
-def test_randomization_and_training_seed_reports_retain_distinct_evidence(tmp_path, monkeypatch,
-                                                                         relative, experiment, scope, payload):
+def test_saved_development_reports_preserve_evidence_scope(tmp_path, monkeypatch,
+                                                          relative, experiment, scope, payload):
     """Generated contract fixtures are not measured research outputs."""
     report = tmp_path/relative
     report.parent.mkdir()
-    report.write_text(json.dumps({**payload, 'limitations': ['Development fixture; no deployment selection.']}))
+    dataset = 'APTOS_2019' if experiment == 'aptos_development_v1' else 'DeepDRiD'
+    report.write_text(json.dumps({**payload, 'dataset': dataset,
+                                 'limitations': ['Development fixture; no deployment selection.']}))
     monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))
     with TestClient(create_app()) as client:
         data = client.get('/research/metrics', params={'experiment_id': experiment})
@@ -110,6 +116,8 @@ def test_randomization_and_training_seed_reports_retain_distinct_evidence(tmp_pa
         assert data.json()['scope'] == scope
         assert data.json()['metrics'] == payload
         assert data.json()['notes'] == ['Development fixture; no deployment selection.']
+        records = client.get('/research/experiments').json()['experiments']
+        assert records[0]['dataset'] == dataset
 
 
 class PositiveFixture:

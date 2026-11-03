@@ -37,7 +37,9 @@ def experiment_registry(root):
         ('ordinal_study_v1/evaluation.json', 'ordinal_randomization_v1', 'validation', 'development_ordinal_diagnostics'),
         ('repeated_seeds_v1/summary.json', 'repeated_seeds_v1', 'validation', 'development_selection'),
         ('policy_comparison_v1/dashboard_summary.json', 'policy_comparison_v1', 'validation',
-         'development_out_of_fold_policy')]
+         'development_out_of_fold_policy'),
+        ('aptos_v1/evaluation.json', 'aptos_development_v1', 'validation',
+         'development_selection_and_independent_calibration')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -51,10 +53,13 @@ def experiment_registry(root):
                    'deterministic_score_diagnostics', 'baseline_reproduction', 'summary', 'runs',
                    'population', 'head_rng_version', 'scenarios', 'paired_comparisons',
                    'evaluation_ledger', 'source_report_sha256', 'paired_bootstrap',
-                   'decision_review_prices', 'mode_interpretation', 'status_interpretation') if key in raw}
+                   'decision_review_prices', 'mode_interpretation', 'status_interpretation',
+                   'candidates', 'selected_candidate', 'selection_rule', 'temperature',
+                   'calibration_fit', 'data_preparation', 'grading_before_temperature',
+                   'calibration', 'calibration_unit_definition', 'uniform_generation') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
-        records.append(ExperimentSummary(experiment_id=name, dataset='DeepDRiD', partition=partition,
+        records.append(ExperimentSummary(experiment_id=name, dataset=raw.get('dataset', 'DeepDRiD'), partition=partition,
             scope=scope, model_version=raw.get('model_info', {}).get('model_version', raw.get('model_version')),
             metrics=metrics, notes=raw.get('limitations', [
                 'Historical AUTO_SCREEN triage is not the current AUTO_NONREFERABLE policy.'])))

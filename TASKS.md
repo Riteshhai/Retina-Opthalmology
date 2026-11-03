@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — 20–22 October 2026
+## Specification-v1 priorities — current on 3 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -14,8 +14,9 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Add all eight dashboard modules and typed config/simulation/research endpoints.
 - [x] P1 Train an actual EfficientNet-B0 DeepDRiD candidate and compare three genuine models.
 - [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
-- [ ] P1 BLOCKED: official APTOS images/access; user confirmed not downloaded.
-- [ ] P1 BLOCKED/NOT STARTED: APTOS EfficientNet study and full base-paper reproduction; the randomized score component is now implemented separately.
+- [x] P1 Locate downloaded APTOS competition archive; user confirmed official Kaggle source on 3 November.
+- [ ] P1 IN PROGRESS: validate actual APTOS images, freeze duplicate-aware partitions and execute declared EfficientNet-B0/MobileNet development baselines.
+- [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.

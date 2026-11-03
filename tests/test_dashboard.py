@@ -181,3 +181,42 @@ def test_policy_explorer_preserves_missing_metrics_and_labels_ablation(monkeypat
     assert table.iloc[1]['Severe recaptures'] == 1
     assert any('Diagnostic ablation' in item.value for item in app.info)
     assert any('Blank pooled metrics' in item.value for item in app.caption)
+
+
+@pytest.mark.skipif(importlib.util.find_spec('streamlit') is None, reason='Streamlit not installed')
+def test_aptos_explorer_keeps_component_representatives_distinct(monkeypatch, dashboard_api):
+    """Explicit fixture checks cohort display; these are not APTOS measurements."""
+    from streamlit.testing.v1 import AppTest
+    original_get = httpx.get
+    metrics = {'images': 4, 'population': {'conformal_representative_images': 2, 'temperature_images': 3},
+        'summary': {'selected_backbone': 'software_fixture'},
+        'candidates': [{'backbone': 'software_fixture', 'selection_metrics': {'accuracy': .5}}],
+        'comparisons': [{'method': 'lac', 'alpha': .1, 'randomization_seed': None,
+            'raw': {'all_selection_images': {'n_images': 4, 'marginal_coverage': .5, 'empty_set_count': 1},
+                    'selection_group_representatives': {'n_images': 2, 'marginal_coverage': 0., 'empty_set_count': 1}},
+            'argmax_fallback': {'all_selection_images': {'n_images': 4, 'marginal_coverage': .75, 'mean_set_size': 2.},
+                               'selection_group_representatives': {'n_images': 2, 'marginal_coverage': .5, 'mean_set_size': 1.}}}]}
+    record = {'experiment_id': 'aptos_development_v1', 'dataset': 'APTOS_2019',
+              'scope': 'development_selection_and_independent_calibration', 'metrics': metrics,
+              'notes': ['Synthetic software-test fixture.']}
+
+    def get(url, **kwargs):
+        if urlparse(url).path == '/research/experiments':
+            return httpx.Response(200, json={'experiments': [record]})
+        if urlparse(url).path == '/research/metrics':
+            return httpx.Response(200, json=record)
+        return original_get(url, **kwargs)
+
+    monkeypatch.setattr(httpx, 'get', get)
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/'dashboard/app.py')).run(timeout=25)
+    app.sidebar.radio[0].set_value('Experiment Explorer').run(timeout=25)
+    assert not app.exception
+    assert app.dataframe[-1].value.iloc[0]['Images'] == 4
+    next(box for box in app.selectbox if box.label == 'Reported population').set_value(
+        'One representative per fingerprint group').run(timeout=25)
+    assert not app.exception
+    table = app.dataframe[-1].value
+    assert table.iloc[0]['Images'] == 2
+    assert table.iloc[0]['Raw coverage'] == 0.
+    assert table.iloc[0]['Coverage with argmax fallback'] == .5
+    assert any('Fingerprint groups' in item.value for item in app.warning)

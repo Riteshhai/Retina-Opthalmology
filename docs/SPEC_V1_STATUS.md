@@ -1,4 +1,4 @@
-# QSART Development Status — updated 22 October 2026
+# QSART Development Status — updated 3 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,6 +6,11 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **Current extension:** official-source APTOS archive located and confirmed by
+  the user; actual image/duplicate validation and the declared CPU classifier
+  study are IN PROGRESS under [the new protocol](research/APTOS_V1_PROTOCOL.md).
+  The historical missing-download blocker is superseded; no new test-performance
+  or full-paper reproduction claim follows from dataset availability.
 - **New execution source:** `493ad7c6e37d16dc338e00280d8ac714ee23a0c8`;
   fixed seven-condition selection-data degradation VERIFIED COMPLETE. Full
   [results and limitations](research/ROBUSTNESS_V1_RESULTS.md) retain the observed
@@ -119,10 +124,10 @@ additional disk space. Source/environment and restart checks accompany deploymen
 
 ## Blockers, files and next work
 
-**BLOCKED:** official APTOS export/access. The user confirmed it is not downloaded.
-[Acquisition/local preparation](APTOS_SETUP.md) documents the exact next step.
-APTOS and independent IDRiD results, clinical review/recapture outcomes and
-prospective utility have not been produced.
+**Current APTOS status:** download located and official competition source
+confirmed on 3 November. [Safe local preparation](APTOS_SETUP.md) and the frozen
+study protocol replace the earlier access blocker. Independent IDRiD results,
+clinical review/recapture outcomes and prospective utility remain unproduced.
 
 **IN PROGRESS overall:** useful validated conformal/triage behavior,
 additional robustness/ablations and external-domain

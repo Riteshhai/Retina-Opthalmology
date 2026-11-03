@@ -1,5 +1,50 @@
 # Execution log
 
+## 2026-11-03 — official APTOS archive and declared development study
+
+- Resumed clean published996deb6 and inspected current instructions/evidence.
+  User reported a downloaded dataset; located the canonical competition ZIP
+  locally,10,215,289,875bytes and3,662training-image members. User explicitly
+  confirmed the official Kaggle competition source. No further upload is needed.
+- Committed the new protocol/config before real model training at
+  a7f59b97fe3bde3f074e47c0a47c97626747d6a5. Later pre-execution clarifications
+  state the inherited LR scheduler and initial source-label access for grouping;
+  reserved test INFERENCE remains prohibited. The protocol is distinct from
+  the paper's384px/full-fine-tuning experiment and does not claim reproduction.
+- Used the master specification's section26 parallel workstreams with separate
+  ownership: archive/data validation; model/calibration runner and figures;
+  independent read-only verification; root API/backlog/deployment integration.
+- Implemented safe training-only archive extraction, original CRC/SHA/decode
+  validation and explicit whole-conflicting-component quarantine. Source labels
+  are preserved; default strict rejection remains. Kept manifests, original-image
+  identifiers, exclusion records, score arrays and eventual weights ignored locally.
+- Prepared fixed60/15/15/10fingerprint-group splits, a test-free development
+  manifest, independent calibration roles and label-independent representatives.
+  Unknown patient/eye identity is reported; no APTOS quality labels are invented.
+- Implemented two frozen official ImageNet candidate runs and all14 declared
+  conventional/deterministic/randomized conformal comparisons, raw empties and
+  common modal fallback. Current production DR/quality/card/sidecar SHA values
+  were snapshotted before execution. No new artifact is selected for deployment.
+- Added APTOS aggregate discovery with the correct dataset/evidence scope.
+  API regression suite passed14tests in31.35s; targeted Ruff passed. The first
+  sandboxed API test attempts hung in Windows socketpair/AnyIO startup; the
+  timeout traceback established denied loopback. Repeating with permitted local
+  loopback passed; the identified blocked test processes were stopped.
+- On3November, Docker info could not reach the DockerDesktopLinuxEngine pipe.
+  A missing server pipe establishes unavailability, not a new confirmed cause.
+  Historical container results remain separate from current verification.
+- Requested a non-destructive Docker Desktop start; the CLI accepted it, but the
+  engine never became reachable. Current3November backend logs confirm startup
+  failed while renaming the stale sailor-ingest socket, which Windows could not
+  access. No deletion, factory reset or further repair was attempted.
+- Final pre-execution code checks:401tests passed, zero failures/skips,103.05s
+  with genuine DeepDRiD DR/quality/conformal integration enabled. The command was
+  `.venv/Scripts/python.exe -m pytest -q --junitxml=reports/aptos_v1_tests.xml`.
+  One upstream AnyIO warning remains. Ruff and Compose configuration passed.
+  Data/archive subset:27passed,18.89s; research-runner subset:12passed,51.75s.
+- Actual data preparation and subsequent training outcomes are recorded below
+  after execution; no result is inferred from implementation or fixture tests.
+
 ## 2026-10-22 — independently tuned guarded-policy comparison
 
 - Verified prior published e23a18b and successful PR workflow39822233255.

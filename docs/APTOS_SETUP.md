@@ -1,9 +1,11 @@
 # APTOS 2019 acquisition and local preparation
 
-Status on 21 October 2026: **BLOCKED — official labeled export not downloaded**.
-The user confirmed it is not available locally. No Kaggle credentials are
-configured. The adapter is implemented and tested with generated fixtures; no
-APTOS image training, split statistics or experimental results are claimed.
+Status on 3 November 2026: **IN PROGRESS — official-source archive located**.
+The user confirmed downloading the APTOS 2019 competition archive from Kaggle.
+Its inventory contains 3,662 labeled training-image members. Archive extraction,
+real-image validation and the newly declared development study follow
+[APTOS_V1_PROTOCOL.md](research/APTOS_V1_PROTOCOL.md). The earlier 21 October
+missing-data blocker is superseded. No credentials need to be shared.
 
 Obtain the labeled training export from the
 [official competition data page](https://www.kaggle.com/competitions/aptos2019-blindness-detection/data)
@@ -20,15 +22,31 @@ data/raw/aptos2019/
     <actual_id_code>.png
 ```
 
-After the official files are available, from the QSART project directory run:
+To import the original official archive safely, from the QSART project directory:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare_aptos_archive.py --archive "<absolute path to aptos2019-blindness-detection.zip>" --conflict-policy quarantine
+```
+
+Only train.csv and its training PNGs are extracted into the ignored project tree.
+The original ZIP stays unchanged. The importer verifies paths, source schema,
+CRC, original hashes, decodability and duplicate fingerprints. This study's
+explicit quarantine policy excludes every image in a label-conflicting component
+without relabeling; strict rejection remains the adapter/importer's default.
+The private manifest, exclusions and calibration-role map are frozen under
+data/manifests/aptos_v1; public evidence contains aggregates and hashes only.
+
+For an already extracted source and strict conflict rejection, the older adapter
+command remains available:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/inspect_datasets.py --aptos-root data/raw/aptos2019 --prepare-aptos --aptos-output data/manifests/aptos_spec_v1
 ```
 
-The protocol proposes 60/15/15/10 train/selection/calibration/test proportions,
-seed20261020. Real connected SHA/pHash groups are kept together, conflicting labels
-block preparation, and actual proportions are reported after rounding. Images and
+The protocol fixes 60/15/15/10 train/selection/calibration/test group proportions,
+seed20261020. Real connected SHA/pHash groups are kept together. Strict mode
+rejects conflicting labels; the declared import policy quarantines whole
+conflicting components. Actual proportions are reported after rounding. Images and
 per-image manifests/duplicate reports remain local. Source labels are preserved.
 
 Standard annotations do not establish patient IDs, eye IDs or quality labels.
@@ -37,5 +55,9 @@ patient-disjoint data. Preserve the new APTOS test partition untouched. Build an
 explicitly hashed development-only manifest before invoking the development
 trainer, which intentionally rejects a manifest containing held-out test rows.
 
-The completed EfficientNet-B0 candidate in reports/spec_v1 used DeepDRiD. It does
-not satisfy the missing APTOS experiment or exact reproduction of the base paper.
+The historical EfficientNet-B0 candidate in reports/spec_v1 used DeepDRiD. The
+new APTOS study trains two genuine frozen-feature candidates with independent
+temperature/conformal diagnostics. It still differs from full base-paper
+fine-tuning. Before any execution, the runner's default readiness mode verifies
+the actual prepared manifests; --execute additionally requires clean committed
+source and its declared --source-commit. Completed experiments refuse overwrite.

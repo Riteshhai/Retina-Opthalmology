@@ -70,19 +70,15 @@ def parse_aptos_labels(dataset_root: str | Path) -> pd.DataFrame:
     })
 
 
-def assign_aptos_splits(frame: pd.DataFrame, *, seed: int = 20261020,
-                       fractions: Mapping[str, float] | None = None,
-                       near_duplicate_distance: int = 2) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
-    """Allocate duplicate-connected components without claiming patient identity.
+def fingerprint_components(frame: pd.DataFrame, *, near_duplicate_distance: int = 2
+                           ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Return observable duplicate components, without modifying source labels.
 
-    Conflicting grade labels anywhere in a component block allocation; they need
-    documented source review rather than arbitrary majority voting or relabeling.
-    Fractions apply to groups within each grade stratum. Integer rounding means
-    actual image proportions can differ, particularly for large components.
+    This is an audit operation, not a patient-identity inference. Components are
+    connected transitively by byte equality or the fixed pHash distance rule.
     """
-    proportions = _fractions(fractions)
-    if not isinstance(seed, int) or not 0 <= near_duplicate_distance <= 63:
-        raise ValueError('Integer split seed and pHash distance in [0, 63] required')
+    if not isinstance(near_duplicate_distance, int) or not 0 <= near_duplicate_distance <= 63:
+        raise ValueError('pHash distance in [0, 63] required')
     required = {'image_id', 'dr_grade', 'sha256', 'phash'}
     if frame.empty or not required.issubset(frame.columns):
         raise ValueError('Nonempty APTOS records with actual labels and fingerprints required')
@@ -118,14 +114,42 @@ def assign_aptos_splits(frame: pd.DataFrame, *, seed: int = 20261020,
     components = {}
     for index in range(len(records)):
         components.setdefault(find(index), []).append(index)
-    groups = []
+    result = frame.copy().reset_index(drop=True)
     for indices in components.values():
-        if len({int(records[index]['dr_grade']) for index in indices}) != 1:
-            raise ValueError('Conflicting DR labels in an APTOS exact/perceptual duplicate component; '
-                             'resolve source annotations before splitting')
         identities = sorted(str(records[index]['image_id']) for index in indices)
         key = 'aptos_splitgroup_' + hashlib.sha256('|'.join(identities).encode()).hexdigest()[:24]
-        groups.append({'group': key, 'grade': int(records[indices[0]]['dr_grade']), 'indices': indices})
+        result.loc[indices, 'split_group_id'] = key
+        result.loc[indices, 'component_label_conflict'] = len({int(records[i]['dr_grade']) for i in indices}) != 1
+    result['component_label_conflict'] = result.component_label_conflict.astype(bool)
+    columns = ['first_image_id', 'second_image_id', 'byte_exact', 'phash_distance', 'label_conflict']
+    return result, pd.DataFrame(candidates, columns=columns)
+
+
+def assign_aptos_splits(frame: pd.DataFrame, *, seed: int = 20261020,
+                       fractions: Mapping[str, float] | None = None,
+                       near_duplicate_distance: int = 2, conflict_policy: str = 'error'
+                       ) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    """Allocate whole label-consistent components; strict conflict rejection is default.
+
+    The explicit ``quarantine`` policy excludes every row of a conflicting
+    component from all model partitions. It never votes, relabels, reduces the
+    fingerprint threshold, or distributes conflict rows across partitions.
+    """
+    proportions = _fractions(fractions)
+    if not isinstance(seed, int):
+        raise ValueError('Integer split seed required')
+    if conflict_policy not in {'error', 'quarantine'}:
+        raise ValueError('Conflict policy must be error or quarantine')
+    components, duplicates = fingerprint_components(frame, near_duplicate_distance=near_duplicate_distance)
+    quarantined = components.loc[components.component_label_conflict].copy()
+    if len(quarantined) and conflict_policy == 'error':
+        raise ValueError('Conflicting DR labels in an APTOS exact/perceptual duplicate component; '
+                         'resolve source annotations before splitting')
+    result = components.loc[~components.component_label_conflict].copy().reset_index(drop=True)
+    if result.empty:
+        raise ValueError('No label-consistent APTOS component remains after quarantine')
+    groups = [{'group': key, 'grade': int(part.dr_grade.iloc[0]), 'indices': part.index.tolist()}
+              for key, part in result.groupby('split_group_id', sort=False)]
     assignments = {}
     for grade in range(5):
         stratum = [group for group in groups if group['grade'] == grade]
@@ -143,9 +167,6 @@ def assign_aptos_splits(frame: pd.DataFrame, *, seed: int = 20261020,
             for group in stratum[position:position + limit]:
                 assignments[group['group']] = role
             position += limit
-    result = frame.copy().reset_index(drop=True)
-    for group in groups:
-        result.loc[group['indices'], 'split_group_id'] = group['group']
     result['split'] = result.split_group_id.map(assignments)
     report = {
         'seed': seed, 'requested_group_proportions': proportions,
@@ -157,9 +178,21 @@ def assign_aptos_splits(frame: pd.DataFrame, *, seed: int = 20261020,
         'patient_grouping_limitation': PATIENT_LIMITATION,
         'images': len(result), 'split_groups': len(groups),
         'duplicate_components': sum(len(group['indices']) > 1 for group in groups),
-        'duplicate_candidate_pairs': len(candidates),
-        'exact_candidate_pairs': sum(pair['byte_exact'] for pair in candidates),
-        'conflicting_components': 0,
+        'duplicate_candidate_pairs': len(duplicates),
+        'duplicate_candidate_pairs_scope': 'entire original source before conflict quarantine',
+        'exact_candidate_pairs': int(duplicates.byte_exact.sum()),
+        'conflict_policy': conflict_policy,
+        'original_images': len(frame),
+        'original_split_groups': int(components.split_group_id.nunique()),
+        'original_duplicate_components': int((components.groupby('split_group_id').size() > 1).sum()),
+        'original_dr_grade_counts': {str(grade): int(count) for grade, count in
+                                     frame.dr_grade.value_counts().sort_index().items()},
+        'conflicting_components': int(quarantined.split_group_id.nunique()),
+        'quarantined_images': len(quarantined),
+        'quarantined_dr_grade_counts': {str(grade): int(count) for grade, count in
+                                        quarantined.dr_grade.value_counts().sort_index().items()},
+        'quarantined_component_size_counts': {str(size): int(count) for size, count in
+                                             quarantined.groupby('split_group_id').size().value_counts().items()},
         'partitions': {role: {
             'images': int((result.split == role).sum()),
             'split_groups': int(result.loc[result.split == role, 'split_group_id'].nunique()),
@@ -167,8 +200,7 @@ def assign_aptos_splits(frame: pd.DataFrame, *, seed: int = 20261020,
                                 result.loc[result.split == role, 'dr_grade'].value_counts().sort_index().items()},
         } for role in DEFAULT_FRACTIONS},
     }
-    columns = ['first_image_id', 'second_image_id', 'byte_exact', 'phash_distance', 'label_conflict']
-    return result, pd.DataFrame(candidates, columns=columns), report
+    return result, duplicates, report
 
 
 def build_aptos_manifest(dataset_root: str | Path, *, seed: int = 20261020,
@@ -210,11 +242,18 @@ def write_aptos_outputs(frame: pd.DataFrame, duplicates: pd.DataFrame, report: d
                'quality_distribution': 'not generated: no official quality labels available'}
     for name in ('split_report.json', 'dataset_summary.json'):
         (output / name).write_text(json.dumps(summary, indent=2), encoding='utf-8')
+    conflict_note = (
+        f'Whole conflicting-label components were quarantined: {report.get("quarantined_images", 0)} images '
+        f'in {report.get("conflicting_components", 0)} components. Source labels were preserved without voting '
+        'or relabeling; quarantined images enter no model partition. '
+        if report.get('conflict_policy') == 'quarantine' else
+        'Conflicting labels block ingestion under the strict default policy. '
+    )
     (output / 'data_validation_report.md').write_text(
         '# APTOS local source validation\n\n'
         f'Verified readable labeled images: {len(frame)}. Labels derive only from official train.csv.\n\n'
         f'{PATIENT_LIMITATION}\n\n'
-        'Exact/perceptual fingerprint components remain in one split. Conflicting labels block ingestion. '
+        'Exact/perceptual fingerprint components remain in one split. ' + conflict_note +
         'Quality labels and competition test labels are unavailable. The internal test partition is reserved.\n\n'
         'Per-image manifests and duplicate identifiers are local private artifacts. '
         'Temperature and conformal calibration require distinct subsets before either fitting step.\n', encoding='utf-8')

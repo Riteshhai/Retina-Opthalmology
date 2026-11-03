@@ -1,5 +1,18 @@
 # QSART change log
 
+## Official APTOS data and declared CPU baseline — 2026-11-03
+
+- Located the user's official-source competition archive and declared data,
+  quarantine, partition, model-selection and independent calibration rules before
+  model execution. Initial source-label access is limited to declared preparation;
+  no reserved-test inference is allowed in this development study.
+- Added safe labeled-training-only archive import, CRC/SHA/decode checks,
+  whole-conflicting-component quarantine as an explicit opt-in, and frozen private
+  manifests/roles. Existing strict conflict rejection remains the default.
+- Added two genuine frozen-feature candidate and 14-comparison uncertainty runner,
+  aggregate API discovery with APTOS dataset identity and cohort-aware explorer.
+  Execution results are recorded separately; code presence is not a training claim.
+
 ## Independently tuned guarded policies — 2026-10-22
 
 - Declared three patient folds, eight guarded wrappers, three conformal modes,

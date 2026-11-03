@@ -42,7 +42,9 @@ actual image/group proportions. Every detected component stays in one partition.
 Freeze both the complete private manifest and a separate development manifest
 containing only train/validation/calibration rows. The trainer must reject test
 rows. The internal reserved test is distinct from inaccessible competition labels.
-Neither test population is used for fitting, selection, calibration or this report.
+Neither test population is used for fitting, selection, calibration or outcome
+evaluation. Initial test annotations are accessed only for the declared source
+integrity, grouping and stratified split assignment, not to tune the experiment.
 
 Standard APTOS annotations provide no authoritative patient identity. Fingerprint
 components are not patients and cannot prove independence of people or eyes.
@@ -66,7 +68,10 @@ cache-independent linear-head trainer. Use the same fixed settings for both:
 64, maximum 100 epochs, patience 15, AdamW learning rate .01, weight decay .0001,
 training-only horizontal-flip feature views, class-weighted cross entropy,
 two CPU threads and two loader workers. Freeze backbone weights and BatchNorm
-statistics. Use only locally preserved official pretrained files with verified
+statistics. The inherited ReduceLROnPlateau schedule monitors validation NLL,
+multiplies the learning rate by .5 after patience 5, and retains the trainer's
+other existing defaults. Early-stopping staleness follows the declared checkpoint
+selection ordering. Use only locally preserved official pretrained files with verified
 hash prefixes; no downloads or random-backbone substitute.
 
 Select each checkpoint by validation macro-F1, breaking ties by lower unweighted
@@ -106,7 +111,9 @@ coverage guarantees. Selection data are already used to choose the classifier.
 
 Retain raw/calibrated grading accuracy, macro-F1, QWK, confusion matrix, per-grade
 support, referable AUROC/AUPRC, NLL, ECE and Brier. Calibration-fit diagnostics are
-not independent test results. No APTOS quality metrics or quality-aware triage
+not independent test results. Grading ECE uses 10 bins before and after
+temperature; the separate temperature-fit diagnostics use 15 bins and are
+explicitly labeled. No APTOS quality metrics or quality-aware triage
 claims are possible from absent quality annotations. Existing DeepDRiD quality
 predictions are not labeled APTOS quality supervision.
 

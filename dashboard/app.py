@@ -114,6 +114,50 @@ def show_policy_comparison(metrics):
                                                'paired_bootstrap', 'paired_comparisons') if key in metrics})
 
 
+def show_aptos_experiment(metrics):
+    """Show the study's actual cohorts and all recorded randomization replicates."""
+    population = metrics.get('population', {})
+    left, middle, right = st.columns(3)
+    left.metric('Selection images', metrics.get('images'))
+    middle.metric('Conformal calibration representatives', population.get('conformal_representative_images'))
+    right.metric('Temperature-fitting images', population.get('temperature_images'))
+    st.write('Development candidate selected: '+str(metrics.get('summary', {}).get('selected_backbone', 'Unreported')))
+    st.caption('The deployed DeepDRiD models remain selected. These APTOS results use '
+               'selection images that also chose classifier checkpoints and architecture.')
+    st.warning('Fingerprint groups do not establish patient independence. '
+               'APTOS provides no quality annotations for this study; useful triage and external validity remain unproven.')
+    candidates = pd.json_normalize(metrics.get('candidates', []))
+    labels = {'backbone': 'Candidate', 'selected_epoch': 'Selected epoch',
+              'selection_metrics.accuracy': 'Accuracy', 'selection_metrics.macro_f1': 'Macro-F1',
+              'selection_metrics.quadratic_weighted_kappa': 'Quadratic kappa', 'selection_metrics.nll': 'NLL'}
+    if not candidates.empty:
+        st.dataframe(candidates[[key for key in labels if key in candidates]].rename(columns=labels),
+                     width='stretch', hide_index=True)
+    left, right = st.columns(2)
+    alpha = left.selectbox('Reported alpha', [.10, .05])
+    cohort = right.selectbox('Reported population', ['All selection images', 'One representative per fingerprint group'])
+    key = ('all_selection_images' if cohort == 'All selection images' else 'selection_group_representatives')
+    records = []
+    for row in metrics.get('comparisons', []):
+        if row.get('alpha') != alpha:
+            continue
+        raw = row.get('raw', {}).get(key, {})
+        enlarged = row.get('argmax_fallback', {}).get(key, {})
+        records.append({'Method': row.get('method'), 'Randomization seed': row.get('randomization_seed'),
+            'Images': enlarged.get('n_images'), 'Raw coverage': raw.get('marginal_coverage'),
+            'Raw empty sets': raw.get('empty_set_count'),
+            'Coverage with argmax fallback': enlarged.get('marginal_coverage'),
+            'Mean set size with fallback': enlarged.get('mean_set_size')})
+    if records:
+        st.dataframe(pd.DataFrame(records), width='stretch', hide_index=True)
+    st.caption('Empirical inclusion on development images; alpha is a declared setting, '
+               'not a verified coverage guarantee. All five randomization seeds are retained. '
+               'Temperature fitting and conformal representatives come from separate calibration groups.')
+    with st.expander('Grading and calibration details'):
+        st.json({key: metrics[key] for key in ('grading', 'grading_before_temperature',
+                                               'calibration', 'calibration_unit_definition') if key in metrics})
+
+
 def submit(files, params=None, batch=False):
     endpoint = '/predict/batch' if batch else '/predict'
     key = 'files' if batch else 'file'
@@ -432,6 +476,8 @@ elif page == 'Experiment Explorer':
                 st.caption('Evidence scope: '+str(detail.get('scope', 'Unreported')))
                 if chosen == 'policy_comparison_v1':
                     show_policy_comparison(detail.get('metrics', {}))
+                elif chosen == 'aptos_development_v1':
+                    show_aptos_experiment(detail.get('metrics', {}))
                 else:
                     st.json(detail.get('metrics', {}))
                 for note in detail.get('notes', []):

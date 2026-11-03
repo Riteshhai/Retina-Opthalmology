@@ -93,9 +93,11 @@ Direct dependencies are pinned in requirements.txt; Docker resolves compatible t
 
 ## Continue the adopted specification
 
-APTOS is not downloaded. [Official acquisition and local ingestion](docs/APTOS_SETUP.md)
-must precede APTOS training; the completed additional EfficientNet-B0 run used
-DeepDRiD and is explicitly not an APTOS/base-paper reproduction. Its selection
+APTOS is now downloaded: on 3 November the user confirmed the official Kaggle
+competition archive. [Safe local ingestion](docs/APTOS_SETUP.md) and the
+[declared APTOS study](docs/research/APTOS_V1_PROTOCOL.md) preserve duplicate
+groups, quarantine conflicting components and reserve test images. The historical
+additional EfficientNet-B0 run used DeepDRiD and is explicitly not an APTOS/base-paper reproduction. Its selection
 macro-F1 0.5249 did not beat MobileNet 0.5372, so the selected deployment is retained.
 
 From the existing frozen development data and selected artifacts:

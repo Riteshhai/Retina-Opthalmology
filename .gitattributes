@@ -14,3 +14,4 @@ reports/robustness_v1/** -text whitespace=cr-at-eol
 reports/ordinal_study_v1/** -text whitespace=cr-at-eol
 reports/repeated_seeds_v1/** -text whitespace=cr-at-eol
 reports/policy_comparison_v1/** -text whitespace=cr-at-eol
+reports/aptos_v1/** -text whitespace=cr-at-eol
