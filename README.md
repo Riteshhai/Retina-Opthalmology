@@ -130,6 +130,13 @@ predeclared primary seed 2026 scores 0.63349, with grade-3 recall
 65.38% and grade-4 recall 47.50%.
 All 42 uncertainty comparisons and paired development intervals are retained.
 This short warm-start pilot does not establish convergence or held-out gains.
+The [primary-seed schedule extension](docs/research/APTOS_OPTIMIZATION_V2_RESULTS.md)
+subsequently stopped after 14/15 epochs and selected epoch 10: accuracy 80.81%,
+macro-F1 .65157. Grade 3 recall falls to 26.92%, while grade 4 rises to 67.50%; all four
+descriptive paired intervals include zero. LAC alpha .10 includes only 46.15% of
+grade 3 images. This single-seed source-development result retains every uncertainty
+replicate and severe-grade failure; reserved-test/IDRiD inference and deployment
+remain unchanged. Exact 384px reproduction and useful validated triage remain open.
 On 4 November the relocated source was verified byte-for-byte; its active local
 root is set through QSART_APTOS_ROOT. [Local setup](docs/APTOS_SETUP.md) preserves
 the frozen manifests, quarantine and reserved test. The historical

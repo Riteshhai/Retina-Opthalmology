@@ -1,5 +1,19 @@
 # QSART change log
 
+## APTOS primary-seed source optimization — 2026-11-04
+
+- Executed the locked 15-epoch cosine/patience 4 extension from the original warm
+  start; stopped after 14 epochs,selected 10. Single primary seed 2026,source only.
+- Retained selection accuracy 80.81%/macro-F1 .65157 and adverse grade 3 recall
+  7/26 versus 17/26 in the previous primary; grade 4 rises 19/40 to 27/40. All four
+  descriptive paired intervals include zero. No exact-paper/convergence claim.
+- Audited all 14 comparisons/14,588 sets,4 intervals,epoch/rank/RNG/parameter/BN
+  evidence and 134 preserved artifacts. Added inspected figures and explicit
+  source-development explorer controls; production stays unchanged.
+- After measured execution/audit, removed a read-only indexing warning with
+  numerically identical owned masks. All 503 local tests, Ruff,Compose and actual
+  native HTTP/Streamlit checks pass. Docker remains unavailable.
+
 ## Locked IDRiD external-domain diagnostics — 2026-11-04
 
 - Executed four preselected APTOS B0 models with unchanged source temperatures

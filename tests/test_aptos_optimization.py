@@ -3,14 +3,32 @@ from dataclasses import asdict, replace
 import hashlib
 import json
 from types import SimpleNamespace
+import warnings
 
 import numpy as np
 import pandas as pd
 import pytest
+import torch
 import yaml
 
 from qsart.training.finetune import FinetuneConfig
 from scripts import run_aptos_optimization as runner
+
+
+def test_calibration_indices_own_memory_and_do_not_expose_pandas_views():
+    lookup = pd.DataFrame({'calibration_role': ['temperature', 'temperature', 'conformal', 'conformal'],
+        'is_group_representative': [True, False, True, False]})
+    original = lookup.copy(deep=True)
+    temperature, conformal = runner.calibration_masks(lookup)
+    with warnings.catch_warnings(record=True) as observed:
+        warnings.simplefilter('always')
+        t, cp = torch.as_tensor(temperature), torch.as_tensor(conformal)
+        assert torch.arange(4)[t].tolist() == [0, 1]
+        assert torch.arange(4)[cp].tolist() == [2]
+        t[0] = False
+    assert temperature.flags.writeable and conformal.flags.writeable
+    assert not any('not writable' in str(w.message) for w in observed)
+    pd.testing.assert_frame_equal(lookup, original)
 
 
 def test_extension_is_fixed_primary_seed_and_longer_schedule(tmp_path):

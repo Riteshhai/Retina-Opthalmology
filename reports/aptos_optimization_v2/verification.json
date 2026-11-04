@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "scope": "source_development_primary_seed_schedule_extension",
+  "execution_source_commit": "a75229f92468a253e8f6c3e28d834571e25bd9e5",
+  "pytest": {
+    "tests": 503,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 91.16,
+    "junit_duration_seconds": 90.652,
+    "junit_sha256": "af9213a52b3c6a1ae1144aa01ffcc8170a06551b4ca5aa868018cca4da255a7b",
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=reports/aptos_optimization_v2_postfix_tests.xml",
+    "genuine_production_model_and_conformal_integration_enabled": true,
+    "warnings": [
+      "One upstream AnyIO BlockingPortal deprecation warning."
+    ]
+  },
+  "pre_execution_pytest": {
+    "tests": 502,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 82.77,
+    "junit_sha256": "b14fb7870ab1bff3a3021cd337f8570dc4cce7e4dfe56d445e1a7ca174a19a8c"
+  },
+  "post_execution_source_changes": [
+    "scripts/run_aptos_optimization.py"
+  ],
+  "post_execution_change_scope": "Owned boolean calibration masks remove a pandas/Torch indexing warning; actual 262/254 indices are numerically identical. No training or scientific result was rerun or changed.",
+  "mask_copy_validation_sha256": "9b18b4b1d55f67bd6dfffc69749e0eeef24b63aa54857e88c5aebea3b2d2850b",
+  "execution_warnings": [
+    "PyTorch noted a non-writable NumPy index mask during post-hoc indexing. Saved mathematics independently reconstructed exactly; future source now owns copies."
+  ],
+  "ruff": "passed",
+  "compose_configuration": "passed",
+  "native_http_and_streamlit_component_checks": "passed",
+  "docker_engine_available": false,
+  "docker_engine_probe_exit_code": 1,
+  "new_container_execution_verified": false,
+  "new_browser_rendering_verified": false,
+  "artifact_sha256": {
+    "evaluation.json": "66c49f12bf630493c9dc38180a73daeeae6a222523067f4ec262971b45d2310e",
+    "independent_audit.json": "eaf17dddece32ee303327e70937d10a61abe6ae843ec2eae27835cfc529ff4af",
+    "native_registry.json": "e52107afe449efaef7ab479b5be8da8368f33e28ec14251fa80aa0425c6d4055",
+    "native_deployment.json": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+    "training_and_grading.png": "a22922e0323909b6c5ac118114349cccfde891baf882adcbadba5ed03a9f6df1",
+    "conformal_diagnostics.png": "8107db470142d441fdde7a673e9f2b6eef5a3e480cae19aac1373b0933c182f4"
+  },
+  "extended_training_runs": 1,
+  "training_seed": 2026,
+  "epochs_executed": 14,
+  "selected_epoch": 10,
+  "fixed_conformal_comparisons": 14,
+  "raw_fallback_sets_reconstructed": 14588,
+  "paired_intervals_reconstructed": 4,
+  "preserved_prior_artifacts": 134,
+  "aptos_reserved_test_inference_performed": false,
+  "external_inference_performed": false,
+  "production_artifacts_changed": false,
+  "elapsed_seconds_interpretation": "Runner wall time includes input preparation, fit, candidate verification and post-hoc diagnostics; concurrent read-only checks mean this is not a controlled speed benchmark.",
+  "plot_note": "Derived figures visually inspected; measured aggregate bytes remain unchanged."
+}

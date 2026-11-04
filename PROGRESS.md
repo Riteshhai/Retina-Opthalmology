@@ -1,5 +1,39 @@
 # Execution log
 
+## 2026-11-04 — completed primary-seed APTOS source optimization v2
+
+- Executed clean a75229f92468a253e8f6c3e28d834571e25bd9e5. The declared primary
+  seed 2026 trajectory stopped after 14 epochs/1,862 updates under patience 4;
+  selected epoch 10 by macro-F1/NLL. Budget and cosine trajectory both change;
+  this single-seed extension establishes neither convergence nor exact-paper reproduction.
+- Selection 521: accuracy .80806142,macro-F1 .65156927,QWK .86726292;
+  original four-epoch primary .78310940/.63348889. Grade 3 recall falls 17/26 to 7/26;
+  grade 4 rises 19/40 to 27/40. Raw NLL .82975311 worsens; source-role temperature
+  2.94099575 gives selection NLL .51450645. No deployment selection follows.
+- All four descriptive paired component intervals include zero. F1 change versus
+  four-epoch primary +.01808038,95% interval[-.04118603,.07879770]; selection/model
+  reuse and unknown patient grouping preclude fresh-test or clinical superiority claims.
+- All 14 CP comparisons retained. Alpha .10 LAC raw/fallback inclusion .89251440,
+  size 1.29558541, grade 3 .46153846/grade 4 .70. Deterministic ordinal raw .90211132 /
+  size 2.58349328 versus fallback .98272553/2.66410749. All five randomized means:
+  raw .90326296/1.66333973; fallback .94318618/1.70403071, grade 4 only .75.
+- Independent reconstruction passed all 14 epoch metrics/rank, schedules/order/flip
+  RNG, 211 changed backbone tensors and 147 unchanged BN buffers, temperature objective,
+  14,588 raw/fallback sets and 4 paired intervals. All 3,163 source hashes/cache bytes,
+  15 independent geometry samples and 134 prior artifacts matched. First epoch's 521
+  logits exactly reproduce the original primary before schedules diverge. Report SHA:
+  66c49f12bf630493c9dc38180a73daeeae6a222523067f4ec262971b45d2310e.
+- Pre-execution 502 tests passed 82.77s. After the complete measured audit, fixed a
+  pandas/Torch read-only Boolean-mask warning using owned copies. Actual 262/254
+  indices are numerically identical; no scientific fit/inference/report was rerun.
+  Post-fix 503 tests passed 91.16s, no failures/skips; Ruff/Compose passed.
+- Actual native production JPEG/batch/TTA/readiness/overload and live-API Streamlit
+  checks passed after restart: 16 records, all 3 comparators,both alpha/population
+  controls, all 5 uniform seeds and single-primary/reuse/stopping captions. Both
+  derived figures visually verified. Docker engine unavailable; no new container/
+  browser-rendering proof. Reserved APTOS test,consumed IDRiD and production artifacts
+  remain preserved. Overall scientific acceptance IN PROGRESS; formal writing deferred.
+
 ## 2026-11-04 — primary-seed source schedule extension preparation
 
 - All three previous source fine-tuning runs selected epoch four at their cap.

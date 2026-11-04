@@ -6,7 +6,15 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** locked IDRiD external-domain evaluation VERIFIED COMPLETE
+- **Current extension:** primary-seed APTOS schedule extension VERIFIED COMPLETE
+  from `a75229f92468a253e8f6c3e28d834571e25bd9e5`. One fixed primary seed 2026,
+  stopped after 14/15 epochs, selected 10. Selection accuracy 80.81%,macro-F1 .65157;
+  grade 3 recall 26.92%/grade 4 67.50%. All four paired intervals include zero.
+  All 14 uncertainty comparisons/14,588 sets and 134 preserved artifacts audited.
+  LAC alpha .10 grade 3 inclusion 46.15% remains poor. The owned-mask warning fix
+  followed measured execution/audit without changing any scientific bytes.
+  [Source development results](research/APTOS_OPTIMIZATION_V2_RESULTS.md).
+- **Completed external extension:** locked IDRiD external-domain evaluation VERIFIED COMPLETE
   at `e447a21b55b82ca47d1e3b91caf76bca61f23699`. Four frozen source classifiers,
   all 56 uncertainty comparisons and all 516/full,513/filtered,505/representative
   views are retained. Primary 2026/main 505 accuracy 42.97%, macro-F1 .41359; source-T
@@ -71,12 +79,14 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:**491 tests passed, no failures/skips,84.64 seconds;
+**Latest verification:** 503 tests passed, no failures/skips, 91.16 seconds;
 Ruff and Compose configuration passed. Actual native HTTP and Streamlit
-component checks cover the consumed external record, all4 classifiers, all3
-population/alpha controls and all15 evidence records. Independent reconstruction
-verified all external metrics and31 preserved previous artifacts. Exact current
-evidence is reports/idrid_external_v1/verification.json.
+component checks cover 16 records, new baseline/four-epoch/extended comparators,
+both alpha/population controls and all 5 uniform seeds. Independent reconstruction
+verified new source-development metrics and 134 preserved artifacts, including
+consumed IDRiD evidence. Pre-execution 502 tests passed 82.77s; the 503-test suite
+also covers the later owned-mask fix. Exact current evidence is
+reports/aptos_optimization_v2/verification.json.
 The earlier APTOS audit of 43,764 raw/fallback sets remains preserved.
 
 **Preserved alignment verification:**198 tests passed, no failures/skips,78.51 seconds. This includes

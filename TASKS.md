@@ -19,7 +19,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute both APTOS frozen-feature candidates and all14 independent temperature/conformal diagnostics; complete independent reconstruction.
 - [x] P1 Verify relocated APTOS source bytes, configure the new local root and preserve frozen study manifests.
 - [x] P1 Execute and independently audit the bounded three-seed APTOS parameter-fine-tuning pilot, fixed BatchNorm statistics, all 42 calibration comparisons and native explorer integration.
-- [ ] P1 IN PROGRESS: execute and audit the locked primary-seed 15-epoch source schedule extension; preserve reserved-test/external exclusion and prior studies.
+- [x] P1 Execute and audit the locked primary-seed source schedule extension: 14/15 epochs, selected 10, 14 uncertainty comparisons; preserve adverse grade-3/coverage changes and all reserved-test/external exclusions.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.

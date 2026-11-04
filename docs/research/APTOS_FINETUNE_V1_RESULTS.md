@@ -1,5 +1,8 @@
 # APTOS parameter fine-tuning v1 — results
 
+Later work: the separately locked [primary-seed schedule extension](APTOS_OPTIMIZATION_V2_RESULTS.md)
+is complete. This original three-seed report and its measured artifacts remain unchanged.
+
 **VERIFIED COMPLETE:** the bounded three-seed adaptation pilot and independent
 artifact/mathematical audit. Overall scientific acceptance remains IN PROGRESS.
 The [protocol](APTOS_FINETUNE_V1_PROTOCOL.md) declares all decisions before real

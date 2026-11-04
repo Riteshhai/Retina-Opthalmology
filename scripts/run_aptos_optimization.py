@@ -124,6 +124,14 @@ def ensure_aggregate(report):
     check(report)
 
 
+def calibration_masks(lookup):
+    """Own boolean arrays so Torch never wraps a read-only pandas view."""
+    temperature = lookup.calibration_role.eq('temperature')
+    conformal = lookup.calibration_role.eq('conformal') & _bools(lookup.is_group_representative)
+    return (temperature.to_numpy(dtype=bool, copy=True),
+            conformal.to_numpy(dtype=bool, copy=True))
+
+
 def run(args):
     root = Path(__file__).resolve().parents[1]
     original, roles, runtime, runtime_roles, reps, bindings, baseline = validate_ready(args)
@@ -200,8 +208,7 @@ def run(args):
         args.private/'posthoc_inputs/calibration_uint8.pt', config)
     calibration_logits = posthoc_logits(model, pixels, config)
     lookup = runtime_roles.set_index('image_id').loc[calibration.image_id]
-    t_mask = lookup.calibration_role.eq('temperature').to_numpy()
-    cp_mask = (lookup.calibration_role.eq('conformal') & _bools(lookup.is_group_representative)).to_numpy()
+    t_mask, cp_mask = calibration_masks(lookup)
     truth = validation.dr_grade.to_numpy(int)
     calibration_truth = torch.tensor(calibration.dr_grade.to_numpy(), dtype=torch.long)
     temperature = fit_temperature(calibration_logits[t_mask], calibration_truth[t_mask])
