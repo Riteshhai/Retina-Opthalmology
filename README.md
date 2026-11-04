@@ -102,6 +102,13 @@ independent external-cohort claim. No IDRiD predictions or model fitting occurre
 The explorer displays this as reserved data-readiness evidence. See
 [local setup](docs/IDRID_SETUP.md).
 
+The [source/pixel review](docs/research/IDRID_REVIEW_V1_RESULTS.md) preserves the
+original audit and all source labels. It freezes full 516, conservatively filtered 513
+and representative 505 sensitivity populations. Three byte-identical internal pairs
+carry different DR labels; all three APTOS perceptual matches remain unresolved.
+No external classifier outcome was computed. The API/UI show the user's official-
+source confirmation separately from the historical audit-time origin status.
+
 The [APTOS study](docs/research/APTOS_V1_RESULTS.md) is complete: two genuine CPU
 frozen-feature candidates, independent temperature/conformal roles and all 14
 uncertainty comparisons. EfficientNet-B0 wins the declared selection macro-F1 rule

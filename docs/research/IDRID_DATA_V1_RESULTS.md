@@ -84,7 +84,10 @@ separate from new container execution or browser-rendering evidence.
 
 ## Remaining gates
 
-Source provenance must be resolved transparently. Review any overlap candidates
+Source-origin testimony is now recorded above. The subsequent
+[pixel/population review](IDRID_REVIEW_V1_RESULTS.md) retains all original labels,
+with explicit unresolved candidates and full/filtered sensitivity views.
+Review any overlap candidates
 under a fixed label-independent rule before external evaluation. Predeclare the
 models/checkpoints, population, preprocessing, temperatures, uncertainty seeds,
 alphas and analysis before computing classifier outcomes. External labels have

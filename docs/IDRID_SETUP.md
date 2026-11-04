@@ -29,3 +29,16 @@ data validation; no external model outcome has been observed. Resolve provenance
 and candidate overlaps before claiming an independent cohort. Predeclare scoring
 and analysis before any later external inference, and keep this data out of model,
 temperature, conformal-threshold and policy fitting.
+
+## Current source and candidate review
+
+The user has confirmed the official IDRiD/IEEE DataPort source. The bound
+source_confirmation.json receipt preserves the original audit-time status; the
+current API/UI display the confirmation and retain the overlap warning.
+
+The [completed review](research/IDRID_REVIEW_V1_RESULTS.md) freezes full 516,
+filtered 513 and representative 505 views under ignored artifacts/idrid_review_v1.
+No source labels or original rows were changed. scripts/review_idrid.py records
+the fixed source/pixel checks and refuses to overwrite this completed bundle.
+Clinical-grade conflicts and cross-source candidates remain explicit; external
+model evaluation needs a locked protocol and ambiguity-sensitive interpretation.

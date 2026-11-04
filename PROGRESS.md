@@ -1,5 +1,36 @@
 # Execution log
 
+## 2026-11-04 — completed IDRiD source/pixel review and population freeze
+
+- Executed from clean d1c5968189f8bd36508b5cbb4c35220af5f0bf6b. Source origin is
+  now user-confirmed in a separate bound receipt; original data audit SHA remains
+  b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a.
+  This is not official archive-checksum authentication or clinical adjudication.
+- Reviewed all 8 internal/all 3 cross-source pairs. Six internal pairs are byte-
+  identical; three of those have different DR labels. The other 2 internal and all 3
+  cross-source pairs remain unresolved fingerprint candidates. No cross-source
+  pair has identical original RGB or canonical 224px arrays. Source grades stay intact.
+- Froze three label-independent sensitivity views: full 516 observations/508
+  components; conservative cross-source-filtered 513/505; one representative per
+  retained component 505/505. All four grade-conflicting components remain flagged
+  in each view. Masks use original candidate components and fixed identity hashes,
+  without consulting labels, pixel similarity, predictions or performance.
+- Independent reconstruction reproduced all 11 pixel comparisons and all 516
+  membership decisions, original columns/grades, hashes and source receipt.
+  All 20 previously preserved master/production/APTOS artifacts and the frozen
+  IDRiD audit/private inputs matched. Review SHA256:
+  f21a3cd6109030c6c9da96710b7af0e6a89a00365afbfc76af9cb539abdf15f7.
+- Full 476-test suite passed 77.12s, zero failures/skips with genuine-model/CP
+  integration; Ruff and Compose configuration passed. Actual native JPEG single/
+  batch/TTA/readiness/simulator and live-API Streamlit component checks passed
+  after restart. Fourteen evidence records show current source confirmation,
+  historical audit status, retained overlap warning and all frozen population
+  counts. Original production card/sidecar match; no external model prediction.
+- New container/browser rendering remains unverified; Docker engine unavailable.
+  Clinical-grade ambiguities and cross-source perceptual candidates remain open.
+  Next declare ambiguity-sensitive external analysis with locked models and full/
+  filtered populations. Overall project IN PROGRESS; formal writing deferred.
+
 ## 2026-11-04 — IDRiD source confirmed and pair-review protocol declared
 
 - User answered "Yes, official IDRiD/IEEE DataPort release". Recorded a separate

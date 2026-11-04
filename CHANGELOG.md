@@ -1,5 +1,19 @@
 # QSART change log
 
+## IDRiD official-source testimony and population freeze — 2026-11-04
+
+- Recorded the user's official IDRiD/IEEE DataPort confirmation in a receipt bound
+  to the immutable audit/manifest/content hashes. API/UI distinguish current
+  testimony from audit-time status and reject stale receipts.
+- Reviewed all 11 candidate pairs and independently reconstructed original/canonical
+  pixel evidence. Three byte-identical internal pairs carry conflicting DR labels;
+  all three cross-source candidates remain unresolved, with no label corrections.
+- Froze full 516/filtered 513/representative 505 sensitivity populations using fixed
+  component/identity rules independent of labels, order and model outcomes.
+- All 476 tests, Ruff, Compose and actual native HTTP/Streamlit checks passed.
+  Previous source/results/production artifacts are preserved; no external model
+  prediction, clinical adjudication or independent-patient guarantee is claimed.
+
 ## Reserved IDRiD data readiness — 2026-11-04
 
 - Added strict original disease-grading ingestion, separate DR/DME labels,

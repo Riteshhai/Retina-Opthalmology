@@ -6,7 +6,14 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** IDRiD integrity/overlap audit VERIFIED COMPLETE from
+- **Current extension:** IDRiD source confirmation, pixel-evidence review and
+  population freeze VERIFIED COMPLETE at `d1c5968189f8bd36508b5cbb4c35220af5f0bf6b`.
+  Full 516/filtered 513/representative 505 views retain original grades and all four
+  ambiguous components. Source origin is user-confirmed; archive checksum is not
+  independently authenticated. Three cross-source candidates remain unresolved;
+  three byte-identical internal pairs have conflicting DR labels. No external
+  classifier outcome exists. [Review results](research/IDRID_REVIEW_V1_RESULTS.md).
+- **Initial IDRiD data audit:** integrity/overlap execution VERIFIED COMPLETE from
   `d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8`. All 516 grading JPEGs decoded;
   independent reconstruction reproduced 132,870 internal and 2,675,976 reference
   distances. Three perceptual APTOS matches and four internally label-conflicting
@@ -56,11 +63,12 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:**456 tests passed, no failures/skips, 75.91 seconds;
+**Latest verification:**476 tests passed, no failures/skips, 77.12 seconds;
 Ruff and Compose configuration passed. Actual native HTTP and Streamlit
-component checks cover the reserved IDRiD record and all 13 evidence records.
-Independent data reconstruction verified all 516 JPEGs and preserved 20 prior
-model/master/result artifacts. Exact evidence is reports/idrid_data_v1/verification.json.
+component checks cover current source confirmation, reserved IDRiD populations
+and all 14 evidence records. Independent review reproduced all11 pair comparisons
+and all516 population decisions, preserving original labels and artifacts.
+Exact current evidence is reports/idrid_review_v1/verification.json.
 The earlier APTOS audit of 43,764 raw/fallback sets remains preserved.
 
 **Preserved alignment verification:**198 tests passed, no failures/skips,78.51 seconds. This includes

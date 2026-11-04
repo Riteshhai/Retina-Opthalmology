@@ -15,7 +15,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Train an actual EfficientNet-B0 DeepDRiD candidate and compare three genuine models.
 - [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
 - [x] P1 Locate downloaded APTOS competition archive; user confirmed official Kaggle source on 3 November.
-- [x] P1 Validate all3,662 APTOS images and freeze duplicate-aware partitions; quarantine148 conflicting-component images without relabeling.
+- [x] P1 Validate all 3,662 APTOS images and freeze duplicate-aware partitions; quarantine148 conflicting-component images without relabeling.
 - [x] P1 Execute both APTOS frozen-feature candidates and all14 independent temperature/conformal diagnostics; complete independent reconstruction.
 - [x] P1 Verify relocated APTOS source bytes, configure the new local root and preserve frozen study manifests.
 - [x] P1 Execute and independently audit the bounded three-seed APTOS parameter-fine-tuning pilot, fixed BatchNorm statistics, all 42 calibration comparisons and native explorer integration.
@@ -28,7 +28,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [ ] P1 NOT STARTED: independent IDRiD external evaluation and broader distribution-shift studies.
 - [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
 - [x] P1 Record user-confirmed official IDRiD/IEEE DataPort origin in a bound append-only receipt; preserve the audit-time provenance status.
-- [ ] P1 IN PROGRESS: review IDRiD candidate pixel identity and freeze label-independent sensitivity populations; keep unresolved clinical-grade conflicts explicit.
+- [x] P1 Review all 11 IDRiD candidate pairs, independently verify pixel evidence and freeze full 516/filtered 513/representative 505 sensitivity populations without altering labels.
+- [ ] P1 Predeclare ambiguity-sensitive external evaluation on full/filtered populations; three cross-source candidates and four source-grade-conflicting components remain unresolved.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
 
 Conformal integration is VERIFIED COMPLETE as software/calibration execution; its
