@@ -187,8 +187,8 @@ def show_aptos_finetune(metrics):
 
 
 def show_idrid_data_readiness(metrics):
-    st.info('External cohort reserved. This record audits data integrity and overlap; '
-            'no external model predictions or performance results have been generated.')
+    st.info('External cohort reserved at audit time. This data-integrity record contains '
+            'no model predictions. Later model outcomes, if available, have a separate external-evaluation record.')
     provenance = metrics.get('source_provenance_status', 'Unreported')
     st.caption('Download provenance: '+provenance)
     if provenance != 'official_download_user_confirmed':
@@ -213,6 +213,52 @@ def show_idrid_data_readiness(metrics):
                'Serial names and fingerprint components are not patient identifiers.')
     with st.expander('Data-audit details'):
         st.json(metrics)
+
+
+def show_idrid_external(metrics):
+    models = metrics.get('models', [])
+    summary = metrics.get('summary', {})
+    populations = list(summary.get('population_counts', {}))
+    if not models or not populations:
+        st.info('No completed locked external evaluation is recorded.')
+        return
+    st.info('External outcomes are consumed. Later reuse is not fresh confirmation; '
+            'these diagnostics do not establish patient independence or clinical validity.')
+    st.caption('Primary classifier '+str(summary.get('primary_model'))+' and primary population '+
+               str(summary.get('primary_population'))+' were fixed before external outcomes. '
+               'Controls display saved results and do not fit or select a model.')
+    population = st.selectbox('Recorded external population', populations,
+                             index=populations.index(summary['primary_population']))
+    table = []
+    for model in models:
+        grade = model['grading'][population]
+        table.append({'Model': model['model_id'], 'Images': grade['n'], 'Accuracy': grade['accuracy'],
+            'Macro-F1': grade['macro_f1'], 'QWK': grade['quadratic_weighted_kappa'],
+            'Grade-3 recall': grade['per_class'][3]['recall'], 'Grade-4 recall': grade['per_class'][4]['recall']})
+    st.dataframe(pd.DataFrame(table), width='stretch', hide_index=True)
+    identifiers = [model['model_id'] for model in models]
+    chosen = st.selectbox('Recorded external classifier', identifiers, index=identifiers.index(summary['primary_model']))
+    alpha = st.selectbox('External reported alpha', [.1, .05])
+    rows = []
+    for row in metrics.get('comparisons', []):
+        if row['model_id'] != chosen or row['alpha'] != alpha:
+            continue
+        raw, fallback = row['raw'][population], row['argmax_fallback'][population]
+        rows.append({'Method': row['method'], 'Uniform seed': row['randomization_seed'], 'Images': raw['n_images'],
+            'Raw inclusion': raw['marginal_coverage'], 'Fallback inclusion': fallback['marginal_coverage'],
+            'Raw mean size': raw['mean_set_size'], 'Fallback mean size': fallback['mean_set_size'],
+            'Raw empties': raw['empty_set_count'], 'Grade-3 fallback inclusion': fallback['per_class']['3']['coverage'],
+            'Grade-4 fallback inclusion': fallback['per_class']['4']['coverage']})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    st.caption('Temperatures and all thresholds were fitted on APTOS and reused unchanged. '
+               'Uniform seeds are distinct from classifier-training seeds. Source-grade ambiguities remain; '
+               'annotation envelopes are hypothetical sensitivity analyses, not corrected clinical truth.')
+    model = next(row for row in models if row['model_id'] == chosen)
+    with st.expander('Annotation sensitivity and descriptive paired changes'):
+        st.json({'grading': model['grading'][population], 'before_temperature': model['grading_before_temperature'][population],
+            'paired_changes': [row for row in metrics.get('paired_baseline_changes', [])
+                              if row['model_id'] == chosen and row['population'] == population],
+            'conditional_seed_summary': summary.get('grading_across_finetuning_seeds', {}).get(population)})
 
 
 def submit(files, params=None, batch=False):
@@ -539,6 +585,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_finetune(detail.get('metrics', {}))
                 elif chosen == 'idrid_data_v1':
                     show_idrid_data_readiness(detail.get('metrics', {}))
+                elif chosen == 'idrid_external_v1':
+                    show_idrid_external(detail.get('metrics', {}))
                 else:
                     st.json(detail.get('metrics', {}))
                 for note in detail.get('notes', []):

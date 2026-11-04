@@ -1,0 +1,81 @@
+{
+  "experiment_id": "idrid_external_v1",
+  "primary_model": "finetune_seed2026",
+  "primary_population": "cross_source_filtered_representatives",
+  "population_counts": {
+    "full_source": 516,
+    "cross_source_filtered": 513,
+    "cross_source_filtered_representatives": 505
+  },
+  "cpu_threads": 4,
+  "cache_workers": 2,
+  "batch_size": 16,
+  "image_size": 224,
+  "bootstrap_repeats": 2000,
+  "bootstrap_seed": 20261105,
+  "uniform_seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "alphas": [
+    0.1,
+    0.05
+  ],
+  "models": [
+    {
+      "model_id": "frozen_baseline",
+      "training_seed": null,
+      "checkpoint": "checkpoints/aptos_v1/dr_efficientnet_b0/best.pt",
+      "checkpoint_sha256": "52574e61db4b68308348aab3794bcc64c55f6d47b0d02932955286c35d190407",
+      "temperature": 1.8980522559891935,
+      "source_report": "reports/aptos_v1/evaluation.json",
+      "selection_scores": "artifacts/aptos_v1/scores/validation_scores.csv",
+      "selection_scores_sha256": "2ea02cafa561b2e58cd61944c028e03e548bb43e4543adcd67f9714f08c9c15f"
+    },
+    {
+      "model_id": "finetune_seed2026",
+      "training_seed": 2026,
+      "checkpoint": "checkpoints/aptos_finetune_v1/seed2026/best.pt",
+      "checkpoint_sha256": "53cdad8295aca6941431a3c321815c10ec3c9fdd5544abc0d8d83094863ead1c",
+      "temperature": 1.7353179819929263,
+      "source_report": "reports/aptos_finetune_v1/evaluation.json",
+      "selection_scores": "artifacts/aptos_finetune_v1/scores/seed2026/validation_scores.csv",
+      "selection_scores_sha256": "e4deeee308ebcaf0663d05305e5493c7f21d7ad47182dedcc07462ff122b4c04"
+    },
+    {
+      "model_id": "finetune_seed2027",
+      "training_seed": 2027,
+      "checkpoint": "checkpoints/aptos_finetune_v1/seed2027/best.pt",
+      "checkpoint_sha256": "2178631c79ac0c0df12f74f26d6873dcf0843e22a98cf95640407d447058fb0e",
+      "temperature": 1.7771325271151057,
+      "source_report": "reports/aptos_finetune_v1/evaluation.json",
+      "selection_scores": "artifacts/aptos_finetune_v1/scores/seed2027/validation_scores.csv",
+      "selection_scores_sha256": "3afbfa73bf62fe65bb3c1e53ab21c1fc49fa663a4d8c2b9bd1c36c4a12a1693b"
+    },
+    {
+      "model_id": "finetune_seed2028",
+      "training_seed": 2028,
+      "checkpoint": "checkpoints/aptos_finetune_v1/seed2028/best.pt",
+      "checkpoint_sha256": "716679143b412cb9b3b696d0a700e5912dd96358f3879b6132dc91b7f15e96d7",
+      "temperature": 1.6368860795155868,
+      "source_report": "reports/aptos_finetune_v1/evaluation.json",
+      "selection_scores": "artifacts/aptos_finetune_v1/scores/seed2028/validation_scores.csv",
+      "selection_scores_sha256": "19f1159a9b6517e4b21b1518cf357b0395e059ed66fcaed9e5f79774037bacf5"
+    }
+  ],
+  "input_sha256": {
+    "reports/aptos_v1/evaluation.json": "994a8e78148d6c16d601d61d8774e0d36070b653ebf5549dec093ecbad4924ec",
+    "reports/aptos_finetune_v1/evaluation.json": "8c6f50e93db412fc845600a4e368094c46fce041109806e37819dcd6bb70c5f4",
+    "reports/idrid_data_v1/data_audit.json": "b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a",
+    "reports/idrid_data_v1/source_confirmation.json": "641d763bb294093824d7565be62855dc7108627556cc223be653c5a351607b49",
+    "reports/idrid_review_v1/data_review.json": "f21a3cd6109030c6c9da96710b7af0e6a89a00365afbfc76af9cb539abdf15f7",
+    "artifacts/idrid_review_v1/external_population.csv": "88b2b35aa68cd59cf86973465e7acf1e3411778de3aa5171fa84e1de9bd167db",
+    "artifacts/aptos_finetune_v1/runtime_development.csv": "dff7122d9cb496f3610e5dca0fab6acdafb6e1309f548f299287c5041cee963d",
+    "artifacts/aptos_finetune_v1/inputs/canonical_uint8_2e091d56319a2ca27ee87e4e7e75f9e4c6913fe93bb986ea531ed93f82f78ec3.pt": "2ac8de257140cea3cbcd8f10d3140f984f63416c7daf1e2af2e6a74e94df510d"
+  },
+  "preflight_cache": "artifacts/aptos_finetune_v1/inputs/canonical_uint8_2e091d56319a2ca27ee87e4e7e75f9e4c6913fe93bb986ea531ed93f82f78ec3.pt",
+  "preflight_runtime_manifest": "artifacts/aptos_finetune_v1/runtime_development.csv"
+}

@@ -316,3 +316,47 @@ def test_confirmed_idrid_origin_keeps_overlap_warning(monkeypatch, dashboard_api
     assert any('overlap candidates require review' in item.value for item in app.warning)
     assert any('origin confirmed by the user' in item.value for item in app.caption)
     assert any(item.label == 'External predictions' and item.value == '0' for item in app.metric)
+
+
+@pytest.mark.skipif(importlib.util.find_spec('streamlit') is None, reason='Streamlit not installed')
+def test_locked_external_controls_display_saved_views_without_changing_primary(monkeypatch, dashboard_api):
+    """Generated scores verify scope, all classifiers and every uniform replicate."""
+    from streamlit.testing.v1 import AppTest
+    original_get = httpx.get
+    populations = {'full_source': 6, 'cross_source_filtered': 5, 'cross_source_filtered_representatives': 3}
+    names = ['frozen_baseline']+[f'finetune_seed{s}' for s in (2026, 2027, 2028)]
+    models = []
+    for name in names:
+        grading = {pop: {'n': n, 'accuracy': .5, 'macro_f1': .4, 'quadratic_weighted_kappa': .3,
+                          'per_class': [{'recall': .2} for _ in range(5)]} for pop, n in populations.items()}
+        models.append({'model_id': name, 'grading': grading, 'grading_before_temperature': grading})
+    comparisons = []
+    for model in names:
+        for alpha in (.1, .05):
+            for method, seed in [('lac', None), ('ordinal_greedy', None)]+[('ordinal_greedy_randomized', s) for s in range(2026, 2031)]:
+                views = {pop: {'n_images': n, 'marginal_coverage': .8, 'mean_set_size': 2., 'empty_set_count': 0,
+                               'per_class': {'3': {'coverage': .5}, '4': {'coverage': .5}}} for pop, n in populations.items()}
+                comparisons.append({'model_id': model, 'alpha': alpha, 'method': method, 'randomization_seed': seed,
+                                    'raw': views, 'argmax_fallback': views})
+    metrics = {'summary': {'primary_model': 'finetune_seed2026', 'primary_population': 'cross_source_filtered_representatives',
+                            'population_counts': populations}, 'models': models, 'comparisons': comparisons}
+    record = {'experiment_id': 'idrid_external_v1', 'dataset': 'IDRiD',
+              'scope': 'locked_external_domain_diagnostics_consumed', 'metrics': metrics, 'notes': []}
+
+    def get(url, **kwargs):
+        if urlparse(url).path == '/research/experiments': return httpx.Response(200, json={'experiments': [record]})
+        if urlparse(url).path == '/research/metrics': return httpx.Response(200, json=record)
+        return original_get(url, **kwargs)
+
+    monkeypatch.setattr(httpx, 'get', get)
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/'dashboard/app.py')).run(timeout=25)
+    app.sidebar.radio[0].set_value('Experiment Explorer').run(timeout=25)
+    assert not app.exception and len(app.dataframe[-2].value) == 4 and len(app.dataframe[-1].value) == 7
+    assert app.dataframe[-1].value.Images.eq(3).all()
+    next(box for box in app.selectbox if box.label == 'Recorded external population').set_value('full_source').run(timeout=25)
+    next(box for box in app.selectbox if box.label == 'Recorded external classifier').set_value('finetune_seed2028').run(timeout=25)
+    next(box for box in app.selectbox if box.label == 'External reported alpha').set_value(.05).run(timeout=25)
+    assert not app.exception and app.dataframe[-1].value.Images.eq(6).all()
+    assert sorted(app.dataframe[-1].value['Uniform seed'].dropna().astype(int)) == list(range(2026, 2031))
+    assert any('External outcomes are consumed' in item.value for item in app.info)
+    assert any('finetune_seed2026' in item.value and 'fixed before external outcomes' in item.value for item in app.caption)

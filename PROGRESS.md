@@ -1,5 +1,26 @@
 # Execution log
 
+## 2026-11-04 — declared locked IDRiD external-domain evaluation
+
+- Fixed four existing EfficientNet-B0 states: frozen-feature baseline and all3
+  fine-tuning seeds, with primary2026 and main505 representatives unchanged.
+  Full516/filtered513 remain mandatory sensitivity views. No model outcome from
+  IDRiD has yet been observed; all prior source/overlap/label findings are disclosed.
+- Bound all source/model/population/cache inputs. Dedicated external cache accepts
+  only training-ineligible external_holdout; prediction is eval-only and state-hash
+  checked. Ten source-development images per model provide regression preflight.
+- Reuse every existing APTOS temperature and all56 CP artifacts without fitting.
+  External uniforms use child2 of a three-child SeedSequence; previous source
+  calibration/selection streams remain separate. Annotation envelopes and paired
+  fixed-component bootstrap are predeclared, with ambiguity/independence limits.
+- Generated scoring/cache/artifact tests:12 passed,13.35s. Ruff found an unused
+  import, now removed. Full API/UI suite and clean source commit precede execution.
+- Real default readiness passed with no external inference. Full pre-execution
+  suite:491 passed, zero failures/skips,84.64s with genuine production-model/CP
+  integration; Ruff and Compose configuration passed. An intermediate490-test
+  suite passed78.65s before adding exact-decimal score export/replay regression.
+  All sources/config/protocol are committed clean before the first external pass.
+
 ## 2026-11-04 — completed IDRiD source/pixel review and population freeze
 
 - Executed from clean d1c5968189f8bd36508b5cbb4c35220af5f0bf6b. Source origin is

@@ -192,6 +192,24 @@ def test_idrid_population_review_has_no_classifier_performance(tmp_path, monkeyp
         assert data['metrics']['model_inference_performed'] is False and 'grading' not in data['metrics']
 
 
+def test_locked_external_report_preserves_consumed_scope_and_all_models(tmp_path, monkeypatch):
+    report = tmp_path/'idrid_external_v1/evaluation.json'
+    report.parent.mkdir()
+    payload = {'images': 6, 'summary': {'primary_model': 'finetune_seed2026'},
+        'models': [{'model_id': name} for name in ('frozen_baseline', 'finetune_seed2026', 'finetune_seed2027', 'finetune_seed2028')],
+        'external_outcomes_consumed': True, 'classifier_fitting_performed': False,
+        'temperature_fitting_performed': False, 'conformal_threshold_fitting_performed': False,
+        'paired_baseline_changes': [{'model_id': 'finetune_seed2026', 'accuracy': {'delta': -.1}}]}
+    report.write_text(json.dumps({**payload, 'dataset': 'IDRiD', 'limitations': ['Generated external-outcome fixture.']}))
+    monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))
+    with TestClient(create_app()) as client:
+        result = client.get('/research/metrics?experiment_id=idrid_external_v1').json()
+        assert result['scope'] == 'locked_external_domain_diagnostics_consumed'
+        assert result['metrics'] == payload
+        record = client.get('/research/experiments').json()['experiments'][0]
+        assert record['dataset'] == 'IDRiD' and record['partition'] == 'external_holdout'
+
+
 class PositiveFixture:
     """Dependency-injected fixture bypasses artifact loading for an endpoint contract."""
     model_version = 'software-positive-fixture'

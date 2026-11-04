@@ -46,7 +46,9 @@ def experiment_registry(root):
         ('idrid_data_v1/data_audit.json', 'idrid_data_v1', 'external_holdout',
          'external_data_integrity_and_overlap_readiness_only'),
         ('idrid_review_v1/data_review.json', 'idrid_review_v1', 'external_holdout',
-         'external_overlap_review_and_population_freeze')]
+         'external_overlap_review_and_population_freeze'),
+        ('idrid_external_v1/evaluation.json', 'idrid_external_v1', 'external_holdout',
+         'locked_external_domain_diagnostics_consumed')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -69,7 +71,10 @@ def experiment_registry(root):
                    'internal_candidate_pairs', 'internal_label_conflict_components',
                    'independence_claim_blocked_by_detected_overlap', 'observations_excluded',
                    'model_inference_performed', 'external_model_evaluation_completed',
-                   'source_confirmation', 'audit_source_provenance_status') if key in raw}
+                   'source_confirmation', 'audit_source_provenance_status', 'models',
+                   'paired_baseline_changes', 'external_outcomes_consumed',
+                   'classifier_fitting_performed', 'temperature_fitting_performed',
+                   'conformal_threshold_fitting_performed') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         if name == 'idrid_data_v1':

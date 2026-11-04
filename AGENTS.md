@@ -13,7 +13,8 @@ rules, not validated clinical safety guarantees.
 
 Preserve the consumed 340-image confirmation population as historical evaluation.
 Future fitting, threshold tuning and model selection use development data only.
-Official test and IDRiD external evaluation remain reserved. APTOS access must
+Official test remains reserved. IDRiD is reserved for locked external evaluation,
+never fitting/tuning; once evaluated, disclose its consumed outcomes in future reuse. APTOS access must
 follow its official source/terms; never substitute an unverified image mirror.
 Conformal calibration must be separate from temperature fitting and model
 selection; account for patient groups and state the exchangeability limitations.

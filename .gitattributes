@@ -5,6 +5,7 @@
 *.yaml text eol=lf
 .env.example text eol=lf
 configs/idrid_data_v1.json text eol=lf
+configs/idrid_external_v1.json text eol=lf
 *.yml text eol=lf
 Dockerfile text eol=lf
 *.ps1 text eol=crlf
@@ -20,3 +21,4 @@ reports/aptos_v1/** -text whitespace=cr-at-eol
 reports/aptos_finetune_v1/** -text whitespace=cr-at-eol
 reports/idrid_data_v1/** -text whitespace=cr-at-eol
 reports/idrid_review_v1/** -text whitespace=cr-at-eol
+reports/idrid_external_v1/** -text whitespace=cr-at-eol

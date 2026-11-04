@@ -29,7 +29,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
 - [x] P1 Record user-confirmed official IDRiD/IEEE DataPort origin in a bound append-only receipt; preserve the audit-time provenance status.
 - [x] P1 Review all 11 IDRiD candidate pairs, independently verify pixel evidence and freeze full 516/filtered 513/representative 505 sensitivity populations without altering labels.
-- [ ] P1 Predeclare ambiguity-sensitive external evaluation on full/filtered populations; three cross-source candidates and four source-grade-conflicting components remain unresolved.
+- [ ] P1 IN PROGRESS: execute the locked four-model IDRiD external-domain evaluation with full/filtered populations, frozen APTOS transforms and explicit annotation-sensitivity diagnostics.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
 
 Conformal integration is VERIFIED COMPLETE as software/calibration execution; its
