@@ -9,6 +9,7 @@ import numpy as np
 
 from api.schemas import (ExperimentList, ExperimentMetrics, ExperimentSummary, PolicyOptions,
                          SimulationRequest, SimulationResponse, TriageConfiguration)
+from qsart.data.idrid_provenance import idrid_source_confirmation
 from qsart.triage_v2 import (Action, BudgetOverloaded, METHODS, PolicyConfig,
                              allocate_rows, screening_metrics)
 
@@ -43,7 +44,9 @@ def experiment_registry(root):
         ('aptos_finetune_v1/evaluation.json', 'aptos_finetune_v1', 'validation',
          'development_finetuning_and_training_seed_diagnostics'),
         ('idrid_data_v1/data_audit.json', 'idrid_data_v1', 'external_holdout',
-         'external_data_integrity_and_overlap_readiness_only')]
+         'external_data_integrity_and_overlap_readiness_only'),
+        ('idrid_review_v1/data_review.json', 'idrid_review_v1', 'external_holdout',
+         'external_overlap_review_and_population_freeze')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -65,9 +68,12 @@ def experiment_registry(root):
                    'cross_source_candidate_pairs', 'cross_source_candidate_images', 'cross_source_exact_pairs',
                    'internal_candidate_pairs', 'internal_label_conflict_components',
                    'independence_claim_blocked_by_detected_overlap', 'observations_excluded',
-                   'model_inference_performed', 'external_model_evaluation_completed') if key in raw}
+                   'model_inference_performed', 'external_model_evaluation_completed',
+                   'source_confirmation', 'audit_source_provenance_status') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
+        if name == 'idrid_data_v1':
+            metrics.update(idrid_source_confirmation(path))
         records.append(ExperimentSummary(experiment_id=name, dataset=raw.get('dataset', 'DeepDRiD'), partition=partition,
             scope=scope, model_version=raw.get('model_info', {}).get('model_version', raw.get('model_version')),
             metrics=metrics, notes=raw.get('limitations', [

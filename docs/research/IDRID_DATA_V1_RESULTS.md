@@ -8,7 +8,12 @@ The [protocol](IDRID_DATA_V1_PROTOCOL.md) preceded execution from clean commit
 
 ## Provenance and population
 
-Download-origin status: **local_package_download_origin_unconfirmed**. Included attribution
+**Current update:** the user confirmed the official IDRiD/IEEE DataPort release
+after audit completion. A bound [source-confirmation receipt](../../reports/idrid_data_v1/source_confirmation.json)
+records this statement without rewriting the original report or implying official
+archive-checksum verification. Overlap and annotation findings remain unresolved.
+
+Audit-time download-origin status: **local_package_download_origin_unconfirmed**. Included attribution
 and CC BY 4.0 license bytes were recorded. Local layout/license matching does not
 authenticate a download. User source confirmation is kept distinct from image
 integrity and official archive authentication.

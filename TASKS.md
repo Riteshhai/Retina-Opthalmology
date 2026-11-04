@@ -27,7 +27,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [ ] P1 NOT STARTED: independent IDRiD external evaluation and broader distribution-shift studies.
 - [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
-- [ ] P1 Resolve IDRiD download provenance and adjudicate three APTOS near-duplicate candidates plus four internally label-conflicting components before an independent external-cohort claim.
+- [x] P1 Record user-confirmed official IDRiD/IEEE DataPort origin in a bound append-only receipt; preserve the audit-time provenance status.
+- [ ] P1 IN PROGRESS: review IDRiD candidate pixel identity and freeze label-independent sensitivity populations; keep unresolved clinical-grade conflicts explicit.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
 
 Conformal integration is VERIFIED COMPLETE as software/calibration execution; its

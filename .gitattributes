@@ -19,3 +19,4 @@ reports/policy_comparison_v1/** -text whitespace=cr-at-eol
 reports/aptos_v1/** -text whitespace=cr-at-eol
 reports/aptos_finetune_v1/** -text whitespace=cr-at-eol
 reports/idrid_data_v1/** -text whitespace=cr-at-eol
+reports/idrid_review_v1/** -text whitespace=cr-at-eol

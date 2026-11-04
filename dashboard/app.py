@@ -193,6 +193,10 @@ def show_idrid_data_readiness(metrics):
     st.caption('Download provenance: '+provenance)
     if provenance != 'official_download_user_confirmed':
         st.warning('The local package download origin is not yet confirmed.')
+    confirmation = metrics.get('source_confirmation', {})
+    if confirmation.get('status') == 'official_origin_user_confirmed':
+        st.caption('Official IDRiD/IEEE DataPort origin confirmed by the user on '+
+                   confirmation['confirmed_at_utc']+'. This receipt does not verify an official archive checksum.')
     left, middle, right = st.columns(3)
     left.metric('Images decoded', metrics.get('images_decoded', 0))
     middle.metric('Cross-source candidate pairs', metrics.get('cross_source_candidate_pairs', 0))

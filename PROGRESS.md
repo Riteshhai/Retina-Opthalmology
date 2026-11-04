@@ -1,5 +1,23 @@
 # Execution log
 
+## 2026-11-04 — IDRiD source confirmed and pair-review protocol declared
+
+- User answered "Yes, official IDRiD/IEEE DataPort release". Recorded a separate
+  receipt bound to the frozen report/manifest/image-content hashes. Original audit
+  bytes and its execution-time unconfirmed status remain unchanged; source
+  testimony is not represented as official archive-checksum authentication.
+- Added fail-closed current-provenance resolution for API/UI. Missing, stale or
+  malformed receipts cannot upgrade the status or clear the overlap gate.
+- Declared all11 fixed candidate-pair comparisons and three label-independent
+  sensitivity populations before real pair review. Pixel proof distinguishes
+  source bytes, original displayed RGB content and descriptive canonical geometry.
+  No original grade is corrected; no external model inference occurs.
+- New generated software tests:16 passed,1.54s. Removed an unused test import
+  found by Ruff. Full updated suite and source commit precede real execution.
+- Final pre-execution suite:476 passed, zero failures/skips,77.12s with genuine
+  production-model/conformal integration enabled; Ruff and Compose configuration
+  passed. Receipt/overlap, row-order/label independence and pixel-evidence tests pass.
+
 ## 2026-11-04 — completed reserved IDRiD integrity/overlap audit
 
 - Executed from clean d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8. All 516

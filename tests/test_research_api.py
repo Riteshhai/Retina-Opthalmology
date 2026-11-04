@@ -147,6 +147,51 @@ def test_external_data_audit_is_not_reported_as_model_evaluation(tmp_path, monke
         assert 'grading' not in data['metrics'] and 'accuracy' not in data['metrics']
 
 
+@pytest.mark.parametrize('stale', [False, True])
+def test_bound_idrid_confirmation_preserves_audit_history_and_overlap_gate(tmp_path, monkeypatch, stale):
+    import hashlib
+    report = tmp_path/'idrid_data_v1/data_audit.json'
+    report.parent.mkdir()
+    raw = {'dataset': 'IDRiD', 'source_provenance_status': 'local_package_download_origin_unconfirmed',
+        'private_output_sha256': {'external_manifest.csv': 'b'*64}, 'image_content_sha256': 'c'*64,
+        'independence_claim_blocked_by_detected_overlap': True, 'model_inference_performed': False,
+        'limitations': ['Generated provenance fixture.']}
+    report.write_text(json.dumps(raw))
+    before = report.read_bytes()
+    receipt = {'schema_version': 1, 'dataset': 'IDRiD', 'confirmation_kind': 'user_statement',
+        'confirmation_statement': 'Official source confirmed.', 'source_provenance_status': 'official_download_user_confirmed',
+        'confirmed_at_utc': '2026-11-04T13:00:00+00:00', 'official_archive_checksum_verified': False,
+        'source_urls': ['https://idrid.grand-challenge.org/Data/'],
+        'data_audit_sha256': hashlib.sha256(before).hexdigest(),
+        'manifest_sha256': ('a' if stale else 'b')*64, 'image_content_sha256': 'c'*64}
+    (report.parent/'source_confirmation.json').write_text(json.dumps(receipt))
+    monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))
+    with TestClient(create_app()) as client:
+        metrics = client.get('/research/metrics?experiment_id=idrid_data_v1').json()['metrics']
+        expected = 'local_package_download_origin_unconfirmed' if stale else 'official_download_user_confirmed'
+        assert metrics['source_provenance_status'] == expected
+        assert metrics['independence_claim_blocked_by_detected_overlap'] is True
+        assert metrics['model_inference_performed'] is False
+        if not stale:
+            assert metrics['audit_source_provenance_status'] == raw['source_provenance_status']
+    assert report.read_bytes() == before
+
+
+def test_idrid_population_review_has_no_classifier_performance(tmp_path, monkeypatch):
+    report = tmp_path/'idrid_review_v1/data_review.json'
+    report.parent.mkdir()
+    report.write_text(json.dumps({'dataset': 'IDRiD', 'images': 5,
+        'summary': {'populations': {'full_source': {'images': 5}, 'cross_source_filtered': {'images': 3}}},
+        'model_inference_performed': False, 'external_model_evaluation_completed': False,
+        'limitations': ['Generated mask fixture.']}))
+    monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))
+    with TestClient(create_app()) as client:
+        data = client.get('/research/metrics?experiment_id=idrid_review_v1').json()
+        assert data['scope'] == 'external_overlap_review_and_population_freeze'
+        assert data['metrics']['summary']['populations']['cross_source_filtered']['images'] == 3
+        assert data['metrics']['model_inference_performed'] is False and 'grading' not in data['metrics']
+
+
 class PositiveFixture:
     """Dependency-injected fixture bypasses artifact loading for an endpoint contract."""
     model_version = 'software-positive-fixture'

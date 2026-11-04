@@ -10,7 +10,8 @@
   `d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8`. All 516 grading JPEGs decoded;
   independent reconstruction reproduced 132,870 internal and 2,675,976 reference
   distances. Three perceptual APTOS matches and four internally label-conflicting
-  components remain unresolved. Download origin is unconfirmed. All images remain
+  components remain unresolved. The user has since confirmed the official source;
+  a bound receipt preserves the original audit-time status. All images remain
   external-only; classifier evaluation is NOT STARTED, and an unqualified
   independent-cohort claim is blocked by these findings. See
   [audit results](research/IDRID_DATA_V1_RESULTS.md).

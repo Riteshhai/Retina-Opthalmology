@@ -96,8 +96,8 @@ Direct dependencies are pinned in requirements.txt; Docker resolves compatible t
 The [IDRiD data-readiness audit](docs/research/IDRID_DATA_V1_RESULTS.md) validated
 all 516 local grading images and froze an external-only manifest. It found three
 perceptual APTOS overlap candidates and four internally label-conflicting
-components. All observations and source labels are retained. Download origin is
-not yet user-confirmed; source clarification and candidate review precede an
+components. All observations and source labels are retained. The user confirmed
+the official IDRiD/IEEE DataPort source in a separate bound receipt; candidate review precedes an
 independent external-cohort claim. No IDRiD predictions or model fitting occurred.
 The explorer displays this as reserved data-readiness evidence. See
 [local setup](docs/IDRID_SETUP.md).
