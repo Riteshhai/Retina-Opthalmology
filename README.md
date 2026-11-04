@@ -99,6 +99,13 @@ uncertainty comparisons. EfficientNet-B0 wins the declared selection macro-F1 ru
 with 78.69% accuracy, macro-F1 .60334 and QWK .84400 on 521 selection images.
 Grade-3 recall remains only 23.08%; these are development results, without useful
 triage or fresh-test claims. The selected DeepDRiD application models are retained.
+The [three-seed parameter-fine-tuning follow-up](docs/research/APTOS_FINETUNE_V1_RESULTS.md)
+completed four epochs per seed with fixed BatchNorm statistics. Conditional
+macro-F1 is 0.62411 ± 0.00823 sample SD;
+predeclared primary seed 2026 scores 0.63349, with grade-3 recall
+65.38% and grade-4 recall 47.50%.
+All 42 uncertainty comparisons and paired development intervals are retained.
+This short warm-start pilot does not establish convergence or held-out gains.
 On 4 November the relocated source was verified byte-for-byte; its active local
 root is set through QSART_APTOS_ROOT. [Local setup](docs/APTOS_SETUP.md) preserves
 the frozen manifests, quarantine and reserved test. The historical

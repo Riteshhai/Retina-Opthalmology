@@ -6,12 +6,15 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** genuine APTOS data validation, both CPU classifier
-  candidates and all 14 uncertainty comparisons VERIFIED COMPLETE at execution
-  source `e862700331186e6a754148b33534974d0f716141`. See the
-  [measured results](research/APTOS_V1_RESULTS.md). The new source location was
-  verified against all original training bytes and configured locally on 4 November.
-  No fresh-test, full-paper reproduction or useful triage claim is established.
+- **Current extension:** bounded three-seed APTOS parameter-fine-tuning and
+  independent audit VERIFIED COMPLETE. All 3 runs/42 uncertainty comparisons
+  executed from clean `8357e9d918ef9ec00d1f66e4efadc3325790097c`.
+  Conditional macro-F1 0.62411 ± 0.00823 sample SD;
+  predeclared primary seed 2026 0.63349. Its grade-3 recall improves to
+  65.38%, while grade-4 recall falls to 47.50%.
+  See [measured results](research/APTOS_FINETUNE_V1_RESULTS.md) and the preserved
+  [frozen-feature study](research/APTOS_V1_RESULTS.md). Production stays unchanged;
+  convergence, exact-paper reproduction and fresh-test utility remain unproven.
 - **New execution source:** `493ad7c6e37d16dc338e00280d8ac714ee23a0c8`;
   fixed seven-condition selection-data degradation VERIFIED COMPLETE. Full
   [results and limitations](research/ROBUSTNESS_V1_RESULTS.md) retain the observed
@@ -41,9 +44,16 @@ unchanged DR/quality/calibration artifacts, not to new triage claims.
 The selected MobileNet and quality models remain deployed. EfficientNet-B0 is an
 additional genuinely trained candidate, not an untrained architecture switch.
 The local APTOS adapter verifies the actual source schema, images and connected
-duplicates, without fabricating patient/eye/quality labels. APTOS is not acquired.
+duplicates, without fabricating patient/eye/quality labels. The official APTOS
+source is acquired, audited and configured at its relocated local root.
 
-**Verification:**198 tests passed, no failures/skips, 78.51 seconds. This includes
+**Latest verification:**433 tests passed, no failures/skips, 75.66 seconds;
+Ruff and Compose configuration passed. Actual native HTTP and Streamlit
+component checks cover the three-seed explorer. Audit reconstructs 43,764
+individual raw/fallback sets and preserves original model/master bytes.
+Exact current evidence is reports/aptos_finetune_v1/verification.json.
+
+**Preserved alignment verification:**198 tests passed, no failures/skips,78.51 seconds. This includes
 real-model JPEG integration with the conformal sidecar. One upstream AnyIO
 deprecation warning. An earlier full run exposed two obsolete assertions expecting
 the old string error; the tests now assert structured overload codes/counts.
@@ -175,7 +185,7 @@ with genuine-model/sidecar integration enabled; Ruff and Compose config passed.
 The intermediate pre-registry full run was 297 passed, 72.75 seconds. Both new
 experiments are exposed through the real API after a native launcher restart;
 the original model card and sidecar remain matched. Current Docker startup remains
-unavailable, and APTOS is still not acquired.
+unavailable. At that historical date APTOS was not yet acquired.
 
 The ordinal diagnostic reproduces the original four baseline fits exactly and
 explains the threshold-one atom with three images from two patients. At alpha .10,
@@ -235,7 +245,7 @@ patient relationships, with label-dependent quarantine; they establish no patien
 conditional or external coverage guarantee. All 14,588 raw/fallback sets were
 independently reconstructed. Selected production artifacts remain byte-identical.
 
-Final 4 November checks:405 tests passed in98.87s with real models/conformal;
+Earlier 4 November checks:405 tests passed in98.87s with real models/conformal;
 Ruff and Compose configuration passed. Actual native JPEG/batch/TTA/simulator,
 APTOS research routes and live-API Streamlit component checks passed. Relocated
 source annotation and all3,662 PNGs match original hashes. Inventory now honors

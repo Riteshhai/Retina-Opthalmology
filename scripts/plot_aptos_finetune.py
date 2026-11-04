@@ -64,7 +64,7 @@ def grading_figure(report, path, digest):
 
 def conformal_figure(report, path, digest):
     families = ('lac', 'ordinal_greedy', 'ordinal_greedy_randomized')
-    labels = ('LAC', 'Ordinal\nfixed', 'Ordinal\nrandom mean')
+    labels = ('LAC', 'Ordinal\nfixed', 'Ordinal\nrandom')
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
     for column, alpha in enumerate((.1, .05)):
         for row_index, metric in enumerate(('marginal_coverage', 'mean_set_size')):

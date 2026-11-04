@@ -1,5 +1,19 @@
 # QSART change log
 
+## Bounded APTOS parameter fine-tuning — 2026-11-04
+
+- Executed the predeclared four-epoch adaptation pilot for seeds2026/2027/2028
+  from the same prior warm start; every learnable parameter adapts with fixed
+  BatchNorm running statistics. Primary seed 2026 remains fixed before outcomes.
+- Retained all three runs, conditional macro-F1 0.62411 ± 0.00823 sample SD,
+  severity tradeoffs, paired fixed-component intervals and all 42 raw/fallback
+  conformal diagnostics. No deployment change or fresh-test improvement claim.
+- Independently reconstructed all epoch selections, state/input bindings,
+  temperatures, bootstrap intervals and43,764 sets. Added inspected figures,
+  aggregate research discovery and display-only classifier-seed controls.
+- Full433-test suite, Ruff, Compose configuration and native HTTP/Streamlit
+  component verification passed. New container execution remains unavailable.
+
 ## Audited APTOS execution and relocated source — 2026-11-04
 
 - Completed both declared APTOS candidates and independent temperature/14-row

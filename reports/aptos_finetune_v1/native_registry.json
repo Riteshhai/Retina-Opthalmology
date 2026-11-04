@@ -1,0 +1,28 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "experiment_id": "aptos_finetune_v1",
+  "scope": "development_finetuning_and_training_seed_diagnostics",
+  "registered_experiments": 12,
+  "classifier_training_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "primary_training_seed": 2026,
+  "conformal_comparisons": 42,
+  "actual_report_metrics_match": true,
+  "production_model_unchanged": true,
+  "model_card_status": "matched",
+  "conformal_status": "available",
+  "source_report_sha256": "8c6f50e93db412fc845600a4e368094c46fce041109806e37819dcd6bb70c5f4",
+  "ui_method": "Streamlit AppTest against running local HTTP API",
+  "browser_rendering_verified": false,
+  "ui_candidate_rows": 4,
+  "ui_comparison_rows_per_training_seed_and_alpha": 7,
+  "training_seed_alpha_population_controls_verified": true,
+  "all_five_randomization_seeds_retained": true,
+  "no_ui_exceptions": true,
+  "verifier_sha256": "d9dcebfc85c768f072857c30b5c4bb6835d252c939d80e75d452af163f860b38",
+  "note": "Engineering integration does not establish independent test or clinical validity."
+}

@@ -1,5 +1,39 @@
 # Execution log
 
+## 2026-11-04 — completed bounded APTOS fine-tuning and audit
+
+- Real execution used clean source 8357e9d918ef9ec00d1f66e4efadc3325790097c. The pre-optimizer
+  canonical-cache equivalence check matched all 521 original predictions; maximum
+  probability delta 6.00379896e-06, below declared 1e-5.
+  All 3 seeds completed 4 epochs / 532 updates each from the SAME selected warm start.
+  All 211 backbone parameter tensors changed; all 147 BatchNorm buffers stayed fixed.
+- Seed 2026: selected epoch 4, accuracy 0.78310940, macro-F1 0.63348889, QWK 0.86005154; grade-3 recall 0.65384615, grade-4 recall 0.47500000.
+- Seed 2027: selected epoch 4, accuracy 0.78502879, macro-F1 0.62077703, QWK 0.85664515; grade-3 recall 0.30769231, grade-4 recall 0.70000000.
+- Seed 2028: selected epoch 4, accuracy 0.77543186, macro-F1 0.61807210, QWK 0.85668708; grade-3 recall 0.38461538, grade-4 recall 0.55000000.
+- Conditional macro-F1 mean 0.62411267 / sample SD 0.00823190.
+  Primary seed 2026 remains fixed, including its severe-grade tradeoff; no best seed
+  or alpha was promoted. Every run's descriptive paired interval is retained.
+- Independently fitted 3 temperatures using 262 role images each; separate 254 CP
+  representatives support all 42 declared comparisons. Audit reconstructed all
+  43,764 raw/fallback sets, every epoch metric/selection, schedules/flip counts,
+  six paired intervals, all 3,163 development image bytes and both canonical caches.
+  Original quarantine/manifests/roles, baseline reports, master and production
+  artifacts remain byte-identical. No reserved-test inference occurred.
+- Actual native research HTTP equality and Streamlit AppTest passed: 12 experiments,
+  baseline + 3 run rows, 42 comparisons, all 5 uniform seeds and training-seed/alpha/population
+  controls. Original production card/sidecar matched. Scientific figures were
+  generated and visually inspected; new browser rendering is not claimed.
+- Full pre-execution suite: 433 passed, zero failures/skips, 75.66s; Ruff and Compose
+  configuration passed. Current source is the tested committed execution source;
+  post-run additions are aggregate reports/figures/documentation; one plot label
+  was shortened after visual QA without changing measured bytes. Exact commands,
+  JUnit/report/audit hashes and deployment evidence are in verification.json.
+- Four CPU epochs and a common selected initialization limit conclusions; this
+  establishes neither convergence nor exact-paper optimization, independent-test
+  performance or clinical utility. Overall acceptance remains IN PROGRESS. Docker
+  engine remains unavailable; stronger optimization, external evaluation and useful
+  validated triage remain open. Formal manuscript work stays deferred.
+
 ## 2026-11-04 — declared APTOS parameter fine-tuning follow-up
 
 - Started from clean published60a7e81 and preserved all completed studies. The

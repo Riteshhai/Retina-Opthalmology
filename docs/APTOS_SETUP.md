@@ -82,3 +82,15 @@ temperature/conformal diagnostics. It still differs from full base-paper
 fine-tuning. Before any execution, the runner's default readiness mode verifies
 the actual prepared manifests; --execute additionally requires clean committed
 source and its declared --source-commit. Completed experiments refuse overwrite.
+
+
+## Completed parameter-fine-tuning follow-up
+
+The [bounded three-seed pilot](research/APTOS_FINETUNE_V1_RESULTS.md) adapts all
+learnable backbone/head parameters with fixed BatchNorm buffers, four epochs per
+seed and independent-role temperature/conformal diagnostics. Its actual runner is
+scripts/run_aptos_finetune.py; default mode validates readiness without learning.
+The committed protocol records exact execution inputs and the pre-execution CPU
+budget amendment. Do not overwrite the completed study or its frozen manifests.
+Any stronger optimization study needs a new protocol and new output identity.
+The active relocated source setting is reused; reserved test remains untouched.
