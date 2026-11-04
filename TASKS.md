@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — current on 3 November 2026
+## Specification-v1 priorities — current on 4 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -16,7 +16,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
 - [x] P1 Locate downloaded APTOS competition archive; user confirmed official Kaggle source on 3 November.
 - [x] P1 Validate all3,662 APTOS images and freeze duplicate-aware partitions; quarantine148 conflicting-component images without relabeling.
-- [ ] P1 IN PROGRESS: execute declared APTOS EfficientNet-B0/MobileNet development baselines and independent temperature/conformal diagnostics.
+- [x] P1 Execute both APTOS frozen-feature candidates and all14 independent temperature/conformal diagnostics; complete independent reconstruction.
+- [x] P1 Verify relocated APTOS source bytes, configure the new local root and preserve frozen study manifests.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.

@@ -1,5 +1,53 @@
 # Execution log
 
+## 2026-11-04 — APTOS completion, relocation and application integration
+
+- The run from frozen e862700331186e6a754148b33534974d0f716141 completed both
+  genuine frozen-ImageNet-feature candidates and all14 CP comparisons in1435.90s.
+  EfficientNet:36epochs,2412updates,selectedepoch21,selection78.6948%accuracy,
+  .603341macro-F1,.844005QWK. MobileNet:20epochs,1340updates,selectedepoch5,
+  76.9674%accuracy,.570192macro-F1,.855747QWK. The fixed F1 rule selects B0;
+  it does not win every metric. Both backbone states remain unchanged.
+- Independent temperature1.898052256 uses262 images. Separate254 conformal
+  representatives fit scores. Selection NLL .683146→.580690 and ECE10
+  .094580→.043193. LACalpha.10 coverage86.37%/size1.296; grade3coverage42.31%.
+  Randomizedalpha.10 raw mean coverage91.36%/size1.791, fallback94.82%/1.825;
+  grade4coverage67.5–75% persists even with fallback. Classifiergrade3recall6/26
+  andgrade4recall22/40 remain weak. No new model/uncertainty seed is deployed.
+- Final independent audit passed:original archive/all3,662image hashes, complete
+  grouping/partitions/roles, both histories/checkpoint choices, official frozen
+  states, direct head×feature probabilities and all14,588raw/fallback sets.
+  Max probability error1.90e-7,quantile error1.17e-8; independent temperature
+  optimum NLL gap2.66e-11. Source/privacy/master/production-byte checks passed.
+  Evaluation SHA994a8e78148d6c16d601d61d8774e0d36070b653ebf5549dec093ecbad4924ec.
+- User relocated/extracted the source into the major-project folder. Verified the
+  new train.csv and all3,662trainingPNG SHA values against frozen source evidence;
+  no model/test inference or split changes. Configured QSART_APTOS_ROOT in the
+  ignored .env. The inventory CLI now reads this local setting, with environment
+  and explicit-argument precedence and project-relative resolution. Four targeted
+  inventory tests passed6.72s. Original manifests/cache remain untouched.
+- Full frozen pre-relocation suite passed402tests,85.41s, no failures/skips,
+  real-model/conformal integration enabled. Later location-reader regressions
+  require the final updated suite recorded below. Plot-only label wrapping was
+  corrected after visual QA; both scientific figures were generated and inspected.
+- Native application was no longer listening after the interruption. Restarted
+  the hidden launcher on free18000/18501. Actual APTOS HTTP discovery/metric
+  equality and Streamlit AppTest passed:11experiments,2candidates,14comparisons,
+  both selection populations,all5randomization seeds,raw/fallback distinctions,
+  matched original model card/sidecar. This is component verification, not a new
+  browser-rendering claim. The relocated source is detected by the real inspector.
+- Docker info still reports the missing engine pipe on4November. No destructive
+  repair was attempted. Formal manuscript work remains deferred; full fine-tuning,
+  multiple classifier seeds, independent external evaluation and useful validated
+  triage remain open. No fresh test performance or quality supervision is invented.
+- Final updated full suite:405passed, zero failures/skips,98.87s with genuinely
+  trained checkpoints/conformal integration enabled. Ruff, Compose configuration
+  and Git whitespace checks passed. Actual JPEG single/batch/TTA/readiness,
+  matched card/sidecar, unsupported upload and simulator evaluated/overloaded
+  checks passed again after restart. New source setting tests verify project-
+  relative resolution, environment precedence and preserved original fallback.
+  Exact machine-readable evidence is reports/aptos_v1/verification.json.
+
 ## 2026-11-03 — official APTOS archive and declared development study
 
 - Resumed clean published996deb6 and inspected current instructions/evidence.

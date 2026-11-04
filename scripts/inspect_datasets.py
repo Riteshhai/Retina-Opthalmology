@@ -19,6 +19,22 @@ from qsart.data.aptos import (APTOS_SOURCE, DEFAULT_FRACTIONS, PATIENT_LIMITATIO
 from qsart.data.manifests import sha256_file
 
 
+def default_aptos_root(project_root=None):
+    """Honor the local data setting without changing frozen experiment paths."""
+    project = Path(project_root or Path(__file__).resolve().parents[1]).resolve()
+    configured = os.getenv('QSART_APTOS_ROOT', '').strip()
+    env_file = project / '.env'
+    if not configured and env_file.is_file():
+        for line in env_file.read_text(encoding='utf-8').splitlines():
+            key, separator, value = line.partition('=')
+            if separator and key.strip() == 'QSART_APTOS_ROOT':
+                configured = value.strip().strip('\"\'')
+    if not configured:
+        return project / 'data/raw/aptos2019'
+    path = Path(configured).expanduser()
+    return (path if path.is_absolute() else project / path).resolve()
+
+
 def manifest_summary(path: Path, *, role: str) -> dict:
     if not path.is_file():
         return {'status': 'missing', 'role': role}
@@ -90,7 +106,7 @@ def inspect_local_datasets(*, aptos_root: Path, deepdrid_development: Path,
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--aptos-root', type=Path,
-                        default=Path(os.getenv('QSART_APTOS_ROOT', 'data/raw/aptos2019')))
+                        default=default_aptos_root())
     parser.add_argument('--deepdrid-development', type=Path,
                         default=Path('data/processed/deepdrid/development_v1.csv'))
     parser.add_argument('--deepdrid-confirmation', type=Path,

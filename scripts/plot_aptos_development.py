@@ -75,7 +75,7 @@ def candidate_figure(report, output, digest):
     note = fig.add_subplot(grid[1, 2])
     note.axis('off')
     before, after = report['grading_before_temperature'], report['grading']
-    lines = [f"Selected by macro-F1, then NLL: {NAMES[selected]}", '',
+    lines = ['Selected by macro-F1, then NLL:', NAMES[selected], '',
         f"Training seed: {report['summary']['training_seed']}",
         f"Selected epoch: {next(row['selected_epoch'] for row in candidates if row['backbone'] == selected)}", '',
         'Independent temperature fit', f"T = {report['calibration']['temperature']:.4f}",
@@ -97,7 +97,7 @@ def candidate_figure(report, output, digest):
 
 def conformal_figure(report, output, digest):
     lookup = {(row['method'], row['randomization_seed'], row['alpha']): row for row in report['comparisons']}
-    labels = ['LAC', 'Deterministic\nordinal'] + [f'Random ordinal\nseed {seed}' for seed in range(2026, 2031)]
+    labels = ['LAC', 'Ordinal\nfixed'] + [f'Ordinal\nseed {seed}' for seed in range(2026, 2031)]
     x = np.arange(len(labels))
     fig, axes = plt.subplots(2, 2, figsize=(15, 9.4), facecolor='white')
     for column, alpha in enumerate((.1, .05)):
@@ -131,12 +131,14 @@ def conformal_figure(report, output, digest):
         lower.text(.5, -.28, 'Raw empty counts, in method order: '+', '.join(map(str, raw_empty)),
                    transform=lower.transAxes, ha='center', fontsize=9)
     fig.suptitle('APTOS conformal diagnostics · common argmax fallback', fontsize=17, y=.985)
-    fig.text(.5, .060, f"{report['images']} previously used selection images; selected classifier "
-             f"{NAMES[report['summary']['selected_backbone']]}. All five randomization seeds retained; "
-             'these are not training replicates.', ha='center', fontsize=9)
-    fig.text(.5, .036, 'Conformal calibration uses one image per fingerprint component, not known patients. '
+    fig.text(.5, .070, f"{report['images']} previously used selection images; selected classifier "
+             f"{NAMES[report['summary']['selected_backbone']]}. All bars use the common argmax fallback.",
+             ha='center', fontsize=9)
+    fig.text(.5, .050, 'Ordinal fixed = deterministic greedy ordinal; seed-labelled columns retain all five '
+             'randomized ordinal replicates, not model-training replicates.', ha='center', fontsize=9)
+    fig.text(.5, .030, 'Conformal calibration uses one image per fingerprint component, not known patients. '
              'Unknown patient overlap and grade-stratified partitions limit coverage claims.', ha='center', fontsize=9)
-    fig.text(.5, .013, f'Raw empty sets and grade-specific/full-set outcomes remain in the complete report. '
+    fig.text(.5, .010, f'Raw empty sets and grade-specific/full-set outcomes remain in the complete report. '
              f'Source SHA256: {digest[:16]}…', ha='center', fontsize=9, color='#4c5966')
     fig.subplots_adjust(left=.075, right=.985, top=.91, bottom=.185, hspace=.47, wspace=.18)
     fig.savefig(output, dpi=160, facecolor='white')

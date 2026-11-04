@@ -1,0 +1,34 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "experiment_id": "aptos_development_v1",
+  "dataset": "APTOS_2019",
+  "scope": "development_selection_and_independent_calibration",
+  "http_status": 200,
+  "registered_experiments": 11,
+  "candidates": 2,
+  "conformal_comparisons": 14,
+  "selection_images": 521,
+  "selection_representatives": 507,
+  "source_report_sha256": "994a8e78148d6c16d601d61d8774e0d36070b653ebf5549dec093ecbad4924ec",
+  "model_card_status": "matched",
+  "conformal_status": "available",
+  "production_model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "production_changed": false,
+  "ui_verification": {
+    "method": "Streamlit AppTest against running local HTTP API",
+    "browser_rendering_verified": false,
+    "dataset_filter_verified": true,
+    "candidate_table_rows": 2,
+    "comparison_rows_per_alpha": 7,
+    "both_selection_populations_verified": true,
+    "all_five_randomization_seeds_retained": true,
+    "no_ui_exceptions": true
+  },
+  "integration_source_sha256": {
+    "api/research.py": "b49bb4f41f93a37efa35fb64c530238dafb2d73cc525129a3ccb4204c67367ac",
+    "dashboard/app.py": "97a069b0a43ec8e8ef4fac2565363d183afa1698219ce2e51943da1a7c5a6c5f"
+  },
+  "verifier_sha256": "31108969ecb1199eb14af4a3a9736cfeb898a88ac11530d950dc8d698a02b498",
+  "note": "Engineering execution and saved development results do not establish fresh test performance or clinical utility."
+}

@@ -1,5 +1,17 @@
 # QSART change log
 
+## Audited APTOS execution and relocated source — 2026-11-04
+
+- Completed both declared APTOS candidates and independent temperature/14-row
+  conformal study; retained severe-grade grading and coverage failures.
+- Independently reconstructed both checkpoint selections, all metrics and 14,588
+  raw/fallback sets. Original production checkpoints/sidecar remain unchanged.
+- Verified the relocated annotation and all 3,662 training PNG hashes; configured
+  the new source through ignored local settings. Inventory defaults now honor
+  QSART_APTOS_ROOT from the environment or local .env, with precedence tests.
+- Published genuine aggregates, readable figures and APTOS explorer views. Frozen
+  manifests retain their original bindings; no reserved-test inference was added.
+
 ## Official APTOS data and declared CPU baseline — 2026-11-03
 
 - Located the user's official-source competition archive and declared data,

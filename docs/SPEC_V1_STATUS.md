@@ -1,4 +1,4 @@
-# QSART Development Status — updated 3 November 2026
+# QSART Development Status — updated 4 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,11 +6,12 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** official-source APTOS archive located and confirmed by
-  the user; actual image/duplicate validation and the declared CPU classifier
-  study are IN PROGRESS under [the new protocol](research/APTOS_V1_PROTOCOL.md).
-  The historical missing-download blocker is superseded; no new test-performance
-  or full-paper reproduction claim follows from dataset availability.
+- **Current extension:** genuine APTOS data validation, both CPU classifier
+  candidates and all 14 uncertainty comparisons VERIFIED COMPLETE at execution
+  source `e862700331186e6a754148b33534974d0f716141`. See the
+  [measured results](research/APTOS_V1_RESULTS.md). The new source location was
+  verified against all original training bytes and configured locally on 4 November.
+  No fresh-test, full-paper reproduction or useful triage claim is established.
 - **New execution source:** `493ad7c6e37d16dc338e00280d8ac714ee23a0c8`;
   fixed seven-condition selection-data degradation VERIFIED COMPLETE. Full
   [results and limitations](research/ROBUSTNESS_V1_RESULTS.md) retain the observed
@@ -215,3 +216,28 @@ null incomplete outcomes and diagnostic labels. A nested-table serialization bug
 found by that integration was fixed with a regression fixture. Browser observation
 was rejected by its URL policy, so this session has no new browser-rendering proof.
 Native checks do not replace a new container run; current Docker remains blocked.
+
+The APTOS study uses 3,514 images after quarantining 148 images in 51 conflicting
+fingerprint components without relabeling. Training/selection/calibration/reserved
+test counts are 2,115/521/527/351. Temperature fitting uses 262 separate images;
+conformal scores use 254 representatives from other calibration components.
+EfficientNet-B0 wins macro-F1 with .60334 versus MobileNet .57019, at 78.69% versus
+76.97% accuracy. MobileNet has higher QWK; no universal architecture advantage is
+claimed. EfficientNet grade-3 recall is only 6/26. Temperature 1.89805 reduces
+selection NLL .68315 to .58069 and ECE10 .09458 to .04319.
+
+LAC alpha .10 selection coverage is 86.37%, with grade-3 coverage 42.31%.
+Randomized ordinal raw mean coverage is 91.36% with mean size 1.791; the common
+argmax fallback raises these to 94.82% and 1.825. Grade-4 coverage remains only
+67.5–75% across seeds. All raw/fallback, per-grade and representative outcomes are
+retained. These results are development diagnostics on selection data and unknown
+patient relationships, with label-dependent quarantine; they establish no patient,
+conditional or external coverage guarantee. All 14,588 raw/fallback sets were
+independently reconstructed. Selected production artifacts remain byte-identical.
+
+Final 4 November checks:405 tests passed in98.87s with real models/conformal;
+Ruff and Compose configuration passed. Actual native JPEG/batch/TTA/simulator,
+APTOS research routes and live-API Streamlit component checks passed. Relocated
+source annotation and all3,662 PNGs match original hashes. Inventory now honors
+the ignored local source setting with precedence tests. Current Docker remains
+unavailable; a new container and browser-rendering check are unverified.

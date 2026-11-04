@@ -93,10 +93,15 @@ Direct dependencies are pinned in requirements.txt; Docker resolves compatible t
 
 ## Continue the adopted specification
 
-APTOS is now downloaded: on 3 November the user confirmed the official Kaggle
-competition archive. [Safe local ingestion](docs/APTOS_SETUP.md) and the
-[declared APTOS study](docs/research/APTOS_V1_PROTOCOL.md) preserve duplicate
-groups, quarantine conflicting components and reserve test images. The historical
+The [APTOS study](docs/research/APTOS_V1_RESULTS.md) is complete: two genuine CPU
+frozen-feature candidates, independent temperature/conformal roles and all 14
+uncertainty comparisons. EfficientNet-B0 wins the declared selection macro-F1 rule
+with 78.69% accuracy, macro-F1 .60334 and QWK .84400 on 521 selection images.
+Grade-3 recall remains only 23.08%; these are development results, without useful
+triage or fresh-test claims. The selected DeepDRiD application models are retained.
+On 4 November the relocated source was verified byte-for-byte; its active local
+root is set through QSART_APTOS_ROOT. [Local setup](docs/APTOS_SETUP.md) preserves
+the frozen manifests, quarantine and reserved test. The historical
 additional EfficientNet-B0 run used DeepDRiD and is explicitly not an APTOS/base-paper reproduction. Its selection
 macro-F1 0.5249 did not beat MobileNet 0.5372, so the selected deployment is retained.
 

@@ -6,9 +6,27 @@ All 3,662 labeled training images passed archive/decode/hash checks. Under the
 declared quarantine rule, 148 images in 51 conflicting-label fingerprint
 components are excluded without relabeling. The 3,514 retained images are split
 into 2,115 training, 521 selection, 527 calibration and 351 reserved test images.
-The development training/uncertainty study remains IN PROGRESS. Preparation follows
+The [development classifier/uncertainty study](research/APTOS_V1_RESULTS.md) is
+VERIFIED COMPLETE, including independent reconstruction. Preparation follows
 [APTOS_V1_PROTOCOL.md](research/APTOS_V1_PROTOCOL.md). The earlier 21 October
 missing-data blocker is superseded. No credentials need to be shared.
+
+On 4 November the user relocated the source into the major-project workspace.
+The annotation and all 3,662 training PNG hashes match the original validated
+source. The ignored local .env now supplies QSART_APTOS_ROOT; the inspector reads
+this setting automatically. Process environment takes precedence over .env, and
+an explicit --aptos-root takes precedence over both. Relative configured values
+resolve from the QSART directory. Frozen manifests, feature caches and measured
+results retain their original bindings; relocating a source does not rerun or
+repartition the completed experiment.
+
+```powershell
+.\.venv\Scripts\python.exe scripts/inspect_datasets.py --output artifacts/aptos_v1/current_inventory.json
+```
+
+This command inventories the configured source. It does not overwrite the frozen
+study or perform reserved-test inference. The independent relocation checksum
+proof is reports/aptos_v1/relocation_verification.json.
 
 Obtain the labeled training export from the
 [official competition data page](https://www.kaggle.com/competitions/aptos2019-blindness-detection/data)
