@@ -25,11 +25,12 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
-- [ ] P1 NOT STARTED: independent IDRiD external evaluation and broader distribution-shift studies.
+- [x] P1 Execute locked IDRiD external-domain diagnostics with four frozen classifiers, all source transforms and full/filtered sensitivity views; retain independence/label limitations.
+- [ ] P1 Broader independent external/prospective validation and distribution-shift studies; IDRiD outcomes are now consumed and cannot guide final tuning.
 - [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
 - [x] P1 Record user-confirmed official IDRiD/IEEE DataPort origin in a bound append-only receipt; preserve the audit-time provenance status.
 - [x] P1 Review all 11 IDRiD candidate pairs, independently verify pixel evidence and freeze full 516/filtered 513/representative 505 sensitivity populations without altering labels.
-- [ ] P1 IN PROGRESS: execute the locked four-model IDRiD external-domain evaluation with full/filtered populations, frozen APTOS transforms and explicit annotation-sensitivity diagnostics.
+- [x] P1 Independently reconstruct all 56 external conformal comparisons,57,792 raw/fallback sets, 360 annotation envelopes and 18 paired intervals; verify API/UI and preserve deployment.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
 
 Conformal integration is VERIFIED COMPLETE as software/calibration execution; its

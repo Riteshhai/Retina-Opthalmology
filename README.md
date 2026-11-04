@@ -98,7 +98,7 @@ all 516 local grading images and froze an external-only manifest. It found three
 perceptual APTOS overlap candidates and four internally label-conflicting
 components. All observations and source labels are retained. The user confirmed
 the official IDRiD/IEEE DataPort source in a separate bound receipt; candidate review precedes an
-independent external-cohort claim. No IDRiD predictions or model fitting occurred.
+independent external-cohort claim. The data-audit stage performed no model inference or fitting.
 The explorer displays this as reserved data-readiness evidence. See
 [local setup](docs/IDRID_SETUP.md).
 
@@ -106,8 +106,16 @@ The [source/pixel review](docs/research/IDRID_REVIEW_V1_RESULTS.md) preserves th
 original audit and all source labels. It freezes full 516, conservatively filtered 513
 and representative 505 sensitivity populations. Three byte-identical internal pairs
 carry different DR labels; all three APTOS perceptual matches remain unresolved.
-No external classifier outcome was computed. The API/UI show the user's official-
+No external classifier outcome was computed during that review. The API/UI show the user's official-
 source confirmation separately from the historical audit-time origin status.
+
+The [locked external evaluation](docs/research/IDRID_EXTERNAL_V1_RESULTS.md) is now
+complete: four existing classifiers, frozen APTOS temperatures/thresholds and all
+56 uncertainty comparisons. Predeclared primary 2026/main 505 accuracy is 42.97%,
+macro-F1 .41359, with grade-3/4 recall 43.96%/43.33%. At alpha .10, LAC inclusion is
+only 70.69%; deterministic ordinal inclusion 96.04% uses mean size 3.461. These are
+external-domain diagnostics with annotation/independence limitations. IDRiD outcomes
+are now consumed; no outcome-driven tuning or production switch follows.
 
 The [APTOS study](docs/research/APTOS_V1_RESULTS.md) is complete: two genuine CPU
 frozen-feature candidates, independent temperature/conformal roles and all 14

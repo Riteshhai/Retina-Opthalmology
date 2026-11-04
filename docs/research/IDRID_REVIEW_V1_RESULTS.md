@@ -1,5 +1,9 @@
 # IDRiD source confirmation and overlap review v1 — results
 
+**Later execution:** [locked external evaluation](IDRID_EXTERNAL_V1_RESULTS.md)
+has now consumed model outcomes. This preserved data-review stage did not perform
+model inference; its population choices remain fixed.
+
 **VERIFIED COMPLETE:** bound source confirmation, fixed candidate pixel review and
 label-independent population freeze. External model evaluation is **NOT STARTED**.
 Execution used clean `d1c5968189f8bd36508b5cbb4c35220af5f0bf6b` under the

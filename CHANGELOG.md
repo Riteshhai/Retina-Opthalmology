@@ -1,5 +1,20 @@
 # QSART change log
 
+## Locked IDRiD external-domain diagnostics — 2026-11-04
+
+- Executed four preselected APTOS B0 models with unchanged source temperatures
+  and all 56 conformal artifacts on frozen full 516/filtered 513/representative 505
+  populations. Marked IDRiD outcomes consumed; official/internal APTOS test stays reserved.
+- Retained primary accuracy 42.97%/F1 .41359 and severe-grade failures, LAC 70.69%
+  inclusion, broad deterministic ordinal sets and every randomized replicate.
+  Added source-annotation sensitivity and descriptive paired component intervals.
+- Independently reconstructed 24 grading views, 57,792 sets, 360 envelopes and 18
+  intervals; 31 previous artifacts remain unchanged. Added inspected figures and
+  read-only external controls. Existing production models remain selected.
+- All 491 local tests, Ruff, Compose and actual native HTTP/Streamlit checks pass.
+  No external fitting, clinical validation, new container/browser-rendering proof
+  or validated triage benefit is claimed.
+
 ## IDRiD official-source testimony and population freeze — 2026-11-04
 
 - Recorded the user's official IDRiD/IEEE DataPort confirmation in a receipt bound

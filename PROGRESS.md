@@ -1,5 +1,44 @@
 # Execution log
 
+## 2026-11-04 — first locked IDRiD external outcomes consumed
+
+- Execution from clean e447a21b55b82ca47d1e3b91caf76bca61f23699 completed all 4
+  frozen classifiers on 516 images/2,064 unique model-observations, all 56 conformal
+  comparisons and nine paired full/filtered comparisons. Prior temperatures and
+  all score thresholds were reused unchanged; no fitting, deployment switch or
+  APTOS reserved-test inference occurred. IDRiD outcomes are now consumed.
+- Primary 2026/main 505: accuracy .42970297, macro-F1 .41359165, QWK .65164044,
+  source-T NLL 1.38231498; grade-3 recall  40/91=.43956044,grade-4 recall 26/60=.43333333.
+  Baseline accuracy .43366337/F1 .36194750; other fine-tuning F1 values .40590214
+  and .35787819. Conditional fine-tuning mean F1 .39245733 / sample SD .03019221.
+  No favorable seed or population was substituted for the fixed primary.
+- Primary alpha .10 LAC inclusion .70693069/size 1.93069307; deterministic ordinal
+  .96039604/3.46138614. Five randomized raw replicates mean .83287129/2.53900990;
+  common fallback .83801980/2.54455446. All56 rows/populations/grade denominators
+  are retained. Wider sets are not a new triage-utility or coverage guarantee.
+- Primary paired main 505 F1 difference +.05164415, descriptive 95% interval
+  [.00889026,.09467970]; accuracy difference -.00396040, interval [-.04950495,
+  .03960396]. No multiplicity, patient-independence or clinical superiority claim.
+  Main annotation sensitivity accuracy .42772277–.43366337 is hypothetical under
+  observed component-label alternatives, not corrected truth or a confidence bound.
+- Independent math reconstruction passed all 24 raw/calibrated grading views,
+  56 comparisons/57,792 sets, 360 annotation envelopes, 18 paired bootstrap intervals,
+  conditional summaries and primary/consumed flags. All516 source hashes/cache
+  bytes matched; 25 canonical images were independently reconstructed. All 31 prior
+  master/model/results/audit artifacts matched. Evaluation SHA256:
+  812c82d7771752fa00d076e067e6d1692da4a414c0b1207c8e6df2f21ec35282.
+- Full 491-test pre-execution suite passed 84.64s, zero failures/skips; Ruff and
+  Compose configuration passed. Real native JPEG/batch/TTA/readiness/simulator
+  and live-API Streamlit component checks passed after restart: 15 records, 4
+  classifiers, 3 population controls, all 5 uniform draws and retained fixed-primary/
+  consumed captions. Original production card/sidecar remain matched. Both derived
+  figures were visually inspected; plot-only labels shortened without changing
+  scientific bytes. New browser/container execution is unverified; Docker unavailable.
+- No external-quality truth, useful validated triage or exact-paper reproduction
+  is established. Future development must use source development data; disclose
+  any IDRiD reuse and never tune final models/policies to these outcomes. Overall
+  scientific acceptance IN PROGRESS; formal manuscript drafting remains deferred.
+
 ## 2026-11-04 — declared locked IDRiD external-domain evaluation
 
 - Fixed four existing EfficientNet-B0 states: frozen-feature baseline and all3

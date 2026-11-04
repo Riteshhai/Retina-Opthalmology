@@ -1,5 +1,9 @@
 # IDRiD external-data readiness v1 — results
 
+**Later execution:** [locked external evaluation](IDRID_EXTERNAL_V1_RESULTS.md)
+is complete and its outcomes are consumed. The following audit-stage status and
+original report are historical; no source/audit bytes were overwritten.
+
 **VERIFIED COMPLETE:** source-layout, JPEG integrity and fixed fingerprint audit.
 **NOT STARTED:** external model evaluation. All 516 images remain reserved;
 no prediction, model fit, temperature fit or conformal-score fit used this cohort.

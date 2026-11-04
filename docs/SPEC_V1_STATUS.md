@@ -6,20 +6,28 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** IDRiD source confirmation, pixel-evidence review and
+- **Current extension:** locked IDRiD external-domain evaluation VERIFIED COMPLETE
+  at `e447a21b55b82ca47d1e3b91caf76bca61f23699`. Four frozen source classifiers,
+  all 56 uncertainty comparisons and all 516/full,513/filtered,505/representative
+  views are retained. Primary 2026/main 505 accuracy 42.97%, macro-F1 .41359; source-T
+  LAC alpha .10 inclusion 70.69%. Independent reconstruction verified 57,792 sets,
+  360 annotation envelopes and 18 intervals. IDRiD model outcomes are now consumed;
+  no further use may be disguised as fresh confirmation or used for final tuning.
+  [External results](research/IDRID_EXTERNAL_V1_RESULTS.md).
+- **Completed source-data review:** IDRiD source confirmation, pixel evidence and
   population freeze VERIFIED COMPLETE at `d1c5968189f8bd36508b5cbb4c35220af5f0bf6b`.
   Full 516/filtered 513/representative 505 views retain original grades and all four
   ambiguous components. Source origin is user-confirmed; archive checksum is not
   independently authenticated. Three cross-source candidates remain unresolved;
   three byte-identical internal pairs have conflicting DR labels. No external
-  classifier outcome exists. [Review results](research/IDRID_REVIEW_V1_RESULTS.md).
+  classifier outcome existed at that review stage. [Review results](research/IDRID_REVIEW_V1_RESULTS.md).
 - **Initial IDRiD data audit:** integrity/overlap execution VERIFIED COMPLETE from
   `d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8`. All 516 grading JPEGs decoded;
   independent reconstruction reproduced 132,870 internal and 2,675,976 reference
   distances. Three perceptual APTOS matches and four internally label-conflicting
   components remain unresolved. The user has since confirmed the official source;
   a bound receipt preserves the original audit-time status. All images remain
-  external-only; classifier evaluation is NOT STARTED, and an unqualified
+  external-only; classifier evaluation had not started at that audit stage, and an unqualified
   independent-cohort claim is blocked by these findings. See
   [audit results](research/IDRID_DATA_V1_RESULTS.md).
 - **Completed APTOS extension:** bounded three-seed parameter-fine-tuning and
@@ -63,12 +71,12 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:**476 tests passed, no failures/skips, 77.12 seconds;
+**Latest verification:**491 tests passed, no failures/skips,84.64 seconds;
 Ruff and Compose configuration passed. Actual native HTTP and Streamlit
-component checks cover current source confirmation, reserved IDRiD populations
-and all 14 evidence records. Independent review reproduced all11 pair comparisons
-and all516 population decisions, preserving original labels and artifacts.
-Exact current evidence is reports/idrid_review_v1/verification.json.
+component checks cover the consumed external record, all4 classifiers, all3
+population/alpha controls and all15 evidence records. Independent reconstruction
+verified all external metrics and31 preserved previous artifacts. Exact current
+evidence is reports/idrid_external_v1/verification.json.
 The earlier APTOS audit of 43,764 raw/fallback sets remains preserved.
 
 **Preserved alignment verification:**198 tests passed, no failures/skips,78.51 seconds. This includes

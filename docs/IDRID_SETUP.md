@@ -1,5 +1,11 @@
 # Local IDRiD disease-grading data
 
+**Current status:** [locked external evaluation](research/IDRID_EXTERNAL_V1_RESULTS.md)
+has consumed IDRiD model outcomes. The audit/review snapshots below describe their
+earlier no-inference stages. Never use this data for model/calibration/policy fitting,
+or describe later reuse as fresh confirmation. Source grades and original files
+remain preserved; official/internal APTOS test remains reserved.
+
 The existing package is discovered under the major-project folder. Its disease-
 grading directory contains `1. Original Images`, `2. Groundtruths`, `LICENSE.txt`
 and `CC-BY-4.0.txt`. Segmentation/localization image copies are not added to the
@@ -25,7 +31,7 @@ pair tables and manifests remain private and excluded from Git.
 
 All rows are `external_holdout` with `eligible_for_training=False`. Generic
 training readers reject the manifest. Source label distributions were read for
-data validation; no external model outcome has been observed. Resolve provenance
+data validation; no external model outcome had been observed at that data-freeze stage. Resolve provenance
 and candidate overlaps before claiming an independent cohort. Predeclare scoring
 and analysis before any later external inference, and keep this data out of model,
 temperature, conformal-threshold and policy fitting.
