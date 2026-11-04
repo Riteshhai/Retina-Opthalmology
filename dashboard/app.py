@@ -158,6 +158,34 @@ def show_aptos_experiment(metrics):
                                                'calibration', 'calibration_unit_definition') if key in metrics})
 
 
+def show_aptos_finetune(metrics):
+    runs = metrics.get('runs', [])
+    if not runs:
+        st.info('No completed fine-tuning runs are recorded.')
+        return
+    primary = metrics.get('summary', {}).get('primary_training_seed')
+    st.caption(f'Primary training seed was fixed at {primary} before execution. '
+               'Training-seed variation is conditional on a shared warm start and reused selection data.')
+    rows = []
+    baseline = metrics.get('baseline', {}).get('selection_metrics', {})
+    rows.append({'Run': 'Frozen-feature baseline', **{key: baseline.get(key) for key in ('accuracy', 'macro_f1', 'nll')}})
+    for run in runs:
+        grading = run.get('grading_before_temperature', run.get('selection_metrics', {}))
+        rows.append({'Run': f'Training seed {run["training_seed"]}',
+                     **{key: grading.get(key) for key in ('accuracy', 'macro_f1', 'nll')}})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    seed = st.selectbox('Recorded classifier training seed', [run['training_seed'] for run in runs])
+    st.caption('This control displays a recorded run; it does not select or deploy a winning seed.')
+    run = next(row for row in runs if row['training_seed'] == seed)
+    view = {**run, 'images': metrics.get('images'), 'population': metrics.get('population', {}),
+            'summary': {'selected_backbone': f'EfficientNet-B0, recorded training seed {seed}'},
+            'comparisons': [row for row in metrics.get('comparisons', []) if row['model_training_seed'] == seed]}
+    show_aptos_experiment(view)
+    with st.expander('Across-seed summaries and descriptive paired changes'):
+        st.json({'summary': metrics.get('summary', {}),
+                 'paired_changes': {str(row['training_seed']): row.get('paired_baseline_changes') for row in runs}})
+
+
 def submit(files, params=None, batch=False):
     endpoint = '/predict/batch' if batch else '/predict'
     key = 'files' if batch else 'file'
@@ -478,6 +506,8 @@ elif page == 'Experiment Explorer':
                     show_policy_comparison(detail.get('metrics', {}))
                 elif chosen == 'aptos_development_v1':
                     show_aptos_experiment(detail.get('metrics', {}))
+                elif chosen == 'aptos_finetune_v1':
+                    show_aptos_finetune(detail.get('metrics', {}))
                 else:
                     st.json(detail.get('metrics', {}))
                 for note in detail.get('notes', []):

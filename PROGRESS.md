@@ -1,5 +1,34 @@
 # Execution log
 
+## 2026-11-04 — declared APTOS parameter fine-tuning follow-up
+
+- Started from clean published60a7e81 and preserved all completed studies. The
+  new study tests supervised backbone adaptation after the frozen-feature study's
+  weak severe-grade findings; selection data are explicitly already inspected.
+- Declared protocol/config at ef2813ff86b0cf8ce1b5c6a523eaf286284ac23d before any
+  real fine-tuning. Generated-tensor capacity probes measured roughly2.2s/update
+  for contiguous/two-thread execution and .8–1.35s with channels-last/four threads.
+  Before real learning, revised12epochs to a bounded4epoch/three-seed pilot,
+  four threads/channels-last and cosineTmax4. This is not convergence evidence,
+  a controlled speed claim or exact base-paper optimization reproduction.
+- Seeds2026/2027/2028 share the same verified APTOS B0 warm start. Every learnable
+  parameter adapts while BatchNorm running buffers remain fixed. The primary
+  seed2026 is predeclared regardless of outcomes. New canonicaluint8 input cache
+  avoids repeated high-resolution geometry, with normalization equality and
+  cache-hit/miss RNG regression coverage. Runtime paths honor the relocated root;
+  original manifests/quarantine/roles and reserved test remain preserved.
+- Separate ownership under master26 covers core training/cache/resume, execution
+  and figures, independent verification, and root API/UI/documentation integration.
+  Added aggregate discovery and display-only training-seed controls; changing
+  that control cannot select/deploy a winning seed. Root API/UI subset23passed,
+  53.16s; Ruff passed. No real fine-tuning outcomes are claimed by these fixtures.
+- Final pre-execution verification:433passed,zero failures/skips,75.66s with
+  genuine production DR/quality/CP artifacts enabled; Ruff passed. Actual default
+  readiness validated the relocated runtime cohort and frozen bindings without
+  inference/training. Independent source review fixed a stale-best checkpoint
+  resume window; interruption, changed-config and stale-selection regressions
+  now pass. Full execution is launched only after this source is committed clean.
+
 ## 2026-11-04 — APTOS completion, relocation and application integration
 
 - The run from frozen e862700331186e6a754148b33534974d0f716141 completed both

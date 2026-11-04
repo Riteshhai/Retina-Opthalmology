@@ -100,13 +100,19 @@ def test_saved_stress_experiment_preserves_scope_and_unfavorable_paired_results(
      {'grading': {'macro_f1': .7}, 'candidates': [{'backbone': 'efficientnet_b0', 'macro_f1': .7}],
       'selected_candidate': 'efficientnet_b0',
       'comparisons': [{'method': 'lac', 'unit': 'image', 'calibration_unit_definition': 'fingerprint representative'}]}),
+    ('aptos_finetune_v1/evaluation.json', 'aptos_finetune_v1',
+     'development_finetuning_and_training_seed_diagnostics',
+     {'summary': {'primary_training_seed': 2026, 'deployment_changed': False},
+      'runs': [{'training_seed': 2026, 'grading': {'macro_f1': .7}}],
+      'baseline': {'grading': {'macro_f1': .6}},
+      'comparisons': [{'model_training_seed': 2026, 'randomization_seed': 2030, 'alpha': .1}]}),
 ])
 def test_saved_development_reports_preserve_evidence_scope(tmp_path, monkeypatch,
                                                           relative, experiment, scope, payload):
     """Generated contract fixtures are not measured research outputs."""
     report = tmp_path/relative
     report.parent.mkdir()
-    dataset = 'APTOS_2019' if experiment == 'aptos_development_v1' else 'DeepDRiD'
+    dataset = 'APTOS_2019' if experiment.startswith('aptos_') else 'DeepDRiD'
     report.write_text(json.dumps({**payload, 'dataset': dataset,
                                  'limitations': ['Development fixture; no deployment selection.']}))
     monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))

@@ -27,6 +27,17 @@ Reject missing/changed images, role mismatches or any test/holdout training row.
 No new quality, patient or eye annotations are invented. Fingerprint components
 are not patients; quarantine and unknown related views limit all conclusions.
 
+## Pre-execution CPU budget amendment
+
+Before any real fine-tuning, generated normalized tensors measured roughly
+2.2 seconds per batch update with contiguous input/two threads and .8–1.35 seconds
+with channels-last/four threads on this workstation. These are software capacity
+probes, not retinal evidence or controlled speed benchmarks. The initial 12-epoch
+proposal is therefore revised BEFORE training to four epochs per seed, four CPU
+threads and channels-last memory layout, with cosine T_max four. This bounds the
+three-run adaptation pilot. It does not establish convergence or satisfy the
+base paper's full optimization experiment. All other fixed study choices remain.
+
 ## Fixed model and training replicates
 
 Every run starts from the SAME prior selected APTOS EfficientNet-B0 checkpoint,
@@ -47,9 +58,9 @@ This is parameter fine-tuning with frozen BatchNorm statistics, not the base
 paper's exact 384px end-to-end training procedure.
 
 For every seed use the same fixed settings: original one-pass fundus crop/RGB
-224px preprocessing and ImageNet normalization; batch 16; maximum 12 epochs;
+224px preprocessing and ImageNet normalization; batch 16; maximum 4 epochs;
 patience 4; AdamW weight decay .0001; backbone initial learning rate .0001 and
-head .0003; CosineAnnealingLR T_max=12, eta_min=.000001; two CPU threads. Use
+head .0003; CosineAnnealingLR T_max=4, eta_min=.000001; four CPU threads and channels-last model/input memory layout. Use
 training-only per-image Bernoulli(.5) horizontal flips and class-weighted cross
 entropy with weights N/(5*n_class) from the ORIGINAL training records. No sampling
 or severity-loss hyperparameter is adjusted after results. Each epoch uses every

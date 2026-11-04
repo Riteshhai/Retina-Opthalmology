@@ -39,7 +39,9 @@ def experiment_registry(root):
         ('policy_comparison_v1/dashboard_summary.json', 'policy_comparison_v1', 'validation',
          'development_out_of_fold_policy'),
         ('aptos_v1/evaluation.json', 'aptos_development_v1', 'validation',
-         'development_selection_and_independent_calibration')]
+         'development_selection_and_independent_calibration'),
+        ('aptos_finetune_v1/evaluation.json', 'aptos_finetune_v1', 'validation',
+         'development_finetuning_and_training_seed_diagnostics')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -56,7 +58,7 @@ def experiment_registry(root):
                    'decision_review_prices', 'mode_interpretation', 'status_interpretation',
                    'candidates', 'selected_candidate', 'selection_rule', 'temperature',
                    'calibration_fit', 'data_preparation', 'grading_before_temperature',
-                   'calibration', 'calibration_unit_definition', 'uniform_generation') if key in raw}
+                   'calibration', 'calibration_unit_definition', 'uniform_generation', 'baseline') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         records.append(ExperimentSummary(experiment_id=name, dataset=raw.get('dataset', 'DeepDRiD'), partition=partition,

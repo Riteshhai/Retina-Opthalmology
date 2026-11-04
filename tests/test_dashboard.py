@@ -220,3 +220,36 @@ def test_aptos_explorer_keeps_component_representatives_distinct(monkeypatch, da
     assert table.iloc[0]['Raw coverage'] == 0.
     assert table.iloc[0]['Coverage with argmax fallback'] == .5
     assert any('Fingerprint groups' in item.value for item in app.warning)
+
+
+@pytest.mark.skipif(importlib.util.find_spec('streamlit') is None, reason='Streamlit not installed')
+def test_finetune_explorer_displays_seed_without_changing_primary(monkeypatch, dashboard_api):
+    """Generated results make a later seed look better to test the display-only control."""
+    from streamlit.testing.v1 import AppTest
+    original_get = httpx.get
+    metrics = {'images': 5, 'population': {'conformal_representative_images': 3, 'temperature_images': 4},
+        'summary': {'primary_training_seed': 2026},
+        'baseline': {'selection_metrics': {'accuracy': .5, 'macro_f1': .4, 'nll': 1.}},
+        'runs': [{'training_seed': seed, 'grading_before_temperature': {'accuracy': value, 'macro_f1': value, 'nll': 1.}}
+                 for seed, value in [(2026, .6), (2027, .9)]], 'comparisons': []}
+    record = {'experiment_id': 'aptos_finetune_v1', 'dataset': 'APTOS_2019',
+              'scope': 'development_finetuning_and_training_seed_diagnostics', 'metrics': metrics,
+              'notes': ['Synthetic software-test fixture.']}
+
+    def get(url, **kwargs):
+        if urlparse(url).path == '/research/experiments':
+            return httpx.Response(200, json={'experiments': [record]})
+        if urlparse(url).path == '/research/metrics':
+            return httpx.Response(200, json=record)
+        return original_get(url, **kwargs)
+
+    monkeypatch.setattr(httpx, 'get', get)
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/'dashboard/app.py')).run(timeout=25)
+    app.sidebar.radio[0].set_value('Experiment Explorer').run(timeout=25)
+    assert not app.exception
+    table = app.dataframe[-1].value
+    assert table.Run.tolist() == ['Frozen-feature baseline', 'Training seed 2026', 'Training seed 2027']
+    next(box for box in app.selectbox if box.label == 'Recorded classifier training seed').set_value(2027).run(timeout=25)
+    assert not app.exception
+    assert any('fixed at 2026' in item.value for item in app.caption)
+    assert any('does not select or deploy' in item.value for item in app.caption)
