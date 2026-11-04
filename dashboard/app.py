@@ -186,6 +186,29 @@ def show_aptos_finetune(metrics):
                  'paired_changes': {str(row['training_seed']): row.get('paired_baseline_changes') for row in runs}})
 
 
+def show_aptos_optimization(metrics):
+    runs = metrics.get('runs', [])
+    if not runs:
+        st.info('No completed source-optimization run is recorded.')
+        return
+    st.caption('Only the fixed primary seed 2026 was extended to a maximum of 15 epochs. '
+               'No new across-seed variance is estimated. IDRiD is consumed and was not used in this run.')
+    run = runs[0]
+    rows = []
+    for label, grading in [('Frozen-feature baseline', metrics.get('baseline', {}).get('selection_metrics', {})),
+                           ('Four-epoch primary', metrics.get('prior_primary', {}).get('selection_metrics', {})),
+                           ('Extended primary', run.get('grading_before_temperature', {}))]:
+        rows.append({'Run': label, **{key: grading.get(key) for key in ('accuracy', 'macro_f1', 'nll')}})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    st.caption('Selected epoch '+str(metrics.get('summary', {}).get('selected_epoch'))+
+               '; stop reason: '+str(metrics.get('summary', {}).get('stop_reason'))+
+               '. Selection/calibration data are reused; these results do not establish convergence or fresh-test performance.')
+    view = {**metrics, 'summary': {'selected_backbone': 'EfficientNet-B0, extended primary seed 2026'}}
+    show_aptos_experiment(view)
+    with st.expander('Training history and paired development changes'):
+        st.json({'history': run.get('history', []), 'paired_changes': metrics.get('paired_comparisons', {})})
+
+
 def show_idrid_data_readiness(metrics):
     st.info('External cohort reserved at audit time. This data-integrity record contains '
             'no model predictions. Later model outcomes, if available, have a separate external-evaluation record.')
@@ -583,6 +606,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_experiment(detail.get('metrics', {}))
                 elif chosen == 'aptos_finetune_v1':
                     show_aptos_finetune(detail.get('metrics', {}))
+                elif chosen == 'aptos_optimization_v2':
+                    show_aptos_optimization(detail.get('metrics', {}))
                 elif chosen == 'idrid_data_v1':
                     show_idrid_data_readiness(detail.get('metrics', {}))
                 elif chosen == 'idrid_external_v1':

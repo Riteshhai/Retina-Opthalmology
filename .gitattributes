@@ -22,3 +22,4 @@ reports/aptos_finetune_v1/** -text whitespace=cr-at-eol
 reports/idrid_data_v1/** -text whitespace=cr-at-eol
 reports/idrid_review_v1/** -text whitespace=cr-at-eol
 reports/idrid_external_v1/** -text whitespace=cr-at-eol
+reports/aptos_optimization_v2/** -text whitespace=cr-at-eol

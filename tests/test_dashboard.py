@@ -223,6 +223,37 @@ def test_aptos_explorer_keeps_component_representatives_distinct(monkeypatch, da
 
 
 @pytest.mark.skipif(importlib.util.find_spec('streamlit') is None, reason='Streamlit not installed')
+def test_optimization_explorer_preserves_single_primary_scope(monkeypatch, dashboard_api):
+    """Synthetic saved results test provenance captions and separate comparators."""
+    from streamlit.testing.v1 import AppTest
+    original_get = httpx.get
+    metrics = {'images': 5, 'population': {'conformal_representative_images': 3, 'temperature_images': 4},
+        'summary': {'primary_training_seed': 2026, 'selected_epoch': 7, 'stop_reason': 'four_nonimproving_selection_epochs'},
+        'baseline': {'selection_metrics': {'accuracy': .5, 'macro_f1': .4, 'nll': 1.}},
+        'prior_primary': {'selection_metrics': {'accuracy': .6, 'macro_f1': .5, 'nll': 1.}},
+        'runs': [{'training_seed': 2026, 'grading_before_temperature': {'accuracy': .6, 'macro_f1': .7, 'nll': 1.}}],
+        'comparisons': []}
+    record = {'experiment_id': 'aptos_optimization_v2', 'dataset': 'APTOS_2019',
+        'scope': 'source_development_primary_seed_schedule_extension', 'metrics': metrics,
+        'notes': ['Synthetic software-test fixture.']}
+
+    def get(url, **kwargs):
+        if urlparse(url).path == '/research/experiments':
+            return httpx.Response(200, json={'experiments': [record]})
+        if urlparse(url).path == '/research/metrics':
+            return httpx.Response(200, json=record)
+        return original_get(url, **kwargs)
+
+    monkeypatch.setattr(httpx, 'get', get)
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/'dashboard/app.py')).run(timeout=25)
+    app.sidebar.radio[0].set_value('Experiment Explorer').run(timeout=25)
+    assert not app.exception
+    assert app.dataframe[-1].value.Run.tolist() == ['Frozen-feature baseline', 'Four-epoch primary', 'Extended primary']
+    assert any('No new across-seed variance' in item.value for item in app.caption)
+    assert any('stop reason: four_nonimproving' in item.value for item in app.caption)
+    assert not any(box.label == 'Recorded classifier training seed' for box in app.selectbox)
+
+
 def test_finetune_explorer_displays_seed_without_changing_primary(monkeypatch, dashboard_api):
     """Generated results make a later seed look better to test the display-only control."""
     from streamlit.testing.v1 import AppTest

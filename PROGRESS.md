@@ -1,5 +1,22 @@
 # Execution log
 
+## 2026-11-04 — primary-seed source schedule extension preparation
+
+- All three previous source fine-tuning runs selected epoch four at their cap.
+  Declared an independent 15-epoch cosine trajectory from the original warm start,
+  primary seed 2026 only, patience four; all other training settings stay fixed.
+  This is source development, not exact-paper reproduction or convergence evidence.
+- Added a separate versioned runner/config/protocol and model namespace, immutable
+  runtime bindings and exact-provenance resume. The original four-epoch studies,
+  consumed IDRiD results, reserved APTOS test and production weights are preserved.
+- Targeted generated-fixture tests: 58 passed, 59.50s; Ruff passed. Actual input-only
+  readiness verified train/selection/calibration 2115/521/527 with no model fitting
+  or inference. Full suite: 502 passed, no failures/skips,82.77s with genuine
+  production-model/conformal integration; Ruff and Compose configuration passed.
+  The tested source/config/protocol are committed clean before actual learning.
+- Saved-results API/dashboard support is implemented; actual new retinal training,
+  independent reconstruction and native integration remain unverified at this stage.
+
 ## 2026-11-04 — first locked IDRiD external outcomes consumed
 
 - Execution from clean e447a21b55b82ca47d1e3b91caf76bca61f23699 completed all 4

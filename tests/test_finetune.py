@@ -126,6 +126,30 @@ def test_training_mode_keeps_stochastic_layers_active_and_bn_eval():
     assert model.backbone[1].weight.requires_grad
 
 
+def test_versioned_model_names_and_resume_cannot_cross_studies(source, tmp_path):
+    """A genuinely optimized generated checkpoint keeps its declared study identity."""
+    manifest, _ = source
+    torch.set_num_threads(1)
+    torch.manual_seed(123)
+    initial = build_model('efficientnet_b0', pretrained=False)
+    meta = {**fixture_metadata(manifest), 'trained': True, 'optimizer_steps': 1, 'task': 'dr',
+        'heads': {'dr_grade': 5}, 'image_size': 32, 'normalization_mean': MEAN, 'normalization_std': STD,
+        'preprocessing': 'fundus_crop_rgb_v1', 'model_version': 'generated-software-fixture'}
+    path = tmp_path/'generated_initial.pt'
+    torch.save({'format_version': FORMAT_VERSION, 'metadata': meta, 'model_state': initial.state_dict()}, path)
+    config = FinetuneConfig(image_size=32, epochs=1, patience=1, batch_size=5, cpu_threads=1)
+    train_finetune(manifest, path, tmp_path/'run', tmp_path/'cache', config=config,
+                   data_purpose='software_test', model_version_prefix='aptos-optimization-v2')
+    _, checkpoint = load_checkpoint(tmp_path/'run/best.pt', allow_software_test=True)
+    assert checkpoint['metadata']['model_version'].startswith('aptos-optimization-v2-efficientnet_b0-')
+    with pytest.raises(ValueError, match='model_version_prefix'):
+        train_finetune(manifest, path, tmp_path/'run', tmp_path/'cache', config=config,
+                       data_purpose='software_test', resume_last=True)
+    with pytest.raises(ValueError, match='namespace'):
+        train_finetune(manifest, path, tmp_path/'new', tmp_path/'cache', config=config,
+                       data_purpose='software_test', model_version_prefix='unrecorded-study')
+
+
 def test_warm_start_roundtrip_and_cache_miss_hit_training_states_are_identical(source, tmp_path, monkeypatch):
     from qsart.training import finetune
     manifest, _ = source

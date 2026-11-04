@@ -251,7 +251,7 @@ def fit_finetune(model, cache, frame, output, config, *, base_metadata, resume_l
         old = torch.load(output/'last.pt', map_location='cpu', weights_only=True)
         previous = old.get('metadata', {})
         for field in ('manifest_sha256', 'initial_checkpoint_sha256', 'canonical_cache_key',
-                      'source_sha256', 'data_purpose', 'backbone', 'split_fingerprints'):
+                      'source_sha256', 'data_purpose', 'backbone', 'split_fingerprints', 'model_version_prefix'):
             if previous.get(field) != base_metadata.get(field):
                 raise ValueError(f'Resume fine-tuning provenance differs: {field}')
         if (previous.get('training_config') != asdict(config) or previous.get('training_strategy') != TRAINING_STRATEGY or
@@ -260,7 +260,7 @@ def fit_finetune(model, cache, frame, output, config, *, base_metadata, resume_l
             raise ValueError('Resume optimizer/preprocessing/initialization configuration differs')
         selected = torch.load(output/'best.pt', map_location='cpu', weights_only=True)
         if any(selected.get('metadata', {}).get(field) != previous.get(field) for field in
-               ('manifest_sha256', 'initial_checkpoint_sha256', 'source_sha256', 'training_config')):
+               ('manifest_sha256', 'initial_checkpoint_sha256', 'source_sha256', 'training_config', 'model_version_prefix')):
             raise ValueError('Resume selected sibling checkpoint provenance differs')
         best_row = max(old['history'], key=lambda row: (row['validation_macro_f1'], -row['validation_nll']))
         expected_score = (best_row['validation_macro_f1'], -best_row['validation_nll'])
@@ -346,7 +346,7 @@ def fit_finetune(model, cache, frame, output, config, *, base_metadata, resume_l
             'trainable_parameters': sum(value.numel() for value in model.parameters()),
             'class_counts': {'dr_grade': counts.int().tolist()}, 'selection_metric': 'macro_f1_then_unweighted_nll',
             'selection_metrics': {'dr_grade': metrics}, 'epoch': epoch+1,
-            'model_version': f'aptos-finetune-v1-efficientnet_b0-seed{config.seed}-epoch{epoch+1}'}
+            'model_version': f"{base_metadata.get('model_version_prefix', 'aptos-finetune-v1')}-efficientnet_b0-seed{config.seed}-epoch{epoch+1}"}
         checkpoint = {'format_version': FORMAT_VERSION, 'metadata': metadata,
             'model_state': {name: value.detach().cpu() for name, value in model.state_dict().items()},
             'optimizer_state': optimizer.state_dict(), 'scheduler_state': scheduler.state_dict(),
@@ -379,11 +379,13 @@ def fit_finetune(model, cache, frame, output, config, *, base_metadata, resume_l
 
 
 def train_finetune(manifest, initial_checkpoint, output, cache_dir, *, config=None, data_purpose='real_research',
-                   resume_last=False):
+                   resume_last=False, model_version_prefix='aptos-finetune-v1'):
     config = config or FinetuneConfig()
     config.validate()
     if data_purpose not in {'real_research', 'software_test'}:
         raise ValueError('Explicit real-research or software-test data purpose required')
+    if model_version_prefix not in {'aptos-finetune-v1', 'aptos-optimization-v2'}:
+        raise ValueError('A declared fine-tuning model-version namespace is required')
     frame = read_manifest(manifest)
     _validate_training_frame(frame)
     if not {'train', 'validation'}.issubset(set(frame.split)):
@@ -405,6 +407,7 @@ def train_finetune(manifest, initial_checkpoint, output, cache_dir, *, config=No
         image_size=config.image_size, workers=config.cache_workers)
     provenance = source_provenance()
     base_metadata = {'data_purpose': data_purpose, 'backbone': 'efficientnet_b0',
+        'model_version_prefix': model_version_prefix,
         'manifest_sha256': sha256_file(manifest), 'initial_checkpoint_sha256': initial_sha,
         'initial_model_version': previous['model_version'], 'code_version': provenance['git_revision'],
         'code_provenance': provenance, 'source_sha256': provenance['source_sha256'],
