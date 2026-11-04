@@ -6,7 +6,15 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** bounded three-seed APTOS parameter-fine-tuning and
+- **Current extension:** IDRiD integrity/overlap audit VERIFIED COMPLETE from
+  `d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8`. All 516 grading JPEGs decoded;
+  independent reconstruction reproduced 132,870 internal and 2,675,976 reference
+  distances. Three perceptual APTOS matches and four internally label-conflicting
+  components remain unresolved. Download origin is unconfirmed. All images remain
+  external-only; classifier evaluation is NOT STARTED, and an unqualified
+  independent-cohort claim is blocked by these findings. See
+  [audit results](research/IDRID_DATA_V1_RESULTS.md).
+- **Completed APTOS extension:** bounded three-seed parameter-fine-tuning and
   independent audit VERIFIED COMPLETE. All 3 runs/42 uncertainty comparisons
   executed from clean `8357e9d918ef9ec00d1f66e4efadc3325790097c`.
   Conditional macro-F1 0.62411 ± 0.00823 sample SD;
@@ -15,7 +23,7 @@
   See [measured results](research/APTOS_FINETUNE_V1_RESULTS.md) and the preserved
   [frozen-feature study](research/APTOS_V1_RESULTS.md). Production stays unchanged;
   convergence, exact-paper reproduction and fresh-test utility remain unproven.
-- **New execution source:** `493ad7c6e37d16dc338e00280d8ac714ee23a0c8`;
+- **Earlier degradation execution:** `493ad7c6e37d16dc338e00280d8ac714ee23a0c8`;
   fixed seven-condition selection-data degradation VERIFIED COMPLETE. Full
   [results and limitations](research/ROBUSTNESS_V1_RESULTS.md) retain the observed
   blur/compression failures and non-monotonic quality response.
@@ -47,11 +55,12 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:**433 tests passed, no failures/skips, 75.66 seconds;
+**Latest verification:**456 tests passed, no failures/skips, 75.91 seconds;
 Ruff and Compose configuration passed. Actual native HTTP and Streamlit
-component checks cover the three-seed explorer. Audit reconstructs 43,764
-individual raw/fallback sets and preserves original model/master bytes.
-Exact current evidence is reports/aptos_finetune_v1/verification.json.
+component checks cover the reserved IDRiD record and all 13 evidence records.
+Independent data reconstruction verified all 516 JPEGs and preserved 20 prior
+model/master/result artifacts. Exact evidence is reports/idrid_data_v1/verification.json.
+The earlier APTOS audit of 43,764 raw/fallback sets remains preserved.
 
 **Preserved alignment verification:**198 tests passed, no failures/skips,78.51 seconds. This includes
 real-model JPEG integration with the conformal sidecar. One upstream AnyIO

@@ -1,0 +1,19 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "experiment_id": "idrid_data_v1",
+  "source_report_sha256": "b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a",
+  "registered_records": 13,
+  "data_scope_and_metadata_match": true,
+  "external_predictions_generated": 0,
+  "reserved_population_displayed": 516,
+  "ui_method": "Streamlit AppTest against actual native HTTP API",
+  "no_ui_exceptions": true,
+  "provenance_warning_matches_record": true,
+  "overlap_warning_matches_record": true,
+  "production_model_unchanged": true,
+  "model_card_status": "matched",
+  "conformal_status": "available",
+  "new_browser_rendering_verified": false,
+  "verifier_sha256": "e4820b543fc911f0d89da7c5bc2a247336ae6e8d64a918dbb0de469c8121caca"
+}

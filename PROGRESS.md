@@ -1,5 +1,35 @@
 # Execution log
 
+## 2026-11-04 — completed reserved IDRiD integrity/overlap audit
+
+- Executed from clean d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8. All 516
+  disease-grading JPEGs decoded and were bound by source SHA256/pHash/dimensions.
+  Original 413/103 partitions remain external_holdout; every row has training
+  eligibility False. Original DR 0–4 and separate DME-risk 0–2 labels are retained.
+  No classifier inference, model fitting, calibration or external outcome exists.
+- Fixed pHash distance <=2 found 8 internal pairs, 6 byte-exact pairs, 7 duplicate
+  components and 4 label-conflicting components. Against 5,186 source fingerprints,
+  three perceptual candidates link three IDRiD images to APTOS; none is byte-exact.
+  No DeepDRiD matches were detected. All observations/labels remain unchanged;
+  an independent-cohort claim requires candidate adjudication and source clarity.
+- Independent scipy-DCT reconstruction decoded/rehashed all 516 images and exactly
+  reproduced all 132,870 internal/2,675,976 cross-source distances, candidates,
+  components, source-label mappings and aggregate counts. All 20 preserved prior
+  master/production/APTOS artifacts matched. Aggregate report SHA256:
+  b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a.
+- Full 456-test suite passed 75.91s, zero failures/skips, with real production-model
+  and conformal integration; Ruff/Compose passed. Actual native JPEG single/batch/
+  TTA/readiness/simulator and live-API Streamlit checks passed after restart.
+  Thirteen evidence records include IDRiD reserved-data scope, source/overlap
+  warnings, original-partition counts and zero external predictions. Production
+  card/sidecar remain matched. No new browser or container execution is claimed.
+- Download-origin question remains unanswered: report records unconfirmed local
+  package origin, without treating license/layout as archive authentication.
+  Docker engine remains unavailable. Formal manuscript stays deferred. Next:
+  resolve provenance and adjudicate observed candidates under a fixed rule,
+  then declare locked external evaluation; stronger development optimization
+  remains separate. Overall scientific acceptance remains IN PROGRESS.
+
 ## 2026-11-04 — declared IDRiD external-data readiness audit
 
 - Found the local disease-grading release while checking remaining evidence gaps.

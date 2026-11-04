@@ -26,7 +26,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [ ] P1 NOT STARTED: independent IDRiD external evaluation and broader distribution-shift studies.
-- [ ] P1 IN PROGRESS: audit the discovered IDRiD grading release, freeze an external-only manifest and review cross-source fingerprints before model evaluation.
+- [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
+- [ ] P1 Resolve IDRiD download provenance and adjudicate three APTOS near-duplicate candidates plus four internally label-conflicting components before an independent external-cohort claim.
 - [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
 
 Conformal integration is VERIFIED COMPLETE as software/calibration execution; its

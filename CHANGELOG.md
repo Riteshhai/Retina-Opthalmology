@@ -1,5 +1,17 @@
 # QSART change log
 
+## Reserved IDRiD data readiness — 2026-11-04
+
+- Added strict original disease-grading ingestion, separate DR/DME labels,
+  source/integrity bindings and an external-only training-rejection guard.
+- Audited all 516 JPEGs and froze private manifest/candidate tables. Retained
+  three perceptual APTOS overlap candidates and four internal label-conflicting
+  components without exclusions or relabeling. Download origin remains unconfirmed.
+- Independently reproduced all fingerprints and 2.8 million pairwise distances;
+  preserved production/master/earlier research bytes. No external model inference.
+- Added explicit reserved-data API/UI evidence. All 456 tests, Ruff, Compose and
+  actual native HTTP/Streamlit checks passed; container execution remains open.
+
 ## Bounded APTOS parameter fine-tuning — 2026-11-04
 
 - Executed the predeclared four-epoch adaptation pilot for seeds2026/2027/2028

@@ -93,6 +93,15 @@ Direct dependencies are pinned in requirements.txt; Docker resolves compatible t
 
 ## Continue the adopted specification
 
+The [IDRiD data-readiness audit](docs/research/IDRID_DATA_V1_RESULTS.md) validated
+all 516 local grading images and froze an external-only manifest. It found three
+perceptual APTOS overlap candidates and four internally label-conflicting
+components. All observations and source labels are retained. Download origin is
+not yet user-confirmed; source clarification and candidate review precede an
+independent external-cohort claim. No IDRiD predictions or model fitting occurred.
+The explorer displays this as reserved data-readiness evidence. See
+[local setup](docs/IDRID_SETUP.md).
+
 The [APTOS study](docs/research/APTOS_V1_RESULTS.md) is complete: two genuine CPU
 frozen-feature candidates, independent temperature/conformal roles and all 14
 uncertainty comparisons. EfficientNet-B0 wins the declared selection macro-F1 rule

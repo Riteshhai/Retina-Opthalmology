@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "scope": "external_data_integrity_and_overlap_readiness_only",
+  "execution_source_commit": "d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8",
+  "pytest": {
+    "tests": 456,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 75.91,
+    "junit_duration_seconds": 75.363,
+    "junit_sha256": "6b31d841918ce037909617ce2f99508484bb0896ff1725c2b0c331e16f3e75c0",
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=reports/idrid_data_v1_tests.xml",
+    "genuine_production_model_and_conformal_integration_enabled": true,
+    "warnings": [
+      "One upstream AnyIO BlockingPortal deprecation warning."
+    ]
+  },
+  "ruff": "passed",
+  "compose_configuration": "passed",
+  "docker_engine_available": false,
+  "new_container_execution_verified": false,
+  "new_browser_rendering_verified": false,
+  "native_http_and_streamlit_component_checks": "passed",
+  "measured_artifact_sha256": {
+    "data_audit.json": "b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a",
+    "independent_audit.json": "c68e9b4f04edecdec2326b398c8c463210c4826995c4501e96cf82a7400cf5eb",
+    "native_registry.json": "f840c76a5cd295d2a75eec365cdd0a1c30bb3a2681e7dff5c8838787d6d86e33",
+    "native_deployment.json": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812"
+  },
+  "external_model_inference_performed": false,
+  "original_studies_and_production_unchanged": true
+}
