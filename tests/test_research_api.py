@@ -126,6 +126,27 @@ def test_saved_development_reports_preserve_evidence_scope(tmp_path, monkeypatch
         assert records[0]['dataset'] == dataset
 
 
+def test_external_data_audit_is_not_reported_as_model_evaluation(tmp_path, monkeypatch):
+    """Generated external-data fixture contains no classifier outputs."""
+    report = tmp_path/'idrid_data_v1/data_audit.json'
+    report.parent.mkdir()
+    payload = {'images': 10, 'images_decoded': 10,
+        'source_provenance_status': 'local_package_download_origin_unconfirmed',
+        'model_inference_performed': False, 'external_model_evaluation_completed': False,
+        'official_partitions': {'official_train': {'images': 5, 'dr_grade_counts': {'0': 5}},
+                                'official_test': {'images': 5, 'dr_grade_counts': {'1': 5}}},
+        'cross_source_candidate_pairs': 1, 'independence_claim_blocked_by_detected_overlap': True}
+    report.write_text(json.dumps({**payload, 'dataset': 'IDRiD', 'limitations': ['Generated data-readiness fixture.']}))
+    monkeypatch.setenv('QSART_REPORTS_DIR', str(tmp_path))
+    with TestClient(create_app()) as client:
+        data = client.get('/research/metrics', params={'experiment_id': 'idrid_data_v1'}).json()
+        assert data['scope'] == 'external_data_integrity_and_overlap_readiness_only'
+        record = client.get('/research/experiments').json()['experiments'][0]
+        assert record['partition'] == 'external_holdout' and record['dataset'] == 'IDRiD'
+        assert data['metrics'] == payload and record['model_version'] is None
+        assert 'grading' not in data['metrics'] and 'accuracy' not in data['metrics']
+
+
 class PositiveFixture:
     """Dependency-injected fixture bypasses artifact loading for an endpoint contract."""
     model_version = 'software-positive-fixture'

@@ -253,3 +253,35 @@ def test_finetune_explorer_displays_seed_without_changing_primary(monkeypatch, d
     assert not app.exception
     assert any('fixed at 2026' in item.value for item in app.caption)
     assert any('does not select or deploy' in item.value for item in app.caption)
+
+
+@pytest.mark.skipif(importlib.util.find_spec('streamlit') is None, reason='Streamlit not installed')
+def test_external_data_readiness_keeps_reservation_and_overlap_visible(monkeypatch, dashboard_api):
+    """Generated metadata verifies data-readiness display without external predictions."""
+    from streamlit.testing.v1 import AppTest
+    original_get = httpx.get
+    metrics = {'images_decoded': 10, 'model_inference_performed': False,
+        'source_provenance_status': 'local_package_download_origin_unconfirmed',
+        'cross_source_candidate_pairs': 1, 'independence_claim_blocked_by_detected_overlap': True,
+        'official_partitions': {name: {'images': 5, 'dr_grade_counts': {'0': 2, '1': 3}}
+                                for name in ('official_train', 'official_test')}}
+    record = {'experiment_id': 'idrid_data_v1', 'dataset': 'IDRiD',
+        'scope': 'external_data_integrity_and_overlap_readiness_only', 'metrics': metrics,
+        'notes': ['Generated software fixture; external evaluation remains reserved.']}
+
+    def get(url, **kwargs):
+        if urlparse(url).path == '/research/experiments':
+            return httpx.Response(200, json={'experiments': [record]})
+        if urlparse(url).path == '/research/metrics':
+            return httpx.Response(200, json=record)
+        return original_get(url, **kwargs)
+
+    monkeypatch.setattr(httpx, 'get', get)
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/'dashboard/app.py')).run(timeout=25)
+    app.sidebar.radio[0].set_value('Experiment Explorer').run(timeout=25)
+    assert not app.exception
+    assert app.dataframe[-1].value.Images.tolist() == [5, 5]
+    assert any(item.label == 'External predictions' and item.value == '0' for item in app.metric)
+    assert any('External cohort reserved' in item.value for item in app.info)
+    assert any('download origin is not yet confirmed' in item.value for item in app.warning)
+    assert any('overlap candidates require review' in item.value for item in app.warning)

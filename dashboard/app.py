@@ -186,6 +186,31 @@ def show_aptos_finetune(metrics):
                  'paired_changes': {str(row['training_seed']): row.get('paired_baseline_changes') for row in runs}})
 
 
+def show_idrid_data_readiness(metrics):
+    st.info('External cohort reserved. This record audits data integrity and overlap; '
+            'no external model predictions or performance results have been generated.')
+    provenance = metrics.get('source_provenance_status', 'Unreported')
+    st.caption('Download provenance: '+provenance)
+    if provenance != 'official_download_user_confirmed':
+        st.warning('The local package download origin is not yet confirmed.')
+    left, middle, right = st.columns(3)
+    left.metric('Images decoded', metrics.get('images_decoded', 0))
+    middle.metric('Cross-source candidate pairs', metrics.get('cross_source_candidate_pairs', 0))
+    right.metric('External predictions', 0 if metrics.get('model_inference_performed') is False else 'Unreported')
+    if metrics.get('independence_claim_blocked_by_detected_overlap'):
+        st.warning('Detected overlap candidates require review before an independent-cohort claim.')
+    rows = []
+    for split, part in metrics.get('official_partitions', {}).items():
+        rows.append({'Original partition': split, 'Images': part['images'],
+                     **{f'DR grade {grade}': part['dr_grade_counts'].get(str(grade), 0) for grade in range(5)}})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    st.caption('Both original partitions are external holdout for QSART. '
+               'DME risk is a separate source annotation and is not an image-quality label. '
+               'Serial names and fingerprint components are not patient identifiers.')
+    with st.expander('Data-audit details'):
+        st.json(metrics)
+
+
 def submit(files, params=None, batch=False):
     endpoint = '/predict/batch' if batch else '/predict'
     key = 'files' if batch else 'file'
@@ -508,6 +533,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_experiment(detail.get('metrics', {}))
                 elif chosen == 'aptos_finetune_v1':
                     show_aptos_finetune(detail.get('metrics', {}))
+                elif chosen == 'idrid_data_v1':
+                    show_idrid_data_readiness(detail.get('metrics', {}))
                 else:
                     st.json(detail.get('metrics', {}))
                 for note in detail.get('notes', []):

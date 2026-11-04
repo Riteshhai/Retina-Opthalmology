@@ -41,7 +41,9 @@ def experiment_registry(root):
         ('aptos_v1/evaluation.json', 'aptos_development_v1', 'validation',
          'development_selection_and_independent_calibration'),
         ('aptos_finetune_v1/evaluation.json', 'aptos_finetune_v1', 'validation',
-         'development_finetuning_and_training_seed_diagnostics')]
+         'development_finetuning_and_training_seed_diagnostics'),
+        ('idrid_data_v1/data_audit.json', 'idrid_data_v1', 'external_holdout',
+         'external_data_integrity_and_overlap_readiness_only')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -58,7 +60,12 @@ def experiment_registry(root):
                    'decision_review_prices', 'mode_interpretation', 'status_interpretation',
                    'candidates', 'selected_candidate', 'selection_rule', 'temperature',
                    'calibration_fit', 'data_preparation', 'grading_before_temperature',
-                   'calibration', 'calibration_unit_definition', 'uniform_generation', 'baseline') if key in raw}
+                   'calibration', 'calibration_unit_definition', 'uniform_generation', 'baseline',
+                   'source_provenance_status', 'official_partitions', 'images_decoded', 'reference_datasets',
+                   'cross_source_candidate_pairs', 'cross_source_candidate_images', 'cross_source_exact_pairs',
+                   'internal_candidate_pairs', 'internal_label_conflict_components',
+                   'independence_claim_blocked_by_detected_overlap', 'observations_excluded',
+                   'model_inference_performed', 'external_model_evaluation_completed') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         records.append(ExperimentSummary(experiment_id=name, dataset=raw.get('dataset', 'DeepDRiD'), partition=partition,

@@ -1,5 +1,23 @@
 # Execution log
 
+## 2026-11-04 — declared IDRiD external-data readiness audit
+
+- Found the local disease-grading release while checking remaining evidence gaps.
+  Official documentation describes 516 images / 413 original training + 103 test.
+  Only source headers/counts and license were inspected before the declared
+  protocol; no external model inference, fitting or tuning was performed.
+- Added strict original-layout parsing, separate DR/DME fields, full JPEG integrity,
+  fixed-distance fingerprint overlap and external-only training-rejection guards.
+  The source-confirmation question remains separate from local file/layout checks.
+- Generated software fixtures:21 tests passed,5.85s; targeted Ruff passed. These
+  are plumbing tests, not evidence of external grading performance. Added a
+  dedicated data-readiness explorer view with explicit reserved/not-inferred text.
+  Real audit will execute only from clean committed source, with frozen references.
+- Full final pre-execution suite:456 passed, zero failures/skips,75.91s with real
+  production-model/conformal integration enabled. Ruff and Compose configuration
+  passed. An initial new API assertion confused discovery metadata with the
+  narrower metrics schema; corrected the test and reran the complete suite.
+
 ## 2026-11-04 — completed bounded APTOS fine-tuning and audit
 
 - Real execution used clean source 8357e9d918ef9ec00d1f66e4efadc3325790097c. The pre-optimizer
