@@ -24,3 +24,4 @@ reports/idrid_review_v1/** -text whitespace=cr-at-eol
 reports/idrid_external_v1/** -text whitespace=cr-at-eol
 reports/aptos_optimization_v2/** -text whitespace=cr-at-eol
 reports/quality_adaptation_v1/** -text whitespace=cr-at-eol
+reports/quality_calibration_stress_v1/** -text whitespace=cr-at-eol

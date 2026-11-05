@@ -1,5 +1,14 @@
 # QSART change log
 
+## Quality calibration/stress v1 preparation — 2026-11-05
+
+- Declared24 independent-role head temperatures for six fixed candidates and seven
+  canonical-input conditions. Clean labels are not reused as corrupted quality truth.
+- Added role/cache guards, atomic inference/scalar resume, fixed group diagnostics,
+  provenance/preservation and saved-result explorer. Production remains fixed.
+- All14 targeted/536 genuine integrated tests, Ruff and Compose configuration pass.
+  Actual new real-model scalar/stress results and audit are pending this source commit.
+
 ## Matched quality adaptation v1 results — 2026-11-05
 
 - Executed all three frozen/adapted pairs at 15 epochs/795 updates per run.

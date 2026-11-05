@@ -24,7 +24,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.
-- [ ] P1 Predeclare independent-role quality probability calibration and a frozen-candidate stress comparison; pursue independent quality validation before deployment changes.
+- [ ] P1 IN PROGRESS: execute declared independent-role quality temperature calibration and frozen-candidate stress study; software/readiness verified, real outcomes/audit pending.
+- [ ] P1 Pursue independent quality supervision/validation before proposing production replacements.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.

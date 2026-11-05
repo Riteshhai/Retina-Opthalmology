@@ -1,5 +1,29 @@
 # Execution log
 
+## 2026-11-05 — quality calibration and stress v1 preparation
+
+- Declared all six fixed quality checkpoints,24 scalar temperatures fitted only
+  on the separate168-image/42-patient calibration role, clean selection diagnostics
+  on168/42 and seven exact canonical-input conditions. Disclose historical role
+  reuse; no classifier, conformal, policy or production updates. No fitting pixels,
+  consumed confirmation/IDRiD or APTOS images enter the new study.
+- Altered quality images have no new annotations: report probability/ordinal-code
+  response changes only, never corrupted quality accuracy. Predeclare fixed-primary
+  mean NLL change, blur2/JPEG20 poor-score response, all486 paired intervals and48
+  zero controls, without refitting/reselection/multiplicity adjustment.
+- Added strict role/pixel-cache guards, frozen eval-mode inference, per-cell atomic
+  resume and scalar seals, input/provenance bindings, saved-results API/UI and two
+  generated-fixture test files. Preserve training_seed versus bootstrap_seed fields.
+  The byte-preservation Git rule is present before new measured reports are created.
+- Input-only readiness passed six candidate seals/336 original byte hashes and
+  role separation. Preservation preview:234 historical/master/production artifacts.
+  No new real-model inference or temperature fitting has occurred at this commit.
+- Generated tests:14 passed14.06s. Full suite with genuine production/conformal
+  integration:536 passed100.90s, zero failures/skips. Ruff,Compose configuration and
+  whitespace checks pass. Source/config/protocol are committed clean before execution.
+  New real scalar/stress outcomes, independent reconstruction and native integration
+  remain unverified at this preparation stage. Overall scientific acceptance IN PROGRESS.
+
 ## 2026-11-05 — completed matched quality-backbone adaptation v1
 
 - Executed all six runs from clean 2d4243c977a0669776a5dc356d6d6e3166732a12:

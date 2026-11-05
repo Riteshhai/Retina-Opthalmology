@@ -251,6 +251,61 @@ def show_quality_adaptation(metrics):
                'They are descriptive, without reselection or multiplicity correction. Production weights are unchanged.')
 
 
+def show_quality_calibration_stress(metrics):
+    runs = metrics.get('runs', [])
+    if not runs:
+        st.info('No completed quality calibration/stress study is recorded.')
+        return
+    st.caption('Temperatures use a separate calibration role, historically used by older models. '
+               'Selection data are reused development evidence. All six models stay fixed; production is unchanged.')
+    heads = {'quality_grade': 'Overall quality', 'clarity_class': 'Clarity',
+             'field_definition_class': 'Field definition', 'artifact_class': 'Artifact'}
+    rows = []
+    for run in runs:
+        clean = run['clean_metrics']['validation']
+        rows.append({'Model': run['model_id'], 'Training seed': run['training_seed'], 'Arm': run['arm'],
+            'Raw mean head NLL': sum(clean['raw'][h]['nll'] for h in heads)/4,
+            'Temperature mean head NLL': sum(clean['temperature'][h]['nll'] for h in heads)/4,
+            'Paired NLL change': run['calibration_changes']['mean_head_nll']['difference']})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    ids = [row['model_id'] for row in runs]
+    chosen = st.selectbox('Recorded calibrated quality model', ids,
+                          index=ids.index(metrics.get('primary_model_id', 'quality_seed2026_adapted')))
+    run = next(row for row in runs if row['model_id'] == chosen)
+    head = st.selectbox('Clean quality head', list(heads), format_func=heads.get)
+    role = st.selectbox('Recorded clean role', ['validation', 'calibration'])
+    st.metric('Recorded head temperature', f"{run['temperatures'][head]:.5f}")
+    clean = run['clean_metrics'][role]
+    st.dataframe(pd.DataFrame([{'Probabilities': state,
+        **{key: clean[state][head][key] for key in ('accuracy', 'macro_f1', 'nll', 'ece_10', 'brier')}}
+        for state in ('raw', 'temperature')]), width='stretch', hide_index=True)
+    support = clean['raw'][head]['support']
+    st.dataframe(pd.DataFrame([{'Class': index, 'Clean images': count,
+        'Raw recall': clean['raw'][head]['recall'][index],
+        'Temperature recall': clean['temperature'][head]['recall'][index]}
+        for index, count in enumerate(support)]), width='stretch', hide_index=True)
+    st.caption('Calibration-role metrics describe fitting data. Positive scalar temperatures preserve class '
+               'predictions and do not repair missing rare classes. Poor quality is class 0.')
+    state = st.selectbox('Recorded probability state', ['temperature', 'raw'])
+    response = st.selectbox('Recorded stress response', ['poor_probability', 'expected_clarity',
+                                                      'expected_field_definition', 'expected_artifact'])
+    stress = []
+    for row in run['stress']:
+        interval = row[state]['changes'][response]
+        stress.append({'Condition': row['condition'], 'Images': row['images'],
+            'Mean score': row[state]['levels'][response], 'Change from clean': interval['difference'],
+            'Lower 95%': interval['lower_95'], 'Upper 95%': interval['upper_95']})
+    st.dataframe(pd.DataFrame(stress), width='stretch', hide_index=True)
+    st.caption('Altered inputs have no new quality labels: this table measures score response, not '
+               'defect-detection accuracy. Expected class indices are ordinal summaries, not physical quality scales.')
+    with st.expander('All paired calibration and adaptation-response intervals'):
+        st.json({'calibration_changes': run['calibration_changes'],
+                 'response_contrasts': metrics.get('response_contrasts', []),
+                 'bootstrap': metrics.get('bootstrap', {}), 'summary': metrics.get('summary', {})})
+    st.caption('Intervals retain whole components and condition on fitted temperatures and fixed models. '
+               'No refitting, reselection or multiplicity correction; no production replacement is selected here.')
+
+
 def show_idrid_data_readiness(metrics):
     st.info('External cohort reserved at audit time. This data-integrity record contains '
             'no model predictions. Later model outcomes, if available, have a separate external-evaluation record.')
@@ -652,6 +707,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_optimization(detail.get('metrics', {}))
                 elif chosen == 'quality_adaptation_v1':
                     show_quality_adaptation(detail.get('metrics', {}))
+                elif chosen == 'quality_calibration_stress_v1':
+                    show_quality_calibration_stress(detail.get('metrics', {}))
                 elif chosen == 'idrid_data_v1':
                     show_idrid_data_readiness(detail.get('metrics', {}))
                 elif chosen == 'idrid_external_v1':
