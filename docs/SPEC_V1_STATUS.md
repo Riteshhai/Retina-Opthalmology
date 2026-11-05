@@ -6,7 +6,15 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** matched quality-backbone adaptation VERIFIED COMPLETE
+- **Current extension:** fixed-model quality calibration/stress VERIFIED COMPLETE
+  from clean `42ae8621649b11d666f7b5e3e8516b0ac3a5a812`:24 scalar temperatures,
+  six candidates, seven conditions,8,064 model-image observations. Primary clean
+  mean NLL 1.02046 to .87412, but field ECE/Brier and frozen-model mean NLL worsen.
+  Every class prediction stays fixed. All 486 intervals/48 zero controls,96 clean
+  head metric views and 234 preserved artifacts independently reconstructed;
+  all logits replay exactly. Stress score changes have no new quality truth and
+  cannot establish detection accuracy or triage utility. [Results](research/QUALITY_CALIBRATION_STRESS_V1_RESULTS.md).
+- **Previous quality extension:** matched quality-backbone adaptation VERIFIED COMPLETE
   from clean `2d4243c977a0669776a5dc356d6d6e3166732a12`: three seeds, two arms,
   fixed15 epochs/795 updates per run. Conditional mean four-head F1 .50894 frozen
   versus .54112 adapted; all three primary paired intervals include zero. Raw
@@ -88,7 +96,15 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:** 522 tests passed, no failures/skips,110.17 seconds,
+**Latest verification:** 536 tests passed, no failures/skips,100.90 seconds before
+the locked scalar/stress execution. Scientific/API/UI source stayed fixed;
+Ruff/Compose/whitespace pass. Actual native production JPEG/batch/TTA/readiness/
+simulator/overload and live-API AppTest checks pass:18 records,48 clean and 48 stress
+views, matched original card/sidecar, fixed primary and absent-corrupted-truth captions.
+Both figures visually inspected. No new browser/container proof. Current evidence:
+reports/quality_calibration_stress_v1/verification.json.
+
+**Preserved adaptation verification:** 522 tests passed, no failures/skips,110.17 seconds,
 after the paired-seed metadata fix;521 passed128.16s before learning. Ruff and
 Compose configuration pass. Actual native production JPEG/batch/TTA/readiness/
 simulator/overload and live-API Streamlit checks pass:17 records, all six quality
@@ -196,8 +212,8 @@ are completed and consumed; broader independent quality/prospective validation,
 clinical review/recapture outcomes and prospective utility remain unproduced.
 
 **IN PROGRESS overall:** useful validated conformal/triage behavior,
-source-role quality calibration, additional fixed-model stress comparisons and
-broader independent validation. A future experiment must predeclare changes; consumed v1 confirmation
+independent quality-data source/terms/label access, broader validation and
+useful triage evidence. A future experiment must predeclare changes; consumed v1 confirmation
 cannot become an undisclosed tuning set. Formal manuscript writing stays deferred.
 
 Key files: MASTER_SPEC.md, CHANGELOG.md, AGENTS.md, TASKS.md, PROGRESS.md,

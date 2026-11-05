@@ -1,0 +1,70 @@
+{
+  "status": "verified",
+  "specification": "MASTER_SPEC_v1.0",
+  "scientific_source_commit": "42ae8621649b11d666f7b5e3e8516b0ac3a5a812",
+  "source_report_sha256": "906322ccd6a28a5a330a935573af6ac775de5e191eafa474ebd28f96c04b6bc3",
+  "independent_audit_sha256": "59ce0b3642977eac71aea235472cfaa8cfad2cccbadd1b4c94c0a56c9e2968cc",
+  "local_tests": {
+    "passed": 536,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_seconds": 100.9,
+    "junit_suite_seconds": 100.036,
+    "junit_sha256": "6b3a8859b28f002f40dc422b31c9fbb3ea1946f9087093b93ffab832b4e09647",
+    "phase": "before actual temperature fitting and stress inference; same scientific/API/UI source retained",
+    "genuine_integration_tests": [
+      "test_real_trained_pipeline_and_batch_export"
+    ]
+  },
+  "targeted_tests": {
+    "passed": 14,
+    "console_seconds": 14.06,
+    "junit_sha256": "1e10f66939e2e77e4e4f3736a14224612a179990e01f7dca2907b94812c7feb6"
+  },
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check .",
+      "exit_code": 0
+    },
+    {
+      "command": "docker compose config --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "runtime": "native_python",
+  "native_registry_sha256": "2b7de2898e9eb376c74359f889c4f6de88972e474e71dd0ce00923e51572ab39",
+  "native_deployment_sha256": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+  "registered_records": 18,
+  "clean_ui_views": 48,
+  "stress_ui_views": 48,
+  "figure_visual_inspection": {
+    "method": "local PNG inspection",
+    "files": [
+      "calibration_diagnostics.png",
+      "stress_responses.png"
+    ]
+  },
+  "docker_engine_status": "unavailable_linux_engine_pipe",
+  "new_container_execution_verified": false,
+  "new_browser_rendering_verified": false,
+  "production_model_changed": false,
+  "verification_source_file_sha256": {
+    "qsart/evaluation_quality.py": "629a91bc8afd327bddc95ade1f0dbc0f87b8c6659b2faeeeb53b99c7505b61aa",
+    "scripts/run_quality_calibration_stress.py": "4aab4e85e64765e6bf4b7806e3690ee9b552199d584b4acc7401d81386278edb",
+    "scripts/plot_quality_calibration_stress.py": "358c24829b40f662f4cf5c0e26c97f944a82a6c98507c0e68ad051beb1c4271c",
+    "api/research.py": "7b7938b960440f0b5017d815fb86c3c21869f3900d586d3059253537d9369d40",
+    "dashboard/app.py": "1d5159f1922b0d993ec6d0154ad6da6095c765175322b4199611c5ba2d732c7f",
+    "tests/test_quality_calibration_stress.py": "15498a45dbc156904cf9ffb18cd8b1d69c429fc875b09695e072b743b312156c",
+    "tests/test_quality_calibration_explorer.py": "765f7e079ea27e0adfdf8b27663198cdf6ac3127a643d23fecb920020ed97f26"
+  },
+  "verification_script_sha256": "7c56c4ebe8fb2bee811520bbdd3dae528a75277fb2f1918b2315549fc6686d9e",
+  "limitations": [
+    "Native HTTP and AppTest are separate from browser/container proof.",
+    "Development calibration/score responses are not fresh confirmation or clinical/triage utility."
+  ]
+}

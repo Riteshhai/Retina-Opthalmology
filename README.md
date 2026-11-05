@@ -42,10 +42,13 @@ stays fixed. Independent reconstruction, all522 tests and the17-record native
 explorer pass. An explicit version1.1 metadata correction separates training and
 bootstrap seed labels while preserving the original report and all outcome values.
 
-The next [quality calibration/stress protocol](docs/research/QUALITY_CALIBRATION_STRESS_V1_PROTOCOL.md)
-fixes all six models, a separate temperature-fitting role and seven input conditions.
-Its software/readiness checks pass; new scalar fits and stress outcomes are pending.
-Altered inputs have no new quality annotations, so their outputs measure score response.
+The [quality calibration/stress study](docs/research/QUALITY_CALIBRATION_STRESS_V1_RESULTS.md)
+completed 24 separate-role head temperatures and seven conditions for all six fixed
+models. Primary clean-selection mean NLL falls from 1.02046 to .87412; class predictions
+stay unchanged, field ECE/Brier worsen, and frozen-model mean NLL rises slightly.
+All 486 intervals and adverse stress responses are retained. Altered inputs have no
+new quality annotations, so score shifts do not establish detection accuracy.
+All 536 tests and the 18-record native explorer pass; production stays fixed.
 
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 

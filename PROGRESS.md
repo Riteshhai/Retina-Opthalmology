@@ -1,15 +1,53 @@
 # Execution log
 
+## 2026-11-05 — completed quality calibration and stress v1
+
+- Executed from clean 42ae8621649b11d666f7b5e3e8516b0ac3a5a812. All six fixed
+  quality models completed 24 calibration-role head temperatures and 8,064 single-pass
+  model-image observations, with only 336 source images decoded. No classifier,
+  conformal, policy or production update. Historical calibration-role and repeated
+  selection reuse are disclosed; no confirmation/IDRiD/APTOS or fitting pixels used.
+- Primary adapted mean clean-selection NLL 1.02045741 to .87411869; delta-.14633872,
+  descriptive95% interval[-.21830587,-.07930656]. All three adapted point NLL changes
+  are negative; all three frozen changes positive. Conditional adapted mean NLL
+  .99734034 to .87326385, frozen .95549177 to .96154892. Keep every adverse fit.
+- Positive temperature preserves all class confusion matrices/accuracy/F1/recall.
+  Primary field ECE .12950 to .17579 and Brier .43208 to .45714 worsen despite lower
+  NLL. Rare-field0/1 and adapted artifact0/6 failures persist. Scaling does not
+  repair discrimination, provide new quality supervision or establish triage utility.
+- Primary scaled poor-score changes blur2 +.08822287, interval[.04974196,.12779639],
+  JPEG20 +.04371024,[.00771073,.07743241]. No new corrupted-quality truth exists;
+  these are responses only. Primary scaled adapted-minus-frozen blur response
+  -.12577232,[-.15538536,-.09755179]; JPEG20 contrast+.01490227 interval includes zero.
+- Independent audit passed24 scalar objectives (maximum NLL gap to independent
+  bounded optimizer3.996714e-9),96 clean head metric views,486 declared intervals
+  and 48 zero controls. All 8,064 raw logits replay exactly; all model state stays
+  fixed. All 336 source hashes/eight pixel caches,26 independent geometry images/
+  104 transform cells and 234 historical/master/production artifacts match. Scientific
+  report SHA906322ccd6a28a5a330a935573af6ac775de5e191eafa474ebd28f96c04b6bc3.
+- All 536 local tests passed in 100.90s before fitting/inference, zero failures/skips,
+  genuine production/conformal integration;14 targeted passed in 14.06s. Same scientific/
+  API/UI source retained. Ruff/Compose/whitespace pass. Source CI42071805872 passed.
+- Actual native JPEG/batch/TTA/readiness/simulator/overload pass after restart.
+  Live-API AppTest verifies18 records,48 clean model/head/role views and 48 stress
+  model/state/response views, all values/supports, fixed primary and fitting/truth
+  captions. Both figures visually inspected. Docker Linux engine unavailable;
+  no new browser/container proof. Overall project IN PROGRESS; formal writing deferred.
+- Local new module/runner/config/protocol/tests/API/UI, plotting script, aggregate/
+  audit/native/verification/figures and results notes are retained. Next highest
+  executable gate: independent quality-data source/terms/label access audit before
+  proposing broader validation or production changes. Current models remain fixed.
+
 ## 2026-11-05 — quality calibration and stress v1 preparation
 
 - Declared all six fixed quality checkpoints,24 scalar temperatures fitted only
-  on the separate168-image/42-patient calibration role, clean selection diagnostics
-  on168/42 and seven exact canonical-input conditions. Disclose historical role
+  on the separate 168-image/42-patient calibration role, clean selection diagnostics
+  on 168/42 and seven exact canonical-input conditions. Disclose historical role
   reuse; no classifier, conformal, policy or production updates. No fitting pixels,
   consumed confirmation/IDRiD or APTOS images enter the new study.
 - Altered quality images have no new annotations: report probability/ordinal-code
   response changes only, never corrupted quality accuracy. Predeclare fixed-primary
-  mean NLL change, blur2/JPEG20 poor-score response, all486 paired intervals and48
+  mean NLL change, blur2/JPEG20 poor-score response, all 486 paired intervals and 48
   zero controls, without refitting/reselection/multiplicity adjustment.
 - Added strict role/pixel-cache guards, frozen eval-mode inference, per-cell atomic
   resume and scalar seals, input/provenance bindings, saved-results API/UI and two
@@ -18,8 +56,8 @@
 - Input-only readiness passed six candidate seals/336 original byte hashes and
   role separation. Preservation preview:234 historical/master/production artifacts.
   No new real-model inference or temperature fitting has occurred at this commit.
-- Generated tests:14 passed14.06s. Full suite with genuine production/conformal
-  integration:536 passed100.90s, zero failures/skips. Ruff,Compose configuration and
+- Generated tests:14 passed in 14.06s. Full suite with genuine production/conformal
+  integration:536 passed in 100.90s, zero failures/skips. Ruff,Compose configuration and
   whitespace checks pass. Source/config/protocol are committed clean before execution.
   New real scalar/stress outcomes, independent reconstruction and native integration
   remain unverified at this preparation stage. Overall scientific acceptance IN PROGRESS.
@@ -367,7 +405,7 @@
 ## 2026-11-04 — APTOS completion, relocation and application integration
 
 - The run from frozen e862700331186e6a754148b33534974d0f716141 completed both
-  genuine frozen-ImageNet-feature candidates and all14 CP comparisons in1435.90s.
+  genuine frozen-ImageNet-feature candidates and all 14 CP comparisons in1435.90s.
   EfficientNet:36epochs,2412updates,selectedepoch21,selection78.6948%accuracy,
   .603341macro-F1,.844005QWK. MobileNet:20epochs,1340updates,selectedepoch5,
   76.9674%accuracy,.570192macro-F1,.855747QWK. The fixed F1 rule selects B0;
@@ -380,7 +418,7 @@
   andgrade4recall22/40 remain weak. No new model/uncertainty seed is deployed.
 - Final independent audit passed:original archive/all3,662image hashes, complete
   grouping/partitions/roles, both histories/checkpoint choices, official frozen
-  states, direct head×feature probabilities and all14,588raw/fallback sets.
+  states, direct head×feature probabilities and all 14,588raw/fallback sets.
   Max probability error1.90e-7,quantile error1.17e-8; independent temperature
   optimum NLL gap2.66e-11. Source/privacy/master/production-byte checks passed.
   Evaluation SHA994a8e78148d6c16d601d61d8774e0d36070b653ebf5549dec093ecbad4924ec.
@@ -433,7 +471,7 @@
 - Prepared fixed60/15/15/10fingerprint-group splits, a test-free development
   manifest, independent calibration roles and label-independent representatives.
   Unknown patient/eye identity is reported; no APTOS quality labels are invented.
-- Implemented two frozen official ImageNet candidate runs and all14 declared
+- Implemented two frozen official ImageNet candidate runs and all 14 declared
   conventional/deterministic/randomized conformal comparisons, raw empties and
   common modal fallback. Current production DR/quality/card/sidecar SHA values
   were snapshotted before execution. No new artifact is selected for deployment.

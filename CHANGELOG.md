@@ -1,12 +1,26 @@
 # QSART change log
 
+## Quality calibration and stress v1 results — 2026-11-05
+
+- Completed 24 scalar fits and 8,064 evaluations from frozen six-model source 42ae862.
+  Primary mean NLL 1.02046 to .87412; frozen-model average NLL and primary field
+  ECE/Brier worsen. Every class prediction/rare-class failure remains unchanged.
+- Retained all seven input conditions, raw/scaled responses and 486 declared
+  intervals/48 zero controls without inventing corrupted quality truth. Primary
+  blur response is smaller than the frozen counterpart; JPEG20 contrast includes0.
+- Independently reconstructed all objectives/metrics/intervals; every raw logit
+  replays exactly. All 234 prior artifacts remain fixed. Added inspected figures,
+  results notes and 18-record native explorer with 96 verified controls/views.
+- All 536 local tests, Ruff,Compose and actual native production checks pass.
+  Docker engine unavailable; no production replacement or clinical-utility claim.
+
 ## Quality calibration/stress v1 preparation — 2026-11-05
 
-- Declared24 independent-role head temperatures for six fixed candidates and seven
+- Declared 24 independent-role head temperatures for six fixed candidates and seven
   canonical-input conditions. Clean labels are not reused as corrupted quality truth.
 - Added role/cache guards, atomic inference/scalar resume, fixed group diagnostics,
   provenance/preservation and saved-result explorer. Production remains fixed.
-- All14 targeted/536 genuine integrated tests, Ruff and Compose configuration pass.
+- All 14 targeted/536 genuine integrated tests, Ruff and Compose configuration pass.
   Actual new real-model scalar/stress results and audit are pending this source commit.
 
 ## Matched quality adaptation v1 results — 2026-11-05

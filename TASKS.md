@@ -16,7 +16,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
 - [x] P1 Locate downloaded APTOS competition archive; user confirmed official Kaggle source on 3 November.
 - [x] P1 Validate all 3,662 APTOS images and freeze duplicate-aware partitions; quarantine148 conflicting-component images without relabeling.
-- [x] P1 Execute both APTOS frozen-feature candidates and all14 independent temperature/conformal diagnostics; complete independent reconstruction.
+- [x] P1 Execute both APTOS frozen-feature candidates and all 14 independent temperature/conformal diagnostics; complete independent reconstruction.
 - [x] P1 Verify relocated APTOS source bytes, configure the new local root and preserve frozen study manifests.
 - [x] P1 Execute and independently audit the bounded three-seed APTOS parameter-fine-tuning pilot, fixed BatchNorm statistics, all 42 calibration comparisons and native explorer integration.
 - [x] P1 Execute and audit the locked primary-seed source schedule extension: 14/15 epochs, selected 10, 14 uncertainty comparisons; preserve adverse grade-3/coverage changes and all reserved-test/external exclusions.
@@ -24,7 +24,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.
-- [ ] P1 IN PROGRESS: execute declared independent-role quality temperature calibration and frozen-candidate stress study; software/readiness verified, real outcomes/audit pending.
+- [x] P1 Execute/audit all 24 independent-role quality temperatures, six fixed candidates/seven conditions and all 486 intervals; retain adverse calibration/response findings and unchanged production.
+- [ ] P1 Audit an independent quality dataset's official source, terms, labels and access; do not substitute an unverified image mirror.
 - [ ] P1 Pursue independent quality supervision/validation before proposing production replacements.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
