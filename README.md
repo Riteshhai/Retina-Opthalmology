@@ -34,12 +34,13 @@ identical actions. Tuning sometimes increased cost; no validated triage benefit 
 deployment change follows. The experiment explorer distinguishes unavailable
 outcomes from measured zero misses.
 
-A [matched quality-backbone adaptation study](docs/research/QUALITY_ADAPTATION_V1_PROTOCOL.md)
-is declared for the same development population: three seeds, frozen versus
-trainable backbones, fixed 15 epochs and a four-head checkpoint selector. Software
-and historical warm-prediction preflight are verified; new fitting/results are
-pending. All rare-class denominators and adverse outcomes will be retained.
-The deployed quality model stays fixed during this development experiment.
+The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
+completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
+is .50894 frozen versus .54112 adapted; all three paired primary intervals include
+zero. Raw calibration worsens, clarity/rare-class failures remain, and production
+stays fixed. Independent reconstruction, all522 tests and the17-record native
+explorer pass. An explicit version1.1 metadata correction separates training and
+bootstrap seed labels while preserving the original report and all outcome values.
 
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 

@@ -26,7 +26,7 @@ def fixture_report():
 
 
 def test_quality_api_preserves_all_arms_seeds_supports_and_scope(tmp_path, monkeypatch):
-    report = tmp_path/'quality_adaptation_v1/evaluation.json'
+    report = tmp_path/'quality_adaptation_v1/evaluation_v1_1.json'
     report.parent.mkdir()
     payload = fixture_report()
     report.write_text(json.dumps(payload))

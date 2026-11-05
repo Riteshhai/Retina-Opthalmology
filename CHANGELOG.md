@@ -1,5 +1,21 @@
 # QSART change log
 
+## Matched quality adaptation v1 results — 2026-11-05
+
+- Executed all three frozen/adapted pairs at 15 epochs/795 updates per run.
+  Conditional mean four-head F1 .50894 to .54112; all three primary intervals
+  include zero. Retain lower primary clarity/artifact F1, worse mean NLL/ECE,
+  lower poor-quality AUROC and complete failures in two rare strata.
+- Independently reconstructed90 trained/6 warm metric sets,27 intervals,
+  parameter/BN/RNG/optimizer evidence,1,016 source bytes and171 preserved artifacts.
+  All selected forward logits reproduce exactly. Production remains fixed.
+- Preserved original evaluation bytes; version1.1 corrects a training/bootstrap
+  seed-label collision through an explicit receipt. No models, selected epochs,
+  probabilities, metrics or interval values were rerun or changed.
+- All522 post-correction local tests, Ruff,Compose and actual native production/
+  explorer checks pass. Added inspected figures, results notes and all seed/head
+  controls. Docker engine unavailable; overall research acceptance remains in progress.
+
 ## Quality adaptation v1 preparation — 2026-11-05
 
 - Declared fixed 15-epoch frozen/adapted pairs for all three historical quality

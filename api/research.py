@@ -45,7 +45,7 @@ def experiment_registry(root):
          'development_finetuning_and_training_seed_diagnostics'),
         ('aptos_optimization_v2/evaluation.json', 'aptos_optimization_v2', 'validation',
          'source_development_primary_seed_schedule_extension'),
-        ('quality_adaptation_v1/evaluation.json', 'quality_adaptation_v1', 'validation',
+        ('quality_adaptation_v1/evaluation_v1_1.json', 'quality_adaptation_v1', 'validation',
          'development_matched_quality_backbone_adaptation'),
         ('idrid_data_v1/data_audit.json', 'idrid_data_v1', 'external_holdout',
          'external_data_integrity_and_overlap_readiness_only'),

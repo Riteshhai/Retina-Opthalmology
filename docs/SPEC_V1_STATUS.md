@@ -1,4 +1,4 @@
-# QSART Development Status — updated 4 November 2026
+# QSART Development Status — updated 5 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,7 +6,16 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** primary-seed APTOS schedule extension VERIFIED COMPLETE
+- **Current extension:** matched quality-backbone adaptation VERIFIED COMPLETE
+  from clean `2d4243c977a0669776a5dc356d6d6e3166732a12`: three seeds, two arms,
+  fixed15 epochs/795 updates per run. Conditional mean four-head F1 .50894 frozen
+  versus .54112 adapted; all three primary paired intervals include zero. Raw
+  calibration and poor-quality AUROC worsen, and rare-class failures remain.
+  Independent reconstruction covers90 trained/6 warm metric sets,27 intervals,
+  1,016 source bytes and171 preserved artifacts. Version1.1 corrects paired-row
+  seed metadata only; original report/model/epoch/prediction/metric/interval bytes
+  remain preserved. [Quality results](research/QUALITY_ADAPTATION_V1_RESULTS.md).
+- **Previous source extension:** primary-seed APTOS schedule extension VERIFIED COMPLETE
   from `a75229f92468a253e8f6c3e28d834571e25bd9e5`. One fixed primary seed 2026,
   stopped after 14/15 epochs, selected 10. Selection accuracy 80.81%,macro-F1 .65157;
   grade 3 recall 26.92%/grade 4 67.50%. All four paired intervals include zero.
@@ -79,7 +88,16 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:** 503 tests passed, no failures/skips, 91.16 seconds;
+**Latest verification:** 522 tests passed, no failures/skips,110.17 seconds,
+after the paired-seed metadata fix;521 passed128.16s before learning. Ruff and
+Compose configuration pass. Actual native production JPEG/batch/TTA/readiness/
+simulator/overload and live-API Streamlit checks pass:17 records, all six quality
+runs and all12 seed/head controls, preserved original production card/sidecar.
+All90 epochs/27 intervals and the metadata-only correction were independently
+reconstructed. Both figures visually inspected; no new container/browser proof.
+Current evidence: reports/quality_adaptation_v1/verification.json.
+
+**Preserved APTOS verification:** 503 tests passed, no failures/skips, 91.16 seconds;
 Ruff and Compose configuration passed. Actual native HTTP and Streamlit
 component checks cover 16 records, new baseline/four-epoch/extended comparators,
 both alpha/population controls and all 5 uniform seeds. Independent reconstruction
@@ -173,12 +191,13 @@ additional disk space. Source/environment and restart checks accompany deploymen
 
 **Current APTOS status:** download located and official competition source
 confirmed on 3 November. [Safe local preparation](APTOS_SETUP.md) and the frozen
-study protocol replace the earlier access blocker. Independent IDRiD results,
+study protocol replace the earlier access blocker. IDRiD transport diagnostics
+are completed and consumed; broader independent quality/prospective validation,
 clinical review/recapture outcomes and prospective utility remain unproduced.
 
 **IN PROGRESS overall:** useful validated conformal/triage behavior,
-additional robustness/ablations and external-domain
-evaluation. A future experiment must predeclare changes; consumed v1 confirmation
+source-role quality calibration, additional fixed-model stress comparisons and
+broader independent validation. A future experiment must predeclare changes; consumed v1 confirmation
 cannot become an undisclosed tuning set. Formal manuscript writing stays deferred.
 
 Key files: MASTER_SPEC.md, CHANGELOG.md, AGENTS.md, TASKS.md, PROGRESS.md,

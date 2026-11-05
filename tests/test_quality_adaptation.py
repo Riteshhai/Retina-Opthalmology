@@ -218,6 +218,8 @@ def test_component_bootstrap_retains_all_views_and_common_seed_stream():
     b = qa.paired_component_changes({k:v[::2] for k,v in truth.items()}, {k:v[::2] for k,v in first.items()},
         {k:v[::2] for k,v in second.items()}, groups[::2], draws=100, seed=123)
     assert a == b and a['metrics']['quality_grade_accuracy']['difference'] == .25
+    assert a['bootstrap_seed'] == 123 and 'seed' not in a
+    assert {'seed': 2026, **a}['seed'] == 2026
     null = qa.paired_component_changes(truth, first, first, groups, draws=100, seed=123)
     assert null['component_draw_sha256'] == a['component_draw_sha256']
     assert all(value == 0 for row in null['metrics'].values() for value in row.values())
@@ -271,3 +273,21 @@ def test_public_report_guard_and_locked_config():
         with pytest.raises(ValueError):
             bad.validate()
     assert json.loads(json.dumps({'poor_class_indices': [0]}))['poor_class_indices'] == [0]
+
+
+def test_paired_seed_metadata_correction_preserves_every_measured_value():
+    from scripts.correct_quality_seed_metadata import corrected_report
+    original = {'schema_version': 'qsart.quality_adaptation.v1',
+        'source_commit': '2d4243c977a0669776a5dc356d6d6e3166732a12',
+        'runs': [{'seed': s, 'arm': a, 'selected_metrics': {'generated_metric': .5}}
+                 for s in qa.SEEDS for a in qa.ARMS],
+        'paired_changes': [{'seed': 20261107, 'metrics': {'difference': float(i)}} for i in range(3)]}
+    before = deepcopy(original)
+    result = corrected_report(original)
+    assert original == before and result['runs'] == original['runs']
+    assert [row['seed'] for row in result['paired_changes']] == list(qa.SEEDS)
+    for old, new in zip(original['paired_changes'], result['paired_changes'], strict=True):
+        assert new['bootstrap_seed'] == old['seed'] and new['metrics'] == old['metrics']
+    original['paired_changes'][0]['seed'] = 999
+    with pytest.raises(ValueError, match='known metadata-only defect'):
+        corrected_report(original)

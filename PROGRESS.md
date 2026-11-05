@@ -1,5 +1,49 @@
 # Execution log
 
+## 2026-11-05 — completed matched quality-backbone adaptation v1
+
+- Executed all six runs from clean 2d4243c977a0669776a5dc356d6d6e3166732a12:
+  seeds 2026/2027/2028, frozen versus adapted, 15 epochs/795 updates each,
+  90 trained epochs/4,770 updates total. Selected epochs frozen 5/6/10 and adapted
+  13/8/8 under the declared mean-four-head F1/NLL rule; no early stopping or seed selection.
+- Conditional mean four-head macro-F1 rises .50894137 (sample SD .00349332) to
+  .54112226 (.00501275). All three descriptive paired primary intervals include
+  zero. Primary change +.03433166,95% interval[-.01349020,.06511460]. Retain all27
+  contrasts and adverse results: primary clarity/artifact F1 decrease, mean raw
+  NLL worsens in every pair, and mean ECE increases for all four heads. Poor-quality
+  AUROC falls in all three pairs. Every model misses the one field-class0 image;
+  all adapted models have zero artifact-class1 recall on six images.
+- Found a paired-row metadata key collision after all learning: bootstrap seed
+  20261107 replaced training-seed labels. Preserved the original evaluation.json
+  bytes/SHA18e184b5abb4c67a53a17a9887b9b4321f34a904f46e714a925c2b46fdcff188.
+  Added evaluation_v1_1.json, explicit correction receipt/script and regression test.
+  Only metadata labels/schema change; no fitting, epoch/prediction/metric/interval
+  recomputation. Corrected aggregate SHA:
+  b21f0305d3d2c19392d91434b7b4dedaed65c9329029b84939143ca8497f2fd8.
+- Independent reconstruction passed all90 trained/6 warm metric sets, selected
+  ranks, order/flip streams, cosine schedules, optimizer/RNG snapshots and all27
+  component intervals. Each adapted backbone changes135 parameter tensors; frozen
+  backbones change none. All102 BN buffers stay fixed. All1,008 selected-model
+  forward logits reproduce exports bit-for-bit. All1,016 source hashes/cache bytes,
+  26 independent geometry samples and171 historical/master/production files match.
+  The auditor verifies the exact metadata-only difference and archived execution source.
+- Before learning:521 tests passed128.16s. After the metadata-only fix:19 targeted
+  tests passed20.53s; full522 passed110.17s, zero failures/skips, genuine production/
+  conformal integration. Ruff/Compose/whitespace passed. Source CI42062103457 /
+  job127366405116 succeeded; a transient GitHub push rejection succeeded on retry.
+- Actual native JPEG/batch/TTA/readiness/simulator/overload checks pass after
+  restart. Live-API Streamlit checks verify17 evidence records, all six runs,
+  all12 seed/head views, majority/warm references and every class support/recall.
+  Both figures visually inspected; corrected plot-only label clipping without
+  changing scientific bytes. Docker Linux engine unavailable; no new container/
+  browser-rendering claim. Calibration pixels, consumed confirmation/IDRiD, APTOS
+  and production artifacts remain preserved. Overall scientific acceptance IN PROGRESS.
+- New source: quality_adaptation.py, fixed config/protocol, run/plot/correction
+  scripts, two test files, API/UI registry; new aggregate/audit/correction/native/
+  verification/figures and results notes. Next: predeclare source-role probability
+  calibration and a fixed-model stress comparison; seek independent quality
+  validation before any deployment proposal. Formal manuscript drafting stays deferred.
+
 ## 2026-11-05 — quality adaptation v1 preparation
 
 - Declared three matched per-seed warm starts, seeds 2026/2027/2028, with frozen

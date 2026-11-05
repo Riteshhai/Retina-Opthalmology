@@ -476,7 +476,7 @@ def paired_component_changes(truth, frozen, adapted, groups, *, draws=2000, seed
         a, b = scores(indices, frozen), scores(indices, adapted)
         for name in samples:
             samples[name].append(b[name]-a[name])
-    return {'unit': 'whole_split_group_id', 'components': len(unique), 'draws': draws, 'seed': seed,
+    return {'unit': 'whole_split_group_id', 'components': len(unique), 'draws': draws, 'bootstrap_seed': seed,
             'component_draw_sha256': digest.hexdigest(), 'direction': 'adapted_minus_frozen',
             'metrics': {name: {'difference': second[name]-first[name],
                        'lower_95': float(np.quantile(values, .025)), 'upper_95': float(np.quantile(values, .975))}
