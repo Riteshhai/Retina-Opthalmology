@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "source_commit": "e7fd2f1b85d79e2f9f910433eea0dd7beea06b7c",
+  "source_report_sha256": "a883d166fe7172d77ee615b300ae46e802355c19731ecf9080640c3b41fc0e88",
+  "saved_logit_rows_verified": 1048,
+  "calibration_representatives_reconstructed": 254,
+  "score_thresholds_reconstructed": 34,
+  "maximum_threshold_absolute_error": 1.1102230246251565e-16,
+  "all_aggregate_metric_views_reconstructed": 136,
+  "raw_and_fallback_set_rows_reconstructed": 35428,
+  "historical_set_and_uniform_controls_reproduced": 14,
+  "paired_intervals_reconstructed": 160,
+  "preserved_artifacts": 295,
+  "images_decoded": 0,
+  "model_inference_performed": false,
+  "public_privacy_checks_passed": true,
+  "verifier_sha256": "c78ccf1a36813612311ca68d6f7b52acbddd316883e191d004c22c7ce3dfe0c4"
+}

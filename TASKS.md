@@ -21,7 +21,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute and independently audit the bounded three-seed APTOS parameter-fine-tuning pilot, fixed BatchNorm statistics, all 42 calibration comparisons and native explorer integration.
 - [x] P1 Execute and audit the locked primary-seed source schedule extension: 14/15 epochs, selected 10, 14 uncertainty comparisons; preserve adverse grade-3/coverage changes and all reserved-test/external exclusions.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
-- [ ] P1 IN PROGRESS: execute and independently reconstruct fixed APS/RAPS saved-prediction baselines against LAC/ordinal, preserving raw/fallback results and every declared interval; no tuned/full-paper reproduction claim.
+- [x] P1 Execute and independently reconstruct fixed APS/RAPS saved-prediction baselines against LAC/ordinal, preserving all 34 comparisons/160 intervals and adverse grade-3 results; no tuned/full-paper reproduction claim.
+- [ ] P1 Predeclare a 384px training/CPU feasibility protocol for closer source-paper replication; retain current model results and reserved-test exclusions.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.

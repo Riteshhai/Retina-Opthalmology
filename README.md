@@ -59,6 +59,14 @@ Original EyePACS photographs, accepted terms, pixel overlap and a locked label/
 evaluation protocol are still required for EyeQ model validation. See the
 [local preparation guide](docs/EYEQ_SETUP.md).
 
+The [fixed APS/RAPS comparison](docs/research/ADAPTIVE_SETS_V1_RESULTS.md) completes
+34 saved-APTOS score comparisons, with all 160 paired intervals independently
+reconstructed. Primary RAPS reduces mean set size from 1.63916 to 1.53935 versus
+APS, while grade-3 inclusion falls from 69.23% to 53.85%. This development tradeoff
+does not support a deployment change. All 593 tests pass; native and rebuilt Docker
+services verify 20 evidence records and all 40 adaptive-set control combinations.
+The full paper training/tuned procedure and independent quality validation remain open.
+
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
 All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.
@@ -87,8 +95,9 @@ The native app remains available through `./scripts/start_local.ps1` on those
 ports. After the earlier Docker outage, the engine became available on 5 November.
 The current source was rebuilt and exercised in healthy CPU containers on
 temporary ports 28000/28501, with actual JPEG/batch/TTA/conformal/simulator checks
-and all 65 runtime source/configuration files matched to local bytes. See
-[container evidence](reports/eyeq_data_v1/container_runtime.json).
+and all 65 runtime source/configuration files matched to local bytes. The 6 November
+APS/RAPS extension was also rebuilt and exercised, with 68 matched files. See
+[latest container evidence](reports/adaptive_sets_v1/container_runtime.json).
 
 The API is alive without checkpoints, but readiness and prediction fail explicitly. There is no generated or random prediction fallback. Compose mounts `./checkpoints` read-only; it never downloads weights at startup. Ports are bound to the local machine. The API and dashboard have independent health checks; liveness does not imply model readiness.
 

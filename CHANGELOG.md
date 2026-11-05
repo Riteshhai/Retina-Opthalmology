@@ -1,5 +1,17 @@
 # QSART change log
 
+## Fixed APS/RAPS comparison results — 2026-11-06
+
+- Complete all 34 fixed score comparisons, 136 metric views, 35,428 raw/fallback
+  prediction-set rows and 160 independently reconstructed paired intervals.
+  All 14 historical LAC/ordinal sets/uniforms and 295 prior artifacts match.
+- Primary RAPS mean size 1.53935 versus APS 1.63916 accompanies lower grade-3
+  inclusion, 53.85% versus 69.23%. Keep every adverse result; no production change.
+- All 593 integrated/35 targeted tests pass. Native and rebuilt CPU-container
+  inference/conformal/simulator/overload and 20-record explorer checks pass,
+  including 40 control combinations per runtime and 68 matched container files.
+  Add a visually inspected saved-result figure, audits and results notes.
+
 ## Fixed APS/RAPS comparison preparation — 2026-11-06
 
 - Add explicit-uniform APS/RAPS research scores, stable ties, exact finite-sample

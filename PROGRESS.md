@@ -1,5 +1,44 @@
 # Execution log
 
+## 2026-11-06 — completed fixed APS/RAPS score comparison
+
+- Executed all 34 fixed saved-logit comparisons from clean
+  e7fd2f1b85d79e2f9f910433eea0dd7beea06b7c. New score thresholds use 254 original
+  conformal representatives; source classifier/temperature and 521 selection rows/
+  507 representatives stay fixed. No new images, neural inference, classifier/
+  temperature fitting, RAPS tuning, external/test inputs or production update.
+- Primary alpha .10/uniform seed 2026/raw RAPS-minus-APS mean size -.09980806,
+  descriptive 95% interval[-.13205517,-.06896552]. Overall inclusion delta -.00575816
+  includes zero, while grade-3 inclusion falls 18/26 to 14/26: delta -.15384615,
+  interval[-.30434783,-.03448276]. No superiority or clinical claim. Randomized
+  ordinal increases grade-3 inclusion to 25/26 but lowers grade-4 inclusion to 30/40
+  versus APS 32/40, with wider sets. All unfavorable/fallback/seed results remain.
+- Independent loops/counts oracle reconstructed 34 thresholds (maximum gap
+  1.110223e-16), all 136 metric views, 35,428 raw/fallback set rows and 160 paired
+  intervals. All 14 historical sets/uniforms and 295 preserved artifacts match.
+  A separate check reconstructs 20 conditional summaries/120 mean-SD cells.
+  Aggregate SHA a883d166fe7172d77ee615b300ae46e802355c19731ecf9080640c3b41fc0e88.
+- All 593 tests passed before execution in 109.14s, zero failures/errors/skips,
+  genuine production/conformal integration; 35 targeted in 12.89s. One upstream
+  AnyIO deprecation warning. Same scientific/API/UI source retained; Ruff/Compose/
+  whitespace pass. Source CI42086591713 passed at the exact execution commit.
+- Actual native and rebuilt nonroot/read-only CPU-container JPEG/batch/TTA/
+  readiness/conformal/simulator/overload pass. Live-API AppTest checks 20 records,
+  all 40 adaptive control combinations, 2,200 metric cells and 1,280 interval cells
+  in each runtime. All 68 container source/config files match. Primary figure
+  visually inspected. Host AppTest against actual HTTP is separate from a new
+  interactive browser-rendering check. Temporary test containers removed; native
+  app remains on 18000/18501 with original production card/sidecar matched.
+- Preserve Matplotlib's generated SVG path spacing with a scoped Git whitespace
+  attribute added after figure verification. No scientific code/result/figure bytes
+  change; staged whitespace checks pass after the attribute correction.
+- Local implementation/config/protocol/tests/API/UI, nine aggregate/audit/runtime
+  JSON reports, PNG/SVG and results notes are saved. Fixed score comparison
+  VERIFIED COMPLETE; exact/tuned/384px paper reproduction, useful triage and
+  independent quality validation remain IN PROGRESS. Next executable source task:
+  lock 384px training/compute feasibility while preserving reserved tests. EyeQ
+  still needs original photos/terms/storage/overlap evidence; formal writing deferred.
+
 ## 2026-11-06 — fixed APS/RAPS comparison preparation
 
 - Found a local EyeQ author-repository copy: seven metadata/source hashes match

@@ -1,4 +1,4 @@
-# QSART Development Status — updated 5 November 2026
+# QSART Development Status — updated 6 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,7 +6,16 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** EyeQ annotation/access audit VERIFIED COMPLETE from clean
+- **Current extension:** fixed APS/RAPS development comparison VERIFIED COMPLETE
+  from clean `e7fd2f1b85d79e2f9f910433eea0dd7beea06b7c`. All 34 thresholds,
+  136 aggregate views, 35,428 raw/fallback set rows and 160 paired intervals are
+  independently reconstructed. Fourteen historical LAC/ordinal controls reproduce;
+  295 prior artifacts remain fixed. Primary RAPS mean size 1.53935 versus APS 1.63916
+  coexists with grade-3 inclusion 53.85% versus 69.23%. One reused APTOS source
+  model/temperature, fixed initial parameters and uniform replicates establish no
+  fresh, grade-specific or clinical guarantee. Production remains unchanged.
+  [Fixed APS/RAPS results](research/ADAPTIVE_SETS_V1_RESULTS.md).
+- **Previous metadata extension:** EyeQ annotation/access audit VERIFIED COMPLETE from clean
   `9f7f22f79362090039369f8a34625d326189c6e2`. All 28,792 rows, 20,662 filename
   subject keys, class/DR matrices, eye groups and four source-table comparisons
   independently reconstructed; all 271 prior artifacts remain fixed. Both author
@@ -105,7 +114,17 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:** all 558 tests passed with genuine production/conformal
+**Latest verification:** all 593 tests passed with genuine production/conformal
+integration, zero failures/errors/skips, 109.14s; all 35 targeted tests passed in
+12.89s. One upstream AnyIO deprecation warning. Same tested scientific/API/UI source
+retained; Ruff/Compose/whitespace pass. Native and rebuilt CPU-container genuine
+JPEG/batch/TTA/readiness/simulator/overload checks pass. Live-API AppTest verifies
+20 records and all 40 adaptive alpha/seed/empty-policy/population combinations in
+each runtime, 2,200 metric cells and 1,280 interval cells. All 68 runtime source/
+config files match. Figure visually inspected; no new interactive browser-rendering
+claim. Evidence: reports/adaptive_sets_v1/verification.json.
+
+**Preserved EyeQ verification:** all 558 tests passed with genuine production/conformal
 integration, zero failures/errors/skips, JUnit suite time 102.731s; all 22 targeted
 tests passed in 11.840s. Tested source remains fixed. Ruff/Compose/whitespace pass.
 Actual native and rebuilt CPU-container JPEG/batch/TTA/readiness/simulator/overload
@@ -226,7 +245,8 @@ study protocol replace the earlier access blocker. IDRiD transport diagnostics
 are completed and consumed; broader independent quality/prospective validation,
 clinical review/recapture outcomes and prospective utility remain unproduced.
 
-**IN PROGRESS overall:** useful validated conformal/triage behavior,
+**IN PROGRESS overall:** useful validated conformal/triage behavior, a locked
+384px training/compute feasibility study toward closer paper replication,
 official EyeQ photograph acquisition/accepted terms, pixel overlap and locked
 quality harmonization/evaluation, broader validation and
 useful triage evidence. A future experiment must predeclare changes; consumed v1 confirmation
@@ -242,6 +262,11 @@ The completed EyeQ extension adds qsart/data/eyeq.py, scripts/audit_eyeq_data.py
 configs/eyeq_data_v1.json, two test files, API/explorer support, setup/protocol/results
 notes and eight aggregate/audit/native/container verification reports. The exact
 master specification and historical experiment bytes remain preserved.
+
+The fixed APS/RAPS extension adds qsart/uncertainty/adaptive.py,
+qsart/evaluation_adaptive.py, scripts/run_adaptive_sets.py and plot_adaptive_sets.py,
+config/protocol, two test files, API/explorer controls, nine JSON evidence reports,
+PNG/SVG figure and results notes. Source photographs and raw individual results remain ignored.
 
 **Docker recovery, 5 November:** the engine became available during this session
 after an initial missing-pipe failure. Current source was actually rebuilt and
