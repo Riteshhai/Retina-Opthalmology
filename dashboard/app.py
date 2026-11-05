@@ -306,6 +306,38 @@ def show_quality_calibration_stress(metrics):
                'No refitting, reselection or multiplicity correction; no production replacement is selected here.')
 
 
+def show_eyeq_readiness(metrics):
+    profile = metrics.get('annotation_profile', {})
+    st.info('Annotation/access audit only. No EyeQ photographs were decoded and no model outcome was generated.')
+    left, middle, right = st.columns(3)
+    left.metric('Source annotation rows', profile.get('images_annotated', 0))
+    middle.metric('Filename subject keys', profile.get('source_subject_keys', 0))
+    right.metric('Images decoded', metrics.get('images_decoded', 0))
+    rows = []
+    for split, values in profile.get('original_splits', {}).items():
+        rows.append({'Author split': split, 'Images': values['images'], 'Subject keys': values['source_subject_keys'],
+            **{name: values['quality_counts'].get(str(code), 0) for code, name in enumerate(['Good', 'Usable', 'Reject'])}})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    st.caption('Both author splits are external-only candidates here. Source code 0 means Good; '
+               'it is not DeepDRiD poor class 0. No binary harmonization or training label is selected.')
+    differences = [row for row in metrics.get('count_reference_differences', []) if row.get('difference') != 0]
+    if differences:
+        st.dataframe(pd.DataFrame(differences), width='stretch', hide_index=True)
+        st.caption('Pinned CSV counts are retained exactly. Displayed table differences are documented without relabeling.')
+    readiness = metrics.get('readiness', {})
+    if not readiness.get('ready_for_model_evaluation', False):
+        st.warning('Photograph provenance/access, pixel-overlap checks and a locked label/evaluation protocol remain incomplete.')
+    st.caption('Filename grouping preserves known eye pairs; zero split-key overlap does not prove image or patient independence.')
+    st.link_button('Open official EyePACS image source', 'https://www.kaggle.com/c/diabetic-retinopathy-detection/data')
+    storage = metrics.get('storage_snapshot', {})
+    if storage.get('whole_archive_exceeds_current_free_space'):
+        st.caption('The indexed full competition archive exceeds project-volume free space at audit time. '
+                   'Its size is not an EyeQ subset or unpacked-storage estimate.')
+    with st.expander('Source, terms and readiness details'):
+        st.json({'revision': metrics.get('author_source_revision'), 'access': metrics.get('access_review', {}),
+                 'readiness': readiness, 'storage_snapshot': storage, 'annotation_profile': profile})
+
+
 def show_idrid_data_readiness(metrics):
     st.info('External cohort reserved at audit time. This data-integrity record contains '
             'no model predictions. Later model outcomes, if available, have a separate external-evaluation record.')
@@ -709,6 +741,8 @@ elif page == 'Experiment Explorer':
                     show_quality_adaptation(detail.get('metrics', {}))
                 elif chosen == 'quality_calibration_stress_v1':
                     show_quality_calibration_stress(detail.get('metrics', {}))
+                elif chosen == 'eyeq_data_v1':
+                    show_eyeq_readiness(detail.get('metrics', {}))
                 elif chosen == 'idrid_data_v1':
                     show_idrid_data_readiness(detail.get('metrics', {}))
                 elif chosen == 'idrid_external_v1':

@@ -1,5 +1,28 @@
 # Execution log
 
+## 2026-11-05 — EyeQ source/annotation audit preparation
+
+- Rechecked primary author source and paper v4, pinned EyeQ1dcfabb08cd31045de1a4a3ee82e48f6833697aa.
+  Downloaded only seven public label/code/README files and separately archived
+  pinned DDR README/LICENSE for terms comparison. No example photos, weights,
+  author result CSV, source photograph, account credential or terms acceptance used.
+- Preparation CSV inspection:28,792 rows/20,662 filename subject keys, zero duplicate
+  IDs/shared split keys. Retain train Good/Usable/Reject8347/1876/2320 and test
+  8471/4558/3220. Document README train-Usable typo and paper/README test one-image
+  disagreement without changing labels. Both eyes stay grouped by source key;
+  filename counts do not establish cross-source pixel or patient independence.
+- Implemented pinned metadata parser, external-only/training-ineligible manifests,
+  separate source quality/DR labels, explicitly unselected binary sensitivity views,
+  exact-JPEG private inventory and hash-bound public metadata fetch. Added source/
+  terms/space/readiness explorer, fixtures, config and protocol. Full original-image
+  listing exceeds current project-volume free space; selected/unpacked footprint
+  and direct acceptance terms remain unverified. No gated image download attempted.
+- All21 targeted tests passed11.02s; full557 passed102.86s, zero failures/skips,
+  genuine production/conformal integration. Ruff,Compose and whitespace checks pass.
+  Metadata-only readiness passes seven source hashes; preservation preview271 old
+  artifacts. Source/config/protocol committed before frozen report execution.
+  Final standard-library reconstruction/native integration remain pending here.
+
 ## 2026-11-05 — completed quality calibration and stress v1
 
 - Executed from clean 42ae8621649b11d666f7b5e3e8516b0ac3a5a812. All six fixed

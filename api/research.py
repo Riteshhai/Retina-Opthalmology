@@ -49,6 +49,8 @@ def experiment_registry(root):
          'development_matched_quality_backbone_adaptation'),
         ('quality_calibration_stress_v1/evaluation.json', 'quality_calibration_stress_v1', 'calibration_and_validation',
          'development_quality_temperature_and_input_stress'),
+        ('eyeq_data_v1/data_audit.json', 'eyeq_data_v1', 'external_candidate_unscored',
+         'external_quality_annotation_and_access_readiness_only'),
         ('idrid_data_v1/data_audit.json', 'idrid_data_v1', 'external_holdout',
          'external_data_integrity_and_overlap_readiness_only'),
         ('idrid_review_v1/data_review.json', 'idrid_review_v1', 'external_holdout',
@@ -85,7 +87,9 @@ def experiment_registry(root):
                    'production_model_changed', 'defect_mapping', 'primary_model_id',
                    'primary_calibration_metric', 'primary_stress_conditions', 'primary_stress_metric',
                    'response_contrasts', 'bootstrap', 'interval_counts',
-                   'corrupted_quality_ground_truth_available') if key in raw}
+                   'corrupted_quality_ground_truth_available', 'annotation_profile',
+                   'count_reference_differences', 'access_review', 'readiness', 'storage_snapshot',
+                   'author_source_revision', 'images_downloaded') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         if name == 'idrid_data_v1':

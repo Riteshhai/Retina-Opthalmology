@@ -38,3 +38,23 @@ Next action: obtain the disease-grading package through the original publisher/c
 ## What the available data can establish
 
 A small legitimate DeepDRiD subset can establish that ingestion, optimization, serialization, inference and reporting operate on actual fundus photos with real annotations. Its held-out results remain a development pilot. The public cross-sectional datasets do not establish whether a recommended recapture succeeds, whether a specialist subsequently diagnoses correctly, or whether patient outcomes improve. Preserve those as unknown outcomes. A recapture recommendation for severe disease remains a separate possible-delay endpoint.
+
+## EyeQ recheck — 5 November 2026
+
+Pinned [author revision1dcfabb](https://github.com/HzFu/EyeQ/tree/1dcfabb08cd31045de1a4a3ee82e48f6833697aa)
+supplies the exact CSVs and class order. The local audit retains all28,792 labels,
+the middle Usable category and separate source DR grades; it records displayed
+table disagreements without relabeling. No photographs or author predictions were
+downloaded. The README's license sentence explicitly concerns code; underlying
+EyePACS terms and separate annotation permissions are not replaced by that sentence.
+
+The [indexed official image page](https://www.kaggle.com/c/diabetic-retinopathy-detection/data?select=test.zip.004)
+shows a sign-in/rules gate and88.29GB whole-competition listing. Direct rules/data
+text extraction yielded no readable body, so no accepted-terms receipt is inferred.
+No third-party image route is used. Source photos, a source/terms record, image
+overlap and a locked harmonization/evaluation protocol remain prerequisites.
+[Local preparation](../EYEQ_SETUP.md) gives a private original-JPEG inventory path.
+
+For comparison only, pinned [DDR225d56e](https://github.com/nkicsl/DDR-dataset/tree/225d56e2f49dc767896e3d38a01071cfadef4271)
+continues to distinguish dataset CC BY-NC-SA4.0 and code MIT. Its README/LICENSE
+copies are archived privately; no DDR images or new quality labels are acquired.

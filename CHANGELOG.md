@@ -1,5 +1,14 @@
 # QSART change log
 
+## EyeQ annotation/access audit preparation — 2026-11-05
+
+- Pin seven author metadata files, retain three quality categories/source DR and
+  original split/eye keys. Add external-only adapter, exact-JPEG private inventory,
+  source hashes, terms/storage gates and metadata-only explorer.
+- Retain actual CSV/table discrepancies without relabeling or model outcomes.
+  Official photographs, term acceptance, pixel overlap and harmonization remain
+  incomplete. All21 targeted/557 integrated tests, Ruff and Compose checks pass.
+
 ## Quality calibration and stress v1 results — 2026-11-05
 
 - Completed 24 scalar fits and 8,064 evaluations from frozen six-model source 42ae862.
