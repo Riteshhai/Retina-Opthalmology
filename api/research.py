@@ -51,6 +51,8 @@ def experiment_registry(root):
          'development_quality_temperature_and_input_stress'),
         ('eyeq_data_v1/data_audit.json', 'eyeq_data_v1', 'external_candidate_unscored',
          'external_quality_annotation_and_access_readiness_only'),
+        ('adaptive_sets_v1/evaluation.json', 'adaptive_sets_v1', 'validation',
+         'reused_development_fixed_aps_raps_score_comparison'),
         ('idrid_data_v1/data_audit.json', 'idrid_data_v1', 'external_holdout',
          'external_data_integrity_and_overlap_readiness_only'),
         ('idrid_review_v1/data_review.json', 'idrid_review_v1', 'external_holdout',
@@ -89,7 +91,8 @@ def experiment_registry(root):
                    'response_contrasts', 'bootstrap', 'interval_counts',
                    'corrupted_quality_ground_truth_available', 'annotation_profile',
                    'count_reference_differences', 'access_review', 'readiness', 'storage_snapshot',
-                   'author_source_revision', 'images_downloaded') if key in raw}
+                   'author_source_revision', 'images_downloaded', 'configuration', 'fixed_temperature',
+                   'model_training_seed', 'raps_parameter_tuning_performed') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         if name == 'idrid_data_v1':

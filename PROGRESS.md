@@ -1,5 +1,28 @@
 # Execution log
 
+## 2026-11-06 — fixed APS/RAPS comparison preparation
+
+- Found a local EyeQ author-repository copy: seven metadata/source hashes match
+  the already pinned audit, but it contains only five example JPEGs and no full
+  EyeQ image cohort. Read only directory metadata and seven non-image source files;
+  no example image was decoded or used as independent validation.
+- Added independently expressed APS/RAPS ranked-mass scores, stable probability/
+  grade ties, exact ranks, explicit uniforms and research-only artifact validation.
+  RAPS thresholds above one remain valid. Fixed initial-author CFG k_reg=2/lambda=.1;
+  no tuning or exact-paper-reproduction claim. Historical sidecar code stays fixed.
+- Locked one saved APTOS source model/temperature, 254 calibration representatives,
+  521 selection rows/507 representatives, two alphas, five shared historical uniform
+  streams, raw/fallback results and all 160 paired component-bootstrap intervals.
+  Fourteen historical LAC/ordinal controls must reproduce. No new images, neural
+  inference, classifier/temperature fitting or reserved-test/external input is used.
+- Input-only readiness passed and snapshots 295 historical/master/production/source
+  artifacts. New score outcomes have not been generated. Added API/explorer controls
+  and protocol/config before actual execution. Targeted tests:35 passed,12.89s,
+  one upstream AnyIO deprecation warning; Ruff/Compose/whitespace checks pass.
+  Full genuine-model/conformal suite:593 passed, zero failures/errors/skips,
+  109.14s (JUnit109.126s), same upstream warning. Added a saved-report-only plotting
+  script; Ruff/Compose/whitespace pass. Commit tested sources before new outcomes.
+
 ## 2026-11-05 — completed EyeQ metadata/access audit and current Docker verification
 
 - Executed the metadata-only audit from clean 9f7f22f79362090039369f8a34625d326189c6e2.

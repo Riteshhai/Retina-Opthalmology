@@ -1,5 +1,14 @@
 # QSART change log
 
+## Fixed APS/RAPS comparison preparation — 2026-11-06
+
+- Add explicit-uniform APS/RAPS research scores, stable ties, exact finite-sample
+  ranks, thresholds above one and separate raw/fallback prediction sets.
+- Declare a fixed-model/temperature saved-APTOS study with two alphas/five uniform
+  seeds, 34 comparisons, 14 historical controls and 160 paired descriptive intervals.
+  Add API/explorer controls and 35 passing targeted tests. Real new outcomes remain
+  pending clean-source execution; production and reserved populations stay fixed.
+
 ## EyeQ annotation/access audit results and Docker recovery — 2026-11-05
 
 - Independently reconstruct all 28,792 source rows, 20,662 filename subject keys,

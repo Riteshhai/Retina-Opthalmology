@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — current on 5 November 2026
+## Specification-v1 priorities — current on 6 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -21,6 +21,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute and independently audit the bounded three-seed APTOS parameter-fine-tuning pilot, fixed BatchNorm statistics, all 42 calibration comparisons and native explorer integration.
 - [x] P1 Execute and audit the locked primary-seed source schedule extension: 14/15 epochs, selected 10, 14 uncertainty comparisons; preserve adverse grade-3/coverage changes and all reserved-test/external exclusions.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
+- [ ] P1 IN PROGRESS: execute and independently reconstruct fixed APS/RAPS saved-prediction baselines against LAC/ordinal, preserving raw/fallback results and every declared interval; no tuned/full-paper reproduction claim.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.

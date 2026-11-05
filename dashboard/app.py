@@ -306,6 +306,45 @@ def show_quality_calibration_stress(metrics):
                'No refitting, reselection or multiplicity correction; no production replacement is selected here.')
 
 
+def show_adaptive_sets(metrics):
+    st.info('Saved APTOS development comparison: one fixed classifier and temperature. '
+            'Calibration/selection observations and uniform streams are reused; no fresh validation claim.')
+    alpha = st.selectbox('Recorded adaptive-set alpha', [.1, .05])
+    state = st.selectbox('Adaptive empty-set policy', ['raw', 'argmax_fallback'])
+    population = st.selectbox('Adaptive evaluation population', ['all_selection_images', 'selection_group_representatives'])
+    seed = st.selectbox('Adaptive uniform seed', [2026, 2027, 2028, 2029, 2030])
+    rows = []
+    for comparison in metrics.get('comparisons', []):
+        if comparison['alpha'] != alpha or comparison['randomization_seed'] not in {None, seed}:
+            continue
+        value = comparison[state][population]
+        rows.append({'Method': comparison['method'], 'Images': value['n_images'],
+            'Inclusion': value['marginal_coverage'], 'Mean set size': value['mean_set_size'],
+            'Empty sets': value['empty_set_count'], 'Full sets': value['full_five_grade_set_count'],
+            'Contiguous nonempty fraction': value['contiguous_nonempty_fraction'],
+            'Grade 3 inclusion': value['per_class']['3']['coverage'], 'Grade 3 images': value['per_class']['3']['n'],
+            'Grade 4 inclusion': value['per_class']['4']['coverage'], 'Grade 4 images': value['per_class']['4']['n'],
+            'Threshold': comparison['artifact']['qhat']})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    st.caption('All methods share these recorded uniforms. Fixed RAPS k_reg=2/lambda=0.10; no tuning. '
+               'Raw empty sets and argmax enlargement are separate. RAPS thresholds may exceed one.')
+    st.caption('Five uniform seeds are randomization replicates of training seed 2026, not model training variance. '
+               'Fingerprint representatives are not verified patient identities. Inclusion values are fractions.')
+    changes = []
+    for contrast in metrics.get('paired_comparisons', []):
+        if contrast['alpha'] == alpha and contrast['randomization_seed'] == seed and contrast['empty_policy'] == state:
+            for endpoint, values in contrast['changes'].items():
+                changes.append({'Direction': contrast['direction'], 'Endpoint': endpoint, **values})
+    st.dataframe(pd.DataFrame(changes), width='stretch', hide_index=True)
+    st.caption('Paired intervals use all selection images and whole fingerprint components, fixed sets and common draws. '
+               'No refitting, reselection or multiplicity adjustment; subset controls above do not change these intervals.')
+    st.warning('Reused development diagnostics do not establish patient, grade-specific, external or clinical coverage. '
+               'No method or parameter is selected for production.')
+    with st.expander('All fixed comparisons and historical controls'):
+        st.json({'summary': metrics.get('summary', []), 'baseline_reproduction': metrics.get('baseline_reproduction', []),
+                 'configuration': metrics.get('configuration', {}), 'bootstrap': metrics.get('bootstrap', {})})
+
+
 def show_eyeq_readiness(metrics):
     profile = metrics.get('annotation_profile', {})
     st.info('Annotation/access audit only. No EyeQ photographs were decoded and no model outcome was generated.')
@@ -743,6 +782,8 @@ elif page == 'Experiment Explorer':
                     show_quality_calibration_stress(detail.get('metrics', {}))
                 elif chosen == 'eyeq_data_v1':
                     show_eyeq_readiness(detail.get('metrics', {}))
+                elif chosen == 'adaptive_sets_v1':
+                    show_adaptive_sets(detail.get('metrics', {}))
                 elif chosen == 'idrid_data_v1':
                     show_idrid_data_readiness(detail.get('metrics', {}))
                 elif chosen == 'idrid_external_v1':

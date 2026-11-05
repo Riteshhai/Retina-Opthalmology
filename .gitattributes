@@ -27,3 +27,5 @@ reports/aptos_optimization_v2/** -text whitespace=cr-at-eol
 reports/quality_adaptation_v1/** -text whitespace=cr-at-eol
 reports/quality_calibration_stress_v1/** -text whitespace=cr-at-eol
 reports/eyeq_data_v1/** -text whitespace=cr-at-eol
+reports/adaptive_sets_v1/** -text whitespace=cr-at-eol
+configs/adaptive_sets_v1.json text eol=lf
