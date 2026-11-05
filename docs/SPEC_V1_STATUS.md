@@ -6,7 +6,16 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** fixed-model quality calibration/stress VERIFIED COMPLETE
+- **Current extension:** EyeQ annotation/access audit VERIFIED COMPLETE from clean
+  `9f7f22f79362090039369f8a34625d326189c6e2`. All 28,792 rows, 20,662 filename
+  subject keys, class/DR matrices, eye groups and four source-table comparisons
+  independently reconstructed; all 271 prior artifacts remain fixed. Both author
+  splits are external-only. Native and rebuilt Docker services expose 19 records
+  and pass actual trained-model checks, with 65 container source/config files
+  matched. Zero EyeQ images decoded or model outcomes produced; photograph/terms/
+  overlap/harmonization readiness remains incomplete.
+  [Metadata audit results](research/EYEQ_DATA_V1_RESULTS.md).
+- **Previous calibration extension:** fixed-model quality calibration/stress VERIFIED COMPLETE
   from clean `42ae8621649b11d666f7b5e3e8516b0ac3a5a812`:24 scalar temperatures,
   six candidates, seven conditions,8,064 model-image observations. Primary clean
   mean NLL 1.02046 to .87412, but field ECE/Brier and frozen-model mean NLL worsen.
@@ -96,13 +105,19 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:** 536 tests passed, no failures/skips,100.90 seconds before
-the locked scalar/stress execution. Scientific/API/UI source stayed fixed;
-Ruff/Compose/whitespace pass. Actual native production JPEG/batch/TTA/readiness/
-simulator/overload and live-API AppTest checks pass:18 records,48 clean and 48 stress
-views, matched original card/sidecar, fixed primary and absent-corrupted-truth captions.
-Both figures visually inspected. No new browser/container proof. Current evidence:
-reports/quality_calibration_stress_v1/verification.json.
+**Latest verification:** all 558 tests passed with genuine production/conformal
+integration, zero failures/errors/skips, JUnit suite time 102.731s; all 22 targeted
+tests passed in 11.840s. Tested source remains fixed. Ruff/Compose/whitespace pass.
+Actual native and rebuilt CPU-container JPEG/batch/TTA/readiness/simulator/overload
+checks pass, with matched original model card/sidecar. Live-API AppTest verifies
+19 records, two source splits, all three quality categories and three nonzero table
+disagreements. All 65 container source/config files match. No new interactive browser
+rendering check. Current evidence: reports/eyeq_data_v1/verification.json.
+
+**Preserved calibration verification:** 536 tests passed, no failures/skips,
+100.90 seconds before the locked scalar/stress execution. All 48 clean and 48 stress
+UI views and both figures were checked. The earlier native-only evidence is
+preserved in reports/quality_calibration_stress_v1/verification.json.
 
 **Preserved adaptation verification:** 522 tests passed, no failures/skips,110.17 seconds,
 after the paired-seed metadata fix;521 passed128.16s before learning. Ruff and
@@ -212,7 +227,8 @@ are completed and consumed; broader independent quality/prospective validation,
 clinical review/recapture outcomes and prospective utility remain unproduced.
 
 **IN PROGRESS overall:** useful validated conformal/triage behavior,
-independent quality-data source/terms/label access, broader validation and
+official EyeQ photograph acquisition/accepted terms, pixel overlap and locked
+quality harmonization/evaluation, broader validation and
 useful triage evidence. A future experiment must predeclare changes; consumed v1 confirmation
 cannot become an undisclosed tuning set. Formal manuscript writing stays deferred.
 
@@ -221,6 +237,18 @@ qsart/triage_v2.py, qsart/uncertainty/conformal.py, conformal sidecar, APTOS ada
 EfficientNet training support, api/research.py, schemas/main, eight-page dashboard,
 reproducible scripts, new tests and reports/spec_v1. Photos, patient manifests,
 raw per-image scores, downloaded author code and checkpoints remain local/ignored.
+
+The completed EyeQ extension adds qsart/data/eyeq.py, scripts/audit_eyeq_data.py,
+configs/eyeq_data_v1.json, two test files, API/explorer support, setup/protocol/results
+notes and eight aggregate/audit/native/container verification reports. The exact
+master specification and historical experiment bytes remain preserved.
+
+**Docker recovery, 5 November:** the engine became available during this session
+after an initial missing-pipe failure. Current source was actually rebuilt and
+exercised in healthy, nonroot, read-only CPU containers on temporary ports
+28000/28501; all 65 runtime source/configuration files match. This resolves the
+host-startup blocker described in the historical paragraphs below. The native app
+remains on 18000/18501. Container evidence: reports/eyeq_data_v1/container_runtime.json.
 
 Evidence: [base-paper critical study](research/BASE_PAPER_STUDY.md),
 [declared alignment protocol](research/SPEC_V1_ALIGNMENT_PROTOCOL.md),
@@ -238,8 +266,9 @@ The Docker paragraph above records 21 October execution. On 22 October the host
 engine failed to start because of an inaccessible stale socket. Automatic approval
 review blocked socket removal; no factory reset was attempted. Native services
 were restored using the existing PowerShell launcher on ports 18000/18501, with
-real-image/model/conformal/batch/simulator HTTP checks. A current container run is
-**BLOCKED** by that host startup failure. Historical Docker evidence is preserved.
+real-image/model/conformal/batch/simulator HTTP checks. A new container run was
+**BLOCKED** at that checkpoint; current 5 November container proof appears above.
+Historical Docker evidence is preserved.
 
 22 October verification: **223 passed**, no failures/skips, 67.03 seconds with
 genuine-model/sidecar integration enabled; Ruff and Compose configuration passed.
@@ -255,8 +284,8 @@ Further 22 October verification: **299 passed**, no failures/skips, 59.59 second
 with genuine-model/sidecar integration enabled; Ruff and Compose config passed.
 The intermediate pre-registry full run was 297 passed, 72.75 seconds. Both new
 experiments are exposed through the real API after a native launcher restart;
-the original model card and sidecar remain matched. Current Docker startup remains
-unavailable. At that historical date APTOS was not yet acquired.
+the original model card and sidecar remained matched. Docker startup was
+unavailable then. At that historical date APTOS was not yet acquired.
 
 The ordinal diagnostic reproduces the original four baseline fits exactly and
 explains the threshold-one atom with three images from two patients. At alpha .10,
@@ -296,7 +325,7 @@ running API verified all ten experiment records, the new192-scenario report,
 null incomplete outcomes and diagnostic labels. A nested-table serialization bug
 found by that integration was fixed with a regression fixture. Browser observation
 was rejected by its URL policy, so this session has no new browser-rendering proof.
-Native checks do not replace a new container run; current Docker remains blocked.
+Native checks did not replace a new container run; Docker was blocked at that checkpoint.
 
 The APTOS study uses 3,514 images after quarantining 148 images in 51 conflicting
 fingerprint components without relabeling. Training/selection/calibration/reserved
@@ -320,5 +349,5 @@ Earlier 4 November checks:405 tests passed in98.87s with real models/conformal;
 Ruff and Compose configuration passed. Actual native JPEG/batch/TTA/simulator,
 APTOS research routes and live-API Streamlit component checks passed. Relocated
 source annotation and all3,662 PNGs match original hashes. Inventory now honors
-the ignored local source setting with precedence tests. Current Docker remains
-unavailable; a new container and browser-rendering check are unverified.
+the ignored local source setting with precedence tests. Docker remained
+unavailable at that checkpoint; new container/browser checks were unverified then.

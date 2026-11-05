@@ -2,7 +2,8 @@
 
 The source/annotation audit is metadata-only. It retains the author release and
 does not acquire photographs, accept publisher terms or generate model outcomes.
-See [protocol](research/EYEQ_DATA_V1_PROTOCOL.md) and the frozen readiness report.
+See [results](research/EYEQ_DATA_V1_RESULTS.md), the preserved
+[protocol](research/EYEQ_DATA_V1_PROTOCOL.md) and the frozen readiness report.
 
 1. Obtain source photographs through the [official 2015 EyePACS competition](https://www.kaggle.com/c/diabetic-retinopathy-detection/data?select=test.zip.004)
    under the terms presented to your account. Preserve the source/download and
@@ -12,13 +13,13 @@ See [protocol](research/EYEQ_DATA_V1_PROTOCOL.md) and the frozen readiness repor
    footprint has not been measured. Keep the existing project datasets intact.
 2. Retain original JPEG filenames and bytes. A flat original root or `train`/`test`
    subfolders is supported. Keep raw data outside Git, for example under
-   `C:\PROJECTS FOR MTECH\MAJOR PROJECT CV\eyepacs2015`. The current adapter requires
+   `..\eyepacs2015` relative to the QSART directory. The current adapter requires
    original `.jpeg` files; processed PNGs need separate provenance and a declared
    transformation protocol. Quality categories and DR labels remain distinct.
 3. Run the private, read-only image inventory from the QSART directory:
 
    ```powershell
-   .\.venv\Scripts\python.exe scripts/audit_eyeq_data.py --image-root "C:\PROJECTS FOR MTECH\MAJOR PROJECT CV\eyepacs2015"
+   .\.venv\Scripts\python.exe scripts/audit_eyeq_data.py --image-root "..\eyepacs2015"
    ```
 
    Results stay in ignored `artifacts/eyeq_data_v1/private_image_inventory`.

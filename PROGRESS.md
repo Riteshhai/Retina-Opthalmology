@@ -1,5 +1,43 @@
 # Execution log
 
+## 2026-11-05 — completed EyeQ metadata/access audit and current Docker verification
+
+- Executed the metadata-only audit from clean 9f7f22f79362090039369f8a34625d326189c6e2.
+  All 28,792 rows/20,662 filename subject keys, both external-only splits and three
+  original quality categories are preserved. No EyeQ image was acquired/decoded/
+  predicted; no model, temperature, conformal, policy or production update occurs.
+- Standard-library reconstruction passed all 28,792 annotation/manifest/group rows,
+  30 quality/DR cells, four binary population views, four table comparisons, seven
+  source objects/independent GitHub tree, receipt and two comparative terms files.
+  Literal raw index header is blank; pandas calls it Unnamed: 0. The auditor's header/
+  Windows UTF-8 handling was corrected before export; source bytes stay unchanged.
+- All 271 historical/master/production artifacts match. Public aggregate SHA256
+  e0941a2319941e28052c614b68a618d5fe9ed850f71cc7b3c3e30e6b7755b645.
+  The stopped earlier attempt's private manifests remain preserved and byte-identical.
+  Source CI42080027323 passed at the exact execution commit. All 558 integrated/22
+  targeted tests passed before execution; JUnit suite times 102.731s/11.840s,
+  zero failures/errors/skips. Same tested scientific/API/UI source remains fixed.
+- Actual native JPEG/batch/TTA/conformal/readiness/simulator/overload checks pass.
+  Live-API AppTest matches 19 records, both source splits, three quality categories,
+  all three nonzero table disagreements and explicit metadata-only/readiness captions.
+  Restarting the old API launcher closed its attached dashboard; standard launcher
+  restored both on 18000/18501, then actual deployment checks passed.
+- Docker initially reported a missing Linux-engine pipe, then became available.
+  `docker compose -p qsart-eyeq-v1 up --build -d` with temporary 28000/28501 ports
+  rebuilt current source and started healthy nonroot/read-only CPU services.
+  Actual container JPEG/batch/TTA/conformal/readiness/simulator/overload and 19-record
+  explorer checks pass; all 65 runtime source/configuration files match local bytes.
+  Runtime image identity and installed packages are recorded. No new interactive
+  browser-rendering check. Historical Docker failure records remain preserved.
+  Temporary verification containers were removed after checks; the native app
+  remains running on 18000/18501.
+- Added eight aggregate/audit/native/container verification reports and results
+  notes; updated setup, README, status/backlog and change log. Original images,
+  identifiers, author source copies, private manifests, weights and XML remain local.
+  Official photographs/accepted terms/storage, cross-source pixels and a locked
+  harmonization/evaluation protocol are next. Metadata audit VERIFIED COMPLETE;
+  independent quality validation and overall research remain IN PROGRESS.
+
 ## 2026-11-05 — EyeQ public-provenance export correction
 
 - The first clean-source execution at 0c6124f6779f9bf21faef5f91934f684bad60c04

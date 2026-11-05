@@ -1,5 +1,19 @@
 # QSART change log
 
+## EyeQ annotation/access audit results and Docker recovery — 2026-11-05
+
+- Independently reconstruct all 28,792 source rows, 20,662 filename subject keys,
+  quality/DR counts, eye groups and source-table disagreements. Preserve original
+  labels, both external-only splits, seven pinned source files and 271 prior artifacts.
+- Correct the public-provenance HTTPS guard; preserve the stopped attempt's private
+  manifests. All 22 targeted/558 integrated tests, Ruff and Compose checks pass.
+- Verify native and rebuilt CPU-container inference, conformal/simulator/overload,
+  19-record API/explorer and exact bytes of 65 runtime source/configuration files.
+  Docker became available after the initial failed engine probe this session.
+- No EyeQ photograph/model outcome is produced. Source photographs, accepted terms,
+  cross-source pixel checks and a locked harmonization/evaluation protocol remain
+  required. Formal manuscript work stays deferred; overall project IN PROGRESS.
+
 ## EyeQ annotation/access audit preparation — 2026-11-05
 
 - Pin seven author metadata files, retain three quality categories/source DR and

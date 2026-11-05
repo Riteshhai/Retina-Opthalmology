@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "independent_annotation_and_access_evidence_reconstruction",
+  "source_report_sha256": "e0941a2319941e28052c614b68a618d5fe9ed850f71cc7b3c3e30e6b7755b645",
+  "source_commit": "9f7f22f79362090039369f8a34625d326189c6e2",
+  "source_revision": "1dcfabb08cd31045de1a4a3ee82e48f6833697aa",
+  "author_files_reconstructed": 7,
+  "annotation_rows_reconstructed": 28792,
+  "source_subject_keys_reconstructed": 20662,
+  "original_splits_reconstructed": 2,
+  "quality_by_dr_cells_reconstructed": 30,
+  "binary_sensitivity_views_reconstructed": 4,
+  "private_manifest_and_group_rows_reconstructed": 28792,
+  "table_reference_comparisons": 4,
+  "comparative_terms_files_verified": 2,
+  "preserved_artifacts": 271,
+  "images_decoded": 0,
+  "model_inference_performed": false,
+  "pixel_or_patient_independence_claimed": false,
+  "public_privacy_checks_passed": true,
+  "verifier_sha256": "6d3e1d098ceacfbc98f779d7e5ae668ad495c381d5bf03df28f092a91f4b65ea"
+}

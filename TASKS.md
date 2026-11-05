@@ -25,7 +25,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.
 - [x] P1 Execute/audit all 24 independent-role quality temperatures, six fixed candidates/seven conditions and all 486 intervals; retain adverse calibration/response findings and unchanged production.
-- [ ] P1 IN PROGRESS: freeze/reconstruct the pinned EyeQ source/annotation/access audit; software/readiness verified, final audit/native evidence pending. Original photos unavailable for validation.
+- [x] P1 Freeze and independently reconstruct the pinned EyeQ source/annotation/access audit; verify all 28,792 rows, 271 preserved artifacts, native/Docker services and 19-record explorer. This completes metadata readiness only.
+- [ ] P1 IN PROGRESS: obtain official EyeQ source photographs with recorded terms/storage plan, audit pixels/overlap and lock harmonization/evaluation before any model validation.
 - [ ] P1 Pursue independent quality supervision/validation before proposing production replacements.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.

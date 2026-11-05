@@ -50,10 +50,14 @@ All 486 intervals and adverse stress responses are retained. Altered inputs have
 new quality annotations, so score shifts do not establish detection accuracy.
 All 536 tests and the 18-record native explorer pass; production stays fixed.
 
-An [EyeQ source/annotation audit](docs/research/EYEQ_DATA_V1_PROTOCOL.md) is in
-preparation. The pinned author CSVs are verified and the external-only adapter is
-tested. Good/Usable/Reject remain separate; original EyePACS photos and the access,
-overlap and harmonization evidence needed for model validation remain incomplete.
+The [EyeQ source/annotation audit](docs/research/EYEQ_DATA_V1_RESULTS.md) is
+VERIFIED COMPLETE for metadata and access readiness: 28,792 rows, 20,662 filename
+subject keys and all three Good/Usable/Reject categories independently reconstructed.
+Both author splits remain external-only. All 558 tests pass; native and rebuilt
+Docker services expose 19 evidence records and pass actual trained-model checks.
+Original EyePACS photographs, accepted terms, pixel overlap and a locked label/
+evaluation protocol are still required for EyeQ model validation. See the
+[local preparation guide](docs/EYEQ_SETUP.md).
 
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
@@ -79,10 +83,12 @@ running URLs here are http://localhost:18000/docs and http://localhost:18501.
 Compose defaults remain 8000/8501 on a fresh checkout; either port can be
 overridden in `.env`. The local PowerShell launcher also reads these port settings.
 
-On 22 October Docker Desktop encountered a stale-socket startup failure. The app
-was restored through `./scripts/start_local.ps1` on the same local ports and its
-real-model HTTP workflow was checked. This native run does not replace the
-historical Docker proof; a new container run awaits the host Docker repair.
+The native app remains available through `./scripts/start_local.ps1` on those
+ports. After the earlier Docker outage, the engine became available on 5 November.
+The current source was rebuilt and exercised in healthy CPU containers on
+temporary ports 28000/28501, with actual JPEG/batch/TTA/conformal/simulator checks
+and all 65 runtime source/configuration files matched to local bytes. See
+[container evidence](reports/eyeq_data_v1/container_runtime.json).
 
 The API is alive without checkpoints, but readiness and prediction fail explicitly. There is no generated or random prediction fallback. Compose mounts `./checkpoints` read-only; it never downloads weights at startup. Ports are bound to the local machine. The API and dashboard have independent health checks; liveness does not imply model readiness.
 
