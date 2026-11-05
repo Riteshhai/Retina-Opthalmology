@@ -209,6 +209,48 @@ def show_aptos_optimization(metrics):
         st.json({'history': run.get('history', []), 'paired_changes': metrics.get('paired_comparisons', {})})
 
 
+def show_quality_adaptation(metrics):
+    runs = metrics.get('runs', [])
+    if not runs:
+        st.info('No completed quality-adaptation study is recorded.')
+        return
+    st.caption('Fixed primary seed 2026; all three seeds and both matched arms are retained. '
+               'Each run used 15 epochs. These reused development results do not select a production model.')
+    labels = {'quality_grade': 'Overall quality', 'clarity_class': 'Clarity',
+              'field_definition_class': 'Field definition', 'artifact_class': 'Artifact'}
+    st.dataframe(pd.DataFrame([{'Seed': row['seed'], 'Arm': row['arm'],
+        'Selected epoch': row['selected_epoch'], 'Mean four-head macro-F1': row['mean_head_macro_f1'],
+        **{labels[head]+' F1': row['selected_metrics'][head]['macro_f1'] for head in labels}}
+        for row in runs]), width='stretch', hide_index=True)
+    seed = st.selectbox('Recorded quality seed', sorted({row['seed'] for row in runs}), index=0)
+    head = st.selectbox('Recorded quality head', list(labels), format_func=labels.get)
+    selected = [row for row in runs if row['seed'] == seed]
+    rows = []
+    warm = selected[0]['warm_metrics'][head]
+    rows.append({'Reference / arm': 'Legacy warm start', **{key: warm[key] for key in ('accuracy', 'macro_f1', 'nll')}})
+    for row in selected:
+        values = row['selected_metrics'][head]
+        rows.append({'Reference / arm': row['arm'], **{key: values[key] for key in ('accuracy', 'macro_f1', 'nll')}})
+    majority = metrics.get('majority_references', {}).get(head, {})
+    if majority:
+        rows.append({'Reference / arm': 'Fitting-majority class '+str(majority['class']),
+                     'accuracy': majority['accuracy'], 'macro_f1': majority['macro_f1'], 'nll': None})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    supports = metrics.get('population', {}).get('class_supports', {}).get(head, {})
+    classes = range(len(warm['support']))
+    st.dataframe(pd.DataFrame([{'Class': index, 'Fitting images': supports.get('train', [])[index],
+        'Selection images': warm['support'][index],
+        **{row['arm']+' recall': row['selected_metrics'][head]['recall'][index] for row in selected}}
+        for index in classes]), width='stretch', hide_index=True)
+    st.caption('Poor quality is class 0. The lowest field-definition class has only one selection image. '
+               'Warm-start changes also include a different selector and fitting procedure; '
+               'the matched adapted-minus-frozen contrast measures added backbone adaptation.')
+    with st.expander('All paired intervals and conditional seed summaries'):
+        st.json({'summary': metrics.get('summary', {}), 'paired_changes': metrics.get('paired_changes', [])})
+    st.caption('Intervals resample whole components and condition on selected checkpoints. '
+               'They are descriptive, without reselection or multiplicity correction. Production weights are unchanged.')
+
+
 def show_idrid_data_readiness(metrics):
     st.info('External cohort reserved at audit time. This data-integrity record contains '
             'no model predictions. Later model outcomes, if available, have a separate external-evaluation record.')
@@ -608,6 +650,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_finetune(detail.get('metrics', {}))
                 elif chosen == 'aptos_optimization_v2':
                     show_aptos_optimization(detail.get('metrics', {}))
+                elif chosen == 'quality_adaptation_v1':
+                    show_quality_adaptation(detail.get('metrics', {}))
                 elif chosen == 'idrid_data_v1':
                     show_idrid_data_readiness(detail.get('metrics', {}))
                 elif chosen == 'idrid_external_v1':

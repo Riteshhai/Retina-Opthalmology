@@ -45,6 +45,8 @@ def experiment_registry(root):
          'development_finetuning_and_training_seed_diagnostics'),
         ('aptos_optimization_v2/evaluation.json', 'aptos_optimization_v2', 'validation',
          'source_development_primary_seed_schedule_extension'),
+        ('quality_adaptation_v1/evaluation.json', 'quality_adaptation_v1', 'validation',
+         'development_matched_quality_backbone_adaptation'),
         ('idrid_data_v1/data_audit.json', 'idrid_data_v1', 'external_holdout',
          'external_data_integrity_and_overlap_readiness_only'),
         ('idrid_review_v1/data_review.json', 'idrid_review_v1', 'external_holdout',
@@ -76,7 +78,9 @@ def experiment_registry(root):
                    'source_confirmation', 'audit_source_provenance_status', 'models',
                    'paired_baseline_changes', 'external_outcomes_consumed',
                    'classifier_fitting_performed', 'temperature_fitting_performed',
-                   'conformal_threshold_fitting_performed', 'prior_primary') if key in raw}
+                   'conformal_threshold_fitting_performed', 'prior_primary', 'primary_seed',
+                   'fixed_epochs_per_run', 'majority_references', 'warm_start_reproduction',
+                   'production_model_changed', 'defect_mapping') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         if name == 'idrid_data_v1':

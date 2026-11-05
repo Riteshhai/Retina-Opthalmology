@@ -1,5 +1,30 @@
 # Execution log
 
+## 2026-11-05 — quality adaptation v1 preparation
+
+- Declared three matched per-seed warm starts, seeds 2026/2027/2028, with frozen
+  versus trainable MobileNet backbones and fixed BatchNorm buffers. Exactly 15
+  epochs per arm; select by mean four-head macro-F1 then mean unweighted NLL.
+  Only 848 fitting/168 selection DeepDRiD images are opened. Calibration metadata
+  guard overlap; calibration pixels, consumed confirmation/IDRiD and APTOS are excluded.
+- Implemented an atomic epoch state containing optimizer/scheduler/RNG/history,
+  all logits and selected snapshot; exact-bound resume and sealed final artifacts.
+  Dedicated saved-results API/UI retain all seeds/arms/heads, class supports and
+  descriptive paired contrasts. Production remains unchanged.
+- Input-only readiness passed. All three genuine warm models reproduced all
+  168 selection argmaxes per head; maximum probability delta 2.23638414e-6,
+  below predeclared 2e-5. All 1,016 fitting/selection bytes are cache-bound;
+  171 historical/master/production artifacts are preservation-previewed.
+- Generated fixtures: 18 tests passed 47.32s, including interruption recovery,
+  cache-independent RNG, frozen/adapted parameter/BN behavior, role/label guards,
+  poor-class0 metrics, component draws and all explorer controls. The initial
+  fixture's duplicated missing filenames were corrected before these results.
+- Full genuine-model/conformal integration: 521 passed, no failures/skips,128.16s;
+  Ruff and Docker Compose configuration passed. One dependency deprecation warning.
+  New real-image adaptation training/outcomes and independent reconstruction are
+  NOT STARTED at this source commit. Source/config/protocol are committed clean
+  before learning. Overall scientific acceptance IN PROGRESS; formal writing deferred.
+
 ## 2026-11-04 — completed primary-seed APTOS source optimization v2
 
 - Executed clean a75229f92468a253e8f6c3e28d834571e25bd9e5. The declared primary

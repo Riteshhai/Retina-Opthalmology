@@ -1,5 +1,16 @@
 # QSART change log
 
+## Quality adaptation v1 preparation — 2026-11-05
+
+- Declared fixed 15-epoch frozen/adapted pairs for all three historical quality
+  warm starts; use a balanced four-head selector and retain sparse-class outcomes.
+- Added atomic epoch recovery, exact provenance, sealed outputs, component paired
+  diagnostics and dedicated saved-result API/UI. New retinal learning is pending
+  this tested source commit; production artifacts and all previous studies stay fixed.
+- All 18 targeted/521 integrated tests, Ruff and Compose configuration passed;
+  historical warm predictions reproduce within the declared tolerance. This is
+  development work, without external-quality or validated-triage claims.
+
 ## APTOS primary-seed source optimization — 2026-11-04
 
 - Executed the locked 15-epoch cosine/patience 4 extension from the original warm

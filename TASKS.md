@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — current on 4 November 2026
+## Specification-v1 priorities — current on 5 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -23,6 +23,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
+- [ ] P1 IN PROGRESS: execute the declared six-run matched quality-backbone adaptation study; software/preflight verified, real adaptation outcomes and audit pending.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
