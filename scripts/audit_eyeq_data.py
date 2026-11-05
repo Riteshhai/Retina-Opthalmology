@@ -8,16 +8,17 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
+from urllib.parse import urlsplit
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from qsart.data.eyeq import (REVISION, annotation_profile, fetch_source_files,
     inspect_originals, load_annotations, source_receipt, verify_source_files)
 from qsart.models.checkpoint import sha256_file
 from qsart.training.quality_adaptation import canonical_hash, write_json
-from scripts.run_quality_adaptation import ensure_aggregate
 from scripts.run_quality_calibration_stress import candidates, preserve
 
 STUDY='eyeq_data_v1'
@@ -26,6 +27,27 @@ PROTOCOL='docs/research/EYEQ_DATA_V1_PROTOCOL.md'
 
 
 def read(path):return json.loads(Path(path).read_text(encoding='utf-8'))
+
+
+def ensure_aggregate(report):
+    """Allow public provenance HTTPS links while rejecting identifiers/local paths."""
+    json.dumps(report,allow_nan=False)
+    hosts={'github.com','raw.githubusercontent.com','api.github.com','www.kaggle.com','kaggle.com','arxiv.org','creativecommons.org'}
+    def check(value):
+        if isinstance(value,dict):
+            if {'image_id','image_path','subject_id','patient_id','original_image_name','source_subject_key'}&value.keys():
+                raise ValueError('Public audit contains private identities')
+            for item in value.values():check(item)
+        elif isinstance(value,list):
+            for item in value:check(item)
+        elif isinstance(value,str):
+            if '://' in value:
+                parsed=urlsplit(value)
+                if parsed.scheme!='https' or parsed.hostname not in hosts or parsed.username is not None or parsed.password is not None:
+                    raise ValueError('Only verified public provenance HTTPS links are allowed')
+            if value[:1] in {'/',chr(92)} or re.search(r'(?<![A-Za-z0-9])[A-Za-z]:[\\/]',value):
+                raise ValueError('Public audit contains a local path')
+    check(report)
 
 
 def frozen_prior_files(root):

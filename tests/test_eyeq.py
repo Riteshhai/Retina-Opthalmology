@@ -120,3 +120,14 @@ def test_source_receipt_cannot_be_silently_replaced(tmp_path):
     changed=deepcopy(records);changed['generated_metadata_fixture']['sha256']='b'*64
     with pytest.raises(ValueError,match='differing source receipt'):eyeq.source_receipt(tmp_path,changed)
     assert json.loads((tmp_path/'source_receipt.json').read_text())==first
+
+
+def test_public_provenance_links_are_not_local_drive_paths():
+    from scripts.audit_eyeq_data import ensure_aggregate
+    ensure_aggregate({'sources':['https://raw.githubusercontent.com/HzFu/EyeQ/pinned/README.md',
+        'https://www.kaggle.com/c/diabetic-retinopathy-detection/data?select=test.zip.004'],
+        'counts':{'quality':3}})
+    for value in [{'source':'C:/private/image.jpeg'},{'nested':['See D:\\private\\data']},
+                  {'source':'https://user:secret@github.com/HzFu/EyeQ'}, {'source':'file:///private/data'},
+                  {'source':'https://unverified-mirror.example/images'}, {'source_subject_key':'generated'}]:
+        with pytest.raises(ValueError):ensure_aggregate(value)

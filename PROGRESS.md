@@ -1,5 +1,21 @@
 # Execution log
 
+## 2026-11-05 — EyeQ public-provenance export correction
+
+- The first clean-source execution at 0c6124f6779f9bf21faef5f91934f684bad60c04
+  stopped before public report creation: the inherited privacy guard mistook the
+  final `s:/` in an HTTPS provenance link for a Windows drive path. No photograph
+  was decoded and no model was run. Preserve the two partial private manifests
+  and their hashes in an ignored attempt directory; retain the source receipt.
+- Use an EyeQ-specific guard that distinguishes public HTTPS source links from
+  local paths and rejects credential URLs, unverified hosts and private identity
+  keys. Historical study helpers and measured artifacts remain unchanged.
+- `python -m pytest tests/test_eyeq.py tests/test_eyeq_explorer.py -q` passed all
+  22 tests; JUnit suite time 11.840s. The full suite with genuine production and
+  conformal artifacts passed 558 tests, zero failures/errors/skips; JUnit suite
+  time 102.731s. XML evidence is retained locally. `python -m ruff check .` and
+  `git diff --check` pass. Commit corrected source before restarting the audit.
+
 ## 2026-11-05 — EyeQ source/annotation audit preparation
 
 - Rechecked primary author source and paper v4, pinned EyeQ1dcfabb08cd31045de1a4a3ee82e48f6833697aa.
