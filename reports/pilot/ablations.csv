@@ -1,0 +1,6 @@
+ablation,status,n,auto_count,review_rate,recapture_rate,coverage,missed_referable_auto,missed_severe_auto,referable_deferred_to_recapture,severe_deferred_to_recapture,auto_sensitivity,auto_specificity,weighted_auto_error_per_image,selective_grade_error,review_budget_violation,recapture_budget_violation,interpretation
+full,infeasible,,,,,,,,,,,,,,,,
+without_quality,evaluated,60.0,36.0,0.4,0.0,0.6,0.0,0.0,0.0,0.0,1.0,0.0,1.2166666666666666,0.8055555555555556,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.
+without_severity_weighting,infeasible,,,,,,,,,,,,,,,,
+without_separate_budgets,infeasible,,,,,,,,,,,,,,,,
+without_calibration,infeasible,,,,,,,,,,,,,,,,

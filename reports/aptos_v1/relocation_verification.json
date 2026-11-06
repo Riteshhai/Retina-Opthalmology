@@ -1,0 +1,14 @@
+{
+  "status": "verified",
+  "checked_client_date": "2026-11-04",
+  "scope": "Relocated user-provided training export matches the frozen APTOS source bytes",
+  "configuration_key": "QSART_APTOS_ROOT",
+  "training_images_verified": 3662,
+  "annotation_sha256": "b2a3479695922e62c83c94a1a9ef669b4b6d68cc26a1d7090ebedecdd7dd79a5",
+  "all_training_image_sha256_match": true,
+  "frozen_manifests_rewritten": false,
+  "new_model_training_or_test_inference": false,
+  "reference_data_audit_sha256": "40dd0fec5c444a283722050ab871073da53d2f016b04f6d274d472de3df6adf8",
+  "verifier_sha256": "926b994a50b541935e4bb7d1ff7e9e68e5ccb019b4055b0a36ff9b311e234c0b",
+  "note": "Location changes do not establish additional validation or alter the measured study."
+}

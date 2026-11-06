@@ -1,0 +1,82 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "experiment_id": "quality_adaptation_v1",
+  "registered_records": 17,
+  "scope": "development_matched_quality_backbone_adaptation",
+  "source_report_sha256": "b21f0305d3d2c19392d91434b7b4dedaed65c9329029b84939143ca8497f2fd8",
+  "actual_api_metrics_match": true,
+  "six_runs_displayed": true,
+  "primary_seed_default_verified": true,
+  "controls_checked": [
+    {
+      "seed": 2026,
+      "head": "quality_grade",
+      "classes": 2
+    },
+    {
+      "seed": 2026,
+      "head": "clarity_class",
+      "classes": 5
+    },
+    {
+      "seed": 2026,
+      "head": "field_definition_class",
+      "classes": 5
+    },
+    {
+      "seed": 2026,
+      "head": "artifact_class",
+      "classes": 6
+    },
+    {
+      "seed": 2027,
+      "head": "quality_grade",
+      "classes": 2
+    },
+    {
+      "seed": 2027,
+      "head": "clarity_class",
+      "classes": 5
+    },
+    {
+      "seed": 2027,
+      "head": "field_definition_class",
+      "classes": 5
+    },
+    {
+      "seed": 2027,
+      "head": "artifact_class",
+      "classes": 6
+    },
+    {
+      "seed": 2028,
+      "head": "quality_grade",
+      "classes": 2
+    },
+    {
+      "seed": 2028,
+      "head": "clarity_class",
+      "classes": 5
+    },
+    {
+      "seed": 2028,
+      "head": "field_definition_class",
+      "classes": 5
+    },
+    {
+      "seed": 2028,
+      "head": "artifact_class",
+      "classes": 6
+    }
+  ],
+  "majority_and_warm_references_displayed": true,
+  "all_class_supports_and_recalls_displayed": true,
+  "sparse_class_and_reuse_captions_verified": true,
+  "original_production_card_and_sidecar_match": true,
+  "ui_method": "Streamlit AppTest against actual native HTTP API",
+  "no_ui_exceptions": true,
+  "new_browser_rendering_verified": false,
+  "new_container_execution_verified": false,
+  "verifier_sha256": "e1d50dce89f1ebf9a7c51d47a780e6c2987574b213ca8c74eda55453f4c31cc4"
+}

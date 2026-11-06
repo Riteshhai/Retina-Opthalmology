@@ -1,0 +1,484 @@
+{
+  "schema_version": 1,
+  "experiment_id": "ordinal_randomization_v1",
+  "audit_type": "independent_read_only_aggregate_reconstruction",
+  "status": "passed",
+  "imports_project_code": false,
+  "inference_or_training_rerun": false,
+  "checks": [
+    {
+      "check": "manifest_identity",
+      "passed": true
+    },
+    {
+      "check": "population_and_calibration_partition",
+      "passed": true
+    },
+    {
+      "check": "calibration_actual_image_hashes",
+      "passed": true,
+      "images": 84
+    },
+    {
+      "check": "selection_actual_image_hashes",
+      "passed": true,
+      "images": 168
+    },
+    {
+      "check": "private_label_group_order",
+      "passed": true
+    },
+    {
+      "check": "private_cache_hash_binding",
+      "passed": true
+    },
+    {
+      "check": "private_study_hash_binding",
+      "passed": true
+    },
+    {
+      "check": "selection_report_hash_binding",
+      "passed": true
+    },
+    {
+      "check": "protocol_hash_binding",
+      "passed": true
+    },
+    {
+      "check": "frozen_artifact_hash_binding",
+      "passed": true
+    },
+    {
+      "check": "execution_source_hashes_current",
+      "passed": true,
+      "files": 7
+    },
+    {
+      "check": "execution_source_hashes_at_commit",
+      "passed": true,
+      "files": 7
+    },
+    {
+      "check": "package_version_binding",
+      "passed": true
+    },
+    {
+      "check": "independent_temperature_binding",
+      "passed": true
+    },
+    {
+      "check": "clean_first_pass_rows",
+      "passed": true
+    },
+    {
+      "check": "predeclared_seed_list",
+      "passed": true
+    },
+    {
+      "check": "uniform_stream_2026",
+      "passed": true
+    },
+    {
+      "check": "uniform_stream_2027",
+      "passed": true
+    },
+    {
+      "check": "uniform_stream_2028",
+      "passed": true
+    },
+    {
+      "check": "uniform_stream_2029",
+      "passed": true
+    },
+    {
+      "check": "uniform_stream_2030",
+      "passed": true
+    },
+    {
+      "check": "all_28_thresholds_sets_metrics",
+      "passed": true,
+      "fits": 28,
+      "evaluation_sets": 4704,
+      "maximum_threshold_absolute_error": 4.440892098500626e-16
+    },
+    {
+      "check": "four_original_baseline_fits",
+      "passed": true
+    },
+    {
+      "check": "terminal_atom_diagnosis",
+      "passed": true
+    },
+    {
+      "check": "deterministic_distributions",
+      "passed": true
+    },
+    {
+      "check": "all_five_seed_summaries",
+      "passed": true,
+      "summaries": 4
+    },
+    {
+      "check": "public_aggregate_privacy_fields",
+      "passed": true
+    },
+    {
+      "check": "preserved_interpretation_limits",
+      "passed": true
+    }
+  ],
+  "fit_checks": [
+    {
+      "method": "lac",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2026,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2027,
+      "passed": true,
+      "threshold_absolute_error": 4.440892098500626e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2028,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2029,
+      "passed": true,
+      "threshold_absolute_error": 4.440892098500626e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2030,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "lac",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2026,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2027,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2028,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2029,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2030,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "lac",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2026,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2027,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2028,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2029,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2030,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "lac",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2026,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2027,
+      "passed": true,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2028,
+      "passed": true,
+      "threshold_absolute_error": 2.220446049250313e-16,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2029,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2030,
+      "passed": true,
+      "threshold_absolute_error": 0.0,
+      "candidate_sets_exact": true,
+      "metrics_exact_or_tolerance": true,
+      "score_distribution_match": true
+    }
+  ],
+  "original_baseline_checks": [
+    {
+      "method": "lac",
+      "alpha": 0.1,
+      "rank": 20,
+      "threshold_absolute_error": 1.1102230246251565e-16,
+      "sets_exact": true
+    },
+    {
+      "method": "ordinal_greedy",
+      "alpha": 0.1,
+      "rank": 20,
+      "threshold_absolute_error": 0.0,
+      "sets_exact": true
+    },
+    {
+      "method": "lac",
+      "alpha": 0.05,
+      "rank": 21,
+      "threshold_absolute_error": 0.0,
+      "sets_exact": true
+    },
+    {
+      "method": "ordinal_greedy",
+      "alpha": 0.05,
+      "rank": 21,
+      "threshold_absolute_error": 0.0,
+      "sets_exact": true
+    }
+  ],
+  "atom_diagnosis": {
+    "terminal_true_label_images": 3,
+    "terminal_true_label_patients": 2,
+    "image_exact_one": 3,
+    "patient_exact_one": 2,
+    "image_within_1e12_of_one": 3,
+    "patient_within_1e12_of_one": 2
+  },
+  "limitations": [
+    "Checks reconstruct from saved raw model outputs; they do not independently rerun retinal inference.",
+    "Direct power temperature transformation and cumulative-minus-uniform scores are independent mathematical expressions; float tolerance is 2e-12.",
+    "No independent clinical validation, coverage guarantee, budget feasibility, classifier refit or threshold selection is established.",
+    "Source inspection found no material numerical or integration error in this fixed study."
+  ]
+}

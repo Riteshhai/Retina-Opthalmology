@@ -1,0 +1,10 @@
+{
+  "tests": "78",
+  "failures": "0",
+  "errors": "0",
+  "skipped": "0",
+  "time": "126.789",
+  "real_image_integration": true,
+  "ruff": "passed",
+  "warning": "One upstream AnyIO deprecation warning"
+}

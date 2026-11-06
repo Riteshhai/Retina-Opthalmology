@@ -1,0 +1,24 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "idrid_external_v1",
+  "source_commit": "e447a21b55b82ca47d1e3b91caf76bca61f23699",
+  "evaluation_sha256": "812c82d7771752fa00d076e067e6d1692da4a414c0b1207c8e6df2f21ec35282",
+  "auditor_script_sha256": "3f0772cda5a538c1d1c5f11f74e229701b484d3ea957179974471df24e8da35e",
+  "independent_math_helper_sha256": "dec9adfcf3a373b63b048afed3d7badc44f03d1f3ba1c6f78c3ca78255226e43",
+  "external_image_hashes_verified": 516,
+  "independently_reconstructed_canonical_images": 25,
+  "models_verified": 4,
+  "grading_views_reconstructed": 24,
+  "conformal_comparisons_reconstructed": 56,
+  "raw_fallback_sets_reconstructed": 57792,
+  "annotation_envelopes_reconstructed": 360,
+  "paired_component_bootstrap_intervals_reconstructed": 18,
+  "preserved_prior_artifacts": 31,
+  "primary_and_consumed_flags_verified": true,
+  "limitations": [
+    "Saved-logit/math reconstruction; no independent neural forward pass or refitting.",
+    "All external file hashes/cache tensor bytes verified; independent pixel geometry sampled on25 label-stratified observations.",
+    "Fingerprint units and annotation envelopes do not establish patient independence or clinical ground truth."
+  ],
+  "elapsed_seconds": 16.566715799970552
+}

@@ -1,0 +1,938 @@
+{
+  "schema_version": 1,
+  "experiment_id": "repeated_seeds_v1",
+  "scope": "development_selection",
+  "dataset": "DeepDRiD",
+  "partition": "validation",
+  "protocol_sha256": "a481eb70bcb4ff2987bab70306baa3a4080aa37a63e5d4497abc03b30010445f",
+  "source_commit": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+  "source_file_sha256": {
+    "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+    "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+    "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+    "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+    "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+    "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6",
+    "scripts/run_repeated_seeds.py": "f04da8bb5412cd33149328d8d0a77b99a158e6e7f2b926f405fb427ddd7ad54f",
+    "docs/research/REPEATED_SEEDS_V1_PROTOCOL.md": "a481eb70bcb4ff2987bab70306baa3a4080aa37a63e5d4497abc03b30010445f",
+    "configs/repeated_seeds_v1_seed2026.yaml": "f82a4ea75ab7db3150fc488f5063700af01f32074fde9b47421ebed387004aaa",
+    "configs/repeated_seeds_v1_seed2027.yaml": "952f2af15e407ae9afa42556a786359cabb0d5e35d80a2d3ffd78d0eaf927707",
+    "configs/repeated_seeds_v1_seed2028.yaml": "f82908ba866c51f116bf0cb8ffad2959bfe0b396bdf03f181b53cfd7b53998cb"
+  },
+  "population": {
+    "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+    "split_counts": {
+      "calibration": 168,
+      "train": 848,
+      "validation": 168
+    },
+    "split_patient_counts": {
+      "calibration": 42,
+      "train": 212,
+      "validation": 42
+    },
+    "split_fingerprints": {
+      "calibration": "a8d00077f392ea0227008c18c1d93b433ca2f94a13cc61ad709b32f76320e080",
+      "train": "5d72aadc4e563f0dfa0482640c1eeaaa44c89e7a7fdcdb54426b28a1fb4865c0",
+      "validation": "24e69851cfe65f41501e0f8344846c8fe3fd68d618fb1946d123aa7bc3315eeb"
+    },
+    "fitting_and_selection_input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678",
+    "calibration_images_read_or_predicted": false
+  },
+  "head_rng_version": "torch_seed_before_linear_heads_v1",
+  "config_sha256": {
+    "2026": "f82a4ea75ab7db3150fc488f5063700af01f32074fde9b47421ebed387004aaa",
+    "2027": "952f2af15e407ae9afa42556a786359cabb0d5e35d80a2d3ffd78d0eaf927707",
+    "2028": "f82908ba866c51f116bf0cb8ffad2959bfe0b396bdf03f181b53cfd7b53998cb"
+  },
+  "runs": [
+    {
+      "task": "dr",
+      "seed": 2026,
+      "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+      "selected_epoch": 15,
+      "epochs_executed": 30,
+      "optimizer_steps_at_selected_epoch": 405,
+      "total_optimizer_steps": 810,
+      "elapsed_seconds": 122.44186229998013,
+      "extraction_seconds": 119.08484450000105,
+      "feature_cache_reused": false,
+      "metrics": {
+        "dr_grade": {
+          "accuracy": 0.6309523809523809,
+          "macro_f1": 0.5367743202441638,
+          "nll": 1.2025245980437616,
+          "quadratic_weighted_kappa": 0.7346343651861822,
+          "ece": 0.09199598091348844,
+          "brier": 0.5480867343766173,
+          "referable_auroc": 0.8969235192639448,
+          "referable_auprc": 0.873774720934101,
+          "referable_sensitivity": 0.8108108108108109
+        }
+      },
+      "class_supports": {
+        "dr_grade": {
+          "train": [
+            378,
+            100,
+            174,
+            142,
+            54
+          ],
+          "validation": [
+            74,
+            20,
+            24,
+            40,
+            10
+          ]
+        }
+      },
+      "training_source_provenance": {
+        "git_revision": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+        "working_tree_dirty": false,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+          "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+        },
+        "source_sha256": "4cf93a0d471756d25d3314648dfe5084b32e0913496a0922a589d893cf8e53b8"
+      },
+      "training_config": {
+        "backbone": "mobilenet_v3_small",
+        "image_size": 224,
+        "extraction_batch_size": 16,
+        "batch_size": 64,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0001,
+        "patience": 15,
+        "seed": 2026,
+        "cpu_threads": 2,
+        "num_workers": 2,
+        "pretrained": true,
+        "class_weights": true,
+        "horizontal_flip": true
+      },
+      "head_rng_version": "torch_seed_before_linear_heads_v1",
+      "feature_cache_key": "9418656aa6cdd0f1a24b810ce22a29edf1e66a103bed0621f516a8c191e24e4d",
+      "feature_cache_file_sha256": "85c4170d4f4c4f1ae770f078a6d3861d33bab1f6159103c43367c972374d4e18",
+      "input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678",
+      "pretrained_provenance": {
+        "enum": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+        "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+        "filename": "mobilenet_v3_small-047dcff4.pth",
+        "published_sha256_prefix": "047dcff4",
+        "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+        "pretrained": true,
+        "file_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+        "backbone_state_sha256": "87f5df141ad2ab0140c501ba5ed5cf98ed30b95613ee36cca16c9a91351db565"
+      },
+      "torch_version": "2.14.1+cpu",
+      "torchvision_version": "0.29.1+cpu",
+      "artifact_sha256": {
+        "best.pt": "6f8b1be6a7e3bed357ab285ec2b16caeac43baad62d62c3e357188c750f3c46b",
+        "last.pt": "f9e97ad4eb1f11974943e82797ac15fda56e97878572bc3777399040f31886d3",
+        "training_metadata.json": "8e2a9c17d3c2143ffd65bc06556b684de47ff87b9b7ba0e988c79b79b420dcca",
+        "training_history.csv": "3599756cde32a70e1b6ee4f82b3cef84819a170bc933735ff51e9ed93b7fbfaf",
+        "selection_predictions.csv": "5164d8b7defa6652584669d028c043dc7776fa52b5492cb40445e28bf7c7af15",
+        "selection_metrics.json": "289d334f0361b69516cd78f2131f8498b588616a9a23557535981510b7b73046",
+        "training_result.json": "9dd697b71eac8a5088c716bdfdd45c05e941a322790d1d6ef086d59e5df865c7",
+        "execution.json": "bd8f5204016a979b280e81306ac7cc2a22f3b308e59f3ba47f1a495857244861"
+      }
+    },
+    {
+      "task": "dr",
+      "seed": 2027,
+      "model_version": "development-v1-dr-mobilenet_v3_small-seed2027-epoch24",
+      "selected_epoch": 24,
+      "epochs_executed": 39,
+      "optimizer_steps_at_selected_epoch": 648,
+      "total_optimizer_steps": 1053,
+      "elapsed_seconds": 3.6279389000264928,
+      "extraction_seconds": 0.0,
+      "feature_cache_reused": true,
+      "metrics": {
+        "dr_grade": {
+          "accuracy": 0.625,
+          "macro_f1": 0.5214933219664678,
+          "nll": 1.2570569581926139,
+          "quadratic_weighted_kappa": 0.7393780113885239,
+          "ece": 0.10217087743507713,
+          "brier": 0.5587982946841871,
+          "referable_auroc": 0.8963484761357102,
+          "referable_auprc": 0.8794663034289062,
+          "referable_sensitivity": 0.8108108108108109
+        }
+      },
+      "class_supports": {
+        "dr_grade": {
+          "train": [
+            378,
+            100,
+            174,
+            142,
+            54
+          ],
+          "validation": [
+            74,
+            20,
+            24,
+            40,
+            10
+          ]
+        }
+      },
+      "training_source_provenance": {
+        "git_revision": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+        "working_tree_dirty": false,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+          "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+        },
+        "source_sha256": "4cf93a0d471756d25d3314648dfe5084b32e0913496a0922a589d893cf8e53b8"
+      },
+      "training_config": {
+        "backbone": "mobilenet_v3_small",
+        "image_size": 224,
+        "extraction_batch_size": 16,
+        "batch_size": 64,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0001,
+        "patience": 15,
+        "seed": 2027,
+        "cpu_threads": 2,
+        "num_workers": 2,
+        "pretrained": true,
+        "class_weights": true,
+        "horizontal_flip": true
+      },
+      "head_rng_version": "torch_seed_before_linear_heads_v1",
+      "feature_cache_key": "9418656aa6cdd0f1a24b810ce22a29edf1e66a103bed0621f516a8c191e24e4d",
+      "feature_cache_file_sha256": "85c4170d4f4c4f1ae770f078a6d3861d33bab1f6159103c43367c972374d4e18",
+      "input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678",
+      "pretrained_provenance": {
+        "enum": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+        "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+        "filename": "mobilenet_v3_small-047dcff4.pth",
+        "published_sha256_prefix": "047dcff4",
+        "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+        "pretrained": true,
+        "file_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+        "backbone_state_sha256": "87f5df141ad2ab0140c501ba5ed5cf98ed30b95613ee36cca16c9a91351db565"
+      },
+      "torch_version": "2.14.1+cpu",
+      "torchvision_version": "0.29.1+cpu",
+      "artifact_sha256": {
+        "best.pt": "31c403045ead31cba1be9b38b8a121b3b1f584a1950998cf950d2c559a880e51",
+        "last.pt": "f5d26e94f73caf6b778993207fc060a65cd6cce1cf56044c4c8789030b2773ad",
+        "training_metadata.json": "b0c180b2102607dbbbcdcffbf5be759004ee7f91e74780d3d2ebb81b1ede2087",
+        "training_history.csv": "4628853634b6769eea495997543183c233c97135c9d2d1e87aa16bbada5a763c",
+        "selection_predictions.csv": "64e7e4444beb7985339c1efe397b1399087361965a418a34c19a26fc0a40605b",
+        "selection_metrics.json": "c50a4d1d79fc0b19470e9d4356fca1dc868b0cfbfd16e516b62e7165769fcfd0",
+        "training_result.json": "1de7aba12281fac5c1223b5922bedcf60cb1c74291b54edf5069c7f3e2a33269",
+        "execution.json": "3106369d842cd953273392561a856eab36d3820e77e89d59a01442f3de2844bd"
+      }
+    },
+    {
+      "task": "dr",
+      "seed": 2028,
+      "model_version": "development-v1-dr-mobilenet_v3_small-seed2028-epoch25",
+      "selected_epoch": 25,
+      "epochs_executed": 40,
+      "optimizer_steps_at_selected_epoch": 675,
+      "total_optimizer_steps": 1080,
+      "elapsed_seconds": 3.5255821000318974,
+      "extraction_seconds": 0.0,
+      "feature_cache_reused": true,
+      "metrics": {
+        "dr_grade": {
+          "accuracy": 0.6309523809523809,
+          "macro_f1": 0.5319922235084436,
+          "nll": 1.2122065854038584,
+          "quadratic_weighted_kappa": 0.7456531431119038,
+          "ece": 0.1048602318880538,
+          "brier": 0.5504145026790637,
+          "referable_auroc": 0.895629672225417,
+          "referable_auprc": 0.8761306633242314,
+          "referable_sensitivity": 0.8243243243243243
+        }
+      },
+      "class_supports": {
+        "dr_grade": {
+          "train": [
+            378,
+            100,
+            174,
+            142,
+            54
+          ],
+          "validation": [
+            74,
+            20,
+            24,
+            40,
+            10
+          ]
+        }
+      },
+      "training_source_provenance": {
+        "git_revision": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+        "working_tree_dirty": false,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+          "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+        },
+        "source_sha256": "4cf93a0d471756d25d3314648dfe5084b32e0913496a0922a589d893cf8e53b8"
+      },
+      "training_config": {
+        "backbone": "mobilenet_v3_small",
+        "image_size": 224,
+        "extraction_batch_size": 16,
+        "batch_size": 64,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0001,
+        "patience": 15,
+        "seed": 2028,
+        "cpu_threads": 2,
+        "num_workers": 2,
+        "pretrained": true,
+        "class_weights": true,
+        "horizontal_flip": true
+      },
+      "head_rng_version": "torch_seed_before_linear_heads_v1",
+      "feature_cache_key": "9418656aa6cdd0f1a24b810ce22a29edf1e66a103bed0621f516a8c191e24e4d",
+      "feature_cache_file_sha256": "85c4170d4f4c4f1ae770f078a6d3861d33bab1f6159103c43367c972374d4e18",
+      "input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678",
+      "pretrained_provenance": {
+        "enum": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+        "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+        "filename": "mobilenet_v3_small-047dcff4.pth",
+        "published_sha256_prefix": "047dcff4",
+        "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+        "pretrained": true,
+        "file_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+        "backbone_state_sha256": "87f5df141ad2ab0140c501ba5ed5cf98ed30b95613ee36cca16c9a91351db565"
+      },
+      "torch_version": "2.14.1+cpu",
+      "torchvision_version": "0.29.1+cpu",
+      "artifact_sha256": {
+        "best.pt": "3312e4250ab083280e0d0fdccb69daafea7f8755c2e8dbaa41272243bae4f2bc",
+        "last.pt": "a8dd9588620d2768b5acf711c9faab47c714a4691243c95058415550f5b11801",
+        "training_metadata.json": "708a3db8c6a5aae893bc3540d428de53f45c85e3d1b158a1c9683c19e97b00d6",
+        "training_history.csv": "49cc596428660659dd73a1c6ab8db7d0d0e4632edba74e28c0a275f4585dcbe8",
+        "selection_predictions.csv": "4a00b69ee6e8cc9e2afa6002e2f8a8a6cacc9da7be76d294e3c86e4c61faadef",
+        "selection_metrics.json": "761da263a54c833587b9fe8365983ef3d8f8ee36caacb5f5eb5b57fb48723575",
+        "training_result.json": "2d9ea721cb6f678b863cf0f9d166a86a18f2a67d9a7f4ba5a99c9fb79647df0c",
+        "execution.json": "d05dd455cd50a3ffbd8867f9b3ba5c9860d296284358a6e571512e6c703fe544"
+      }
+    },
+    {
+      "task": "quality",
+      "seed": 2026,
+      "model_version": "development-v1-quality-mobilenet_v3_small-seed2026-epoch4",
+      "selected_epoch": 4,
+      "epochs_executed": 19,
+      "optimizer_steps_at_selected_epoch": 108,
+      "total_optimizer_steps": 513,
+      "elapsed_seconds": 3.3424451999599114,
+      "extraction_seconds": 0.0,
+      "feature_cache_reused": true,
+      "metrics": {
+        "quality_grade": {
+          "accuracy": 0.7678571428571429,
+          "macro_f1": 0.7585406301824212,
+          "nll": 0.5210603812929843
+        },
+        "clarity_class": {
+          "accuracy": 0.5059523809523809,
+          "macro_f1": 0.4576715132693393,
+          "nll": 1.185280324634391
+        },
+        "field_definition_class": {
+          "accuracy": 0.4523809523809524,
+          "macro_f1": 0.4271404825835205,
+          "nll": 1.2884192937944456
+        },
+        "artifact_class": {
+          "accuracy": 0.30952380952380953,
+          "macro_f1": 0.25120424958369675,
+          "nll": 1.5945755483443256
+        }
+      },
+      "class_supports": {
+        "quality_grade": {
+          "train": [
+            438,
+            410
+          ],
+          "validation": [
+            98,
+            70
+          ]
+        },
+        "clarity_class": {
+          "train": [
+            19,
+            70,
+            188,
+            272,
+            299
+          ],
+          "validation": [
+            5,
+            9,
+            42,
+            61,
+            51
+          ]
+        },
+        "field_definition_class": {
+          "train": [
+            3,
+            33,
+            130,
+            576,
+            106
+          ],
+          "validation": [
+            1,
+            6,
+            21,
+            116,
+            24
+          ]
+        },
+        "artifact_class": {
+          "train": [
+            418,
+            31,
+            169,
+            105,
+            99,
+            26
+          ],
+          "validation": [
+            80,
+            6,
+            35,
+            20,
+            20,
+            7
+          ]
+        }
+      },
+      "training_source_provenance": {
+        "git_revision": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+        "working_tree_dirty": false,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+          "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+        },
+        "source_sha256": "4cf93a0d471756d25d3314648dfe5084b32e0913496a0922a589d893cf8e53b8"
+      },
+      "training_config": {
+        "backbone": "mobilenet_v3_small",
+        "image_size": 224,
+        "extraction_batch_size": 16,
+        "batch_size": 64,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0001,
+        "patience": 15,
+        "seed": 2026,
+        "cpu_threads": 2,
+        "num_workers": 2,
+        "pretrained": true,
+        "class_weights": true,
+        "horizontal_flip": true
+      },
+      "head_rng_version": "torch_seed_before_linear_heads_v1",
+      "feature_cache_key": "9418656aa6cdd0f1a24b810ce22a29edf1e66a103bed0621f516a8c191e24e4d",
+      "feature_cache_file_sha256": "85c4170d4f4c4f1ae770f078a6d3861d33bab1f6159103c43367c972374d4e18",
+      "input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678",
+      "pretrained_provenance": {
+        "enum": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+        "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+        "filename": "mobilenet_v3_small-047dcff4.pth",
+        "published_sha256_prefix": "047dcff4",
+        "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+        "pretrained": true,
+        "file_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+        "backbone_state_sha256": "87f5df141ad2ab0140c501ba5ed5cf98ed30b95613ee36cca16c9a91351db565"
+      },
+      "torch_version": "2.14.1+cpu",
+      "torchvision_version": "0.29.1+cpu",
+      "artifact_sha256": {
+        "best.pt": "67368a38922423e38d541f96bfa7a49ce740d7b172eef7389073367cee6ffbc1",
+        "last.pt": "6d60466e39419eee42acc57763a417885990ceb89fb24c163ab0824c9037b198",
+        "training_metadata.json": "eb9f33011c77a184466a99b55d0371b1dfdb36979f80588853922cdcf37563ad",
+        "training_history.csv": "2f86e2bc620457be2cd6bca031321e1dac471d2ebd1f49644879535a8830f418",
+        "selection_predictions.csv": "0bd28982be4883ea0f2cdaf671d754b40abf086ca14bad34a86c1da0f88998cf",
+        "selection_metrics.json": "a73c69c129144afc6854e8ab3a6643c8eb7ca666b45388056a85ab6ac66426fe",
+        "training_result.json": "8370df5ce3c8af7f307f524fa8f8f1c81f3687498820ba81291135104ec59c6c",
+        "execution.json": "322cbe3922b424c884510efa89a9a05175d9b3f1a9732866bce7ef4b372305f5"
+      }
+    },
+    {
+      "task": "quality",
+      "seed": 2027,
+      "model_version": "development-v1-quality-mobilenet_v3_small-seed2027-epoch10",
+      "selected_epoch": 10,
+      "epochs_executed": 25,
+      "optimizer_steps_at_selected_epoch": 270,
+      "total_optimizer_steps": 675,
+      "elapsed_seconds": 3.717455499980133,
+      "extraction_seconds": 0.0,
+      "feature_cache_reused": true,
+      "metrics": {
+        "quality_grade": {
+          "accuracy": 0.7619047619047619,
+          "macro_f1": 0.7529411764705882,
+          "nll": 0.5182099639587416
+        },
+        "clarity_class": {
+          "accuracy": 0.5297619047619048,
+          "macro_f1": 0.4752687588100056,
+          "nll": 1.151710321348992
+        },
+        "field_definition_class": {
+          "accuracy": 0.5833333333333334,
+          "macro_f1": 0.3776943514418404,
+          "nll": 0.9878717182086257
+        },
+        "artifact_class": {
+          "accuracy": 0.49404761904761907,
+          "macro_f1": 0.3219646986740829,
+          "nll": 1.2378953121799912
+        }
+      },
+      "class_supports": {
+        "quality_grade": {
+          "train": [
+            438,
+            410
+          ],
+          "validation": [
+            98,
+            70
+          ]
+        },
+        "clarity_class": {
+          "train": [
+            19,
+            70,
+            188,
+            272,
+            299
+          ],
+          "validation": [
+            5,
+            9,
+            42,
+            61,
+            51
+          ]
+        },
+        "field_definition_class": {
+          "train": [
+            3,
+            33,
+            130,
+            576,
+            106
+          ],
+          "validation": [
+            1,
+            6,
+            21,
+            116,
+            24
+          ]
+        },
+        "artifact_class": {
+          "train": [
+            418,
+            31,
+            169,
+            105,
+            99,
+            26
+          ],
+          "validation": [
+            80,
+            6,
+            35,
+            20,
+            20,
+            7
+          ]
+        }
+      },
+      "training_source_provenance": {
+        "git_revision": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+        "working_tree_dirty": false,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+          "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+        },
+        "source_sha256": "4cf93a0d471756d25d3314648dfe5084b32e0913496a0922a589d893cf8e53b8"
+      },
+      "training_config": {
+        "backbone": "mobilenet_v3_small",
+        "image_size": 224,
+        "extraction_batch_size": 16,
+        "batch_size": 64,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0001,
+        "patience": 15,
+        "seed": 2027,
+        "cpu_threads": 2,
+        "num_workers": 2,
+        "pretrained": true,
+        "class_weights": true,
+        "horizontal_flip": true
+      },
+      "head_rng_version": "torch_seed_before_linear_heads_v1",
+      "feature_cache_key": "9418656aa6cdd0f1a24b810ce22a29edf1e66a103bed0621f516a8c191e24e4d",
+      "feature_cache_file_sha256": "85c4170d4f4c4f1ae770f078a6d3861d33bab1f6159103c43367c972374d4e18",
+      "input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678",
+      "pretrained_provenance": {
+        "enum": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+        "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+        "filename": "mobilenet_v3_small-047dcff4.pth",
+        "published_sha256_prefix": "047dcff4",
+        "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+        "pretrained": true,
+        "file_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+        "backbone_state_sha256": "87f5df141ad2ab0140c501ba5ed5cf98ed30b95613ee36cca16c9a91351db565"
+      },
+      "torch_version": "2.14.1+cpu",
+      "torchvision_version": "0.29.1+cpu",
+      "artifact_sha256": {
+        "best.pt": "545c367d226951d63e9e0170407289ffa0474686f3355680a7c32510fd9aa9ca",
+        "last.pt": "8385d581c2ecb1ac1cc74b7fc681d59493b1af94e7592f8a9454b9e9f9e84c6c",
+        "training_metadata.json": "8db494f76daa9bcda6eb9cf498e7d7c88ffa750dbe8206b2855a3ffaf9583784",
+        "training_history.csv": "5045e37297419a0028c61e2ed6105304bd5bbe3729c886a9e78e16cf3b668d68",
+        "selection_predictions.csv": "97193e8c68f1fa236f5b97c12cb02e10e8c9ef83692fcaeca74d751c0b0beea2",
+        "selection_metrics.json": "556b2932d8ff9eef0d9594cedc47cb03856cecf90a0c42e5c1bf06a7d1f73840",
+        "training_result.json": "89841417bfeba7eae8030a6fde5ac1998be459f11816c1912702261d328f0205",
+        "execution.json": "b098d2b17a451fd94d47a762c1427892c682e0ed27dd5487df404e603cd387ae"
+      }
+    },
+    {
+      "task": "quality",
+      "seed": 2028,
+      "model_version": "development-v1-quality-mobilenet_v3_small-seed2028-epoch7",
+      "selected_epoch": 7,
+      "epochs_executed": 22,
+      "optimizer_steps_at_selected_epoch": 189,
+      "total_optimizer_steps": 594,
+      "elapsed_seconds": 3.505822299979627,
+      "extraction_seconds": 0.0,
+      "feature_cache_reused": true,
+      "metrics": {
+        "quality_grade": {
+          "accuracy": 0.7738095238095238,
+          "macro_f1": 0.7571515520389531,
+          "nll": 0.52816318959932
+        },
+        "clarity_class": {
+          "accuracy": 0.42857142857142855,
+          "macro_f1": 0.3646579699950486,
+          "nll": 1.2254449961009268
+        },
+        "field_definition_class": {
+          "accuracy": 0.5119047619047619,
+          "macro_f1": 0.37711601690205565,
+          "nll": 1.2438702983835392
+        },
+        "artifact_class": {
+          "accuracy": 0.4523809523809524,
+          "macro_f1": 0.33254917597022865,
+          "nll": 1.3290562544054139
+        }
+      },
+      "class_supports": {
+        "quality_grade": {
+          "train": [
+            438,
+            410
+          ],
+          "validation": [
+            98,
+            70
+          ]
+        },
+        "clarity_class": {
+          "train": [
+            19,
+            70,
+            188,
+            272,
+            299
+          ],
+          "validation": [
+            5,
+            9,
+            42,
+            61,
+            51
+          ]
+        },
+        "field_definition_class": {
+          "train": [
+            3,
+            33,
+            130,
+            576,
+            106
+          ],
+          "validation": [
+            1,
+            6,
+            21,
+            116,
+            24
+          ]
+        },
+        "artifact_class": {
+          "train": [
+            418,
+            31,
+            169,
+            105,
+            99,
+            26
+          ],
+          "validation": [
+            80,
+            6,
+            35,
+            20,
+            20,
+            7
+          ]
+        }
+      },
+      "training_source_provenance": {
+        "git_revision": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+        "working_tree_dirty": false,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "6475205ca11012e6330984491c13868e7d3f94e3a21f88da82accc218dd5261b",
+          "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+        },
+        "source_sha256": "4cf93a0d471756d25d3314648dfe5084b32e0913496a0922a589d893cf8e53b8"
+      },
+      "training_config": {
+        "backbone": "mobilenet_v3_small",
+        "image_size": 224,
+        "extraction_batch_size": 16,
+        "batch_size": 64,
+        "epochs": 100,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0001,
+        "patience": 15,
+        "seed": 2028,
+        "cpu_threads": 2,
+        "num_workers": 2,
+        "pretrained": true,
+        "class_weights": true,
+        "horizontal_flip": true
+      },
+      "head_rng_version": "torch_seed_before_linear_heads_v1",
+      "feature_cache_key": "9418656aa6cdd0f1a24b810ce22a29edf1e66a103bed0621f516a8c191e24e4d",
+      "feature_cache_file_sha256": "85c4170d4f4c4f1ae770f078a6d3861d33bab1f6159103c43367c972374d4e18",
+      "input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678",
+      "pretrained_provenance": {
+        "enum": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+        "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+        "filename": "mobilenet_v3_small-047dcff4.pth",
+        "published_sha256_prefix": "047dcff4",
+        "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+        "pretrained": true,
+        "file_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+        "backbone_state_sha256": "87f5df141ad2ab0140c501ba5ed5cf98ed30b95613ee36cca16c9a91351db565"
+      },
+      "torch_version": "2.14.1+cpu",
+      "torchvision_version": "0.29.1+cpu",
+      "artifact_sha256": {
+        "best.pt": "09e19a910c0c6d9c80bb743aa47c2476d1b6091802421ea7210dd458ee052285",
+        "last.pt": "afb329590cd9bef686e855b6905827d159ee51c739693cc0888ca048a6ac870a",
+        "training_metadata.json": "4e0a2015c2480c1d195e21fc6702e4f979d300b6f74d0fc46d37094af1a525bc",
+        "training_history.csv": "ff76e13491a165d705cadc487d1bccaaab3874c483709bab8391f3bbd2e9b898",
+        "selection_predictions.csv": "398bfc090df107a1441bb7719ea22fb928b3168532f7ce3a4139aa1f9d17fdd0",
+        "selection_metrics.json": "aeb367d900fb04e5208fc2b2518f49d733836b9c05cc29eda993d1d376cf9339",
+        "training_result.json": "bee2c2c2288f630471e047434b68b684f4053661d476550485047fa0738b01f4",
+        "execution.json": "ed6f2531a04eaff95f3d5b5e717079d9a82d537b1af50d18135f020ba692b3c1"
+      }
+    }
+  ],
+  "summary": {
+    "dr": {
+      "dr_grade": {
+        "accuracy": {
+          "mean": 0.628968253968254,
+          "sample_standard_deviation": 0.0034366087451763315,
+          "seeds": 3
+        },
+        "macro_f1": {
+          "mean": 0.5300866219063584,
+          "sample_standard_deviation": 0.007816694646085347,
+          "seeds": 3
+        },
+        "nll": {
+          "mean": 1.2239293805467446,
+          "sample_standard_deviation": 0.02909488821636185,
+          "seeds": 3
+        },
+        "quadratic_weighted_kappa": {
+          "mean": 0.7398885065622034,
+          "sample_standard_deviation": 0.005527098762990835,
+          "seeds": 3
+        },
+        "ece": {
+          "mean": 0.09967569674553978,
+          "sample_standard_deviation": 0.006785402220151097,
+          "seeds": 3
+        },
+        "brier": {
+          "mean": 0.5524331772466227,
+          "sample_standard_deviation": 0.0056338855431183905,
+          "seeds": 3
+        },
+        "referable_auroc": {
+          "mean": 0.896300555875024,
+          "sample_standard_deviation": 0.0006482532709635449,
+          "seeds": 3
+        },
+        "referable_auprc": {
+          "mean": 0.8764572292290795,
+          "sample_standard_deviation": 0.0028598097474220423,
+          "seeds": 3
+        },
+        "referable_sensitivity": {
+          "mean": 0.8153153153153153,
+          "sample_standard_deviation": 0.007802030664724657,
+          "seeds": 3
+        }
+      }
+    },
+    "quality": {
+      "quality_grade": {
+        "accuracy": {
+          "mean": 0.7678571428571428,
+          "sample_standard_deviation": 0.005952380952380988,
+          "seeds": 3
+        },
+        "macro_f1": {
+          "mean": 0.7562111195639876,
+          "sample_standard_deviation": 0.0029157812671250847,
+          "seeds": 3
+        },
+        "nll": {
+          "mean": 0.5224778449503487,
+          "sample_standard_deviation": 0.005125775802552038,
+          "seeds": 3
+        }
+      },
+      "clarity_class": {
+        "accuracy": {
+          "mean": 0.4880952380952381,
+          "sample_standard_deviation": 0.05290591915068804,
+          "seeds": 3
+        },
+        "macro_f1": {
+          "mean": 0.43253274735813124,
+          "sample_standard_deviation": 0.059436140640359895,
+          "seeds": 3
+        },
+        "nll": {
+          "mean": 1.1874785473614367,
+          "sample_standard_deviation": 0.03691645571505579,
+          "seeds": 3
+        }
+      },
+      "field_definition_class": {
+        "accuracy": {
+          "mean": 0.5158730158730159,
+          "sample_standard_deviation": 0.06556631603912028,
+          "seeds": 3
+        },
+        "macro_f1": {
+          "mean": 0.39398361697580553,
+          "sample_standard_deviation": 0.028716143898616188,
+          "seeds": 3
+        },
+        "nll": {
+          "mean": 1.1733871034622034,
+          "sample_standard_deviation": 0.1621977862745598,
+          "seeds": 3
+        }
+      },
+      "artifact_class": {
+        "accuracy": {
+          "mean": 0.41865079365079366,
+          "sample_standard_deviation": 0.09677578093854919,
+          "seeds": 3
+        },
+        "macro_f1": {
+          "mean": 0.30190604140933613,
+          "sample_standard_deviation": 0.04422681947253282,
+          "seeds": 3
+        },
+        "nll": {
+          "mean": 1.3871757049765767,
+          "sample_standard_deviation": 0.1853067743461683,
+          "seeds": 3
+        }
+      }
+    }
+  },
+  "preserved_selected_artifact_sha256": {
+    "selected_dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "selected_quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "selected_calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "selected_model_card": "43830695b8362aabd06df0d5dfa65b01086db9da2db3212001ac98b8b0e4710f"
+  },
+  "limitations": [
+    "Three training seeds on one fixed development selection population; no cohort/domain variability estimate.",
+    "New cache-independent head initialization procedure; historical seed2026 is excluded from this summary.",
+    "Uncalibrated first-pass probabilities; no temperature/conformal fitting or consumed confirmation prediction.",
+    "Mean and sample SD across all three seeds; no best-seed selection, confidence interval or deployment switch.",
+    "Execution times include hashing/cache checks and shared-workstation activity; no matched speed comparison."
+  ]
+}

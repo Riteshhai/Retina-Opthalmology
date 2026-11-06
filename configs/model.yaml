@@ -1,0 +1,12 @@
+# Backbones are candidate architectures; final selection requires validation evidence.
+backbone: mobilenet_v3_small
+dr_heads:
+  dr_grade: 5
+quality_heads:
+  quality_grade: 2
+# DeepDRiD verified binary overall_quality: 0 poor, 1 good.
+poor_class_indices: [0]
+image_size: 224
+pretrained: false
+normalization_mean: [0.485, 0.456, 0.406]
+normalization_std: [0.229, 0.224, 0.225]

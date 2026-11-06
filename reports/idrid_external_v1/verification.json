@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "scope": "locked_external_domain_diagnostics_consumed",
+  "execution_source_commit": "e447a21b55b82ca47d1e3b91caf76bca61f23699",
+  "pytest": {
+    "tests": 491,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 84.64,
+    "junit_duration_seconds": 84.244,
+    "junit_sha256": "e6be12df70dba5566de38e34edd73986e6956eca5b4c8059d800ba0e95c0993e",
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=reports/idrid_external_v1_tests.xml",
+    "genuine_production_model_and_conformal_integration_enabled": true,
+    "warnings": [
+      "One upstream AnyIO BlockingPortal deprecation warning."
+    ]
+  },
+  "ruff": "passed",
+  "compose_configuration": "passed",
+  "native_http_and_streamlit_component_checks": "passed",
+  "docker_engine_available": false,
+  "new_container_execution_verified": false,
+  "new_browser_rendering_verified": false,
+  "artifact_sha256": {
+    "evaluation.json": "812c82d7771752fa00d076e067e6d1692da4a414c0b1207c8e6df2f21ec35282",
+    "independent_audit.json": "db034e45f78c98b21a95fdf86c5bb909aa61849de770bc05b8a50d5ef05ff6d1",
+    "native_registry.json": "f3c8d1105cf0796fec539289b3bada001986421562bf67bda49648308abdb581",
+    "native_deployment.json": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+    "external_grading.png": "b648557ebd13fbb7bb2322f8206f9ee01bb4100786f2b3c1cce0897f342269dc",
+    "external_conformal.png": "475d7e83ee10dab20dd03aedc2e0dfd9ea30112380629ee5180c7acb34411a59"
+  },
+  "external_outcomes_consumed": true,
+  "external_model_observations": 2064,
+  "fixed_conformal_comparisons": 56,
+  "raw_fallback_sets_reconstructed": 57792,
+  "classifier_or_calibrator_refitted": false,
+  "aptos_reserved_test_inference_performed": false,
+  "production_artifacts_changed": false,
+  "plot_note": "Derived labels were shortened after visual inspection; the scientific aggregate remained byte-identical."
+}

@@ -1,0 +1,15 @@
+# Repeated-seeds v1: cache-independent head initialization; development data only.
+backbone: mobilenet_v3_small
+image_size: 224
+extraction_batch_size: 16
+batch_size: 64
+epochs: 100
+learning_rate: 0.01
+weight_decay: 0.0001
+patience: 15
+seed: 2027
+cpu_threads: 2
+num_workers: 2
+pretrained: true
+class_weights: true
+horizontal_flip: true

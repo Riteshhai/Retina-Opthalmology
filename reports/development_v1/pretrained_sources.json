@@ -1,0 +1,22 @@
+{
+  "mobilenet_v3_small": {
+    "enum": "MobileNet_V3_Small_Weights.IMAGENET1K_V1",
+    "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+    "filename": "mobilenet_v3_small-047dcff4.pth",
+    "published_sha256_prefix": "047dcff4",
+    "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+    "pretrained": true,
+    "file_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+    "backbone_state_sha256": "87f5df141ad2ab0140c501ba5ed5cf98ed30b95613ee36cca16c9a91351db565"
+  },
+  "resnet18": {
+    "enum": "ResNet18_Weights.IMAGENET1K_V1",
+    "url": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+    "filename": "resnet18-f37072fd.pth",
+    "published_sha256_prefix": "f37072fd",
+    "code_license": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review",
+    "pretrained": true,
+    "file_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "backbone_state_sha256": "f5d134da30e02282b812f919c60132fd325ad294e08ddf3dbd12b38f07ff7ce8"
+  }
+}

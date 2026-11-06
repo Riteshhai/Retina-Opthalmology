@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "scope": "bounded payload format/geometry and verified-cache offline reuse",
+  "source_commit": "c1e52fd21f43e38de78007e1376055276be5865d",
+  "selection_plan_sha256": "068b86e5a7ae43d96f0727f1939cc96ee683af1078eeb38823723080fbbf8944",
+  "sample_records_sha256": "5fae30e03e2c96f42bfcc9bd724fb81332f93d79dba8f53465550d1e947eb552",
+  "sample_selection": "one lowest deterministic SHA256 per original author-train quality code; fixed before decoding",
+  "payloads_decoded_without_error": 3,
+  "format_counts": {
+    "JPEG": 3
+  },
+  "mode_counts": {
+    "RGB": 3
+  },
+  "dimension_counts": {
+    "1024x1024": 2,
+    "1024x839": 1
+  },
+  "complete_payload_inventory_claimed": false,
+  "quality_truth_revalidation_performed": false,
+  "model_inference_or_training_performed": false,
+  "verified_cached_shards_reused_without_network": 14,
+  "network_requests_during_reuse": 0,
+  "verifier_sha256": "1118f19f6982cc6957525e729c1ddba3f25a5616fcc101e588e79d982b1c6b31"
+}

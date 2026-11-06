@@ -1,0 +1,48 @@
+{
+  "experiment": "development_v1_classical_quality",
+  "split": "validation",
+  "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "artifact_sha256": "9754a8812848eded6e64a17578734162b78127f5e1c668a97594776673161db4",
+  "feature_description": "Fixed 128px RGB/green contrast, exposure, gradient and border statistics",
+  "fit_configuration": {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "max_iter": 1000,
+    "seed": 2026
+  },
+  "logistic_regression": {
+    "n": 168,
+    "accuracy": 0.7261904761904762,
+    "macro_f1": 0.723010752688172,
+    "confusion_matrix": [
+      [
+        70,
+        28
+      ],
+      [
+        18,
+        52
+      ]
+    ],
+    "poor_auroc": 0.7876093294460641,
+    "brier": 0.3871712675279455
+  },
+  "training_prior_baseline": {
+    "n": 168,
+    "accuracy": 0.5833333333333334,
+    "macro_f1": 0.3684210526315789,
+    "confusion_matrix": [
+      [
+        98,
+        0
+      ],
+      [
+        70,
+        0
+      ]
+    ],
+    "poor_auroc": 0.5,
+    "brier": 0.4950419781654207
+  },
+  "limitation": "Selection-partition comparator, not independent confirmation or clinical certification."
+}
