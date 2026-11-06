@@ -1,5 +1,23 @@
 # QSART change log
 
+## Verified Hugging Face cache and CPU feasibility — 2026-11-06
+
+- Cache the user's pinned bumbledeep/eyepacs source with explicit, resumable
+  32-MiB transfers, exact SHA256, immutable receipts, trusted redirects and offline
+  reuse. All 14 files, 6.54 GB and 35,108 unique metadata rows verified; app startup
+  never downloads data. Keep payloads/IDs/private joins ignored; pin PyArrow 25.0.1.
+- Independently reconstruct all 28,792 EyeQ CSV/join rows and match all 35,108 remote
+  name/DR records. Retain 12,529 train matches, 14 missing Reject train images and
+  zero test images, with no shared DR-label conflicts. Quality truth/evaluation
+  readiness stays false; preserve all 307 earlier artifacts and original models.
+- Complete the declared fitting-only 224/384 CPU probe: 32 images, four temporary
+  updates each, finite gradients and no saved model/predictions. The 384-pixel
+  sampled RSS of 2.742 GB is short-run evidence, not full-training RAM or accuracy.
+- All 618 genuine-model/conformal integration and 25 targeted checks pass. Rebuild
+  and exercise native/CPU Docker workflows, verify all 70 container source/config
+  files, then run the primary app on 18000/18501 and remove temporary containers.
+  Add aggregate acquisition/audit/resource reports, setup and results notes.
+
 ## Fixed APS/RAPS comparison results — 2026-11-06
 
 - Complete all 34 fixed score comparisons, 136 metric views, 35,428 raw/fallback

@@ -52,6 +52,13 @@ resized EyePACS images and DR grades. Original filenames are present, allowing a
 exact-name compatibility audit with our separate EyeQ quality CSVs. Its quality
 labels after transformation and any missing images must be reviewed before use.
 
+The 6 November cache audit completed: all fourteen file hashes and 35,108 unique
+names verified. It matches 12,529 author-train annotations, misses fourteen
+Reject-labelled train images and contains none of the 16,249 author-test images.
+All matched DR grades agree. This is partial transformed-image compatibility;
+full EyeQ quality validation remains incomplete. See
+[measured coverage and limitations](research/EYEPACS_HF_V1_RESULTS.md).
+
 From the project directory, preview the source/space plan:
 
 ```powershell
@@ -67,6 +74,7 @@ Download once, verify SHA256 and audit the metadata join:
 Rerunning resumes interrupted transfers and reuses matching cached files.
 Transfers use 32-MiB ranges with bounded retries after interrupted connections.
 `--workers 4` can increase concurrency; the default is two files at a time.
+Use one acquisition process per cache, with those internal workers.
 The cache is data/external/eyepacs_hf_v1; receipts, private annotation joins and
 audit summaries remain under ignored data/artifacts. App startup does not fetch
 the dataset. `--audit-cache` repeats the read-only metadata audit without network

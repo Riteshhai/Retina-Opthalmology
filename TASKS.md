@@ -22,14 +22,15 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute and audit the locked primary-seed source schedule extension: 14/15 epochs, selected 10, 14 uncertainty comparisons; preserve adverse grade-3/coverage changes and all reserved-test/external exclusions.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
 - [x] P1 Execute and independently reconstruct fixed APS/RAPS saved-prediction baselines against LAC/ordinal, preserving all 34 comparisons/160 intervals and adverse grade-3 results; no tuned/full-paper reproduction claim.
-- [ ] P1 Predeclare a 384px training/CPU feasibility protocol for closer source-paper replication; retain current model results and reserved-test exclusions.
+- [x] P1 Execute a bounded 32-image fitting-only 224/384 CPU feasibility probe in fresh workers; retain source models/reserved-test exclusions and avoid full-training claims.
+- [ ] P1 Lock the next full 384px training initialization/augmentation/optimization/selection protocol and resource budget before fitting a new candidate.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.
 - [x] P1 Execute/audit all 24 independent-role quality temperatures, six fixed candidates/seven conditions and all 486 intervals; retain adverse calibration/response findings and unchanged production.
 - [x] P1 Freeze and independently reconstruct the pinned EyeQ source/annotation/access audit; verify all 28,792 rows, 271 preserved artifacts, native/Docker services and 19-record explorer. This completes metadata readiness only.
 - [ ] P1 IN PROGRESS: obtain official EyeQ source photographs with recorded terms/storage plan, audit pixels/overlap and lock harmonization/evaluation before any model validation.
-- [ ] P1 IN PROGRESS: cache and audit the user-selected pinned Hugging Face EyePACS mirror with resumable transfers, separate transformed-image provenance and exact EyeQ label joins; do not infer original-quality readiness.
+- [x] P1 Cache and independently audit all fourteen user-selected pinned Hugging Face EyePACS files/35,108 rows, resumable/offline reuse and exact EyeQ joins: 12,529 train matches, fourteen missing Reject train rows, zero test matches; original-quality readiness remains incomplete.
 - [ ] P1 Pursue independent quality supervision/validation before proposing production replacements.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.

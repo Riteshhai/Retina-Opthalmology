@@ -6,7 +6,22 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** fixed APS/RAPS development comparison VERIFIED COMPLETE
+- **Current extension:** pinned user-selected Hugging Face EyePACS cache and
+  independent compatibility audit VERIFIED COMPLETE from recovery source
+  `c1e52fd21f43e38de78007e1376055276be5865d`: 14 files/6,535,643,877 bytes/35,108 unique
+  rows, all file/card/receipt hashes verified. Exact author annotation joins yield
+  12,529 train matches, fourteen missing Reject-labelled train rows and zero of
+  16,249 test images. Shared DR labels agree. All 307 prior artifacts remain fixed.
+  Transformed quality truth, original terms/pixels and patient independence remain
+  unverified; both EyeQ partitions remain external-only and evaluation-ineligible.
+  [Acquisition results](research/EYEPACS_HF_V1_RESULTS.md).
+- **Current feasibility extension:** bounded fitting-only 224/384 CPU probe VERIFIED
+  COMPLETE from the same source. 32 fitting images/four actual AdamW updates per
+  fresh worker, finite loss/gradients, no saved candidate/predictions. 224/384 update
+  times 2.71586s/8.24752s and sampled process-tree RSS 1.310 GB/2.742 GB. These are short
+  concurrent-workload observations, not full-training resource or accuracy claims.
+  [Measured feasibility](research/APTOS_384_FEASIBILITY_RESULTS.md).
+- **Previous score extension:** fixed APS/RAPS development comparison VERIFIED COMPLETE
   from clean `e7fd2f1b85d79e2f9f910433eea0dd7beea06b7c`. All 34 thresholds,
   136 aggregate views, 35,428 raw/fallback set rows and 160 paired intervals are
   independently reconstructed. Fourteen historical LAC/ordinal controls reproduce;
@@ -114,7 +129,17 @@ The local APTOS adapter verifies the actual source schema, images and connected
 duplicates, without fabricating patient/eye/quality labels. The official APTOS
 source is acquired, audited and configured at its relocated local root.
 
-**Latest verification:** all 593 tests passed with genuine production/conformal
+**Latest verification:** all 618 tests passed with genuine production/conformal
+integration, zero failures/errors/skips, 130.82s; 25 targeted passed 11.29s. One upstream
+AnyIO warning. Ruff/Compose/whitespace pass. Actual native and rebuilt Docker
+JPEG/batch/TTA/readiness/conformal/simulator/overload workflows pass. All 70 runtime
+source/configuration files match; PyArrow 25.0.1 is installed. The primary Docker
+app runs on 18000/18501 after passing checks; the temporary stack was removed.
+All 14 verified shards reuse without network, and three separately preselected
+payloads pass bounded format/geometry checks without model/quality reassessment.
+Evidence: reports/eyeq_hf_v1/verification.json. No new browser-rendering claim.
+
+**Preserved APS/RAPS verification:** all 593 tests passed with genuine production/conformal
 integration, zero failures/errors/skips, 109.14s; all 35 targeted tests passed in
 12.89s. One upstream AnyIO deprecation warning. Same tested scientific/API/UI source
 retained; Ruff/Compose/whitespace pass. Native and rebuilt CPU-container genuine
@@ -246,7 +271,8 @@ are completed and consumed; broader independent quality/prospective validation,
 clinical review/recapture outcomes and prospective utility remain unproduced.
 
 **IN PROGRESS overall:** useful validated conformal/triage behavior, a locked
-384px training/compute feasibility study toward closer paper replication,
+full 384px initialization/augmentation/optimization/selection protocol and compute
+budget toward closer paper replication (the bounded CPU feasibility is complete),
 official EyeQ photograph acquisition/accepted terms, pixel overlap and locked
 quality harmonization/evaluation, broader validation and
 useful triage evidence. A future experiment must predeclare changes; consumed v1 confirmation
@@ -268,7 +294,19 @@ qsart/evaluation_adaptive.py, scripts/run_adaptive_sets.py and plot_adaptive_set
 config/protocol, two test files, API/explorer controls, nine JSON evidence reports,
 PNG/SVG figure and results notes. Source photographs and raw individual results remain ignored.
 
-**Docker recovery, 5 November:** the engine became available during this session
+The Hugging Face cache extension adds qsart/data/hf_eyepacs.py,
+scripts/fetch_eyepacs_hf.py, configs/eyepacs_hf_v1.json, transport/join fixtures,
+setup/plan/results notes and aggregate cache/native/container audit reports.
+scripts/probe_aptos_384.py and its protocol/tests/two reports record the separate
+fitting-only resource probe. All local dataset payloads/private IDs remain ignored.
+
+**Current Docker verification, 6 November:** the PyArrow-pinned image was rebuilt
+and exercised on temporary 28000/28501, then promoted to primary 18000/18501 after
+the owned native services were stopped. Both primary services are healthy,
+nonroot and read-only; all 70 source/config files match. The temporary stack was
+removed. See reports/eyeq_hf_v1/primary_runtime.json and primary_deployment.json.
+
+**Historical Docker recovery, 5 November:** the engine became available during this session
 after an initial missing-pipe failure. Current source was actually rebuilt and
 exercised in healthy, nonroot, read-only CPU containers on temporary ports
 28000/28501; all 65 runtime source/configuration files match. This resolves the

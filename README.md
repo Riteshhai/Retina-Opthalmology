@@ -67,6 +67,17 @@ does not support a deployment change. All 593 tests pass; native and rebuilt Doc
 services verify 20 evidence records and all 40 adaptive-set control combinations.
 The full paper training/tuned procedure and independent quality validation remain open.
 
+The [user-selected Hugging Face cache](docs/research/EYEPACS_HF_V1_RESULTS.md) is
+downloaded and checksum-verified locally: 14 files, 6.54 GB and 35,108 images.
+It supplies 12,529 EyeQ author-train matches with no DR-label conflicts, misses
+14 Reject-labelled train images and contains none of EyeQ's 16,249 test images.
+The resumable [download script](scripts/fetch_eyepacs_hf.py) preserves transformed
+source provenance and keeps private payloads out of Git. Original quality truth
+and evaluation readiness remain unverified. All 618 integrated tests pass.
+A separate [fitting-only 224/384 CPU probe](docs/research/APTOS_384_FEASIBILITY_RESULTS.md)
+completed at both sizes; the 384-pixel short run used about 2.74 GB of process-tree
+memory. It produced no candidate model or accuracy result.
+
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
 All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.
@@ -91,13 +102,13 @@ running URLs here are http://localhost:18000/docs and http://localhost:18501.
 Compose defaults remain 8000/8501 on a fresh checkout; either port can be
 overridden in `.env`. The local PowerShell launcher also reads these port settings.
 
-The native app remains available through `./scripts/start_local.ps1` on those
-ports. After the earlier Docker outage, the engine became available on 5 November.
-The current source was rebuilt and exercised in healthy CPU containers on
-temporary ports 28000/28501, with actual JPEG/batch/TTA/conformal/simulator checks
-and all 65 runtime source/configuration files matched to local bytes. The 6 November
-APS/RAPS extension was also rebuilt and exercised, with 68 matched files. See
-[latest container evidence](reports/adaptive_sets_v1/container_runtime.json).
+The current Docker app runs on those workstation ports. Both services passed
+actual JPEG/batch/TTA/conformal/simulator checks and all 70 runtime source/config
+files match local bytes. Temporary verification containers on 28000/28501 were
+removed after the primary deployment passed. See
+[latest container evidence](reports/eyeq_hf_v1/primary_runtime.json).
+The native launcher `./scripts/start_local.ps1` remains available as an alternative;
+stop the Compose app before using it on the same ports.
 
 The API is alive without checkpoints, but readiness and prediction fail explicitly. There is no generated or random prediction fallback. Compose mounts `./checkpoints` read-only; it never downloads weights at startup. Ports are bound to the local machine. The API and dashboard have independent health checks; liveness does not imply model readiness.
 

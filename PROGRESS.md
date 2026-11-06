@@ -1,5 +1,61 @@
 # Execution log
 
+## 2026-11-06 — completed cache acquisition and restored primary Docker app
+
+- The resumed four-worker CLI completed all 14 pinned Parquet files, 6,535,643,877
+  bytes and 35,108 unique names. Every file SHA256/size, cached card and local receipt
+  verifies. Original failed long-response logs and source-bound recovery records
+  remain private. The automatic metadata join decodes no images and fits no model.
+- Exact EyeQ join: 12,529 of 12,543 author-train rows matched; 14 missing, all Reject.
+  None of 16,249 author-test images occur. Matched qualities 8347/1876/2306 and
+  missing 8471/4558/3234 (Good/Usable/Reject), zero shared DR-label conflicts.
+  22,579 mirror rows have no EyeQ annotation. Original source partitions remain
+  external-only; no transported quality-truth or independent-validation claim.
+- Independent auditor rehashes every shard, all 307 prior artifacts and source
+  CSVs; reconstructs all 35,108 cached rows and 28,792 annotation/private-join rows;
+  and matches all identities/DR labels to the earlier 1,291,755-byte remote scan.
+  Corrected only private audit setup for the CSV's unnamed index and an HTTPS
+  false positive in the local-path guard; preserve stopped attempt logs. Footer
+  read-ahead may include adjacent compressed payload, with no JPEG decoding.
+- Separate deterministic three-payload format/geometry checks and all 14-shard
+  no-network cache reuse are recorded separately; no quality/model reassessment.
+  Patient photos/IDs/Parquet/checkpoints remain local and ignored.
+- Docker engine 29.9.2 was started and the PyArrow 25.0.1 image genuinely rebuilt.
+  All 70 source/configuration files match. Temporary 28000/28501 checks passed;
+  verified owned native service commands, stopped those and started primary
+  qsart Compose on 18000/18501. Actual JPEG/batch/TTA/conformal/simulator/overload
+  checks pass, both services healthy/nonroot/read-only. Removed only the temporary
+  project after primary verification; unrelated user containers remain untouched.
+- Current 618 full/25 targeted test results are retained from the tested C1 source;
+  no subsequent scientific/API/UI source change. Added public aggregate cache,
+  runtime and CPU feasibility evidence plus updated setup/backlog/status notes.
+  Exact source C1 CI 42259048809/run 56 passed. Final results publication and its
+  exact-head CI are recorded privately after push. Full EyeQ test/quality truth,
+  useful triage and full 384px training remain open; manuscript remains deferred.
+
+## 2026-11-06 — completed bounded 224/384 CPU feasibility
+
+- Executed from clean c1e52fd21f43e38de78007e1376055276be5865d on 32 hash-selected
+  fitting representatives, with original source image/checkpoint hashes verified.
+  Both fresh workers completed four actual AdamW updates, batch8/threads2/FP32,
+  direct RGB resize and active BatchNorm. All losses/gradients remained finite;
+  temporary parameters changed. No updated weights or predictions were saved.
+- Four update times:224px2.71586s/384px8.24752s; sampled worker/launcher process-tree
+  RSS1.30977GB/2.74216GB. Pixel preparation2.98046s/3.00417s excludes model loading.
+  These concurrent-workload observations establish short-run feasibility only,
+  not controlled speed, full-training memory/duration, convergence or accuracy.
+- Saved-record audit verifies all 32 selected fitting inputs/byte hashes, class
+  weights, both raw worker records, source/protocol Git bytes, original checkpoint
+  and 307 historical artifacts. No independent timing/gradient repeat is claimed.
+  Report SHA d43e9d5e00ed870523a90b3ee525fc6cad4a9f20d5285fd179a37f89117a1620.
+- Final full suite after transport/cache-root/probe changes:618 passed130.82s,
+  zero failures/errors/skips, genuine production/conformal integration and one
+  upstream AnyIO warning. Final25 targeted passed11.29s. Earlier613/615/617 runs
+  remain historical phase evidence. No post-test scientific/API source changes.
+- Added feasibility/audit reports and results notes. Full384px paper training and
+  independent quality validation remain open. The user-selected mirror transfer
+  continues with source-bound partials; no mirror image has been decoded/predicted.
+
 ## 2026-11-06 — transfer recovery and bounded 384px probe preparation
 
 - Long mirror responses repeatedly closed early. Two Parquet shards passed exact
