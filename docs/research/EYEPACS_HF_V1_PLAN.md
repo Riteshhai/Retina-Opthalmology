@@ -24,7 +24,9 @@ This is an engineering acquisition audit, not a blind neural experiment.
 
 Default CLI prints a space/source plan and downloads nothing. Explicit --download
 fetches the pinned card and files once under ignored project data. Two workers
-limit transfer concurrency. Each file resumes only from a partial bound to its
+are the default; --workers supports one, two or four concurrent files. Bounded
+32-MiB requests and twelve consecutive network retries tolerate long-response
+disconnects. Each file resumes only from a partial bound to its
 repository, revision, exact size and SHA256. Require the exact HTTP resume range,
 reject size/checksum changes, preserve differing local bytes and never overwrite
 a completed cache file. Restrict redirects to HTTPS Hugging Face/CDN domains;

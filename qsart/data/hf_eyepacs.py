@@ -77,8 +77,10 @@ def cache_path(root,name):
     return result
 
 
-def download_record(record,root,*,client,progress=None,retries=3):
+def download_record(record,root,*,client,progress=None,retries=12,chunk_bytes=32*1024*1024):
     """Resume only an identity-bound partial; a final file is never overwritten."""
+    if type(retries) is not int or retries<1 or type(chunk_bytes) is not int or chunk_bytes<1:
+        raise ValueError('Positive bounded chunk/retry settings required')
     path=cache_path(root,record['path']);expected=record['sha256'];size=record['bytes']
     if path.exists():
         if path.stat().st_size!=size or sha256(path)!=expected:raise ValueError('Existing cached file differs; preserve it')
@@ -92,33 +94,37 @@ def download_record(record,root,*,client,progress=None,retries=3):
     else:
         with marker.open('x',encoding='utf-8') as stream:stream.write(json.dumps(identity,sort_keys=True)+'\n')
     url=f'https://huggingface.co/datasets/{REPOSITORY}/resolve/{REVISION}/{record["path"]}'
-    for attempt in range(retries):
+    failures=0;last_notice=partial.stat().st_size if partial.exists() else 0
+    while True:
         offset=partial.stat().st_size if partial.exists() else 0
         if offset>size:raise ValueError('Partial cache exceeds pinned file size')
         if offset==size:break
-        headers={'Accept-Encoding':'identity'}
-        if offset:headers['Range']=f'bytes={offset}-'
+        end=min(offset+chunk_bytes,size)-1
+        headers={'Accept-Encoding':'identity','Range':f'bytes={offset}-{end}'}
         response=None
         try:
             response=open_response(client,url,headers)
-            if offset:
+            if response.status_code==206:
                 match=re.fullmatch(r'bytes ([0-9]+)-([0-9]+)/([0-9]+)',response.headers.get('content-range',''))
-                if response.status_code!=206 or not match or int(match[1])!=offset or int(match[3])!=size or int(match[2])!=size-1:
+                if not match or int(match[1])!=offset or int(match[3])!=size or int(match[2])!=end:
                     raise ValueError('Server did not honor the exact resume range; partial bytes preserved')
-            elif response.status_code!=200:raise ValueError('Initial file response must contain the complete object')
-            if response.headers.get('content-length') and int(response.headers['content-length'])!=size-offset:
+            elif response.status_code==200 and offset==0:
+                end=size-1  # A full initial response is safe if a server ignores Range.
+            else:raise ValueError('Server did not honor the exact resume range; partial bytes preserved')
+            if response.headers.get('content-length') and int(response.headers['content-length'])!=end-offset+1:
                 raise ValueError('Response size differs from pinned file/range')
-            downloaded=offset;last_notice=offset
+            downloaded=offset
             with partial.open('ab') as stream:
                 for block in response.iter_raw(1024*1024):
-                    if downloaded+len(block)>size:raise ValueError('Response exceeds pinned byte budget')
+                    if downloaded+len(block)>end+1:raise ValueError('Response exceeds pinned byte budget')
                     stream.write(block);downloaded+=len(block)
                     if progress and downloaded-last_notice>=64*1024*1024:
                         progress({'file':record['path'],'downloaded_bytes':downloaded,'expected_bytes':size});last_notice=downloaded
-            if downloaded==size:break
-            if attempt==retries-1:raise ValueError('Incomplete transfer preserved for resume')
+            if downloaded!=end+1:raise httpx.RemoteProtocolError('Incomplete chunk preserved for resume')
+            failures=0
         except (httpx.HTTPError,OSError):
-            if attempt==retries-1:raise
+            failures+=1
+            if failures>=retries:raise
         finally:
             if response is not None:response.close()
     if not partial.exists() or partial.stat().st_size!=size or sha256(partial)!=expected:

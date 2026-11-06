@@ -1,5 +1,28 @@
 # Execution log
 
+## 2026-11-06 — transfer recovery and bounded 384px probe preparation
+
+- Long mirror responses repeatedly closed early. Two Parquet shards passed exact
+  SHA256; two partials are preserved with source-bound markers. The initial transfer
+  stopped after its retry budget, with no corrupt file promoted or model use.
+- Add 32-MiB range requests, twelve consecutive network retries and optional
+  one/two/four file workers. Regression fixtures cover multi-chunk completion and
+  a disconnect followed by resuming the actual written prefix. The source pin,
+  expected bytes and final SHA256 remain unchanged; old partials remain reusable.
+- Found the new cache directory was not covered by legacy ignore rules; no payload
+  was staged/uploaded. Explicitly ignore data/external and require that root in the
+  CLI, with a regression check. Keep all payloads/card/IDs/receipts local.
+- Add a predeclared 224/384 CPU feasibility probe using 32 hash-selected fitting
+  representatives, a temporary copy of the genuine source model and four weighted
+  AdamW steps per fresh worker. It exports no weights/predictions and uses no
+  selection/calibration/test/external pixels. Full-paper training remains separate.
+- Probe fixture tests passed2/16.66s; corrected its import ordering after Ruff found
+  two E402 errors. Earlier expanded suite615 passed107.85s before range recovery;
+  range-recovery suite617 passed106.08s, zero failures/errors/skips, one upstream
+  warning. Final25 targeted checks passed11.29s after the additional ignored-root
+  regression. Memory sampling explicitly includes venv descendants and verifies
+  the actual probe worker. Ruff/whitespace pass before source commit and resumption.
+
 ## 2026-11-06 — user-selected Hugging Face acquisition preparation
 
 - The user deferred manual EyeQ acquisition and selected bumbledeep/eyepacs for

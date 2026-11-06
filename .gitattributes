@@ -32,3 +32,4 @@ reports/adaptive_sets_v1/*.svg -text whitespace=-blank-at-eol,cr-at-eol
 configs/adaptive_sets_v1.json text eol=lf
 configs/eyepacs_hf_v1.json text eol=lf
 reports/eyeq_hf_v1/** -text whitespace=cr-at-eol
+reports/aptos_384_feasibility_v1/** -text whitespace=cr-at-eol

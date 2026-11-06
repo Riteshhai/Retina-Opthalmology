@@ -65,6 +65,8 @@ Download once, verify SHA256 and audit the metadata join:
 ```
 
 Rerunning resumes interrupted transfers and reuses matching cached files.
+Transfers use 32-MiB ranges with bounded retries after interrupted connections.
+`--workers 4` can increase concurrency; the default is two files at a time.
 The cache is data/external/eyepacs_hf_v1; receipts, private annotation joins and
 audit summaries remain under ignored data/artifacts. App startup does not fetch
 the dataset. `--audit-cache` repeats the read-only metadata audit without network

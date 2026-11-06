@@ -29,6 +29,13 @@ def test_manifest_is_bound_to_selected_repo_revision_all_shards_and_sizes():
         with pytest.raises(ValueError):hf.validate_manifest(changed)
 
 
+def test_cli_rejects_a_cache_outside_the_ignored_external_data_root(monkeypatch):
+    import sys
+    from scripts.fetch_eyepacs_hf import main
+    monkeypatch.setattr(sys,'argv',['fetch_eyepacs_hf.py','--cache','data/processed/not-a-cache'])
+    with pytest.raises(ValueError,match='data/external'):main()
+
+
 @pytest.mark.parametrize('url',['http://huggingface.co/file','https://huggingface.co.evil.example/a',
     'https://user:token@huggingface.co/a','https://huggingface.co:444/a','file:///private/data'])
 def test_network_requests_reject_untrusted_or_credential_origins(url):
@@ -67,7 +74,7 @@ def partial(tmp_path,data,amount):
 def test_interrupted_transfer_resumes_exact_range_and_keeps_existing_prefix(tmp_path):
     data=b'0123456789';r,p,part,_=partial(tmp_path,data,4)
     def handler(request):
-        assert request.headers['range']=='bytes=4-'
+        assert request.headers['range']=='bytes=4-9'
         return response(206,data[4:],**{'content-range':'bytes 4-9/10','content-length':'6'})
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:hf.download_record(r,tmp_path,client=client)
     assert p.read_bytes()==data and not part.exists()
@@ -92,6 +99,35 @@ def test_public_endpoint_gates_fail_without_source_or_credential_substitution(tm
     def handler(request):return response(403)
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(ValueError,match='HTTP 403'):hf.download_record(record(),tmp_path,client=client)
+
+
+def test_bounded_chunks_complete_a_file_without_one_long_response(tmp_path):
+    data=b'0123456789';calls=[]
+    def handler(request):
+        value=request.headers['range'];calls.append(value)
+        start,end=map(int,value.removeprefix('bytes=').split('-'))
+        return response(206,data[start:end+1],**{'content-range':f'bytes {start}-{end}/10','content-length':str(end-start+1)})
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        hf.download_record(record(data),tmp_path,client=client,chunk_bytes=4)
+    assert calls==['bytes=0-3','bytes=4-7','bytes=8-9']
+    assert (tmp_path/record(data)['path']).read_bytes()==data
+
+
+def test_a_chunk_retry_restarts_after_the_exact_written_prefix(tmp_path):
+    data=b'0123456789';calls=[]
+    class Disconnect(httpx.SyncByteStream):
+        def __iter__(self):
+            yield b'01'
+            raise httpx.RemoteProtocolError('generated connection cutoff')
+    def handler(request):
+        value=request.headers['range'];calls.append(value)
+        if len(calls)==1:return httpx.Response(206,stream=Disconnect(),headers={'content-range':'bytes 0-3/10','content-length':'4'})
+        start,end=map(int,value.removeprefix('bytes=').split('-'))
+        return response(206,data[start:end+1],**{'content-range':f'bytes {start}-{end}/10','content-length':str(end-start+1)})
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        hf.download_record(record(data),tmp_path,client=client,chunk_bytes=4)
+    assert calls[0]=='bytes=0-3' and calls[1] in ('bytes=0-3','bytes=2-5')
+    assert (tmp_path/record(data)['path']).read_bytes()==data
 
 
 def parquet(tmp_path,names,grades=None):

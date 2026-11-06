@@ -29,15 +29,16 @@ def preserve_json(path,value):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--download',action='store_true');parser.add_argument('--audit-cache',action='store_true')
+    parser.add_argument('--workers',type=int,choices=[1,2,4],default=2)
     parser.add_argument('--cache',type=Path,default=Path('data/external/eyepacs_hf_v1'))
     parser.add_argument('--audit-output',type=Path,default=Path('artifacts/eyeq_hf_v1/cache_audit'))
     args=parser.parse_args();root=Path(__file__).resolve().parents[1]
     cache=(root/args.cache).resolve();audit=(root/args.audit_output).resolve()
-    if not cache.is_relative_to(root/'data') or not audit.is_relative_to(root/'artifacts'):
-        raise ValueError('Keep the cache under ignored project data and audits under artifacts')
+    if not cache.is_relative_to(root/'data'/'external') or not audit.is_relative_to(root/'artifacts'):
+        raise ValueError('Keep the cache under ignored project data/external and audits under artifacts')
     manifest=validate_manifest(json.loads((root/'configs/eyepacs_hf_v1.json').read_text(encoding='utf-8')))
     plan={'repository':REPOSITORY,'revision':REVISION,'shards':14,'bytes':manifest['total_bytes'],
-        'free_bytes':shutil.disk_usage(root).free,'download_requested':args.download,
+        'free_bytes':shutil.disk_usage(root).free,'download_requested':args.download,'workers':args.workers,
         'mirror_is_original_eyeq':False,'startup_downloads_enabled':False}
     print(json.dumps({'plan':plan}),flush=True)
     if args.download:
@@ -58,7 +59,7 @@ def main():
                 value=download_record(record,cache,client=client,progress=lambda item:print(json.dumps({'progress':item}),flush=True))
                 print(json.dumps({'file_verified':value['path'],'cached':value['already_cached']}),flush=True)
                 return value
-            with ThreadPoolExecutor(max_workers=2) as pool:records=list(pool.map(fetch,manifest['files']))
+            with ThreadPoolExecutor(max_workers=args.workers) as pool:records=list(pool.map(fetch,manifest['files']))
         preserve_json(cache/'download_receipt.json',{'repository':REPOSITORY,'revision':REVISION,
             'card_sha256':CARD_SHA,'files':[{k:r[k] for k in ('path','sha256','bytes')} for r in records],
             'source_selected_by_user':True,'original_photo_source_verified':False,'model_inference_performed':False})
