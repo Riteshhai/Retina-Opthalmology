@@ -1,5 +1,30 @@
 # Execution log
 
+## 2026-11-06 — user-selected Hugging Face acquisition preparation
+
+- The user deferred manual EyeQ acquisition and selected bumbledeep/eyepacs for
+  an online execution path. Pinned mirror revision 3e94599d7e41d9992a8362cc0467eb397e11210f,
+  14 Parquet files/6,535,643,877 bytes/35,108 declared rows, file sizes/LFS SHA256 and
+  card hash. Card describes transformed images and removed nearly black scans;
+  its MIT claim is recorded separately from unverified underlying image terms.
+- A 66,599-byte metadata-only range probe found original JPEG names in image.path.
+  No embedded JPEG decoding, full-cohort join or model inference was performed.
+  Initial broad discovery found an empty EyeQ-named repository; the user's exact
+  link resolves that ambiguity. No alternative source is substituted.
+- Added a plan-first explicit download CLI, resumable identity-bound partials,
+  SHA256 cache reuse, trusted HTTPS redirects, strict range/size/path guards,
+  read-only Parquet metadata projection and separate original EyeQ quality/DR join.
+  App startup never downloads data. Source/truth/pixel independence readiness stays
+  false; cached payloads/IDs remain ignored. Pin the existing PyArrow 25.0.1 dependency.
+- All 20 targeted generated-fixture tests passed in 8.82s; Ruff and default source/
+  space plan pass. Full genuine-model/conformal suite passed 613 tests, zero
+  failures/errors/skips,117.96s (JUnit117.941s), one upstream AnyIO warning.
+  Commit the tested source/manifest/plan before actual cache acquisition.
+- The previously completed APS/RAPS publication 49fc4384a0bfbd43a63c1eaf69e61109075c853a
+  passed exact-head CI42088242301. Its scientific results remain unchanged. The
+  later checks found native services/Docker unavailable; the native launcher was restarted and
+  current Linux-engine pipe availability will be reported separately.
+
 ## 2026-11-06 — completed fixed APS/RAPS score comparison
 
 - Executed all 34 fixed saved-logit comparisons from clean
