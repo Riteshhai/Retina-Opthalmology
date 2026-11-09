@@ -25,6 +25,9 @@ class InferenceEngine:
         self.quality_model, quality = load_checkpoint(quality_checkpoint,
                                                        allow_software_test=allow_software_test)
         self.dr_metadata, self.quality_metadata = dr["metadata"], quality["metadata"]
+        if any(metadata.get("production_eligible", True) is not True
+               for metadata in (self.dr_metadata, self.quality_metadata)):
+            raise ArtifactError("Research-only checkpoint is ineligible for the production preprocessing pipeline")
         self.dr_metadata["selected_epoch"] = int(dr["epoch"]) + 1
         self.quality_metadata["selected_epoch"] = int(quality["epoch"]) + 1
         if self.dr_metadata["task"] != "dr" or self.quality_metadata["task"] != "quality":

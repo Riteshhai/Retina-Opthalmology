@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — current on 6 November 2026
+## Specification-v1 priorities — current on 9 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -23,7 +23,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
 - [x] P1 Execute and independently reconstruct fixed APS/RAPS saved-prediction baselines against LAC/ordinal, preserving all 34 comparisons/160 intervals and adverse grade-3 results; no tuned/full-paper reproduction claim.
 - [x] P1 Execute a bounded 32-image fitting-only 224/384 CPU feasibility probe in fresh workers; retain source models/reserved-test exclusions and avoid full-training claims.
-- [ ] P1 Lock the next full 384px training initialization/augmentation/optimization/selection protocol and resource budget before fitting a new candidate.
+- [x] P1 Lock the single-seed 384-pixel ImageNet initialization, augmentation, optimizer, checkpoint selection and resource budget.
+- [ ] P1 Execute and audit the fixed 384-pixel development run and compare its saved scores with the 224-pixel references.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.

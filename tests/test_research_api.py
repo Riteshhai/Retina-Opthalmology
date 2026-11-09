@@ -113,6 +113,10 @@ def test_saved_stress_experiment_preserves_scope_and_unfavorable_paired_results(
       'runs': [{'training_seed': 2026, 'grading': {'macro_f1': .7}}],
       'paired_comparisons': {'four_epoch_primary': {'macro_f1': {'delta': .1}}},
       'comparisons': [{'model_training_seed': 2026, 'randomization_seed': 2030, 'alpha': .1}]}),
+    ('aptos_384_v1/evaluation.json', 'aptos_384_v1', 'source_development_384px_imagenet_finetuning',
+     {'configuration': {'image_size': 384, 'microbatch_size': 4, 'optimizer_batch_size': 8},
+      'summary': {'completed_runs': 1, 'selected_epoch': 3},
+      'runs': [{'production_eligible': False, 'grading': {'macro_f1': .7}}]}),
 ])
 def test_saved_development_reports_preserve_evidence_scope(tmp_path, monkeypatch,
                                                           relative, experiment, scope, payload):

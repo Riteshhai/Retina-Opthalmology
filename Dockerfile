@@ -1,4 +1,4 @@
-FROM python:3.11-slim@sha256:e88e9763f943ec1834f992a4b51e0f24500486803e8bc534e5767af9ea65f6ce
+FROM python:3.11-slim@sha256:e88e9763f943ec1834f992a4b51e0f24500486803e8bc534e5767af9ea65f6ce AS dependencies
 WORKDIR /app
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \
     CUDA_VISIBLE_DEVICES="" STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
@@ -7,6 +7,15 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 COPY requirements.txt pyproject.toml ./
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --timeout 120 --retries 8 -r requirements.txt
+
+FROM dependencies AS aptos-training
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd --create-home --uid 10001 qsart
+USER qsart
+
+FROM dependencies AS runtime
 COPY qsart ./qsart
 COPY api ./api
 COPY dashboard ./dashboard

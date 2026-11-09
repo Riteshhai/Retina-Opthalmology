@@ -114,7 +114,7 @@ def show_policy_comparison(metrics):
                                                'paired_bootstrap', 'paired_comparisons') if key in metrics})
 
 
-def show_aptos_experiment(metrics):
+def show_aptos_experiment(metrics, *, selection_note=None):
     """Show the study's actual cohorts and all recorded randomization replicates."""
     population = metrics.get('population', {})
     left, middle, right = st.columns(3)
@@ -122,7 +122,7 @@ def show_aptos_experiment(metrics):
     middle.metric('Conformal calibration representatives', population.get('conformal_representative_images'))
     right.metric('Temperature-fitting images', population.get('temperature_images'))
     st.write('Development candidate selected: '+str(metrics.get('summary', {}).get('selected_backbone', 'Unreported')))
-    st.caption('The deployed DeepDRiD models remain selected. These APTOS results use '
+    st.caption(selection_note or 'The deployed DeepDRiD models remain selected. These APTOS results use '
                'selection images that also chose classifier checkpoints and architecture.')
     st.warning('Fingerprint groups do not establish patient independence. '
                'APTOS provides no quality annotations for this study; useful triage and external validity remain unproven.')
@@ -205,6 +205,33 @@ def show_aptos_optimization(metrics):
                '. Selection/calibration data are reused; these results do not establish convergence or fresh-test performance.')
     view = {**metrics, 'summary': {'selected_backbone': 'EfficientNet-B0, extended primary seed 2026'}}
     show_aptos_experiment(view)
+    with st.expander('Training history and paired development changes'):
+        st.json({'history': run.get('history', []), 'paired_changes': metrics.get('paired_comparisons', {})})
+
+
+def show_aptos_384(metrics):
+    summary = metrics.get('summary', {})
+    runs = metrics.get('runs', [])
+    if not runs:
+        st.info('The 384-pixel development run is incomplete.')
+        return
+    run = runs[0]
+    st.caption('One ImageNet-initialized EfficientNet-B0 run at 384 pixels. '
+               'The comparison includes changes to initialization, augmentation, BatchNorm and optimization.')
+    rows = []
+    for name, grading in (
+        ('Frozen features', metrics.get('baseline', {}).get('selection_metrics', {})),
+        ('224-pixel primary', metrics.get('prior_primary', {}).get('selection_metrics', {})),
+        ('384-pixel primary', run.get('grading_before_temperature', {})),
+    ):
+        recalls = {row['grade']: row['recall'] for row in grading.get('per_class', [])}
+        rows.append({'Run': name, 'Accuracy': grading.get('accuracy'), 'Macro-F1': grading.get('macro_f1'),
+                     'Grade 3 recall': recalls.get(3), 'Grade 4 recall': recalls.get(4)})
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    st.caption(f"Selected epoch {summary.get('selected_epoch')} of {summary.get('epochs_executed')} completed. "
+               'The direct-resize checkpoint is restricted to research.')
+    show_aptos_experiment(metrics, selection_note='The 521 development selection images determined the checkpoint. '
+                          'These images also supply the reported grading and inclusion metrics.')
     with st.expander('Training history and paired development changes'):
         st.json({'history': run.get('history', []), 'paired_changes': metrics.get('paired_comparisons', {})})
 
@@ -776,6 +803,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_finetune(detail.get('metrics', {}))
                 elif chosen == 'aptos_optimization_v2':
                     show_aptos_optimization(detail.get('metrics', {}))
+                elif chosen == 'aptos_384_v1':
+                    show_aptos_384(detail.get('metrics', {}))
                 elif chosen == 'quality_adaptation_v1':
                     show_quality_adaptation(detail.get('metrics', {}))
                 elif chosen == 'quality_calibration_stress_v1':

@@ -79,6 +79,16 @@ def test_checkpoint_requires_actual_training_and_test_opt_in(software_artifacts,
         load_checkpoint(path, allow_software_test=True)
 
 
+def test_engine_rejects_research_only_checkpoint(software_artifacts, tmp_path):
+    root, _, calibration = software_artifacts
+    _, artifact = load_checkpoint(root / "dr/best.pt", allow_software_test=True)
+    artifact["metadata"]["production_eligible"] = False
+    candidate = tmp_path / "direct_resize.pt"
+    torch.save(artifact, candidate)
+    with pytest.raises(ArtifactError, match="ineligible for the production preprocessing"):
+        InferenceEngine(candidate, root / "quality/best.pt", calibration, allow_software_test=True)
+
+
 def test_engine_calibration_and_population_budget(software_artifacts):
     root, _, calibration = software_artifacts
     with pytest.raises(ArtifactError):

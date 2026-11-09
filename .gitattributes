@@ -33,3 +33,6 @@ configs/adaptive_sets_v1.json text eol=lf
 configs/eyepacs_hf_v1.json text eol=lf
 reports/eyeq_hf_v1/** -text whitespace=cr-at-eol
 reports/aptos_384_feasibility_v1/** -text whitespace=cr-at-eol
+configs/aptos_384_v1.json text eol=lf
+scripts/run_aptos_384_docker.ps1 text eol=lf
+reports/aptos_384_v1/** -text whitespace=cr-at-eol

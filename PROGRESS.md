@@ -1,5 +1,24 @@
 # Execution log
 
+## 2026-11-09 — locked the 384-pixel APTOS development protocol
+
+- Verified the frozen 2,115 fitting, 521 selection and 527 calibration images,
+  the saved comparator scores and the full hash of the cached ImageNet weights.
+  The input check passed on Windows and in the Docker worker.
+- Fixed seed 2026, the direct RGB resize and augmentation recipe, weighted
+  AdamW, the 15-epoch cosine schedule and accuracy-based checkpoint selection.
+  Added disk streaming and immutable epoch recovery with separate score hashes.
+  The worker uses four-image microbatches, eight-image optimizer windows, four
+  CPUs, a 4 GiB container limit and read-only source mounts.
+- The trainer, inference, research API and dashboard checks passed with 54
+  tests in 74.55 seconds. After the cache and checkpoint publication changes,
+  the final trainer and real-image integration gate passed 8 tests in 12.15
+  seconds. Each run reported one upstream AnyIO deprecation warning. Ruff and
+  the Compose configuration check passed.
+- Added the 384-pixel research explorer and restricted its direct-resize
+  checkpoint to the research scorer. The protocol and execution files are
+  committed together before fitting. Study results and the audit follow the run.
+
 ## 2026-11-06 — completed cache acquisition and restored primary Docker app
 
 - The resumed four-worker CLI completed all 14 pinned Parquet files, 6,535,643,877
