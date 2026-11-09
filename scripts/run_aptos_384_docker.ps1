@@ -1,12 +1,17 @@
 [CmdletBinding()]
 param(
     [string]$AptosRoot,
+    [ValidateSet(224, 384)][int]$ImageSize = 384,
     [switch]$Execute,
     [switch]$Resume
 )
 
 $ErrorActionPreference = 'Stop'
 $project = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
+$experiment = if ($ImageSize -eq 224) { 'aptos_224_matched_v1' } else { 'aptos_384_v1' }
+$image = if ($ImageSize -eq 224) {
+    'sha256:03ea39d05bf7ece0eb68fa1539e18219b89d07b17e2920e95736c18e1d068ef7'
+} else { 'qsart:aptos-training' }
 if ($Resume -and -not $Execute) { throw 'Resume requires Execute.' }
 if (-not $AptosRoot) { $AptosRoot = $env:QSART_APTOS_ROOT }
 if (-not $AptosRoot) {
@@ -36,19 +41,19 @@ if ($Execute) {
     if ($LASTEXITCODE -ne 0) { throw 'Cannot resolve the source commit.' }
     $changes = git -C $project status --porcelain
     if ($LASTEXITCODE -ne 0 -or $changes) { throw 'Training requires a clean checkout.' }
-    $active = docker ps --filter 'label=org.qsart.experiment=aptos_384_v1' --quiet
-    if ($LASTEXITCODE -ne 0 -or $active) { throw 'Check Docker and any active 384-pixel worker.' }
-    $container = 'qsart-aptos-384-' + [Guid]::NewGuid().ToString('N').Substring(0, 8)
-    $dockerArgs += @('--detach', '--name', $container, '--label', 'org.qsart.experiment=aptos_384_v1')
+    $active = docker ps --filter 'label=org.qsart.experiment' --quiet
+    if ($LASTEXITCODE -ne 0 -or $active) { throw 'Check Docker and any active QSART training worker.' }
+    $container = "qsart-aptos-$ImageSize-" + [Guid]::NewGuid().ToString('N').Substring(0, 8)
+    $dockerArgs += @('--detach', '--name', $container, '--label', "org.qsart.experiment=$experiment")
     foreach ($area in @('artifacts', 'checkpoints', 'reports')) {
-        $output = Join-Path $project "$area/aptos_384_v1"
+        $output = Join-Path $project "$area/$experiment"
         New-Item -ItemType Directory -Path $output -Force | Out-Null
-        $dockerArgs += @('--mount', "type=bind,source=$output,target=/work/$area/aptos_384_v1")
+        $dockerArgs += @('--mount', "type=bind,source=$output,target=/work/$area/$experiment")
     }
 } else {
     $dockerArgs += '--rm'
 }
-$dockerArgs += @('qsart:aptos-training', 'python', 'scripts/run_aptos_384.py', '--aptos-root', '/aptos')
+$dockerArgs += @($image, 'python', 'scripts/run_aptos_384.py', '--aptos-root', '/aptos', '--image-size', "$ImageSize")
 if ($Execute) { $dockerArgs += @('--execute', '--source-commit', $commit.Trim()) }
 if ($Resume) { $dockerArgs += '--resume' }
 docker @dockerArgs

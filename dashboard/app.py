@@ -209,23 +209,38 @@ def show_aptos_optimization(metrics):
         st.json({'history': run.get('history', []), 'paired_changes': metrics.get('paired_comparisons', {})})
 
 
-def show_aptos_384(metrics):
+def show_aptos_384(metrics, *, matched=False):
     summary = metrics.get('summary', {})
     runs = metrics.get('runs', [])
     if not runs:
-        st.info('The 384-pixel development run is incomplete.')
+        st.info('The APTOS direct-resize development run is incomplete.')
         return
     run = runs[0]
-    st.caption('One ImageNet-initialized EfficientNet-B0 run at 384 pixels. '
-               'The comparison includes changes to initialization, augmentation, BatchNorm and optimization.')
+    grading = run.get('grading_before_temperature', {})
+    if matched:
+        st.caption('Matched ImageNet EfficientNet-B0 recipe, one fixed seed. '
+                   'Paired differences are 384 pixels minus 224 pixels on the same development images.')
+        reference = metrics.get('matched_reference', {})
+        fixed = metrics.get('fixed_epoch_comparison', {})
+        records = (
+            ('Matched 224-pixel', summary.get('selected_epoch'), grading),
+            ('384-pixel reference', reference.get('selected_epoch'), reference.get('selection_metrics', {})),
+            ('224-pixel fixed epoch', fixed.get('epoch'), fixed.get('grading_224', {})),
+            ('384-pixel fixed epoch', fixed.get('epoch'), fixed.get('grading_384', {})),
+        )
+    else:
+        st.caption('One ImageNet-initialized EfficientNet-B0 run at 384 pixels. '
+                   'The comparison includes changes to initialization, augmentation, BatchNorm and optimization.')
+        records = (
+            ('Frozen features', None, metrics.get('baseline', {}).get('selection_metrics', {})),
+            ('224-pixel primary', None, metrics.get('prior_primary', {}).get('selection_metrics', {})),
+            ('384-pixel primary', None, grading),
+        )
     rows = []
-    for name, grading in (
-        ('Frozen features', metrics.get('baseline', {}).get('selection_metrics', {})),
-        ('224-pixel primary', metrics.get('prior_primary', {}).get('selection_metrics', {})),
-        ('384-pixel primary', run.get('grading_before_temperature', {})),
-    ):
+    for name, epoch, grading in records:
         recalls = {row['grade']: row['recall'] for row in grading.get('per_class', [])}
-        rows.append({'Run': name, 'Accuracy': grading.get('accuracy'), 'Macro-F1': grading.get('macro_f1'),
+        rows.append({'Run': name, **({'Epoch': epoch} if matched else {}),
+                     'Accuracy': grading.get('accuracy'), 'Macro-F1': grading.get('macro_f1'),
                      'Grade 3 recall': recalls.get(3), 'Grade 4 recall': recalls.get(4)})
     st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
     st.caption(f"Selected epoch {summary.get('selected_epoch')} of {summary.get('epochs_executed')} completed. "
@@ -803,8 +818,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_finetune(detail.get('metrics', {}))
                 elif chosen == 'aptos_optimization_v2':
                     show_aptos_optimization(detail.get('metrics', {}))
-                elif chosen == 'aptos_384_v1':
-                    show_aptos_384(detail.get('metrics', {}))
+                elif chosen in {'aptos_384_v1', 'aptos_224_matched_v1'}:
+                    show_aptos_384(detail.get('metrics', {}), matched=chosen == 'aptos_224_matched_v1')
                 elif chosen == 'quality_adaptation_v1':
                     show_quality_adaptation(detail.get('metrics', {}))
                 elif chosen == 'quality_calibration_stress_v1':

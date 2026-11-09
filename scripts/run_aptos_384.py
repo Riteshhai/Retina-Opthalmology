@@ -1,4 +1,4 @@
-"""Run the locked APTOS 384px development experiment."""
+"""Run the locked APTOS direct-resize study at 384px or its matched 224px arm."""
 
 from __future__ import annotations
 
@@ -27,7 +27,17 @@ from qsart.calibration.temperature import calibration_metrics, fit_temperature
 from qsart.models.checkpoint import load_checkpoint, sha256_file
 from qsart.training.aptos384 import Config, PREPROCESSING, evaluate, fit, prepare_store
 from qsart.training.data import read_manifest, split_fingerprint
+from qsart.training.finetune import batchnorm_buffer_hash, parameter_hash
 from qsart.training.transfer import TransferConfig, _input_content_hash, initialize_transfer
+from scripts.aptos_resolution_match import (
+    EXPERIMENT as MATCHED_EXPERIMENT,
+    FIXED_EPOCH,
+    REFERENCE_REPORT_SHA256,
+    compare_resolutions,
+    epoch_probabilities,
+    load_reference,
+    verify_matching_source,
+)
 from scripts.inspect_datasets import default_aptos_root
 from scripts.run_aptos_development import (
     CALIBRATION_UNIT,
@@ -57,9 +67,6 @@ WEIGHT_SHA256 = "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca1493
 BASELINE_REPORT = ROOT / "reports/aptos_v1/evaluation.json"
 PRIOR_REPORT = ROOT / "reports/aptos_optimization_v2/evaluation.json"
 PRIOR_SHA256 = "66c49f12bf630493c9dc38180a73daeeae6a222523067f4ec262971b45d2310e"
-CHECKPOINTS = ROOT / "checkpoints" / EXPERIMENT / "seed2026"
-PRIVATE = ROOT / "artifacts" / EXPERIMENT
-OUTPUT = ROOT / "reports" / EXPERIMENT / "evaluation.json"
 COUNTS = {"train": 2115, "validation": 521, "calibration": 527}
 
 
@@ -71,7 +78,7 @@ def git(*args):
     )
 
 
-def source_bindings(commit):
+def source_bindings(commit, config_path, protocol):
     if (
         not commit
         or git("rev-parse", "HEAD").decode().strip() != commit
@@ -81,11 +88,12 @@ def source_bindings(commit):
     paths = git("ls-files", "qsart/*.py", "api/*.py", "dashboard/*.py").decode().splitlines()
     paths += [
         Path(__file__).relative_to(ROOT).as_posix(),
-        CONFIG_PATH.relative_to(ROOT).as_posix(),
-        PROTOCOL.relative_to(ROOT).as_posix(),
+        config_path.relative_to(ROOT).as_posix(),
+        protocol.relative_to(ROOT).as_posix(),
         "Dockerfile",
         "requirements.txt",
         "scripts/run_aptos_384_docker.ps1",
+        "scripts/aptos_resolution_match.py",
         "scripts/inspect_datasets.py",
         "scripts/run_aptos_development.py",
         "scripts/run_aptos_finetune.py",
@@ -200,9 +208,17 @@ def fixed_inputs(args):
 
 
 def run(args):
-    config = Config()
-    if read_json(CONFIG_PATH) != asdict(config):
-        raise ValueError("Configuration differs from the declared 384px protocol")
+    matched = args.image_size == 224
+    experiment = MATCHED_EXPERIMENT if matched else EXPERIMENT
+    config_path = ROOT / "configs" / f"{experiment}.json" if matched else CONFIG_PATH
+    protocol = ROOT / "docs/research/APTOS_MATCHED_RESOLUTION_V1_PROTOCOL.md" if matched else PROTOCOL
+    scope = "source_development_matched_resolution_224_vs_384" if matched else SCOPE
+    checkpoints = ROOT / "checkpoints" / experiment / "seed2026"
+    private = ROOT / "artifacts" / experiment
+    output = ROOT / "reports" / experiment / "evaluation.json"
+    config = Config(image_size=args.image_size)
+    if read_json(config_path) != asdict(config):
+        raise ValueError("Configuration differs from the declared direct-resize protocol")
     frame, roles, inputs = fixed_inputs(args)
     if (
         inputs["development_manifest_sha256"] != DEVELOPMENT_SHA256
@@ -213,16 +229,22 @@ def run(args):
         raise ValueError("Active source annotations differ from the audited source")
     runtime, runtime_roles = runtime_mapping(frame, roles, args.aptos_root)
     validation = runtime.loc[runtime.split.eq("validation")]
-    baseline, baseline_p = comparator_scores(
-        BASELINE_REPORT,
-        BASELINE_SHA256,
-        ROOT / "checkpoints/aptos_v1/dr_efficientnet_b0",
-        validation,
-        "frozen",
-    )
-    prior, prior_p = comparator_scores(
-        PRIOR_REPORT, PRIOR_SHA256, ROOT / "checkpoints/aptos_optimization_v2/seed2026", validation, "prior"
-    )
+    reference = load_reference(ROOT, asdict(config), inputs, validation) if matched else None
+    if reference is None:
+        baseline, baseline_p = comparator_scores(
+            BASELINE_REPORT,
+            BASELINE_SHA256,
+            ROOT / "checkpoints/aptos_v1/dr_efficientnet_b0",
+            validation,
+            "frozen",
+        )
+        prior, prior_p = comparator_scores(
+            PRIOR_REPORT,
+            PRIOR_SHA256,
+            ROOT / "checkpoints/aptos_optimization_v2/seed2026",
+            validation,
+            "prior",
+        )
     if sha256_file(WEIGHT_FILE) != WEIGHT_SHA256 or not all(Path(p).is_file() for p in runtime.image_path):
         raise ValueError("Expected pinned ImageNet weights and complete development image paths")
     if not args.execute:
@@ -230,7 +252,7 @@ def run(args):
             json.dumps(
                 {
                     "status": "ready_inputs_only",
-                    "experiment_id": EXPERIMENT,
+                    "experiment_id": experiment,
                     "partition_images": COUNTS,
                     "configuration": asdict(config),
                     "imagenet_sha256": WEIGHT_SHA256,
@@ -241,18 +263,24 @@ def run(args):
             flush=True,
         )
         return 0
-    if OUTPUT.exists() or (CHECKPOINTS.exists() and not args.resume):
+    if output.exists() or (checkpoints.exists() and not args.resume):
         raise ValueError("Preserve existing experiment outputs")
     if psutil.virtual_memory().available < 2 * 1024**3 or shutil.disk_usage(ROOT).free < 5 * 1024**3:
         raise RuntimeError("Execution needs 2 GiB available RAM and 5 GiB available disk at launch")
     start = time.perf_counter()
-    sources = source_bindings(args.source_commit)
+    sources = source_bindings(args.source_commit, config_path, protocol)
+    if reference:
+        verify_matching_source(
+            ROOT, reference, sources, lambda name: git("show", f"{reference.report['source_commit']}:{name}")
+        )
     snapshot = preservation_snapshot()
+    if reference:
+        snapshot.update(reference.preserved)
     content = _input_content_hash(runtime)
-    manifest = PRIVATE / "runtime_development.csv"
-    role_manifest = PRIVATE / "runtime_calibration_roles.csv"
-    for path, part in ((manifest, runtime), (role_manifest, runtime_roles)):
-        write_or_verify(path, part.to_csv(index=False, lineterminator="\n").encode(), args.resume)
+    manifest = private / "runtime_development.csv"
+    role_manifest = private / "runtime_calibration_roles.csv"
+    manifest_bytes = runtime.to_csv(index=False, lineterminator="\n").encode()
+    role_bytes = runtime_roles.to_csv(index=False, lineterminator="\n").encode()
     torch.set_num_threads(config.cpu_threads)
     model, pretrained = initialize(config)
     environment = {
@@ -268,19 +296,40 @@ def run(args):
         "source_file_sha256": sources,
         "configuration": asdict(config),
         "frozen_input_bindings": inputs,
-        "runtime_manifest_sha256": sha256_file(manifest),
-        "runtime_calibration_roles_sha256": sha256_file(role_manifest),
+        "runtime_manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
+        "runtime_calibration_roles_sha256": hashlib.sha256(role_bytes).hexdigest(),
         "development_content_sha256": content,
         "imagenet_pretrained": pretrained,
         "preserved_artifact_sha256": snapshot,
-        "baseline_report_sha256": BASELINE_SHA256,
-        "prior_224_report_sha256": PRIOR_SHA256,
         "environment": environment,
     }
-    lock_path = PRIVATE / "execution_lock.json"
+    if reference:
+        for key in (
+            "runtime_manifest_sha256",
+            "runtime_calibration_roles_sha256",
+            "development_content_sha256",
+            "imagenet_pretrained",
+            "environment",
+        ):
+            if lock[key] != reference.lock[key]:
+                raise ValueError(f"Matched execution differs from the 384px reference: {key}")
+        if (
+            parameter_hash(model.backbone) != reference.initial_backbone_sha256
+            or batchnorm_buffer_hash(model) != reference.initial_batchnorm_sha256
+        ):
+            raise ValueError("Initial backbone parameters or BatchNorm buffers differ")
+        lock.update(
+            reference_report_sha256=REFERENCE_REPORT_SHA256,
+            fresh_head_parameters_sha256=parameter_hash(model.heads["dr_grade"]),
+        )
+    else:
+        lock.update(baseline_report_sha256=BASELINE_SHA256, prior_224_report_sha256=PRIOR_SHA256)
+    write_or_verify(manifest, manifest_bytes, args.resume)
+    write_or_verify(role_manifest, role_bytes, args.resume)
+    lock_path = private / "execution_lock.json"
     save(lock_path, lock, args.resume)
     fitting = runtime.loc[runtime.split.isin(["train", "validation"])]
-    store, fit_cache = prepare_store(fitting, manifest, PRIVATE / "input_store", size=config.image_size)
+    store, fit_cache = prepare_store(fitting, manifest, private / "input_store", size=config.image_size)
     provenance = {
         "data_purpose": "real_research",
         "manifest_sha256": sha256_file(manifest),
@@ -302,7 +351,7 @@ def run(args):
         ),
         flush=True,
     )
-    result_path = CHECKPOINTS / "training_result.json"
+    result_path = checkpoints / "training_result.json"
     result = (
         read_json(result_path)
         if args.resume and result_path.exists()
@@ -310,10 +359,10 @@ def run(args):
             model,
             store,
             fitting,
-            CHECKPOINTS,
+            checkpoints,
             config,
             provenance=provenance,
-            resume=args.resume and CHECKPOINTS.exists(),
+            resume=args.resume and checkpoints.exists(),
         )
     )
     del model
@@ -324,9 +373,9 @@ def run(args):
         )
         return 2
     for name, expected in result["epoch_checkpoint_sha256"].items():
-        if sha256_file(CHECKPOINTS / name) != expected:
+        if sha256_file(checkpoints / name) != expected:
             raise ValueError("Completed epoch checkpoint changed")
-    best = CHECKPOINTS / "best.pt"
+    best = checkpoints / "best.pt"
     model, artifact = load_checkpoint(best)
     metadata = artifact["metadata"]
     if (
@@ -341,7 +390,7 @@ def run(args):
     positions = np.flatnonzero(fitting.split.eq("validation").to_numpy())
     logits, _ = evaluate(model, store, positions, truth, config.microbatch_size)
     saved = pd.read_csv(
-        CHECKPOINTS / f"selection_epoch_{result['selected_epoch']:03}.csv", float_precision="round_trip"
+        checkpoints / f"selection_epoch_{result['selected_epoch']:03}.csv", float_precision="round_trip"
     )
     saved_logits = saved[[f"logit_{grade}" for grade in range(5)]].to_numpy(float)
     replay_delta = float(np.max(np.abs(logits.double().numpy() - saved_logits)))
@@ -355,7 +404,7 @@ def run(args):
 
     calibration = runtime.loc[runtime.split.eq("calibration")]
     cal_store, cal_cache = prepare_store(
-        calibration, manifest, PRIVATE / "posthoc_store", size=config.image_size, scope="posthoc"
+        calibration, manifest, private / "posthoc_store", size=config.image_size, scope="posthoc"
     )
     cal_truth = torch.tensor(calibration.dr_grade.to_numpy(int), dtype=torch.long)
     cal_logits, _ = evaluate(model, cal_store, np.arange(len(calibration)), cal_truth, config.microbatch_size)
@@ -379,12 +428,36 @@ def run(args):
     comparisons, private_sets = conformal_comparisons(
         cp_p, cal_truth[cp_mask].numpy(), probabilities, truth, representatives, binding
     )
-    paired = {}
-    for name, reference_p in (("frozen_feature_baseline", baseline_p), ("prior_224_primary", prior_p)):
-        paired[name] = paired_fingerprint_bootstrap(
-            truth, reference_p, raw_p, validation.split_group_id.to_numpy(), repeats=2000, seed=20261109
-        )
-        paired[name]["direction"] = "bundled_384_configuration_minus_" + name
+    if reference:
+        epoch_224 = epoch_probabilities(checkpoints / f"selection_epoch_{FIXED_EPOCH:03}.csv", validation)
+        paired, fixed_epoch = compare_resolutions(reference, validation, raw_p, epoch_224)
+        comparison_details = {
+            "matched_reference": {
+                "report_sha256": REFERENCE_REPORT_SHA256,
+                "source_commit": reference.report["source_commit"],
+                "configuration": reference.report["configuration"],
+                "selected_epoch": reference.report["summary"]["selected_epoch"],
+                "selection_metrics": reference.report["grading_before_temperature"],
+            },
+            "fixed_epoch_comparison": fixed_epoch,
+        }
+    else:
+        paired = {}
+        for name, reference_p in (("frozen_feature_baseline", baseline_p), ("prior_224_primary", prior_p)):
+            paired[name] = paired_fingerprint_bootstrap(
+                truth, reference_p, raw_p, validation.split_group_id.to_numpy(), repeats=2000, seed=20261109
+            )
+            paired[name]["direction"] = "bundled_384_configuration_minus_" + name
+        comparison_details = {
+            "baseline": {
+                "selected_epoch": baseline["selected_epoch"],
+                "selection_metrics": _grading(truth, baseline_p),
+            },
+            "prior_primary": {
+                "selected_epoch": prior["selected_epoch"],
+                "selection_metrics": _grading(truth, prior_p),
+            },
+        }
     score_hashes = {}
     for name, part, values in (("validation", validation, logits), ("calibration", calibration, cal_logits)):
         scores = part[["image_id", "split_group_id", "dr_grade", "is_group_representative"]].copy()
@@ -392,17 +465,17 @@ def run(args):
             scores["calibration_role"] = lookup.calibration_role.to_numpy()
         for grade in range(5):
             scores[f"logit_{grade}"] = values[:, grade].double().numpy()
-        path = PRIVATE / "scores" / f"{name}_scores.csv"
+        path = private / "scores" / f"{name}_scores.csv"
         write_or_verify(
             path, scores.to_csv(index=False, lineterminator="\n", float_format="%.17g").encode(), args.resume
         )
         score_hashes[path.name] = sha256_file(path)
-    sets_path = PRIVATE / "scores/conformal_comparisons.json"
+    sets_path = private / "scores/conformal_comparisons.json"
     save(sets_path, private_sets, args.resume)
     score_hashes[sets_path.name] = sha256_file(sets_path)
     if any(sha256_file(ROOT / name) != expected for name, expected in snapshot.items()):
         raise ValueError("A preserved source or historical artifact changed")
-    if source_bindings(args.source_commit) != sources:
+    if source_bindings(args.source_commit, config_path, protocol) != sources:
         raise ValueError("Execution source changed")
     raw_grading, grading = _grading(truth, raw_p), _grading(truth, probabilities)
     calibration_report = {
@@ -416,7 +489,7 @@ def run(args):
         **result,
         "model_version": metadata["model_version"],
         "checkpoint_sha256": sha256_file(best),
-        "last_checkpoint_sha256": sha256_file(CHECKPOINTS / "last.pt"),
+        "last_checkpoint_sha256": sha256_file(checkpoints / "last.pt"),
         "training_seed": config.seed,
         "grading_before_temperature": raw_grading,
         "grading": grading,
@@ -427,10 +500,10 @@ def run(args):
     report = {
         "schema_version": 1,
         "spec_version": "MASTER_SPEC_v1.0",
-        "experiment_id": EXPERIMENT,
+        "experiment_id": experiment,
         "dataset": "APTOS_2019",
         "partition": "validation",
-        "scope": SCOPE,
+        "scope": scope,
         "model_version": metadata["model_version"],
         "images": len(validation),
         "configuration": asdict(config),
@@ -441,7 +514,7 @@ def run(args):
             "selected_epoch": result["selected_epoch"],
             "epochs_executed": result["epochs_executed"],
             "stop_reason": result["stop_reason"],
-            "selected_backbone": "ImageNet EfficientNet-B0, 384px",
+            "selected_backbone": f"ImageNet EfficientNet-B0, {config.image_size}px",
             "conformal_comparisons": len(comparisons),
             "production_model_changed": False,
         },
@@ -458,14 +531,7 @@ def run(args):
         "grading_before_temperature": raw_grading,
         "grading": grading,
         "calibration": calibration_report,
-        "baseline": {
-            "selected_epoch": baseline["selected_epoch"],
-            "selection_metrics": _grading(truth, baseline_p),
-        },
-        "prior_primary": {
-            "selected_epoch": prior["selected_epoch"],
-            "selection_metrics": _grading(truth, prior_p),
-        },
+        **comparison_details,
         "paired_comparisons": paired,
         "comparisons": comparisons,
         "calibration_unit_definition": CALIBRATION_UNIT,
@@ -486,7 +552,11 @@ def run(args):
         "environment": environment,
         "limitations": [
             "One fixed CPU training seed on reused source-development cohorts. Selection accuracy chose the checkpoint.",
-            "The comparison changes initialization, geometry, augmentation, BatchNorm and optimization together.",
+            (
+                "Selected checkpoints can use different epochs. The fixed epoch comparison uses equal update counts."
+                if matched
+                else "The comparison changes initialization, geometry, augmentation, BatchNorm and optimization together."
+            ),
             "Torchvision, CPU FP32, microbatch four and the frozen project split differ from the base-paper design.",
             "Fingerprint components are an approximation for related images. Patient identities are unavailable.",
             "Temperature and conformal roles are disjoint. All reported coverage is empirical on reused selection images.",
@@ -494,9 +564,9 @@ def run(args):
         ],
     }
     ensure_aggregate(report)
-    temporary = OUTPUT.with_name(f".{OUTPUT.name}.{uuid.uuid4().hex}.writing")
+    temporary = output.with_name(f".{output.name}.{uuid.uuid4().hex}.writing")
     save(temporary, report)
-    os.link(temporary, OUTPUT)
+    os.link(temporary, output)
     temporary.unlink()
     print(
         json.dumps(
@@ -521,6 +591,7 @@ if __name__ == "__main__":
     parser.add_argument("--calibration-roles", type=Path, default=manifest_root / "calibration_roles.csv")
     parser.add_argument("--data-audit", type=Path, default=ROOT / "reports/aptos_v1/data_audit.json")
     parser.add_argument("--aptos-root", type=Path, default=default_aptos_root(ROOT))
+    parser.add_argument("--image-size", type=int, choices=(224, 384), default=384)
     parser.add_argument("--source-commit")
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--resume", action="store_true")

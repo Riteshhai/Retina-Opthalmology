@@ -426,7 +426,7 @@ def fit(model, store, frame, folder, config, *, provenance, resume=False):
             "normalization_std": STD,
             "task": "dr",
             "seed": config.seed,
-            "model_version": f"aptos-384-v1-seed{config.seed}-epoch{epoch + 1}",
+            "model_version": f"aptos-{config.image_size}-v1-seed{config.seed}-epoch{epoch + 1}",
             "selected_epoch": epoch + 1,
             "optimizer_steps": steps,
             "training_config": asdict(config),

@@ -1,5 +1,21 @@
 # Execution log
 
+## 2026-11-09 — locked the matched 224-pixel arm
+
+- Pinned the 384-pixel evaluation, selected checkpoint and epoch 5 scores.
+  The new arm binds the same data, initialization, training recipe and Docker
+  image. Verified 51 shared scientific dependency hashes and the initializer
+  syntax tree. The trainer change derives the checkpoint name from input size.
+- Declared selected-checkpoint and fixed epoch 5 contrasts, both in the
+  direction 384 minus 224, with 2,000 paired fingerprint-component resamples.
+  Epoch 5 compares 1,325 updates per arm. The development data already supplied
+  checkpoint selection, and the run uses one seed.
+- Ran `python -m pytest -q tests/test_aptos_384.py tests/test_aptos_resolution_match.py tests/test_research_api.py tests/test_dashboard.py`.
+  All 45 tests passed in 60.91 seconds with one upstream AnyIO deprecation
+  warning. Ruff and the Compose configuration check passed. Fitting and the
+  measured comparison follow this locked source.
+  [Matched protocol](docs/research/APTOS_MATCHED_RESOLUTION_V1_PROTOCOL.md).
+
 ## 2026-11-09 — completed and audited the 384-pixel APTOS run
 
 - Executed clean source `a446d647535d629f03f46ea2b43a73e29523fff7` in the

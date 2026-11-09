@@ -47,6 +47,8 @@ def experiment_registry(root):
          'source_development_primary_seed_schedule_extension'),
         ('aptos_384_v1/evaluation.json', 'aptos_384_v1', 'validation',
          'source_development_384px_imagenet_finetuning'),
+        ('aptos_224_matched_v1/evaluation.json', 'aptos_224_matched_v1', 'validation',
+         'source_development_matched_resolution_224_vs_384'),
         ('quality_adaptation_v1/evaluation_v1_1.json', 'quality_adaptation_v1', 'validation',
          'development_matched_quality_backbone_adaptation'),
         ('quality_calibration_stress_v1/evaluation.json', 'quality_calibration_stress_v1', 'calibration_and_validation',
@@ -94,7 +96,8 @@ def experiment_registry(root):
                    'corrupted_quality_ground_truth_available', 'annotation_profile',
                    'count_reference_differences', 'access_review', 'readiness', 'storage_snapshot',
                    'author_source_revision', 'images_downloaded', 'configuration', 'fixed_temperature',
-                   'model_training_seed', 'raps_parameter_tuning_performed') if key in raw}
+                   'model_training_seed', 'raps_parameter_tuning_performed',
+                   'matched_reference', 'fixed_epoch_comparison') if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         if name == 'idrid_data_v1':
