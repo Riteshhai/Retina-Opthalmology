@@ -1,4 +1,4 @@
-# QSART Development Status — updated 6 November 2026
+# QSART Development Status — updated 9 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,7 +6,16 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current extension:** pinned user-selected Hugging Face EyePACS cache and
+- **Current training extension:** the locked 384-pixel APTOS development run is
+  VERIFIED COMPLETE from `a446d647535d629f03f46ea2b43a73e29523fff7`. It selected
+  epoch 9 after 13 epochs and 3,445 updates. Selection accuracy was 83.49%,
+  macro-F1 0.697 and grade 3 recall 8/26. Both paired intervals against the prior
+  224-pixel run include zero. The audit verified 340 preserved artifacts and
+  reconstructed all 14,588 saved conformal sets. All 627 local tests passed.
+  The rebuilt Docker app passed real-image checks and serves the new research
+  report. A matched resolution comparison and independent validation remain
+  open. [Results and verification](research/APTOS_384_V1_RESULTS.md).
+- **Previous data extension:** pinned user-selected Hugging Face EyePACS cache and
   independent compatibility audit VERIFIED COMPLETE from recovery source
   `c1e52fd21f43e38de78007e1376055276be5865d`: 14 files/6,535,643,877 bytes/35,108 unique
   rows, all file/card/receipt hashes verified. Exact author annotation joins yield

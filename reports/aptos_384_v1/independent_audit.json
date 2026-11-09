@@ -1,0 +1,54 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "aptos_384_v1",
+  "source_commit": "a446d647535d629f03f46ea2b43a73e29523fff7",
+  "evaluation_sha256": "746e47de7dba071c82e4ea15736daa19021a3a9d804ca42b2351d2554e635daf",
+  "auditor_script_sha256": "83e05cf332187b5182ae96f56c31b44b6b606ca7eea0d85953cb425f2255989d",
+  "independent_math_helper_sha256": "dec9adfcf3a373b63b048afed3d7badc44f03d1f3ba1c6f78c3ca78255226e43",
+  "independent_pairing_helper_sha256": "f1f00176d1cd511fbcdaeb10f942231fb84c9316d8b12aa02d3ca7a6da7f4558",
+  "development_images_rehashed": 3163,
+  "frozen_manifests_and_roles_verified": true,
+  "preserved_prior_artifacts": 340,
+  "disk_cache": {
+    "fit_selection": {
+      "images": 2636,
+      "bytes": 1166082048,
+      "sha256": "aa2b341f459a2bd8ffd465d3421c22c9d6ba65dba224c55bcb9dbafb7924ffcf",
+      "independent_pixel_samples": 10
+    },
+    "posthoc": {
+      "images": 527,
+      "bytes": 233127936,
+      "sha256": "a7b1646303f0773ecc5575eaf449bd224227adefc9111db7bac698c785b3a387",
+      "independent_pixel_samples": 5
+    }
+  },
+  "training": {
+    "epochs_verified": 13,
+    "selected_epoch": 9,
+    "optimizer_steps": 3445,
+    "batchnorm_updates_per_epoch": 529,
+    "fitting_grade_support": [
+      1059,
+      211,
+      575,
+      105,
+      165
+    ],
+    "selection_rows_reconstructed": 6773,
+    "selected_replay_max_logit_error": 0.0,
+    "maximum_epoch_accuracy_error": 0.0,
+    "imagenet_initial_state_reconstructed": true
+  },
+  "uncertainty": {
+    "comparisons": 14,
+    "individual_raw_and_fallback_sets": 14588,
+    "maximum_threshold_error": 1.1102230246251565e-16,
+    "temperature_optimum_nll_gap": 5.551115123125783e-17,
+    "temperature_independent_optimum": 1.56073997110111
+  },
+  "paired_intervals_reconstructed": 4,
+  "model_refitting_performed": false,
+  "additional_model_forward_pass_performed": false,
+  "elapsed_seconds": 32.75294529995881
+}

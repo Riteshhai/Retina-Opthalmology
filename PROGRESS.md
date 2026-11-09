@@ -1,5 +1,31 @@
 # Execution log
 
+## 2026-11-09 — completed and audited the 384-pixel APTOS run
+
+- Executed clean source `a446d647535d629f03f46ea2b43a73e29523fff7` in the
+  nonroot Docker worker with four CPUs, 4 GiB of memory and read-only inputs.
+  The patience rule stopped at epoch 13 after 3,445 optimizer updates. Epoch 9
+  reached 83.49% selection accuracy, 0.697 macro-F1 and 0.907 quadratic kappa.
+  Training took 7,400.51 seconds and peak sampled process RSS was 1.72 GB.
+- The prior 224-pixel run had 80.81% accuracy and 0.652 macro-F1. Both paired
+  intervals include zero. Grade 3 recall was 8/26 and referable AUROC was
+  0.9747. Temperature 1.560740 lowered selection NLL from 0.5645 to 0.4831.
+  At alpha 0.10, raw LAC inclusion was 91.36% overall and 14/26 for grade 3.
+  The evaluation retains the tradeoffs across all 14 conformal settings.
+- The separate audit reconstructed epoch metrics from saved scores, the ImageNet initialization,
+  14,588 individual raw and fallback sets and four paired intervals. All
+  340 prior artifact hashes match. The selected checkpoint replay reproduced
+  the saved logits exactly. The comparison bundles several training changes.
+- Ran `python -m pytest -q --junitxml=reports/aptos_384_v1_full_tests.xml` with
+  the genuine DeepDRiD validation artifacts and conformal sidecar. All 627 tests
+  passed in 206.54 seconds with one upstream AnyIO deprecation warning. Source
+  CI passed with 626 tests and the local real-image test skipped in CI.
+- Rebuilt the main Docker app and checked 72 source and configuration files
+  against the checkout. The live service passed real-image prediction, batch,
+  conformal, simulator and overload checks. The explorer exposes the new
+  report and verified both alpha settings and both population views.
+  See [measured results](docs/research/APTOS_384_V1_RESULTS.md).
+
 ## 2026-11-09 — locked the 384-pixel APTOS development protocol
 
 - Verified the frozen 2,115 fitting, 521 selection and 527 calibration images,

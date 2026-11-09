@@ -78,6 +78,13 @@ A separate [fitting-only 224/384 CPU probe](docs/research/APTOS_384_FEASIBILITY_
 completed at both sizes; the 384-pixel short run used about 2.74 GB of process-tree
 memory. It produced no candidate model or accuracy result.
 
+The 384-pixel ImageNet-initialized APTOS run completed 13 epochs and selected
+epoch 9 at 83.49% accuracy and 0.697 macro-F1 on the 521 development selection
+images. The earlier 224-pixel configuration reached 80.81% and 0.652. Both
+paired intervals include zero, and grade 3 recall was 8/26. The research
+explorer displays the comparison and the 14 conformal settings. The separate
+audit and 627 local tests passed. [384-pixel results](docs/research/APTOS_384_V1_RESULTS.md).
+
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
 All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.
