@@ -6,15 +6,22 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current training extension:** the locked 384-pixel APTOS development run is
+- **Current training extension:** the matched 224/384-pixel APTOS comparison is
+  VERIFIED COMPLETE from `cc4f4450cb9b2663def6cb1e637949cdfdd50782`. The 224-pixel
+  arm completed 15 epochs and selected epoch 12 at 83.11% accuracy and 0.715
+  macro-F1. All four paired intervals for the selected and epoch 5 contrasts
+  include zero. The audit reconstructed all 14 conformal settings and verified
+  350 preserved artifacts. All 631 local tests and live Docker checks passed.
+  Multiple training seeds and independent validation remain open.
+  [Matched results](research/APTOS_MATCHED_RESOLUTION_V1_RESULTS.md).
+- **Previous training extension:** the locked 384-pixel APTOS development run is
   VERIFIED COMPLETE from `a446d647535d629f03f46ea2b43a73e29523fff7`. It selected
   epoch 9 after 13 epochs and 3,445 updates. Selection accuracy was 83.49%,
   macro-F1 0.697 and grade 3 recall 8/26. Both paired intervals against the prior
   224-pixel run include zero. The audit verified 340 preserved artifacts and
   reconstructed all 14,588 saved conformal sets. All 627 local tests passed.
-  The rebuilt Docker app passed real-image checks and serves the new research
-  report. A matched resolution comparison and independent validation remain
-  open. [Results and verification](research/APTOS_384_V1_RESULTS.md).
+  The rebuilt Docker app passed real-image checks and serves the research
+  report. [384-pixel results and verification](research/APTOS_384_V1_RESULTS.md).
 - **Previous data extension:** pinned user-selected Hugging Face EyePACS cache and
   independent compatibility audit VERIFIED COMPLETE from recovery source
   `c1e52fd21f43e38de78007e1376055276be5865d`: 14 files/6,535,643,877 bytes/35,108 unique
@@ -279,13 +286,11 @@ study protocol replace the earlier access blocker. IDRiD transport diagnostics
 are completed and consumed; broader independent quality/prospective validation,
 clinical review/recapture outcomes and prospective utility remain unproduced.
 
-**IN PROGRESS overall:** useful validated conformal/triage behavior, a locked
-full 384px initialization/augmentation/optimization/selection protocol and compute
-budget toward closer paper replication (the bounded CPU feasibility is complete),
-official EyeQ photograph acquisition/accepted terms, pixel overlap and locked
-quality harmonization/evaluation, broader validation and
-useful triage evidence. A future experiment must predeclare changes; consumed v1 confirmation
-cannot become an undisclosed tuning set. Formal manuscript writing stays deferred.
+**IN PROGRESS overall.** Open work includes additional matched seeds, full
+base-paper reproduction, official EyeQ photograph acquisition and terms, pixel
+overlap and quality harmonization, independent validation, and useful triage
+evidence. Future protocols will be locked before execution and use development
+roles for tuning. Formal manuscript writing stays deferred.
 
 Key files: MASTER_SPEC.md, CHANGELOG.md, AGENTS.md, TASKS.md, PROGRESS.md,
 qsart/triage_v2.py, qsart/uncertainty/conformal.py, conformal sidecar, APTOS adapter,

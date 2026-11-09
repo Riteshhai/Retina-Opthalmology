@@ -25,7 +25,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute a bounded 32-image fitting-only 224/384 CPU feasibility probe in fresh workers; retain source models/reserved-test exclusions and avoid full-training claims.
 - [x] P1 Lock the single-seed 384-pixel ImageNet initialization, augmentation, optimizer, checkpoint selection and resource budget.
 - [x] P1 Execute and audit the fixed 384-pixel development run and compare its saved scores with the 224-pixel references.
-- [ ] P1 Run a matched 224-pixel ImageNet initialization and training recipe to estimate the effect of resolution on the frozen development cohort.
+- [x] P1 Execute and independently audit the matched 224-pixel arm, selected-checkpoint and equal-update contrasts, and all 14 conformal settings.
+- [ ] P1 Predeclare and run additional matched seed pairs to measure resolution sensitivity to training randomness on development data.
 - [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
 - [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
 - [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.

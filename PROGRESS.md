@@ -1,5 +1,33 @@
 # Execution log
 
+## 2026-11-09 — completed and audited the matched APTOS resolution comparison
+
+- Ran `./scripts/run_aptos_384_docker.ps1 -ImageSize 224` and then added
+  `-Execute` on clean source `cc4f4450cb9b2663def6cb1e637949cdfdd50782`.
+  The 224-pixel worker completed 15 epochs and 3,975 updates, selected epoch 12,
+  and exited successfully. Training took 2,828.64 seconds with 1.07 GB sampled
+  process RSS. The same worker continued after Windows standby and the temporary
+  system execution request was released at exit.
+- On the 521 development selection images, the selected 224/384 checkpoints had
+  83.11%/83.49% accuracy, 0.715/0.697 macro-F1 and 15/26 versus 8/26 grade 3 recall.
+  At epoch 5, both arms had 1,325 updates and 78.31%/80.42% accuracy. All four
+  paired intervals include zero. The cohort supplied checkpoint selection and
+  the runs use one seed.
+- The audit verified 15 immutable epochs, 7,815 saved selection rows, 13 common
+  epochs' matching RNG states, all 14,588 raw and fallback sets, all four paired
+  intervals and 350 preserved artifacts. It reconstructed the initial head in
+  the pinned Linux image and matched the selected checkpoint replay exactly.
+- Ran `python -m pytest -q --junitxml=reports/aptos_224_matched_v1_full_tests.xml`
+  with genuine DeepDRiD validation artifacts and the conformal sidecar. All 631
+  tests passed in 120.20 seconds with one upstream AnyIO warning. Ruff and Compose
+  configuration passed. Source CI passed with 630 tests and the real-image test
+  skipped on GitHub.
+- Rebuilt and exercised the primary Docker services with the deployed model card
+  and conformal sidecar. All 73 runtime files matched. Actual single, batch and
+  simulator checks passed, and Streamlit AppTest matched the four checkpoint
+  rows and four conformal views to the live API.
+  [Results and verification](docs/research/APTOS_MATCHED_RESOLUTION_V1_RESULTS.md).
+
 ## 2026-11-09 — locked the matched 224-pixel arm
 
 - Pinned the 384-pixel evaluation, selected checkpoint and epoch 5 scores.
