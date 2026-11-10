@@ -1,5 +1,37 @@
 # Execution log
 
+## 2026-11-10 — completed the two-seed APTOS resolution comparison
+
+- The first seed-2027 384-pixel worker exited with I/O errors and eight
+  intact checkpoint and score pairs. Archived its state and logs, restored
+  Docker and reran the locked input preview. Ran
+  `./scripts/run_aptos_384_docker.ps1 -Seed 2027 -ImageSize 384 -Execute -Resume`
+  at source `0a8eb4a5f29156ebf0032b517bd809e51060c020`. The trainer verified
+  the lock and checkpoint chain, then resumed epoch 9. It exited successfully
+  under the patience rule and selected epoch 5. The 224-pixel arm selected
+  epoch 6 after 10 epochs. Released the temporary Windows execution request.
+- On the 521 development selection images, seed-2027 selected accuracy was
+  81.38% at 224 pixels and 82.53% at 384 pixels. Macro-F1 was 0.693 and 0.681,
+  and grade 3 recall was 15/26 and 12/26. Both seeds favored 384 pixels in
+  accuracy and macro-F1 at equal updates. All eight paired intervals include
+  zero. The reserved test and external populations supplied no repeat results.
+- Ran `python scripts/summarize_aptos_resolution_repeat.py`, the pinned
+  Linux selected-checkpoint replay, and the independent host audit. The audit
+  verified 19 checkpoints, 9,899 saved selection rows, nine matching RNG
+  epochs, 2,636 source image hashes, 352 preserved artifacts and all eight
+  intervals. Both selected replays matched the saved logits exactly.
+- Ran `python -m pytest -q tests/test_aptos_resolution_match.py
+  tests/test_research_api.py tests/test_dashboard.py` and
+  `python -m ruff check .`. All 39 targeted tests passed in 92.37 seconds
+  with one upstream AnyIO warning. Ruff and Compose configuration passed.
+  The locked source also retains its earlier 634-test local run and GitHub CI.
+- Rebuilt the QSART Docker services. Both were healthy and all 73 runtime
+  files matched. The deployed model passed genuine-image single, batch,
+  conformal, simulator and overload checks. The live API and Streamlit
+  explorer matched all eight checkpoint rows. Independent EyeQ quality
+  validation still requires the official photographs.
+  [Results and verification](docs/research/APTOS_RESOLUTION_SEED2027_V1_RESULTS.md).
+
 ## 2026-11-10 — locked the second APTOS resolution pair
 
 - Fixed seed 2027 before fitting. The 224- and 384-pixel arms reuse the audited

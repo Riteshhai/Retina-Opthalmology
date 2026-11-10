@@ -91,6 +91,13 @@ intervals for the selected checkpoints and the equal-update epoch 5 comparison
 include zero. The Docker explorer displays both comparisons and all 14
 conformal settings. [Matched results](docs/research/APTOS_MATCHED_RESOLUTION_V1_RESULTS.md).
 
+The locked seed-2027 repeat found 81.38% versus 82.53% selected accuracy
+and 0.693 versus 0.681 macro-F1 at 224 and 384 pixels. Across both seeds,
+384 pixels raised accuracy but lowered macro-F1 at the selected checkpoints.
+Both metrics rose at equal updates, and all eight paired intervals include
+zero on the reused development cohort.
+[Two-seed results](docs/research/APTOS_RESOLUTION_SEED2027_V1_RESULTS.md).
+
 **Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
 
 All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.

@@ -1,4 +1,4 @@
-# QSART Development Status — updated 9 November 2026
+# QSART Development Status — updated 10 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,13 +6,21 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
-- **Current training extension:** the matched 224/384-pixel APTOS comparison is
+- **Current training extension:** the two-seed matched APTOS resolution study
+  is VERIFIED COMPLETE from `0a8eb4a5f29156ebf0032b517bd809e51060c020`. The
+  seed-2027 worker at 384 pixels resumed from its verified epoch-8 checkpoint
+  and selected epoch 5. At both seeds, 384 pixels raised selected accuracy
+  and lowered selected macro-F1. At equal updates, both metrics rose. All
+  eight paired intervals include zero on the reused development cohort.
+  The audit and live Docker explorer verification passed.
+  [Two-seed results](research/APTOS_RESOLUTION_SEED2027_V1_RESULTS.md).
+- **Previous training extension:** the matched seed-2026 224/384-pixel APTOS comparison is
   VERIFIED COMPLETE from `cc4f4450cb9b2663def6cb1e637949cdfdd50782`. The 224-pixel
   arm completed 15 epochs and selected epoch 12 at 83.11% accuracy and 0.715
   macro-F1. All four paired intervals for the selected and epoch 5 contrasts
   include zero. The audit reconstructed all 14 conformal settings and verified
   350 preserved artifacts. All 631 local tests and live Docker checks passed.
-  Multiple training seeds and independent validation remain open.
+  Independent validation remains open.
   [Matched results](research/APTOS_MATCHED_RESOLUTION_V1_RESULTS.md).
 - **Previous training extension:** the locked 384-pixel APTOS development run is
   VERIFIED COMPLETE from `a446d647535d629f03f46ea2b43a73e29523fff7`. It selected
