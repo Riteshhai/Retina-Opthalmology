@@ -251,6 +251,25 @@ def show_aptos_384(metrics, *, matched=False):
         st.json({'history': run.get('history', []), 'paired_changes': metrics.get('paired_comparisons', {})})
 
 
+def show_aptos_resolution_repeat(metrics):
+    rows = []
+    fixed_epoch = metrics.get('summary', {}).get('fixed_epoch')
+    for run in metrics.get('runs', []):
+        for comparison, epoch, grading in (
+            ('Selected', run['selected_epoch'], run['selected_grading']),
+            ('Equal updates', fixed_epoch, run['fixed_epoch_grading']),
+        ):
+            recalls = {row['grade']: row['recall'] for row in grading.get('per_class', [])}
+            rows.append({'Seed': run['training_seed'], 'Pixels': run['image_size'], 'Comparison': comparison,
+                         'Epoch': epoch, 'Accuracy': grading['accuracy'], 'Macro-F1': grading['macro_f1'],
+                         'Grade 3 recall': recalls.get(3)})
+    st.caption('Each pair uses the same recipe at both resolutions. Both seeds reuse the development selection cohort.')
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True)
+    with st.expander('Paired differences and descriptive ranges'):
+        st.json({'384 minus 224': metrics.get('paired_comparisons', {}),
+                 'Ranges across the two seeds': metrics.get('summary', {}).get('difference_ranges', {})})
+
+
 def show_quality_adaptation(metrics):
     runs = metrics.get('runs', [])
     if not runs:
@@ -820,6 +839,8 @@ elif page == 'Experiment Explorer':
                     show_aptos_optimization(detail.get('metrics', {}))
                 elif chosen in {'aptos_384_v1', 'aptos_224_matched_v1'}:
                     show_aptos_384(detail.get('metrics', {}), matched=chosen == 'aptos_224_matched_v1')
+                elif chosen == 'aptos_resolution_seed2027_v1':
+                    show_aptos_resolution_repeat(detail.get('metrics', {}))
                 elif chosen == 'quality_adaptation_v1':
                     show_quality_adaptation(detail.get('metrics', {}))
                 elif chosen == 'quality_calibration_stress_v1':

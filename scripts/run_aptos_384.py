@@ -38,6 +38,13 @@ from scripts.aptos_resolution_match import (
     load_reference,
     verify_matching_source,
 )
+from scripts.aptos_resolution_repeat import (
+    EXPERIMENT as REPEAT_EXPERIMENT,
+    ORIGINAL_SEED,
+    SEED as REPEAT_SEED,
+    checked_cache,
+    read_anchor,
+)
 from scripts.inspect_datasets import default_aptos_root
 from scripts.run_aptos_development import (
     CALIBRATION_UNIT,
@@ -94,6 +101,8 @@ def source_bindings(commit, config_path, protocol):
         "requirements.txt",
         "scripts/run_aptos_384_docker.ps1",
         "scripts/aptos_resolution_match.py",
+        "scripts/aptos_resolution_repeat.py",
+        "scripts/summarize_aptos_resolution_repeat.py",
         "scripts/inspect_datasets.py",
         "scripts/run_aptos_development.py",
         "scripts/run_aptos_finetune.py",
@@ -126,6 +135,14 @@ def preservation_snapshot():
 
 def save(path, value, resume=False):
     write_or_verify(path, (json.dumps(value, indent=2, allow_nan=False) + "\n").encode(), resume)
+
+
+def publish_evaluation(output, report):
+    ensure_aggregate(report)
+    temporary = output.with_name(f".{output.name}.{uuid.uuid4().hex}.writing")
+    save(temporary, report)
+    os.link(temporary, output)
+    temporary.unlink()
 
 
 def comparator_scores(report_path, report_sha, folder, validation, key):
@@ -208,16 +225,25 @@ def fixed_inputs(args):
 
 
 def run(args):
-    matched = args.image_size == 224
+    repeated = args.seed == REPEAT_SEED
+    matched = args.image_size == 224 and not repeated
     experiment = MATCHED_EXPERIMENT if matched else EXPERIMENT
-    config_path = ROOT / "configs" / f"{experiment}.json" if matched else CONFIG_PATH
+    config_path = ROOT / "configs" / f"{MATCHED_EXPERIMENT}.json" if args.image_size == 224 else CONFIG_PATH
     protocol = ROOT / "docs/research/APTOS_MATCHED_RESOLUTION_V1_PROTOCOL.md" if matched else PROTOCOL
     scope = "source_development_matched_resolution_224_vs_384" if matched else SCOPE
-    checkpoints = ROOT / "checkpoints" / experiment / "seed2026"
+    if repeated:
+        experiment = REPEAT_EXPERIMENT
+        protocol = ROOT / "docs/research/APTOS_RESOLUTION_SEED2027_V1_PROTOCOL.md"
+    checkpoints = ROOT / "checkpoints" / experiment / f"seed{args.seed}"
     private = ROOT / "artifacts" / experiment
     output = ROOT / "reports" / experiment / "evaluation.json"
-    config = Config(image_size=args.image_size)
-    if read_json(config_path) != asdict(config):
+    if repeated:
+        checkpoints /= f"{args.image_size}px"
+        private /= f"{args.image_size}px"
+        output = private / "evaluation.json"
+    config = Config(image_size=args.image_size, seed=args.seed)
+    original_config = {**asdict(config), "seed": ORIGINAL_SEED}
+    if read_json(config_path) != original_config:
         raise ValueError("Configuration differs from the declared direct-resize protocol")
     frame, roles, inputs = fixed_inputs(args)
     if (
@@ -229,8 +255,12 @@ def run(args):
         raise ValueError("Active source annotations differ from the audited source")
     runtime, runtime_roles = runtime_mapping(frame, roles, args.aptos_root)
     validation = runtime.loc[runtime.split.eq("validation")]
+    fitting = runtime.loc[runtime.split.isin(["train", "validation"])]
     reference = load_reference(ROOT, asdict(config), inputs, validation) if matched else None
-    if reference is None:
+    anchor = read_anchor(ROOT, config.image_size) if repeated else None
+    if anchor and (anchor.lock["configuration"] != original_config or anchor.lock["frozen_input_bindings"] != inputs):
+        raise ValueError("The repeat must use the audited recipe and development cohorts")
+    if reference is None and anchor is None:
         baseline, baseline_p = comparator_scores(
             BASELINE_REPORT,
             BASELINE_SHA256,
@@ -269,14 +299,22 @@ def run(args):
         raise RuntimeError("Execution needs 2 GiB available RAM and 5 GiB available disk at launch")
     start = time.perf_counter()
     sources = source_bindings(args.source_commit, config_path, protocol)
-    if reference:
+    original = read_anchor(ROOT, 384) if anchor else reference
+    if original:
         verify_matching_source(
-            ROOT, reference, sources, lambda name: git("show", f"{reference.report['source_commit']}:{name}")
+            ROOT, original, sources, lambda name: git("show", f"{original.report['source_commit']}:{name}")
         )
     snapshot = preservation_snapshot()
     if reference:
         snapshot.update(reference.preserved)
-    content = _input_content_hash(runtime)
+    if anchor:
+        snapshot.update(anchor.bindings)
+        snapshot.update(original.bindings)
+        matched_source = read_anchor(ROOT, 224)
+        snapshot.update(matched_source.bindings)
+        if sources["qsart/training/aptos384.py"] != matched_source.lock["source_file_sha256"]["qsart/training/aptos384.py"]:
+            raise ValueError("Repeat trainer bytes differ from the audited matched run")
+    content = _input_content_hash(fitting if anchor else runtime)
     manifest = private / "runtime_development.csv"
     role_manifest = private / "runtime_calibration_roles.csv"
     manifest_bytes = runtime.to_csv(index=False, lineterminator="\n").encode()
@@ -322,14 +360,26 @@ def run(args):
             reference_report_sha256=REFERENCE_REPORT_SHA256,
             fresh_head_parameters_sha256=parameter_hash(model.heads["dr_grade"]),
         )
+    elif anchor:
+        for key in ("runtime_manifest_sha256", "runtime_calibration_roles_sha256", "imagenet_pretrained", "environment"):
+            if lock[key] != anchor.lock[key]:
+                raise ValueError(f"Repeat execution differs from the seed-2026 anchor: {key}")
+        lock.pop("development_content_sha256")
+        lock.update(
+            fitting_selection_content_sha256=content,
+            reused_input_cache_sha256=anchor.cache["sha256"],
+            fresh_head_parameters_sha256=parameter_hash(model.heads["dr_grade"]),
+        )
     else:
         lock.update(baseline_report_sha256=BASELINE_SHA256, prior_224_report_sha256=PRIOR_SHA256)
     write_or_verify(manifest, manifest_bytes, args.resume)
     write_or_verify(role_manifest, role_bytes, args.resume)
     lock_path = private / "execution_lock.json"
     save(lock_path, lock, args.resume)
-    fitting = runtime.loc[runtime.split.isin(["train", "validation"])]
-    store, fit_cache = prepare_store(fitting, manifest, private / "input_store", size=config.image_size)
+    if anchor:
+        store, fit_cache = checked_cache(ROOT, config.image_size, anchor, fitting, sha256_file(manifest), content)
+    else:
+        store, fit_cache = prepare_store(fitting, manifest, private / "input_store", size=config.image_size)
     provenance = {
         "data_purpose": "real_research",
         "manifest_sha256": sha256_file(manifest),
@@ -347,6 +397,7 @@ def run(args):
                 "source_commit": args.source_commit,
                 "fitting_images": len(fitting) - len(validation),
                 "selection_images": len(validation),
+                **({"training_seed": config.seed, "image_size": config.image_size, "reused_cache": True} if anchor else {}),
             }
         ),
         flush=True,
@@ -401,6 +452,33 @@ def run(args):
         or not np.array_equal(logits.numpy().argmax(1), saved_logits.argmax(1))
     ):
         raise ValueError("Selected checkpoint replay differs from saved epoch scores")
+
+    if anchor:
+        if any(sha256_file(ROOT / name) != expected for name, expected in snapshot.items()):
+            raise ValueError("A preserved source or historical artifact changed")
+        if source_bindings(args.source_commit, config_path, protocol) != sources:
+            raise ValueError("Execution source changed")
+        grading = _grading(truth, logits.double().softmax(1).numpy())
+        arm = {
+            "status": "completed",
+            "experiment_id": experiment,
+            "source_commit": args.source_commit,
+            "configuration": asdict(config),
+            "frozen_input_bindings": inputs,
+            "execution_lock_sha256": sha256_file(lock_path),
+            "training_result_sha256": sha256_file(result_path),
+            "cache_sha256": fit_cache["file_sha256"],
+            "selected_checkpoint_sha256": sha256_file(best),
+            "selected_replay_max_abs_delta": replay_delta,
+            "preserved_artifact_count": len(snapshot),
+            "grading_before_temperature": grading,
+            "run": result,
+        }
+        publish_evaluation(output, arm)
+        print(json.dumps({"event": "completed", "training_seed": config.seed, "image_size": config.image_size,
+                          "selected_epoch": result["selected_epoch"], "epochs_executed": result["epochs_executed"],
+                          "accuracy": grading["accuracy"], "macro_f1": grading["macro_f1"]}), flush=True)
+        return 0
 
     calibration = runtime.loc[runtime.split.eq("calibration")]
     cal_store, cal_cache = prepare_store(
@@ -563,11 +641,7 @@ def run(args):
             "The selected checkpoint is restricted to research with its direct RGB resize.",
         ],
     }
-    ensure_aggregate(report)
-    temporary = output.with_name(f".{output.name}.{uuid.uuid4().hex}.writing")
-    save(temporary, report)
-    os.link(temporary, output)
-    temporary.unlink()
+    publish_evaluation(output, report)
     print(
         json.dumps(
             {
@@ -592,6 +666,7 @@ if __name__ == "__main__":
     parser.add_argument("--data-audit", type=Path, default=ROOT / "reports/aptos_v1/data_audit.json")
     parser.add_argument("--aptos-root", type=Path, default=default_aptos_root(ROOT))
     parser.add_argument("--image-size", type=int, choices=(224, 384), default=384)
+    parser.add_argument("--seed", type=int, choices=(ORIGINAL_SEED, REPEAT_SEED), default=ORIGINAL_SEED)
     parser.add_argument("--source-commit")
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--resume", action="store_true")

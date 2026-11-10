@@ -1,5 +1,22 @@
 # Execution log
 
+## 2026-11-10 — locked the second APTOS resolution pair
+
+- Fixed seed 2027 before fitting. The 224- and 384-pixel arms reuse the audited
+  source cohort, pinned ImageNet weights, exact trainer and original Docker
+  image. Each worker verifies its original image bytes and reads the preserved
+  resize cache. The new outputs are separate by resolution.
+- Declared the two selected-checkpoint and epoch 5 comparisons in the same
+  384-minus-224 direction and with the same fingerprint-component draws. This
+  repeat scores the fitting and selection roles for grading. The seed-2026
+  temperature and conformal evidence remains preserved.
+- Both read-only previews passed with `./scripts/run_aptos_384_docker.ps1 -Seed 2027`
+  at `-ImageSize 224` and `-ImageSize 384`. Ran `python -m pytest -q
+  --junitxml=reports/aptos_resolution_seed2027_v1_full_tests.xml` with the genuine
+  DeepDRiD validation pipeline. All 634 tests passed in 157.92 seconds with one
+  upstream AnyIO warning. Ruff, launcher syntax and Compose configuration passed.
+  [Locked protocol](docs/research/APTOS_RESOLUTION_SEED2027_V1_PROTOCOL.md).
+
 ## 2026-11-09 — completed and audited the matched APTOS resolution comparison
 
 - Ran `./scripts/run_aptos_384_docker.ps1 -ImageSize 224` and then added

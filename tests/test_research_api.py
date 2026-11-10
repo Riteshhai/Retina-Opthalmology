@@ -121,6 +121,11 @@ def test_saved_stress_experiment_preserves_scope_and_unfavorable_paired_results(
      {'configuration': {'image_size': 224}, 'matched_reference': {'selected_epoch': 9},
       'fixed_epoch_comparison': {'epoch': 5, 'grading_224': {'accuracy': .8}, 'grading_384': {'accuracy': .75}},
       'paired_comparisons': {'fixed_epoch_5': {'direction': 'matched_384_minus_224', 'accuracy': {'delta': -.05}}}}),
+    ('aptos_resolution_seed2027_v1/evaluation.json', 'aptos_resolution_seed2027_v1',
+     'source_development_matched_resolution_repeat',
+     {'summary': {'training_seeds': [2026, 2027], 'fixed_epoch': 5},
+      'runs': [{'training_seed': 2027, 'image_size': 224, 'selected_grading': {'accuracy': .8}}],
+      'paired_comparisons': {'seed2027': {'fixed_epoch_5': {'accuracy': {'delta': -.05}}}}}),
 ])
 def test_saved_development_reports_preserve_evidence_scope(tmp_path, monkeypatch,
                                                           relative, experiment, scope, payload):

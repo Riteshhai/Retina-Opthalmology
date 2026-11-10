@@ -49,6 +49,8 @@ def experiment_registry(root):
          'source_development_384px_imagenet_finetuning'),
         ('aptos_224_matched_v1/evaluation.json', 'aptos_224_matched_v1', 'validation',
          'source_development_matched_resolution_224_vs_384'),
+        ('aptos_resolution_seed2027_v1/evaluation.json', 'aptos_resolution_seed2027_v1', 'validation',
+         'source_development_matched_resolution_repeat'),
         ('quality_adaptation_v1/evaluation_v1_1.json', 'quality_adaptation_v1', 'validation',
          'development_matched_quality_backbone_adaptation'),
         ('quality_calibration_stress_v1/evaluation.json', 'quality_calibration_stress_v1', 'calibration_and_validation',
