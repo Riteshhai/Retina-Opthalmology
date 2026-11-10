@@ -1,5 +1,31 @@
 # Execution log
 
+## 2026-11-10 — evaluated direct referability conformal gates
+
+- Declared the protocol at `a326df4` and ran
+  `python scripts/run_referability_gate.py --source-commit b457a14baa93767e3e0f52f5d28fad196205c87e`.
+  The runner replayed the default ordinal sets and used only frozen
+  first-pass DeepDRiD development scores. Separate temperature and conformal
+  calibration roles remained disjoint from the 42 reused selection patients.
+  No model or temperature was fitted and no reserved or external data were scored.
+- Binary LAC narrowed sets at both alphas. At .90/.40 review/recapture capacity
+  it allocated 3 automatic, 14 recapture and 151 review recommendations at
+  each alpha. At alpha .10, projected LAC allocated 5 automatic, 12 recapture
+  and 151 review recommendations. No referable automatic miss was observed
+  among those small budgeted subsets. All methods overloaded at .30/.20 and
+  .60/.40. The experimental gates remain separate from the deployed policy.
+- Ran `python scripts/audit_referability_gate.py`. The independent audit
+  rehashed 336 images and reproduced six threshold fits, 1,008 sets, 1,008
+  pointwise routes and all 24 budget scenarios. Nine were feasible and 15
+  overloaded. The worst optimal-cost difference was 1.42e-14.
+- Ran `python -m pytest -q tests/test_conformal.py tests/test_conformal_sidecar.py
+  tests/test_randomized_ordinal.py tests/test_triage_v2.py
+  tests/test_policy_comparison.py tests/test_policy_runner.py`. All 207
+  targeted tests passed. The full `python -m pytest -q` suite passed 634 tests
+  in 116.51 seconds with the genuine DeepDRiD integration and one upstream
+  AnyIO warning. Ruff and Compose configuration passed.
+  [Results and verification](docs/research/REFERABILITY_GATE_V1_RESULTS.md).
+
 ## 2026-11-10 — completed the two-seed APTOS resolution comparison
 
 - The first seed-2027 384-pixel worker exited with I/O errors and eight

@@ -34,6 +34,12 @@ identical actions. Tuning sometimes increased cost; no validated triage benefit 
 deployment change follows. The experiment explorer distinguishes unavailable
 outcomes from measured zero misses.
 
+Direct binary conformal calibration narrowed referability sets on the
+same DeepDRiD development cohort. At the 90% review cap it yielded three
+automatic recommendations, compared with five for projected five-grade
+LAC at alpha .10. Every gate overloaded at the 30% and 60% caps.
+[Referability gate results](docs/research/REFERABILITY_GATE_V1_RESULTS.md).
+
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
 is .50894 frozen versus .54112 adapted; all three paired primary intervals include

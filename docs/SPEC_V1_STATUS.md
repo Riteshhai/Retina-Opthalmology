@@ -6,6 +6,12 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **Current triage diagnostic:** the direct binary and projected grade-set
+  comparison is VERIFIED COMPLETE on 168 reused development images. At a
+  .90/.40 review/recapture budget, direct binary LAC permitted 3 automatic
+  recommendations at each alpha. Projected LAC permitted 5 at alpha .10 and
+  overloaded at .05. Every method overloaded at .30/.20 and .60/.40.
+  [Results and audit](research/REFERABILITY_GATE_V1_RESULTS.md).
 - **Current training extension:** the two-seed matched APTOS resolution study
   is VERIFIED COMPLETE from `0a8eb4a5f29156ebf0032b517bd809e51060c020`. The
   seed-2027 worker at 384 pixels resumed from its verified epoch-8 checkpoint
