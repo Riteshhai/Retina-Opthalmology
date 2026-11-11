@@ -40,6 +40,14 @@ automatic recommendations, compared with five for projected five-grade
 LAC at alpha .10. Every gate overloaded at the 30% and 60% caps.
 [Referability gate results](docs/research/REFERABILITY_GATE_V1_RESULTS.md).
 
+The [MSHF external quality study](docs/research/MSHF_QUALITY_V1_RESULTS.md)
+evaluated the frozen DeepDRiD head on 497 conventional fundus photos. Accuracy
+was 74.85% and poor-quality AUROC was .8973. The fixed threshold missed 20 of
+41 poor DR-ZJU photos and flagged 87 of 118 good DR-XJU photos. The frozen
+temperature slightly reduced pooled Brier score while increasing log loss and
+confidence calibration error. Patient independence and triage utility remain
+unverified.
+
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
 is .50894 frozen versus .54112 adapted; all three paired primary intervals include

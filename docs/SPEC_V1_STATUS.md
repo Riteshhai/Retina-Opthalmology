@@ -1,4 +1,4 @@
-# QSART Development Status — updated 10 November 2026
+# QSART Development Status — updated 11 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,6 +6,13 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **Current external quality diagnostic:** the frozen DeepDRiD head scored
+  497 MSHF v2 photographs after three overlap-candidate exclusions. It reached
+  74.85% accuracy and .8973 poor-quality AUROC. At the fixed threshold,
+  DR-XJU good specificity was 31/118 and DR-ZJU poor sensitivity was 21/41.
+  Pooled log loss and confidence ECE rose with the frozen temperature.
+  The archive lacked patient linkage. This endpoint supplies no DR grading
+  or triage utility evidence. [MSHF results](research/MSHF_QUALITY_V1_RESULTS.md).
 - **Current triage diagnostic:** the direct binary and projected grade-set
   comparison is VERIFIED COMPLETE on 168 reused development images. At a
   .90/.40 review/recapture budget, direct binary LAC permitted 3 automatic

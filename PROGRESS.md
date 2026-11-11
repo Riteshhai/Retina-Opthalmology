@@ -1,5 +1,32 @@
 # Execution log
 
+## 2026-11-11 — evaluated the frozen quality head on MSHF v2
+
+- Verified the author Figshare v2 archive, file 39485878, against the publisher
+  MD5 and recorded its SHA256. The first locked attempt stopped before scoring
+  because 78 conventional files named `.jpg` are TIFF. Verified 422 JPEGs and
+  78 TIFFs, all single-frame RGB, and locked the format correction and audit
+  before any model outcomes.
+- Ran `python scripts/evaluate_mshf_quality.py --source-commit 92b93077534eff891bbdec7c02e7afee611fb941`.
+  Reconstructed majority labels from the three individual overall ratings.
+  The summary workbook disagreed on 163 of 500 photos. Two internal and ten
+  reference perceptual pairs led to three exclusions; 497 images were scored
+  by the frozen head. The representative and unanimous views had 495 and
+  445 images respectively.
+- Main accuracy was 372/497 (74.85%) versus 289/497 (58.15%) for always good.
+  Poor sensitivity was 181/208 and good specificity was 191/289. DR-XJU
+  accounted for 87 of 98 false flags; DR-ZJU accounted for 20 of 27 misses.
+  Frozen temperature left decisions unchanged and increased pooled NLL and ECE.
+- Ran `python scripts/audit_mshf_quality.py`. The audit independently rebuilt
+  the 500 image and label rows, candidate screen against 5,186 reference
+  fingerprints and all 30 metric cells. It checked probabilities for all 497
+  scored images and reproduced logits exactly for all eight replays.
+- Ran `python -m pytest -q` with genuine DeepDRiD integration: 634 passed in
+  119.80 seconds with one upstream AnyIO warning. `python -m ruff check .`
+  and `docker compose config --quiet` passed. This experiment used local CPU
+  inference and did not exercise a new deployment runtime.
+  [Results and reproduction](docs/research/MSHF_QUALITY_V1_RESULTS.md).
+
 ## 2026-11-10 — evaluated direct referability conformal gates
 
 - Declared the protocol at `a326df4` and ran

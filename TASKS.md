@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — current on 10 November 2026
+## Specification-v1 priorities — current on 11 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -35,6 +35,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Freeze and independently reconstruct the pinned EyeQ source/annotation/access audit; verify all 28,792 rows, 271 preserved artifacts, native/Docker services and 19-record explorer. This completes metadata readiness only.
 - [ ] P1 IN PROGRESS: obtain official EyeQ source photographs with recorded terms/storage plan, audit pixels/overlap and lock harmonization/evaluation before any model validation.
 - [x] P1 Cache and independently audit all fourteen user-selected pinned Hugging Face EyePACS files/35,108 rows, resumable/offline reuse and exact EyeQ joins: 12,529 train matches, fourteen missing Reject train rows, zero test matches; original-quality readiness remains incomplete.
+- [x] P1 Execute the locked external MSHF overall-quality diagnostic on the frozen head, including annotation discrepancies, overlap screening and source-specific threshold failures.
 - [ ] P1 Pursue independent quality supervision/validation before proposing production replacements.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [x] P1 Compare direct referability and projected five-grade conformal gates with frozen guards and exact budgets. Audit all 24 development scenarios and retain low automatic coverage and overloads.
