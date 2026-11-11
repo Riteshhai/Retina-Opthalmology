@@ -1,5 +1,32 @@
 # Execution log
 
+## 2026-11-11 — measured patient outcomes and capacity
+
+- Declared the patient follow-up at `1073a14`. Ran
+  `python scripts/run_patient_triage.py --source-commit 3c9ccd47384cd8367bcf16dba29789dac791c5ee`
+  against the frozen referability actions and development manifest. Verified
+  two views per eye and agreement between worst-eye and recorded patient
+  grades for all 42 patients. The five automatic photos in the saved
+  allocation with the highest image coverage represented two patients and
+  yielded one fully automatic patient. The single observed full clearance
+  had a non-referable reference grade.
+- At the 90% photo review cap, three image allocations were feasible. Their
+  patient rollups each required 41 review recommendations. The fixed patient
+  guards required at least 39 or 40 reviews, and the patient cap was 37.
+  Six of 24 patient-capacity settings were feasible, all at 100% review
+  capacity. The counts describe reused development cases. Prospective
+  patient outcomes and useful triage validation remain open.
+- Ran `python scripts/audit_patient_triage.py`. The audit reconstructed all
+  six pointwise and nine evaluated image-budget rollups, enumerated all
+  24 patient-capacity scenarios and verified six exact binomial minima.
+  A one-sided 95% upper bound of at most 5% with zero misses requires at least
+  59 fully automatic patients under a fixed independent evaluation design.
+- Ran `python -m pytest -q tests/test_patient_triage.py tests/test_triage_v2.py`
+  (41 passed) and `python -m pytest -q` with genuine DeepDRiD integration
+  (640 passed in 113.58 seconds with one upstream AnyIO warning). Ruff and
+  Compose configuration checks passed.
+  [Patient triage results](docs/research/PATIENT_TRIAGE_V1_RESULTS.md).
+
 ## 2026-11-11 — added MSHF and referability to Experiment Explorer
 
 - Registered the two audited aggregate reports in `/research/experiments` and

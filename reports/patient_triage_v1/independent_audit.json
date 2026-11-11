@@ -1,0 +1,13 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "patient_triage_v1",
+  "source_commit": "3c9ccd47384cd8367bcf16dba29789dac791c5ee",
+  "evaluation_sha256": "27f9915781045371f4affb5973b19dbca3a0171d44f227f61b288667486661a1",
+  "auditor_sha256": "5536dc233674e31e0ae47e7d505719ba5238fa5bdbe9e3e16496a87b90556e9a",
+  "manifest_images": 168,
+  "manifest_patients": 42,
+  "pointwise_rollups_verified": 6,
+  "image_budget_rollups_verified": 9,
+  "patient_capacity_scenarios_enumerated": 24,
+  "binomial_minima_verified": 6
+}

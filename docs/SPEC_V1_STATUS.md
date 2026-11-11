@@ -22,6 +22,12 @@
   recommendations at each alpha. Projected LAC permitted 5 at alpha .10 and
   overloaded at .05. Every method overloaded at .30/.20 and .60/.40.
   [Results and audit](research/REFERABILITY_GATE_V1_RESULTS.md).
+- **Patient triage follow-up:** at most one of 42 patients had automatic
+  recommendations for all four views in the frozen image allocations. Three
+  settings feasible at the 90% photo review cap overloaded at the patient cap.
+  The audit reproduced all rollups, 24 patient-capacity settings and six
+  prospective sample-size minima.
+  [Patient results](research/PATIENT_TRIAGE_V1_RESULTS.md).
 - **Current training extension:** the two-seed matched APTOS resolution study
   is VERIFIED COMPLETE from `0a8eb4a5f29156ebf0032b517bd809e51060c020`. The
   seed-2027 worker at 384 pixels resumed from its verified epoch-8 checkpoint

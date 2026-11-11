@@ -40,6 +40,12 @@ automatic recommendations, compared with five for projected five-grade
 LAC at alpha .10. Every gate overloaded at the 30% and 60% caps.
 [Referability gate results](docs/research/REFERABILITY_GATE_V1_RESULTS.md).
 
+The patient follow-up found that the saved allocation with five automatic
+photo recommendations yielded one fully automatic patient out of 42.
+All three allocations feasible at the 90% photo review cap
+overloaded when capacity was counted in patients.
+[Patient triage results](docs/research/PATIENT_TRIAGE_V1_RESULTS.md).
+
 The [MSHF external quality study](docs/research/MSHF_QUALITY_V1_RESULTS.md)
 evaluated the frozen DeepDRiD head on 497 conventional fundus photos. Accuracy
 was 74.85% and poor-quality AUROC was .8973. The fixed threshold missed 20 of
