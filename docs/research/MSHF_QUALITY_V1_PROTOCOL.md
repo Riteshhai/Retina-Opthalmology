@@ -48,8 +48,8 @@ the APTOS annotated population, including its quarantined rows. Use byte
 SHA256 and the existing central-green retinal pHash with Hamming distance at
 most two. Treat pairs as candidates and group internal pairs transitively.
 
-The main population includes all rows outside components with a cross-source
-candidate or conflicting overall-quality labels. These whole-component
+The main population includes all rows outside components with a candidate in
+a reference manifest or conflicting overall-quality labels. These whole-component
 exclusions are conservative and independent of model scores. The second
 population takes the lexicographically first archive member of each
 remaining component to check sensitivity to internal repeats. A third
@@ -69,11 +69,12 @@ logits before and after applying the stored first-pass temperature.
 All model, temperature and decision choices come from the existing
 DeepDRiD pipeline. Evaluate the fixed quality flag `P(poor) > 0.50`.
 
-For each population and source group, report counts, the confusion matrix
-in poor/good order, poor sensitivity, good specificity, balanced accuracy,
-poor AUROC and average precision, negative log likelihood, two-class Brier
-score and confidence ECE with ten bins. Report the observed accuracy of the
-fixed always-good reference and retain unavailable class metrics as null.
+For each population and source group, report counts, accuracy, the confusion
+matrix in poor/good order, poor sensitivity, good specificity, balanced accuracy,
+poor AUROC and stepwise average precision, negative log likelihood, Brier score
+summed over both classes and top-label ECE with ten equal-width confidence bins.
+Report the observed accuracy of the fixed always-good reference and retain
+unavailable class metrics as null.
 Treat discrimination and threshold behavior separately from calibration.
 Use point estimates given the unresolved patient grouping. The quality
 endpoint alone supports no claims about DR grading or triage utility.
