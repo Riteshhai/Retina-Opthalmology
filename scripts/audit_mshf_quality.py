@@ -33,6 +33,7 @@ CALIBRATION = ROOT / "checkpoints/development_v1/selected/calibration.json"
 ARCHIVE_ROOT = "MSHF dataset 2.0"
 WORKBOOKS = {"individual": "Individual_scores.xlsx.xlsx", "summary": "MSHF_quality_scores.xlsx"}
 GROUPS = {"DR-XJU": 235, "DR-ZJU": 187, "Glaucoma": 52, "Healthy": 26}
+GROUP_FORMATS = {"DR-XJU": "JPEG", "DR-ZJU": "JPEG", "Glaucoma": "TIFF", "Healthy": "TIFF"}
 PAPER_COUNTS = {"DR-XJU": (117, 118), "DR-ZJU": (40, 147), "Glaucoma": (50, 2), "Healthy": (0, 26)}
 
 
@@ -247,7 +248,13 @@ def archive_rows(bundle):
             blank_formula_inputs[group] += blank
             payload = bundle.read(name)
             with Image.open(BytesIO(payload)) as image:
-                require(image.format == "JPEG", "Conventional image is not JPEG")
+                image_format = image.format
+                require(
+                    image_format == GROUP_FORMATS[group]
+                    and image.mode == "RGB"
+                    and getattr(image, "n_frames", 1) == 1,
+                    "Conventional image encoding differs from the archived release",
+                )
                 image.load()
                 width, height = image.size
                 perceptual = phash(image)
@@ -256,6 +263,7 @@ def archive_rows(bundle):
                     "member": name,
                     "group": group,
                     "filename": path.name,
+                    "format": image_format,
                     "width": width,
                     "height": height,
                     "sha256": hashlib.sha256(payload).hexdigest(),
@@ -298,6 +306,7 @@ def inventory(rows, blanks):
     return {
         "images": len(rows),
         "images_decoded": len(rows),
+        "formats": dict(Counter(row["format"] for row in rows)),
         "dimensions": [
             {"width": width, "height": height, "images": count}
             for (width, height), count in sorted(dimensions.items())

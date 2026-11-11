@@ -29,6 +29,12 @@ individual ratings and source groups. The portable, ultra-widefield and
 counts differ across its sections. The released rating workbook identifies
 images, and patient linkage is unavailable.
 
+All 500 conventional members use a `.jpg` suffix. Before any prediction,
+format inspection identified 422 JPEGs (DR-XJU and DR-ZJU) and 78 TIFFs
+(Glaucoma and Healthy), all single-frame RGB. Decode both formats directly
+and retain the full cohort. Use the frozen model’s preprocessing offline;
+this does not test whether the service accepts the original upload bytes.
+
 The archive preflight found discrepancies between the reconstructed majority,
 the summary workbook and the article’s table. In particular, the cached
 DR-ZJU summary has all 187 joined rows coded poor and the overall formulas

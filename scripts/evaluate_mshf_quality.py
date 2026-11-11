@@ -55,6 +55,7 @@ WORKBOOKS = {
 }
 PAPER_COUNTS = {'DR-XJU': (117, 118), 'DR-ZJU': (40, 147), 'Glaucoma': (50, 2), 'Healthy': (0, 26)}
 GROUP_COUNTS = {group: sum(counts) for group, counts in PAPER_COUNTS.items()}
+ENCODED_FORMATS = {'DR-XJU': 'JPEG', 'DR-ZJU': 'JPEG', 'Glaucoma': 'TIFF', 'Healthy': 'TIFF'}
 SOURCES = (
     PROTOCOL, REFERENCE_CONFIG, 'scripts/evaluate_mshf_quality.py', 'scripts/prepare_idrid.py',
     'qsart/data/aptos.py', 'qsart/data/idrid.py', 'qsart/data/manifests.py',
@@ -231,15 +232,17 @@ def inspect_originals(archive):
     for member, group, filename in members:
         raw = archive.read(member)
         with Image.open(BytesIO(raw)) as image:
-            if image.format != 'JPEG':
-                raise ValueError('Original CFP member is not an actual JPEG')
+            encoded_format = image.format
+            if encoded_format != ENCODED_FORMATS[group] or image.mode != 'RGB' or getattr(image, 'n_frames', 1) != 1:
+                raise ValueError('Original CFP encoding differs from the single-frame RGB release')
             image.verify()
         with Image.open(BytesIO(raw)) as image:
             image.load()
             width, height, phash = image.width, image.height, retinal_phash(image)
         values = ratings[filename]
         rows.append({'member': member, 'group': group, 'filename': filename, 'width': width, 'height': height,
-                     'sha256': hashlib.sha256(raw).hexdigest(), 'phash': phash, 'ratings': values,
+                     'format': encoded_format, 'sha256': hashlib.sha256(raw).hexdigest(),
+                     'phash': phash, 'ratings': values,
                      'label': int(sum(values) >= 2), 'unanimous': len(set(values)) == 1, **summary[filename]})
     return rows
 
@@ -262,6 +265,7 @@ def inventory(rows):
             'paper_poor': paper_poor, 'paper_good': paper_good,
         }
     return {'images': len(rows), 'images_decoded': len(rows), 'groups': groups,
+            'formats': dict(sorted(Counter(row['format'] for row in rows).items())),
             'dimensions': [{'width': width, 'height': height, 'images': n}
                            for (width, height), n in sorted(dimensions.items())]}
 
