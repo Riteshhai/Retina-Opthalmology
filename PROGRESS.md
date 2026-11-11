@@ -1,5 +1,28 @@
 # Execution log
 
+## 2026-11-11 — added MSHF and referability to Experiment Explorer
+
+- Registered the two audited aggregate reports in `/research/experiments` and
+  `/research/metrics`. The MSHF view shows subgroup counts, performance and
+  raw versus temperature-scaled probability metrics. The referability view
+  shows empirical inclusion, pointwise actions and recorded capacity outcomes.
+  Overloaded rows display blank outcomes. Feasible allocations with zero
+  observed misses display zero.
+- Ran `python -m pytest -q` with genuine DeepDRiD integration. All 637 tests
+  passed in 207.27 seconds with one upstream AnyIO warning. Ruff and Compose
+  configuration checks passed.
+- Built and exercised an isolated Compose project with
+  `docker compose up --build -d --wait`. Both services were healthy, nonroot
+  and read-only, and their three changed runtime source files matched the
+  checkout by SHA256. Ran `python scripts/verify_deployment.py --runtime docker
+  --split validation --require-conformal` with the real DeepDRiD manifest and
+  running service URLs. Trained prediction, batch, simulator, overload and
+  dashboard health checks passed.
+- Streamlit AppTest against the running Docker API found 25 unique registry
+  entries. It verified 15 pooled and source rows across the three MSHF
+  populations and all 24 referability allocations (9 feasible, 15 overloaded).
+  Both mounted report hashes matched their audit receipts.
+
 ## 2026-11-11 — evaluated the frozen quality head on MSHF v2
 
 - Verified the author Figshare v2 archive, file 39485878, against the publisher

@@ -14,6 +14,15 @@ from qsart.triage_v2 import (Action, BudgetOverloaded, METHODS, PolicyConfig,
                              allocate_rows, screening_metrics)
 
 
+DIAGNOSTIC_METRICS = {
+    'mshf_quality_v1': ('inventory', 'overlap', 'model', 'populations', 'archive',
+                        'source_commit', 'protocol_sha256'),
+    'referability_gate_v1': ('images', 'patients', 'calibration', 'policy', 'budget_pairs',
+                             'fits', 'default_ordinal_sets_replayed', 'input_sha256',
+                             'source_commit', 'protocol_sha256'),
+}
+
+
 def experiment_registry(root):
     root = Path(root)
     records = []
@@ -64,7 +73,11 @@ def experiment_registry(root):
         ('idrid_review_v1/data_review.json', 'idrid_review_v1', 'external_holdout',
          'external_overlap_review_and_population_freeze'),
         ('idrid_external_v1/evaluation.json', 'idrid_external_v1', 'external_holdout',
-         'locked_external_domain_diagnostics_consumed')]
+         'locked_external_domain_diagnostics_consumed'),
+        ('referability_gate_v1/evaluation.json', 'referability_gate_v1', 'validation',
+         'development_referability_gate_diagnostic'),
+        ('mshf_quality_v1/evaluation.json', 'mshf_quality_v1', 'external',
+         'external_overall_quality_diagnostic')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -72,7 +85,7 @@ def experiment_registry(root):
         if not path.is_file():
             continue
         raw = json.loads(path.read_text(encoding='utf-8'))
-        metrics = {key: raw[key] for key in ('grading', 'quality', 'classical_quality', 'conformal',
+        metric_keys = ('grading', 'quality', 'classical_quality', 'conformal',
                    'budgets', 'images', 'patients', 'selection_metrics', 'conditions', 'paired_changes',
                    'condition_parameters', 'clean_equivalence', 'comparisons', 'randomization_summaries',
                    'deterministic_score_diagnostics', 'baseline_reproduction', 'summary', 'runs',
@@ -99,13 +112,15 @@ def experiment_registry(root):
                    'count_reference_differences', 'access_review', 'readiness', 'storage_snapshot',
                    'author_source_revision', 'images_downloaded', 'configuration', 'fixed_temperature',
                    'model_training_seed', 'raps_parameter_tuning_performed',
-                   'matched_reference', 'fixed_epoch_comparison') if key in raw}
+                   'matched_reference', 'fixed_epoch_comparison')
+        metrics = {key: raw[key] for key in DIAGNOSTIC_METRICS.get(name, metric_keys) if key in raw}
         if name.startswith('selection_') and 'selection_metrics' in raw:
             metrics = raw['selection_metrics'].get('dr_grade', raw['selection_metrics'])
         if name == 'idrid_data_v1':
             metrics.update(idrid_source_confirmation(path))
+        model_info = raw.get('model' if name == 'mshf_quality_v1' else 'model_info', {})
         records.append(ExperimentSummary(experiment_id=name, dataset=raw.get('dataset', 'DeepDRiD'), partition=partition,
-            scope=scope, model_version=raw.get('model_info', {}).get('model_version', raw.get('model_version')),
+            scope=scope, model_version=model_info.get('model_version', raw.get('model_version')),
             metrics=metrics, notes=raw.get('limitations', [
                 'Historical AUTO_SCREEN triage is not the current AUTO_NONREFERABLE policy.'])))
     return records

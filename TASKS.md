@@ -39,6 +39,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [ ] P1 Pursue independent quality supervision/validation before proposing production replacements.
 - [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
 - [x] P1 Compare direct referability and projected five-grade conformal gates with frozen guards and exact budgets. Audit all 24 development scenarios and retain low automatic coverage and overloads.
+- [x] P1 Publish both MSHF and referability studies in Experiment Explorer and verify every recorded population and capacity setting against the audited reports in Docker.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [x] P1 Execute locked IDRiD external-domain diagnostics with four frozen classifiers, all source transforms and full/filtered sensitivity views; retain independence/label limitations.

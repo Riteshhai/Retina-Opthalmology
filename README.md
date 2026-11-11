@@ -48,6 +48,10 @@ temperature slightly reduced pooled Brier score while increasing log loss and
 confidence calibration error. Patient independence and triage utility remain
 unverified.
 
+In Experiment Explorer, select `mshf_quality_v1` to compare the three MSHF
+populations or `referability_gate_v1` to compare both conformal alphas across
+the four recorded capacity pairs. Both studies support aggregate JSON export.
+
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
 is .50894 frozen versus .54112 adapted; all three paired primary intervals include

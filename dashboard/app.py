@@ -12,6 +12,7 @@ from PIL import Image
 import streamlit as st
 
 from api.schemas import DISCLAIMER
+from dashboard.research_diagnostics import show_mshf_quality, show_referability_gate
 
 st.set_page_config(page_title='QSART Retinal Screening', page_icon='◉', layout='wide')
 st.title('QSART — AI-Assisted Retinal Screening Research Prototype')
@@ -61,10 +62,9 @@ def recorded_experiments():
 def experiment_table(records):
     """Display only supplied records; no default scientific metric is invented."""
     columns = ['experiment_id', 'dataset', 'partition', 'scope', 'model_version']
-    table = pd.json_normalize(records)
+    table = pd.json_normalize(records, max_level=1)
     present = [column for column in columns if column in table]
-    # Nested scenarios/pairs have their own detail view. Mixing their heterogeneous
-    # lists with scalar summary cells is not representable by Arrow's table schema.
+    # Nested metrics belong in the detail view. Keep scalar summary cells in the index.
     present += [column for column in table if column.startswith('metrics.')
                 and all(pd.api.types.is_scalar(value) for value in table[column])]
     return table[present]
@@ -831,6 +831,10 @@ elif page == 'Experiment Explorer':
                 st.caption('Evidence scope: '+str(detail.get('scope', 'Unreported')))
                 if chosen == 'policy_comparison_v1':
                     show_policy_comparison(detail.get('metrics', {}))
+                elif chosen == 'mshf_quality_v1':
+                    show_mshf_quality(detail.get('metrics', {}))
+                elif chosen == 'referability_gate_v1':
+                    show_referability_gate(detail.get('metrics', {}))
                 elif chosen == 'aptos_development_v1':
                     show_aptos_experiment(detail.get('metrics', {}))
                 elif chosen == 'aptos_finetune_v1':

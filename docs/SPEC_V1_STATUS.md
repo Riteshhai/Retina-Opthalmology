@@ -6,6 +6,9 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **Experiment Explorer:** the Docker app exposes 25 records. Live API and
+  Streamlit checks matched all three MSHF populations and all 24 DeepDRiD
+  referability capacity scenarios to their audited reports.
 - **Current external quality diagnostic:** the frozen DeepDRiD head scored
   497 MSHF v2 photographs after three overlap-candidate exclusions. It reached
   74.85% accuracy and .8973 poor-quality AUROC. At the fixed threshold,
