@@ -42,3 +42,4 @@ reports/aptos_resolution_seed2027_v1/** -text whitespace=cr-at-eol
 reports/referability_gate_v1/** -text whitespace=cr-at-eol
 reports/mshf_quality_v1/** -text whitespace=cr-at-eol
 reports/patient_triage_v1/** -text whitespace=cr-at-eol
+reports/matched_flip_v1/** -text whitespace=cr-at-eol
