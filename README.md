@@ -46,6 +46,12 @@ All three allocations feasible at the 90% photo review cap
 overloaded when capacity was counted in patients.
 [Patient triage results](docs/research/PATIENT_TRIAGE_V1_RESULTS.md).
 
+At 42 extra flip passes, entropy ranking raised five-grade accuracy from
+106/168 to 109/168. The combined ranking reached 108/168 at the same
+workload. Every profile still recommended review for all 168 development
+photos under the ordinal guard.
+[Matched flip results](docs/research/MATCHED_FLIP_V1_RESULTS.md).
+
 The [MSHF external quality study](docs/research/MSHF_QUALITY_V1_RESULTS.md)
 evaluated the frozen DeepDRiD head on 497 conventional fundus photos. Accuracy
 was 74.85% and poor-quality AUROC was .8973. The fixed threshold missed 20 of

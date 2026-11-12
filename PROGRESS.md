@@ -1,5 +1,29 @@
 # Execution log
 
+## 2026-11-12 — compared flip inference at matched workloads
+
+- Declared the protocol at `7844554`. Ran
+  `python scripts/run_matched_flip.py --source-commit 7df75add5eb18d285abe219abb51f5fadb7f605d`
+  using paired first-pass and all-flip scores on 168 reused selection photos
+  from 42 patients. Preserved the 21 original requests of eight and replayed
+  all 168 saved combined-controller rows apart from timing fields.
+- At 42 extra passes, entropy ranking raised correct grades from 106 to 109,
+  and the existing combined ranking reached 108. All-flip corrected three
+  grades and introduced three new grade errors. At 84 extra passes, entropy
+  matched the all-flip count of 143 correct referability flags. All eight
+  profiles recommended specialist review for all 168 images under the
+  deployed ordinal guard. Independent confirmation remains open.
+- Ran `python scripts/audit_matched_flip.py`. Independently reconstructed
+  six matched rankings, two anchors and all four exact random assignment
+  distributions. Fresh trained CPU inference reproduced stored scores,
+  decisions and conformal sets exactly for both paths on eight images.
+- Ran `python -m pytest -q tests/test_matched_flip.py
+  tests/test_conformal_sidecar.py tests/test_triage_v2.py` (44 passed)
+  and `python -m pytest -q` with genuine DeepDRiD integration
+  (643 passed in 128.08 seconds with one upstream AnyIO warning).
+  Ruff and Compose configuration checks passed.
+  [Matched flip results](docs/research/MATCHED_FLIP_V1_RESULTS.md).
+
 ## 2026-11-11 — measured patient outcomes and capacity
 
 - Declared the patient follow-up at `1073a14`. Ran

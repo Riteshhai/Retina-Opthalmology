@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — current on 11 November 2026
+## Specification-v1 priorities — current on 12 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -41,6 +41,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Compare direct referability and projected five-grade conformal gates with frozen guards and exact budgets. Audit all 24 development scenarios and retain low automatic coverage and overloads.
 - [x] P1 Publish both MSHF and referability studies in Experiment Explorer and verify every recorded population and capacity setting against the audited reports in Docker.
 - [x] P1 Reconstruct patient outcomes for the frozen referability actions, enumerate 24 patient-capacity scenarios and verify prospective exact-binomial planning counts.
+- [x] P1 Compare flip inference rankings at matched extra-pass counts and verify paired outcomes, exact random selection distributions and trained CPU replays.
 - [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [x] P1 Execute locked IDRiD external-domain diagnostics with four frozen classifiers, all source transforms and full/filtered sensitivity views; retain independence/label limitations.

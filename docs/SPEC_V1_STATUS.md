@@ -1,4 +1,4 @@
-# QSART Development Status — updated 11 November 2026
+# QSART Development Status — updated 12 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,6 +6,12 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **Matched flip diagnostic:** at 42 extra passes, entropy ranking raised
+  the number of correct grades from 106/168 to 109/168. The combined controller
+  reached 108/168. At 84 extra passes, entropy matched the all-flip count of
+  143 correct referability flags. All eight profiles recommended full review
+  under the ordinal guard. Both CPU replay paths reproduced the stored scores
+  on eight images. [Matched flip results](research/MATCHED_FLIP_V1_RESULTS.md).
 - **Experiment Explorer:** the Docker app exposes 25 records. Live API and
   Streamlit checks matched all three MSHF populations and all 24 DeepDRiD
   referability capacity scenarios to their audited reports.
