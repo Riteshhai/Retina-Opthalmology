@@ -3,7 +3,7 @@
 Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
 docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 
-## Specification-v1 priorities — current on 12 November 2026
+## Specification-v1 priorities — current on 13 November 2026
 
 - [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
 - [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
@@ -46,6 +46,8 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [x] P1 Execute locked IDRiD external-domain diagnostics with four frozen classifiers, all source transforms and full/filtered sensitivity views; retain independence/label limitations.
 - [ ] P1 Broader independent external/prospective validation and distribution-shift studies; IDRiD outcomes are now consumed and cannot guide final tuning.
+- [x] P1 Verify and independently audit the official FDR26 v3 grading cohort, including exact label joins and overlap sensitivity.
+- [ ] P1 Lock and execute a frozen FDR26 grading diagnostic with explicit ALFEDIAM endpoint and patient-linkage limits.
 - [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
 - [x] P1 Record user-confirmed official IDRiD/IEEE DataPort origin in a bound append-only receipt; preserve the audit-time provenance status.
 - [x] P1 Review all 11 IDRiD candidate pairs, independently verify pixel evidence and freeze full 516/filtered 513/representative 505 sensitivity populations without altering labels.

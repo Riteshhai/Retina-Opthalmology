@@ -1,5 +1,32 @@
 # Execution log
 
+## 2026-11-13 — audited the FDR26 v3 grading release
+
+- Acquired the official Zenodo workbook and 1,681,871,182-byte photo archive.
+  Verified both published MD5 checksums and bound the local SHA256 digests.
+  Ran `python scripts/prepare_fdr26.py --source-commit 887f9ec82d1e0744060da7f3ae4afa812826bc07`.
+  All 3,000 originals decoded as RGB JPEG. Exact filenames linked 2,999
+  photos to ALFEDIAM grades. One unmatched photo was byte-identical to a
+  labeled photo. The two-photo component was excluded and the unmatched
+  grade remained separate.
+- The overlap screen found 189 internal pairs, 161 byte-identical pairs,
+  71 components with conflicting grades, and three APTOS candidates across
+  two FDR26 photos. The primary exclusions left 2,849 eligible images
+  and 2,742 representatives. Extending exclusions through the unconfirmed
+  filename groups left 2,761 images and 2,673 representatives.
+- The first independent audit matched the inventory, fingerprints and
+  exclusions, then stopped because an undirected pair was listed in reverse
+  order. Audit revision `4e36d8e` normalizes the endpoints without changing
+  the original evidence. `python scripts/audit_fdr26_readiness.py` then
+  reproduced all 3,000 rows, 189 internal and three reference candidates,
+  and all exclusion counts. All nine targeted readiness tests passed.
+- The full `python -m pytest -q` rerun exited successfully with 652 tests
+  passed in 131.11 seconds and genuine DeepDRiD integration. It emitted an
+  upstream AnyIO deprecation warning and a Windows access-violation
+  diagnostic that did not stop the run. Ruff and Compose configuration
+  checks passed.
+  [FDR26 readiness results](docs/research/FDR26_READINESS_V1_RESULTS.md).
+
 ## 2026-11-12 — compared flip inference at matched workloads
 
 - Declared the protocol at `7844554`. Ran

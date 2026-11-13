@@ -1,0 +1,24 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "fdr26_readiness_v1",
+  "source_commit": "887f9ec82d1e0744060da7f3ae4afa812826bc07",
+  "audit_source_commit": "4e36d8e0a6ea65294d41f59ef4dc8e7f4b79ab64",
+  "evaluation_sha256": "b9692d9db75ff0f8113f348e944ca62d64e699335f773c2c900852d513c1e2b9",
+  "auditor_sha256": "042f898e97e049a246706b19f1c1d32b695d3a81e01a144224713120474e070e",
+  "private_witness_sha256": "556e47ad165f76e5586c2936423b2a933985ff266c69135706c9c8f9ba8192b2",
+  "input_sha256": {
+    "record": "defa65da026efb00bc4a9cbd421176effca01f59355ede1401b4ae7c6ac32169",
+    "reference_config": "11461a9a8a10b8554f3cf35a518a3650085714ac2ca439daecec22e96e16b027",
+    "archive": "6c5517d60f24cbd310a1ab0607b8c90dbb4b88b61aee57840fc2e823b753dadb",
+    "workbook": "54083bc9bccf55f4eb271256de152f0e948090182bf43984585fa8535943f610"
+  },
+  "images_reconstructed": 3000,
+  "exact_joins_reconstructed": 2999,
+  "unmatched_archive_images": 1,
+  "unmatched_workbook_rows": 1,
+  "reference_manifest_rows": 5186,
+  "internal_candidate_pairs": 189,
+  "cross_candidate_pairs": 3,
+  "components_reconstructed": 2816,
+  "model_inference_performed": false
+}

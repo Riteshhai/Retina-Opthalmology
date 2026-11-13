@@ -1,4 +1,4 @@
-# QSART Development Status — updated 12 November 2026
+# QSART Development Status — updated 13 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -6,6 +6,11 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **FDR26 external data readiness:** 3,000 original images decoded and 2,999
+  joined to ALFEDIAM grades. Primary overlap exclusions leave 2,849 eligible
+  photos, or 2,761 when extended through unconfirmed filename groups.
+  Model evaluation remains pending.
+  [FDR26 audit results](research/FDR26_READINESS_V1_RESULTS.md).
 - **Matched flip diagnostic:** at 42 extra passes, entropy ranking raised
   the number of correct grades from 106/168 to 109/168. The combined controller
   reached 108/168. At 84 extra passes, entropy matched the all-flip count of

@@ -64,6 +64,11 @@ In Experiment Explorer, select `mshf_quality_v1` to compare the three MSHF
 populations or `referability_gate_v1` to compare both conformal alphas across
 the four recorded capacity pairs. Both studies support aggregate JSON export.
 
+The FDR26 v3 readiness audit decoded 3,000 photos from Morocco and matched
+2,999 to their released ALFEDIAM grades. The primary overlap rules left 2,849
+eligible photos. This release supplies an external grading cohort for a
+future locked evaluation. [FDR26 readiness results](docs/research/FDR26_READINESS_V1_RESULTS.md).
+
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
 is .50894 frozen versus .54112 adapted; all three paired primary intervals include
