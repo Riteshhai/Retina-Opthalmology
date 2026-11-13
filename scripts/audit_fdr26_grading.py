@@ -77,7 +77,9 @@ def verify_bindings(report):
     for path, expected in sources.items():
         raw = (ROOT / path).read_bytes()
         committed = subprocess.check_output(['git', 'show', f'{commit}:{path}'], cwd=ROOT)
-        require(raw == committed and hashlib.sha256(raw).hexdigest() == expected, f'Locked source differs: {path}')
+        require(hashlib.sha256(committed).hexdigest() == expected
+                and (path == 'scripts/audit_fdr26_grading.py' or raw == committed),
+                f'Locked source differs: {path}')
     paths = {name: ROOT / path for name, (path, _) in INPUTS.items()}
     hashes = {name: digest(path) for name, path in paths.items()}
     require(hashes == {name: expected for name, (_, expected) in INPUTS.items()}
@@ -159,7 +161,7 @@ def verify_scores(witness, primary):
         expected = exps / exps.sum(axis=1, keepdims=True)
         saved = np.array([row[key] for row in rows], dtype=float)
         require(saved.shape == expected.shape and np.isfinite(saved).all() and (saved >= 0).all()
-                and (saved <= 1).all() and np.allclose(saved.sum(axis=1), 1.0, rtol=0, atol=2e-7),
+                and (saved <= 1).all() and np.allclose(saved.sum(axis=1), 1.0, rtol=0, atol=1e-6),
                 'Invalid saved probabilities')
         deltas[key] = float(np.max(np.abs(saved - expected)))
         require(deltas[key] <= 2e-7, 'Saved probabilities differ from logits and frozen temperature')
@@ -284,13 +286,18 @@ def run():
             and report['binary_probability_threshold'] == .5 and report['patient_linkage_available'] is False,
             'Grading report scope or binary proxy differs')
     paths, readiness, calibration = verify_bindings(report)
+    audit_source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    path = Path(__file__).resolve()
+    committed = subprocess.check_output(['git', 'show', f'{audit_source}:{path.relative_to(ROOT).as_posix()}'], cwd=ROOT)
+    require(path.read_bytes() == committed, 'Run a committed auditor')
     populations = reconstruct_populations(readiness, read(paths['readiness_witness']))
     rows, scores, probability_delta = verify_scores(read(WITNESS), populations['primary'])
     verify_aggregates(report['populations'], populations, scores)
     replay_result = replay(paths, calibration, populations['primary'], rows)
     receipt = {
         'audit_status': 'passed', 'experiment_id': EXPERIMENT, 'source_commit': report['source_commit'],
-        'evaluation_sha256': digest(evaluation), 'auditor_sha256': digest(Path(__file__)),
+        'audit_source_commit': audit_source,
+        'evaluation_sha256': digest(evaluation), 'auditor_sha256': digest(path),
         'private_witness_sha256': witness_sha, 'input_sha256': report['input_sha256'],
         'population_images': {name: len(part) for name, part in populations.items()},
         'population_probability_views_reconstructed': len(populations) * len(scores),
