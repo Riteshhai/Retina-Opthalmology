@@ -9,8 +9,12 @@
 - **FDR26 external data readiness:** 3,000 original images decoded and 2,999
   joined to ALFEDIAM grades. Primary overlap exclusions leave 2,849 eligible
   photos, or 2,761 when extended through unconfirmed filename groups.
-  Model evaluation remains pending.
   [FDR26 audit results](research/FDR26_READINESS_V1_RESULTS.md).
+- **FDR26 external grading:** the selected DeepDRiD head matched 794/2,849
+  ALFEDIAM grade codes. The fixed calibrated binary threshold detected
+  834/1,700 grade ≥2 photos. All four populations and both probability paths
+  were reconstructed independently, with exact logits on ten replays.
+  [FDR26 grading results](research/FDR26_GRADING_V1_RESULTS.md).
 - **Matched flip diagnostic:** at 42 extra passes, entropy ranking raised
   the number of correct grades from 106/168 to 109/168. The combined controller
   reached 108/168. At 84 extra passes, entropy matched the all-flip count of

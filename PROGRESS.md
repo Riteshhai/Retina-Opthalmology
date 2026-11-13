@@ -1,5 +1,24 @@
 # Execution log
 
+## 2026-11-13 — evaluated frozen grading on FDR26 v3
+
+- Locked the protocol at `89d68e6`. Ran
+  `python scripts/evaluate_fdr26_grading.py --source-commit af1e3362cfd4db6b70537c9d2602d263efaa4b86`.
+  The selected DeepDRiD DR checkpoint scored 2,849 photos using its native
+  first-pass preprocessing and frozen temperature. Five-grade agreement
+  was 794/2,849, macro-F1 was 0.268, and 804 photos were undercalled by
+  two or more grade codes. The fixed threshold detected 834/1,700 grade ≥2
+  photos. All outcomes are image-level code comparisons.
+- Ran `python scripts/audit_fdr26_grading.py`. The first attempt stopped on
+  a float32 probability sum just outside the 2e-7 normalization tolerance.
+  Audit revision `41952cd` allowed 1e-6 normalization error and preserved the
+  2e-7 elementwise agreement check. The corrected audit reproduced all
+  eight metric views and matched logits exactly on ten photos.
+- `python -m pytest -q` passed all 652 tests in 128.31 seconds with genuine
+  DeepDRiD integration and one upstream AnyIO warning. Ruff and Compose
+  configuration checks passed.
+  [FDR26 grading results](docs/research/FDR26_GRADING_V1_RESULTS.md).
+
 ## 2026-11-13 — audited the FDR26 v3 grading release
 
 - Acquired the official Zenodo workbook and 1,681,871,182-byte photo archive.
