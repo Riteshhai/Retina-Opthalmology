@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "scope": "development_selection",
+  "development_manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "selection_split_fingerprint": "24e69851cfe65f41501e0f8344846c8fe3fd68d618fb1946d123aa7bc3315eeb",
+  "selection_rule": "macro_f1_then_unweighted_nll; do not select models using consumed confirmation",
+  "probability_handling": "Finite/range checks and row-sum tolerance1e-5; normalize CSV-rounding residues before metrics.",
+  "metric_implementation": "qsart.evaluation.grade_metrics plus sklearn.metrics.recall_score and log_loss",
+  "metric_source_sha256": {
+    "scripts/build_model_comparison.py": "7058fe017a39d0639940a85bbfac186d99a34ce785da63a315bcafac84d73dd2",
+    "qsart/evaluation.py": "b5de399e6f607c4506dfec3a0d027cc48cd8c6733b5ccef65e0b997130e1efc8"
+  },
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0"
+  },
+  "experiments": [
+    {
+      "experiment_id": "selection_dr_mobilenet",
+      "dataset": "DeepDRiD",
+      "partition": "validation",
+      "scope": "development_selection",
+      "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+      "architecture": "mobilenet_v3_small",
+      "metrics": {
+        "n": 168,
+        "accuracy": 0.6309523809523809,
+        "macro_f1": 0.5372380282257395,
+        "quadratic_weighted_kappa": 0.7419719583898687,
+        "referable_auroc": 0.8986486486486487,
+        "referable_auprc": 0.8764529010872314,
+        "ece": 0.10494245983153533,
+        "brier": 0.5463915769520515,
+        "referable_sensitivity": 0.8108108108108109,
+        "nll": 1.1971167070459494,
+        "model_size_mib": 3.6989850997924805,
+        "selected_epoch": 15,
+        "latency_ms_per_image": 194.71509513944815
+      },
+      "notes": [
+        "Genuine frozen-ImageNet candidate on the same 168-image/42-patient development selection population; not independent test evidence.",
+        "Metrics use saved uncalibrated first-pass five-class softmax probabilities; no temperature or conformal sidecar.",
+        "Referable sensitivity: argmax DR grade >=2 versus verified grade >=2. AUROC/AUPRC use summed grade2-4 risk.",
+        "ECE uses ten equal-width confidence bins; multiclass Brier sums squared error across all five classes.",
+        "Model size is actual serialized best.pt MiB, including checkpoint metadata and optimizer state; not a weights-only export.",
+        "Latency is a separate historical 48-image selection-prefix benchmark with the v1 DR+quality pipeline, no conformal, decode or HTTP. It does not time this 168-image comparison or provide a matched architecture speed comparison. Live-workstation/sequential-order limitations apply."
+      ],
+      "latency_measurement": {
+        "scope": "historical_v1_preprocessing_plus_DR_and_quality_model_pipeline_no_conformal",
+        "partition": "validation",
+        "images": 48,
+        "repeats": 3,
+        "sampling_rule": "manifest prefix",
+        "cpu_threads": 2,
+        "image_size": 224,
+        "model_forward_batch_size": 1,
+        "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+        "source_sha256": "9b7ca549aaa03ad23786e26d435aca914f73dfec168d430c446a092a5d12514b",
+        "architecture_comparison_valid": false
+      },
+      "input_sha256": {
+        "training_metadata.json": "b8205dcbc1013be4db31358b4b98a97110aeafc866cb959335de9de60c7104ca",
+        "selection_predictions.csv": "58733c2a01830731cd0871ea55d01ea9d2528e8a5cfca7a77403cfd8d6798f16",
+        "best.pt": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527"
+      },
+      "training_source_provenance": {
+        "git_revision": "51eae274c70ba29007257689c886982c5298fd1d",
+        "working_tree_dirty": true,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "337c908a13acadd7ba97ec02145c5f1e0f5f6074e4fba1c5c8fedb74ea2b58c6",
+          "qsart/training/data.py": "e9b05db9af680aaccbe301c4236febef3e69dc3e85553f6e588ad33f1f30ae36",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "599e4f6c4bd1604515eb287d47c0a3de1d9fc5d19f4cd4f2e9febbbc63f70878",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "5bca0cc286fc559b955b8d7f35534000927c315a7001800b69aa7af1cfe14c68"
+        },
+        "source_sha256": "51e93f1c705cc2856511573fe6509610aac521a99284c7fbcf140057f0313cbe"
+      }
+    },
+    {
+      "experiment_id": "selection_dr_resnet18",
+      "dataset": "DeepDRiD",
+      "partition": "validation",
+      "scope": "development_selection",
+      "model_version": "development-v1-dr-resnet18-seed2026-epoch20",
+      "architecture": "resnet18",
+      "metrics": {
+        "n": 168,
+        "accuracy": 0.6130952380952381,
+        "macro_f1": 0.51600892540659,
+        "quadratic_weighted_kappa": 0.7443400256300726,
+        "referable_auroc": 0.8940483036227718,
+        "referable_auprc": 0.8988138653425531,
+        "ece": 0.09040522999839935,
+        "brier": 0.5697673877491007,
+        "referable_sensitivity": 0.7567567567567568,
+        "nll": 1.212298496982591,
+        "model_size_mib": 42.754183769226074,
+        "selected_epoch": 20,
+        "latency_ms_per_image": null
+      },
+      "notes": [
+        "Genuine frozen-ImageNet candidate on the same 168-image/42-patient development selection population; not independent test evidence.",
+        "Metrics use saved uncalibrated first-pass five-class softmax probabilities; no temperature or conformal sidecar.",
+        "Referable sensitivity: argmax DR grade >=2 versus verified grade >=2. AUROC/AUPRC use summed grade2-4 risk.",
+        "ECE uses ten equal-width confidence bins; multiclass Brier sums squared error across all five classes.",
+        "Model size is actual serialized best.pt MiB, including checkpoint metadata and optimizer state; not a weights-only export.",
+        "Candidate latency is unmeasured and explicitly null; no speed estimate is inferred from training time."
+      ],
+      "latency_measurement": null,
+      "input_sha256": {
+        "training_metadata.json": "17f31247df7841ce9454e47111470643bc7354c8e1b171f8cca1ced1d775c2e5",
+        "selection_predictions.csv": "d93ea0e779fe768c8c2348b500452db105edb13aeedfd2f14142f418fdb6054c",
+        "best.pt": "5134537517218506bccc8348b5153f6c72db79ea66d0de3c48a8ae9a608d2efb"
+      },
+      "training_source_provenance": {
+        "git_revision": "51eae274c70ba29007257689c886982c5298fd1d",
+        "working_tree_dirty": true,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "337c908a13acadd7ba97ec02145c5f1e0f5f6074e4fba1c5c8fedb74ea2b58c6",
+          "qsart/training/data.py": "e9b05db9af680aaccbe301c4236febef3e69dc3e85553f6e588ad33f1f30ae36",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "599e4f6c4bd1604515eb287d47c0a3de1d9fc5d19f4cd4f2e9febbbc63f70878",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "5bca0cc286fc559b955b8d7f35534000927c315a7001800b69aa7af1cfe14c68"
+        },
+        "source_sha256": "51e93f1c705cc2856511573fe6509610aac521a99284c7fbcf140057f0313cbe"
+      }
+    },
+    {
+      "experiment_id": "selection_dr_efficientnet",
+      "dataset": "DeepDRiD",
+      "partition": "validation",
+      "scope": "development_selection",
+      "model_version": "development-v1-dr-efficientnet_b0-seed2026-epoch13",
+      "architecture": "efficientnet_b0",
+      "metrics": {
+        "n": 168,
+        "accuracy": 0.6428571428571429,
+        "macro_f1": 0.5249243563717705,
+        "quadratic_weighted_kappa": 0.7343682621819749,
+        "referable_auroc": 0.9255319148936171,
+        "referable_auprc": 0.9077371091250731,
+        "ece": 0.16374898878185476,
+        "brier": 0.5700548961404391,
+        "referable_sensitivity": 0.9054054054054054,
+        "nll": 1.27114275053018,
+        "model_size_mib": 15.63293170928955,
+        "selected_epoch": 13,
+        "latency_ms_per_image": null
+      },
+      "notes": [
+        "Genuine frozen-ImageNet candidate on the same 168-image/42-patient development selection population; not independent test evidence.",
+        "Metrics use saved uncalibrated first-pass five-class softmax probabilities; no temperature or conformal sidecar.",
+        "Referable sensitivity: argmax DR grade >=2 versus verified grade >=2. AUROC/AUPRC use summed grade2-4 risk.",
+        "ECE uses ten equal-width confidence bins; multiclass Brier sums squared error across all five classes.",
+        "Model size is actual serialized best.pt MiB, including checkpoint metadata and optimizer state; not a weights-only export.",
+        "Candidate latency is unmeasured and explicitly null; no speed estimate is inferred from training time."
+      ],
+      "latency_measurement": null,
+      "input_sha256": {
+        "training_metadata.json": "0a6d23f0147b3b4ba49b9be66e0a3dee9bf47b217fcf8900b783e5b0122b3b41",
+        "selection_predictions.csv": "f717830802422cfe63f8d0de63c7d4ca0f7fafc7ea36a8a9da08557a73eee51b",
+        "best.pt": "f00ceb6bf23cecc3a730b548089a7dcaa39e492ec03e5427da5485fa7a954e49"
+      },
+      "training_source_provenance": {
+        "git_revision": "cedf182846845a782bb6e30336d9c8f99b2e31fb",
+        "working_tree_dirty": true,
+        "source_file_sha256": {
+          "qsart/training/transfer.py": "166f4751a2c97e4a96b7778423e87d428add0c3f79d2a29e0781e35c12528959",
+          "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+          "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+          "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+          "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+          "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+          "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+        },
+        "source_sha256": "0b381907b6b121d8943193efe8ae69812ef02627fe911ff31ff7e1f8bc52156d"
+      }
+    }
+  ],
+  "limitations": [
+    "Same development selection set and one seed; no confidence/clinical-generalization claim.",
+    "Only MobileNet has the separately scoped historical pipeline timing; architecture latencies are not comparable.",
+    "APTOS reproduction, repeated seeds, independent external IDRiD evaluation and prospective utility remain open."
+  ]
+}

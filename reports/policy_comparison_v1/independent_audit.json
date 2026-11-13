@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "policy_comparison_v1",
+  "audit_status": "passed",
+  "auditor": "independent_read_only_policy_audit",
+  "source_commit": "c2f8fbb50622631c6001092f7b1da008498f421b",
+  "evaluation_sha256": "4dfd99d535d7f7413596caab5ca1fa47629a62126a488b907563656bf5834085",
+  "private_output_sha256": "db499cac697aca56439e251688991bbdfb8996c94743a9880aadf3b6e0ca34f5",
+  "audit_script_sha256": "6e3715c8469f73e61ad4abec68d208857cfb917bd90cf5291c784edc5c03bd42",
+  "protocol_sha256": "6ad3eaabdd22169871ac2378f4cfca3fb38923e8c310b8b66f07220ad86e9186",
+  "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "cache_sha256": "71013749c8b303104568e8115e0e78f13373ef951e9e5c5bfac1fea9469a0b57",
+  "artifact_sha256": {
+    "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "conformal": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221"
+  },
+  "population": {
+    "images": 168,
+    "patients": 42,
+    "folds": 3,
+    "images_per_evaluation_fold": 56,
+    "patients_per_evaluation_fold": 14
+  },
+  "verified_counts": {
+    "tuning_candidates": 1728,
+    "tuning_overloaded": 942,
+    "held_fold_records": 576,
+    "held_skipped_untunable": 157,
+    "incomplete_scenarios": 114,
+    "held_evaluation_overload": 163,
+    "tuning_evaluated": 786,
+    "chosen_prices_verified": 131,
+    "held_evaluated": 256,
+    "complete_scenarios": 78,
+    "paired_records": 180,
+    "estimable_pairs": 73,
+    "matched_workload_pairs": 19,
+    "bootstrap_intervals_verified": 219
+  },
+  "scientific_interpretation": {
+    "paired_counts_by_mode": {
+      "ordinal": {
+        "planned_pairs": 60,
+        "not_estimable_pairs": 45,
+        "estimable_pairs": 15,
+        "matched_workload_pairs": 15,
+        "matched_identical_action_pairs": 15,
+        "matched_pairs_with_automatic_actions": 0
+      },
+      "lac": {
+        "planned_pairs": 60,
+        "not_estimable_pairs": 45,
+        "estimable_pairs": 15,
+        "unequal_workload_pairs": 13,
+        "matched_workload_pairs": 2,
+        "matched_identical_action_pairs": 2,
+        "matched_pairs_with_automatic_actions": 1
+      },
+      "no_cp": {
+        "planned_pairs": 60,
+        "not_estimable_pairs": 17,
+        "estimable_pairs": 43,
+        "unequal_workload_pairs": 41,
+        "matched_workload_pairs": 2,
+        "matched_identical_action_pairs": 2,
+        "matched_pairs_with_automatic_actions": 2
+      }
+    },
+    "all_19_matched_workload_pairs_have_identical_per_image_actions": true,
+    "all_19_have_zero_pointwise_proxy_referable_auto_miss_severe_auto_miss_severe_recapture_and_auto_indicator_deltas": true,
+    "conclusion": "No observed action or outcome advantage in any actual-workload-matched pair. The 54 unequal-workload estimable pairs describe different tradeoffs and cannot establish matched-resource superiority."
+  },
+  "checks": [
+    "Exact recorded source/protocol blobs match frozen Git commit and working bytes.",
+    "All 168 genuine source image bytes, cache/public binding, manifest order and selected artifacts verified.",
+    "Patient folds independently reconstructed with SHA256 order; no tuning/evaluation patient overlap.",
+    "All tuning allocations recomputed with production allocator; every outcome ledger/count independently recomputed.",
+    "All chosen review prices independently reconstructed using fixed ledger and declared seven-part tie rule.",
+    "Every held-fold record checked; untunable records correctly retain tuning N112 diagnostics and skip held-fold evaluation.",
+    "Pooled metrics exist only for three real action folds and use sum of applied fold-floor capacities.",
+    "Every paired record and realized per-fold workload match checked; all 219 percentile intervals independently reconstructed.",
+    "Public report contains no patient identifiers, per-image scores/actions, source paths or private fold assignments.",
+    "Historical triage and confirmation/development/pilot reports match frozen source commit."
+  ],
+  "limitations": [
+    "Allocator recomputation reuses production LP; independent mathematics covers guards, counts, cost ledger, candidate ranks, folds, capacities and bootstrap.",
+    "Equal-cost LP actions can depend on solver version/row order; no cross-version identity claimed.",
+    "All 42 patients previously informed model selection; this is development policy cross-fitting, not independent validation.",
+    "Bootstrap conditions on fixed actions and overlapping fitted folds; no threshold refitting, multiplicity adjustment or resampled capacity guarantee.",
+    "LAC/no-CP results are diagnostic ablations; deployed ordinal gate remains unchanged."
+  ],
+  "elapsed_seconds": 6.929592399974354
+}

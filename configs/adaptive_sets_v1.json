@@ -1,0 +1,16 @@
+{
+  "source_report_sha256": "66c49f12bf630493c9dc38180a73daeeae6a222523067f4ec262971b45d2310e",
+  "model_training_seed": 2026,
+  "alphas": [0.1, 0.05],
+  "uniform_seeds": [2026, 2027, 2028, 2029, 2030],
+  "primary_alpha": 0.1,
+  "primary_uniform_seed": 2026,
+  "primary_empty_policy": "raw",
+  "raps_k_reg": 2,
+  "raps_lambda": 0.1,
+  "raps_parameter_selection": "fixed_author_initial_CFG; no tuning",
+  "uniform_generation": "reuse historical SeedSequence(seed).spawn(2), calibration then selection; common across randomized methods",
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 20261109,
+  "evaluation_scope": "reused_aptos_source_development_fixed_model_and_temperature"
+}

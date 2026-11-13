@@ -1,0 +1,277 @@
+{
+  "status": "passed",
+  "source_report_sha256": "906322ccd6a28a5a330a935573af6ac775de5e191eafa474ebd28f96c04b6bc3",
+  "source_commit": "42ae8621649b11d666f7b5e3e8516b0ac3a5a812",
+  "preserved_artifacts": 234,
+  "source_images_sha256_verified": 336,
+  "cache_cells_verified": 8,
+  "independent_geometry_images": 26,
+  "independent_geometry_transform_cells": 104,
+  "clean_head_metric_views_reconstructed": 96,
+  "declared_intervals_reconstructed": 486,
+  "zero_controls_reconstructed": 48,
+  "forward_images_replayed": 8064,
+  "runs": [
+    {
+      "model_id": "quality_seed2026_frozen",
+      "maximum_replayed_logit_delta": 0.0,
+      "forward_images_replayed": 1344,
+      "model_state_unchanged": true
+    },
+    {
+      "model_id": "quality_seed2026_adapted",
+      "maximum_replayed_logit_delta": 0.0,
+      "forward_images_replayed": 1344,
+      "model_state_unchanged": true
+    },
+    {
+      "model_id": "quality_seed2027_frozen",
+      "maximum_replayed_logit_delta": 0.0,
+      "forward_images_replayed": 1344,
+      "model_state_unchanged": true
+    },
+    {
+      "model_id": "quality_seed2027_adapted",
+      "maximum_replayed_logit_delta": 0.0,
+      "forward_images_replayed": 1344,
+      "model_state_unchanged": true
+    },
+    {
+      "model_id": "quality_seed2028_frozen",
+      "maximum_replayed_logit_delta": 0.0,
+      "forward_images_replayed": 1344,
+      "model_state_unchanged": true
+    },
+    {
+      "model_id": "quality_seed2028_adapted",
+      "maximum_replayed_logit_delta": 0.0,
+      "forward_images_replayed": 1344,
+      "model_state_unchanged": true
+    }
+  ],
+  "temperature_objective_checks": [
+    {
+      "model_id": "quality_seed2026_frozen",
+      "head": "quality_grade",
+      "temperature": 1.1411966878573585,
+      "independent_optimum_temperature": 1.141206327703899,
+      "fitted_nll": 0.5389634574834388,
+      "independent_optimum_nll": 0.5389634574761895,
+      "objective_gap": 7.249312261592422e-12
+    },
+    {
+      "model_id": "quality_seed2026_frozen",
+      "head": "clarity_class",
+      "temperature": 0.8447400455550239,
+      "independent_optimum_temperature": 0.8446312162833362,
+      "fitted_nll": 1.005510963583798,
+      "independent_optimum_nll": 1.0055109595870841,
+      "objective_gap": 3.996713848763989e-09
+    },
+    {
+      "model_id": "quality_seed2026_frozen",
+      "head": "field_definition_class",
+      "temperature": 1.5395337775370297,
+      "independent_optimum_temperature": 1.5395348824526731,
+      "fitted_nll": 1.0911515773788847,
+      "independent_optimum_nll": 1.091151577378766,
+      "objective_gap": 1.1879386363489175e-13
+    },
+    {
+      "model_id": "quality_seed2026_frozen",
+      "head": "artifact_class",
+      "temperature": 1.0076481267782131,
+      "independent_optimum_temperature": 1.0076619434693905,
+      "fitted_nll": 1.1433318545517654,
+      "independent_optimum_nll": 1.1433318544920583,
+      "objective_gap": 5.970712813052614e-11
+    },
+    {
+      "model_id": "quality_seed2026_adapted",
+      "head": "quality_grade",
+      "temperature": 2.4446313045390347,
+      "independent_optimum_temperature": 2.444749247496779,
+      "fitted_nll": 0.5664361422635719,
+      "independent_optimum_nll": 0.5664361420624354,
+      "objective_gap": 2.011364408360805e-10
+    },
+    {
+      "model_id": "quality_seed2026_adapted",
+      "head": "clarity_class",
+      "temperature": 1.7965841943091128,
+      "independent_optimum_temperature": 1.7965851367700074,
+      "fitted_nll": 0.9378229949023255,
+      "independent_optimum_nll": 0.9378229949022616,
+      "objective_gap": 6.38378239159465e-14
+    },
+    {
+      "model_id": "quality_seed2026_adapted",
+      "head": "field_definition_class",
+      "temperature": 2.9424186786201725,
+      "independent_optimum_temperature": 2.942423573620901,
+      "fitted_nll": 0.9636904673082233,
+      "independent_optimum_nll": 0.9636904673075508,
+      "objective_gap": 6.724620860154573e-13
+    },
+    {
+      "model_id": "quality_seed2026_adapted",
+      "head": "artifact_class",
+      "temperature": 1.7784770968382602,
+      "independent_optimum_temperature": 1.7784924849104746,
+      "fitted_nll": 0.9543456303670058,
+      "independent_optimum_nll": 0.9543456303420519,
+      "objective_gap": 2.495392781298733e-11
+    },
+    {
+      "model_id": "quality_seed2027_frozen",
+      "head": "quality_grade",
+      "temperature": 1.3176556801972663,
+      "independent_optimum_temperature": 1.3176573939797787,
+      "fitted_nll": 0.5443275198977376,
+      "independent_optimum_nll": 0.5443275198975732,
+      "objective_gap": 1.6442402994698568e-13
+    },
+    {
+      "model_id": "quality_seed2027_frozen",
+      "head": "clarity_class",
+      "temperature": 0.9991736405643471,
+      "independent_optimum_temperature": 0.9990492814295543,
+      "fitted_nll": 0.9981880894016584,
+      "independent_optimum_nll": 0.998188085642523,
+      "objective_gap": 3.7591353363453095e-09
+    },
+    {
+      "model_id": "quality_seed2027_frozen",
+      "head": "field_definition_class",
+      "temperature": 1.6572122216746565,
+      "independent_optimum_temperature": 1.6572135579526122,
+      "fitted_nll": 1.0463400793982822,
+      "independent_optimum_nll": 1.0463400793981323,
+      "objective_gap": 1.4988010832439613e-13
+    },
+    {
+      "model_id": "quality_seed2027_frozen",
+      "head": "artifact_class",
+      "temperature": 1.0816832385051562,
+      "independent_optimum_temperature": 1.0816973545497508,
+      "fitted_nll": 1.029783536736129,
+      "independent_optimum_nll": 1.029783536678757,
+      "objective_gap": 5.737188502052959e-11
+    },
+    {
+      "model_id": "quality_seed2027_adapted",
+      "head": "quality_grade",
+      "temperature": 2.299266864302541,
+      "independent_optimum_temperature": 2.299314289326672,
+      "fitted_nll": 0.5541825083433755,
+      "independent_optimum_nll": 0.5541825083043912,
+      "objective_gap": 3.8984260264385284e-11
+    },
+    {
+      "model_id": "quality_seed2027_adapted",
+      "head": "clarity_class",
+      "temperature": 1.7649553672469682,
+      "independent_optimum_temperature": 1.7649560337726222,
+      "fitted_nll": 0.9534696783606224,
+      "independent_optimum_nll": 0.9534696783605855,
+      "objective_gap": 3.68594044175552e-14
+    },
+    {
+      "model_id": "quality_seed2027_adapted",
+      "head": "field_definition_class",
+      "temperature": 2.748969485246712,
+      "independent_optimum_temperature": 2.7490247095612315,
+      "fitted_nll": 0.9910320701773069,
+      "independent_optimum_nll": 0.9910320700779575,
+      "objective_gap": 9.934941758160676e-11
+    },
+    {
+      "model_id": "quality_seed2027_adapted",
+      "head": "artifact_class",
+      "temperature": 1.855402106578943,
+      "independent_optimum_temperature": 1.8554250367850103,
+      "fitted_nll": 0.9345148468036297,
+      "independent_optimum_nll": 0.9345148467504929,
+      "objective_gap": 5.313682827079447e-11
+    },
+    {
+      "model_id": "quality_seed2028_frozen",
+      "head": "quality_grade",
+      "temperature": 1.1898303766839682,
+      "independent_optimum_temperature": 1.189865565127948,
+      "fitted_nll": 0.5418444438728013,
+      "independent_optimum_nll": 0.541844443786385,
+      "objective_gap": 8.641631854544585e-11
+    },
+    {
+      "model_id": "quality_seed2028_frozen",
+      "head": "clarity_class",
+      "temperature": 0.9839014299835309,
+      "independent_optimum_temperature": 0.9837798472746507,
+      "fitted_nll": 0.995123386723903,
+      "independent_optimum_nll": 0.9951233829825177,
+      "objective_gap": 3.7413853126722074e-09
+    },
+    {
+      "model_id": "quality_seed2028_frozen",
+      "head": "field_definition_class",
+      "temperature": 1.630383165182847,
+      "independent_optimum_temperature": 1.6303842228390786,
+      "fitted_nll": 1.0369617377404052,
+      "independent_optimum_nll": 1.036961737740304,
+      "objective_gap": 1.0125233984581428e-13
+    },
+    {
+      "model_id": "quality_seed2028_frozen",
+      "head": "artifact_class",
+      "temperature": 1.0494296430002408,
+      "independent_optimum_temperature": 1.0494335391490732,
+      "fitted_nll": 1.0501975743668948,
+      "independent_optimum_nll": 1.0501975743622989,
+      "objective_gap": 4.595879232738298e-12
+    },
+    {
+      "model_id": "quality_seed2028_adapted",
+      "head": "quality_grade",
+      "temperature": 2.105396787331956,
+      "independent_optimum_temperature": 2.1054027396097483,
+      "fitted_nll": 0.558590699995435,
+      "independent_optimum_nll": 0.5585906999947209,
+      "objective_gap": 7.140954494389007e-13
+    },
+    {
+      "model_id": "quality_seed2028_adapted",
+      "head": "clarity_class",
+      "temperature": 1.6888186004903354,
+      "independent_optimum_temperature": 1.6888190052520564,
+      "fitted_nll": 0.9563531707233883,
+      "independent_optimum_nll": 0.956353170723374,
+      "objective_gap": 1.432187701766452e-14
+    },
+    {
+      "model_id": "quality_seed2028_adapted",
+      "head": "field_definition_class",
+      "temperature": 2.4763485269867958,
+      "independent_optimum_temperature": 2.476358745239822,
+      "fitted_nll": 0.9518095429129819,
+      "independent_optimum_nll": 0.95180954290868,
+      "objective_gap": 4.3018921758175566e-12
+    },
+    {
+      "model_id": "quality_seed2028_adapted",
+      "head": "artifact_class",
+      "temperature": 1.6820178054680168,
+      "independent_optimum_temperature": 1.6820271907962414,
+      "fitted_nll": 0.9747593237562704,
+      "independent_optimum_nll": 0.9747593237458428,
+      "objective_gap": 1.0427547714186858e-11
+    }
+  ],
+  "maximum_temperature_objective_gap": 3.996713848763989e-09,
+  "independent_bounded_optimizer_used_for_verification": true,
+  "scientific_temperatures_replaced": false,
+  "classifier_parameters_updated": false,
+  "verifier_sha256": "bb43e29f207f385c292bb35017e6e13f16d4722a53a57aa776517ef25183eb5b",
+  "prior_independent_metric_helper_sha256": "d734adae7d15c20c5c60a10c301b30c24892e40adf61e7320d03ae6c8910303e",
+  "elapsed_seconds": 42.52036410011351
+}

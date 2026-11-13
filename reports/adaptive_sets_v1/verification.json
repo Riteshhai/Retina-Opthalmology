@@ -1,0 +1,105 @@
+{
+  "status": "verified",
+  "specification": "MASTER_SPEC_v1.0",
+  "scientific_source_commit": "e7fd2f1b85d79e2f9f910433eea0dd7beea06b7c",
+  "source_report_sha256": "a883d166fe7172d77ee615b300ae46e802355c19731ecf9080640c3b41fc0e88",
+  "evidence_file_sha256": {
+    "independent_audit.json": "37f364913724ef09cbd9589db2b1c00885867ed7653dbb8567218d3ce8b158d5",
+    "summary_audit.json": "3d5ee3ecc796bb5c09f41902a3b378af6846814fd3d64ced450c64aaa3322399",
+    "native_registry.json": "c6a9b4ee4e12e94c6c7c03ad5d4f526fb1c4eaf06617264fbb00f94a71f1b163",
+    "native_deployment.json": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+    "container_registry.json": "7f8ebcf6541efd28170343ac032f2c866667e6849c8a57bd1c0fa9af77477a8b",
+    "container_deployment.json": "33853680738fa97a8ad5b18d8404c73b97fd933a59bbf9698e237954861cf6f4",
+    "container_runtime.json": "1a259c154aa3591145a33e7937a56dfdf01b1fefbeceb44bdd74ddf092f8e4b1"
+  },
+  "local_tests": {
+    "passed": 593,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_seconds": 109.14,
+    "junit_suite_seconds": 109.126,
+    "junit_sha256": "b2e6189f44aa2c1744a0294c2b09b57a775a1e326b956bba228e6ed8b2215f5d",
+    "phase": "before real saved-score execution; same scientific/API/UI source retained"
+  },
+  "targeted_tests": {
+    "passed": 35,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_seconds": 12.89,
+    "junit_suite_seconds": 11.79,
+    "junit_sha256": "a663d6744ba3f93fa277aeef5dfe8ce3768680540dd40dec3a68b363bf651599",
+    "phase": "before real saved-score execution; same scientific/API/UI source retained"
+  },
+  "genuine_integration_tests": [
+    "test_real_trained_pipeline_and_batch_export"
+  ],
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check .",
+      "exit_code": 0
+    },
+    {
+      "command": "docker compose config --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "source_ci": {
+    "run_id": 42086591713,
+    "head_sha": "e7fd2f1b85d79e2f9f910433eea0dd7beea06b7c",
+    "status": "completed",
+    "conclusion": "success",
+    "run_number": 50,
+    "html_url": "https://github.com/Riteshhai/Retina-Opthalmology/actions/runs/42086591713"
+  },
+  "native_and_container_registry_records": 20,
+  "native_and_container_ui_control_combinations_each": 40,
+  "native_and_container_metric_cells_each": 2200,
+  "native_and_container_interval_cells_each": 1280,
+  "container_runtime_source_files_matched": 68,
+  "new_container_execution_verified": true,
+  "new_browser_rendering_verified": false,
+  "scientific_images_decoded": 0,
+  "scientific_model_inference_performed": false,
+  "score_thresholds_fitted_from_saved_logits": 34,
+  "classifier_or_temperature_fitting_performed": false,
+  "raps_parameter_tuning_performed": false,
+  "production_model_changed": false,
+  "genuine_deployment_inference_separately_exercised": true,
+  "figure_visual_inspection": {
+    "method": "local PNG inspection",
+    "files": [
+      "primary_set_comparison.png"
+    ]
+  },
+  "figure_sha256": {
+    "primary_set_comparison.png": "940397785af8c50146b61cee3fdd6e9cf3234d40cff47146537928c8a183db5a",
+    "primary_set_comparison.svg": "8d621a7a6e64653ac45d0db021f9dda4c36d27348c2db6cc012ef5615a52516e"
+  },
+  "preserved_artifacts": 295,
+  "verification_source_file_sha256": {
+    "qsart/uncertainty/adaptive.py": "d340250399d0602ada29b622576cd99de9d3eaf63ed5945d3125735690bdd217",
+    "qsart/uncertainty/conformal.py": "e8469ac637b913a984098c24fb543ae434b52d80c23647d78fa30e1d0548ffa4",
+    "qsart/uncertainty/randomized_ordinal.py": "c8350d55f41d7abc21215d0979a8d9d385f7f4cff6350ba8c9e4697ac76bc030",
+    "qsart/evaluation_adaptive.py": "f68cb8c73c008f7ffab8845fa220199beaf4857407b9df4bd4823f924c8dbcd5",
+    "scripts/run_adaptive_sets.py": "4c774688dac637a35b6b14690213a9d75cdd84176b1c8bbc7974e6ef98e44eef",
+    "configs/adaptive_sets_v1.json": "379616821f0182d67a0121b83c73aa0f273c330569828aa72a39499d93fbb34b",
+    "docs/research/ADAPTIVE_SETS_V1_PROTOCOL.md": "9b18510f966c7776f5ca4e2c2ae7a3761a80d28f27b115f7a21321eaa2093fc7",
+    "api/research.py": "26d3f5ca3a9aa92eb89524f362b930d2d2c3b2b7345e2e14a08ec31305eae95b",
+    "dashboard/app.py": "0f2dfa7fa4e14f9a10d42c97dd7a2b9aff74200dd707373858118c69e24c7242",
+    "tests/test_adaptive_sets.py": "1a281813ebcd8da2e8b3efc651e029e51d3868a9cafef4aa6ef73d8fa9dd9e00",
+    "tests/test_adaptive_explorer.py": "4c51c5057a0970888b84833e856836160b4d7b1c05d992d34e5b5eca2ab5727b",
+    "scripts/plot_adaptive_sets.py": "5c22bb396cf9a0e059cccb7855584f4252dc8c1299525d4d2dd66f0b6c959bbd"
+  },
+  "verifier_sha256": "8b282552556e1f87da877e8e5540991e2905e19e6502f8eebb2015ff82225c3b",
+  "limitations": [
+    "Fixed initial RAPS parameters and one reused source model; no final tuned/full paper reproduction.",
+    "Uniform replicates, fingerprint representatives and development intervals do not establish clinical/patient/grade/external guarantees.",
+    "Real native/container HTTP and host AppTest are verified; interactive browser rendering is separate."
+  ]
+}

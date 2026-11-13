@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "experiment_id": "aptos_384_v1",
+  "registered_records": 21,
+  "actual_api_metrics_match": true,
+  "conformal_controls_verified": 4,
+  "comparators_displayed": 3,
+  "all_randomized_replicates_displayed": true,
+  "active_production_model": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "production_card_and_sidecar_matched": true,
+  "ui_method": "Streamlit AppTest against the running Docker HTTP API",
+  "ui_exceptions": 0,
+  "evaluation_sha256": "746e47de7dba071c82e4ea15736daa19021a3a9d804ca42b2351d2554e635daf",
+  "verifier_sha256": "e10dca2f189fca1da550a7d50184b250a089f1996c61844a3c1eb4b7e729cb06"
+}

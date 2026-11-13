@@ -1,0 +1,23 @@
+{
+  "status": "verified",
+  "scope": "actual HTTP against running deployment",
+  "image_source": "authorized DeepDRiD pilot holdout; input not retained by this script",
+  "get_statuses": {
+    "/health": 200,
+    "/ready": 200,
+    "/model/info": 200,
+    "/docs": 200
+  },
+  "predict_status": 200,
+  "batch_status": 200,
+  "unsupported_status": 415,
+  "dashboard_health_status": 200,
+  "model_version": "dr-mobilenet_v3_small-seed42-epoch1",
+  "device": "cpu",
+  "second_pass_single": true,
+  "batch_review_rate": 0.5,
+  "batch_recapture_rate": 0.5,
+  "batch_second_pass_rate": 0.5,
+  "note": "Health/readiness and schema execution do not establish model usefulness or clinical validity.",
+  "checkpoint_persistence_after_api_restart": true
+}

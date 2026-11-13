@@ -1,0 +1,877 @@
+{
+  "schema_version": 1,
+  "experiment_id": "matched_flip_v1",
+  "dataset": "DeepDRiD",
+  "partition": "validation",
+  "scope": "development_matched_workload_flip_diagnostic",
+  "source_commit": "7df75add5eb18d285abe219abb51f5fadb7f605d",
+  "source_sha256": {
+    "docs/research/MATCHED_FLIP_V1_PROTOCOL.md": "3e90824452e60e8aaee89016c92559356785010dd99387bf15f9b95b489cae0b",
+    "scripts/run_matched_flip.py": "afa828d7980bddc41c6e26caa69aac36b2e3272499a50f537104d309f69c3d80",
+    "scripts/audit_matched_flip.py": "a8afba443b0b70992353bc1d1df76a210250de6268ff046c76ab8ecda0aeff53",
+    "scripts/prepare_research_scores.py": "d26ebad19f9d4485efae4a500212cd1781a1e3b3df9692782259cb02c13b7fee",
+    "qsart/inference/engine.py": "71d2007ffa87242b20c1d4c8a0cde8ab2fc10122ba928566c6a52d011e74e2ab",
+    "qsart/inference/conformal_sidecar.py": "a16677fe3666542a766411f112100ab5ad64d0776f6a9982c2003b3fc60adcee",
+    "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+    "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+    "qsart/triage_v2.py": "8c8d98ba478190439490dbae5f265637ed5a9d90dcec4c0c72b12c8ba48005ec"
+  },
+  "protocol_sha256": "3e90824452e60e8aaee89016c92559356785010dd99387bf15f9b95b489cae0b",
+  "input_sha256": {
+    "cache": "71013749c8b303104568e8115e0e78f13373ef951e9e5c5bfac1fea9469a0b57",
+    "original_report": "7ca66739ba4c6daf72438527e3a747bdbb11488930bbf187db5dac9f2417a58b",
+    "manifest": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+    "ordinal_witness": "0ef95338994b3a587dd38b3034f5c059f063a77901b5af3f17f39292d5f40b4c",
+    "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "conformal": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221"
+  },
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "images": 168,
+  "patients": 42,
+  "request_size": 8,
+  "requests": 21,
+  "referable_images": 74,
+  "referable_patients": 21,
+  "budget25_rows_replayed": 168,
+  "anchors": {
+    "single": {
+      "extra_passes": 0,
+      "grade": {
+        "correct": 106,
+        "corrected": 0,
+        "harmed": 0,
+        "by_grade": [
+          {
+            "grade": 0,
+            "support": 74,
+            "correct": 57,
+            "corrected": 0,
+            "harmed": 0
+          },
+          {
+            "grade": 1,
+            "support": 20,
+            "correct": 14,
+            "corrected": 0,
+            "harmed": 0
+          },
+          {
+            "grade": 2,
+            "support": 24,
+            "correct": 8,
+            "corrected": 0,
+            "harmed": 0
+          },
+          {
+            "grade": 3,
+            "support": 40,
+            "correct": 23,
+            "corrected": 0,
+            "harmed": 0
+          },
+          {
+            "grade": 4,
+            "support": 10,
+            "correct": 4,
+            "corrected": 0,
+            "harmed": 0
+          }
+        ]
+      },
+      "referability": {
+        "correct": 139,
+        "corrected": 0,
+        "harmed": 0,
+        "false_negatives": 13,
+        "false_positives": 16
+      },
+      "quality_correct": 125,
+      "patients": {
+        "with_grade_correction": 0,
+        "with_new_grade_error": 0,
+        "referable_false_negatives": 2,
+        "referable_false_positives": 6
+      },
+      "conformal": {
+        "lac": {
+          "covered_images": 159,
+          "all_views_covered_patients": 36,
+          "mean_size": 3.3452380952380953
+        },
+        "ordinal": {
+          "covered_images": 168,
+          "all_views_covered_patients": 42,
+          "mean_size": 5.0
+        }
+      },
+      "pointwise": {
+        "actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 168
+        },
+        "referable_automatic_misses": 0
+      }
+    },
+    "all": {
+      "extra_passes": 168,
+      "grade": {
+        "correct": 106,
+        "corrected": 3,
+        "harmed": 3,
+        "by_grade": [
+          {
+            "grade": 0,
+            "support": 74,
+            "correct": 58,
+            "corrected": 2,
+            "harmed": 1
+          },
+          {
+            "grade": 1,
+            "support": 20,
+            "correct": 13,
+            "corrected": 0,
+            "harmed": 1
+          },
+          {
+            "grade": 2,
+            "support": 24,
+            "correct": 7,
+            "corrected": 0,
+            "harmed": 1
+          },
+          {
+            "grade": 3,
+            "support": 40,
+            "correct": 24,
+            "corrected": 1,
+            "harmed": 0
+          },
+          {
+            "grade": 4,
+            "support": 10,
+            "correct": 4,
+            "corrected": 0,
+            "harmed": 0
+          }
+        ]
+      },
+      "referability": {
+        "correct": 143,
+        "corrected": 4,
+        "harmed": 0,
+        "false_negatives": 12,
+        "false_positives": 13
+      },
+      "quality_correct": 128,
+      "patients": {
+        "with_grade_correction": 3,
+        "with_new_grade_error": 3,
+        "referable_false_negatives": 2,
+        "referable_false_positives": 6
+      },
+      "conformal": {
+        "lac": {
+          "covered_images": 159,
+          "all_views_covered_patients": 36,
+          "mean_size": 3.4226190476190474
+        },
+        "ordinal": {
+          "covered_images": 168,
+          "all_views_covered_patients": 42,
+          "mean_size": 5.0
+        }
+      },
+      "pointwise": {
+        "actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 168
+        },
+        "referable_automatic_misses": 0
+      }
+    }
+  },
+  "budgets": [
+    {
+      "budget": 0.25,
+      "slots_per_request": 2,
+      "random": {
+        "grade": {
+          "assignments": 2456510688823056210273111113728,
+          "mean_change": 0.0,
+          "central_95_changes": [
+            -2,
+            2
+          ],
+          "minimum_change": -3,
+          "maximum_change": 3,
+          "histogram": [
+            {
+              "change": -3,
+              "assignments": 16192819481987919354827636736
+            },
+            {
+              "change": -2,
+              "assignments": 161928194819879193548276367360
+            },
+            {
+              "change": -1,
+              "assignments": 588339107845561069892070801408
+            },
+            {
+              "change": 0,
+              "assignments": 923590444528199844682761502720
+            },
+            {
+              "change": 1,
+              "assignments": 588339107845561069892070801408
+            },
+            {
+              "change": 2,
+              "assignments": 161928194819879193548276367360
+            },
+            {
+              "change": 3,
+              "assignments": 16192819481987919354827636736
+            }
+          ]
+        },
+        "referability": {
+          "assignments": 2456510688823056210273111113728,
+          "mean_change": 1.0,
+          "central_95_changes": [
+            0,
+            3
+          ],
+          "minimum_change": 0,
+          "maximum_change": 4,
+          "histogram": [
+            {
+              "change": 0,
+              "assignments": 740243176319447741934977679360
+            },
+            {
+              "change": 1,
+              "assignments": 1085689991935190021504633929728
+            },
+            {
+              "change": 2,
+              "assignments": 526395147604940616487095238656
+            },
+            {
+              "change": 3,
+              "assignments": 98699090175926365591330357248
+            },
+            {
+              "change": 4,
+              "assignments": 5483282787551464755073908736
+            }
+          ]
+        }
+      },
+      "rankings": {
+        "entropy": {
+          "metrics": {
+            "extra_passes": 42,
+            "grade": {
+              "correct": 109,
+              "corrected": 3,
+              "harmed": 0,
+              "by_grade": [
+                {
+                  "grade": 0,
+                  "support": 74,
+                  "correct": 59,
+                  "corrected": 2,
+                  "harmed": 0
+                },
+                {
+                  "grade": 1,
+                  "support": 20,
+                  "correct": 14,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 2,
+                  "support": 24,
+                  "correct": 8,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 3,
+                  "support": 40,
+                  "correct": 24,
+                  "corrected": 1,
+                  "harmed": 0
+                },
+                {
+                  "grade": 4,
+                  "support": 10,
+                  "correct": 4,
+                  "corrected": 0,
+                  "harmed": 0
+                }
+              ]
+            },
+            "referability": {
+              "correct": 141,
+              "corrected": 2,
+              "harmed": 0,
+              "false_negatives": 13,
+              "false_positives": 14
+            },
+            "quality_correct": 125,
+            "patients": {
+              "with_grade_correction": 3,
+              "with_new_grade_error": 0,
+              "referable_false_negatives": 2,
+              "referable_false_positives": 6
+            },
+            "conformal": {
+              "lac": {
+                "covered_images": 159,
+                "all_views_covered_patients": 36,
+                "mean_size": 3.369047619047619
+              },
+              "ordinal": {
+                "covered_images": 168,
+                "all_views_covered_patients": 42,
+                "mean_size": 5.0
+              }
+            },
+            "pointwise": {
+              "actions": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 168
+              },
+              "referable_automatic_misses": 0
+            }
+          },
+          "random_probability_matching_or_exceeding": {
+            "grade": 0.006591796875,
+            "referability": 0.25669642857142855
+          }
+        },
+        "referable_probability": {
+          "metrics": {
+            "extra_passes": 42,
+            "grade": {
+              "correct": 105,
+              "corrected": 0,
+              "harmed": 1,
+              "by_grade": [
+                {
+                  "grade": 0,
+                  "support": 74,
+                  "correct": 57,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 1,
+                  "support": 20,
+                  "correct": 14,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 2,
+                  "support": 24,
+                  "correct": 7,
+                  "corrected": 0,
+                  "harmed": 1
+                },
+                {
+                  "grade": 3,
+                  "support": 40,
+                  "correct": 23,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 4,
+                  "support": 10,
+                  "correct": 4,
+                  "corrected": 0,
+                  "harmed": 0
+                }
+              ]
+            },
+            "referability": {
+              "correct": 139,
+              "corrected": 0,
+              "harmed": 0,
+              "false_negatives": 13,
+              "false_positives": 16
+            },
+            "quality_correct": 125,
+            "patients": {
+              "with_grade_correction": 0,
+              "with_new_grade_error": 1,
+              "referable_false_negatives": 2,
+              "referable_false_positives": 6
+            },
+            "conformal": {
+              "lac": {
+                "covered_images": 159,
+                "all_views_covered_patients": 36,
+                "mean_size": 3.363095238095238
+              },
+              "ordinal": {
+                "covered_images": 168,
+                "all_views_covered_patients": 42,
+                "mean_size": 5.0
+              }
+            },
+            "pointwise": {
+              "actions": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 168
+              },
+              "referable_automatic_misses": 0
+            }
+          },
+          "random_probability_matching_or_exceeding": {
+            "grade": 0.927490234375,
+            "referability": 1.0
+          }
+        },
+        "combined": {
+          "metrics": {
+            "extra_passes": 42,
+            "grade": {
+              "correct": 108,
+              "corrected": 2,
+              "harmed": 0,
+              "by_grade": [
+                {
+                  "grade": 0,
+                  "support": 74,
+                  "correct": 58,
+                  "corrected": 1,
+                  "harmed": 0
+                },
+                {
+                  "grade": 1,
+                  "support": 20,
+                  "correct": 14,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 2,
+                  "support": 24,
+                  "correct": 8,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 3,
+                  "support": 40,
+                  "correct": 24,
+                  "corrected": 1,
+                  "harmed": 0
+                },
+                {
+                  "grade": 4,
+                  "support": 10,
+                  "correct": 4,
+                  "corrected": 0,
+                  "harmed": 0
+                }
+              ]
+            },
+            "referability": {
+              "correct": 139,
+              "corrected": 0,
+              "harmed": 0,
+              "false_negatives": 13,
+              "false_positives": 16
+            },
+            "quality_correct": 125,
+            "patients": {
+              "with_grade_correction": 2,
+              "with_new_grade_error": 0,
+              "referable_false_negatives": 2,
+              "referable_false_positives": 6
+            },
+            "conformal": {
+              "lac": {
+                "covered_images": 159,
+                "all_views_covered_patients": 36,
+                "mean_size": 3.369047619047619
+              },
+              "ordinal": {
+                "covered_images": 168,
+                "all_views_covered_patients": 42,
+                "mean_size": 5.0
+              }
+            },
+            "pointwise": {
+              "actions": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 168
+              },
+              "referable_automatic_misses": 0
+            }
+          },
+          "random_probability_matching_or_exceeding": {
+            "grade": 0.072509765625,
+            "referability": 1.0
+          }
+        }
+      }
+    },
+    {
+      "budget": 0.5,
+      "slots_per_request": 4,
+      "random": {
+        "grade": {
+          "assignments": 558545864083284007000000000000000000000,
+          "mean_change": 0.0,
+          "central_95_changes": [
+            -2,
+            2
+          ],
+          "minimum_change": -3,
+          "maximum_change": 3,
+          "histogram": [
+            {
+              "change": -3,
+              "assignments": 8727279126301312609375000000000000000
+            },
+            {
+              "change": -2,
+              "assignments": 52363674757807875656250000000000000000
+            },
+            {
+              "change": -1,
+              "assignments": 130909186894519689140625000000000000000
+            },
+            {
+              "change": 0,
+              "assignments": 174545582526026252187500000000000000000
+            },
+            {
+              "change": 1,
+              "assignments": 130909186894519689140625000000000000000
+            },
+            {
+              "change": 2,
+              "assignments": 52363674757807875656250000000000000000
+            },
+            {
+              "change": 3,
+              "assignments": 8727279126301312609375000000000000000
+            }
+          ]
+        },
+        "referability": {
+          "assignments": 558545864083284007000000000000000000000,
+          "mean_change": 2.0,
+          "central_95_changes": [
+            0,
+            4
+          ],
+          "minimum_change": 0,
+          "maximum_change": 4,
+          "histogram": [
+            {
+              "change": 0,
+              "assignments": 29922099861604500375000000000000000000
+            },
+            {
+              "change": 1,
+              "assignments": 139636466020821001750000000000000000000
+            },
+            {
+              "change": 2,
+              "assignments": 219428732318433002750000000000000000000
+            },
+            {
+              "change": 3,
+              "assignments": 139636466020821001750000000000000000000
+            },
+            {
+              "change": 4,
+              "assignments": 29922099861604500375000000000000000000
+            }
+          ]
+        }
+      },
+      "rankings": {
+        "entropy": {
+          "metrics": {
+            "extra_passes": 84,
+            "grade": {
+              "correct": 108,
+              "corrected": 3,
+              "harmed": 1,
+              "by_grade": [
+                {
+                  "grade": 0,
+                  "support": 74,
+                  "correct": 58,
+                  "corrected": 2,
+                  "harmed": 1
+                },
+                {
+                  "grade": 1,
+                  "support": 20,
+                  "correct": 14,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 2,
+                  "support": 24,
+                  "correct": 8,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 3,
+                  "support": 40,
+                  "correct": 24,
+                  "corrected": 1,
+                  "harmed": 0
+                },
+                {
+                  "grade": 4,
+                  "support": 10,
+                  "correct": 4,
+                  "corrected": 0,
+                  "harmed": 0
+                }
+              ]
+            },
+            "referability": {
+              "correct": 143,
+              "corrected": 4,
+              "harmed": 0,
+              "false_negatives": 12,
+              "false_positives": 13
+            },
+            "quality_correct": 126,
+            "patients": {
+              "with_grade_correction": 3,
+              "with_new_grade_error": 1,
+              "referable_false_negatives": 2,
+              "referable_false_positives": 6
+            },
+            "conformal": {
+              "lac": {
+                "covered_images": 159,
+                "all_views_covered_patients": 36,
+                "mean_size": 3.363095238095238
+              },
+              "ordinal": {
+                "covered_images": 168,
+                "all_views_covered_patients": 42,
+                "mean_size": 5.0
+              }
+            },
+            "pointwise": {
+              "actions": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 168
+              },
+              "referable_automatic_misses": 0
+            }
+          },
+          "random_probability_matching_or_exceeding": {
+            "grade": 0.109375,
+            "referability": 0.05357142857142857
+          }
+        },
+        "referable_probability": {
+          "metrics": {
+            "extra_passes": 84,
+            "grade": {
+              "correct": 106,
+              "corrected": 1,
+              "harmed": 1,
+              "by_grade": [
+                {
+                  "grade": 0,
+                  "support": 74,
+                  "correct": 58,
+                  "corrected": 1,
+                  "harmed": 0
+                },
+                {
+                  "grade": 1,
+                  "support": 20,
+                  "correct": 14,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 2,
+                  "support": 24,
+                  "correct": 7,
+                  "corrected": 0,
+                  "harmed": 1
+                },
+                {
+                  "grade": 3,
+                  "support": 40,
+                  "correct": 23,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 4,
+                  "support": 10,
+                  "correct": 4,
+                  "corrected": 0,
+                  "harmed": 0
+                }
+              ]
+            },
+            "referability": {
+              "correct": 142,
+              "corrected": 3,
+              "harmed": 0,
+              "false_negatives": 12,
+              "false_positives": 14
+            },
+            "quality_correct": 125,
+            "patients": {
+              "with_grade_correction": 1,
+              "with_new_grade_error": 1,
+              "referable_false_negatives": 2,
+              "referable_false_positives": 6
+            },
+            "conformal": {
+              "lac": {
+                "covered_images": 159,
+                "all_views_covered_patients": 36,
+                "mean_size": 3.386904761904762
+              },
+              "ordinal": {
+                "covered_images": 168,
+                "all_views_covered_patients": 42,
+                "mean_size": 5.0
+              }
+            },
+            "pointwise": {
+              "actions": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 168
+              },
+              "referable_automatic_misses": 0
+            }
+          },
+          "random_probability_matching_or_exceeding": {
+            "grade": 0.65625,
+            "referability": 0.30357142857142855
+          }
+        },
+        "combined": {
+          "metrics": {
+            "extra_passes": 84,
+            "grade": {
+              "correct": 107,
+              "corrected": 2,
+              "harmed": 1,
+              "by_grade": [
+                {
+                  "grade": 0,
+                  "support": 74,
+                  "correct": 58,
+                  "corrected": 1,
+                  "harmed": 0
+                },
+                {
+                  "grade": 1,
+                  "support": 20,
+                  "correct": 14,
+                  "corrected": 0,
+                  "harmed": 0
+                },
+                {
+                  "grade": 2,
+                  "support": 24,
+                  "correct": 7,
+                  "corrected": 0,
+                  "harmed": 1
+                },
+                {
+                  "grade": 3,
+                  "support": 40,
+                  "correct": 24,
+                  "corrected": 1,
+                  "harmed": 0
+                },
+                {
+                  "grade": 4,
+                  "support": 10,
+                  "correct": 4,
+                  "corrected": 0,
+                  "harmed": 0
+                }
+              ]
+            },
+            "referability": {
+              "correct": 142,
+              "corrected": 3,
+              "harmed": 0,
+              "false_negatives": 12,
+              "false_positives": 14
+            },
+            "quality_correct": 125,
+            "patients": {
+              "with_grade_correction": 2,
+              "with_new_grade_error": 1,
+              "referable_false_negatives": 2,
+              "referable_false_positives": 6
+            },
+            "conformal": {
+              "lac": {
+                "covered_images": 159,
+                "all_views_covered_patients": 36,
+                "mean_size": 3.386904761904762
+              },
+              "ordinal": {
+                "covered_images": 168,
+                "all_views_covered_patients": 42,
+                "mean_size": 5.0
+              }
+            },
+            "pointwise": {
+              "actions": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 168
+              },
+              "referable_automatic_misses": 0
+            }
+          },
+          "random_probability_matching_or_exceeding": {
+            "grade": 0.34375,
+            "referability": 0.30357142857142855
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Selection patients already informed model choice.",
+    "Uniform selection distributions describe assignment variability on these fixed requests.",
+    "Minimum and maximum changes use known reference labels to describe retrospective opportunity.",
+    "Mixed-path set inclusion is empirical. Extra-forward counts describe compute workload."
+  ]
+}

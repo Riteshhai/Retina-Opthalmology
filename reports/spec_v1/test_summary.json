@@ -1,0 +1,14 @@
+{
+  "spec_version": "1.0",
+  "policy_version": "2.0",
+  "date_local": "2026-10-21",
+  "tests": 198,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "seconds": 78.296,
+  "real_integration": "Selected genuine DR/quality and conformal sidecar enabled on development selection JPEG",
+  "ruff": "passed",
+  "additional_dashboard_default_metric_check": "1 passed,4 deselected,8.87 seconds",
+  "scope": "Software and actual model-backed execution; not clinical validation"
+}

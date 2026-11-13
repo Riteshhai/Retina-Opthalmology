@@ -1,0 +1,93 @@
+# Prioritized executable backlog
+
+Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
+docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
+
+## Specification-v1 priorities — current on 13 November 2026
+
+- [x] P0 Adopt exact master/versioned specification, change log and compatibility audit.
+- [x] P0 Preserve measured v1 artifacts/source; version AUTO_NONREFERABLE policy and overload diagnostics.
+- [x] P0 Integrate current API/client/simulator semantics and real-model checks.
+- [x] P1 Read the full selected base paper and audit authors' implementation differences.
+- [x] P1 Fit independent-temperature, patient-max LAC and ordinal conformal sidecars on real data.
+- [x] P1 Record vacuous five-grade ordinal sets and every overloaded scenario without retuning.
+- [x] P1 Add all eight dashboard modules and typed config/simulation/research endpoints.
+- [x] P1 Train an actual EfficientNet-B0 DeepDRiD candidate and compare three genuine models.
+- [x] P1 Implement strict local APTOS adapter, duplicate grouping, inventory and fixtures.
+- [x] P1 Locate downloaded APTOS competition archive; user confirmed official Kaggle source on 3 November.
+- [x] P1 Validate all 3,662 APTOS images and freeze duplicate-aware partitions; quarantine148 conflicting-component images without relabeling.
+- [x] P1 Execute both APTOS frozen-feature candidates and all 14 independent temperature/conformal diagnostics; complete independent reconstruction.
+- [x] P1 Verify relocated APTOS source bytes, configure the new local root and preserve frozen study manifests.
+- [x] P1 Execute and independently audit the bounded three-seed APTOS parameter-fine-tuning pilot, fixed BatchNorm statistics, all 42 calibration comparisons and native explorer integration.
+- [x] P1 Execute and audit the locked primary-seed source schedule extension: 14/15 epochs, selected 10, 14 uncertainty comparisons; preserve adverse grade-3/coverage changes and all reserved-test/external exclusions.
+- [ ] P1 NOT STARTED: full APTOS base-paper fine-tuning reproduction; frozen-feature baselines and randomized-score implementation are separate evidence.
+- [x] P1 Execute and independently reconstruct fixed APS/RAPS saved-prediction baselines against LAC/ordinal, preserving all 34 comparisons/160 intervals and adverse grade-3 results; no tuned/full-paper reproduction claim.
+- [x] P1 Execute a bounded 32-image fitting-only 224/384 CPU feasibility probe in fresh workers; retain source models/reserved-test exclusions and avoid full-training claims.
+- [x] P1 Lock the single-seed 384-pixel ImageNet initialization, augmentation, optimizer, checkpoint selection and resource budget.
+- [x] P1 Execute and audit the fixed 384-pixel development run and compare its saved scores with the 224-pixel references.
+- [x] P1 Execute and independently audit the matched 224-pixel arm, selected-checkpoint and equal-update contrasts, and all 14 conformal settings.
+- [x] P1 Execute and independently audit the locked seed-2027 matched 224/384-pixel pair, recover the interrupted 384-pixel worker from epoch 8, and compare both seeds at selection and equal updates.
+- [ ] P1 Predeclare further matched seeds if estimating variability across training runs becomes a study objective.
+- [x] P1 Execute fixed ordinal randomization/calibration-unit diagnostic; explain the full-set atom and retain empirical patient-coverage limitations.
+- [x] P1 Fix cache-dependent head RNG and execute all six three-seed DR/quality development runs with complete provenance.
+- [x] P1 Execute and independently audit all six matched quality-backbone runs, retain raw calibration/rare-class failures and correct paired-row seed metadata without recomputing outcomes.
+- [x] P1 Execute/audit all 24 independent-role quality temperatures, six fixed candidates/seven conditions and all 486 intervals; retain adverse calibration/response findings and unchanged production.
+- [x] P1 Freeze and independently reconstruct the pinned EyeQ source/annotation/access audit; verify all 28,792 rows, 271 preserved artifacts, native/Docker services and 19-record explorer. This completes metadata readiness only.
+- [ ] P1 IN PROGRESS: obtain official EyeQ source photographs with recorded terms/storage plan, audit pixels/overlap and lock harmonization/evaluation before any model validation.
+- [x] P1 Cache and independently audit all fourteen user-selected pinned Hugging Face EyePACS files/35,108 rows, resumable/offline reuse and exact EyeQ joins: 12,529 train matches, fourteen missing Reject train rows, zero test matches; original-quality readiness remains incomplete.
+- [x] P1 Execute the locked external MSHF overall-quality diagnostic on the frozen head, including annotation discrepancies, overlap screening and source-specific threshold failures.
+- [ ] P1 Pursue independent quality supervision/validation before proposing production replacements.
+- [x] P1 Execute predeclared independently tuned guarded-policy comparison with patient folds, fixed evaluation ledger and independent reconstruction.
+- [x] P1 Compare direct referability and projected five-grade conformal gates with frozen guards and exact budgets. Audit all 24 development scenarios and retain low automatic coverage and overloads.
+- [x] P1 Publish both MSHF and referability studies in Experiment Explorer and verify every recorded population and capacity setting against the audited reports in Docker.
+- [x] P1 Reconstruct patient outcomes for the frozen referability actions, enumerate 24 patient-capacity scenarios and verify prospective exact-binomial planning counts.
+- [x] P1 Compare flip inference rankings at matched extra-pass counts and verify paired outcomes, exact random selection distributions and trained CPU replays.
+- [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
+- [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
+- [x] P1 Execute locked IDRiD external-domain diagnostics with four frozen classifiers, all source transforms and full/filtered sensitivity views; retain independence/label limitations.
+- [ ] P1 Broader independent external/prospective validation and distribution-shift studies; IDRiD outcomes are now consumed and cannot guide final tuning.
+- [x] P1 Verify and independently audit the official FDR26 v3 grading cohort, including exact label joins and overlap sensitivity.
+- [x] P1 Lock, execute and independently audit frozen FDR26 grading across four populations. Preserve low grade agreement and sensitivity against the released ALFEDIAM codes.
+- [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
+- [x] P1 Record user-confirmed official IDRiD/IEEE DataPort origin in a bound append-only receipt; preserve the audit-time provenance status.
+- [x] P1 Review all 11 IDRiD candidate pairs, independently verify pixel evidence and freeze full 516/filtered 513/representative 505 sensitivity populations without altering labels.
+- [x] P1 Independently reconstruct all 56 external conformal comparisons,57,792 raw/fallback sets, 360 annotation envelopes and 18 paired intervals; verify API/UI and preserve deployment.
+- [ ] P2 Optional explanations/ONNX/report polish after core research evidence.
+
+Conformal integration is VERIFIED COMPLETE as software/calibration execution.
+The deployed ordinal gate reviews every case in its feasible selection-grid
+allocations. The separate referability diagnostic recommended automatic
+clearance for at most 5 of 168 development images in any feasible budgeted
+setting. This yielded at most one fully automatic patient out of 42.
+Validated triage utility remains open.
+
+## Preserved pre-adoption execution
+
+- [x] Inspect and preserve starter and review assets; inspect connected GitHub.
+- [x] Repair project environment and run original tests.
+- [x] Verify official DeepDRiD metadata, image access, terms and quality-label semantics.
+- [x] Implement image manifests, strict validation and leakage-aware partitions.
+- [x] Implement real DR/quality training, checkpoint validation and calibration.
+- [x] Obtain authorized real images and execute first real-image pilot training.
+- [x] Implement three actions and independent cohort budget enforcement.
+- [x] Implement pilot research evaluation and conditional CPU inference.
+- [x] Connect FastAPI and Streamlit; verify unavailable, fixture and real-model states.
+- [x] Build Docker image and verify with genuinely trained pilot checkpoints.
+- [x] Predeclare larger development, compare two pretrained backbones and reserve fresh internal confirmation.
+- [x] Train natural-defect heads and a fixed classical quality comparator.
+- [x] Execute locked internal confirmation, full budget grid and exploratory patient-cluster comparisons.
+- [x] Complete development comparator tuning, controlled degradation and repeated seeds; retain negative findings.
+- [ ] Complete independent external validation and establish useful triage evidence.
+- [x] Update literature verification, Review-1 brief and exploratory pilot evidence.
+- [x] Record final tests and publish a reviewable GitHub branch/draft PR.
+
+No checkbox for real-image research or deployment may be checked using synthetic
+software tests. Full completion depends on execution evidence, not code presence.
+
+Development v1 supersedes the weak pilot: 340-image / 85-patient internal
+confirmation yields 60.0% DR accuracy, 0.532 macro-F1 and 74.1% quality accuracy.
+The original 16.67%/50% pilot reports are preserved. These rounds differ in cohort
+and protocol, so no paired improvement estimate is claimed. Defect heads are weak;
+the artifact head falls below majority-class accuracy. Internal policy findings
+are exploratory. External transport, prospective utility and a publication-level
+contribution remain unestablished.

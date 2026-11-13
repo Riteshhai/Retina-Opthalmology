@@ -1,0 +1,67 @@
+{
+  "schema": "qsart.aptos_384_cpu_feasibility.v1",
+  "status": "completed",
+  "source_commit": "c1e52fd21f43e38de78007e1376055276be5865d",
+  "source_file_sha256": {
+    "scripts/probe_aptos_384.py": "ca42ce8ad6fc913de929db14cd023e4209b4673712d6f4f1ddaedfb8fc02d027",
+    "docs/research/APTOS_384_FEASIBILITY_PROTOCOL.md": "a1ddc5358d9d4a78acf2ded6b8a49c07675f463dead93922ae0f8d9a9fbaf028",
+    "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+    "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd"
+  },
+  "source_report_sha256": "66c49f12bf630493c9dc38180a73daeeae6a222523067f4ec262971b45d2310e",
+  "private_input_manifest_sha256": "b798654caa93504502ed543e11ba41d9fb6550b0f08ea6ead88a3c549c96104d",
+  "runs": [
+    {
+      "image_size": 224,
+      "fitting_images": 32,
+      "optimizer_steps": 4,
+      "batch_size": 8,
+      "cpu_threads": 2,
+      "preparation_seconds": 2.9804648000281304,
+      "four_update_seconds": 2.7158596001099795,
+      "all_losses_and_gradients_finite": true,
+      "temporary_parameters_changed": true,
+      "source_checkpoint_unchanged": true,
+      "updated_weights_saved": false,
+      "torch_version": "2.14.1+cpu",
+      "source_checkpoint_sha256": "97eccafe89e271e94ee5588f51f6f42ff7deefb3f161ad30c364a66dae7c1a0e",
+      "sampled_peak_process_tree_rss_bytes": 1309765632,
+      "windows_peak_single_process_working_set_bytes": 1298763776,
+      "memory_measurement_scope": "worker plus venv launcher descendants",
+      "actual_worker_observed": true,
+      "memory_poll_interval_seconds": 0.02,
+      "fresh_process": true
+    },
+    {
+      "image_size": 384,
+      "fitting_images": 32,
+      "optimizer_steps": 4,
+      "batch_size": 8,
+      "cpu_threads": 2,
+      "preparation_seconds": 3.0041657998226583,
+      "four_update_seconds": 8.24752079998143,
+      "all_losses_and_gradients_finite": true,
+      "temporary_parameters_changed": true,
+      "source_checkpoint_unchanged": true,
+      "updated_weights_saved": false,
+      "torch_version": "2.14.1+cpu",
+      "source_checkpoint_sha256": "97eccafe89e271e94ee5588f51f6f42ff7deefb3f161ad30c364a66dae7c1a0e",
+      "sampled_peak_process_tree_rss_bytes": 2742157312,
+      "windows_peak_single_process_working_set_bytes": 2737291264,
+      "memory_measurement_scope": "worker plus venv launcher descendants",
+      "actual_worker_observed": true,
+      "memory_poll_interval_seconds": 0.02,
+      "fresh_process": true
+    }
+  ],
+  "classifier_updates_in_temporary_copies": 8,
+  "updated_checkpoints_saved": false,
+  "production_model_changed": false,
+  "selection_calibration_test_or_external_images_used": false,
+  "shared_workstation_and_download_concurrency": true,
+  "limitations": [
+    "Four updates per size on 32 source fitting images; no full training, convergence or performance comparison.",
+    "Direct resize, active BatchNorm, existing trained initialization and no augmentation differ from the full paper experiment.",
+    "Times are feasibility observations with concurrent workloads, not controlled speed benchmarks or precise full-run estimates."
+  ]
+}

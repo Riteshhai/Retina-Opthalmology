@@ -1,0 +1,13 @@
+{
+  "status": "verified",
+  "experiment_id": "aptos_resolution_seed2027_v1",
+  "registered_records": 23,
+  "checkpoint_rows_displayed": 8,
+  "actual_api_metrics_match": true,
+  "ui_exceptions": 0,
+  "ui_method": "Streamlit AppTest against the running Docker HTTP API",
+  "active_production_model": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "production_card_and_sidecar_matched": true,
+  "evaluation_sha256": "22d0603474316653b786a9f55aa21c2e3d858bc133291ed5fd5e4b10f8103c14",
+  "verifier_sha256": "07b818326063d4cc3ba9808323e3ea5771c783b1957be39028e14c46cc1acb8b"
+}

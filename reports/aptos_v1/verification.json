@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "scope": "local engineering and independently audited APTOS development execution",
+  "execution_source_commit": "e862700331186e6a754148b33534974d0f716141",
+  "pytest": {
+    "tests": 405,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 98.87,
+    "junit_duration_seconds": 98.583,
+    "junit_sha256": "4fe1bb225980c8db84bbc76d95539e3a402c7f5b030d96620bfaba6c396090c9",
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=reports/aptos_v1_tests.xml",
+    "integration": "Selected genuine DeepDRiD DR/quality checkpoints and conformal artifact enabled",
+    "warnings": [
+      "One upstream AnyIO BlockingPortal deprecation warning."
+    ]
+  },
+  "ruff": {
+    "status": "passed",
+    "command": ".venv/Scripts/python.exe -m ruff check ."
+  },
+  "compose_configuration": {
+    "status": "passed",
+    "command": "docker compose config --quiet"
+  },
+  "docker_execution": {
+    "status": "unavailable",
+    "verified_this_session": false,
+    "start_requested": true,
+    "server_reachable_after_start": false,
+    "observed_backend_error": "Startup failed while renaming inaccessible stale sailor-ingest socket.",
+    "destructive_repair_attempted": false
+  },
+  "native_http": {
+    "status": "verified",
+    "sha256": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812"
+  },
+  "native_registry_and_streamlit_component": {
+    "status": "verified",
+    "sha256": "fabe1281ba6d5e64b03c98f5b057587a761a0d5b93b3a84958e1f373ebbe79f3"
+  },
+  "relocated_source": {
+    "status": "verified",
+    "sha256": "d4b29453220bf6c0d8e87141704be4fe040dfa64df09020944e46dc073c370e6"
+  },
+  "independent_audit": {
+    "status": "passed",
+    "sha256": "2b2eedbe64f7a62168afa0a4aeceb8502e6b97788049376b7b17bbc16341ab1c"
+  },
+  "data_audit_sha256": "40dd0fec5c444a283722050ab871073da53d2f016b04f6d274d472de3df6adf8",
+  "evaluation_sha256": "994a8e78148d6c16d601d61d8774e0d36070b653ebf5549dec093ecbad4924ec",
+  "preserved_production_artifacts_match": true,
+  "source_sha256": {
+    "api/research.py": "b49bb4f41f93a37efa35fb64c530238dafb2d73cc525129a3ccb4204c67367ac",
+    "dashboard/app.py": "97a069b0a43ec8e8ef4fac2565363d183afa1698219ce2e51943da1a7c5a6c5f",
+    "scripts/run_aptos_development.py": "9b5d48712ed8a435a366d9a14a2a21e21c426bfdfde28760027cb03f291fc0ff",
+    "scripts/prepare_aptos_archive.py": "77d7d08ad31b508dfaf6da87437abc4a288e2d239e58b59d145430e7f3b12d8c",
+    "scripts/plot_aptos_development.py": "d18ec3b954209fc364233800a40c0531292737c9a44ec0ed49e304a5396e713c",
+    "scripts/inspect_datasets.py": "54694735980190df8fdc59814b86882d11bd59833402bfe36191f2939b869e3d",
+    "tests/test_dataset_inventory.py": "083dd4d5f22c773fc1e0f4259e7ddf46b9110bc7c57616d1ed99cb5dc3e3c488"
+  },
+  "limitations": [
+    "No new browser rendering verification; interface evidence is Streamlit component testing.",
+    "Native execution does not replace verification of a newly built container.",
+    "Development selection, fingerprint-group limitations and quarantine prevent fresh-test or clinical-utility claims."
+  ]
+}

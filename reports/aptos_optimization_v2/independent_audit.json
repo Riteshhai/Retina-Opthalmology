@@ -1,0 +1,57 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "aptos_optimization_v2",
+  "source_commit": "a75229f92468a253e8f6c3e28d834571e25bd9e5",
+  "evaluation_sha256": "66c49f12bf630493c9dc38180a73daeeae6a222523067f4ec262971b45d2310e",
+  "auditor_script_sha256": "f1f00176d1cd511fbcdaeb10f942231fb84c9316d8b12aa02d3ca7a6da7f4558",
+  "prior_auditor_sha256": "15b659e8f57a04c89615683b7a4d3b079b827fc1ec43785812d2762f241e546a",
+  "independent_math_helper_sha256": "dec9adfcf3a373b63b048afed3d7badc44f03d1f3ba1c6f78c3ca78255226e43",
+  "verified_runtime_images": 3163,
+  "canonical_cache": {
+    "cache_images": 2636,
+    "shape": [
+      2636,
+      224,
+      224,
+      3
+    ],
+    "tensor_sha256": "3c8b4d63a338b42001a4dd60735b2d61b26ec26c51a9fe111c6173061ed240e3",
+    "independently_preprocessed_train_selection_images": 10,
+    "cache_file_sha256": "64f456b26c7ce890dac53775006b9653449827323ea525fcda9ceeb2fe42ec3e"
+  },
+  "posthoc_calibration_cache": {
+    "images": 527,
+    "file_sha256": "bd83ea7bdaea5bddb443bbff14fa914643b410acd7f61e55ce2b4cdf74b14d4f",
+    "tensor_sha256": "5273347690ac511956a3ce32b1e63956039a660c4f19db95af747e9e0959379b",
+    "independently_preprocessed_calibration_images": 5
+  },
+  "verified_candidate": {
+    "training_seed": 2026,
+    "epochs_executed": 14,
+    "selected_epoch": 10,
+    "optimizer_updates": 1862,
+    "backbone_parameter_tensors": 211,
+    "fixed_batchnorm_buffer_tensors": 147,
+    "changed_selected_parameter_tensors": 211,
+    "changed_last_parameter_tensors": 211,
+    "all_epoch_selection_metrics_recomputed": true,
+    "batch_order_flip_rng_reconstructed": true
+  },
+  "uncertainty": {
+    "comparisons": 14,
+    "individual_raw_and_fallback_sets": 14588,
+    "maximum_threshold_error": 1.1102230246251565e-16,
+    "temperature_optimum_nll_gap": 7.072120666862247e-14,
+    "temperature_independent_optimum": 2.9409972467255816
+  },
+  "paired_intervals_reconstructed": 4,
+  "first_epoch_fixed_initialconditions_max_logit_delta": 0.0,
+  "preserved_prior_artifacts": 134,
+  "primary_namespace_stop_and_exclusion_flags_verified": true,
+  "limitations": [
+    "Saved-logit/mathematical audit, without independent neural forward pass or refitting.",
+    "All source hashes/cache bytes checked; independent geometry reconstructed on 10 training/selection and 5 calibration images.",
+    "No fresh test, external, patient-independence, clinical or convergence claim."
+  ],
+  "elapsed_seconds": 32.34346959996037
+}

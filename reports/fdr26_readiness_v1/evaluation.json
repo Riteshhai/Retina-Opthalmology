@@ -1,0 +1,80 @@
+{
+  "experiment_id": "fdr26_readiness_v1",
+  "dataset": "FDR26",
+  "partition": "external_candidate_unscored",
+  "scope": "external_grading_data_readiness",
+  "source_commit": "887f9ec82d1e0744060da7f3ae4afa812826bc07",
+  "source_sha256": {
+    "docs/research/FDR26_READINESS_V1_PROTOCOL.md": "ca1cbffbdfaaac3f633cf4a8b60b9ecf77343ff5b7be661cba7be205f8218ce2",
+    "scripts/prepare_fdr26.py": "170b96edef45fdff9d78e4359835e2d2fcd5c9fc2dc59ae37662e94018596ea5",
+    "scripts/audit_fdr26_readiness.py": "549c2f8d5687c055e8ceb316508d9f727a6e95a25556d3f500547ebb37742189",
+    "scripts/prepare_idrid.py": "9f56591ac15d7b284a3e2610963dce178255c08e341708fa2f2cadb94437fe99",
+    "configs/idrid_data_v1.json": "11461a9a8a10b8554f3cf35a518a3650085714ac2ca439daecec22e96e16b027",
+    "qsart/data/aptos.py": "b5d6b1f981c4d0e3f24d1465dc2ac82ea3ddbf3567472f19b5094b19b515e9fd",
+    "qsart/data/idrid.py": "1be85cc7dcd40c55063ee8935c37ef17959c642852bdbce5b5295884319f6ffd",
+    "qsart/data/manifests.py": "0ae85ee90b6b81b0fb4281b91b503d85c73e5665de5acb5b12a1371fcd98a6ec",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8"
+  },
+  "input_sha256": {
+    "record": "defa65da026efb00bc4a9cbd421176effca01f59355ede1401b4ae7c6ac32169",
+    "reference_config": "11461a9a8a10b8554f3cf35a518a3650085714ac2ca439daecec22e96e16b027",
+    "archive": "6c5517d60f24cbd310a1ab0607b8c90dbb4b88b61aee57840fc2e823b753dadb",
+    "workbook": "54083bc9bccf55f4eb271256de152f0e948090182bf43984585fa8535943f610"
+  },
+  "witness_sha256": "556e47ad165f76e5586c2936423b2a933985ff266c69135706c9c8f9ba8192b2",
+  "inventory": {
+    "images": 3000,
+    "archive_images": 3000,
+    "workbook_rows": 3000,
+    "joined_images": 2999,
+    "unmatched_archive_images": 1,
+    "unmatched_workbook_rows": 1,
+    "grade_counts": {
+      "0": 505,
+      "1": 701,
+      "2": 583,
+      "3": 632,
+      "4": 579
+    },
+    "joined_grade_counts": {
+      "1": 701,
+      "3": 632,
+      "4": 579,
+      "0": 504,
+      "2": 583
+    },
+    "formats": {
+      "JPEG": 3000
+    },
+    "filename_prefix_profile": {
+      "prefixes": 1918,
+      "multi_image_prefixes": 855,
+      "contiguous_numbered_prefixes": 1918,
+      "metadata_consistent_prefixes": 1918
+    }
+  },
+  "overlap": {
+    "internal_pairs": 189,
+    "internal_exact_pairs": 161,
+    "components": 2816,
+    "conflicting_components": 71,
+    "unmatched_component_excluded_images": 2,
+    "cross_pairs": 3,
+    "cross_exact_pairs": 0,
+    "cross_images": 2,
+    "excluded_images": 151,
+    "eligible_images": 2849,
+    "representatives": 2742,
+    "reference_rows": 5186,
+    "reference_pairs_by_dataset": {
+      "APTOS_2019": 3,
+      "DeepDRiD_regular_fundus": 0
+    },
+    "prefix_sensitivity_excluded_images": 239,
+    "prefix_sensitivity_eligible_images": 2761,
+    "prefix_sensitivity_representatives": 2673
+  },
+  "grade_standard": "ALFEDIAM",
+  "patient_linkage_available": false,
+  "model_inference_performed": false
+}

@@ -1,0 +1,18 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "referability_gate_v1",
+  "source_commit": "b457a14baa93767e3e0f52f5d28fad196205c87e",
+  "evaluation_sha256": "53de650c64c6313cf612a355aea51dc99146ef344a4affdc5a0bed410bc33cfe",
+  "auditor_sha256": "f7c45eb5f7c5cd4a6f6c968c57631783f67eb2106b0337c81049c4879bd169b6",
+  "private_output_sha256": "6d416b0e6275b4b495c5213add27c13e550db7ff31a6023682fc96e33833f282",
+  "protocol_sha256": "1357f1135f53302086ce245dec6c0fae0a6275ebbe4b29cc454f003d0ac60110",
+  "calibration_fits_reconstructed": 6,
+  "historical_five_grade_fits_reconstructed": 4,
+  "binary_selection_sets_reconstructed": 1008,
+  "pointwise_actions_reconstructed": 1008,
+  "development_image_hashes_verified": 336,
+  "allocation_scenarios_verified": 24,
+  "evaluated_allocations": 9,
+  "overloaded_allocations": 15,
+  "max_absolute_allocation_objective_delta": 1.4210854715202004e-14
+}

@@ -1,0 +1,2189 @@
+{
+  "experiment": "confirmation_v1",
+  "date": "2026-10-20",
+  "scope": "Fresh internal DeepDRiD same-domain confirmation; not external or clinical validation",
+  "images": 340,
+  "patients": 85,
+  "selection_lock_sha256": "c2366e8ac8d369759d7431c6135bc593b5fa4623c4ce906a42cefa478928e3c2",
+  "confirmation_manifest_sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7",
+  "model_info": {
+    "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+    "backbone": "mobilenet_v3_small",
+    "image_size": 224,
+    "device": "cpu",
+    "cpu_threads": 2,
+    "data_purpose": "real_research",
+    "quality_model_version": "development-v1-quality-mobilenet_v3_small-seed2026-epoch3",
+    "quality_heads": {
+      "quality_grade": 2,
+      "clarity_class": 5,
+      "field_definition_class": 5,
+      "artifact_class": 6
+    },
+    "quality_label_mappings": {
+      "clarity_class": {
+        "source_column": "clarity",
+        "source_codes": [
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "better clarity",
+        "code_to_class": {
+          "1": 0,
+          "4": 1,
+          "6": 2,
+          "8": 3,
+          "10": 4
+        },
+        "class_to_code": {
+          "0": 1,
+          "1": 4,
+          "2": 6,
+          "3": 8,
+          "4": 10
+        },
+        "classes": 5
+      },
+      "field_definition_class": {
+        "source_column": "field_definition",
+        "source_codes": [
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "better field definition",
+        "code_to_class": {
+          "1": 0,
+          "4": 1,
+          "6": 2,
+          "8": 3,
+          "10": 4
+        },
+        "class_to_code": {
+          "0": 1,
+          "1": 4,
+          "2": 6,
+          "3": 8,
+          "4": 10
+        },
+        "classes": 5
+      },
+      "artifact_class": {
+        "source_column": "artifact",
+        "source_codes": [
+          0,
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "more extensive artifact; class 0 is no artifact",
+        "code_to_class": {
+          "0": 0,
+          "1": 1,
+          "4": 2,
+          "6": 3,
+          "8": 4,
+          "10": 5
+        },
+        "class_to_code": {
+          "0": 0,
+          "1": 1,
+          "2": 4,
+          "3": 6,
+          "4": 8,
+          "5": 10
+        },
+        "classes": 6
+      }
+    },
+    "training_strategy": "frozen_imagenet_cached_features",
+    "source_sha256": "51e93f1c705cc2856511573fe6509610aac521a99284c7fbcf140057f0313cbe",
+    "training_provenance": {
+      "dr": {
+        "split_counts": {
+          "calibration": 168,
+          "train": 848,
+          "validation": 168
+        },
+        "seed": 2026,
+        "optimizer_steps": 405,
+        "selected_epoch": 15,
+        "selection_metric": "macro_f1_then_unweighted_nll",
+        "configured_epochs": 100,
+        "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+        "code_version": "51eae274c70ba29007257689c886982c5298fd1d"
+      },
+      "quality": {
+        "split_counts": {
+          "calibration": 168,
+          "train": 848,
+          "validation": 168
+        },
+        "seed": 2026,
+        "optimizer_steps": 81,
+        "selected_epoch": 3,
+        "selection_metric": "macro_f1_then_unweighted_nll",
+        "configured_epochs": 100,
+        "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+        "code_version": "51eae274c70ba29007257689c886982c5298fd1d"
+      }
+    },
+    "calibration_fit_metrics": {
+      "dr": {
+        "dr_grade": {
+          "temperature": 1.4621494531656656,
+          "before": {
+            "n": 168,
+            "nll": 1.1374393371223832,
+            "ece": 0.12982246879787107,
+            "brier": 0.6158116792964793
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.087902967976227,
+            "ece": 0.06202297856547488,
+            "brier": 0.5892906552052573
+          }
+        }
+      },
+      "quality": {
+        "quality_grade": {
+          "temperature": 1.0349426972146167,
+          "before": {
+            "n": 168,
+            "nll": 0.5299913480232195,
+            "ece": 0.13033933026530406,
+            "brier": 0.3574397158487079
+          },
+          "after": {
+            "n": 168,
+            "nll": 0.5298645098855822,
+            "ece": 0.12489716635021726,
+            "brier": 0.3571593627730074
+          }
+        },
+        "clarity_class": {
+          "temperature": 1.0381431361500668,
+          "before": {
+            "n": 168,
+            "nll": 1.162961802535261,
+            "ece": 0.059044997962916256,
+            "brier": 0.6438256787604649
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.162633751205279,
+            "ece": 0.05315903629499816,
+            "brier": 0.6425830183961272
+          }
+        },
+        "field_definition_class": {
+          "temperature": 1.7814232126859433,
+          "before": {
+            "n": 168,
+            "nll": 1.2773017937715028,
+            "ece": 0.15857411695482168,
+            "brier": 0.6695214040927929
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.1965139472847162,
+            "ece": 0.10980891260251437,
+            "brier": 0.6418186608314946
+          }
+        },
+        "artifact_class": {
+          "temperature": 1.2949429647308723,
+          "before": {
+            "n": 168,
+            "nll": 1.3829430790382593,
+            "ece": 0.13127698477797137,
+            "brier": 0.7009266192865734
+          },
+          "after": {
+            "n": 168,
+            "nll": 1.363045364323737,
+            "ece": 0.07049040621653405,
+            "brier": 0.6887713346683132
+          }
+        }
+      }
+    },
+    "calibration_method": "temperature_scaling",
+    "second_pass_strategy": "horizontal_flip_mean_logits",
+    "limitations": [
+      "Research prototype; not clinically validated.",
+      "Calibration-fit metrics are not independent test performance.",
+      "Checkpoint provenance markers do not establish model accuracy.",
+      "Second-pass activation is limited per request population."
+    ],
+    "research_only": true
+  },
+  "grading": {
+    "n": 340,
+    "accuracy": 0.6,
+    "macro_f1": 0.531758927755637,
+    "quadratic_weighted_kappa": 0.7264950557212368,
+    "confusion_matrix": [
+      [
+        115,
+        17,
+        20,
+        5,
+        1
+      ],
+      [
+        6,
+        20,
+        11,
+        0,
+        1
+      ],
+      [
+        6,
+        15,
+        30,
+        16,
+        5
+      ],
+      [
+        2,
+        4,
+        13,
+        28,
+        11
+      ],
+      [
+        0,
+        1,
+        0,
+        2,
+        11
+      ]
+    ],
+    "per_class": [
+      {
+        "grade": 0,
+        "precision": 0.8914728682170543,
+        "recall": 0.7278481012658228,
+        "f1": 0.8013937282229965,
+        "support": 158
+      },
+      {
+        "grade": 1,
+        "precision": 0.3508771929824561,
+        "recall": 0.5263157894736842,
+        "f1": 0.42105263157894735,
+        "support": 38
+      },
+      {
+        "grade": 2,
+        "precision": 0.40540540540540543,
+        "recall": 0.4166666666666667,
+        "f1": 0.410958904109589,
+        "support": 72
+      },
+      {
+        "grade": 3,
+        "precision": 0.5490196078431373,
+        "recall": 0.4827586206896552,
+        "f1": 0.5137614678899083,
+        "support": 58
+      },
+      {
+        "grade": 4,
+        "precision": 0.3793103448275862,
+        "recall": 0.7857142857142857,
+        "f1": 0.5116279069767442,
+        "support": 14
+      }
+    ],
+    "referable_auroc": 0.9248157596371882,
+    "referable_auprc": 0.9078944747815818,
+    "ece": 0.039985965192317965,
+    "reliability_bins": [
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 10,
+        "accuracy": 0.2,
+        "confidence": 0.2678966075181961
+      },
+      {
+        "count": 49,
+        "accuracy": 0.3877551020408163,
+        "confidence": 0.3567404899061943
+      },
+      {
+        "count": 86,
+        "accuracy": 0.4418604651162791,
+        "confidence": 0.4548156937194425
+      },
+      {
+        "count": 65,
+        "accuracy": 0.5384615384615384,
+        "confidence": 0.5431361216765184
+      },
+      {
+        "count": 39,
+        "accuracy": 0.717948717948718,
+        "confidence": 0.6465275639142746
+      },
+      {
+        "count": 36,
+        "accuracy": 0.8055555555555556,
+        "confidence": 0.7429206073284149
+      },
+      {
+        "count": 36,
+        "accuracy": 0.9444444444444444,
+        "confidence": 0.847944685154491
+      },
+      {
+        "count": 19,
+        "accuracy": 1.0,
+        "confidence": 0.9229329447997244
+      }
+    ],
+    "brier": 0.521474855900669
+  },
+  "grading_uncalibrated": {
+    "n": 340,
+    "accuracy": 0.6,
+    "macro_f1": 0.531758927755637,
+    "quadratic_weighted_kappa": 0.7264950557212368,
+    "confusion_matrix": [
+      [
+        115,
+        17,
+        20,
+        5,
+        1
+      ],
+      [
+        6,
+        20,
+        11,
+        0,
+        1
+      ],
+      [
+        6,
+        15,
+        30,
+        16,
+        5
+      ],
+      [
+        2,
+        4,
+        13,
+        28,
+        11
+      ],
+      [
+        0,
+        1,
+        0,
+        2,
+        11
+      ]
+    ],
+    "per_class": [
+      {
+        "grade": 0,
+        "precision": 0.8914728682170543,
+        "recall": 0.7278481012658228,
+        "f1": 0.8013937282229965,
+        "support": 158
+      },
+      {
+        "grade": 1,
+        "precision": 0.3508771929824561,
+        "recall": 0.5263157894736842,
+        "f1": 0.42105263157894735,
+        "support": 38
+      },
+      {
+        "grade": 2,
+        "precision": 0.40540540540540543,
+        "recall": 0.4166666666666667,
+        "f1": 0.410958904109589,
+        "support": 72
+      },
+      {
+        "grade": 3,
+        "precision": 0.5490196078431373,
+        "recall": 0.4827586206896552,
+        "f1": 0.5137614678899083,
+        "support": 58
+      },
+      {
+        "grade": 4,
+        "precision": 0.3793103448275862,
+        "recall": 0.7857142857142857,
+        "f1": 0.5116279069767442,
+        "support": 14
+      }
+    ],
+    "referable_auroc": 0.920670351473923,
+    "referable_auprc": 0.9038128881219759,
+    "ece": 0.08790351248839322,
+    "reliability_bins": [
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 5,
+        "accuracy": 0.0,
+        "confidence": 0.2751713335514069
+      },
+      {
+        "count": 23,
+        "accuracy": 0.4782608695652174,
+        "confidence": 0.3575920540353526
+      },
+      {
+        "count": 48,
+        "accuracy": 0.3958333333333333,
+        "confidence": 0.45620300496617955
+      },
+      {
+        "count": 61,
+        "accuracy": 0.47540983606557374,
+        "confidence": 0.5520864490602837
+      },
+      {
+        "count": 56,
+        "accuracy": 0.4642857142857143,
+        "confidence": 0.644034746502127
+      },
+      {
+        "count": 41,
+        "accuracy": 0.6585365853658537,
+        "confidence": 0.7450028279932533
+      },
+      {
+        "count": 42,
+        "accuracy": 0.7857142857142857,
+        "confidence": 0.8473607472011021
+      },
+      {
+        "count": 64,
+        "accuracy": 0.921875,
+        "confidence": 0.9525113133713603
+      }
+    ],
+    "brier": 0.5319928084299689
+  },
+  "training_prior_grading": {
+    "n": 340,
+    "accuracy": 0.4647058823529412,
+    "macro_f1": 0.12690763052208837,
+    "quadratic_weighted_kappa": 0.0,
+    "confusion_matrix": [
+      [
+        158,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        38,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        72,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        58,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        14,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "per_class": [
+      {
+        "grade": 0,
+        "precision": 0.4647058823529412,
+        "recall": 1.0,
+        "f1": 0.6345381526104418,
+        "support": 158
+      },
+      {
+        "grade": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 38
+      },
+      {
+        "grade": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 72
+      },
+      {
+        "grade": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 58
+      },
+      {
+        "grade": 4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 14
+      }
+    ],
+    "referable_auroc": 0.5,
+    "referable_auprc": 0.4235294117647059,
+    "ece": 0.018951165371808965,
+    "reliability_bins": [
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 340,
+        "accuracy": 0.4647058823529412,
+        "confidence": 0.4457547169811322
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      },
+      {
+        "count": 0,
+        "accuracy": null,
+        "confidence": null
+      }
+    ],
+    "brier": 0.6968734948589619
+  },
+  "accuracy_ci95": {
+    "mean": 0.6,
+    "lower": 0.5264705882352941,
+    "upper": 0.6705882352941176
+  },
+  "quality": {
+    "n": 340,
+    "accuracy": 0.7411764705882353,
+    "macro_f1": 0.7402777777777778,
+    "confusion_matrix": [
+      [
+        136,
+        52
+      ],
+      [
+        36,
+        116
+      ]
+    ],
+    "poor_auroc": 0.8102603583426652,
+    "ece": 0.027517170064589584,
+    "nll": 0.5356068797290954,
+    "brier": 0.3558725625627376
+  },
+  "quality_uncalibrated": {
+    "n": 340,
+    "accuracy": 0.7411764705882353,
+    "macro_f1": 0.7402777777777778,
+    "confusion_matrix": [
+      [
+        136,
+        52
+      ],
+      [
+        36,
+        116
+      ]
+    ],
+    "poor_auroc": 0.8102603583426652,
+    "ece": 0.04045293225961571,
+    "nll": 0.5361937132346358,
+    "brier": 0.3559412886512864
+  },
+  "classical_quality": {
+    "n": 340,
+    "accuracy": 0.7323529411764705,
+    "macro_f1": 0.7313279899964397,
+    "confusion_matrix": [
+      [
+        135,
+        53
+      ],
+      [
+        38,
+        114
+      ]
+    ],
+    "poor_auroc": 0.7929731243001119,
+    "ece": 0.08013246144504653,
+    "nll": 0.5704620994219969,
+    "brier": 0.38335434541310454
+  },
+  "budgets": [
+    {
+      "method": "plain",
+      "review_budget": 0.2,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.2,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.2,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.2,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.2,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.2,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.2,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.2,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.2,
+      "recapture_rate": 0.4,
+      "coverage": 0.4,
+      "missed_referable_auto": 12,
+      "missed_severe_auto": 1,
+      "referable_deferred_to_recapture": 60,
+      "severe_deferred_to_recapture": 40,
+      "auto_sensitivity": 0.7818181818181819,
+      "auto_specificity": 0.7654320987654321,
+      "weighted_auto_error_per_image": 0.43529411764705883,
+      "selective_grade_error": 0.4411764705882353,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.2,
+      "recapture_rate": 0.4,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 60,
+      "severe_deferred_to_recapture": 40,
+      "auto_sensitivity": 0.8837209302325582,
+      "auto_specificity": 0.7741935483870968,
+      "weighted_auto_error_per_image": 0.38235294117647056,
+      "selective_grade_error": 0.41911764705882354,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 157,
+      "review_rate": 0.2,
+      "recapture_rate": 0.3382352941176471,
+      "coverage": 0.46176470588235297,
+      "missed_referable_auto": 10,
+      "missed_severe_auto": 1,
+      "referable_deferred_to_recapture": 20,
+      "severe_deferred_to_recapture": 9,
+      "auto_sensitivity": 0.8333333333333334,
+      "auto_specificity": 0.7525773195876289,
+      "weighted_auto_error_per_image": 0.5235294117647059,
+      "selective_grade_error": 0.445859872611465,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.4,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.4,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.4,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.4,
+      "recapture_budget": 0.1,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.4,
+      "recapture_rate": 0.2,
+      "coverage": 0.4,
+      "missed_referable_auto": 12,
+      "missed_severe_auto": 1,
+      "referable_deferred_to_recapture": 30,
+      "severe_deferred_to_recapture": 18,
+      "auto_sensitivity": 0.7818181818181819,
+      "auto_specificity": 0.7654320987654321,
+      "weighted_auto_error_per_image": 0.43529411764705883,
+      "selective_grade_error": 0.4411764705882353,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.4,
+      "recapture_rate": 0.2,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 30,
+      "severe_deferred_to_recapture": 18,
+      "auto_sensitivity": 0.8837209302325582,
+      "auto_specificity": 0.7741935483870968,
+      "weighted_auto_error_per_image": 0.38235294117647056,
+      "selective_grade_error": 0.41911764705882354,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.4,
+      "recapture_rate": 0.2,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 3,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8837209302325582,
+      "auto_specificity": 0.7741935483870968,
+      "weighted_auto_error_per_image": 0.38235294117647056,
+      "selective_grade_error": 0.41911764705882354,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 94,
+      "review_rate": 0.4,
+      "recapture_rate": 0.3235294117647059,
+      "coverage": 0.27647058823529413,
+      "missed_referable_auto": 3,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 46,
+      "severe_deferred_to_recapture": 31,
+      "auto_sensitivity": 0.9166666666666666,
+      "auto_specificity": 0.7413793103448276,
+      "weighted_auto_error_per_image": 0.24705882352941178,
+      "selective_grade_error": 0.425531914893617,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "status": "infeasible",
+      "reason": "Required quality deferrals exceed capacities"
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 68,
+      "review_rate": 0.4,
+      "recapture_rate": 0.4,
+      "coverage": 0.2,
+      "missed_referable_auto": 0,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 60,
+      "severe_deferred_to_recapture": 40,
+      "auto_sensitivity": 1.0,
+      "auto_specificity": 0.8103448275862069,
+      "weighted_auto_error_per_image": 0.08235294117647059,
+      "selective_grade_error": 0.27941176470588236,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 115,
+      "review_rate": 0.4,
+      "recapture_rate": 0.26176470588235295,
+      "coverage": 0.3382352941176471,
+      "missed_referable_auto": 4,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 9,
+      "severe_deferred_to_recapture": 2,
+      "auto_sensitivity": 0.8571428571428571,
+      "auto_specificity": 0.7931034482758621,
+      "weighted_auto_error_per_image": 0.25588235294117645,
+      "selective_grade_error": 0.3826086956521739,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8979591836734694,
+      "auto_specificity": 0.7816091954022989,
+      "weighted_auto_error_per_image": 0.4147058823529412,
+      "selective_grade_error": 0.40441176470588236,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 102,
+      "review_rate": 0.6,
+      "recapture_rate": 0.1,
+      "coverage": 0.3,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 1,
+      "referable_deferred_to_recapture": 17,
+      "severe_deferred_to_recapture": 10,
+      "auto_sensitivity": 0.8717948717948718,
+      "auto_specificity": 0.746031746031746,
+      "weighted_auto_error_per_image": 0.2852941176470588,
+      "selective_grade_error": 0.43137254901960786,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 12,
+      "missed_severe_auto": 2,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.7,
+      "auto_specificity": 0.7604166666666666,
+      "weighted_auto_error_per_image": 0.3029411764705882,
+      "selective_grade_error": 0.39705882352941174,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8837209302325582,
+      "auto_specificity": 0.7741935483870968,
+      "weighted_auto_error_per_image": 0.38235294117647056,
+      "selective_grade_error": 0.41911764705882354,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 102,
+      "review_rate": 0.6,
+      "recapture_rate": 0.1,
+      "coverage": 0.3,
+      "missed_referable_auto": 3,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 17,
+      "severe_deferred_to_recapture": 10,
+      "auto_sensitivity": 0.875,
+      "auto_specificity": 0.7948717948717948,
+      "weighted_auto_error_per_image": 0.21176470588235294,
+      "selective_grade_error": 0.37254901960784315,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 102,
+      "review_rate": 0.6,
+      "recapture_rate": 0.1,
+      "coverage": 0.3,
+      "missed_referable_auto": 3,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 1,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.875,
+      "auto_specificity": 0.7948717948717948,
+      "weighted_auto_error_per_image": 0.21176470588235294,
+      "selective_grade_error": 0.37254901960784315,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8979591836734694,
+      "auto_specificity": 0.7816091954022989,
+      "weighted_auto_error_per_image": 0.4147058823529412,
+      "selective_grade_error": 0.40441176470588236,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 77,
+      "review_rate": 0.5735294117647058,
+      "recapture_rate": 0.2,
+      "coverage": 0.22647058823529412,
+      "missed_referable_auto": 1,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 30,
+      "severe_deferred_to_recapture": 18,
+      "auto_sensitivity": 0.9629629629629629,
+      "auto_specificity": 0.72,
+      "weighted_auto_error_per_image": 0.15588235294117647,
+      "selective_grade_error": 0.4025974025974026,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 12,
+      "missed_severe_auto": 2,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.7,
+      "auto_specificity": 0.7604166666666666,
+      "weighted_auto_error_per_image": 0.3029411764705882,
+      "selective_grade_error": 0.39705882352941174,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8837209302325582,
+      "auto_specificity": 0.7741935483870968,
+      "weighted_auto_error_per_image": 0.38235294117647056,
+      "selective_grade_error": 0.41911764705882354,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 68,
+      "review_rate": 0.6,
+      "recapture_rate": 0.2,
+      "coverage": 0.2,
+      "missed_referable_auto": 0,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 30,
+      "severe_deferred_to_recapture": 18,
+      "auto_sensitivity": 1.0,
+      "auto_specificity": 0.8103448275862069,
+      "weighted_auto_error_per_image": 0.08235294117647059,
+      "selective_grade_error": 0.27941176470588236,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 80,
+      "review_rate": 0.6,
+      "recapture_rate": 0.16470588235294117,
+      "coverage": 0.23529411764705882,
+      "missed_referable_auto": 2,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 2,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8666666666666667,
+      "auto_specificity": 0.8,
+      "weighted_auto_error_per_image": 0.12352941176470589,
+      "selective_grade_error": 0.3375,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "plain",
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 340,
+      "review_rate": 0.0,
+      "recapture_rate": 0.0,
+      "coverage": 1.0,
+      "missed_referable_auto": 28,
+      "missed_severe_auto": 7,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8055555555555556,
+      "auto_specificity": 0.8061224489795918,
+      "weighted_auto_error_per_image": 1.1676470588235295,
+      "selective_grade_error": 0.4,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "confidence_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8979591836734694,
+      "auto_specificity": 0.7816091954022989,
+      "weighted_auto_error_per_image": 0.4147058823529412,
+      "selective_grade_error": 0.40441176470588236,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "quality_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 77,
+      "review_rate": 0.5029411764705882,
+      "recapture_rate": 0.27058823529411763,
+      "coverage": 0.22647058823529412,
+      "missed_referable_auto": 1,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 39,
+      "severe_deferred_to_recapture": 27,
+      "auto_sensitivity": 0.9629629629629629,
+      "auto_specificity": 0.72,
+      "weighted_auto_error_per_image": 0.15588235294117647,
+      "selective_grade_error": 0.4025974025974026,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "severity_only",
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 12,
+      "missed_severe_auto": 2,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.7,
+      "auto_specificity": 0.7604166666666666,
+      "weighted_auto_error_per_image": 0.3029411764705882,
+      "selective_grade_error": 0.39705882352941174,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "single_budget",
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 136,
+      "review_rate": 0.6,
+      "recapture_rate": 0.0,
+      "coverage": 0.4,
+      "missed_referable_auto": 5,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 0,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8837209302325582,
+      "auto_specificity": 0.7741935483870968,
+      "weighted_auto_error_per_image": 0.38235294117647056,
+      "selective_grade_error": 0.41911764705882354,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "naive",
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 0,
+      "review_rate": 0.6,
+      "recapture_rate": 0.4,
+      "coverage": 0.0,
+      "missed_referable_auto": 0,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 60,
+      "severe_deferred_to_recapture": 40,
+      "auto_sensitivity": null,
+      "auto_specificity": null,
+      "weighted_auto_error_per_image": 0.0,
+      "selective_grade_error": null,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    },
+    {
+      "method": "dual_budget",
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "status": "evaluated",
+      "n": 340,
+      "auto_count": 80,
+      "review_rate": 0.6,
+      "recapture_rate": 0.16470588235294117,
+      "coverage": 0.23529411764705882,
+      "missed_referable_auto": 2,
+      "missed_severe_auto": 0,
+      "referable_deferred_to_recapture": 2,
+      "severe_deferred_to_recapture": 0,
+      "auto_sensitivity": 0.8666666666666667,
+      "auto_specificity": 0.8,
+      "weighted_auto_error_per_image": 0.12352941176470589,
+      "selective_grade_error": 0.3375,
+      "review_budget_violation": false,
+      "recapture_budget_violation": false,
+      "interpretation": "Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis."
+    }
+  ],
+  "defect_heads": {
+    "clarity_class": {
+      "label_mapping": {
+        "source_column": "clarity",
+        "source_codes": [
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "better clarity",
+        "code_to_class": {
+          "1": 0,
+          "4": 1,
+          "6": 2,
+          "8": 3,
+          "10": 4
+        },
+        "class_to_code": {
+          "0": 1,
+          "1": 4,
+          "2": 6,
+          "3": 8,
+          "4": 10
+        },
+        "classes": 5
+      },
+      "n": 340,
+      "accuracy": 0.49411764705882355,
+      "macro_f1": 0.37789140542916755,
+      "confusion_matrix": [
+        [
+          0,
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          28,
+          2,
+          2,
+          0
+        ],
+        [
+          0,
+          24,
+          14,
+          28,
+          1
+        ],
+        [
+          0,
+          14,
+          16,
+          61,
+          15
+        ],
+        [
+          0,
+          5,
+          3,
+          57,
+          65
+        ]
+      ]
+    },
+    "field_definition_class": {
+      "label_mapping": {
+        "source_column": "field_definition",
+        "source_codes": [
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "better field definition",
+        "code_to_class": {
+          "1": 0,
+          "4": 1,
+          "6": 2,
+          "8": 3,
+          "10": 4
+        },
+        "class_to_code": {
+          "0": 1,
+          "1": 4,
+          "2": 6,
+          "3": 8,
+          "4": 10
+        },
+        "classes": 5
+      },
+      "n": 340,
+      "accuracy": 0.4852941176470588,
+      "macro_f1": 0.3355795831588049,
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          7,
+          2,
+          1
+        ],
+        [
+          0,
+          23,
+          31,
+          7,
+          4
+        ],
+        [
+          1,
+          45,
+          21,
+          90,
+          51
+        ],
+        [
+          0,
+          1,
+          0,
+          12,
+          41
+        ]
+      ]
+    },
+    "artifact_class": {
+      "label_mapping": {
+        "source_column": "artifact",
+        "source_codes": [
+          0,
+          1,
+          4,
+          6,
+          8,
+          10
+        ],
+        "higher_class_means": "more extensive artifact; class 0 is no artifact",
+        "code_to_class": {
+          "0": 0,
+          "1": 1,
+          "4": 2,
+          "6": 3,
+          "8": 4,
+          "10": 5
+        },
+        "class_to_code": {
+          "0": 0,
+          "1": 1,
+          "2": 4,
+          "3": 6,
+          "4": 8,
+          "5": 10
+        },
+        "classes": 6
+      },
+      "n": 340,
+      "accuracy": 0.3558823529411765,
+      "macro_f1": 0.2755671133501975,
+      "confusion_matrix": [
+        [
+          61,
+          59,
+          32,
+          2,
+          3,
+          6
+        ],
+        [
+          1,
+          6,
+          5,
+          1,
+          2,
+          0
+        ],
+        [
+          3,
+          15,
+          37,
+          5,
+          4,
+          6
+        ],
+        [
+          1,
+          4,
+          16,
+          2,
+          10,
+          18
+        ],
+        [
+          0,
+          2,
+          1,
+          3,
+          7,
+          19
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          8
+        ]
+      ]
+    }
+  },
+  "paired_policy_comparisons": [
+    {
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "baseline": "plain",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "baseline": "quality_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.2,
+      "recapture_budget": 0.4,
+      "baseline": "naive",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "baseline": "plain",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "baseline": "quality_only",
+      "actual_workloads_matched": true,
+      "proposed_minus_baseline_ci95": {
+        "missed_referable_auto_per_image": {
+          "mean": -0.020588235294117647,
+          "lower": -0.035367647058823524,
+          "upper": -0.008823529411764706
+        },
+        "severe_recapture_per_image": {
+          "mean": -0.052941176470588235,
+          "lower": -0.08529411764705883,
+          "upper": -0.023529411764705882
+        },
+        "weighted_auto_grade_error_per_image": {
+          "mean": -0.052941176470588235,
+          "lower": -0.15,
+          "upper": 0.05
+        },
+        "automated_coverage": {
+          "mean": 0.0,
+          "lower": -0.04411764705882353,
+          "upper": 0.03823529411764706
+        }
+      },
+      "interpretation": "Conditional on original cohort assignments; lower errors/delays favored."
+    },
+    {
+      "review_budget": 0.4,
+      "recapture_budget": 0.2,
+      "baseline": "naive",
+      "actual_workloads_matched": true,
+      "proposed_minus_baseline_ci95": {
+        "missed_referable_auto_per_image": {
+          "mean": 0.0,
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "severe_recapture_per_image": {
+          "mean": -0.052941176470588235,
+          "lower": -0.08529411764705883,
+          "upper": -0.023529411764705882
+        },
+        "weighted_auto_grade_error_per_image": {
+          "mean": 0.0,
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "automated_coverage": {
+          "mean": 0.0,
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      },
+      "interpretation": "Conditional on original cohort assignments; lower errors/delays favored."
+    },
+    {
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "baseline": "plain",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "baseline": "quality_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.4,
+      "recapture_budget": 0.4,
+      "baseline": "naive",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "baseline": "plain",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "baseline": "confidence_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "baseline": "quality_only",
+      "actual_workloads_matched": true,
+      "proposed_minus_baseline_ci95": {
+        "missed_referable_auto_per_image": {
+          "mean": -0.0058823529411764705,
+          "lower": -0.01764705882352941,
+          "upper": 0.0058823529411764705
+        },
+        "severe_recapture_per_image": {
+          "mean": -0.029411764705882353,
+          "lower": -0.052941176470588235,
+          "upper": -0.008823529411764706
+        },
+        "weighted_auto_grade_error_per_image": {
+          "mean": -0.07352941176470588,
+          "lower": -0.17955882352941177,
+          "upper": 0.03823529411764706
+        },
+        "automated_coverage": {
+          "mean": 0.0,
+          "lower": -0.061764705882352944,
+          "upper": 0.061764705882352944
+        }
+      },
+      "interpretation": "Conditional on original cohort assignments; lower errors/delays favored."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "baseline": "severity_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "baseline": "single_budget",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.1,
+      "baseline": "naive",
+      "actual_workloads_matched": true,
+      "proposed_minus_baseline_ci95": {
+        "missed_referable_auto_per_image": {
+          "mean": 0.0,
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "severe_recapture_per_image": {
+          "mean": -0.029411764705882353,
+          "lower": -0.052941176470588235,
+          "upper": -0.008823529411764706
+        },
+        "weighted_auto_grade_error_per_image": {
+          "mean": 0.0,
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "automated_coverage": {
+          "mean": 0.0,
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      },
+      "interpretation": "Conditional on original cohort assignments; lower errors/delays favored."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "baseline": "plain",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "baseline": "confidence_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "baseline": "quality_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "baseline": "severity_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "baseline": "single_budget",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.2,
+      "baseline": "naive",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "baseline": "plain",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "baseline": "confidence_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "baseline": "quality_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "baseline": "severity_only",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "baseline": "single_budget",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    },
+    {
+      "review_budget": 0.6,
+      "recapture_budget": 0.4,
+      "baseline": "naive",
+      "actual_workloads_matched": false,
+      "interpretation": "No matched-workload superiority comparison is made."
+    }
+  ],
+  "limitations": [
+    "Single-site/domain internal evaluation; external transport is unmeasured.",
+    "Recapture and specialist review remain unresolved recommendations.",
+    "No confirmation-based model or policy tuning was performed.",
+    "Bootstrap intervals are exploratory and not corrected for multiple comparisons."
+  ]
+}

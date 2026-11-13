@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "experiment_id": "aptos_development_v1",
+  "audit_status": "passed",
+  "source_commit": "e862700331186e6a754148b33534974d0f716141",
+  "evaluation_sha256": "994a8e78148d6c16d601d61d8774e0d36070b653ebf5549dec093ecbad4924ec",
+  "data_audit_sha256": "40dd0fec5c444a283722050ab871073da53d2f016b04f6d274d472de3df6adf8",
+  "original_archive_sha256_independently_verified": "18036845ab76b68d305d6e2dbbaaaf5cd23926be740e1297a8972ac1c6360976",
+  "auditor_script_sha256": "dec9adfcf3a373b63b048afed3d7badc44f03d1f3ba1c6f78c3ca78255226e43",
+  "verified_data_counts": {
+    "images": 3514,
+    "split_groups": 3399,
+    "original_split_groups": 3450,
+    "conflicting_components": 51,
+    "quarantined_images": 148,
+    "duplicate_components": 108,
+    "duplicate_candidate_pairs": 255,
+    "exact_candidate_pairs": 134,
+    "original_dr_grade_counts": {
+      "0": 1805,
+      "1": 370,
+      "2": 999,
+      "3": 193,
+      "4": 295
+    },
+    "quarantined_dr_grade_counts": {
+      "0": 42,
+      "1": 21,
+      "2": 42,
+      "3": 21,
+      "4": 22
+    },
+    "quarantined_component_size_counts": {
+      "2": 35,
+      "3": 8,
+      "5": 3,
+      "21": 1,
+      "4": 3,
+      "6": 1
+    }
+  },
+  "auditor_package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.0",
+    "torch": "2.14.1+cpu"
+  },
+  "verified_candidates": [
+    {
+      "backbone": "efficientnet_b0",
+      "selected_epoch": 21,
+      "epochs_executed": 36,
+      "optimizer_steps": 2412
+    },
+    {
+      "backbone": "mobilenet_v3_small",
+      "selected_epoch": 5,
+      "epochs_executed": 20,
+      "optimizer_steps": 1340
+    }
+  ],
+  "head_feature_probability_max_abs_delta": 1.898918394749316e-07,
+  "uncertainty_reconstruction": {
+    "comparisons": 14,
+    "individual_raw_and_fallback_sets": 14588,
+    "maximum_threshold_error": 1.1694795132299873e-08,
+    "temperature_optimum_nll_gap": 2.655198283463278e-11,
+    "temperature_independent_optimum": 1.898072349820695
+  },
+  "preserved_deployment_and_master_sha256": {
+    "checkpoints/development_v1/selected/dr.pt": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "checkpoints/development_v1/selected/quality.pt": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "checkpoints/development_v1/selected/calibration.json": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "checkpoints/development_v1/selected/model_card.json": "43830695b8362aabd06df0d5dfa65b01086db9da2db3212001ac98b8b0e4710f",
+    "checkpoints/spec_v1/conformal_r1.json": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221",
+    "MASTER_SPEC.md": "1b6af695af482d43d763e7e5cb74d4fe1002f3778fba8abc55872500a5a8c275"
+  },
+  "checks": [
+    "All 3662 source image bytes rehashed and cached-fingerprint graph independently rebuilt.",
+    "Whole conflicting components, original grades, partitions, representatives and calibration roles reconstructed.",
+    "Development is exactly the non-test full-manifest subset; no audit model/test-image inference.",
+    "Both candidate histories, winning epochs, counts, optimizer steps, saved metrics and artifact hashes verified.",
+    "Saved linear-head/feature probabilities reconstructed; every selected/last backbone tensor matches official pretrained state.",
+    "Independent temperature optimum checked and all grading/reliability outcomes reconstructed.",
+    "All fourteen exact ranks, numerical thresholds, raw/fallback sets, random streams and subgroup metrics reconstructed.",
+    "Source bindings, public aggregate privacy and original deployment/master bytes verified."
+  ],
+  "limitations": [
+    "Fingerprint grouping uses saved pHashes; this audit rehashes images but does not independently decode all PNG fingerprints.",
+    "Classifier reconstruction uses saved frozen features and heads; no independent retinal forward pass or re-training was executed.",
+    "Classifier selection reuses validation outcomes; diagnostics are development evidence, not independent test validation.",
+    "Components are not patients, quarantine is label dependent and group stratification does not establish exchangeability.",
+    "Official archive source is user confirmed; no published official checksum was independently supplied.",
+    "Exact paper reproduction, APTOS quality-aware triage and clinical validity are not established."
+  ],
+  "elapsed_seconds": 53.40083339996636
+}

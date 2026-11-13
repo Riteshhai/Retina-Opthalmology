@@ -1,2 +1,367 @@
-# Retina-Opthalmology
-Major CV Project
+# QSART — Quality- and Severity-Aware Retinal Triage
+
+A local, CPU-compatible **research prototype** with trained DR and image-quality models, temperature calibration, three-action triage, independent cohort budgets, a FastAPI service and a Streamlit client.
+
+**Current specification: [MASTER_SPEC_v1.0](MASTER_SPEC.md), adopted 20–21 October 2026.**
+The current action policy uses `AUTO_NONREFERABLE`, `RECAPTURE` and
+`SPECIALIST_REVIEW`. It reports overload when mandatory deferrals exceed capacity.
+Conventional and paper-inspired ordinal conformal outputs, a development-only
+policy simulator, three-model comparison and experiment explorer are implemented.
+See [alignment](docs/SPEC_ALIGNMENT.md) and [current evidence](docs/SPEC_V1_STATUS.md).
+The conservative ordinal sets currently contain all five grades on selection data;
+they provide no useful automatic clearance. This limitation is retained explicitly.
+
+The [22 October controlled degradation study](docs/research/ROBUSTNESS_V1_RESULTS.md)
+evaluated seven fixed conditions on 168 selection images from 42 patients. Clean
+accuracy was 63.10%, stronger-blur accuracy 34.52% and JPEG20 accuracy 22.02%;
+quality scores did not reliably track compression damage. These are development
+stress diagnostics. The unchanged models remain selected while weaknesses are
+investigated. Reports/plots appear in Research Analytics and Experiment Explorer.
+
+Two further [ordinal diagnostics](docs/research/ORDINAL_STUDY_V1_RESULTS.md) and
+[three-seed training results](docs/research/REPEATED_SEEDS_V1_RESULTS.md) are saved
+locally and exposed through the experiment explorer. Randomized ordinal sets are
+narrower but show variable empirical patient coverage; the production sidecar is
+retained. A cache-dependent RNG issue was fixed before all six new DR/quality
+runs. DR macro-F1 across seeds is 0.5301 ±0.0078 (sample SD); no deployment switch
+or fresh-confirmation claim follows from this development study.
+
+The [independently tuned policy study](docs/research/POLICY_COMPARISON_V1_RESULTS.md)
+uses three patient folds, eight guarded policies and a fixed evaluation cost ledger.
+Of 192 scenarios, 78 fully evaluated and 114 remained incomplete because of overload
+or untunable folds. All 19 comparisons with matching actual workloads produced
+identical actions. Tuning sometimes increased cost; no validated triage benefit or
+deployment change follows. The experiment explorer distinguishes unavailable
+outcomes from measured zero misses.
+
+Direct binary conformal calibration narrowed referability sets on the
+same DeepDRiD development cohort. At the 90% review cap it yielded three
+automatic recommendations, compared with five for projected five-grade
+LAC at alpha .10. Every gate overloaded at the 30% and 60% caps.
+[Referability gate results](docs/research/REFERABILITY_GATE_V1_RESULTS.md).
+
+The patient follow-up found that the saved allocation with five automatic
+photo recommendations yielded one fully automatic patient out of 42.
+All three allocations feasible at the 90% photo review cap
+overloaded when capacity was counted in patients.
+[Patient triage results](docs/research/PATIENT_TRIAGE_V1_RESULTS.md).
+
+At 42 extra flip passes, entropy ranking raised five-grade accuracy from
+106/168 to 109/168. The combined ranking reached 108/168 at the same
+workload. Every profile still recommended review for all 168 development
+photos under the ordinal guard.
+[Matched flip results](docs/research/MATCHED_FLIP_V1_RESULTS.md).
+
+The [MSHF external quality study](docs/research/MSHF_QUALITY_V1_RESULTS.md)
+evaluated the frozen DeepDRiD head on 497 conventional fundus photos. Accuracy
+was 74.85% and poor-quality AUROC was .8973. The fixed threshold missed 20 of
+41 poor DR-ZJU photos and flagged 87 of 118 good DR-XJU photos. The frozen
+temperature slightly reduced pooled Brier score while increasing log loss and
+confidence calibration error. Patient independence and triage utility remain
+unverified.
+
+In Experiment Explorer, select `mshf_quality_v1` to compare the three MSHF
+populations or `referability_gate_v1` to compare both conformal alphas across
+the four recorded capacity pairs. Both studies support aggregate JSON export.
+
+The FDR26 v3 readiness audit decoded 3,000 photos from Morocco and matched
+2,999 to their released ALFEDIAM grades. The primary overlap rules left 2,849
+eligible photos. This release supplies an external grading cohort for a
+locked evaluation. [FDR26 readiness results](docs/research/FDR26_READINESS_V1_RESULTS.md).
+
+On that cohort, the frozen DeepDRiD model matched 27.87% of five-grade
+ALFEDIAM labels. At the fixed grade ≥2 probability threshold, it detected
+834 of 1,700 positive photos. The results measure image-level agreement
+with the released grade codes.
+[FDR26 grading results](docs/research/FDR26_GRADING_V1_RESULTS.md).
+
+The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
+completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
+is .50894 frozen versus .54112 adapted; all three paired primary intervals include
+zero. Raw calibration worsens, clarity/rare-class failures remain, and production
+stays fixed. Independent reconstruction, all522 tests and the17-record native
+explorer pass. An explicit version1.1 metadata correction separates training and
+bootstrap seed labels while preserving the original report and all outcome values.
+
+The [quality calibration/stress study](docs/research/QUALITY_CALIBRATION_STRESS_V1_RESULTS.md)
+completed 24 separate-role head temperatures and seven conditions for all six fixed
+models. Primary clean-selection mean NLL falls from 1.02046 to .87412; class predictions
+stay unchanged, field ECE/Brier worsen, and frozen-model mean NLL rises slightly.
+All 486 intervals and adverse stress responses are retained. Altered inputs have no
+new quality annotations, so score shifts do not establish detection accuracy.
+All 536 tests and the 18-record native explorer pass; production stays fixed.
+
+The [EyeQ source/annotation audit](docs/research/EYEQ_DATA_V1_RESULTS.md) is
+VERIFIED COMPLETE for metadata and access readiness: 28,792 rows, 20,662 filename
+subject keys and all three Good/Usable/Reject categories independently reconstructed.
+Both author splits remain external-only. All 558 tests pass; native and rebuilt
+Docker services expose 19 evidence records and pass actual trained-model checks.
+Original EyePACS photographs, accepted terms, pixel overlap and a locked label/
+evaluation protocol are still required for EyeQ model validation. See the
+[local preparation guide](docs/EYEQ_SETUP.md).
+
+The [fixed APS/RAPS comparison](docs/research/ADAPTIVE_SETS_V1_RESULTS.md) completes
+34 saved-APTOS score comparisons, with all 160 paired intervals independently
+reconstructed. Primary RAPS reduces mean set size from 1.63916 to 1.53935 versus
+APS, while grade-3 inclusion falls from 69.23% to 53.85%. This development tradeoff
+does not support a deployment change. All 593 tests pass; native and rebuilt Docker
+services verify 20 evidence records and all 40 adaptive-set control combinations.
+The full paper training/tuned procedure and independent quality validation remain open.
+
+The [user-selected Hugging Face cache](docs/research/EYEPACS_HF_V1_RESULTS.md) is
+downloaded and checksum-verified locally: 14 files, 6.54 GB and 35,108 images.
+It supplies 12,529 EyeQ author-train matches with no DR-label conflicts, misses
+14 Reject-labelled train images and contains none of EyeQ's 16,249 test images.
+The resumable [download script](scripts/fetch_eyepacs_hf.py) preserves transformed
+source provenance and keeps private payloads out of Git. Original quality truth
+and evaluation readiness remain unverified. All 618 integrated tests pass.
+A separate [fitting-only 224/384 CPU probe](docs/research/APTOS_384_FEASIBILITY_RESULTS.md)
+completed at both sizes; the 384-pixel short run used about 2.74 GB of process-tree
+memory. It produced no candidate model or accuracy result.
+
+The 384-pixel ImageNet-initialized APTOS run completed 13 epochs and selected
+epoch 9 at 83.49% accuracy and 0.697 macro-F1 on the 521 development selection
+images. The earlier 224-pixel configuration reached 80.81% and 0.652. Both
+paired intervals include zero, and grade 3 recall was 8/26. The research
+explorer displays the comparison and the 14 conformal settings. The separate
+audit and 627 local tests passed. [384-pixel results](docs/research/APTOS_384_V1_RESULTS.md).
+
+The matched 224-pixel arm used the 384-pixel recipe and the same seed. Its
+selected checkpoint reached 83.11% accuracy and 0.715 macro-F1. All four paired
+intervals for the selected checkpoints and the equal-update epoch 5 comparison
+include zero. The Docker explorer displays both comparisons and all 14
+conformal settings. [Matched results](docs/research/APTOS_MATCHED_RESOLUTION_V1_RESULTS.md).
+
+The locked seed-2027 repeat found 81.38% versus 82.53% selected accuracy
+and 0.693 versus 0.681 macro-F1 at 224 and 384 pixels. Across both seeds,
+384 pixels raised accuracy but lowered macro-F1 at the selected checkpoints.
+Both metrics rose at equal updates, and all eight paired intervals include
+zero on the reused development cohort.
+[Two-seed results](docs/research/APTOS_RESOLUTION_SEED2027_V1_RESULTS.md).
+
+**Status: PARTIALLY COMPLETE — internal confirmation completed, 20 October 2026.** Development v1 uses 1,184 patient-separated images, frozen ImageNet backbones and dedicated selection/calibration groups. On 340 reserved images from 85 new patients, the selected MobileNet achieved **60.0% DR accuracy, 0.532 macro-F1, 0.726 QWK and 74.1% overall-quality accuracy**. The patient-bootstrap DR accuracy interval is 52.6–67.1%. Defect heads remain weak; external validation and clinical utility are unestablished. It must not be used for patient care. See [current results](docs/research/CONFIRMATION_V1_RESULTS.md), [aggregate evidence](reports/confirmation_v1/evaluation.json) and [acceptance status](docs/ACCEPTANCE_STATUS.md). The failed initial pilot is preserved as historical evidence, with no paired improvement claim across different cohorts.
+
+All local work lives in this QSART directory inside `MAJOR PROJECT CV`. Original Office documents, bibliography files and starter ZIP remain unchanged in its parent directory. Datasets, patient manifests, trained weights and raw per-image artifacts are intentionally local and ignored by Git.
+
+## Start the application
+
+With Docker Desktop running and local model artifacts available:
+
+```powershell
+docker compose up --build -d
+```
+
+- Dashboard: http://localhost:8501
+- API documentation: http://localhost:8000/docs
+- Liveness: http://localhost:8000/health
+- Trained-artifact readiness: http://localhost:8000/ready
+- Stop: `docker compose down`
+
+On this workstation, another application occupies port 8000. The ignored local
+`.env` sets `QSART_API_PORT=18000` and `QSART_DASHBOARD_PORT=18501`. The verified
+running URLs here are http://localhost:18000/docs and http://localhost:18501.
+Compose defaults remain 8000/8501 on a fresh checkout; either port can be
+overridden in `.env`. The local PowerShell launcher also reads these port settings.
+
+The current Docker app runs on those workstation ports. Both services passed
+actual JPEG/batch/TTA/conformal/simulator checks and all 70 runtime source/config
+files match local bytes. Temporary verification containers on 28000/28501 were
+removed after the primary deployment passed. See
+[latest container evidence](reports/eyeq_hf_v1/primary_runtime.json).
+The native launcher `./scripts/start_local.ps1` remains available as an alternative;
+stop the Compose app before using it on the same ports.
+
+The API is alive without checkpoints, but readiness and prediction fail explicitly. There is no generated or random prediction fallback. Compose mounts `./checkpoints` read-only; it never downloads weights at startup. Ports are bound to the local machine. The API and dashboard have independent health checks; liveness does not imply model readiness.
+
+This workstation uses `checkpoints/development_v1/selected/dr.pt`, `quality.pt`, `calibration.json` and `model_card.json`. The ignored local `.env` selects these with `QSART_CONTAINER_DR_CHECKPOINT`, `QSART_CONTAINER_QUALITY_CHECKPOINT`, `QSART_CONTAINER_CALIBRATION` and `QSART_CONTAINER_MODEL_CARD`. Fresh Compose defaults retain the historical pilot paths (`checkpoints/dr/best.pt`, `checkpoints/quality/best.pt`, `checkpoints/calibration.json`). The calibration artifact is bound to checkpoint/manifest checksums; recorded dashboard metrics appear only when the model card matches the loaded weights and calibration. Production loading refuses software-test fixtures.
+
+Current local extensions: `QSART_CONTAINER_CONFORMAL=/checkpoints/spec_v1/conformal_r1.json`
+and `QSART_CONTAINER_SIMULATION_DATA=/checkpoints/spec_v1/development_scores.json`.
+The configured conformal sidecar must match the loaded artifacts; an invalid or
+missing configured file makes readiness fail. It has an independently fitted DR
+temperature and does not alter the historical grading probabilities. Simulator
+scores are private, real selection-data artifacts, not held-out test results.
+
+## Local Python setup
+
+Python 3.11 is the verified version. CPU-only wheels require the PyTorch index:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cpu
+.\.venv\Scripts\python.exe -m pip install -e '.[dev]'
+.\.venv\Scripts\python.exe -m uvicorn api.main:app --host 127.0.0.1 --port 8000 --no-access-log
+# In a second terminal:
+.\.venv\Scripts\python.exe -m streamlit run dashboard/app.py
+```
+
+Alternatively, `./scripts/start_local.ps1` launches both local services. Use either Compose or local processes to avoid port conflicts. `.env.example` lists settings; export them for local Python. The API accepts `QSART_DR_CHECKPOINT`, `QSART_QUALITY_CHECKPOINT`, `QSART_CALIBRATION`, and `QSART_CPU_THREADS`; the dashboard uses `QSART_API_URL` and `QSART_REPORTS_DIR`. Compose supplies container paths explicitly.
+
+Direct dependencies are pinned in requirements.txt; Docker resolves compatible transitive dependencies and its executed environment is captured in the deployment report. The development venv initially inherited existing host libraries, while the container provides an independent clean installation. No paid service is required.
+
+## Continue the adopted specification
+
+The [IDRiD data-readiness audit](docs/research/IDRID_DATA_V1_RESULTS.md) validated
+all 516 local grading images and froze an external-only manifest. It found three
+perceptual APTOS overlap candidates and four internally label-conflicting
+components. All observations and source labels are retained. The user confirmed
+the official IDRiD/IEEE DataPort source in a separate bound receipt; candidate review precedes an
+independent external-cohort claim. The data-audit stage performed no model inference or fitting.
+The explorer displays this as reserved data-readiness evidence. See
+[local setup](docs/IDRID_SETUP.md).
+
+The [source/pixel review](docs/research/IDRID_REVIEW_V1_RESULTS.md) preserves the
+original audit and all source labels. It freezes full 516, conservatively filtered 513
+and representative 505 sensitivity populations. Three byte-identical internal pairs
+carry different DR labels; all three APTOS perceptual matches remain unresolved.
+No external classifier outcome was computed during that review. The API/UI show the user's official-
+source confirmation separately from the historical audit-time origin status.
+
+The [locked external evaluation](docs/research/IDRID_EXTERNAL_V1_RESULTS.md) is now
+complete: four existing classifiers, frozen APTOS temperatures/thresholds and all
+56 uncertainty comparisons. Predeclared primary 2026/main 505 accuracy is 42.97%,
+macro-F1 .41359, with grade-3/4 recall 43.96%/43.33%. At alpha .10, LAC inclusion is
+only 70.69%; deterministic ordinal inclusion 96.04% uses mean size 3.461. These are
+external-domain diagnostics with annotation/independence limitations. IDRiD outcomes
+are now consumed; no outcome-driven tuning or production switch follows.
+
+The [APTOS study](docs/research/APTOS_V1_RESULTS.md) is complete: two genuine CPU
+frozen-feature candidates, independent temperature/conformal roles and all 14
+uncertainty comparisons. EfficientNet-B0 wins the declared selection macro-F1 rule
+with 78.69% accuracy, macro-F1 .60334 and QWK .84400 on 521 selection images.
+Grade-3 recall remains only 23.08%; these are development results, without useful
+triage or fresh-test claims. The selected DeepDRiD application models are retained.
+The [three-seed parameter-fine-tuning follow-up](docs/research/APTOS_FINETUNE_V1_RESULTS.md)
+completed four epochs per seed with fixed BatchNorm statistics. Conditional
+macro-F1 is 0.62411 ± 0.00823 sample SD;
+predeclared primary seed 2026 scores 0.63349, with grade-3 recall
+65.38% and grade-4 recall 47.50%.
+All 42 uncertainty comparisons and paired development intervals are retained.
+This short warm-start pilot does not establish convergence or held-out gains.
+The [primary-seed schedule extension](docs/research/APTOS_OPTIMIZATION_V2_RESULTS.md)
+subsequently stopped after 14/15 epochs and selected epoch 10: accuracy 80.81%,
+macro-F1 .65157. Grade 3 recall falls to 26.92%, while grade 4 rises to 67.50%; all four
+descriptive paired intervals include zero. LAC alpha .10 includes only 46.15% of
+grade 3 images. This single-seed source-development result retains every uncertainty
+replicate and severe-grade failure; reserved-test/IDRiD inference and deployment
+remain unchanged. Exact 384px reproduction and useful validated triage remain open.
+On 4 November the relocated source was verified byte-for-byte; its active local
+root is set through QSART_APTOS_ROOT. [Local setup](docs/APTOS_SETUP.md) preserves
+the frozen manifests, quarantine and reserved test. The historical
+additional EfficientNet-B0 run used DeepDRiD and is explicitly not an APTOS/base-paper reproduction. Its selection
+macro-F1 0.5249 did not beat MobileNet 0.5372, so the selected deployment is retained.
+
+From the existing frozen development data and selected artifacts:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/calibrate_conformal.py --output checkpoints/spec_v1/conformal_r1.json
+.\.venv\Scripts\python.exe scripts/prepare_research_scores.py
+.\.venv\Scripts\python.exe scripts/build_model_comparison.py
+docker compose up --build -d
+.\.venv\Scripts\python.exe scripts/verify_deployment.py --manifest data/processed/deepdrid/development_v1.csv --split validation --require-conformal --api http://127.0.0.1:18000 --dashboard http://127.0.0.1:18501 --output reports/spec_v1/deployment.json
+```
+
+Sidecar/score preparation refuses overwriting existing experiment files. Use the
+existing local artifacts to run the app; a new experiment needs new declared
+outputs. The [alignment protocol](docs/research/SPEC_V1_ALIGNMENT_PROTOCOL.md)
+records partitioning, defaults and interpretation boundaries.
+
+## Reproduce historical development v1
+
+Read the [declared protocol](docs/research/DEVELOPMENT_V1_PROTOCOL.md) and [execution details](docs/TRANSFER_STATUS.md). From the prepared pinned metadata and preserved pilot reservation:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare_development_data.py
+.\.venv\Scripts\python.exe scripts/train_transfer.py --manifest data/processed/deepdrid/development_v1.csv --output checkpoints/development_v1/dr_mobilenet --task dr --allow-download
+.\.venv\Scripts\python.exe scripts/train_transfer.py --manifest data/processed/deepdrid/development_v1.csv --output checkpoints/development_v1/dr_resnet18 --task dr --backbone resnet18 --allow-download
+.\.venv\Scripts\python.exe scripts/train_transfer.py --manifest data/processed/deepdrid/development_v1.csv --output checkpoints/development_v1/quality_mobilenet --task quality --quality-defects --allow-download
+.\.venv\Scripts\python.exe scripts/train_classical_quality.py --manifest data/processed/deepdrid/development_v1.csv
+.\.venv\Scripts\python.exe scripts/prepare_development_data.py --confirmation-only
+.\.venv\Scripts\python.exe scripts/finalize_development.py
+.\.venv\Scripts\python.exe scripts/evaluate_confirmation.py
+.\.venv\Scripts\python.exe scripts/package_confirmation.py
+```
+
+The manifest and selection lock are intentionally frozen and refuse overwriting.
+Do not rerun training against already evaluated experiment paths. A new experiment
+needs its own declared protocol and output directories. Confirmation is now
+consumed evidence; future tuning must be disclosed. Official test data remain
+untouched. Pretrained weight URLs and hashes are recorded separately from code
+licensing; weights and photos are not redistributed by this repository.
+
+## Historical real-image pilot
+
+The official DeepDRiD repository is pinned to commit `56d8af71319803150d0e7b90533e0918c7bf85ee`. Read [data terms](docs/research/DATA_ACCESS_AND_TERMS.md) and [schema](docs/DATA_SCHEMA.md). Images are downloaded locally from the author repository, with attribution and per-file checksums; no private archive or gated access is bypassed.
+
+```powershell
+.\.venv\Scripts\python.exe scripts/prepare_data.py --download-pilot --out data/processed/deepdrid/pilot_manifest.csv
+.\.venv\Scripts\python.exe scripts/validate_data.py data/processed/deepdrid/pilot_manifest.csv --out data/processed/deepdrid/pilot_manifest.verified_audit.json
+.\.venv\Scripts\python.exe scripts/train_dr.py --manifest data/processed/deepdrid/pilot_manifest.csv --output checkpoints/dr --epochs 3 --image-size 96 --batch-size 8
+.\.venv\Scripts\python.exe scripts/train_quality.py --manifest data/processed/deepdrid/pilot_manifest.csv --output checkpoints/quality --epochs 3 --image-size 96 --batch-size 8
+.\.venv\Scripts\python.exe scripts/calibrate.py --dr-checkpoint checkpoints/dr/best.pt --quality-checkpoint checkpoints/quality/best.pt --manifest data/processed/deepdrid/pilot_manifest.csv --output checkpoints/calibration.json
+.\.venv\Scripts\python.exe scripts/evaluate.py --manifest data/processed/deepdrid/pilot_manifest.csv --split holdout --output reports/pilot
+```
+
+Pilot: 260 images / 65 patients, 138.9 MiB downloaded; train 160 / 40 patients, checkpoint-selection validation 20 / 5, calibration 20 / 5, held-out pilot 60 / 15. Sampling was predefined by maximum patient grade, so it cannot estimate screening prevalence. Official validation supplies the pilot holdout; official training supplies the other three disjoint partitions. Eleven ambiguous source annotation rows are quarantined rather than silently corrected. The pilot excludes their subjects.
+
+The initial manifest is frozen and hash-recorded. Shared cropping and normalization are used during training and inference. Quality 0 means not good enough, 1 means good enough. Detailed ordinal defect annotations are preserved; the initial trained quality model uses the binary overall label. They are not equivalent to the scalar model probability.
+
+The training CLI supports optional explicitly requested pretrained weights, resume, class balancing, early stopping, validation selection and CPU/CUDA configuration. This run used no pretrained download. Training a production-quality model needs a substantially larger, independently evaluated experiment. Keep all consumed pilot evaluation data separate from a future confirmatory test.
+
+## Research policy and evaluation
+
+Current `AUTO_NONREFERABLE` is a provisional non-referable clearance. Predicted
+referable/high-risk cases mandate review; quality, uncertainty and conformal
+ambiguity restrict automatic eligibility. `RECAPTURE` and `SPECIALIST_REVIEW`
+remain unresolved recommendations, not completed care. Research thresholds are
+not validated clinical safety cutoffs. [Current policy mathematics](docs/TRIAGE_V2_METHOD.md)
+documents the guards, baseline distinctions and costs.
+
+Historical `AUTO_SCREEN` could return any provisional five-grade result, including
+positive grades. The preserved `qsart/triage.py` and old reports retain that
+meaning. Their triage numbers are not current non-referable policy results.
+
+Batch routing solves an assignment problem with separate `floor(N * budget)` review and recapture capacities. Low-quality or guarded high-risk images cannot receive AUTO_NONREFERABLE. If required deferrals exceed capacity, the service reports overload (HTTP 422 with structured diagnostics); it never silently relaxes budgets. Single-image routing has no population workload guarantee. [Current policy mathematics](docs/TRIAGE_V2_METHOD.md) describe the research proxy costs and eligibility rules.
+
+Seven baseline/proposed policies, budget grids, quality-by-severity error analysis, calibration comparisons and ablations produce actual aggregate pilot artifacts. Same budget ceilings do not guarantee matched realized workloads or demonstrate superiority. Primary metrics distinguish automated errors and severe cases deferred to recapture. Empty metric denominators are null. Patient-group bootstrap intervals acknowledge correlated views.
+
+Conditional inference uses horizontal-flip logit averaging and dedicated TTA calibration; the per-request second-pass cap is rounded down. The validation benchmark compares single pass, all-image second pass, uncertainty triggers, severity triggers and budgeted selection. It measures CPU timings rather than claiming a speed advantage. Re-run with:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/benchmark_cpu.py --dr-checkpoint checkpoints/dr/best.pt --quality-checkpoint checkpoints/quality/best.pt --calibration checkpoints/calibration.json --manifest data/processed/deepdrid/pilot_manifest.csv --split validation --output artifacts/pilot_cpu_benchmark.json --batch-size 8 --repeats 3
+```
+
+The inference loop forwards one image at a time; benchmark batch size means request cohort chunk size. RSS is sampled, not a continuous peak. See the report for CPU, thread count, resolution and timing variability. Development v1 additionally compares two backbones, trains mapped natural-defect heads, includes a classical quality comparator and reports exploratory matched-workload patient-cluster intervals. Robustness studies, independently tuned comparator experiments and external-domain testing remain research work.
+
+## API and interface
+
+Endpoints: `GET /health`, `/ready`, `/model/info`, `/triage/config`, `/research/experiments`, `/research/metrics`, `/docs`; `POST /predict` (multipart `file`); `POST /predict/batch` (multipart `files`, query `review_budget`, `recapture_budget`, `second_pass_budget`); `POST /triage/simulate` (typed development exploration). PNG/JPEG only; maximum 12 MiB per image, 24 million pixels, minimum side 32 pixels, maximum batch 64. Correct shape/format does not establish that a photograph is a retina or in distribution.
+
+The dashboard displays actual current-session results, image preprocessing, probabilities, quality, entropy, actions, CPU timings, model information and saved experiment artifacts. It supports multi-image upload, action/grade filters and CSV/JSON export. Uploads are temporary and closed after processing; the application does not retain source images. Large multipart uploads may use temporary spooled files. Access logs are disabled in provided server commands, and application errors omit image contents and original filenames.
+
+## Verification
+
+```powershell
+.\.venv\Scripts\python.exe -m ruff check .
+.\.venv\Scripts\python.exe -m pytest -q
+$env:QSART_REAL_MANIFEST='data/processed/deepdrid/pilot_manifest.csv'
+.\.venv\Scripts\python.exe -m pytest tests/test_real_integration.py -q
+docker compose config --quiet
+```
+
+Ordinary tests use explicitly labeled software fixtures and do not require the Internet. Real-image integration is opt-in and never substitutes synthetic images. See PROGRESS.md and reports for actual executed results. Tests do not imply clinical validation.
+
+## Repository map and preserved assets
+
+- `qsart/data`, `preprocessing`: acquisition adapters, manifests, integrity and preprocessing.
+- `qsart/models`, `training`, `calibration`, `inference`: genuine PyTorch pipeline and artifact validation.
+- `qsart/triage.py`, `evaluation.py`: budget allocator and held-out reporting.
+- `api`, `dashboard`: service and client.
+- `scripts`, `configs`, `tests`, `.github/workflows`: reproducible commands and verification.
+- `reports/development_v1`, `reports/confirmation_v1`: current aggregate measured results, model card and figures; `reports/pilot` preserves the original round.
+- `docs/research`: 43-record literature audit, bibliography, protocol, Review-1 briefing and manuscript draft.
+- `PROJECT_AUDIT.md`, `TASKS.md`, `PROGRESS.md`: status and evidence.
+
+The original starter `app.py`, `qsart/policy.py`, `qsart/cli.py` remain a separate **synthetic-score policy bench**. Its `routine` means auto-clearance, unlike the new provisional AUTO_SCREEN action. Its legacy tuning constrains calibration workloads, not future cohorts. Do not use its built-in mock CSVs as clinical results. See docs/LEGACY_STARTER_README.md.
+
+No broad novelty or clinical benefit is claimed. Close prior work already covers quality-aware grading, ordinal uncertainty and screening integration. The manuscript includes internal confirmation but remains a research draft; independent external and prospective results are incomplete. GitHub is used for source history and review, while local images, manifests, training logs and checkpoints remain outside version control.

@@ -1,0 +1,24 @@
+{
+  "status": "verified",
+  "scope": "actual HTTP against running deployment",
+  "image_source": "authorized DeepDRiD manifest holdout; input not retained by this script",
+  "manifest_sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7",
+  "model_card_status": "matched",
+  "get_statuses": {
+    "/health": 200,
+    "/ready": 200,
+    "/model/info": 200,
+    "/docs": 200
+  },
+  "predict_status": 200,
+  "batch_status": 200,
+  "unsupported_status": 415,
+  "dashboard_health_status": 200,
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "device": "cpu",
+  "second_pass_single": true,
+  "batch_review_rate": 0.5,
+  "batch_recapture_rate": 0.5,
+  "batch_second_pass_rate": 0.5,
+  "note": "Health/readiness and schema execution do not establish model usefulness or clinical validity."
+}

@@ -1,0 +1,12 @@
+{
+  "ready_http": 200,
+  "predict_http": 200,
+  "real_image_source": "authorized DeepDRiD pilot holdout",
+  "model_version": "dr-mobilenet_v3_small-seed42-epoch1",
+  "grade": 3,
+  "action": "SPECIALIST_REVIEW",
+  "second_pass": true,
+  "dashboard_pages_rendered": 5,
+  "export_widgets_rendered": 2,
+  "note": "HTTP real-image upload then actual response rendered in Streamlit AppTest; native browser upload/download clicks not automated."
+}

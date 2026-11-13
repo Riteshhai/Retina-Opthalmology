@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "experiment_id": "idrid_data_v1",
+  "dataset": "IDRiD",
+  "scope": "external_data_integrity_and_overlap_readiness_only",
+  "source_url": "https://idrid.grand-challenge.org/Data/",
+  "license": "CC BY 4.0",
+  "license_file_sha256": {
+    "LICENSE.txt": "ebc63a59874a44419ac860fa5cceb5c6428b74e09b5712620f08d68f0f335a88",
+    "CC-BY-4.0.txt": "dce09367809a1ebae8d90ceb60fa6618360e13d2cd9d304dfb595719e2f02f58"
+  },
+  "images": 516,
+  "images_decoded": 516,
+  "official_partitions": {
+    "official_test": {
+      "images": 103,
+      "annotation_sha256": "ced1cb8f66e126e98edde38a9b10843e6e8c3a76795b17dd57ca5abbff8ff602",
+      "dr_grade_counts": {
+        "0": 34,
+        "1": 5,
+        "2": 32,
+        "3": 19,
+        "4": 13
+      },
+      "dme_risk_counts": {
+        "0": 45,
+        "1": 10,
+        "2": 48
+      }
+    },
+    "official_train": {
+      "images": 413,
+      "annotation_sha256": "789fb5a5aca296f6e01db9eb930cc41a063c681c284dbf3675628afc2a2d4ffe",
+      "dr_grade_counts": {
+        "0": 134,
+        "1": 20,
+        "2": 136,
+        "3": 74,
+        "4": 49
+      },
+      "dme_risk_counts": {
+        "0": 177,
+        "1": 41,
+        "2": 195
+      }
+    }
+  },
+  "dimensions": [
+    {
+      "width": 4288,
+      "height": 2848,
+      "images": 516
+    }
+  ],
+  "fingerprint_method": "central_green_dct_phash_v1",
+  "near_duplicate_distance": 2,
+  "internal_components": 508,
+  "internal_duplicate_components": 7,
+  "internal_candidate_pairs": 8,
+  "internal_exact_pairs": 6,
+  "internal_label_conflict_components": 4,
+  "cross_source_candidate_pairs": 3,
+  "cross_source_exact_pairs": 0,
+  "cross_source_candidate_images": 3,
+  "reference_datasets": {
+    "APTOS_2019": {
+      "rows": 3662,
+      "unique_identities": 3662,
+      "candidate_pairs": 3,
+      "exact_pairs": 0
+    },
+    "DeepDRiD_regular_fundus": {
+      "rows": 1524,
+      "unique_identities": 1524,
+      "candidate_pairs": 0,
+      "exact_pairs": 0
+    }
+  },
+  "independence_claim_blocked_by_detected_overlap": true,
+  "observations_excluded": 0,
+  "dr_labels_modified": false,
+  "dme_used_as_quality": false,
+  "model_inference_performed": false,
+  "model_fitting_performed": false,
+  "calibration_performed": false,
+  "external_model_evaluation_completed": false,
+  "patient_identity_available": false,
+  "quality_labels_available": false,
+  "patient_grouping_limitation": "Serial image names provide no authoritative patient or eye identities. Fingerprint components are not patients; unknown related views and undetected overlap remain possible.",
+  "limitations": [
+    "Serial image names provide no authoritative patient or eye identities. Fingerprint components are not patients; unknown related views and undetected overlap remain possible.",
+    "pHash matches are review candidates; no candidate is automatically excluded or relabeled.",
+    "Reference fingerprints were previously verified; reference images are not freshly reinspected here.",
+    "Label distributions are inspected for data auditing, not for model or threshold selection.",
+    "Included license/layout do not authenticate download origin or establish absence of every related view.",
+    "The complete release differs from the base-paper 455-image reported cohort."
+  ],
+  "source_commit": "d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8",
+  "execution_source_sha256": {
+    "qsart/data/idrid.py": "1be85cc7dcd40c55063ee8935c37ef17959c642852bdbce5b5295884319f6ffd",
+    "qsart/data/aptos.py": "b5d6b1f981c4d0e3f24d1465dc2ac82ea3ddbf3567472f19b5094b19b515e9fd",
+    "qsart/data/manifests.py": "0ae85ee90b6b81b0fb4281b91b503d85c73e5665de5acb5b12a1371fcd98a6ec",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+    "scripts/prepare_idrid.py": "9f56591ac15d7b284a3e2610963dce178255c08e341708fa2f2cadb94437fe99",
+    "configs/idrid_data_v1.json": "11461a9a8a10b8554f3cf35a518a3650085714ac2ca439daecec22e96e16b027",
+    "docs/research/IDRID_DATA_V1_PROTOCOL.md": "745e0854a46999286b7bb7881f65b3ecb3c842344ae77db45d98d9d1a2335c7e"
+  },
+  "audited_at_utc": "2026-11-04T13:10:26.176883+00:00",
+  "reference_manifest_bindings": [
+    {
+      "path": "data/manifests/aptos_v1/dataset_manifest.csv",
+      "dataset": "APTOS_2019",
+      "rows": 3514,
+      "sha256": "1d79240d22237d1934328899d3d6624cd41f6294a15d158a3f62eacf5e7684ed"
+    },
+    {
+      "path": "data/manifests/aptos_v1/quarantine_report.csv",
+      "dataset": "APTOS_2019",
+      "rows": 148,
+      "sha256": "4ae497251d8923f31d4e18fe1a3b8e650a8a1a8b57a59587a1486f48d7c2ef39"
+    },
+    {
+      "path": "data/processed/deepdrid/development_v1.csv",
+      "dataset": "DeepDRiD_regular_fundus",
+      "rows": 1184,
+      "sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d"
+    },
+    {
+      "path": "data/processed/deepdrid/confirmation_v1.csv",
+      "dataset": "DeepDRiD_regular_fundus",
+      "rows": 340,
+      "sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7"
+    }
+  ],
+  "source_provenance_status": "local_package_download_origin_unconfirmed",
+  "source_confirmation_note": "User source statement is separate from byte authentication against an official archive.",
+  "image_content_sha256": "5b834fbaebeab02a828e79c3a61606fe6be15e15722ac0431ca6a0e6aa2eafe0",
+  "private_output_sha256": {
+    "external_manifest.csv": "9f185bf5083b68e3bdeddacb5aa127e83e9a6011ed6a0fd8990ea2bb39b17553",
+    "internal_candidates.csv": "01bddaa0bb42d09df6d1586148dcb4feee24a779b72a82bae2b2e8598fa28ac5",
+    "cross_source_candidates.csv": "f47f9b0b28bd4203570359b1d0aed2cffb201be8ee55452bff560644c572d1f5"
+  }
+}
