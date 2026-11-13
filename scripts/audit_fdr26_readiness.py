@@ -13,7 +13,7 @@ from zipfile import ZipFile
 
 import numpy as np
 from openpyxl import load_workbook
-from PIL import Image, ImageOps
+from PIL import Image, ImageChops, ImageOps
 from scipy.fft import dctn
 
 
@@ -126,10 +126,12 @@ def read_labels(path):
 
 def independent_phash(image):
     rgb = ImageOps.exif_transpose(image).convert('RGB')
-    lit = np.any(np.asarray(rgb) > 10, axis=2)
-    if lit.sum() >= 0.01 * lit.size:
-        y, x = np.nonzero(lit)
-        rgb = rgb.crop((int(x.min()), int(y.min()), int(x.max()) + 1, int(y.max()) + 1))
+    red, green, blue = rgb.split()
+    channel_max = ImageChops.lighter(ImageChops.lighter(red, green), blue)
+    foreground = channel_max.point([0] * 11 + [255] * 245)
+    lit_pixels = foreground.histogram()[255]
+    if lit_pixels >= 0.01 * (rgb.width * rgb.height):
+        rgb = rgb.crop(foreground.getbbox())
     left, top = rgb.width // 8, rgb.height // 8
     right, bottom = rgb.width * 7 // 8, rgb.height * 7 // 8
     center = rgb.crop((left, top, right, bottom)).getchannel('G')

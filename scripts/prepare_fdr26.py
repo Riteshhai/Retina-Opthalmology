@@ -13,11 +13,12 @@ from zipfile import ZipFile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd
-from PIL import Image
+import numpy as np
+from PIL import Image, ImageOps
 
 from qsart.data.aptos import fingerprint_components
 from qsart.data.idrid import cross_dataset_candidates
-from qsart.data.manifests import retinal_phash
+from qsart.data.manifests import _DCT_BASIS
 from scripts.prepare_idrid import load_references
 
 
@@ -110,6 +111,23 @@ def read_labels(path, *, prefix_profile=None):
         book.close()
 
 
+def fingerprint(photo):
+    # Same central-green pHash as the reference manifests. Use a channelwise
+    # mask and project onto each axis to avoid allocating every lit coordinate.
+    rgb = ImageOps.exif_transpose(photo).convert('RGB')
+    pixels = np.asarray(rgb)
+    lit = (pixels[:, :, 0] > 10) | (pixels[:, :, 1] > 10) | (pixels[:, :, 2] > 10)
+    if lit.mean() >= .01:
+        x = np.flatnonzero(lit.any(axis=0))
+        y = np.flatnonzero(lit.any(axis=1))
+        rgb = rgb.crop((int(x[0]), int(y[0]), int(x[-1]) + 1, int(y[-1]) + 1))
+    green = rgb.crop((rgb.width // 8, rgb.height // 8, rgb.width * 7 // 8, rgb.height * 7 // 8))
+    sample = np.asarray(green.getchannel('G').resize((32, 32), Image.Resampling.BICUBIC), dtype=float)
+    frequencies = (_DCT_BASIS @ sample @ _DCT_BASIS.T)[:8, :8].ravel()[1:]
+    bits = ''.join('1' if bit else '0' for bit in frequencies > np.median(frequencies))
+    return f'{int(bits, 2):016x}'
+
+
 def inspect_archive(path, labels, *, expected_unmatched=0):
     rows = []
     with ZipFile(path) as archive:
@@ -134,7 +152,7 @@ def inspect_archive(path, labels, *, expected_unmatched=0):
                 photo.load()
                 rows.append({'image_id': identity, 'member': info.filename, 'dr_grade': labels.get(identity),
                              'format': photo.format, 'width': photo.width, 'height': photo.height,
-                             'sha256': hashlib.sha256(data).hexdigest(), 'phash': retinal_phash(photo)})
+                             'sha256': hashlib.sha256(data).hexdigest(), 'phash': fingerprint(photo)})
     return rows
 
 
