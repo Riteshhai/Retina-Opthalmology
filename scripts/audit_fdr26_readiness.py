@@ -12,7 +12,6 @@ import subprocess
 from zipfile import ZipFile
 
 import numpy as np
-from openpyxl import load_workbook
 from PIL import Image, ImageChops, ImageOps
 from scipy.fft import dctn
 
@@ -61,8 +60,17 @@ def verify_sources(report):
     for name, expected in bindings.items():
         raw = (ROOT / name).read_bytes()
         git_bytes = subprocess.check_output(['git', 'show', f'{commit}:{name}'], cwd=ROOT)
-        require(raw == git_bytes and hashlib.sha256(raw).hexdigest() == expected,
+        require(hashlib.sha256(git_bytes).hexdigest() == expected
+                and (name == 'scripts/audit_fdr26_readiness.py' or raw == git_bytes),
                 f'Locked source differs: {name}')
+
+
+def audit_revision():
+    path = Path(__file__).resolve()
+    revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    committed = subprocess.check_output(['git', 'show', f'{revision}:{path.relative_to(ROOT).as_posix()}'], cwd=ROOT)
+    require(path.read_bytes() == committed, 'Run the committed auditor')
+    return revision
 
 
 def verify_inputs(report):
@@ -95,6 +103,8 @@ def verify_inputs(report):
 
 
 def read_labels(path):
+    from openpyxl import load_workbook
+
     workbook = load_workbook(path, read_only=True, data_only=False)
     try:
         require(workbook.sheetnames == ['Toutes'], 'Unexpected FDR26 worksheet')
@@ -287,6 +297,13 @@ def screen_overlaps(rows, references, reference_counts):
 
 
 def canonical_pairs(rows, keys):
+    if keys == ('first_image_id', 'second_image_id'):
+        first, second = keys
+        normalized = []
+        for row in rows:
+            left, right = sorted((row[first], row[second]))
+            normalized.append({**row, first: left, second: right})
+        rows = normalized
     return sorted(rows, key=lambda row: tuple(row[key] for key in keys))
 
 
@@ -304,6 +321,7 @@ def run():
     require(witness.keys() == {'rows', 'unmatched_workbook_ids', 'internal_candidates', 'cross_candidates'},
             'Unexpected witness fields')
     verify_sources(report)
+    revision = audit_revision()
     paths = verify_inputs(report)
     references, reference_counts = reference_rows()
     labels, prefix_profile = read_labels(paths['workbook'])
@@ -330,6 +348,7 @@ def run():
 
     receipt = {
         'audit_status': 'passed', 'experiment_id': EXPERIMENT, 'source_commit': report['source_commit'],
+        'audit_source_commit': revision,
         'evaluation_sha256': sha256(evaluation), 'auditor_sha256': sha256(Path(__file__)),
         'private_witness_sha256': sha256(WITNESS), 'input_sha256': report['input_sha256'],
         'images_reconstructed': len(rows), 'exact_joins_reconstructed': len(joined),

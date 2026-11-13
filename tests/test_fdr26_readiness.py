@@ -7,7 +7,17 @@ import pandas as pd
 from PIL import Image
 import pytest
 
+from scripts.audit_fdr26_readiness import canonical_pairs
+
 from scripts.prepare_fdr26 import inspect_archive, prefix_sensitivity, screen_overlap
+
+
+def test_internal_pair_order_does_not_change_identity_or_attributes():
+    keys = ('first_image_id', 'second_image_id')
+    pair = {'first_image_id': 'FIXTURE001', 'second_image_id': 'FIXTURE001(2)',
+            'byte_exact': True, 'phash_distance': 0, 'label_conflict': False}
+    reversed_pair = {**pair, keys[0]: pair[keys[1]], keys[1]: pair[keys[0]]}
+    assert canonical_pairs([pair], keys) == canonical_pairs([reversed_pair], keys)
 
 
 def image_payload(image_format):
