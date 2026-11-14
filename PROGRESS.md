@@ -1,5 +1,28 @@
 # Execution log
 
+## 2026-11-14 — audited DeepDRiD Set-C readiness
+
+- Fetched the pinned author Git tree with `git fetch --depth=1 --filter=blob:none
+  --no-tags` and kept it local. Locked the readiness protocol, runner and
+  independent auditor at `56b41e3` before running the full fingerprint screen.
+  The source workbooks joined to all 400 photos, and the two views agreed on
+  the released grade for all 200 eyes. This is a same-release held-out split.
+- Ran `python -u scripts/prepare_deepdrid_online.py` with `--root`, `--source-git`
+  and `--source-commit 56b41e39641be2e08a9d24b4717c34f5343fa2b8`. The scan
+  bound both workbooks, the challenge instructions, license, all 400 Set-C
+  photos and all 1,600 Set-A/B reference photos to the authors’ Git tree.
+  The development, confirmation and pilot manifests agreed with the official
+  photo bytes. No model scoring or tuning ran on Set-C.
+- Ran `python -u scripts/audit_deepdrid_online.py` with the same `--root` and
+  `--source-git`. It reconstructed two within-eye candidate pairs and one
+  cross-split candidate against Set-B. Excluding the full Set-C patient for
+  the cross-split candidate left 396 photos from 99 eligible patients.
+- Ran `python -m pytest -q tests/test_deepdrid_online.py tests/test_deepdrid.py
+  tests/test_fdr26_readiness.py` (22 passed). The full `python -m pytest -q` run
+  with genuine DeepDRiD integration passed all 665 tests in 159.55 seconds with
+  one upstream AnyIO deprecation warning. Ruff and Compose configuration
+  checks passed. [Set-C readiness results](docs/research/DEEPDRID_ONLINE_READINESS_V1_RESULTS.md).
+
 ## 2026-11-14 — added FDR26 to Experiment Explorer
 
 - Registered readiness, frozen DeepDRiD grading and the paired APTOS follow-up

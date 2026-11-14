@@ -86,6 +86,12 @@ show all four recorded populations, raw and temperature-scaled metrics, and
 grade ≥2 sensitivity at the frozen threshold. Each study supports aggregate
 JSON export.
 
+The DeepDRiD Set-C readiness audit verifies the online challenge as a separate
+split of the same release, including both annotation workbooks, four-view
+patient grouping, and overlap screening against the complete regular training
+and validation sets. Set-C remains reserved for a locked patient-level
+evaluation. [Set-C readiness results](docs/research/DEEPDRID_ONLINE_READINESS_V1_RESULTS.md).
+
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
 is .50894 frozen versus .54112 adapted; all three paired primary intervals include

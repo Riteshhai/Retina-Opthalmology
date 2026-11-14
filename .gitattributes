@@ -46,3 +46,4 @@ reports/matched_flip_v1/** -text whitespace=cr-at-eol
 reports/fdr26_readiness_v1/** -text whitespace=cr-at-eol
 reports/fdr26_grading_v1/** -text whitespace=cr-at-eol
 reports/fdr26_aptos_v1/** -text whitespace=cr-at-eol
+reports/deepdrid_online_readiness_v1/** -text whitespace=cr-at-eol

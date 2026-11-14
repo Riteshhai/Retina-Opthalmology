@@ -1,0 +1,40 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "deepdrid_online_readiness_v1",
+  "source_release": {
+    "commit": "56d8af71319803150d0e7b90533e0918c7bf85ee",
+    "tree": "8340aa4fa31819be0e6da05bb842804f40284bdf",
+    "license": "CC-BY-SA-4.0"
+  },
+  "source_commit": "56b41e39641be2e08a9d24b4717c34f5343fa2b8",
+  "evaluation_sha256": "57e77bef5d18fd154d6b0b2db80c2a6753d9a6b463037bb6b48f652c5f031d9d",
+  "auditor_sha256": "ccefb0171914931c043846764da1da2229bb505962322a4204edbfae3606dec6",
+  "private_witness_sha256": "b2d176eaf8277806c16274648cc26dc52f5bf7021de1878ebbec6f3fa4d031b8",
+  "author_photo_blobs_verified": 2000,
+  "author_metadata_blobs_verified": 4,
+  "population": {
+    "images": 400,
+    "patients": 100,
+    "eyes": 200,
+    "eligible_images": 396,
+    "eligible_patients": 99,
+    "excluded_patients": 1
+  },
+  "prior_manifest_coverage": {
+    "development_v1": {
+      "images": 1184,
+      "sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d"
+    },
+    "confirmation_v1": {
+      "images": 340,
+      "sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7"
+    },
+    "pilot_manifest": {
+      "images": 260,
+      "sha256": "e7e349903964f3c64935092b205647a2153b79c6ae18e4d0a4179cf54af285f0"
+    }
+  },
+  "internal_candidate_pairs_reconstructed": 2,
+  "reference_candidate_pairs_reconstructed": 1,
+  "model_inference_performed": false
+}

@@ -6,6 +6,11 @@
   qsart/research-prototype branch/draft PR. Exact v1 source is preserved locally.
 - **Current milestone:** specification alignment and integrated real-image
   execution VERIFIED COMPLETE; overall scientific project IN PROGRESS.
+- **DeepDRiD Set-C readiness:** both released doctor workbooks joined to all
+  400 photos from 100 patients. Screening against all 1,600 official Set-A/B
+  photos flagged one perceptual overlap candidate and excluded one complete
+  patient. The remaining 396 photos from 99 patients are reserved for locked
+  evaluation. [Set-C readiness results](research/DEEPDRID_ONLINE_READINESS_V1_RESULTS.md).
 - **FDR26 external data readiness:** 3,000 original images decoded and 2,999
   joined to ALFEDIAM grades. Primary overlap exclusions leave 2,849 eligible
   photos, or 2,761 when extended through unconfirmed filename groups.

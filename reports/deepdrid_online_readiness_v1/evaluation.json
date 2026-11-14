@@ -1,0 +1,114 @@
+{
+  "experiment_id": "deepdrid_online_readiness_v1",
+  "dataset": "DeepDRiD",
+  "partition": "online_challenge_unscored",
+  "scope": "same_release_held_out_patient_data_readiness",
+  "source_commit": "56b41e39641be2e08a9d24b4717c34f5343fa2b8",
+  "source_sha256": {
+    "docs/research/DEEPDRID_ONLINE_READINESS_V1_PROTOCOL.md": "9ff538f800c17e65f329537007f52b6ca0662b12991171b2229a3587ec1f501e",
+    "scripts/prepare_deepdrid_online.py": "a21e702daf71ec697137b40c917c6a33d68a2231335a0ba76dffeab1eb474ea6",
+    "scripts/audit_deepdrid_online.py": "ccefb0171914931c043846764da1da2229bb505962322a4204edbfae3606dec6",
+    "qsart/data/manifests.py": "0ae85ee90b6b81b0fb4281b91b503d85c73e5665de5acb5b12a1371fcd98a6ec",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8"
+  },
+  "source_release": {
+    "commit": "56d8af71319803150d0e7b90533e0918c7bf85ee",
+    "tree": "8340aa4fa31819be0e6da05bb842804f40284bdf",
+    "license": "CC-BY-SA-4.0"
+  },
+  "metadata_sha256": {
+    "LICENSE": "87a816969906840bf7af8d4d01cdfad4741b18946365e1f286007935509f2edb",
+    "regular_fundus_images/Online-Challenge1&2-Evaluation/Readme.docx": "ed5e3036ebec97e8b7f60d19fec47bf981e0b4d418202cc9b414ef649146827c",
+    "regular_fundus_images/Online-Challenge1&2-Evaluation/Challenge1_labels.xlsx": "baa39963bc037e3448cd6eb8ee3f645ac0b65114300c4472f1460e9f7ff0a36d",
+    "regular_fundus_images/Online-Challenge1&2-Evaluation/Challenge2_labels.xlsx": "9a76b7ea16747b7a1413a66a443072a70de20a13ee063b3533c58bdf79d98f8b"
+  },
+  "prior_manifest_coverage": {
+    "development_v1": {
+      "images": 1184,
+      "sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d"
+    },
+    "confirmation_v1": {
+      "images": 340,
+      "sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7"
+    },
+    "pilot_manifest": {
+      "images": 260,
+      "sha256": "e7e349903964f3c64935092b205647a2153b79c6ae18e4d0a4179cf54af285f0"
+    }
+  },
+  "population": {
+    "images": 400,
+    "patients": 100,
+    "eyes": 200,
+    "eligible_images": 396,
+    "eligible_patients": 99,
+    "excluded_patients": 1
+  },
+  "labels": {
+    "overall_quality_counts": {
+      "0": 220,
+      "1": 180
+    },
+    "artifact_counts": {
+      "0": 192,
+      "1": 14,
+      "10": 14,
+      "4": 71,
+      "6": 56,
+      "8": 53
+    },
+    "clarity_counts": {
+      "1": 15,
+      "10": 130,
+      "4": 36,
+      "6": 94,
+      "8": 125
+    },
+    "field_definition_counts": {
+      "1": 4,
+      "10": 64,
+      "4": 11,
+      "6": 62,
+      "8": 259
+    },
+    "image_grade_counts": {
+      "0": 200,
+      "1": 36,
+      "2": 72,
+      "3": 72,
+      "4": 20
+    },
+    "eye_grade_counts": {
+      "0": 100,
+      "1": 18,
+      "2": 36,
+      "3": 36,
+      "4": 10
+    },
+    "patient_grade_counts": {
+      "0": 43,
+      "1": 9,
+      "2": 20,
+      "3": 18,
+      "4": 10
+    }
+  },
+  "overlap": {
+    "reference_images": {
+      "training": 1200,
+      "validation": 400
+    },
+    "shared_source_patient_keys": 0,
+    "internal_pairs": 2,
+    "reference_pairs": 1,
+    "reference_patients": 1,
+    "internal_exact_pairs": 0,
+    "internal_cross_patient_pairs": 0,
+    "internal_same_patient_same_eye_pairs": 2,
+    "internal_same_patient_opposite_eye_pairs": 0,
+    "internal_same_patient_opposite_eye_exact_pairs": 0,
+    "reference_exact_pairs": 0
+  },
+  "model_inference_performed": false,
+  "witness_sha256": "b2d176eaf8277806c16274648cc26dc52f5bf7021de1878ebbec6f3fa4d031b8"
+}
