@@ -26,9 +26,11 @@
   143 correct referability flags. All eight profiles recommended full review
   under the ordinal guard. Both CPU replay paths reproduced the stored scores
   on eight images. [Matched flip results](research/MATCHED_FLIP_V1_RESULTS.md).
-- **Experiment Explorer:** the Docker app exposes 25 records. Live API and
-  Streamlit checks matched all three MSHF populations and all 24 DeepDRiD
-  referability capacity scenarios to their audited reports.
+- **Experiment Explorer:** the Docker app exposes 28 records, including FDR26
+  readiness, frozen DeepDRiD grading and the paired APTOS comparison. All
+  four FDR26 populations, raw and scaled metrics, and paired counts are
+  available in the Explorer. Prior live checks matched all three MSHF
+  populations and all 24 DeepDRiD referability capacity scenarios.
 - **Current external quality diagnostic:** the frozen DeepDRiD head scored
   497 MSHF v2 photographs after three overlap-candidate exclusions. It reached
   74.85% accuracy and .8973 poor-quality AUROC. At the fixed threshold,

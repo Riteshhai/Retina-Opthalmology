@@ -49,6 +49,7 @@ docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
 - [x] P1 Verify and independently audit the official FDR26 v3 grading cohort, including exact label joins and overlap sensitivity.
 - [x] P1 Lock, execute and independently audit frozen FDR26 grading across four populations. Preserve low grade agreement and sensitivity against the released ALFEDIAM codes.
 - [x] P1 Compare the frozen APTOS and DeepDRiD pipelines on the reused FDR26 cohort. Audit all four populations, both probability paths and the paired correctness counts.
+- [x] P1 Publish the three audited FDR26 reports in Experiment Explorer with all eligibility populations, both probability paths, and paired grade agreement counts.
 - [x] P1 Audit all 516 discovered IDRiD grading images; freeze external-only manifest/candidates, independently reconstruct fingerprints and verify the data-readiness explorer.
 - [x] P1 Record user-confirmed official IDRiD/IEEE DataPort origin in a bound append-only receipt; preserve the audit-time provenance status.
 - [x] P1 Review all 11 IDRiD candidate pairs, independently verify pixel evidence and freeze full 516/filtered 513/representative 505 sensitivity populations without altering labels.

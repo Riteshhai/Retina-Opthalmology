@@ -20,6 +20,29 @@ DIAGNOSTIC_METRICS = {
     'referability_gate_v1': ('images', 'patients', 'calibration', 'policy', 'budget_pairs',
                              'fits', 'default_ordinal_sets_replayed', 'input_sha256',
                              'source_commit', 'protocol_sha256'),
+    'fdr26_readiness_v1': ('inventory', 'overlap', 'grade_standard', 'patient_linkage_available',
+                           'model_inference_performed', 'source_commit'),
+    'fdr26_grading_v1': ('model', 'reference_grade_standard', 'binary_reference_minimum_grade',
+                         'binary_probability_threshold', 'patient_linkage_available', 'populations', 'source_commit'),
+    'fdr26_aptos_v1': ('model', 'source_replay', 'populations', 'source_commit'),
+}
+
+FDR26_NOTES = {
+    'fdr26_readiness_v1': [
+        'This readiness audit describes the FDR26 release, ALFEDIAM label joins and overlap screening before model inference.',
+        'Filename-prefix groups are inferred. Patient linkage remains unverified.',
+    ],
+    'fdr26_grading_v1': [
+        'The frozen DeepDRiD model was compared with the released ALFEDIAM grade codes at photo level.',
+        'The grade ≥2 score is an image-level proxy. The release supplies no clinical referral endpoint.',
+        'Filename-prefix groups are inferred. Patient linkage remains unverified.',
+    ],
+    'fdr26_aptos_v1': [
+        'This exploratory comparison reuses FDR26 photos and the previously inspected DeepDRiD scores.',
+        'Agreement and the grade ≥2 proxy use the released ALFEDIAM codes. The pipelines differ in training, '
+        'architecture and preprocessing.',
+        'Filename-prefix groups are inferred. Patient linkage remains unverified.',
+    ],
 }
 
 
@@ -77,7 +100,13 @@ def experiment_registry(root):
         ('referability_gate_v1/evaluation.json', 'referability_gate_v1', 'validation',
          'development_referability_gate_diagnostic'),
         ('mshf_quality_v1/evaluation.json', 'mshf_quality_v1', 'external',
-         'external_overall_quality_diagnostic')]
+         'external_overall_quality_diagnostic'),
+        ('fdr26_readiness_v1/evaluation.json', 'fdr26_readiness_v1', 'external_candidate_unscored',
+         'external_grading_data_readiness'),
+        ('fdr26_grading_v1/evaluation.json', 'fdr26_grading_v1', 'external',
+         'external_alfediam_grade_code_diagnostic'),
+        ('fdr26_aptos_v1/evaluation.json', 'fdr26_aptos_v1', 'external',
+         'exploratory_paired_frozen_grading_on_reused_fdr26')]
     for relative, name, partition, scope in sources:
         if any(record.experiment_id == name for record in records):
             continue
@@ -119,10 +148,13 @@ def experiment_registry(root):
         if name == 'idrid_data_v1':
             metrics.update(idrid_source_confirmation(path))
         model_info = raw.get('model' if name == 'mshf_quality_v1' else 'model_info', {})
+        model_version = model_info.get('model_version', raw.get('model_version'))
+        if name in FDR26_NOTES:
+            model_version = raw.get('model', {}).get('version')
+        notes = raw.get('limitations', FDR26_NOTES.get(name, [
+            'Historical AUTO_SCREEN triage is not the current AUTO_NONREFERABLE policy.']))
         records.append(ExperimentSummary(experiment_id=name, dataset=raw.get('dataset', 'DeepDRiD'), partition=partition,
-            scope=scope, model_version=model_info.get('model_version', raw.get('model_version')),
-            metrics=metrics, notes=raw.get('limitations', [
-                'Historical AUTO_SCREEN triage is not the current AUTO_NONREFERABLE policy.'])))
+            scope=scope, model_version=model_version, metrics=metrics, notes=notes))
     return records
 
 

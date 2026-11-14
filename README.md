@@ -80,6 +80,12 @@ matched 734 grades and DeepDRiD matched 794. APTOS had higher grade ≥2 AUROC
 (0.823 vs 0.703) and lower sensitivity at the fixed 0.50 threshold
 (40.12% vs 49.06%). [Paired FDR26 results](docs/research/FDR26_APTOS_V1_RESULTS.md).
 
+In Experiment Explorer, choose the **FDR26** dataset to inspect the readiness
+audit, frozen DeepDRiD grading, and paired APTOS comparison. The grading views
+show all four recorded populations, raw and temperature-scaled metrics, and
+grade ≥2 sensitivity at the frozen threshold. Each study supports aggregate
+JSON export.
+
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
 is .50894 frozen versus .54112 adapted; all three paired primary intervals include

@@ -1,5 +1,29 @@
 # Execution log
 
+## 2026-11-14 — added FDR26 to Experiment Explorer
+
+- Registered readiness, frozen DeepDRiD grading and the paired APTOS follow-up
+  in `/research/experiments` and `/research/metrics`. The Explorer shows the
+  label joins and eligibility counts, all four scored populations, both
+  probability paths, and the paired correctness counts. Each study exports
+  the same aggregate fields served by the API.
+- `python -m pytest -q tests/test_fdr26_explorer.py` passed all three tests.
+  The first full suite caught a missing ALFEDIAM label in the readiness
+  note. After the correction, `python -m pytest -q` with genuine DeepDRiD
+  integration passed all 655 tests in 164.20 seconds with one upstream AnyIO
+  deprecation warning. `python -m ruff check .` and
+  `docker compose config --quiet` passed.
+- Rebuilt an isolated Compose project with `docker compose up --build -d --wait`.
+  Both services were healthy, ran as the nonroot `qsart` user, and had read-only
+  filesystems. The app sources in the image matched the checkout by SHA256. Ran
+  `python scripts/verify_deployment.py --runtime docker --split validation --require-conformal`
+  with the authorized DeepDRiD manifest and service URLs. Trained prediction,
+  batch, simulator, overload and dashboard health checks passed.
+- Streamlit AppTest against the live Docker API found 28 unique experiment
+  records and matched all 24 metric rows and 16 paired correctness counts
+  across eight scored population views. It checked the four readiness counts
+  and the three mounted report digests against their independent audit receipts.
+
 ## 2026-11-14 — published the paired frozen FDR26 comparison
 
 - Locked the protocol at `00e5b38`. Ran

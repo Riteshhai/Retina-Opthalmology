@@ -513,6 +513,116 @@ def show_idrid_external(metrics):
             'conditional_seed_summary': summary.get('grading_across_finetuning_seeds', {}).get(population)})
 
 
+FDR26_POPULATIONS = {
+    'primary': 'Primary exclusions',
+    'representative': 'One photo per fingerprint component',
+    'prefix': 'Exclusions extended through filename prefixes',
+    'prefix_representative': 'Extended exclusions, one photo per fingerprint component',
+}
+
+
+def show_fdr26_readiness(metrics):
+    inventory, overlap = metrics.get('inventory'), metrics.get('overlap')
+    if not inventory or not overlap:
+        st.info('FDR26 data readiness results are unavailable.')
+        return
+
+    st.subheader('FDR26 grading data readiness')
+    left, middle, right = st.columns(3)
+    left.metric('Archive photos', inventory['archive_images'])
+    middle.metric('Exact image joins', inventory['joined_images'])
+    right.metric('Excluded photos', overlap['excluded_images'])
+    st.caption(f"{inventory['unmatched_archive_images']} archive photo and "
+               f"{inventory['unmatched_workbook_rows']} workbook row lack an exact match. "
+               'The audit recorded the archive and workbook before model scoring.')
+    st.dataframe(pd.DataFrame([{
+        'ALFEDIAM grade': grade,
+        'Workbook rows': inventory['grade_counts'][str(grade)],
+        'Exact image joins': inventory['joined_grade_counts'][str(grade)],
+    } for grade in range(5)]), width='stretch', hide_index=True)
+    counts = (overlap['eligible_images'], overlap['representatives'],
+              overlap['prefix_sensitivity_eligible_images'], overlap['prefix_sensitivity_representatives'])
+    st.dataframe(pd.DataFrame([{'Population': label, 'Photos': count}
+                              for label, count in zip(FDR26_POPULATIONS.values(), counts, strict=True)]),
+                 width='stretch', hide_index=True)
+    st.caption(f"The fingerprint screen recorded {overlap['internal_pairs']} internal candidate pairs, "
+               f"{overlap['conflicting_components']} components with conflicting grades and "
+               f"{overlap['cross_pairs']} pairs against {overlap['reference_rows']:,} reference rows.")
+    st.caption('Patient linkage is unavailable. The filename prefixes provide a sensitivity check for '
+               'possible grouping. Fingerprint components group candidate repeats.')
+    with st.expander('Inventory and overlap details'):
+        st.json({'inventory': inventory, 'overlap': overlap, 'source_commit': metrics.get('source_commit')})
+
+
+def fdr26_model_rows(models):
+    rows = []
+    for model, paths in models:
+        for path, label in (('raw', 'Raw'), ('calibrated', 'Temperature-scaled')):
+            result = paths[path]
+            binary = result['binary']
+            rows.append({
+                'Model': model, 'Probability path': label, 'Grade accuracy': result['accuracy'],
+                'Macro-F1': result['macro_f1'], 'Quadratic kappa': result['quadratic_kappa'],
+                'Two-grade undercalls': result['undergrade_by_two_or_more'],
+                'Grade ≥2 AUROC': binary['auroc'], 'Grade ≥2 average precision': binary['average_precision'],
+                'Grade ≥2 sensitivity': binary['sensitivity'], 'Grade ≥2 specificity': binary['specificity'],
+                'NLL': result['nll'], 'Brier': result['brier'], 'ECE': result['ece'],
+            })
+    return rows
+
+
+def show_fdr26_grading(metrics, *, paired):
+    populations = metrics.get('populations', {})
+    choices = [key for key in FDR26_POPULATIONS if key in populations]
+    if not choices:
+        st.info('FDR26 grading results are unavailable.')
+        return
+
+    if paired:
+        st.subheader('Paired APTOS and DeepDRiD grading on FDR26')
+        st.caption('The paired comparison reused the FDR26 cohort after the DeepDRiD grading study. '
+                   'Each frozen pipeline used its own preprocessing and source temperature.')
+    else:
+        st.subheader('Frozen DeepDRiD grading on FDR26')
+        model = metrics['model']
+        st.caption(f"Checkpoint: {model['version']}. "
+                   f"Input size {model['image_size']} pixels and source temperature {model['temperature']:.6f}.")
+
+    population = st.selectbox('FDR26 population', choices, format_func=FDR26_POPULATIONS.__getitem__)
+    view = populations[population]
+    models = [('APTOS', view['aptos']), ('DeepDRiD', view['deepdrid'])] if paired else [('DeepDRiD', view)]
+    st.caption(f"{view['images']:,} photos in this population. ALFEDIAM and ICDR have different lesion criteria. "
+               'Patient linkage is unavailable.')
+    st.dataframe(pd.DataFrame([{'ALFEDIAM grade': grade, 'Photos': view['grade_counts'][str(grade)]}
+                               for grade in range(5)]), width='stretch', hide_index=True)
+    rows = fdr26_model_rows(models)
+    percentages = ('Grade accuracy', 'Grade ≥2 sensitivity', 'Grade ≥2 specificity')
+    scores = ('Macro-F1', 'Quadratic kappa', 'Grade ≥2 AUROC', 'Grade ≥2 average precision', 'NLL', 'Brier', 'ECE')
+    st.dataframe(pd.DataFrame(rows), width='stretch', hide_index=True, column_config={
+        **{key: st.column_config.NumberColumn(format='percent') for key in percentages},
+        **{key: st.column_config.NumberColumn(format='%.4f') for key in scores},
+    })
+    threshold = metrics.get('binary_probability_threshold', .50)
+    st.caption(f"The grade ≥2 flag uses the sum of probabilities for grades 2–4 at a fixed {threshold:.2f} "
+               'threshold. Two-grade undercalls count predictions at least two codes below the ALFEDIAM reference. '
+               'NLL is negative log likelihood. ECE is expected calibration error.')
+    if paired:
+        counts = view['paired']
+        st.dataframe(pd.DataFrame([{
+            'Both correct': counts['both_correct'], 'APTOS only correct': counts['aptos_only'],
+            'DeepDRiD only correct': counts['deepdrid_only'], 'Neither correct': counts['neither'],
+        }]), width='stretch', hide_index=True)
+        st.caption('Paired correctness counts use exact five-grade agreement for the same photos.')
+    with st.expander('Per-grade recall and confusion matrices'):
+        st.json({
+            model: {path: {'recall_by_grade': paths[path]['recall_by_grade'],
+                           'grade_confusion': paths[path]['confusion'],
+                           'binary_confusion': paths[path]['binary']['confusion']}
+                    for path in ('raw', 'calibrated')}
+            for model, paths in models
+        })
+
+
 def submit(files, params=None, batch=False):
     endpoint = '/predict/batch' if batch else '/predict'
     key = 'files' if batch else 'file'
@@ -857,6 +967,10 @@ elif page == 'Experiment Explorer':
                     show_idrid_data_readiness(detail.get('metrics', {}))
                 elif chosen == 'idrid_external_v1':
                     show_idrid_external(detail.get('metrics', {}))
+                elif chosen == 'fdr26_readiness_v1':
+                    show_fdr26_readiness(detail.get('metrics', {}))
+                elif chosen in {'fdr26_grading_v1', 'fdr26_aptos_v1'}:
+                    show_fdr26_grading(detail.get('metrics', {}), paired=chosen == 'fdr26_aptos_v1')
                 else:
                     st.json(detail.get('metrics', {}))
                 for note in detail.get('notes', []):
