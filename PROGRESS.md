@@ -1,5 +1,21 @@
 # Execution log
 
+## 2026-11-14 — published the paired frozen FDR26 comparison
+
+- Locked the protocol at `00e5b38`. Ran
+  `python -u scripts/evaluate_fdr26_aptos.py --source-commit 799f70874b0fab00284f1dcb31d9e4fe474d7a12`.
+  The ten source development replays passed before APTOS scored 2,849 FDR26
+  photos. The saved DeepDRiD probabilities supplied the paired comparator.
+  In the primary population, 407 photos matched both predictions, 327 matched
+  APTOS alone, 387 matched DeepDRiD alone and 1,728 matched neither.
+- Ran `python -u scripts/audit_fdr26_aptos.py`. It rebuilt four populations,
+  verified 2,849 scores per model and all 16 paired correctness counts,
+  and matched the first ten APTOS logits exactly in an independent replay.
+- `python -m pytest -q` passed all 652 tests in 118.77 seconds with genuine
+  DeepDRiD integration and one upstream AnyIO warning. Ruff and
+  `docker compose config --quiet` passed.
+  [Paired FDR26 results](docs/research/FDR26_APTOS_V1_RESULTS.md).
+
 ## 2026-11-13 — evaluated frozen grading on FDR26 v3
 
 - Locked the protocol at `89d68e6`. Ran

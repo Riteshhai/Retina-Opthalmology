@@ -1,4 +1,4 @@
-# QSART Development Status — updated 13 November 2026
+# QSART Development Status — updated 14 November 2026
 
 - **Current specification:** MASTER_SPEC_v1.0, exact root/versioned copies retained.
 - **Verified pre-adoption commit:** cedf182846845a782bb6e30336d9c8f99b2e31fb;
@@ -15,6 +15,11 @@
   834/1,700 grade ≥2 photos. All four populations and both probability paths
   were reconstructed independently, with exact logits on ten replays.
   [FDR26 grading results](research/FDR26_GRADING_V1_RESULTS.md).
+- **FDR26 paired follow-up:** the frozen APTOS pipeline matched 734/2,849
+  grades and DeepDRiD matched 794/2,849. APTOS had higher grade ≥2 AUROC
+  (0.823 vs 0.703) and lower fixed-threshold sensitivity (40.12% vs 49.06%).
+  The audit verified both models across all four populations and replayed
+  ten APTOS logits exactly. [Paired FDR26 results](research/FDR26_APTOS_V1_RESULTS.md).
 - **Matched flip diagnostic:** at 42 extra passes, entropy ranking raised
   the number of correct grades from 106/168 to 109/168. The combined controller
   reached 108/168. At 84 extra passes, entropy matched the all-flip count of

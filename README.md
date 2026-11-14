@@ -75,6 +75,11 @@ ALFEDIAM labels. At the fixed grade ≥2 probability threshold, it detected
 with the released grade codes.
 [FDR26 grading results](docs/research/FDR26_GRADING_V1_RESULTS.md).
 
+In a paired follow-up on the same 2,849 photos, the frozen APTOS pipeline
+matched 734 grades and DeepDRiD matched 794. APTOS had higher grade ≥2 AUROC
+(0.823 vs 0.703) and lower sensitivity at the fixed 0.50 threshold
+(40.12% vs 49.06%). [Paired FDR26 results](docs/research/FDR26_APTOS_V1_RESULTS.md).
+
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
 is .50894 frozen versus .54112 adapted; all three paired primary intervals include
