@@ -48,8 +48,8 @@ flowchart LR
 | Area | Available | Milestone gap |
 | --- | --- | --- |
 | Dataset management | Verified APTOS 2019, DeepDRiD and IDRiD source manifests and historical audits. The locked DeepDRiD Set-C study evaluated 99 eligible four-view patients. | Preserve every held-out boundary. EyeQ source-photo coverage remains incomplete. |
-| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Study paired acquisition with first-view information and patient-disjoint splits. |
-| Triage and research | Three-action engine, persistent human review, workload limits, and audited stress, external and Set-C studies. The deployed Set-C gate needed full review capacity. | Establish useful automatic triage and evaluate adaptive paired-view acquisition. |
+| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Verify the full release and document validated operating limits. |
+| Triage and research | Three-action engine, persistent human review, workload limits, and audited stress, external, Set-C and paired-view studies. The deployed Set-C gate needed full review capacity. | Establish useful automatic triage and test paired-view acquisition on an independent cohort. |
 | Dependencies | Windows Python 3.11, Node 24 and Docker Desktop in the development environment. | Install the pinned frontend and optional portal dependencies for the new stack. |
 
 The [dataset catalog and import guide](QSART_X_DATASETS.md) track the dataset

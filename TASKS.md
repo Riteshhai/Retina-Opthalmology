@@ -10,7 +10,7 @@ The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) governs the new platform.
 - [x] 3. Verify trained single-image inference and the missing-model state in the local React workspace.
 - [x] 4. Verify authentication, role enforcement, persistent case review, overrides and private reports in the local workspace.
 - [x] 5. Execute and audit locked Set-C patient validation, publish all matched-budget scenarios and link preserved stress and external results.
-- [ ] 6. Implement and evaluate adaptive acquisition using paired views and first-view-only routing features.
+- [x] 6. Fit and independently audit first-view acquisition rankings on paired DeepDRiD fields and publish the six-budget simulator.
 - [ ] 7. Verify the release and prepare manuscript materials from audited outcomes.
 
 ## Specification-v1 priorities — current on 14 November 2026

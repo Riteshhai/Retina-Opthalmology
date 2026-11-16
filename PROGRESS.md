@@ -1,5 +1,30 @@
 # Execution log
 
+## 2026-11-16 — evaluated paired-view acquisition at exact workloads
+
+- Pushed the [protocol](docs/research/PAIRED_VIEW_V1_PROTOCOL.md) and source at
+  `6017d0c` before scoring. Ran `python -u scripts/run_paired_view_v1.py` with
+  `--source-commit` at that revision. Frozen first-pass inference scored 1,016
+  original DeepDRiD photos, forming 424 fitting eyes and 84 selection eyes
+  from 212 and 42 separate patients. The acquisition rankings use first-view
+  features. Set-A calibration, Set-B and Set-C supplied no study outcomes.
+- Ran `python scripts/audit_paired_view_v1.py` and
+  `python scripts/plot_paired_view_v1.py`. The audit reconstructed the ridge
+  fit, 26 policy scenarios, and 16 exact-workload comparisons from the private
+  witness. At eight extra views the value ranking reduced missed referable
+  eyes from 8 to 6. All matched cost intervals included zero. The positive-value
+  cutoff used four views without correcting a missed referral.
+  [Paired-view results](docs/research/PAIRED_VIEW_V1_RESULTS.md).
+- Added the six-budget simulator to Experiment Explorer. The nine pre-score
+  tests, 30 registry and research API checks, and the live-report Explorer test
+  passed. The full `python -m pytest -q` run with genuine DeepDRiD integration
+  passed 708 tests in 155.89 seconds with one upstream AnyIO warning. Ruff and
+  both Compose configurations passed.
+- Rebuilt with `docker compose up --build -d --wait`. The live API returned all
+  26 audited scenario records and 16 comparisons. Docker AppTest checked all
+  six displayed budget values. Trained DeepDRiD validation passed the existing
+  single-image, batch, simulator and overload checks.
+
 ## 2026-11-16 — audited the locked DeepDRiD Set-C patient study
 
 - Pushed the [protocol](docs/research/SET_C_VALIDATION_V1_PROTOCOL.md) and

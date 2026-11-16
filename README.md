@@ -163,6 +163,12 @@ workload. Every profile still recommended review for all 168 development
 photos under the ordinal guard.
 [Matched flip results](docs/research/MATCHED_FLIP_V1_RESULTS.md).
 
+The paired-view study evaluated acquisition of a second recorded field on 84
+eyes from 42 selection patients. The value ranking reduced missed referrals
+from eight to six at eight extra views. All 16 matched-cost intervals included
+zero. Experiment Explorer shows the six audited budgets and reports the number
+of slots used. [Paired-view acquisition results](docs/research/PAIRED_VIEW_V1_RESULTS.md).
+
 The [MSHF external quality study](docs/research/MSHF_QUALITY_V1_RESULTS.md)
 evaluated the frozen DeepDRiD head on 497 conventional fundus photos. Accuracy
 was 74.85% and poor-quality AUROC was .8973. The fixed threshold missed 20 of

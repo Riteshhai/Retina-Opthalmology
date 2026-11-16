@@ -6,6 +6,89 @@ import streamlit as st
 from qsart.triage_v2 import capacity
 
 
+PAIRED_VIEW_METHODS = {
+    'first_view': 'First view only',
+    'both_views': 'Both recorded views',
+    'voi': 'Predicted value',
+    'voi_positive': 'Positive value only',
+    'quality': 'Poor quality',
+    'entropy': 'Predictive entropy',
+    'referable_risk': 'Referable risk',
+    'random': 'Seeded random',
+}
+PAIRED_VIEW_ENDPOINTS = {
+    'ledger_per_eye': 'Research cost per eye',
+    'referable_misses_per_eye': 'Referable misses per eye',
+    'severe_misses_per_eye': 'Severe missed referrals per eye',
+    'grade_accuracy': 'Eye grade accuracy',
+}
+
+
+def show_paired_view(metrics):
+    scenarios, budgets = metrics.get('scenarios'), metrics.get('budgets')
+    if not scenarios or not budgets:
+        st.info('Audited paired-view results are unavailable.')
+        return
+
+    st.subheader('Paired-view acquisition budget simulator')
+    st.caption('Acquisition uses initial-view information. The additional view is the other recorded field of the '
+               'same eye. This retrospective study reuses development selection patients. Capture chronology '
+               'and retake outcomes are unobserved.')
+    left, middle, right = st.columns(3)
+    left.metric('Value model fitting patients', metrics['fit_population']['patients'])
+    middle.metric('Evaluation patients', metrics['selection_population']['patients'])
+    right.metric('Evaluation eye pairs', metrics['selection_population']['eyes'])
+
+    budget = st.select_slider('Extra-view budget', options=budgets, value=.25 if .25 in budgets else budgets[0],
+                              format_func=lambda fraction: f'{fraction:.0%}')
+    rows = []
+    for scenario in scenarios:
+        if scenario['budget'] != budget:
+            continue
+        outcomes = scenario['outcomes']
+        rows.append({
+            'Acquisition policy': PAIRED_VIEW_METHODS[scenario['method']],
+            'Available slots': scenario['slots'],
+            'Extra views used': outcomes['extra_views'],
+            'Review proxy count': outcomes['review_proxy_count'],
+            'Referable eye misses': outcomes['referable_misses'],
+            'Severe eye misses': outcomes['severe_misses'],
+            'Referable patient misses': outcomes['patient_referable_misses'],
+            'Severe patient misses': outcomes['patient_severe_misses'],
+            'Eye grade accuracy': outcomes['grade_accuracy'],
+            'Research cost per eye': outcomes['ledger_per_eye'],
+            'Cost difference vs first view': outcomes['delta_vs_first']['ledger_per_eye'],
+        })
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width='stretch', column_config={
+        'Eye grade accuracy': st.column_config.NumberColumn(format='percent'),
+        'Research cost per eye': st.column_config.NumberColumn(format='%.4f'),
+        'Cost difference vs first view': st.column_config.NumberColumn(format='%.4f'),
+    })
+    st.caption('The review proxy counts eye predictions of grade 2 or higher. The simulation imposes no specialist '
+               'capacity. Severe misses count grade 3 or 4 eyes predicted below grade 2. Patient outcomes use the '
+               'worse eye. The research cost charges .20 per extra view and .25 per review proxy in addition to '
+               'severity-weighted missed referrals.')
+
+    comparisons = [pair for pair in metrics['comparisons'] if pair['budget'] == budget]
+    if comparisons:
+        st.subheader('Matched acquisition workload')
+        endpoint = st.selectbox('Outcome', list(PAIRED_VIEW_ENDPOINTS), format_func=PAIRED_VIEW_ENDPOINTS.__getitem__)
+        pairs = []
+        for pair in comparisons:
+            interval = pair['intervals'][endpoint]
+            pairs.append({'Comparator': PAIRED_VIEW_METHODS[pair['reference'].split(':', 1)[0]],
+                          'Extra views per policy': pair['extra_views'],
+                          'Predicted value minus comparator': interval['difference_candidate_minus_reference'],
+                          '95% lower': interval['ci95'][0], '95% upper': interval['ci95'][1]})
+        st.dataframe(pd.DataFrame(pairs), hide_index=True, width='stretch')
+        st.caption('Paired intervals resample whole patients while keeping acquisition assignments fixed.')
+    else:
+        st.caption('Choose an interior budget to compare policies using the same number of extra views.')
+
+    with st.expander('Model and provenance'):
+        st.json({key: metrics[key] for key in ('model', 'fit_population', 'selection_population', 'source_commit')})
+
+
 SET_C_MODES = {'ordinal': 'Deployed ordinal', 'lac': 'LAC diagnostic', 'no_cp': 'No-conformal diagnostic'}
 SET_C_ACTIONS = {'AUTO_NONREFERABLE': 'Fully automatic', 'RECAPTURE': 'Recapture',
                  'SPECIALIST_REVIEW': 'Specialist review'}

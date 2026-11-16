@@ -3,6 +3,7 @@ from dataclasses import asdict
 import json
 import os
 from pathlib import Path
+import re
 
 from fastapi import APIRouter, HTTPException
 import numpy as np
@@ -14,6 +15,19 @@ from api.schemas import (DatasetCatalog, ExperimentList, ExperimentMetrics, Expe
 from qsart.data.idrid_provenance import idrid_source_confirmation
 from qsart.triage_v2 import (Action, BudgetOverloaded, METHODS, PolicyConfig,
                              allocate_rows, screening_metrics)
+
+
+PAIRED_VIEW_ID = 'paired_view_v1'
+PAIRED_VIEW_EVALUATION = f'{PAIRED_VIEW_ID}/evaluation.json'
+PAIRED_VIEW_AUDIT = f'{PAIRED_VIEW_ID}/independent_audit.json'
+PAIRED_VIEW_DEVELOPMENT = 'development_v1/data_summary.json'
+PAIRED_VIEW_METRICS = ('fit_population', 'selection_population', 'model', 'budgets', 'scenarios',
+                       'comparisons', 'source_commit')
+PAIRED_VIEW_PRIVATE_FIELDS = ('fit_rows', 'selection_rows', 'routes', 'selected', 'acquisition_mask', 'mask',
+                              'subject_id', 'patient_id', 'patient', 'image_id', 'image_path', 'first_id',
+                              'second_id', 'first_sha256', 'second_sha256', 'private_witness_sha256',
+                              'first', 'second', 'first_quality', 'probabilities')
+PAIRED_VIEW_INPUTS = {'manifest', 'dataset_report', 'dr', 'quality', 'calibration', 'model_card', 'selection_lock'}
 
 
 DIAGNOSTIC_METRICS = {
@@ -48,6 +62,58 @@ FDR26_NOTES = {
 }
 
 
+def paired_view_record(root):
+    """Return the aggregate entry only when its independent audit and source match."""
+    reports = Reports(root)
+    try:
+        study = reports.read(PAIRED_VIEW_EVALUATION)
+        receipt = reports.read(PAIRED_VIEW_AUDIT)
+        development = reports.read(PAIRED_VIEW_DEVELOPMENT)['development_v1']
+        provenance = study['input_provenance']
+        digests = provenance['input_sha256']
+        source_commit = study['source_commit']
+        model_version = provenance['model_version']
+        metrics = {key: study[key] for key in PAIRED_VIEW_METRICS}
+        serialized = json.dumps(metrics, allow_nan=False)
+        if (
+            study['experiment_id'] != PAIRED_VIEW_ID or receipt['experiment_id'] != PAIRED_VIEW_ID
+            or study['partition'] != 'validation' or study['model_inference_performed'] is not True
+            or receipt['audit_status'] != 'passed' or receipt['evaluation_sha256'] != reports.evidence[PAIRED_VIEW_EVALUATION]
+            or receipt['source_commit'] != source_commit or re.fullmatch(r'[0-9a-f]{40}', source_commit) is None
+            or receipt['private_witness_sha256'] != study['private_witness_sha256']
+            or re.fullmatch(r'[0-9a-f]{64}', study['private_witness_sha256']) is None
+            or not isinstance(digests, dict) or receipt['input_sha256'] != digests or set(digests) != PAIRED_VIEW_INPUTS
+            or any(re.fullmatch(r'[0-9a-f]{64}', checksum) is None for checksum in digests.values())
+            or digests['dataset_report'] != reports.evidence[PAIRED_VIEW_DEVELOPMENT]
+            or digests['manifest'] != development['manifest_sha256']
+            or receipt['routing_reconstructed_from_first_view'] is not True
+            or not isinstance(study['scenarios'], list) or not study['scenarios']
+            or not isinstance(study['comparisons'], list) or not study['comparisons']
+            or len(study['scenarios']) != receipt['scenarios_verified']
+            or len(study['comparisons']) != receipt['comparisons_verified']
+            or not isinstance(model_version, str) or not model_version
+            or any(f'"{field}":' in serialized for field in PAIRED_VIEW_PRIVATE_FIELDS)
+        ):
+            return None
+        for role, split, count in (('fit', 'train', 212), ('selection', 'validation', 42)):
+            expected = {'split': split, 'patients': count, 'eyes': count * 2, 'photos': count * 4}
+            source_partition = development['partitions'][split]
+            if (metrics[f'{role}_population'] != expected or receipt[f'{role}_patients'] != count
+                    or (source_partition['subjects'], source_partition['images']) != (count, count * 4)):
+                return None
+    except (KeyError, OSError, TypeError, ValueError):
+        return None
+    return ExperimentSummary(
+        experiment_id=PAIRED_VIEW_ID, dataset='DeepDRiD', partition='validation',
+        scope='development_retrospective_paired_view_acquisition', model_version=model_version,
+        metrics={**metrics, 'evaluation_sha256': reports.evidence[PAIRED_VIEW_EVALUATION],
+                 'independent_audit_sha256': reports.evidence[PAIRED_VIEW_AUDIT]},
+        notes=['The acquisition policies use only first-view scores to choose which recorded second views to reveal.',
+               'Selection patients are separate from acquisition-policy fitting and were used for classifier selection.',
+               'Workload counts describe retrospective extra views and research proxy outcomes.'],
+    )
+
+
 def experiment_registry(root):
     root = Path(root)
     records = []
@@ -55,7 +121,7 @@ def experiment_registry(root):
     if comparison_path.is_file():
         comparison = json.loads(comparison_path.read_text(encoding='utf-8'))
         records.extend(ExperimentSummary(**row) for row in comparison['experiments']
-                       if row['experiment_id'] != SET_C_VALIDATION_ID)
+                       if row['experiment_id'] not in {SET_C_VALIDATION_ID, PAIRED_VIEW_ID})
     lock_path = root/'development_v1/selection_lock.json'
     if lock_path.is_file() and not records:
         lock = json.loads(lock_path.read_text(encoding='utf-8'))
@@ -172,6 +238,9 @@ def experiment_registry(root):
                    'Image and patient workload counts describe allocated recommendations.',
                    'The release records DR grades and photo quality. Follow-up outcomes are unavailable.'],
         ))
+    paired_views = paired_view_record(root)
+    if paired_views is not None:
+        records.append(paired_views)
     return records
 
 
