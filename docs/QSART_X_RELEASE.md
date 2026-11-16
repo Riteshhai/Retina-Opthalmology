@@ -86,9 +86,18 @@ container memory.
 
 Use the [manuscript draft](research/QSART_X_MANUSCRIPT.md) and the
 [evidence table](research/QSART_X_EVIDENCE_TABLE.md) for exact outcomes,
-denominators, and audit links. The [IEEE LaTeX export](research/QSART_X_TABLES.tex)
-contains both tables and the figure includes. Use `graphicx` and add
-`\input{docs/research/QSART_X_TABLES.tex}` to the manuscript when compiling
-from the repository root. The historical draft documents the original QSART
-experiments. [Verified literature matrix](LITERATURE_MATRIX.md) ·
-[Bibliography](research/references.bib) · [Historical draft](research/MANUSCRIPT_DRAFT.md).
+denominators, and audit links. The [IEEE-style manuscript](research/QSART_X_MANUSCRIPT.tex)
+includes the [generated tables and figures](research/QSART_X_TABLES.tex) and
+the cited entries from the [bibliography](research/references.bib). Build the
+author-review PDF from the repository root with Tectonic.
+
+```powershell
+New-Item -ItemType Directory -Force artifacts/qsart_x_manuscript/output/pdf | Out-Null
+tectonic -Z search-path=. --outdir artifacts/qsart_x_manuscript/output/pdf docs/research/QSART_X_MANUSCRIPT.tex
+```
+
+Confirm authorship, affiliations, correspondence, funding, conflicts of
+interest, and institutional ethics and consent language before submitting.
+Check the chosen venue's template and submission requirements. The
+[historical draft](research/MANUSCRIPT_DRAFT.md) documents the original QSART
+experiments. [Verified literature matrix](LITERATURE_MATRIX.md).

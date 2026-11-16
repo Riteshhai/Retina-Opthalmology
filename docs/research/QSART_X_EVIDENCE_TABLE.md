@@ -100,7 +100,7 @@ For the eight-field comparison against entropy, select the comparison whose
 `candidate=voi:1` and `reference=entropy:1`. Its
 `intervals.ledger_per_eye.{difference_candidate_minus_reference,ci95}` gives
 −0.1161 [−0.3530, +0.0095]. All 16 entries in `comparisons` contain zero in
-`intervals.ledger_per_eye.ci95`. At 21 and 42 acquisitions, the positive
+`intervals.ledger_per_eye.ci95`. At 21, 42, and 63 acquisitions, the positive
 value-minus-entropy estimates favor entropy on the observed ledger. The audit
 reconstructed all 26 scenarios and 16 paired intervals from saved scores.
 [Exact-workload comparisons](../../reports/paired_view_v1/evaluation.json) ·

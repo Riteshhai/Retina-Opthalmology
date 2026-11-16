@@ -55,7 +55,7 @@ and the result of requesting a future retake remain unobserved.
 Differences are mean research ledger units per eye. At eight views the
 value-versus-entropy difference was −0.1161, with a 95% paired patient
 interval of [−0.3530, +0.0095]. Entropy had a lower observed ledger at
-21 and 42 extra views. These intervals hold acquisition assignments fixed
+21, 42, and 63 extra views. These intervals hold acquisition assignments fixed
 and resample patients as units. The random comparator is one seeded
 ordering.
 

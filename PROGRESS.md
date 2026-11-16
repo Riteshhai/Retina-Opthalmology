@@ -1,5 +1,25 @@
 # Execution log
 
+## 2026-11-16 — prepared the manuscript for author review
+
+- Added the [IEEEtran manuscript](docs/research/QSART_X_MANUSCRIPT.tex) and
+  updated publication metadata for its five cited sources. The manuscript
+  incorporates the two generated tables and two study figures. Links pin
+  the aggregate reports and independent audit receipts to the research
+  release commit.
+- Corrected the paired-view summary to record entropy's lower observed
+  ledger at 21, 42, and 63 additional fields. All 16 matched cost intervals
+  include zero. The audit-bound aggregates and generated table hash matched
+  the release receipt.
+- Compiled with Tectonic 0.17.0 using the [release guide](docs/QSART_X_RELEASE.md#manuscript-materials)
+  command. Poppler rendered all four PDF pages for visual inspection. A
+  text and link check verified both audit links, all four table and figure
+  references, and the author-review status. The local PDF is under
+  `artifacts/qsart_x_manuscript/output/pdf/`.
+- Ruff, the generated IEEE table check, and 36 focused Set-C, paired-view,
+  and research API tests passed with one upstream AnyIO deprecation warning.
+  Authorship and study declarations still require author confirmation.
+
 ## 2026-11-16 — verified the QSART-X local research release
 
 - Hardened workspace request limits and release of uploaded files and decoded

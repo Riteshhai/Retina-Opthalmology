@@ -10,7 +10,7 @@
 
 **Results.** The deployed ordinal policy required specialist review for every Set-C photograph. It exceeded the 30%, 60%, and 90% image review caps and recommended review for all 99 patients at the 100% cap. All 12 policy pairs that matched image and patient review and recapture counts made identical decisions. In the acquisition analysis, the value ranking reduced missed referable eyes from 8 to 6 at eight additional views. All 16 equal-acquisition cost intervals included zero. The acquisition rule based on predicted value above cost used four views without reducing missed referrals.
 
-**Conclusion.** On Set-C, full ordinal coverage coincided with zero automatic clearance and a requirement for full review capacity. A low-budget acquisition benefit was observed on development patients. The equal-workload comparisons leave comparative acquisition benefit uncertain. [Numerical evidence and denominators](QSART_X_EVIDENCE_TABLE.md).
+**Conclusion.** On Set-C, full ordinal coverage coincided with zero automatic clearance and a requirement for full review capacity. At eight additional fields, the value ranking missed two fewer referable eyes than first-view prediction alone. The equal-workload comparisons leave comparative acquisition benefit uncertain. [Numerical evidence and denominators](QSART_X_EVIDENCE_TABLE.md).
 
 ## Introduction
 
@@ -54,7 +54,7 @@ Across all modes, budget pairs and methods, 39/96 allocation scenarios were feas
 
 ### Same-eye acquisition on development patients
 
-On 84 selection eyes, first-view prediction missed eight referable eyes including four severe eyes. At eight additional fields, the value ranking missed six referable eyes including three severe eyes. Review-proxy predictions increased from 36 to 38, and the mean ledger decreased from 0.5833 to 0.4536 per eye. The first-view and eight-field conditions both missed one patient in the severe subgroup. At the same eight-field acquisition count, the ledger difference for value minus entropy was −0.1161 per eye, with a paired 95% interval of [−0.3530, +0.0095]. At 21 and 42 added fields, entropy had the lower observed ledger. All 16 matched cost intervals included zero. The positive-value cutoff acquired four fields and retained eight missed referable eyes, raising the ledger to 0.5929 per eye. [Outcome and interval pointers](QSART_X_EVIDENCE_TABLE.md#paired-view-acquisition) · [Workload figure](../../reports/paired_view_v1/acquisition_workload.png).
+On 84 selection eyes, first-view prediction missed eight referable eyes including four severe eyes. At eight additional fields, the value ranking missed six referable eyes including three severe eyes. Review-proxy predictions increased from 36 to 38, and the mean ledger decreased from 0.5833 to 0.4536 per eye. The first-view and eight-field conditions both missed one patient in the severe subgroup. At the same eight-field acquisition count, the ledger difference for value minus entropy was −0.1161 per eye, with a paired 95% interval of [−0.3530, +0.0095]. At 21, 42, and 63 added fields, entropy had the lower observed ledger. All 16 matched cost intervals included zero. The positive-value cutoff acquired four fields and retained eight missed referable eyes, raising the ledger to 0.5929 per eye. [Outcome and interval pointers](QSART_X_EVIDENCE_TABLE.md#paired-view-acquisition) · [Workload figure](../../reports/paired_view_v1/acquisition_workload.png).
 
 ### Context from separate studies
 
