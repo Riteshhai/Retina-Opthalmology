@@ -48,7 +48,11 @@ services:
 
   api:
     <<: *portal-image
-    environment: *portal-environment
+    environment:
+      <<: *portal-environment
+      QSART_PORTAL_IMAGE_DIR: /var/lib/qsart/portal-images
+    volumes:
+      - portal-images:/var/lib/qsart/portal-images
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -74,3 +78,4 @@ services:
 
 volumes:
   portal-data:
+  portal-images:

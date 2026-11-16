@@ -1,5 +1,30 @@
 # Execution log
 
+## 2026-11-16 — verified the authenticated screening and review workspace
+
+- Added local account provisioning for the four research roles, revocable
+  database-backed sessions, and owner-scoped operator access. The workspace
+  persists screened cases, metadata-scrubbed PNGs, original model predictions,
+  reviewer assessments, overrides and action history. The reviewer view marks
+  grade disagreement and offers JSON export and a printer-friendly PDF view.
+- Ran `python -m pytest -q` with genuine DeepDRiD validation integration.
+  All 687 tests passed in 151.26 seconds with one upstream AnyIO deprecation
+  warning. `python -m ruff check .`, both Compose configuration checks, all
+  six `npm test` cases, and both production web builds passed.
+- Ran `alembic upgrade head` on an isolated PostgreSQL database seeded at
+  `0001_portal_foundation`. The original case row survived the upgrade to
+  `0003_portal_cases`. `alembic check` found no pending schema differences.
+  Rebuilt the Docker overlay. A synthetic case exercised trained inference,
+  all four roles, cross-operator access denial, concurrent reviewer writes,
+  report download, account disablement and persistence across an API restart.
+  Trained single-image and batch inference, simulation and overload also
+  passed the existing deployment verifier on DeepDRiD pilot validation.
+- In the browser, an operator saved a synthetic case and a reviewer reopened
+  it, recorded a differing grade and overrode the suggested action. The
+  original model output and override history were both visible. Verified
+  mobile and desktop layouts, read-only controls and sign-out across tabs.
+  Held-out DeepDRiD Set-C and APTOS test cohorts remain unscored.
+
 ## 2026-11-16 — connected trained inference to the local React workspace
 
 - Added the loopback-only analysis workspace on port `18701`. It previews a

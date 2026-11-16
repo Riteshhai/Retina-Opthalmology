@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session, sessionmaker
 
 DATABASE_ENV = 'QSART_PORTAL_DATABASE_URL'
 VERSION_TABLE = 'qsart_portal_alembic_version'
-HEAD_REVISION = '0001_portal_foundation'
+HEAD_REVISION = '0003_portal_cases'
 CONNECT_TIMEOUT_SECONDS = 3
 
 

@@ -30,6 +30,7 @@ CMD ["python", "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "
 FROM runtime AS portal
 USER root
 COPY services ./services
+RUN install -d -m 0700 -o qsart -g qsart /var/lib/qsart/portal-images
 RUN --mount=type=cache,target=/root/.cache/pip \
     python -c 'import tomllib; from pathlib import Path; print("\n".join(tomllib.loads(Path("pyproject.toml").read_text())["project"]["optional-dependencies"]["portal"]))' > /tmp/portal-requirements.txt \
     && pip install --timeout 120 --retries 8 -r /tmp/portal-requirements.txt \

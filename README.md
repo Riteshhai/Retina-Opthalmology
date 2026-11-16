@@ -36,22 +36,42 @@ for the existing API and lab workflow.
 
 ### Analyze an image in the local workspace
 
-Open [Retinal image analysis](http://127.0.0.1:18701/). When the status shows
-**Model ready**, choose one authorized JPG or PNG of up to 12 MiB and select
-**Analyze image**. The workspace shows the photo beside the model's five-grade
-distribution, referable and severe DR estimates, estimated poor quality,
-uncertainty, and the suggested action. **Clear** removes the selected photo
-and its result from the page. Set the model paths in the private environment
-file using `.env.qsart-x.example` as a reference. If you add the files after
-the API has started, restart the `api` service using the same Compose files
-and then select **Recheck service status** in the workspace.
+Provision an account from the repository root after starting the stack. The
+CLI prompts for a password without echoing it. Create an account for each
+person using the role appropriate to their work. Use the same environment files
+and project name you used to start Compose.
 
-The analysis workspace is a separate loopback-only Compose service. Its
-upload bridge requires a same-origin request and forwards only model status
-and single-image analysis. The public site serves its own bundle and status
-routes. This milestone uses browser session state and temporary API uploads.
-Sign-in, role enforcement and persistent case workflows are part of the next
-portal milestone.
+```powershell
+docker compose --env-file .env.qsart-x -f docker-compose.yml -f infrastructure/docker/compose.qsart-x.yml exec api python -m services.api.portal_db.accounts create research-admin research_admin
+```
+
+| Role code | Workspace access |
+| --- | --- |
+| `research_admin` | Create cases, view all cases, record reviews and overrides, export reports |
+| `research_operator` | Create cases, view and export cases they created |
+| `clinician_reviewer` | View all cases, record reviews and overrides, export reports |
+| `research_viewer` | View saved cases in the workspace |
+
+Use `reset-password <username>` or `disable <username>` in the same account
+CLI to revoke existing sessions when rotating credentials or removing access.
+
+Sign in to [Retinal image analysis](http://127.0.0.1:18701/). An operator or
+administrator can upload an authorized JPG or PNG of up to 12 MiB when the
+model is ready. The saved case shows the trained model's five-grade
+distribution, risk estimates, image quality, uncertainty and suggested action.
+Reviewers can inspect pending cases, record an assessment and explain a proposed
+override. The case retains the original model output alongside its review history.
+Authorized users can download a structured JSON report or use the print view
+with the browser's **Save as PDF** destination. A reviewer assessment is a
+user-entered research record.
+
+Connect to this workspace on the local machine. It uses a private PostgreSQL
+volume for case records and a separate API-only volume for decoded retinal
+images. The API removes file metadata when saving images. Use photographs
+whose pixels are already clear of identifiers. Keep both volumes together when
+backing up research cases. The public site serves status routes. Set model
+paths using `.env.qsart-x.example` as a reference and restart the API after
+installing matching model artifacts.
 
 ### Develop the public website on Windows
 

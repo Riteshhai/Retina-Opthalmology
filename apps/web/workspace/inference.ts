@@ -38,16 +38,24 @@ export type AnalysisResult = {
   conformalGrades: number[] | null
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
+export function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function isProbability(value: unknown): value is number {
+export function isProbability(value: unknown): value is number {
   return typeof value === 'number' && value >= 0 && value <= 1
 }
 
-function isGrade(value: unknown): value is number {
+export function isGrade(value: unknown): value is number {
   return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value < GRADES.length
+}
+
+export function isAction(value: unknown): value is keyof typeof ACTIONS {
+  return typeof value === 'string' && Object.hasOwn(ACTIONS, value)
+}
+
+export function isTimestamp(value: unknown): value is string {
+  return typeof value === 'string' && Number.isFinite(Date.parse(value))
 }
 
 export function parseModelStatus(value: unknown): ModelStatus {
@@ -82,8 +90,7 @@ export function parsePrediction(value: unknown): AnalysisResult {
       || !isProbability(value.quality.poor_probability) || !isProbability(value.uncertainty.entropy)
       || !isProbability(value.uncertainty.confidence)
       || typeof value.model_version !== 'string' || typeof value.policy_version !== 'string'
-      || typeof value.action !== 'string' || !Object.hasOwn(ACTIONS, value.action)
-      || typeof value.inference_timestamp !== 'string' || !Number.isFinite(Date.parse(value.inference_timestamp))
+      || !isAction(value.action) || !isTimestamp(value.inference_timestamp)
       || typeof value.processing_time_ms !== 'number' || !Number.isFinite(value.processing_time_ms)
       || value.processing_time_ms < 0 || !Array.isArray(value.reason_codes)
       || !value.reason_codes.every((reason) => typeof reason === 'string')) {
@@ -96,7 +103,7 @@ export function parsePrediction(value: unknown): AnalysisResult {
     }
     conformalGrades = value.conformal.prediction_set
   }
-  return { action: value.action as AnalysisResult['action'], predictedGrade: value.predicted_grade,
+  return { action: value.action, predictedGrade: value.predicted_grade,
     gradeProbabilities: value.grade_probabilities, referable: value.referable_probability,
     severe: value.severe_probability, poorQuality: value.quality.poor_probability,
     entropy: value.uncertainty.entropy, confidence: value.uncertainty.confidence,
@@ -110,31 +117,4 @@ export async function getModelStatus(signal: AbortSignal): Promise<ModelStatus> 
 }
 
 export class PredictionError extends Error {
-  status: number | undefined
-
-  constructor(message: string, status?: number) {
-    super(message)
-    this.status = status
-  }
-}
-
-const requestErrors: Record<number, string> = {
-  413: 'The file exceeds the upload limit.',
-  415: 'The image content must match its JPG or PNG format.',
-  422: 'The image could not be read or its dimensions are unsupported.',
-  503: 'The model could not complete this analysis. Recheck the service status before trying again.',
-}
-
-export async function analyzeImage(upload: Upload, signal: AbortSignal): Promise<AnalysisResult> {
-  const body = new FormData()
-  const filename = upload.type === 'image/png' ? 'fundus.png' : 'fundus.jpg'
-  body.append('file', upload.file.slice(0, upload.file.size, upload.type), filename)
-  const response = await fetch('/api/predict', {
-    method: 'POST', body, signal, cache: 'no-store', headers: { 'X-QSART-Workspace': '1' },
-  })
-  if (!response.ok) throw new PredictionError(
-    requestErrors[response.status] ?? 'The local service could not complete this analysis. Recheck status and try again.',
-    response.status,
-  )
-  return parsePrediction(await response.json())
 }

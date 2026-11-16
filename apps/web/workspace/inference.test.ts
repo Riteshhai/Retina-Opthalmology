@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
-  MAX_UPLOAD_BYTES, MIME_TYPES, analyzeImage, parseModelStatus, parsePrediction, validateUpload,
+  MAX_UPLOAD_BYTES, MIME_TYPES, parseModelStatus, parsePrediction, validateUpload,
 } from './inference.ts'
+import { createCase, getSession, saveReview, sessionEnded, signIn, signOut } from './portal.ts'
 
 const softwareFixture = {
   action: 'SPECIALIST_REVIEW', policy_scope: 'single_image', model_version: 'software-test-fixture',
@@ -48,7 +49,7 @@ test('uploads multipart bytes with a generic filename and surface-level errors',
   let status = 200
   const upload = validateUpload(new File(['fixture'], 'local-research-record.png'), MIME_TYPES, MAX_UPLOAD_BYTES)
   context.mock.method(globalThis, 'fetch', async (url: string, request: RequestInit) => {
-    assert.equal(url, '/api/predict')
+    assert.equal(url, '/api/portal/cases')
     assert.equal(request.method, 'POST')
     assert.equal(new Headers(request.headers).get('X-QSART-Workspace'), '1')
     assert.ok(request.body instanceof FormData)
@@ -57,10 +58,54 @@ test('uploads multipart bytes with a generic filename and surface-level errors',
     assert.equal(file.name, 'fundus.png')
     assert.equal(file.type, 'image/png')
     assert.equal(await file.text(), 'fixture')
-    return Response.json(status === 200 ? softwareFixture : { detail: 'Discard this response detail.' }, { status })
+    return Response.json(status === 200 ? caseFixture : { detail: 'Discard this response detail.' }, { status })
   })
   const signal = new AbortController().signal
-  assert.equal((await analyzeImage(upload, signal)).predictedGrade, 2)
+  assert.equal((await createCase(upload, signal)).prediction.predictedGrade, 2)
   status = 503
-  await assert.rejects(analyzeImage(upload, signal), /could not complete this analysis/)
+  await assert.rejects(createCase(upload, signal), /case storage is unavailable/)
+})
+
+const caseFixture = {
+  id: 'case-fixture', created_at: '2026-01-01T00:00:00Z', prediction: softwareFixture,
+  reviews: [], effective_action: softwareFixture.action,
+  audit: [{ event: 'case_created', actor: 'operator-fixture', created_at: '2026-01-01T00:00:00Z' }],
+}
+
+test('uses a same-origin session and marks expired responses', async (context) => {
+  const account = { username: 'reviewer-fixture', role: 'clinician_reviewer' }
+  const calls: string[] = []
+  context.mock.method(globalThis, 'fetch', async (path: string, request: RequestInit) => {
+    calls.push(path)
+    assert.equal(request.credentials, 'same-origin')
+    assert.equal(request.cache, 'no-store')
+    if (request.method === 'POST') assert.equal(new Headers(request.headers).get('X-QSART-Workspace'), '1')
+    if (path.endsWith('/logout')) return new Response(null, { status: 204 })
+    if (path.endsWith('/login')) {
+      assert.deepEqual(JSON.parse(String(request.body)), { username: 'reviewer-fixture', password: 'software-fixture' })
+      return Response.json(account)
+    }
+    return new Response(null, { status: 401 })
+  })
+  const signal = new AbortController().signal
+  assert.deepEqual(await signIn('reviewer-fixture', 'software-fixture', signal), account)
+  await signOut(signal)
+  await assert.rejects(getSession(signal), sessionEnded)
+  assert.deepEqual(calls, ['/api/portal/login', '/api/portal/logout', '/api/portal/session'])
+})
+
+test('keeps the model recommendation when parsing a recorded override', async (context) => {
+  const input = { grade: 3, action: 'RECAPTURE', notes: 'Synthetic software assessment.' } as const
+  context.mock.method(globalThis, 'fetch', async (path: string, request: RequestInit) => {
+    assert.equal(path, '/api/portal/cases/case-fixture/reviews')
+    assert.equal(new Headers(request.headers).get('X-QSART-Workspace'), '1')
+    assert.deepEqual(JSON.parse(String(request.body)), input)
+    return Response.json({ ...caseFixture, effective_action: input.action,
+      reviews: [{ ...input, id: 'review-fixture', reviewer: 'reviewer-fixture', created_at: '2026-01-01T00:00:01Z',
+        grade_disagreement: true, is_override: true }] })
+  })
+  const updated = await saveReview('case-fixture', input, new AbortController().signal)
+  assert.equal(updated.prediction.action, 'SPECIALIST_REVIEW')
+  assert.equal(updated.effectiveAction, 'RECAPTURE')
+  assert.equal(updated.reviews[0].gradeDisagreement, true)
 })

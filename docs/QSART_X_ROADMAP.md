@@ -25,9 +25,10 @@ flowchart LR
 - `apps/web` provides public pages, a static production build, and a teaching
   walkthrough. The Compose proxy exposes two read-only status endpoints. The
   public pages read their evidence summaries and links from source content.
-  A separate React build serves the loopback-only analysis workspace, with
-  same-origin uploads and the existing model artifacts. The single-image
-  workspace displays the returned action and calibrated estimates.
+  A separate React build serves the loopback-only screening and reviewer
+  workspace. Same-origin uploads require an operator or administrator session.
+  The single-image workspace displays the returned action and calibrated
+  estimates alongside any later human assessments.
 - The existing `api`, `qsart` and `dashboard` packages remain the entry points
   for trained inference, policy, and the research lab. Existing scripts and
   benchmark paths keep their structure. New portal data code lives in
@@ -36,7 +37,8 @@ flowchart LR
   and a migration service to the existing CPU stack. Database credentials come
   from a local environment file. PostgreSQL has an internal network address and
   a persistent volume. The current portal schema supplies role, user and case
-  foundations. Authentication and authorized case workflows belong to Milestone 4.
+  records, account sessions, model predictions, human reviews and audit history.
+  A separate private volume stores decoded case images.
 - Research inputs, model artifacts, and private audit outputs remain in local
   storage. Public pages use a generated retinal illustration and published
   aggregate evidence. The app uses trained artifacts when locally installed.
@@ -46,7 +48,7 @@ flowchart LR
 | Area | Available | Milestone gap |
 | --- | --- | --- |
 | Dataset management | Verified APTOS 2019, DeepDRiD and IDRiD source manifests and historical audits. DeepDRiD Set-C has 99 eligible four-view patients and remains unscored. | Finish import documentation and preserve every held-out boundary. EyeQ source-photo coverage remains incomplete. |
-| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Add authenticated case workflows and role enforcement. |
+| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Execute the locked research validation before drawing conclusions about screening utility. |
 | Triage and research | Existing three-action engine, separate capacities with explicit overload, recorded stress and external studies, local lab. | Persist human review, compare patient-level risk at matched budgets, and implement real paired-view acquisition evaluation. |
 | Dependencies | Windows Python 3.11, Node 24 and Docker Desktop in the development environment. | Install the pinned frontend and optional portal dependencies for the new stack. |
 

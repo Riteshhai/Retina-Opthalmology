@@ -1,255 +1,306 @@
-import { StrictMode, useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
+import { StrictMode, useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { createRoot } from 'react-dom/client'
-import { AlertCircle, CircleCheck, ImagePlus, RefreshCw, ScanEye, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ClipboardList, LockKeyhole, Plus, RefreshCw, ShieldCheck } from 'lucide-react'
 import '@fontsource-variable/inter/wght.css'
 import '@fontsource-variable/manrope/wght.css'
 import mark from '../public/mark.svg?url'
+import { CaseDetail } from './case-detail'
+import { ACTIONS, GRADES, getModelStatus, type ModelStatus } from './inference'
 import {
-  ACTIONS, GRADES, MAX_UPLOAD_BYTES, MIME_TYPES, PredictionError, analyzeImage, getModelStatus, validateUpload,
-  type AnalysisResult, type ModelStatus, type Upload,
-} from './inference'
+  ROLES, errorText, getSession, listCases, readCase, sessionEnded, signIn, signOut,
+  type Account, type CaseRecord, type CaseSummary,
+} from './portal'
+import { dateTime, percentage } from './result'
+import { NewCase } from './upload'
 import './workspace.css'
 
-const statusLabels = {
-  checking: 'Checking model', ready: 'Model ready', unavailable: 'Model unavailable', offline: 'API unavailable',
-}
-const progressNotes = {
-  checking: 'Checking the local FastAPI service.',
-  unavailable: 'Load the trained DR and quality checkpoints and matched calibration, then recheck status.',
-  offline: 'Check that the local API is running, then recheck status.',
-}
-const reasonLabels: Record<string, string> = {
-  PREDICTED_REFERABLE_GRADE: 'The predicted grade meets the study’s referral definition.',
-  HIGH_REFERABLE_PROBABILITY: 'The grade 2 or higher estimate meets the policy review threshold.',
-  HIGH_SEVERE_PROBABILITY: 'The grade 3 or higher estimate meets the policy review threshold.',
-  EMPTY_CONFORMAL_SET: 'The conformal method returned an empty grade set.',
-  CONFORMAL_SET_INCLUDES_REFERABLE: 'The conformal set includes a grade that requires review under the research policy.',
-  HIGH_PREDICTIVE_UNCERTAINTY: 'Predictive uncertainty meets the policy review threshold.',
-  INSUFFICIENT_IMAGE_QUALITY: 'The model estimated insufficient image quality for provisional clearance.',
-  PROVISIONAL_NONREFERABLE: 'The result meets the policy criteria for provisional non-referable disposition.',
-}
-const percentage = new Intl.NumberFormat(undefined, { style: 'percent', maximumFractionDigits: 1 })
-const dateTime = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'medium' })
-
-function Results({ result }: { result: AnalysisResult }) {
-  const reasons = result.reasons.flatMap((reason) => reasonLabels[reason] ? [reasonLabels[reason]] : [])
-  const measurements = [
-    { label: 'Referable DR estimate', detail: 'Grade 2 or higher', value: percentage.format(result.referable) },
-    { label: 'Severe DR estimate', detail: 'Grade 3 or higher', value: percentage.format(result.severe) },
-    { label: 'Poor image quality', detail: 'Model-estimated probability', value: percentage.format(result.poorQuality) },
-    { label: 'Predictive uncertainty', detail: 'Normalized entropy from 0 to 1', value: result.entropy.toFixed(3) },
-  ]
-  return (
-    <div className="result-body">
-      <div className="case-outcome">
-        <div>
-          <p>Predicted grade</p>
-          <h3>Grade {result.predictedGrade} · {GRADES[result.predictedGrade]}</h3>
-          <span>{percentage.format(result.confidence)} top-grade probability</span>
-        </div>
-        <div className="result-action">
-          <p>Suggested action</p>
-          <strong>{ACTIONS[result.action]}</strong>
-        </div>
+function Header({ account, onSignOut }: { account?: Account; onSignOut?: () => void }) {
+  return <>
+    <a href="#main" className="skip-link">Skip to workspace</a>
+    <header className="workspace-header">
+      <div className="shell header-inner">
+        <div className="identity"><img src={mark} alt="" width="36" height="36" />
+          <strong>QSART<span>-X</span></strong><span className="workspace-name">Research workspace</span></div>
+        {account && <div className="account">
+          <div><strong>{account.username}</strong><span>{ROLES[account.role]}</span></div>
+          <button className="button button-secondary" type="button" onClick={onSignOut}>Sign out</button>
+        </div>}
       </div>
-      {reasons.length > 0 && <ul className="action-reasons">{reasons.map((reason) => <li key={reason}>{reason}</li>)}</ul>}
-      <dl className="metrics-grid">
-        {measurements.map(({ label, detail, value }) => (
-          <div className="metric" key={label}><dt>{label}</dt><dd>{value}</dd><small>{detail}</small></div>
-        ))}
-      </dl>
-      <section aria-labelledby="grade-probabilities">
-        <h3 id="grade-probabilities">Five-grade probabilities</h3>
-        <ul className="grade-list">
-          {result.gradeProbabilities.map((probability, grade) => (
-            <li className={grade === result.predictedGrade ? 'predicted' : ''} key={grade}>
-              <span>{grade} · {GRADES[grade]}</span>
-              <progress max={1} value={probability} aria-label={`Grade ${grade} probability`} />
-              <span>{percentage.format(probability)}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section className="result-details" aria-labelledby="analysis-details">
-        <h3 id="analysis-details">Analysis details</h3>
-        <dl>
-          <div><dt>Ordinal conformal set</dt><dd>{result.conformalGrades === null ? 'Unavailable' :
-            result.conformalGrades.length ? result.conformalGrades.join(', ') : 'Empty set'}</dd></div>
-          <div><dt>Model version</dt><dd>{result.modelVersion}</dd></div>
-          <div><dt>Policy version</dt><dd>{result.policyVersion}</dd></div>
-          <div><dt>Inference time</dt><dd><time dateTime={result.timestamp}>{dateTime.format(new Date(result.timestamp))}</time></dd></div>
-          <div><dt>Model processing</dt><dd>{result.processingTime.toFixed(1)} ms</dd></div>
-        </dl>
-        <p className="small-copy">This recommendation applies to one image. Review and recapture capacities apply to cohort decisions.</p>
-      </section>
-    </div>
-  )
+    </header>
+  </>
 }
 
-function Workspace() {
-  const [status, setStatus] = useState<ModelStatus>({ kind: 'checking' })
-  const [attempt, setAttempt] = useState(0)
-  const [upload, setUpload] = useState<Upload | null>(null)
-  const [preview, setPreview] = useState<{ file: File; url: string } | null>(null)
-  const [result, setResult] = useState<AnalysisResult | null>(null)
+function SignIn({ notice, onSignIn }: { notice: string; onSignIn: (account: Account) => void }) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const input = useRef<HTMLInputElement>(null)
   const active = useRef<AbortController | null>(null)
-
-  useEffect(() => {
-    const request = new AbortController()
-    let current = true
-    const timer = window.setTimeout(() => request.abort(), 5000)
-    void getModelStatus(request.signal).then((value) => {
-      if (current) setStatus(value)
-    }).catch(() => {
-      if (current) setStatus({ kind: 'offline' })
-    }).finally(() => window.clearTimeout(timer))
-    return () => { current = false; request.abort(); window.clearTimeout(timer) }
-  }, [attempt])
-
-  useEffect(() => {
-    if (!upload) return
-    const url = URL.createObjectURL(upload.file)
-    setPreview({ file: upload.file, url })
-    return () => URL.revokeObjectURL(url)
-  }, [upload])
-
-  useEffect(() => () => { active.current?.abort(); active.current = null }, [])
-
-  function resetAnalysis() {
-    active.current?.abort()
-    active.current = null
-    setBusy(false)
-    setResult(null)
-    setError('')
-    setUpload(null)
-    setPreview(null)
-  }
-
-  function clear() {
-    resetAnalysis()
-    if (input.current) {
-      input.current.value = ''
-      input.current.focus()
-    }
-  }
-
-  function choose(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0]
-    resetAnalysis()
-    if (!file) return
-    const ready = status.kind === 'ready' ? status : null
-    try {
-      setUpload(validateUpload(file, ready?.types ?? MIME_TYPES, ready?.maxBytes ?? MAX_UPLOAD_BYTES))
-    } catch (cause) {
-      event.target.value = ''
-      setError(cause instanceof Error ? cause.message : 'The selected file could not be read.')
-    }
-  }
+  useEffect(() => () => active.current?.abort(), [])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!upload || status.kind !== 'ready' || active.current) return
-    setError('')
-    setResult(null)
-    try {
-      validateUpload(upload.file, status.types, status.maxBytes)
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'The selected file could not be read.')
-      return
-    }
+    if (active.current) return
+    const form = event.currentTarget
+    const fields = new FormData(form)
     const request = new AbortController()
     active.current = request
+    setError('')
     setBusy(true)
-    const timer = window.setTimeout(() => request.abort(), 90000)
     try {
-      const value = await analyzeImage(upload, request.signal)
-      if (active.current === request) setResult(value)
+      const account = await signIn(String(fields.get('username')).trim(), String(fields.get('password')),
+        AbortSignal.any([request.signal, AbortSignal.timeout(12_000)]))
+      if (!request.signal.aborted) onSignIn(account)
     } catch (cause) {
-      if (active.current !== request) return
-      if (cause instanceof PredictionError && cause.status === 503) setStatus({ kind: 'unavailable' })
-      const message = request.signal.aborted ? 'Analysis timed out. Recheck the service and try again.' :
-        'The local service did not return a readable result. Recheck status and try again.'
-      setError(cause instanceof PredictionError ? cause.message : message)
+      if (!request.signal.aborted) setError(errorText(cause, 'Sign-in could not reach the local portal.'))
     } finally {
-      window.clearTimeout(timer)
-      if (active.current === request) {
-        active.current = null
-        setBusy(false)
-      }
+      const field = form.elements.namedItem('password') as HTMLInputElement | null
+      if (field) field.value = ''
+      active.current = null
+      if (!request.signal.aborted) setBusy(false)
+    }
+  }
+
+  return <main id="main" tabIndex={-1} className="shell workspace-main sign-in-main">
+    <section className="panel sign-in-card" aria-labelledby="sign-in-title">
+      <LockKeyhole className="sign-in-icon" size={23} aria-hidden="true" />
+      <h1 id="sign-in-title">Sign in to QSART-X</h1>
+      <p className="page-intro">Use your local research account to access screening and review.</p>
+      {notice && <p className="small-copy" role="status">{notice}</p>}
+      <form onSubmit={submit} aria-busy={busy}>
+        <label>Username<input name="username" autoComplete="username" required maxLength={96} /></label>
+        <label>Password<input type="password" name="password" autoComplete="current-password" required maxLength={512} /></label>
+        {error && <p className="analysis-error" role="alert">{error}</p>}
+        <button className="button button-primary" disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}</button>
+      </form>
+    </section>
+  </main>
+}
+
+const filters = [
+  'All cases', 'Pending specialist review', 'Pending recapture', 'Assessments recorded',
+] as const
+
+function CaseQueue({ onOpen, onSessionEnd }: { onOpen: (id: string) => void; onSessionEnd: () => void }) {
+  const [cases, setCases] = useState<CaseSummary[] | null>(null)
+  const [filter, setFilter] = useState(0)
+  const [attempt, setAttempt] = useState(0)
+  const [error, setError] = useState('')
+  useEffect(() => {
+    const request = new AbortController()
+    void listCases(AbortSignal.any([request.signal, AbortSignal.timeout(12_000)])).then((rows) => {
+      if (!request.signal.aborted) setCases(rows)
+    }).catch((cause: unknown) => {
+      if (request.signal.aborted) return
+      if (sessionEnded(cause)) onSessionEnd()
+      else setError(errorText(cause, 'The case queue could not be loaded.'))
+    })
+    return () => request.abort()
+  }, [attempt, onSessionEnd])
+
+  const specialist = cases?.filter((row) => row.effectiveAction === 'SPECIALIST_REVIEW' && !row.reviewed)
+  const recapture = cases?.filter((row) => row.effectiveAction === 'RECAPTURE' && !row.reviewed)
+  const reviewed = cases?.filter((row) => row.reviewed)
+  const rows = [cases, specialist, recapture, reviewed][filter] ?? []
+
+  function recheck() {
+    setError('')
+    setCases(null)
+    setAttempt((value) => value + 1)
+  }
+
+  return <section className="panel queue-panel" aria-labelledby="queue-title">
+    <div className="queue-heading">
+      <div><h2 id="queue-title">Case queue</h2>
+        <p className="small-copy">Pending cases appear first by action priority and estimated severe DR risk.</p></div>
+      <button className="icon-button" onClick={recheck} type="button" aria-label="Refresh case queue" title="Refresh case queue">
+        <RefreshCw size={16} aria-hidden="true" /></button>
+    </div>
+    {error && <p className="analysis-error" role="alert">{error}</p>}
+    {!error && cases === null && <p className="queue-empty" role="status">Loading cases…</p>}
+    {cases !== null && <>
+      <div className="queue-filters" role="group" aria-label="Filter cases">
+        {filters.map((label, index) => <button type="button" className="queue-filter" key={label}
+          aria-pressed={filter === index} onClick={() => setFilter(index)}>
+          <strong>{[cases, specialist, recapture, reviewed][index]?.length}</strong><span>{label}</span>
+        </button>)}
+      </div>
+      {rows.length === 0 ? <p className="queue-empty" role="status">{filter ? 'No cases match this filter.' : 'No screening cases yet.'}</p>
+        : <ul className="queue-list">{rows.map((row) => <li key={row.id}>
+          <button className="queue-row" type="button" onClick={() => onOpen(row.id)}>
+            <span><strong>Case {row.id.slice(0, 8)}</strong><small><time dateTime={row.createdAt}>{dateTime.format(new Date(row.createdAt))}</time></small></span>
+            <span><strong>{ACTIONS[row.effectiveAction]}</strong><small>{row.reviewed ? 'Assessment recorded' : 'Awaiting assessment'}</small></span>
+            <span><strong>Grade {row.grade} · {GRADES[row.grade]}</strong><small>{percentage.format(row.severe)} severe DR estimate</small></span>
+            <ArrowRight size={18} aria-hidden="true" />
+          </button>
+        </li>)}</ul>}
+    </>}
+  </section>
+}
+
+const statusLabel: Record<ModelStatus['kind'], string> = {
+  checking: 'Checking model', ready: 'Model ready', unavailable: 'Model unavailable', offline: 'API unavailable',
+}
+
+function Workspace({ account, onSessionEnd }: { account: Account; onSessionEnd: () => void }) {
+  const canCreate = account.role === 'research_admin' || account.role === 'research_operator'
+  const canReview = account.role === 'research_admin' || account.role === 'clinician_reviewer'
+  const [view, setView] = useState<'queue' | 'new' | 'detail'>('queue')
+  const [status, setStatus] = useState<ModelStatus>({ kind: 'checking' })
+  const [check, setCheck] = useState(0)
+  const [record, setRecord] = useState<CaseRecord | null>(null)
+  const [error, setError] = useState('')
+  const selection = useRef<AbortController | null>(null)
+
+  useEffect(() => {
+    const request = new AbortController()
+    void getModelStatus(AbortSignal.any([request.signal, AbortSignal.timeout(6000)])).then((model) => {
+      if (!request.signal.aborted) setStatus(model)
+    }).catch(() => {
+      if (!request.signal.aborted) setStatus({ kind: 'offline' })
+    })
+    return () => request.abort()
+  }, [check])
+  useEffect(() => () => selection.current?.abort(), [])
+
+  function show(next: 'queue' | 'new' | 'detail', data: CaseRecord | null = null) {
+    selection.current?.abort()
+    setError('')
+    setRecord(data)
+    setView(next)
+  }
+
+  async function openCase(id: string) {
+    show('detail')
+    const request = new AbortController()
+    selection.current = request
+    try {
+      const selected = await readCase(id, AbortSignal.any([request.signal, AbortSignal.timeout(12_000)]))
+      if (!request.signal.aborted) setRecord(selected)
+    } catch (cause) {
+      if (request.signal.aborted) return
+      if (sessionEnded(cause)) onSessionEnd()
+      else setError(errorText(cause, 'The case could not be loaded.'))
     }
   }
 
   function recheck() {
     setStatus({ kind: 'checking' })
-    setAttempt((current) => current + 1)
+    setCheck((value) => value + 1)
   }
 
-  const previewUrl = upload && preview?.file === upload.file ? preview.url : null
-  const maxBytes = status.kind === 'ready' ? status.maxBytes : MAX_UPLOAD_BYTES
-  const maxMiB = +(maxBytes / (1024 * 1024)).toFixed(2)
-  return (
-    <>
-      <a href="#main" className="skip-link">Skip to analysis</a>
-      <header className="workspace-header">
-        <div className="shell header-inner">
-          <div className="identity"><img src={mark} alt="" width="36" height="36" />
-            <strong>QSART<span>-X</span></strong><span className="workspace-name">Research workspace</span></div>
-          <div className="service-status">
-            <span className={`status-pill status-${status.kind}`} role="status">{statusLabels[status.kind]}</span>
-            <button className="icon-button" type="button" title="Recheck service status" aria-label="Recheck service status"
-              onClick={recheck} disabled={status.kind === 'checking' || busy}><RefreshCw size={17} /></button>
-          </div>
-        </div>
-      </header>
-      <main className="shell workspace-main" id="main" tabIndex={-1}>
-        <h1>Retinal image analysis</h1>
-        <p className="page-intro">Run the trained research model on one color fundus photograph.</p>
-        <aside className="research-note"><ShieldCheck size={20} aria-hidden="true" />
-          <p>Use authorized research images. Predictions and suggested actions are provisional and require clinical judgment.</p></aside>
-        {status.kind !== 'ready' && <p className="service-note" role="status">{progressNotes[status.kind]}</p>}
-        <div className="analysis-grid">
-          <section className="panel image-panel" aria-labelledby="image-heading">
-            <h2 id="image-heading">Fundus photograph</h2>
-            <form onSubmit={submit}>
-              <div className={`preview ${previewUrl ? 'has-image' : ''}`}>
-                {previewUrl ? <img src={previewUrl} alt="Selected retinal photograph" /> :
-                  <div className="empty-preview"><ImagePlus size={36} aria-hidden="true" />
-                    <p>{upload ? 'Preparing preview…' : 'Choose an image to preview it'}</p></div>}
-              </div>
-              <input ref={input} className="visually-hidden" id="fundus-file" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png"
-                aria-describedby="file-hint" onChange={choose} />
-              <div className="file-controls">
-                <label htmlFor="fundus-file" className="button button-secondary">{upload ? 'Replace image' : 'Choose image'}</label>
-                {upload && <button className="button button-text" onClick={clear} type="button">Clear</button>}
-              </div>
-              <p className="small-copy" id="file-hint">JPG or PNG, up to {maxMiB} MiB.</p>
-              {error && <p className="analysis-error" role="alert"><AlertCircle size={17} aria-hidden="true" />{error}</p>}
-              <button type="submit" className="button button-primary analyze-button" disabled={!upload || status.kind !== 'ready' || busy}>
-                <ScanEye size={19} aria-hidden="true" />{busy ? 'Analyzing image…' : 'Analyze image'}
-              </button>
-            </form>
-            {status.kind === 'ready' && <details className="model-configuration">
-              <summary>Loaded models</summary>
-              <dl><div><dt>DR</dt><dd>{status.version}</dd></div>
-                <div><dt>Quality</dt><dd>{status.qualityVersion}</dd></div>
-                <div><dt>Device</dt><dd>{status.device.toUpperCase()}</dd></div></dl>
-            </details>}
-          </section>
-          <section className="panel results-panel" aria-labelledby="results-heading" aria-busy={busy}>
-            <div className="panel-heading"><h2 id="results-heading">Analysis results</h2>
-              {result && <span className="result-ready" role="status"><CircleCheck size={16} aria-hidden="true" />Complete</span>}</div>
-            {result ? <Results result={result} /> : <div className="empty-result" role="status">
-              <ScanEye size={37} aria-hidden="true" />
-              <p>{busy ? 'The local model is processing the selected image.' : 'Results appear here after analysis.'}</p>
-            </div>}
-          </section>
-        </div>
-      </main>
-    </>
-  )
+  return <main className={`shell workspace-main${account.role === 'research_viewer' ? ' viewer-workspace' : ''}`} id="main" tabIndex={-1}>
+    <div className="workspace-intro">
+      <div><h1>Screening workspace</h1>
+        <p className="page-intro">Analyze fundus images and review saved research cases.</p></div>
+      <div className="service-status"><span className={`status-pill status-${status.kind}`} role="status">{statusLabel[status.kind]}</span>
+        <button className="icon-button" onClick={recheck} type="button" aria-label="Recheck service status" title="Recheck service status"
+          disabled={status.kind === 'checking'}><RefreshCw size={16} aria-hidden="true" /></button></div>
+    </div>
+    <aside className="research-note"><ShieldCheck size={20} aria-hidden="true" />
+      <p>Use authorized research images. Predictions and suggested actions are provisional and require clinical judgment.</p></aside>
+    <nav className="workspace-nav" aria-label="Workspace views">
+      <button className="button button-secondary" type="button" aria-current={view === 'queue' ? 'page' : undefined}
+        onClick={() => show('queue')}><ClipboardList size={17} aria-hidden="true" />Case queue</button>
+      {canCreate && <button className="button button-primary" type="button" aria-current={view === 'new' ? 'page' : undefined}
+        onClick={() => show('new')}><Plus size={17} aria-hidden="true" />New case</button>}
+    </nav>
+    {view === 'queue' && <CaseQueue onOpen={openCase} onSessionEnd={onSessionEnd} />}
+    {view === 'new' && canCreate && <NewCase status={status} onCreate={(created) => show('detail', created)} onSessionEnd={onSessionEnd} />}
+    {view === 'detail' && <>
+      <button className="button button-text back-to-queue" type="button" onClick={() => show('queue')}>
+        <ArrowLeft size={17} aria-hidden="true" />Back to queue</button>
+      {error && <p className="analysis-error" role="alert">{error}</p>}
+      {!record && !error && <p className="queue-empty" role="status">Loading case…</p>}
+      {record && <CaseDetail key={record.id} record={record} canReview={canReview} canExport={account.role !== 'research_viewer'}
+        onUpdate={setRecord} onSessionEnd={onSessionEnd} />}
+    </>}
+  </main>
 }
 
-createRoot(document.getElementById('root')!).render(<StrictMode><Workspace /></StrictMode>)
+type Session = { status: 'checking' | 'signed_out' | 'signing_out' | 'signout_failed'; notice?: string }
+  | { status: 'signed_in'; account: Account }
+
+const sessionChannelName = 'qsart-x-session'
+
+function announceSessionChange() {
+  if (typeof BroadcastChannel === 'undefined') return
+  const channel = new BroadcastChannel(sessionChannelName)
+  channel.postMessage('changed')
+  channel.close()
+}
+
+function App() {
+  const [session, setSession] = useState<Session>({ status: 'checking' })
+  const endSession = useCallback(() => setSession({ status: 'signed_out', notice: 'Your session ended. Sign in to continue.' }), [])
+  const signedIn = session.status === 'signed_in'
+
+  useEffect(() => {
+    if (!signedIn || typeof BroadcastChannel === 'undefined') return
+    const channel = new BroadcastChannel(sessionChannelName)
+    channel.onmessage = () => setSession({ status: 'checking' })
+    return () => channel.close()
+  }, [signedIn])
+
+  useEffect(() => {
+    if (session.status !== 'checking' && !signedIn) return
+    const request = new AbortController()
+    async function refresh() {
+      try {
+        const account = await getSession(AbortSignal.any([request.signal, AbortSignal.timeout(8000)]))
+        if (!request.signal.aborted) setSession({ status: 'signed_in', account })
+      } catch (cause) {
+        if (request.signal.aborted) return
+        if (sessionEnded(cause)) {
+          if (signedIn) endSession()
+          else setSession({ status: 'signed_out' })
+        } else if (!signedIn) {
+          setSession({ status: 'signed_out', notice: errorText(cause, 'The local portal could not be reached.') })
+        }
+      }
+    }
+    function refreshIfVisible() {
+      if (document.visibilityState === 'visible') void refresh()
+    }
+    if (!signedIn) void refresh()
+    const timer = signedIn ? window.setInterval(refreshIfVisible, 30_000) : undefined
+    if (signedIn) document.addEventListener('visibilitychange', refreshIfVisible)
+    return () => {
+      request.abort()
+      window.clearInterval(timer)
+      document.removeEventListener('visibilitychange', refreshIfVisible)
+    }
+  }, [session.status, signedIn, endSession])
+
+  function acceptSignIn(account: Account) {
+    setSession({ status: 'signed_in', account })
+    announceSessionChange()
+  }
+
+  async function logout() {
+    setSession({ status: 'signing_out' })
+    try {
+      await signOut(AbortSignal.timeout(8000))
+      setSession({ status: 'signed_out' })
+      announceSessionChange()
+    } catch (cause) {
+      setSession(sessionEnded(cause) ? { status: 'signed_out' } : { status: 'signout_failed' })
+    }
+  }
+
+  if (session.status === 'signed_in') return <>
+    <Header account={session.account} onSignOut={logout} />
+    <Workspace key={`${session.account.role}:${session.account.username}`} account={session.account} onSessionEnd={endSession} />
+  </>
+
+  return <>
+    <Header />
+    {session.status === 'signed_out' ? <SignIn notice={session.notice ?? ''} onSignIn={acceptSignIn} /> :
+      <main id="main" className="shell workspace-main session-message" tabIndex={-1}>
+        {session.status === 'signout_failed' ? <>
+          <p className="analysis-error" role="alert">The server could not confirm sign-out.</p>
+          <button className="button button-secondary" type="button" onClick={logout}>Retry sign-out</button>
+        </> : <p role="status">{session.status === 'checking' ? 'Checking local session…' : 'Signing out…'}</p>}
+      </main>}
+  </>
+}
+
+createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)

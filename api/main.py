@@ -11,10 +11,13 @@ from threading import Lock
 import uuid
 import warnings
 
-from fastapi import FastAPI, File, HTTPException, Query, UploadFile
+from fastapi import FastAPI, File, HTTPException, Query, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
+from fastapi.exception_handlers import request_validation_exception_handler
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from PIL import Image, UnidentifiedImageError
+from starlette.datastructures import MutableHeaders
 
 from api.schemas import (BatchPrediction, DISCLAIMER, HealthResponse, ModelInformation,
                          PortalReadyResponse, Prediction, ReadyResponse)
@@ -26,6 +29,24 @@ MAX_BATCH = 64
 MAX_PIXELS = 24_000_000
 ALLOWED = {'image/png': 'PNG', 'image/jpeg': 'JPEG'}
 logger = logging.getLogger('qsart.api')
+
+
+class PrivatePortalResponses:
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope['type'] != 'http' or not scope['path'].startswith('/api/portal/'):
+            return await self.app(scope, receive, send)
+
+        async def send_private(message):
+            if message['type'] == 'http.response.start':
+                headers = MutableHeaders(scope=message)
+                headers['Cache-Control'] = 'no-store'
+                headers['Cross-Origin-Resource-Policy'] = 'same-origin'
+            await send(message)
+
+        return await self.app(scope, receive, send_private)
 
 
 def create_app(engine=None, conformal=None):
@@ -76,6 +97,12 @@ def create_app(engine=None, conformal=None):
     app.state.unavailable = None if engine else 'ArtifactsNotLoaded'
     app.state.inference_lock = Lock()
     app.state.portal_db = None
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request: Request, exc: RequestValidationError):
+        if request.url.path.startswith('/api/portal/'):
+            return JSONResponse(status_code=422, content={'detail': 'Invalid portal request.'})
+        return await request_validation_exception_handler(request, exc)
 
     @app.head('/health', include_in_schema=False)
     @app.get('/health', response_model=HealthResponse)
@@ -185,16 +212,21 @@ def create_app(engine=None, conformal=None):
                 ['CONDITIONAL_SECOND_PASS_COVERAGE_UNVERIFIED'] if row['second_pass_activated'] else []) + (
                 ['CONFORMAL_SET_CONTAINS_ALL_GRADES'] if row.get('conformal_set') == [0, 1, 2, 3, 4] else []))
 
-    @app.post('/predict', response_model=Prediction)
-    async def single(file: UploadFile = File(...),
-                     second_pass: bool = Query(False)):
+    async def screen_image(file: UploadFile, second_pass: bool = False) -> tuple[Prediction, Image.Image]:
         im = await decode(file)
         row = (await run_in_threadpool(predict, [im], float(second_pass)))[0]
         action, reasons = pointwise_action(row['grade_probabilities'],
             1-row['quality']['poor_probability'], row['uncertainty']['entropy'],
             conformal_set=row.get('conformal_set'))
         reasons.append('SINGLE_IMAGE_NO_POPULATION_BUDGET_GUARANTEE')
-        return response(row, str(uuid.uuid4()), 0, action, reasons, 'single_image', datetime.now(timezone.utc))
+        prediction = response(row, str(uuid.uuid4()), 0, action, reasons, 'single_image', datetime.now(timezone.utc))
+        return prediction, im
+
+    @app.post('/predict', response_model=Prediction)
+    async def single(file: UploadFile = File(...), second_pass: bool = Query(False)):
+        prediction, image = await screen_image(file, second_pass)
+        image.close()
+        return prediction
 
     @app.post('/predict/batch', response_model=BatchPrediction)
     async def batch(files: list[UploadFile] = File(...),
@@ -226,6 +258,16 @@ def create_app(engine=None, conformal=None):
 
     from api.research import research_router
     app.include_router(research_router(app))
+    try:
+        from api.portal_auth import router as auth_router
+        from api.portal_cases import case_router
+    except ModuleNotFoundError as exc:
+        if exc.name not in {'services', 'sqlalchemy'}:
+            raise
+    else:
+        app.add_middleware(PrivatePortalResponses)
+        app.include_router(auth_router)
+        app.include_router(case_router(screen_image))
     return app
 
 
