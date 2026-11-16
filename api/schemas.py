@@ -1,5 +1,5 @@
 from typing import Annotated, Any, Literal
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 from qsart.triage_v2 import Action
 
 DISCLAIMER = ('Research prototype. Provisional model outputs are not a diagnosis; '
@@ -26,12 +26,14 @@ class Prediction(BaseModel):
     predicted_grade: int = Field(ge=0, le=4)
     grade_probabilities: list[float] = Field(min_length=5, max_length=5)
     referable_probability: float = Field(ge=0, le=1)
+    severe_probability: float = Field(ge=0, le=1)
     quality: QualityResult
     uncertainty: UncertaintyResult
     action: Action
     reason_codes: list[str]
     second_pass_activated: bool
     processing_time_ms: float = Field(ge=0)
+    inference_timestamp: AwareDatetime
     policy_scope: Literal['single_image', 'cohort']
     policy_version: str = '2.0'
     conformal: dict[str, Any] | None = None

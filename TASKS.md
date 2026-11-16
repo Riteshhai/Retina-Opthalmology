@@ -7,7 +7,7 @@ The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) governs the new platform.
 
 - [x] 1. Verify the React public site, API health bridge, PostgreSQL migration and CPU Compose stack.
 - [x] 2. Verify and document the dataset imports, metadata and split boundaries for QSART-X. Expose the audited cohorts in the local Dataset Catalog.
-- [ ] 3. Connect genuine inference to the new application with honest unavailable states.
+- [x] 3. Verify trained single-image inference and the missing-model state in the local React workspace.
 - [ ] 4. Implement authentication, role enforcement, case review, overrides and private exports.
 - [ ] 5. Run locked patient-level and matched-budget research validation and publish traceable results.
 - [ ] 6. Implement and evaluate adaptive acquisition using paired views and first-view-only routing features.

@@ -1,4 +1,6 @@
+from datetime import datetime, timedelta
 from io import BytesIO
+import pytest
 from fastapi.testclient import TestClient
 from PIL import Image
 from api.main import create_app
@@ -56,10 +58,13 @@ def test_prediction_contract_and_batch():
         assert r.status_code == 200, r.text
         assert r.json()['model_version'] == 'synthetic-software-fixture'
         assert r.json()['policy_scope'] == 'single_image'
+        assert r.json()['severe_probability'] == pytest.approx(.1)
+        assert datetime.fromisoformat(r.json()['inference_timestamp']).utcoffset() == timedelta(0)
         files = [('files', ('x.png', image_bytes(), 'image/png'))]*10
         r = c.post('/predict/batch?review_budget=.2&recapture_budget=.1', files=files)
         assert r.status_code == 200, r.text
         assert len(r.json()['results']) == 10
+        assert len({row['inference_timestamp'] for row in r.json()['results']}) == 1
         assert r.json()['review_rate'] <= .2
         assert r.json()['recapture_rate'] <= .1
 

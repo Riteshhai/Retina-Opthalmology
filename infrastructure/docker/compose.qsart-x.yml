@@ -7,6 +7,19 @@ x-portal-image: &portal-image
     context: .
     target: portal
 
+x-web-runtime: &web-runtime
+  depends_on:
+    api:
+      condition: service_healthy
+  read_only: true
+  tmpfs:
+    - /tmp
+  healthcheck:
+    test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1:8080/']
+    interval: 5s
+    timeout: 3s
+    retries: 12
+
 services:
   db:
     image: postgres:17.12-alpine@sha256:34261f594522cf41dfcb76aefd42b9d201098b0e6b23c9c68733f169e4218b6f
@@ -44,21 +57,20 @@ services:
     image: *portal-image-name
 
   web:
+    <<: *web-runtime
     build: ./apps/web
     image: qsart-x-web:local
     ports:
       - '127.0.0.1:${QSART_WEB_PORT:-18700}:8080'
-    depends_on:
-      api:
-        condition: service_healthy
-    read_only: true
-    tmpfs:
-      - /tmp
-    healthcheck:
-      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1:8080/']
-      interval: 5s
-      timeout: 3s
-      retries: 12
+
+  workspace:
+    <<: *web-runtime
+    build:
+      context: ./apps/web
+      target: local-workspace
+    image: qsart-x-workspace:local
+    ports:
+      - '127.0.0.1:${QSART_WORKSPACE_PORT:-18701}:8080'
 
 volumes:
   portal-data:

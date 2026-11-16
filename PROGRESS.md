@@ -1,5 +1,32 @@
 # Execution log
 
+## 2026-11-16 — connected trained inference to the local React workspace
+
+- Added the loopback-only analysis workspace on port `18701`. It previews a
+  JPG or PNG locally, sends one temporary upload to FastAPI, and displays the
+  loaded DeepDRiD models, calibrated grades, risk estimates, image quality,
+  entropy, conformal set, suggested action and inference time. FastAPI's single
+  and batch responses now include the grade 3 or higher probability and a UTC
+  inference timestamp.
+- Ran `npm test`, `npm run build`, and `npm run build:workspace` in `apps/web`.
+  All four frontend tests and both builds passed. `python -m pytest -q` with
+  genuine DeepDRiD integration passed all 677 tests in 130.56 seconds with one
+  upstream AnyIO deprecation warning. `python -m ruff check .` and the base
+  and overlay `docker compose config --quiet` checks passed.
+- Rebuilt the overlay with `docker compose up --build -d --wait`. Compared
+  the workspace's prediction with direct FastAPI inference on one authorized
+  DeepDRiD pilot validation image. The probabilities, uncertainty, conformal
+  set, policy outputs, and model version matched. The deployment verifier
+  (`python scripts/verify_deployment.py --runtime docker --split validation
+  --require-conformal`) passed the trained single, batch, simulator and overload
+  checks. The public proxy continued to reject uploads, and the workspace
+  enforced its origin, file-type and size checks.
+- Exercised the browser flow on mobile and desktop with a synthetic fixture.
+  Clearing the photo also cleared its analysis. A separate container without
+  model artifacts showed **Model unavailable** and blocked analysis even after
+  file selection. The eligible DeepDRiD Set-C and APTOS test cohorts remain
+  unscored. Sign-in and persistent case review are pending.
+
 ## 2026-11-16 — verified dataset imports and delivered the Dataset Catalog
 
 - Ran `python -u scripts/verify_dataset_imports.py --include-eyeq`. The offline

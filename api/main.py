@@ -1,5 +1,6 @@
 """Temporary uploads are closed; production never substitutes generated predictions."""
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from io import BytesIO
 import hashlib
 import json
@@ -169,13 +170,14 @@ def create_app(engine=None, conformal=None):
             logger.error('Inference failed: %s', type(exc).__name__)
             raise HTTPException(503, 'Model inference failed; no result was produced') from None
 
-    def response(row, request_id, index, action, reasons, scope):
+    def response(row, request_id, index, action, reasons, scope, timestamp):
         return Prediction(
             request_id=request_id, image_index=index,
             **{k: row[k] for k in ('model_version', 'predicted_grade',
                                   'grade_probabilities', 'referable_probability',
                                   'quality', 'uncertainty', 'second_pass_activated',
                                   'processing_time_ms')},
+            severe_probability=min(1., sum(row['grade_probabilities'][3:])), inference_timestamp=timestamp,
             action=action, reason_codes=reasons, policy_scope=scope,
             conformal=row.get('conformal'),
             model_warnings=['RESEARCH_NOT_CLINICALLY_VALIDATED'] + (
@@ -192,7 +194,7 @@ def create_app(engine=None, conformal=None):
             1-row['quality']['poor_probability'], row['uncertainty']['entropy'],
             conformal_set=row.get('conformal_set'))
         reasons.append('SINGLE_IMAGE_NO_POPULATION_BUDGET_GUARANTEE')
-        return response(row, str(uuid.uuid4()), 0, action, reasons, 'single_image')
+        return response(row, str(uuid.uuid4()), 0, action, reasons, 'single_image', datetime.now(timezone.utc))
 
     @app.post('/predict/batch', response_model=BatchPrediction)
     async def batch(files: list[UploadFile] = File(...),
@@ -210,11 +212,11 @@ def create_app(engine=None, conformal=None):
         except BudgetOverloaded as exc:
             raise HTTPException(422, {'code': 'BUDGET_OVERLOADED', 'message': str(exc),
                                      'diagnostics': exc.diagnostics}) from None
-        request_id = str(uuid.uuid4())
+        request_id, timestamp = str(uuid.uuid4()), datetime.now(timezone.utc)
         results = [response(row, request_id, i, action,
                     ['COHORT_BUDGET_ALLOCATION',
                      'PROVISIONAL_NONREFERABLE' if action == Action.AUTO_NONREFERABLE else 'DEFERRED_INTERPRETATION'],
-                    'cohort') for i, (row, action) in enumerate(zip(rows, actions))]
+                    'cohort', timestamp) for i, (row, action) in enumerate(zip(rows, actions))]
         return BatchPrediction(request_id=request_id, results=results,
             review_rate=actions.count(Action.SPECIALIST_REVIEW)/len(rows),
             recapture_rate=actions.count(Action.RECAPTURE)/len(rows),

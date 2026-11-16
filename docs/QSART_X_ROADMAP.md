@@ -12,6 +12,8 @@ checks and decisions.
 flowchart LR
     Visitor[Public visitor] --> Web[React and Vite site]
     Web -->|Health and model readiness| Api[FastAPI]
+    Researcher --> Workspace[Local React image analysis]
+    Workspace -->|Model status and one temporary upload| Api
     Researcher[Local researcher] --> Lab[Streamlit research lab]
     Lab --> Api
     Api --> ML[CPU inference and dual-budget triage]
@@ -23,6 +25,9 @@ flowchart LR
 - `apps/web` provides public pages, a static production build, and a teaching
   walkthrough. The Compose proxy exposes two read-only status endpoints. The
   public pages read their evidence summaries and links from source content.
+  A separate React build serves the loopback-only analysis workspace, with
+  same-origin uploads and the existing model artifacts. The single-image
+  workspace displays the returned action and calibrated estimates.
 - The existing `api`, `qsart` and `dashboard` packages remain the entry points
   for trained inference, policy, and the research lab. Existing scripts and
   benchmark paths keep their structure. New portal data code lives in
@@ -41,7 +46,7 @@ flowchart LR
 | Area | Available | Milestone gap |
 | --- | --- | --- |
 | Dataset management | Verified APTOS 2019, DeepDRiD and IDRiD source manifests and historical audits. DeepDRiD Set-C has 99 eligible four-view patients and remains unscored. | Finish import documentation and preserve every held-out boundary. EyeQ source-photo coverage remains incomplete. |
-| Inference | Local trained DeepDRiD MobileNetV3 grading and quality models, calibration, conformal sidecar, and APTOS EfficientNet-B0 research checkpoints. CPU image and batch inference verified previously. | Connect an authenticated upload flow and clearly distinguish the EfficientNet reference from the deployed model. |
+| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Add authenticated case workflows and role enforcement. |
 | Triage and research | Existing three-action engine, separate capacities with explicit overload, recorded stress and external studies, local lab. | Persist human review, compare patient-level risk at matched budgets, and implement real paired-view acquisition evaluation. |
 | Dependencies | Windows Python 3.11, Node 24 and Docker Desktop in the development environment. | Install the pinned frontend and optional portal dependencies for the new stack. |
 

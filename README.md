@@ -25,13 +25,33 @@ if (-not (Test-Path -LiteralPath .env.qsart-x)) {
 docker compose --env-file .env.qsart-x -f docker-compose.yml -f infrastructure/docker/compose.qsart-x.yml up --build -d --wait
 ```
 
-Open the public site on port `18700`, the local research lab on `18501`, and the
-FastAPI docs on `18000/docs`. The database is private to Compose. The migration
-service provisions the initial schema before the API starts. The API endpoints
+Open the public site on port `18700`, the React analysis workspace on `18701`,
+the local research lab on `18501`, and the FastAPI docs on `18000/docs`.
+The database is private to Compose. The migration service provisions the
+initial schema before the API starts. The API endpoints
 `/health`, `/ready` and `/portal/ready` check service, model and database readiness,
 respectively. Without a local checkpoint, the website still runs and the Demo
 reports that inference is unavailable. The core Compose file remains available
 for the existing API and lab workflow.
+
+### Analyze an image in the local workspace
+
+Open [Retinal image analysis](http://127.0.0.1:18701/). When the status shows
+**Model ready**, choose one authorized JPG or PNG of up to 12 MiB and select
+**Analyze image**. The workspace shows the photo beside the model's five-grade
+distribution, referable and severe DR estimates, estimated poor quality,
+uncertainty, and the suggested action. **Clear** removes the selected photo
+and its result from the page. Set the model paths in the private environment
+file using `.env.qsart-x.example` as a reference. If you add the files after
+the API has started, restart the `api` service using the same Compose files
+and then select **Recheck service status** in the workspace.
+
+The analysis workspace is a separate loopback-only Compose service. Its
+upload bridge requires a same-origin request and forwards only model status
+and single-image analysis. The public site serves its own bundle and status
+routes. This milestone uses browser session state and temporary API uploads.
+Sign-in, role enforcement and persistent case workflows are part of the next
+portal milestone.
 
 ### Develop the public website on Windows
 
@@ -39,17 +59,25 @@ for the existing API and lab workflow.
 Set-Location apps/web
 npm ci
 npm run dev
+```
+
+For the two production bundles, run the following from `apps/web`.
+
+```powershell
+npm test
 npm run build
+npm run build:workspace
 ```
 
 The Vite development proxy checks the existing API on port `18000` by default.
 Set `QSART_API_TARGET` to the local API origin when using a different port.
-The production build lives in `apps/web/dist`. A static deployment serves the
+The public bundle lives in `apps/web/dist`. A static deployment serves the
 public pages and needs an `index.html` fallback for browser routes. Live status
-requires a reachable same-origin API proxy. The local screening backend and
-PostgreSQL run separately. For native API development with an existing PostgreSQL
-database, install `python -m pip install -e '.[portal]'`, set a private
-`QSART_PORTAL_DATABASE_URL`, and run the migration before starting FastAPI.
+requires a reachable same-origin API proxy. Docker runs the `workspace` service
+using `apps/web/dist-workspace` built inside its image. For native API
+development with an existing PostgreSQL database, install
+`python -m pip install -e '.[portal]'`, set a private `QSART_PORTAL_DATABASE_URL`,
+and run the migration before starting FastAPI.
 
 ```powershell
 python -m alembic -c services/api/portal_db/alembic.ini upgrade head
