@@ -7,7 +7,8 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException
 import numpy as np
 
-from api.schemas import (ExperimentList, ExperimentMetrics, ExperimentSummary, PolicyOptions,
+from api.datasets import dataset_catalog
+from api.schemas import (DatasetCatalog, ExperimentList, ExperimentMetrics, ExperimentSummary, PolicyOptions,
                          SimulationRequest, SimulationResponse, TriageConfiguration)
 from qsart.data.idrid_provenance import idrid_source_confirmation
 from qsart.triage_v2 import (Action, BudgetOverloaded, METHODS, PolicyConfig,
@@ -224,6 +225,10 @@ def research_router(app):
                 warnings=warnings+['No allocation was produced; automatic clearance was not forced.'])
         except (ValueError, KeyError, OSError, TypeError) as exc:
             raise HTTPException(422, f'Invalid simulation input or incompatible development cache: {type(exc).__name__}') from None
+
+    @router.get('/research/datasets', response_model=DatasetCatalog)
+    def datasets():
+        return dataset_catalog(os.environ.get('QSART_REPORTS_DIR', 'reports'))
 
     @router.get('/research/experiments', response_model=ExperimentList)
     def experiments():

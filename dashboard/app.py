@@ -12,6 +12,7 @@ from PIL import Image
 import streamlit as st
 
 from api.schemas import DISCLAIMER
+from dashboard.dataset_catalog import show_dataset_catalog
 from dashboard.research_diagnostics import show_mshf_quality, show_referability_gate
 
 st.set_page_config(page_title='QSART Retinal Screening', page_icon='◉', layout='wide')
@@ -652,7 +653,7 @@ with st.sidebar:
     st.caption('LOCAL RESEARCH WORKSPACE')
     page = st.radio('Page', ['Screening Dashboard', 'Retinal Image Analysis',
                             'Batch Screening', 'Triage Policy Simulator', 'Research Analytics',
-                            'Model Comparison', 'Experiment Explorer', 'Model Information'])
+                            'Model Comparison', 'Experiment Explorer', 'Dataset Catalog', 'Model Information'])
     ready = api_get('/ready')
     if ready.get('ready'):
         st.success('Model artifacts loaded')
@@ -979,6 +980,8 @@ elif page == 'Experiment Explorer':
                                    'qsart_experiment.json', 'application/json')
             else:
                 st.warning('The selected experiment details could not be retrieved.')
+elif page == 'Dataset Catalog':
+    show_dataset_catalog(api_get('/research/datasets'))
 else:
     st.subheader('Model information and limitations')
     st.json(api_get('/model/info'))

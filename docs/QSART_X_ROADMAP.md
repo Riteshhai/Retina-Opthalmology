@@ -15,7 +15,7 @@ flowchart LR
     Researcher[Local researcher] --> Lab[Streamlit research lab]
     Lab --> Api
     Api --> ML[CPU inference and dual-budget triage]
-    Api --> Reports[Audited aggregate reports]
+    Api --> Reports[Audited aggregate reports and dataset catalog]
     Api -->|Optional portal readiness| DB[(PostgreSQL)]
     Alembic[Alembic migrations] --> DB
 ```
@@ -44,6 +44,10 @@ flowchart LR
 | Inference | Local trained DeepDRiD MobileNetV3 grading and quality models, calibration, conformal sidecar, and APTOS EfficientNet-B0 research checkpoints. CPU image and batch inference verified previously. | Connect an authenticated upload flow and clearly distinguish the EfficientNet reference from the deployed model. |
 | Triage and research | Existing three-action engine, separate capacities with explicit overload, recorded stress and external studies, local lab. | Persist human review, compare patient-level risk at matched budgets, and implement real paired-view acquisition evaluation. |
 | Dependencies | Windows Python 3.11, Node 24 and Docker Desktop in the development environment. | Install the pinned frontend and optional portal dependencies for the new stack. |
+
+The [dataset catalog and import guide](QSART_X_DATASETS.md) track the dataset
+foundation. The local verifier checks the saved split bindings and original
+photo bytes. EyeQ remains optional and is documented at metadata readiness.
 
 ## Milestones
 

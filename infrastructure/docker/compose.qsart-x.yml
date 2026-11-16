@@ -2,7 +2,7 @@ x-portal-environment: &portal-environment
   QSART_PORTAL_DATABASE_URL: postgresql+psycopg://qsart:${QSART_POSTGRES_PASSWORD:?Set QSART_POSTGRES_PASSWORD in the local QSART-X environment file}@db:5432/qsart
 
 x-portal-image: &portal-image
-  image: qsart-x-api:local
+  image: &portal-image-name qsart-x-api:local
   build:
     context: .
     target: portal
@@ -39,6 +39,9 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+
+  dashboard:
+    image: *portal-image-name
 
   web:
     build: ./apps/web

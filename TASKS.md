@@ -6,7 +6,7 @@ The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) governs the new platform.
 ## QSART-X milestones
 
 - [x] 1. Verify the React public site, API health bridge, PostgreSQL migration and CPU Compose stack.
-- [ ] 2. Verify and document the dataset imports, metadata and split boundaries for QSART-X.
+- [x] 2. Verify and document the dataset imports, metadata and split boundaries for QSART-X. Expose the audited cohorts in the local Dataset Catalog.
 - [ ] 3. Connect genuine inference to the new application with honest unavailable states.
 - [ ] 4. Implement authentication, role enforcement, case review, overrides and private exports.
 - [ ] 5. Run locked patient-level and matched-budget research validation and publish traceable results.

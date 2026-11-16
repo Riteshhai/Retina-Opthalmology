@@ -1,5 +1,29 @@
 # Execution log
 
+## 2026-11-16 — verified dataset imports and delivered the Dataset Catalog
+
+- Ran `python -u scripts/verify_dataset_imports.py --include-eyeq`. The offline
+  check matched 3,662 APTOS, 1,924 DeepDRiD and 516 IDRiD photo SHA-256 values
+  to their frozen records. It preserved the 351-photo APTOS internal test and
+  the eligible DeepDRiD Set-C roster of 396 photos from 99 patients. The IDRiD
+  outcomes remain consumed and external to fitting. Seven EyeQ author files
+  and 28,792 annotations matched the frozen metadata audit. Original EyeQ
+  source-photo readiness remains pending.
+- Added `GET /research/datasets` and the local Streamlit Dataset Catalog. The
+  API verifies report bindings and exposes split roles, aggregate label counts,
+  source access and audit digests. The [dataset guide](docs/QSART_X_DATASETS.md)
+  records the official import and offline verification paths. The public site
+  continues to serve the health and readiness routes through its proxy.
+- Ran `python -m pytest -q tests/test_dataset_catalog.py tests/test_research_api.py
+  tests/test_deepdrid_online.py` (37 passed) and `python -m pytest -q` with
+  genuine DeepDRiD integration (677 passed in 143.31 seconds, one upstream
+  AnyIO warning). Ruff and both Compose configurations passed.
+- Rebuilt the QSART-X API and lab from the shared image. Live Docker AppTest
+  matched 22 population rows and 17 evidence digests across four catalog
+  entries. Verified the catalog in the browser. The trained DeepDRiD
+  deployment check passed for single-image and batch inference, the simulator
+  and overload behavior. No model scoring ran on reserved test photos.
+
 ## 2026-11-16 — built the QSART-X platform foundation
 
 - Preserved the supplied QSART-X prompt and recorded the platform decisions in

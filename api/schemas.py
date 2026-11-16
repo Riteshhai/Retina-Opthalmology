@@ -1,4 +1,4 @@
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 from pydantic import BaseModel, ConfigDict, Field
 from qsart.triage_v2 import Action
 
@@ -153,3 +153,42 @@ class ExperimentMetrics(BaseModel):
     scope: str
     metrics: dict[str, Any]
     notes: list[str]
+
+
+DatasetCount = Annotated[int, Field(strict=True, ge=0)]
+
+
+class DatasetPopulation(BaseModel):
+    name: str
+    role: Literal['fitting', 'selection', 'calibration', 'reserved', 'consumed',
+                  'excluded', 'not_imported', 'metadata_only']
+    observations: DatasetCount | None = None
+    groups: DatasetCount | None = None
+    dr_grade_counts: dict[Literal['0', '1', '2', '3', '4'], DatasetCount] = Field(default_factory=dict)
+    quality_counts: dict[Literal['0', '1', '2'], DatasetCount] = Field(default_factory=dict)
+    transformed_matches: DatasetCount | None = None
+
+
+class DatasetEvidence(BaseModel):
+    report: str
+    sha256: str = Field(pattern='^[0-9a-f]{64}$')
+
+
+class DatasetCatalogEntry(BaseModel):
+    dataset_id: Literal['aptos_2019', 'deepdrid', 'idrid', 'eyeq']
+    name: str
+    purpose: str
+    source_url: str
+    access: str
+    status: Literal['audited', 'metadata_only', 'unavailable']
+    observation_label: Literal['Photos', 'Annotations'] = 'Photos'
+    group_label: Literal['Patients', 'Fingerprint groups', 'Source subject keys']
+    quality_codes: dict[Literal['0', '1', '2'], str] = Field(default_factory=dict)
+    partitions: list[DatasetPopulation] = Field(default_factory=list)
+    study_populations: list[DatasetPopulation] = Field(default_factory=list)
+    evidence: list[DatasetEvidence] = Field(default_factory=list)
+    notes: list[str]
+
+
+class DatasetCatalog(BaseModel):
+    datasets: list[DatasetCatalogEntry]

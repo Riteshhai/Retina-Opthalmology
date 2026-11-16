@@ -56,6 +56,13 @@ python -m alembic -c services/api/portal_db/alembic.ini upgrade head
 python -m uvicorn api.main:app --host 127.0.0.1 --port 18000
 ```
 
+### Check dataset imports
+
+In the local Streamlit research lab, open **Dataset Catalog** to see cohort
+roles, provenance, and label counts. The new catalog uses the saved aggregate
+audits. For official access, private import commands, and the offline check of
+original file hashes and split boundaries, use the [dataset guide](docs/QSART_X_DATASETS.md).
+
 ## Existing QSART research evidence
 
 **Current research specification: [MASTER_SPEC_v1.0](MASTER_SPEC.md), adopted 20–21 October 2026.**
