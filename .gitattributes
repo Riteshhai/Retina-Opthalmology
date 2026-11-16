@@ -12,6 +12,7 @@ configs/eyeq_data_v1.json text eol=lf
 Dockerfile text eol=lf
 *.ps1 text eol=crlf
 # Preserve supplied specification and measured artifact bytes, including CRLF.
+reports/development_v1/data_summary.json -text whitespace=cr-at-eol
 MASTER_SPEC.md -text whitespace=-blank-at-eol,cr-at-eol
 docs/specifications/MASTER_SPEC_v1.0.md -text whitespace=-blank-at-eol,cr-at-eol
 docs/specifications/QSART_X_MASTER_DEVELOPMENT_PROMPT.md -text whitespace=-blank-at-eol,cr-at-eol

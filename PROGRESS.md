@@ -24,6 +24,10 @@
   26 audited scenario records and 16 comparisons. Docker AppTest checked all
   six displayed budget values. Trained DeepDRiD validation passed the existing
   single-image, batch, simulator and overload checks.
+- Linux CI exposed Git line-ending normalization of the frozen development
+  summary. Preserved its original bytes in Git so both checkouts resolve the
+  same input digest. The study report and independent audit retained their
+  original checksums.
 
 ## 2026-11-16 — audited the locked DeepDRiD Set-C patient study
 
