@@ -1,5 +1,30 @@
 # Execution log
 
+## 2026-11-16 — audited the locked DeepDRiD Set-C patient study
+
+- Pushed the [protocol](docs/research/SET_C_VALIDATION_V1_PROTOCOL.md) and
+  source at `eafd13d` before scoring. Ran `python -u scripts/run_set_c_validation.py`
+  with the authorized author package and `--source-commit` at that revision.
+  The frozen first-pass pipeline scored 396 photos from 99 complete patient
+  groups. The excluded Set-C patient supplied no score or outcome.
+- Ran `python scripts/audit_set_c_validation.py`. The audit independently
+  reconstructed both conformal sets, 96 policy allocations or overloads and
+  all 84 paired comparisons. The deployed gate overloaded below full image
+  review capacity and referred all 99 patients at full capacity. All 12 exact
+  workload matches had identical actions. Ran `python scripts/plot_set_c_validation.py`
+  to generate the patient workload figure. [Study results](docs/research/SET_C_VALIDATION_V1_RESULTS.md).
+- Published the audited aggregate in Experiment Explorer and updated Dataset
+  Catalog to distinguish the 400-photo source roster from the evaluated 396.
+  The focused pytest suites passed, including 17 pre-score checks, 28 catalog
+  and research API checks and the new Explorer test. The full `python -m pytest -q`
+  run with genuine DeepDRiD integration passed all 696 tests in 162.98 seconds
+  with one upstream AnyIO warning. Ruff and both Compose configurations passed.
+- Rebuilt with `docker compose up --build -d --wait`. Live Docker AppTest
+  verified all 96 scenarios and 84 comparisons across the three displayed
+  modes. The trained DeepDRiD pilot validation deployment check passed for
+  single-image inference, batch inference and the simulator overload response.
+  Set-C outcomes are now consumed and remain outside fitting and tuning.
+
 ## 2026-11-16 — verified the authenticated screening and review workspace
 
 - Added local account provisioning for the four research roles, revocable

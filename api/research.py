@@ -7,7 +7,8 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException
 import numpy as np
 
-from api.datasets import dataset_catalog
+from api.datasets import (SET_C_AUDIT, SET_C_EVALUATION, SET_C_METRICS, SET_C_VALIDATION_ID,
+                          Reports, audited_set_c_validation, dataset_catalog)
 from api.schemas import (DatasetCatalog, ExperimentList, ExperimentMetrics, ExperimentSummary, PolicyOptions,
                          SimulationRequest, SimulationResponse, TriageConfiguration)
 from qsart.data.idrid_provenance import idrid_source_confirmation
@@ -53,7 +54,8 @@ def experiment_registry(root):
     comparison_path = root/'spec_v1/model_comparison.json'
     if comparison_path.is_file():
         comparison = json.loads(comparison_path.read_text(encoding='utf-8'))
-        records.extend(ExperimentSummary(**row) for row in comparison['experiments'])
+        records.extend(ExperimentSummary(**row) for row in comparison['experiments']
+                       if row['experiment_id'] != SET_C_VALIDATION_ID)
     lock_path = root/'development_v1/selection_lock.json'
     if lock_path.is_file() and not records:
         lock = json.loads(lock_path.read_text(encoding='utf-8'))
@@ -156,6 +158,20 @@ def experiment_registry(root):
             'Historical AUTO_SCREEN triage is not the current AUTO_NONREFERABLE policy.']))
         records.append(ExperimentSummary(experiment_id=name, dataset=raw.get('dataset', 'DeepDRiD'), partition=partition,
             scope=scope, model_version=model_version, metrics=metrics, notes=notes))
+    reports = Reports(root)
+    validation = audited_set_c_validation(reports)
+    if validation is not None:
+        records.append(ExperimentSummary(
+            experiment_id=SET_C_VALIDATION_ID, dataset='DeepDRiD', partition='same_release_held_out',
+            scope='locked_patient_and_matched_budget_validation',
+            model_version=validation['input_provenance']['model_version'],
+            metrics={**{key: validation[key] for key in SET_C_METRICS},
+                     'evaluation_sha256': reports.evidence[SET_C_EVALUATION],
+                     'independent_audit_sha256': reports.evidence[SET_C_AUDIT]},
+            notes=['Set-C is a held-out split of the same DeepDRiD release.',
+                   'Image and patient workload counts describe allocated recommendations.',
+                   'The release records DR grades and photo quality. Follow-up outcomes are unavailable.'],
+        ))
     return records
 
 

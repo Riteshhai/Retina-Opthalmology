@@ -11,6 +11,7 @@ ROLE_LABELS = {
     'fitting': 'Model fitting', 'selection': 'Model selection', 'calibration': 'Calibration',
     'reserved': 'Reserved for evaluation', 'consumed': 'Evaluated', 'excluded': 'Excluded',
     'not_imported': 'Outside the import', 'metadata_only': 'External annotations only',
+    'source_roster': 'Source roster',
 }
 
 

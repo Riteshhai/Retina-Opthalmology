@@ -1,7 +1,79 @@
-"""Explorer views for the saved MSHF quality and DeepDRiD referability reports."""
+"""Explorer views for saved quality and DeepDRiD screening studies."""
 
 import pandas as pd
 import streamlit as st
+
+from qsart.triage_v2 import capacity
+
+
+SET_C_MODES = {'ordinal': 'Deployed ordinal', 'lac': 'LAC diagnostic', 'no_cp': 'No-conformal diagnostic'}
+SET_C_ACTIONS = {'AUTO_NONREFERABLE': 'Fully automatic', 'RECAPTURE': 'Recapture',
+                 'SPECIALIST_REVIEW': 'Specialist review'}
+
+
+def show_set_c_validation(metrics):
+    if not metrics.get('scenarios'):
+        st.info('Audited Set-C results are unavailable.')
+        return
+    st.subheader('DeepDRiD Set-C patient validation')
+    st.caption('This held-out split comes from the same release. Patient grades use the worse eye. '
+               'Patient actions summarize the four photo recommendations.')
+    prediction = metrics['prediction_metrics']
+    left, middle, right = st.columns(3)
+    left.metric('Patients', metrics['patients'])
+    middle.metric('Photos', metrics['images'])
+    right.metric('Patient referable AUROC', f"{prediction['patient_grading']['referable']['auroc']:.3f}")
+    st.dataframe(pd.DataFrame([
+        {'Prediction set': label, 'Photos covered': prediction['conformal'][mode]['covered_images'],
+         'Patients with all views covered': prediction['conformal'][mode]['covered_patients'],
+         'Mean set size': prediction['conformal'][mode]['mean_set_size']}
+        for mode, label in [('ordinal', 'Ordinal'), ('lac', 'LAC')]
+    ]), hide_index=True, width='stretch')
+
+    mode = st.selectbox('Set-C policy mode', list(SET_C_MODES), format_func=SET_C_MODES.__getitem__)
+    rows = []
+    for row in metrics['scenarios']:
+        if row['mode'] != mode:
+            continue
+        review, recapture = row['budget']
+        outcomes = row['outcomes']
+        counts = outcomes['patient_actions'] if outcomes else {}
+        images = outcomes['image_actions'] if outcomes else {}
+        rows.append({'Method': row['method'], 'Image review cap': capacity(review, metrics['images']),
+                     'Image recapture cap': capacity(recapture, metrics['images']),
+                     'Allocation': 'Evaluated' if outcomes else 'Overload',
+                     'Additional image review slots': row['diagnostics']['review_shortfall_after_recapture']
+                     if row['diagnostics'] else None, 'Image reviews': images.get('SPECIALIST_REVIEW'),
+                     'Image recaptures': images.get('RECAPTURE'),
+                     **{label: counts.get(action) for action, label in SET_C_ACTIONS.items()},
+                     'Severe photo misses': outcomes['missed_severe_images'] if outcomes else None,
+                     'Referable patients cleared': outcomes['fully_automatic_referable_patients'] if outcomes else None,
+                     'Additional patient review slots': row['patient_capacity']['review_shortfall']})
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width='stretch')
+    st.caption('The patient shortfall uses pointwise recommendations and patient caps. '
+               'Recommendations for review and recapture have no observed follow-up outcome.')
+
+    pairs = [row for row in metrics['comparisons'] if row['mode'] == mode]
+    exact = sum(row['matched_image_workload'] is True and row['matched_patient_workload'] is True for row in pairs)
+    identical = sum(row['identical_image_actions'] is True for row in pairs)
+    st.subheader('Observed workload comparisons')
+    st.write(f'{exact} of {len(pairs)} pairs matched both image and patient workloads. '
+             f'{identical} pairs made identical image recommendations.')
+    with st.expander('Paired results'):
+        pairs_table = []
+        for row in pairs:
+            review, recapture = row['budget']
+            effect = (row['intervals'] or {}).get('patient_weighted_missed_referral_per_patient')
+            pairs_table.append({'Comparator': row['reference'].split(':')[1], 'Caps': f'{review:.0%} / {recapture:.0%}',
+                                'Both arms feasible': row['status'] == 'comparison',
+                                'Image workload match': row['matched_image_workload'],
+                                'Patient workload match': row['matched_patient_workload'],
+                                'Identical actions': row['identical_image_actions'],
+                                'Weighted miss difference': effect['difference_candidate_minus_reference'] if effect else None,
+                                '95% lower': effect['ci95'][0] if effect else None,
+                                '95% upper': effect['ci95'][1] if effect else None})
+        st.dataframe(pd.DataFrame(pairs_table), hide_index=True, width='stretch')
+    st.caption('Paired intervals describe the measured patients and their fixed actions.')
 
 
 POPULATION_NAMES = {

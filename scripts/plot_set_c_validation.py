@@ -40,6 +40,7 @@ def main():
         scenarios = [row for row in report['scenarios'] if row['mode'] == mode and row['method'] == 'dual_budget']
         axis.set_title(title, fontsize=11, loc='left', weight='bold', pad=12)
         axis.set_ylim(0, 106)
+        axis.set_xlim(-.58, 3.58)
         axis.set_xticks(range(4), [f'{review:.0%}\n{recapture:.0%}' for review, recapture in report['budget_pairs']])
         axis.tick_params(length=0)
         axis.set_axisbelow(True)

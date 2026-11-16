@@ -3,9 +3,20 @@
 import hashlib
 import json
 from pathlib import Path
+import re
 
 from api.schemas import DatasetCatalog, DatasetCatalogEntry, DatasetEvidence, DatasetPopulation
 from qsart.data.idrid_provenance import idrid_source_confirmation
+
+
+SET_C_VALIDATION_ID = 'set_c_validation_v1'
+SET_C_READINESS = 'deepdrid_online_readiness_v1/evaluation.json'
+SET_C_READINESS_AUDIT = 'deepdrid_online_readiness_v1/independent_audit.json'
+SET_C_EVALUATION = f'{SET_C_VALIDATION_ID}/evaluation.json'
+SET_C_AUDIT = f'{SET_C_VALIDATION_ID}/independent_audit.json'
+SET_C_METRICS = ('images', 'patients', 'prediction_metrics', 'policy', 'budget_pairs',
+                 'pointwise', 'scenarios', 'comparisons', 'source_commit')
+SET_C_PRIVATE_FIELDS = ('image_id', 'patient_id', 'subject_id', 'image_path', 'private_witness_sha256')
 
 
 class Reports:
@@ -27,6 +38,47 @@ class Reports:
         if receipt[status_field] != 'passed' or receipt[digest_field] != self.evidence[name]:
             raise ValueError('Dataset report does not match its independent audit')
         return data
+
+
+def audited_set_c_validation(reports, readiness=None):
+    """Return the matched evaluation and register its evidence only after verification."""
+    optional = Reports(reports.root)
+    try:
+        study = optional.read(SET_C_EVALUATION)
+        receipt = optional.read(SET_C_AUDIT)
+        if readiness is None:
+            readiness = optional.audited(SET_C_READINESS, 'evaluation_sha256')
+            readiness_digests = optional.evidence
+        else:
+            readiness_digests = reports.evidence
+        provenance = study['input_provenance']
+        digests = provenance['artifact_sha256']
+        counts = readiness['population']
+        source_commit = study['source_commit']
+        serialized = json.dumps({key: study[key] for key in SET_C_METRICS}, allow_nan=False)
+        if (
+            study['experiment_id'] != SET_C_VALIDATION_ID or receipt['experiment_id'] != SET_C_VALIDATION_ID
+            or study['partition'] != 'same_release_held_out' or study['model_inference_performed'] is not True
+            or readiness['model_inference_performed'] is not False or receipt['audit_status'] != 'passed'
+            or receipt['evaluation_sha256'] != optional.evidence[SET_C_EVALUATION]
+            or receipt['source_commit'] != source_commit or re.fullmatch(r'[0-9a-f]{40}', source_commit) is None
+            or receipt['private_witness_sha256'] != study['private_witness_sha256']
+            or re.fullmatch(r'[0-9a-f]{64}', study['private_witness_sha256']) is None
+            or receipt['input_artifact_sha256'] != digests
+            or digests['readiness_report'] != readiness_digests[SET_C_READINESS]
+            or digests['readiness_audit'] != readiness_digests[SET_C_READINESS_AUDIT]
+            or digests['readiness_witness'] != readiness['witness_sha256']
+            or provenance['source_release'] != readiness['source_release']
+            or (study['images'], study['patients']) != (counts['eligible_images'], counts['eligible_patients'])
+            or any(receipt[key] != study[key] for key in ('images', 'patients'))
+            or not isinstance(provenance['model_version'], str) or not provenance['model_version']
+            or any(f'"{field}":' in serialized for field in SET_C_PRIVATE_FIELDS)
+        ):
+            return None
+    except (KeyError, OSError, TypeError, ValueError):
+        return None
+    reports.evidence.update(optional.evidence)
+    return study
 
 
 def population(name, role, values, *, group_key=None, dr_key='dr_grade_counts', matches=None):
@@ -68,7 +120,7 @@ def aptos(reports):
 def deepdrid(reports):
     summary = reports.read('development_v1/data_summary.json')
     confirmation = reports.read('confirmation_v1/evaluation.json')
-    online = reports.audited('deepdrid_online_readiness_v1/evaluation.json', 'evaluation_sha256')
+    online = reports.audited(SET_C_READINESS, 'evaluation_sha256')
     coverage = online['prior_manifest_coverage']
     if (summary['cross_cohort_audit']['passed'] is not True or online['model_inference_performed'] is not False
             or any(summary[key]['manifest_sha256'] != coverage[key]['sha256'] for key in (
@@ -83,17 +135,20 @@ def deepdrid(reports):
                       ('train', 'Set-A fitting', 'fitting'), ('validation', 'Set-A selection', 'selection'),
                       ('calibration', 'Set-A calibration', 'calibration'))]
     counts = online['population']
+    evaluated = audited_set_c_validation(reports, online) is not None
     partitions.extend([
         population('Set-B historical confirmation', 'consumed', summary['confirmation_v1']['partitions']['holdout'],
                    group_key='subjects'),
-        population('Set-C online challenge', 'reserved', {
+        population('Set-C source roster' if evaluated else 'Set-C online challenge',
+                   'source_roster' if evaluated else 'reserved', {
             'images': counts['images'], 'patients': counts['patients'],
             'dr_grade_counts': online['labels']['image_grade_counts'],
             'quality_counts': online['labels']['overall_quality_counts'],
         }, group_key='patients'),
     ])
     return partitions, [
-        DatasetPopulation(name='Set-C eligible for locked evaluation', role='reserved',
+        DatasetPopulation(name='Set-C locked evaluation' if evaluated else 'Set-C eligible for locked evaluation',
+                          role='consumed' if evaluated else 'reserved',
                           observations=counts['eligible_images'], groups=counts['eligible_patients']),
         DatasetPopulation(name='Set-C overlap exclusion', role='excluded',
                           observations=counts['images'] - counts['eligible_images'], groups=counts['excluded_patients']),

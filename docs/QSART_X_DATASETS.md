@@ -13,7 +13,7 @@ photos or trained model files.
 | Dataset | Imported and checked | QSART use |
 | --- | --- | --- |
 | APTOS 2019 | 3,662 labeled PNGs. 148 excluded through whole-component conflict quarantine. | 2,115 fitting, 521 selection, 527 calibration, and 351 reserved internal-test photos. The separate competition test was outside the import. |
-| DeepDRiD regular fundus | 1,184 Set-A development photos, 340 Set-B confirmation photos, and 400 Set-C photos. | Set-A roles use patient-disjoint groups. Set-B confirmation outcomes are consumed. Set-C remains unscored. Its locked overlap screen leaves 396 eligible photos from 99 patients. |
+| DeepDRiD regular fundus | 1,184 Set-A development photos, 340 Set-B confirmation photos, and 400 Set-C photos. | Set-A roles use patient-disjoint groups. Set-B confirmation outcomes are consumed. The locked Set-C study evaluated 396 eligible photos from 99 patients. One complete patient was excluded. |
 | IDRiD grading | 516 photos, including 413 and 103 in the two original source splits. | Both source splits are external to QSART. Its 516, 513 and 505-photo views are overlapping sensitivity populations with previously observed outcomes. |
 | EyeQ | 28,792 author annotations. The transformed mirror matches 12,529 of 12,543 author-train annotations and zero of 16,249 author-test annotations. | Metadata readiness only. Original photos, cross-source overlap, and a quality harmonization protocol remain pending. |
 
@@ -25,7 +25,7 @@ when a protocol uses all four photos. In IDRiD, macular edema risk remains a
 separate source label. EyeQ retains the Good, Usable and Reject categories.
 [APTOS audit](research/APTOS_V1_RESULTS.md) ·
 [DeepDRiD data contract](DATA_SCHEMA.md) ·
-[Set-C audit](research/DEEPDRID_ONLINE_READINESS_V1_RESULTS.md) ·
+[Set-C audit](research/DEEPDRID_ONLINE_READINESS_V1_RESULTS.md) · [Set-C validation](research/SET_C_VALIDATION_V1_RESULTS.md) ·
 [IDRiD results](research/IDRID_EXTERNAL_V1_RESULTS.md) ·
 [EyeQ cache coverage](research/EYEPACS_HF_V1_RESULTS.md).
 

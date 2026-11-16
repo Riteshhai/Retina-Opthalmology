@@ -163,7 +163,7 @@ DatasetCount = Annotated[int, Field(strict=True, ge=0)]
 class DatasetPopulation(BaseModel):
     name: str
     role: Literal['fitting', 'selection', 'calibration', 'reserved', 'consumed',
-                  'excluded', 'not_imported', 'metadata_only']
+                  'excluded', 'not_imported', 'metadata_only', 'source_roster']
     observations: DatasetCount | None = None
     groups: DatasetCount | None = None
     dr_grade_counts: dict[Literal['0', '1', '2', '3', '4'], DatasetCount] = Field(default_factory=dict)

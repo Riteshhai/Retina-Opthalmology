@@ -13,7 +13,7 @@ import streamlit as st
 
 from api.schemas import DISCLAIMER
 from dashboard.dataset_catalog import show_dataset_catalog
-from dashboard.research_diagnostics import show_mshf_quality, show_referability_gate
+from dashboard.research_diagnostics import show_mshf_quality, show_referability_gate, show_set_c_validation
 
 st.set_page_config(page_title='QSART Retinal Screening', page_icon='◉', layout='wide')
 st.title('QSART — AI-Assisted Retinal Screening Research Prototype')
@@ -946,6 +946,8 @@ elif page == 'Experiment Explorer':
                     show_mshf_quality(detail.get('metrics', {}))
                 elif chosen == 'referability_gate_v1':
                     show_referability_gate(detail.get('metrics', {}))
+                elif chosen == 'set_c_validation_v1':
+                    show_set_c_validation(detail.get('metrics', {}))
                 elif chosen == 'aptos_development_v1':
                     show_aptos_experiment(detail.get('metrics', {}))
                 elif chosen == 'aptos_finetune_v1':

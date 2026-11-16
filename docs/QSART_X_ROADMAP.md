@@ -47,9 +47,9 @@ flowchart LR
 
 | Area | Available | Milestone gap |
 | --- | --- | --- |
-| Dataset management | Verified APTOS 2019, DeepDRiD and IDRiD source manifests and historical audits. DeepDRiD Set-C has 99 eligible four-view patients and remains unscored. | Finish import documentation and preserve every held-out boundary. EyeQ source-photo coverage remains incomplete. |
-| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Execute the locked research validation before drawing conclusions about screening utility. |
-| Triage and research | Existing three-action engine, separate capacities with explicit overload, recorded stress and external studies, local lab. | Persist human review, compare patient-level risk at matched budgets, and implement real paired-view acquisition evaluation. |
+| Dataset management | Verified APTOS 2019, DeepDRiD and IDRiD source manifests and historical audits. The locked DeepDRiD Set-C study evaluated 99 eligible four-view patients. | Preserve every held-out boundary. EyeQ source-photo coverage remains incomplete. |
+| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Study paired acquisition with first-view information and patient-disjoint splits. |
+| Triage and research | Three-action engine, persistent human review, workload limits, and audited stress, external and Set-C studies. The deployed Set-C gate needed full review capacity. | Establish useful automatic triage and evaluate adaptive paired-view acquisition. |
 | Dependencies | Windows Python 3.11, Node 24 and Docker Desktop in the development environment. | Install the pinned frontend and optional portal dependencies for the new stack. |
 
 The [dataset catalog and import guide](QSART_X_DATASETS.md) track the dataset

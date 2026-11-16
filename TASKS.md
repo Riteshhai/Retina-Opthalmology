@@ -9,7 +9,7 @@ The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) governs the new platform.
 - [x] 2. Verify and document the dataset imports, metadata and split boundaries for QSART-X. Expose the audited cohorts in the local Dataset Catalog.
 - [x] 3. Verify trained single-image inference and the missing-model state in the local React workspace.
 - [x] 4. Verify authentication, role enforcement, persistent case review, overrides and private reports in the local workspace.
-- [ ] 5. Run locked patient-level and matched-budget research validation and publish traceable results.
+- [x] 5. Execute and audit locked Set-C patient validation, publish all matched-budget scenarios and link preserved stress and external results.
 - [ ] 6. Implement and evaluate adaptive acquisition using paired views and first-view-only routing features.
 - [ ] 7. Verify the release and prepare manuscript materials from audited outcomes.
 
@@ -52,9 +52,9 @@ The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) governs the new platform.
 - [x] P1 Publish both MSHF and referability studies in Experiment Explorer and verify every recorded population and capacity setting against the audited reports in Docker.
 - [x] P1 Reconstruct patient outcomes for the frozen referability actions, enumerate 24 patient-capacity scenarios and verify prospective exact-binomial planning counts.
 - [x] P1 Authenticate and independently audit the official DeepDRiD Set-C photos, grading and quality labels, and patient-level overlap exclusions against complete regular Set-A/B.
-- [ ] P1 Lock and run a same-release held-out patient-level triage study on the eligible DeepDRiD Set-C cohort.
+- [x] P1 Lock, run and independently audit same-release held-out triage on the frozen 99-patient DeepDRiD Set-C cohort.
 - [x] P1 Compare flip inference rankings at matched extra-pass counts and verify paired outcomes, exact random selection distributions and trained CPU replays.
-- [ ] P1 IN PROGRESS: useful validated automatic triage; all 19 actual-workload-matched policy pairs have identical actions.
+- [ ] P1 IN PROGRESS: useful validated automatic triage. All 19 matched development pairs and all 12 exactly matched Set-C pairs made identical actions.
 - [x] P1 Execute predeclared seven-condition controlled degradation on 168 selection images / 42 patients; retain unfavorable quality/coverage responses.
 - [x] P1 Execute locked IDRiD external-domain diagnostics with four frozen classifiers, all source transforms and full/filtered sensitivity views; retain independence/label limitations.
 - [ ] P1 Broader independent external/prospective validation and distribution-shift studies; IDRiD outcomes are now consumed and cannot guide final tuning.

@@ -200,8 +200,12 @@ JSON export.
 The DeepDRiD Set-C readiness audit verifies the online challenge as a separate
 split of the same release, including both annotation workbooks, four-view
 patient grouping, and overlap screening against the complete regular training
-and validation sets. Set-C remains reserved for a locked patient-level
-evaluation. [Set-C readiness results](docs/research/DEEPDRID_ONLINE_READINESS_V1_RESULTS.md).
+and validation sets. The locked Set-C study scored 396 photos from 99 eligible
+patients. The deployed ordinal policy overloaded below full review capacity
+and recommended specialist review for all 99 patients at full capacity.
+All 12 policy pairs matched on image and patient workloads made identical
+image recommendations. [Set-C readiness](docs/research/DEEPDRID_ONLINE_READINESS_V1_RESULTS.md) ·
+[Set-C validation results](docs/research/SET_C_VALIDATION_V1_RESULTS.md).
 
 The [matched quality adaptation study](docs/research/QUALITY_ADAPTATION_V1_RESULTS.md)
 completed all six 15-epoch runs on reused development data. Mean four-head macro-F1
