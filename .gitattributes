@@ -3,6 +3,7 @@
 *.md text eol=lf
 *.toml text eol=lf
 *.yaml text eol=lf
+requirements.txt text eol=lf
 .env.example text eol=lf
 configs/idrid_data_v1.json text eol=lf
 configs/idrid_external_v1.json text eol=lf
@@ -48,3 +49,4 @@ reports/fdr26_readiness_v1/** -text whitespace=cr-at-eol
 reports/fdr26_grading_v1/** -text whitespace=cr-at-eol
 reports/fdr26_aptos_v1/** -text whitespace=cr-at-eol
 reports/deepdrid_online_readiness_v1/** -text whitespace=cr-at-eol
+reports/set_c_validation_v1/** -text whitespace=cr-at-eol
