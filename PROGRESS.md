@@ -1,5 +1,21 @@
 # Execution log
 
+## 2026-11-16 — linked audited results from the QSART-X website
+
+- Updated the public-facing home and Research pages to show the Set-C review
+  requirements and the paired-view result, including the uncertainty in all
+  16 matched-workload intervals. Updated dataset and project status labels to
+  reflect the completed research release. The architecture labels second-view
+  acquisition as a retrospective study.
+- The Publications page now links the unpublished author-review manuscript,
+  its evidence table, and both audited study reports. Verified all 17 distinct
+  research-document targets against the pinned source revision `da3b01a`.
+- All six web tests, both production builds, Ruff, and 36 focused research
+  tests passed. Rebuilt and restarted the loopback Docker website service.
+  Browser checks covered the study and manuscript links, mobile navigation
+  and page width, and the live Demo status, which reported the API online and
+  the trained model ready.
+
 ## 2026-11-16 — prepared the manuscript for author review
 
 - Added the [IEEEtran manuscript](docs/research/QSART_X_MANUSCRIPT.tex) and

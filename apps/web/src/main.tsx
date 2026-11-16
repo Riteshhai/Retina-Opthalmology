@@ -192,7 +192,7 @@ function Home() {
         <div className="shell hero-grid">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow"><span /> Retinal screening research</p>
-            <h1>Smarter retinal screening.<br /><span>Safer decisions.</span></h1>
+            <h1>Retinal screening <span>under capacity limits</span></h1>
             <p className="hero-intro">
               QSART-X studies how image quality, disease severity and uncertainty can guide retinal screening
               when repeat imaging and specialist review have separate capacity limits.
@@ -247,7 +247,7 @@ function Home() {
       <Datasets />
       <section className="section">
         <div className="shell split-section">
-          <SectionHeading eyebrow="Project roadmap" title="From retrospective studies to a research workspace">
+          <SectionHeading eyebrow="Project status" title="The local research release">
             M.Tech in Artificial Intelligence and Machine Learning, VIT Vellore.
           </SectionHeading>
           <ol className="roadmap">
@@ -318,7 +318,7 @@ const stages = {
   uncertainty: { name: 'Uncertainty estimation', icon: CircleHelp, body: 'The pipeline summarizes predictive uncertainty and can generate a set of plausible grades using source-calibrated conformal methods.' },
   decision: { name: 'Decision engine', icon: SlidersHorizontal, body: 'The workflow combines severity, quality and uncertainty criteria under independent budgets for repeat imaging and specialist review.' },
   action: { name: 'Screening action', icon: ClipboardCheck, body: 'The policy can recommend automated non-referable disposition, another image or specialist review. It reports overload when required deferrals exceed capacity.' },
-  second: { name: 'Second-view acquisition', icon: ImagePlus, body: 'This proposed extension estimates the benefit of acquiring another view, based on the first view and the cost of acquisition. Retrospective paired photographs provide the evaluation input.' },
+  second: { name: 'Second-view acquisition', icon: ImagePlus, body: 'The retrospective study ranks the expected value of a second recorded field using first-view information. Compare the fixed acquisition workloads in the research lab.' },
 } satisfies Record<string, { name: string; icon: typeof Camera; body: string }>
 
 type Stage = keyof typeof stages
@@ -331,7 +331,7 @@ function Architecture() {
       <button key={stage} className={`stage-node ${stage === 'second' ? 'stage-proposed' : ''}`}
         type="button" aria-pressed={stage === active} onClick={() => setActive(stage)}>
         <Icon size={21} aria-hidden="true" />
-        <span>{name}{stage === 'second' && <small>Proposed extension</small>}</span>
+        <span>{name}{stage === 'second' && <small>Retrospective study</small>}</span>
       </button>
     )
   }
