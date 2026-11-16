@@ -4,7 +4,8 @@ The [QSART-X master development prompt](specifications/QSART_X_MASTER_DEVELOPMEN
 governs new platform work. [MASTER_SPEC v1.0](specifications/MASTER_SPEC_v1.0.md)
 remains the reference for frozen QSART behavior and historical evidence. The
 [backlog](../TASKS.md) tracks work and the [execution log](../PROGRESS.md) records
-checks and decisions.
+checks and decisions. The [release guide](QSART_X_RELEASE.md) documents the
+verified local Compose stack, measured CPU profiles and manuscript materials.
 
 ## Architecture
 
@@ -43,14 +44,13 @@ flowchart LR
   storage. Public pages use a generated retinal illustration and published
   aggregate evidence. The app uses trained artifacts when locally installed.
 
-## Starting inventory
+## Current inventory
 
-| Area | Available | Milestone gap |
+| Area | Available | Remaining evidence gap |
 | --- | --- | --- |
 | Dataset management | Verified APTOS 2019, DeepDRiD and IDRiD source manifests and historical audits. The locked DeepDRiD Set-C study evaluated 99 eligible four-view patients. | Preserve every held-out boundary. EyeQ source-photo coverage remains incomplete. |
-| Inference | Local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Verify the full release and document validated operating limits. |
+| Inference | Verified local React single-image analysis and Streamlit batch screening use the selected trained DeepDRiD MobileNetV3 grading and quality models, calibration and conformal sidecar. APTOS EfficientNet-B0 checkpoints support separate research comparisons. | Host and workload coverage is limited to the local CPU research benchmark. |
 | Triage and research | Three-action engine, persistent human review, workload limits, and audited stress, external, Set-C and paired-view studies. The deployed Set-C gate needed full review capacity. | Establish useful automatic triage and test paired-view acquisition on an independent cohort. |
-| Dependencies | Windows Python 3.11, Node 24 and Docker Desktop in the development environment. | Install the pinned frontend and optional portal dependencies for the new stack. |
 
 The [dataset catalog and import guide](QSART_X_DATASETS.md) track the dataset
 foundation. The local verifier checks the saved split bindings and original

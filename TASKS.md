@@ -11,7 +11,7 @@ The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) governs the new platform.
 - [x] 4. Verify authentication, role enforcement, persistent case review, overrides and private reports in the local workspace.
 - [x] 5. Execute and audit locked Set-C patient validation, publish all matched-budget scenarios and link preserved stress and external results.
 - [x] 6. Fit and independently audit first-view acquisition rankings on paired DeepDRiD fields and publish the six-budget simulator.
-- [ ] 7. Verify the release and prepare manuscript materials from audited outcomes.
+- [x] 7. Verify the local Docker research release, profile CPU inference, and prepare manuscript materials from audited outcomes.
 
 ## Specification-v1 priorities — current on 14 November 2026
 

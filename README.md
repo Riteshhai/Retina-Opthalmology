@@ -6,6 +6,8 @@ A local, CPU-compatible **research prototype** with trained DR and image-quality
 
 The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) describes the React website,
 FastAPI and PostgreSQL foundation alongside the existing QSART research tools.
+The [local research release guide](docs/QSART_X_RELEASE.md) links the verified
+Docker workflow, CPU measurements, and manuscript materials.
 
 ### Start QSART-X locally with Docker
 

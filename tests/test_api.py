@@ -75,3 +75,22 @@ def test_reject_corrupt_unsupported_and_mismatched_mime():
         assert c.post('/predict', files={'file': ('x.png', b'broken', 'image/png')}).status_code == 422
         assert c.post('/predict', files={'file': ('x.jpg', image_bytes(), 'image/jpeg')}).status_code == 415
         assert c.post('/predict').status_code == 422
+
+
+def test_rejected_batch_releases_images_decoded_so_far(monkeypatch):
+    original = Image.Image.convert
+    decoded = []
+
+    def remember(image, *args, **kwargs):
+        converted = original(image, *args, **kwargs)
+        decoded.append(converted)
+        return converted
+
+    monkeypatch.setattr(Image.Image, 'convert', remember)
+    files = [('files', ('valid.png', image_bytes(), 'image/png')),
+             ('files', ('corrupt.png', b'broken', 'image/png'))]
+    with TestClient(create_app(SoftwareFixture())) as client:
+        assert client.post('/predict/batch', files=files).status_code == 422
+    assert len(decoded) == 1
+    with pytest.raises(ValueError, match='closed image'):
+        decoded[0].getpixel((0, 0))

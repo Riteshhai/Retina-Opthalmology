@@ -1,5 +1,35 @@
 # Execution log
 
+## 2026-11-16 — verified the QSART-X local research release
+
+- Hardened workspace request limits and release of uploaded files and decoded
+  images. The disposable Docker project passed authorized screening and review,
+  role and owner isolation, metadata removal, private reporting and rejection
+  of invalid uploads. A full stop and restart with the same volumes preserved
+  the case, image, original prediction, reviewer history and private report.
+  A separate live API without artifacts returned 503 for readiness and
+  prediction. The main local stack passed real DeepDRiD development validation
+  inference and simulation. [Verification receipt](reports/qsart_x_release_v1/verification.json).
+- Profiled the same frozen model and 12 verified development images at one,
+  two and four CPU threads. First-view median request times were 184.1, 181.8
+  and 181.3 ms. All compared decisions agreed and numerical outputs met the
+  `1e-6` absolute tolerance. The Compose default uses two threads. The
+  benchmark records tail latency and peak memory for this host.
+  [CPU profiles](reports/qsart_x_release_v1/cpu_profiles.json).
+- Replayed both independent checks using saved private witnesses. The live
+  API exposed 30 experiments and returned 96 scenarios and 84 comparisons for
+  Set-C and 26 scenarios and 16 comparisons for paired views. Both report and
+  audit digests matched. A dataset import recheck verified DeepDRiD, IDRiD and
+  APTOS source photographs and confirmed EyeQ metadata readiness. The audit
+  replays used saved scores.
+- The full `python -m pytest -q` run with trained DeepDRiD integration passed
+  719 tests in 149.45 seconds with one upstream AnyIO deprecation warning.
+  Ruff, both Compose configurations, both frontend builds and the generated
+  IEEE LaTeX table check passed. The [release guide](docs/QSART_X_RELEASE.md)
+  links the [manuscript draft](docs/research/QSART_X_MANUSCRIPT.md),
+  [evidence table](docs/research/QSART_X_EVIDENCE_TABLE.md) and
+  [LaTeX export](docs/research/QSART_X_TABLES.tex).
+
 ## 2026-11-16 — evaluated paired-view acquisition at exact workloads
 
 - Pushed the [protocol](docs/research/PAIRED_VIEW_V1_PROTOCOL.md) and source at

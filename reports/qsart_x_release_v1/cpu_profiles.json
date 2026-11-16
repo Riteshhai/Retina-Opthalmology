@@ -1,0 +1,217 @@
+{
+  "date_utc": "2026-11-16T17:30:35.292245+00:00",
+  "status": "measured",
+  "scope": "Sequential loopback HTTP timing of a real frozen model on one Docker host",
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "partition": "Set-A development validation",
+  "sample_rule": "First twelve frozen selection rows in manifest order; bytes checked by SHA-256",
+  "sample_images": 12,
+  "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "sample_roster_sha256": "3a558461b20cfa92c5964bfdaaa8b4aab81dd500b17f89a10c269622c0c19221",
+  "benchmark_source_sha256": "b783047105f7d01477eb2d964464b081d9952eb9e640080abdd0c3789e3ecdde",
+  "repeats": 3,
+  "warmup_requests_per_target": 2,
+  "batch_compute_profile": "Batch requests of four use one horizontal-flip extra pass",
+  "schedule": "Requests run one at a time, rotating target order per request and workload order per repeat",
+  "runtime": {
+    "docker_image_id": "sha256:ed4e261deb94553265608cc458b464f32de272b7ddc7dc035ab68929e91c7f6e",
+    "artifact_sha256": {
+      "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+      "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+      "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+      "model_card": "43830695b8362aabd06df0d5dfa65b01086db9da2db3212001ac98b8b0e4710f",
+      "conformal": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221"
+    },
+    "machine": "x86_64",
+    "cpu_model": "12th Gen Intel(R) Core(TM) i5-12500H",
+    "cpu_affinity_count": 16,
+    "cpu_max": "max 100000",
+    "python": "3.11.17",
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "pillow": "10.4.0"
+  },
+  "profiles_by_thread_count": {
+    "1": {
+      "cpu_threads": 1,
+      "profiles": {
+        "single_first": {
+          "requests": 36,
+          "images": 36,
+          "request_batch_size": 1,
+          "mean_request_ms": 211.53911387793616,
+          "p50_request_ms": 184.05739997979254,
+          "p95_request_ms": 363.05184999946505,
+          "amortized_wall_ms_per_image": 211.53911387793616,
+          "mean_preprocessing_model_ms_per_image": 172.35111336112317,
+          "second_passes": 0,
+          "second_pass_fraction": 0.0,
+          "requested_second_pass_budget": 0.0
+        },
+        "single_extra": {
+          "requests": 36,
+          "images": 36,
+          "request_batch_size": 1,
+          "mean_request_ms": 231.51114167154043,
+          "p50_request_ms": 198.30809999257326,
+          "p95_request_ms": 367.03147494699806,
+          "amortized_wall_ms_per_image": 231.51114167154043,
+          "mean_preprocessing_model_ms_per_image": 191.49817169438342,
+          "second_passes": 36,
+          "second_pass_fraction": 1.0,
+          "requested_second_pass_budget": 1.0
+        },
+        "batch_budget25": {
+          "requests": 9,
+          "images": 36,
+          "request_batch_size": 4,
+          "mean_request_ms": 823.8942555617541,
+          "p50_request_ms": 757.9911999637261,
+          "p95_request_ms": 1125.0200600130484,
+          "amortized_wall_ms_per_image": 205.97356389043853,
+          "mean_preprocessing_model_ms_per_image": 172.04263861104766,
+          "second_passes": 9,
+          "second_pass_fraction": 0.25,
+          "requested_second_pass_budget": 0.25
+        }
+      },
+      "memory": {
+        "api_vm_hwm_kib": 643592,
+        "api_vm_rss_kib": 514196,
+        "container_cgroup_memory_peak_bytes": 515231744
+      }
+    },
+    "2": {
+      "cpu_threads": 2,
+      "profiles": {
+        "single_first": {
+          "requests": 36,
+          "images": 36,
+          "request_batch_size": 1,
+          "mean_request_ms": 212.46566109281653,
+          "p50_request_ms": 181.78749992512167,
+          "p95_request_ms": 387.3299249971751,
+          "amortized_wall_ms_per_image": 212.46566109281653,
+          "mean_preprocessing_model_ms_per_image": 174.94352086108242,
+          "second_passes": 0,
+          "second_pass_fraction": 0.0,
+          "requested_second_pass_budget": 0.0
+        },
+        "single_extra": {
+          "requests": 36,
+          "images": 36,
+          "request_batch_size": 1,
+          "mean_request_ms": 208.30146388875113,
+          "p50_request_ms": 192.12530000368133,
+          "p95_request_ms": 298.0716999154538,
+          "amortized_wall_ms_per_image": 208.30146388875113,
+          "mean_preprocessing_model_ms_per_image": 171.6891321667112,
+          "second_passes": 36,
+          "second_pass_fraction": 1.0,
+          "requested_second_pass_budget": 1.0
+        },
+        "batch_budget25": {
+          "requests": 9,
+          "images": 36,
+          "request_batch_size": 4,
+          "mean_request_ms": 892.6707333367732,
+          "p50_request_ms": 747.8312000166625,
+          "p95_request_ms": 1422.6059600245208,
+          "amortized_wall_ms_per_image": 223.1676833341933,
+          "mean_preprocessing_model_ms_per_image": 187.0294228888901,
+          "second_passes": 9,
+          "second_pass_fraction": 0.25,
+          "requested_second_pass_budget": 0.25
+        }
+      },
+      "memory": {
+        "api_vm_hwm_kib": 643980,
+        "api_vm_rss_kib": 513728,
+        "container_cgroup_memory_peak_bytes": 516124672
+      }
+    },
+    "4": {
+      "cpu_threads": 4,
+      "profiles": {
+        "single_first": {
+          "requests": 36,
+          "images": 36,
+          "request_batch_size": 1,
+          "mean_request_ms": 210.3692833237195,
+          "p50_request_ms": 181.3413500203751,
+          "p95_request_ms": 381.03932500234805,
+          "amortized_wall_ms_per_image": 210.3692833237195,
+          "mean_preprocessing_model_ms_per_image": 173.95262911106278,
+          "second_passes": 0,
+          "second_pass_fraction": 0.0,
+          "requested_second_pass_budget": 0.0
+        },
+        "single_extra": {
+          "requests": 36,
+          "images": 36,
+          "request_batch_size": 1,
+          "mean_request_ms": 220.37170276032865,
+          "p50_request_ms": 193.57255002250895,
+          "p95_request_ms": 413.38887496385723,
+          "amortized_wall_ms_per_image": 220.37170276032865,
+          "mean_preprocessing_model_ms_per_image": 183.97590705545656,
+          "second_passes": 36,
+          "second_pass_fraction": 1.0,
+          "requested_second_pass_budget": 1.0
+        },
+        "batch_budget25": {
+          "requests": 9,
+          "images": 36,
+          "request_batch_size": 4,
+          "mean_request_ms": 780.054433323029,
+          "p50_request_ms": 754.7655999660492,
+          "p95_request_ms": 951.6668199561536,
+          "amortized_wall_ms_per_image": 195.01360833075725,
+          "mean_preprocessing_model_ms_per_image": 159.70144955555395,
+          "second_passes": 9,
+          "second_pass_fraction": 0.25,
+          "requested_second_pass_budget": 0.25
+        }
+      },
+      "memory": {
+        "api_vm_hwm_kib": 644552,
+        "api_vm_rss_kib": 514640,
+        "container_cgroup_memory_peak_bytes": 518914048
+      }
+    }
+  },
+  "output_equivalence": {
+    "reference_threads": 2,
+    "absolute_float_tolerance": 1e-06,
+    "excluded_response_fields": [
+      "inference_timestamp",
+      "processing_time_ms",
+      "request_id"
+    ],
+    "by_thread_count": {
+      "1": {
+        "requests_compared": 81,
+        "numeric_values_compared": 3186,
+        "max_absolute_numeric_difference": 7.450580596923828e-07,
+        "numeric_tolerance_violations": 0,
+        "semantic_violations": 0,
+        "passed": true
+      },
+      "4": {
+        "requests_compared": 81,
+        "numeric_values_compared": 3186,
+        "max_absolute_numeric_difference": 4.76837158203125e-07,
+        "numeric_tolerance_violations": 0,
+        "semantic_violations": 0,
+        "passed": true
+      }
+    }
+  },
+  "limitations": [
+    "Wall time includes multipart upload, JPEG decode, preprocessing, engine, decision and HTTP response.",
+    "Client disk reads, response parsing, browser rendering and remote networking are outside the timer.",
+    "All other targets were idle during each request. The single host and small sample limit tail-latency inference.",
+    "Peak RSS and cgroup memory are high-water marks since container start, including startup and probes.",
+    "The timings use development images and do not evaluate clinical performance or concurrent throughput."
+  ]
+}

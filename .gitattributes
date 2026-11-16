@@ -1,6 +1,7 @@
 * text=auto
 *.py text eol=lf
 *.md text eol=lf
+*.tex text eol=lf
 *.toml text eol=lf
 *.yaml text eol=lf
 requirements.txt text eol=lf
@@ -52,3 +53,4 @@ reports/fdr26_aptos_v1/** -text whitespace=cr-at-eol
 reports/deepdrid_online_readiness_v1/** -text whitespace=cr-at-eol
 reports/set_c_validation_v1/** -text whitespace=cr-at-eol
 reports/paired_view_v1/** -text whitespace=cr-at-eol
+reports/qsart_x_release_v1/** -text whitespace=cr-at-eol

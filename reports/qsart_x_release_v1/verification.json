@@ -1,0 +1,112 @@
+{
+  "date_utc": "2026-11-16T17:38:34.757324+00:00",
+  "status": "verified",
+  "scope": "Local Docker Compose research release",
+  "runtime": {
+    "healthy_services": [
+      "api",
+      "web",
+      "workspace",
+      "dashboard",
+      "db"
+    ],
+    "migration_exit_code": 0,
+    "loopback_only_publications": true,
+    "database_has_no_host_port": true,
+    "non_root_read_only_application_containers": true,
+    "read_only_checkpoint_and_report_mounts": true,
+    "private_case_volume_api_only": true,
+    "api_image_id": "sha256:ed4e261deb94553265608cc458b464f32de272b7ddc7dc035ab68929e91c7f6e",
+    "cpu_threads": 2
+  },
+  "authorized_development_validation_inference": {
+    "status": "verified",
+    "scope": "actual HTTP against running deployment",
+    "runtime": "docker",
+    "runtime_scope": "Declared by invoker from startup evidence; HTTP checks alone do not identify runtime",
+    "verifier_sha256": "113d39e2009327ad410657e8d8c1da990b0bca0ce81819662ff4bb50246c25c8",
+    "image_source": "authorized DeepDRiD manifest; input not retained by this script",
+    "partition": "validation",
+    "manifest_sha256": "e7e349903964f3c64935092b205647a2153b79c6ae18e4d0a4179cf54af285f0",
+    "model_card_status": "matched",
+    "policy_version": "2.0",
+    "conformal_status": "available",
+    "research_get_statuses": {
+      "/triage/config": 200,
+      "/research/experiments": 200,
+      "/research/metrics?experiment_id=confirmation_v1": 200
+    },
+    "simulator_status": "evaluated",
+    "overload_checked": true,
+    "get_statuses": {
+      "/health": 200,
+      "/ready": 200,
+      "/model/info": 200,
+      "/docs": 200
+    },
+    "predict_status": 200,
+    "batch_status": 200,
+    "unsupported_status": 415,
+    "dashboard_health_status": 200,
+    "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+    "device": "cpu",
+    "second_pass_single": true,
+    "batch_review_rate": 1.0,
+    "batch_recapture_rate": 0.0,
+    "batch_second_pass_rate": 0.5,
+    "note": "Health/readiness and schema execution do not establish model usefulness or clinical validity."
+  },
+  "synthetic_case_verification": {
+    "status": "verified",
+    "scope": "loopback HTTP against the running research release",
+    "phase": "screening_and_review",
+    "verifier_sha256": "cf8061181939e5e1d21c86249fab4c589178067b3374e70d4f8faae79591e7d5",
+    "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+    "services_ready": true,
+    "public_upload_denied": true,
+    "fixture": "synthetic retinal image",
+    "role_and_owner_boundaries_verified": true,
+    "origin_and_session_controls_verified": true,
+    "invalid_uploads_rejected": true,
+    "oversize_login_body_rejected": true,
+    "stored_image_pixels_match_and_metadata_removed": true,
+    "immutable_prediction_and_review_history_verified": true,
+    "private_case_report_verified": true
+  },
+  "full_compose_stop_start_replay": {
+    "status": "verified",
+    "scope": "loopback HTTP against the running research release",
+    "phase": "restart_replay",
+    "verifier_sha256": "cf8061181939e5e1d21c86249fab4c589178067b3374e70d4f8faae79591e7d5",
+    "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+    "services_ready": true,
+    "public_upload_denied": true,
+    "case_image_and_report_match_private_witness": true,
+    "restart_scope": "Restart performed by the caller between verification phases."
+  },
+  "missing_checkpoint": {
+    "api_live": true,
+    "artifact_ready_status": 503,
+    "prediction_status": 503,
+    "prediction_body_contains_no_inference_output": true
+  },
+  "registered_research_experiments": 30,
+  "reconciled_research_results": {
+    "set_c_validation_v1": {
+      "evaluation_sha256": "14c7ed44bfec0f66ac8a5763ca093f9a70c599438fb545368918f47dc0d4069a",
+      "independent_audit_sha256": "9f1a4618a822cad44769e3298bd2b208d8686b795450e3932e1735490eca50f8",
+      "scenarios": 96,
+      "comparisons": 84,
+      "saved_witness_audit_replayed": true
+    },
+    "paired_view_v1": {
+      "evaluation_sha256": "230c5bab0851c2ee708e3d52f5fd066bc383dcfd6168d1c0f01b14ca07becd48",
+      "independent_audit_sha256": "8cf495985a148e50681eb9f6d1c0822b761f1ab8e99493cf9f287cd2f61a3318",
+      "scenarios": 26,
+      "comparisons": 16,
+      "saved_witness_audit_replayed": true
+    }
+  },
+  "cpu_profiles_sha256": "4ab9b313dd6df1b575d469464695301c0d906cc8d3bdcb7abe73e85421ae25f6",
+  "manuscript_table_export_sha256": "c076259d8c3f4d126208947b095d50a88e1ed3ac755a13ef4ef73c40be9feae6"
+}

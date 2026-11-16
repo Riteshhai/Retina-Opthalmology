@@ -1,5 +1,5 @@
 """Temporary uploads are closed; production never substitutes generated predictions."""
-from contextlib import asynccontextmanager
+from contextlib import ExitStack, asynccontextmanager
 from datetime import datetime, timezone
 from io import BytesIO
 import hashlib
@@ -157,24 +157,26 @@ def create_app(engine=None, conformal=None):
                 'disclaimer': DISCLAIMER}
 
     async def decode(upload):
-        if upload.content_type not in ALLOWED:
+        image_format = ALLOWED.get(upload.content_type)
+        try:
+            if image_format is None:
+                raise HTTPException(415, 'Only PNG and JPEG uploads are supported')
+            data = await upload.read(MAX_BYTES+1)
+        finally:
             await upload.close()
-            raise HTTPException(415, 'Only PNG and JPEG uploads are supported')
-        data = await upload.read(MAX_BYTES+1)
-        await upload.close()
         if len(data) > MAX_BYTES:
             raise HTTPException(413, 'Image exceeds the 12 MiB upload limit')
         try:
             with warnings.catch_warnings():
                 warnings.simplefilter('error', Image.DecompressionBombWarning)
                 with Image.open(BytesIO(data)) as im:
-                    if im.format != ALLOWED[upload.content_type]:
+                    if im.format != image_format:
                         raise HTTPException(415, 'Image format does not match MIME type')
                     if min(im.size) < 32 or im.width*im.height > MAX_PIXELS:
                         raise HTTPException(422, 'Image dimensions are outside supported limits')
                     im.verify()
                 with Image.open(BytesIO(data)) as im:
-                    return im.convert('RGB').copy()
+                    return im.convert('RGB')
         except HTTPException:
             raise
         except (UnidentifiedImageError, OSError, ValueError,
@@ -214,12 +216,16 @@ def create_app(engine=None, conformal=None):
 
     async def screen_image(file: UploadFile, second_pass: bool = False) -> tuple[Prediction, Image.Image]:
         im = await decode(file)
-        row = (await run_in_threadpool(predict, [im], float(second_pass)))[0]
-        action, reasons = pointwise_action(row['grade_probabilities'],
-            1-row['quality']['poor_probability'], row['uncertainty']['entropy'],
-            conformal_set=row.get('conformal_set'))
-        reasons.append('SINGLE_IMAGE_NO_POPULATION_BUDGET_GUARANTEE')
-        prediction = response(row, str(uuid.uuid4()), 0, action, reasons, 'single_image', datetime.now(timezone.utc))
+        try:
+            row = (await run_in_threadpool(predict, [im], float(second_pass)))[0]
+            action, reasons = pointwise_action(row['grade_probabilities'],
+                1-row['quality']['poor_probability'], row['uncertainty']['entropy'],
+                conformal_set=row.get('conformal_set'))
+            reasons.append('SINGLE_IMAGE_NO_POPULATION_BUDGET_GUARANTEE')
+            prediction = response(row, str(uuid.uuid4()), 0, action, reasons, 'single_image', datetime.now(timezone.utc))
+        except BaseException:
+            im.close()
+            raise
         return prediction, im
 
     @app.post('/predict', response_model=Prediction)
@@ -233,12 +239,20 @@ def create_app(engine=None, conformal=None):
                     review_budget: float = Query(.3, ge=0, le=1),
                     recapture_budget: float = Query(.2, ge=0, le=1),
                     second_pass_budget: float = Query(0., ge=0, le=1)):
-        if not files or len(files) > MAX_BATCH:
-            for f in files:
-                await f.close()
-            raise HTTPException(422, f'Upload 1 to {MAX_BATCH} images')
-        images = [await decode(f) for f in files]
-        rows = await run_in_threadpool(predict, images, second_pass_budget)
+        try:
+            if not files or len(files) > MAX_BATCH:
+                raise HTTPException(422, f'Upload 1 to {MAX_BATCH} images')
+            with ExitStack() as retained:
+                images = []
+                for upload in files:
+                    image = await decode(upload)
+                    retained.callback(image.close)
+                    images.append(image)
+                rows = await run_in_threadpool(predict, images, second_pass_budget)
+        finally:
+            for upload in files:
+                if not upload.file.closed:
+                    await upload.close()
         try:
             actions = allocate_rows(rows, PolicyConfig(review_budget, recapture_budget))
         except BudgetOverloaded as exc:
