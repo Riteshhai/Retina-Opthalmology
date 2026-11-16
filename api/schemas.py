@@ -63,6 +63,11 @@ class ReadyResponse(BaseModel):
     disclaimer: str = DISCLAIMER
 
 
+class PortalReadyResponse(BaseModel):
+    ready: bool
+    status: Literal['ready', 'not_configured', 'unavailable']
+
+
 class ModelInformation(BaseModel):
     model_config = ConfigDict(extra='allow')
     ready: bool

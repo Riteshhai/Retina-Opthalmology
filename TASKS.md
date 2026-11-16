@@ -1,7 +1,17 @@
 # Prioritized executable backlog
 
-Current authority: MASTER_SPEC_v1.0. Current alignment evidence:
-docs/SPEC_V1_STATUS.md. Historical completed tasks remain below.
+The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) governs the new platform.
+[Specification v1 status](docs/SPEC_V1_STATUS.md) records the existing QSART evidence.
+
+## QSART-X milestones
+
+- [x] 1. Verify the React public site, API health bridge, PostgreSQL migration and CPU Compose stack.
+- [ ] 2. Verify and document the dataset imports, metadata and split boundaries for QSART-X.
+- [ ] 3. Connect genuine inference to the new application with honest unavailable states.
+- [ ] 4. Implement authentication, role enforcement, case review, overrides and private exports.
+- [ ] 5. Run locked patient-level and matched-budget research validation and publish traceable results.
+- [ ] 6. Implement and evaluate adaptive acquisition using paired views and first-view-only routing features.
+- [ ] 7. Verify the release and prepare manuscript materials from audited outcomes.
 
 ## Specification-v1 priorities — current on 14 November 2026
 

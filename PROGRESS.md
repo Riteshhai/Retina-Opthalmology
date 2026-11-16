@@ -1,5 +1,28 @@
 # Execution log
 
+## 2026-11-16 — built the QSART-X platform foundation
+
+- Preserved the supplied QSART-X prompt and recorded the platform decisions in
+  the [architecture roadmap](docs/QSART_X_ROADMAP.md). Kept the existing inference
+  packages, Streamlit research lab, local checkpoints, and frozen reports in place.
+- Built eight React public pages, interactive retinal screening and architecture
+  views, and a live FastAPI service status. The public proxy allows only the
+  health and model readiness routes. Browser QA covered all eight routes,
+  keyboard navigation, and desktop, tablet and mobile layouts.
+- Added SQLAlchemy and Alembic for the portal database. Exercised upgrade,
+  repeated upgrade, downgrade, re-upgrade and role seeding in an isolated
+  PostgreSQL instance. A test case and its creator persisted across reconnects.
+- Ran `npm ci` and `npm run build`, then started the QSART-X overlay with
+  `docker compose up --build -d --wait`. The site, API, database and research
+  lab reached healthy status. The migration service exited successfully.
+  `python scripts/verify_deployment.py --runtime docker --split validation --require-conformal`
+  verified genuine DeepDRiD single and batch inference, artifact readiness,
+  and simulator and overload behavior.
+- `python -m pytest -q` passed 674 tests with genuine DeepDRiD integration and
+  one upstream AnyIO deprecation warning. Ruff and both Compose configurations
+  passed. The new portal still needs authentication, role enforcement and
+  clinician review workflows. Set-C remains reserved and unscored.
+
 ## 2026-11-14 — audited DeepDRiD Set-C readiness
 
 - Fetched the pinned author Git tree with `git fetch --depth=1 --filter=blob:none

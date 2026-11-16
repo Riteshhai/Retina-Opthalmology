@@ -1,0 +1,61 @@
+x-portal-environment: &portal-environment
+  QSART_PORTAL_DATABASE_URL: postgresql+psycopg://qsart:${QSART_POSTGRES_PASSWORD:?Set QSART_POSTGRES_PASSWORD in the local QSART-X environment file}@db:5432/qsart
+
+x-portal-image: &portal-image
+  image: qsart-x-api:local
+  build:
+    context: .
+    target: portal
+
+services:
+  db:
+    image: postgres:17.12-alpine@sha256:34261f594522cf41dfcb76aefd42b9d201098b0e6b23c9c68733f169e4218b6f
+    environment:
+      POSTGRES_DB: qsart
+      POSTGRES_USER: qsart
+      POSTGRES_PASSWORD: ${QSART_POSTGRES_PASSWORD:?Set QSART_POSTGRES_PASSWORD in the local QSART-X environment file}
+    volumes:
+      - portal-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-h', '127.0.0.1', '-U', 'qsart', '-d', 'qsart']
+      interval: 3s
+      timeout: 3s
+      retries: 15
+
+  migrate:
+    <<: *portal-image
+    command: ['python', '-m', 'alembic', '-c', 'services/api/portal_db/alembic.ini', 'upgrade', 'head']
+    environment: *portal-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  api:
+    <<: *portal-image
+    environment: *portal-environment
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  web:
+    build: ./apps/web
+    image: qsart-x-web:local
+    ports:
+      - '127.0.0.1:${QSART_WEB_PORT:-18700}:8080'
+    depends_on:
+      api:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1:8080/']
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+volumes:
+  portal-data:

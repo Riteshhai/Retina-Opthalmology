@@ -26,9 +26,27 @@ def test_liveness_readiness_and_missing_artifacts(monkeypatch, tmp_path):
     monkeypatch.setenv('QSART_DR_CHECKPOINT', str(tmp_path/'missing.pt'))
     with TestClient(create_app()) as c:
         assert c.get('/health').status_code == 200
+        assert c.head('/health').status_code == 200
         assert c.get('/ready').status_code == 503
+        assert c.head('/ready').status_code == 503
         assert c.post('/predict', files={'file': ('x.png', image_bytes(), 'image/png')}).status_code == 503
         assert c.get('/docs').status_code == 200
+
+
+def test_portal_readiness_is_independent_of_inference(monkeypatch):
+    monkeypatch.delenv('QSART_PORTAL_DATABASE_URL', raising=False)
+    with TestClient(create_app(SoftwareFixture())) as client:
+        portal = client.get('/portal/ready')
+        assert portal.status_code == 503
+        assert portal.json() == {'ready': False, 'status': 'not_configured'}
+        assert client.get('/ready').status_code == 200
+
+    monkeypatch.setenv('QSART_PORTAL_DATABASE_URL', 'invalid-db-url-with-private-configuration')
+    with TestClient(create_app(SoftwareFixture())) as client:
+        portal = client.get('/portal/ready')
+        assert portal.status_code == 503
+        assert portal.json() == {'ready': False, 'status': 'unavailable'}
+        assert client.get('/health').status_code == 200
 
 
 def test_prediction_contract_and_batch():

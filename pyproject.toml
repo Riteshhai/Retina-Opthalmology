@@ -13,12 +13,16 @@ dynamic = ["dependencies"]
 dev = ["pytest==9.1.1", "ruff==0.17.1"]
 mshf = ["openpyxl==3.1.5"]
 fdr26 = ["openpyxl==3.1.5"]
+portal = ["SQLAlchemy==2.0.57", "alembic==1.20.1", "psycopg[binary]==3.3.9"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 
 [tool.setuptools.packages.find]
-include = ["qsart*", "api*", "dashboard*"]
+include = ["qsart*", "api*", "dashboard*", "services*"]
+
+[tool.setuptools.package-data]
+"services.api.portal_db" = ["alembic.ini", "migrations/script.py.mako"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,9 +1,13 @@
 .git
 .venv
+.env*
+apps
 data
 checkpoints
 artifacts
 results
+reports/private
+docs/research/private
 __pycache__
 .pytest_cache
 .ruff_cache

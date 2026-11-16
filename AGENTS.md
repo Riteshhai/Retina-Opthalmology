@@ -1,6 +1,9 @@
 # Project instructions
 
-Current authority: MASTER_SPEC.md (MASTER_SPEC_v1.0, adopted 20 October 2026).
+New platform work follows docs/specifications/QSART_X_MASTER_DEVELOPMENT_PROMPT.md.
+MASTER_SPEC.md (MASTER_SPEC_v1.0, adopted 20 October 2026) governs QSART v1 evidence
+and existing model and policy behavior. See docs/QSART_X_ROADMAP.md for the
+platform architecture and milestones.
 Read docs/SPEC_ALIGNMENT.md for verified reuse, requirement changes and evidence gaps.
 The original docs/MASTER_BUILD_PROMPT.md and v1 reports are historical records.
 

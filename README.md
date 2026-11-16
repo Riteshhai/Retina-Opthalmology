@@ -2,7 +2,63 @@
 
 A local, CPU-compatible **research prototype** with trained DR and image-quality models, temperature calibration, three-action triage, independent cohort budgets, a FastAPI service and a Streamlit client.
 
-**Current specification: [MASTER_SPEC_v1.0](MASTER_SPEC.md), adopted 20–21 October 2026.**
+## QSART-X platform setup
+
+The [QSART-X roadmap](docs/QSART_X_ROADMAP.md) describes the React website,
+FastAPI and PostgreSQL foundation alongside the existing QSART research tools.
+
+### Start QSART-X locally with Docker
+
+From the repository root in PowerShell, create a private environment file and
+generate its database password once. Keep this file across restarts of the
+same database volume.
+
+```powershell
+if (-not (Test-Path -LiteralPath .env.qsart-x)) {
+  $qsartBytes = New-Object byte[] 32
+  $qsartRng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+  try { $qsartRng.GetBytes($qsartBytes) } finally { $qsartRng.Dispose() }
+  $qsartPassword = -join ($qsartBytes | ForEach-Object { $_.ToString('x2') })
+  (Get-Content -LiteralPath .env.qsart-x.example) -replace '^QSART_POSTGRES_PASSWORD=$', "QSART_POSTGRES_PASSWORD=$qsartPassword" |
+    Set-Content -LiteralPath .env.qsart-x -Encoding ascii
+}
+docker compose --env-file .env.qsart-x -f docker-compose.yml -f infrastructure/docker/compose.qsart-x.yml up --build -d --wait
+```
+
+Open the public site on port `18700`, the local research lab on `18501`, and the
+FastAPI docs on `18000/docs`. The database is private to Compose. The migration
+service provisions the initial schema before the API starts. The API endpoints
+`/health`, `/ready` and `/portal/ready` check service, model and database readiness,
+respectively. Without a local checkpoint, the website still runs and the Demo
+reports that inference is unavailable. The core Compose file remains available
+for the existing API and lab workflow.
+
+### Develop the public website on Windows
+
+```powershell
+Set-Location apps/web
+npm ci
+npm run dev
+npm run build
+```
+
+The Vite development proxy checks the existing API on port `18000` by default.
+Set `QSART_API_TARGET` to the local API origin when using a different port.
+The production build lives in `apps/web/dist`. A static deployment serves the
+public pages and needs an `index.html` fallback for browser routes. Live status
+requires a reachable same-origin API proxy. The local screening backend and
+PostgreSQL run separately. For native API development with an existing PostgreSQL
+database, install `python -m pip install -e '.[portal]'`, set a private
+`QSART_PORTAL_DATABASE_URL`, and run the migration before starting FastAPI.
+
+```powershell
+python -m alembic -c services/api/portal_db/alembic.ini upgrade head
+python -m uvicorn api.main:app --host 127.0.0.1 --port 18000
+```
+
+## Existing QSART research evidence
+
+**Current research specification: [MASTER_SPEC_v1.0](MASTER_SPEC.md), adopted 20–21 October 2026.**
 The current action policy uses `AUTO_NONREFERABLE`, `RECAPTURE` and
 `SPECIALIST_REVIEW`. It reports overload when mandatory deferrals exceed capacity.
 Conventional and paper-inspired ordinal conformal outputs, a development-only

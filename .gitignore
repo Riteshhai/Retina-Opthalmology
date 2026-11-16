@@ -15,6 +15,13 @@ artifacts/
 *.onnx
 .ruff_cache/
 .env
+.env.qsart-x
+.env.qsart-x.*
+!.env.qsart-x.example
+node_modules/
+apps/web/dist/
+apps/web/playwright-report/
+apps/web/test-results/
 *.log
 *.egg-info/
 data/manifests/

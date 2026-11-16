@@ -16,7 +16,7 @@ from fastapi.responses import JSONResponse
 from PIL import Image, UnidentifiedImageError
 
 from api.schemas import (BatchPrediction, DISCLAIMER, HealthResponse, ModelInformation,
-                         Prediction, ReadyResponse)
+                         PortalReadyResponse, Prediction, ReadyResponse)
 from qsart.triage_v2 import (Action, BudgetOverloaded, PolicyConfig, allocate_rows,
                              pointwise_action)
 
@@ -55,7 +55,18 @@ def create_app(engine=None, conformal=None):
                 app.state.engine = None
                 app.state.unavailable = 'Conformal'+type(exc).__name__
                 logger.warning('Configured conformal artifact unavailable: %s', type(exc).__name__)
-        yield
+        if os.environ.get('QSART_PORTAL_DATABASE_URL', '').strip():
+            try:
+                from services.api.portal_db import DatabaseSettings, PortalDatabase
+
+                app.state.portal_db = PortalDatabase(DatabaseSettings.from_environment())
+            except (ImportError, ValueError):
+                logger.warning('Portal database configuration is unavailable')
+        try:
+            yield
+        finally:
+            if app.state.portal_db is not None:
+                app.state.portal_db.dispose()
 
     app = FastAPI(title='QSART Research API', version='0.3.0', lifespan=lifespan,
                   description=DISCLAIMER)
@@ -63,11 +74,14 @@ def create_app(engine=None, conformal=None):
     app.state.conformal = conformal
     app.state.unavailable = None if engine else 'ArtifactsNotLoaded'
     app.state.inference_lock = Lock()
+    app.state.portal_db = None
 
+    @app.head('/health', include_in_schema=False)
     @app.get('/health', response_model=HealthResponse)
     def health():
         return {'status': 'ok', 'service': 'qsart-api'}
 
+    @app.head('/ready', include_in_schema=False)
     @app.get('/ready', response_model=ReadyResponse)
     def ready():
         available = app.state.engine is not None
@@ -76,6 +90,15 @@ def create_app(engine=None, conformal=None):
             'policy_version': '2.0',
             'conformal_status': 'available' if app.state.conformal is not None else 'not_configured',
             'disclaimer': DISCLAIMER})
+
+    @app.get('/portal/ready', response_model=PortalReadyResponse)
+    def portal_ready():
+        database = app.state.portal_db
+        if database is not None and database.is_ready():
+            return {'ready': True, 'status': 'ready'}
+        configured = bool(os.environ.get('QSART_PORTAL_DATABASE_URL', '').strip())
+        return JSONResponse(status_code=503, content={
+            'ready': False, 'status': 'unavailable' if configured else 'not_configured'})
 
     @app.get('/model/info', response_model=ModelInformation)
     def model_info():
