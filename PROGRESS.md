@@ -1,5 +1,20 @@
 # Execution log
 
+## 2026-11-17 — automated the panel rehearsal preflight
+
+- Added `python -m scripts.preflight_qsart_x_demo` to the
+  [panel runbook](docs/QSART_X_PANEL_DEMO.md#readiness-command). It checks API
+  and portal readiness, the frozen release model metadata, both website bridges,
+  the lab, and the audited study responses using local GET requests. The report
+  lists each result and returns a nonzero code when a check fails.
+- All nine checks passed on the running `qsart-x-verify` stack. Set-C returned
+  96 scenarios and 84 comparisons, and paired views returned 26 and 16. The
+  live responses matched the audit-bound release files. Changing the lab port
+  to the public website returned exit code 1 and identified only the lab check.
+- Ruff and 20 focused preflight, release, and research tests passed with one
+  upstream AnyIO deprecation warning. No authentication or inference ran during
+  the preflight.
+
 ## 2026-11-17 — prepared the M.Tech panel review
 
 - Created a nine-slide local review deck with editable evidence tables and

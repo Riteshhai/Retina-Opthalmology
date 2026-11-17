@@ -19,17 +19,39 @@ retrospective DeepDRiD studies. [Release setup and verification](QSART_X_RELEASE
    | Research lab `/` | `18501` | `18627` |
    | FastAPI `/health`, `/ready`, `/portal/ready` | `18000` | `18127` |
 
-3. Confirm the three API endpoints return HTTP 200 and the public **Research
-   demo** shows **API connection** online and **Model artifacts** ready.
-   In the lab, check that **Experiment Explorer** lists `set_c_validation_v1`
-   and `paired_view_v1`. Keep the cached charts below open in case any service
-   is unavailable.
+3. Run the [preflight command](#readiness-command). A `ready` result confirms
+   service readiness, the release model metadata, and both audited study
+   results served through the API. Open **Experiment Explorer** for the walkthrough
+   and keep the cached charts below available for offline use.
 4. Prepare local `research_operator` and `clinician_reviewer` accounts using
    the [account setup](../README.md#analyze-an-image-in-the-local-workspace).
    Sign in before presenting or switch roles outside the shared screen. Use
    a rehearsal workspace with demo cases. Choose a JPG or PNG of up to
    12 MiB cleared for research and panel display, or use the synthetic fixture
    below. Label the synthetic fixture **DEMO DATA** when presenting it.
+
+### Readiness command
+
+Run from the repository root in the project Python environment. The default
+ports match the example Compose setup.
+
+```powershell
+python -m scripts.preflight_qsart_x_demo
+```
+
+For the verified `qsart-x-verify` mapping, pass its three different origins.
+Use `--workspace` too if your workspace listens on a different port.
+
+```powershell
+python -m scripts.preflight_qsart_x_demo --api http://127.0.0.1:18127 --public http://127.0.0.1:18727 --lab http://127.0.0.1:18627
+```
+
+The command uses local GET requests and the checked-in release reports. It
+returns exit code `0` for `ready` and `1` for `attention_required`, with one
+result per check. It uses no accounts or images. Sign in separately to rehearse
+the operator and reviewer steps.
+
+### Synthetic demonstration image
 
 To prepare the synthetic fixture, run from the repository root with the project
 Python environment active. The source illustration is included in the site.
