@@ -1,0 +1,6289 @@
+{
+  "experiment_id": "set_c_validation_v1",
+  "source_commit": "eafd13db260bde7ed3627252d027e0cfc2ad2582",
+  "source_sha256": {
+    "docs/research/SET_C_VALIDATION_V1_PROTOCOL.md": "e576864456d3bb13c28be4183a97b770e39039205781f32ad8593dc9e3ce7b98",
+    "scripts/run_set_c_validation.py": "b557c96f44cf7d684853564ec9b9bab05de03eb7afc75e89592743411bdeecd4",
+    "scripts/audit_set_c_validation.py": "311cce933cdc28f51950f54af3b9880afdd585f400d3a4cd07d181e2b6d293ba",
+    "qsart/set_c_inputs.py": "37c356b2122200ff78257e5413256162a30d6834c0a74758a0f123a877925087",
+    "qsart/set_c_metrics.py": "2f3ea958985eead9369ec4af294ac51aa400a43bb4d28b124dd4e2471d6d7041",
+    "qsart/evaluation_policy.py": "8cad638c5cb601981d91a61670130323b1a26d59ed4cc0dc428f943f5b08f24b",
+    "qsart/triage_v2.py": "8c8d98ba478190439490dbae5f265637ed5a9d90dcec4c0c72b12c8ba48005ec",
+    "qsart/triage.py": "9ec579bf0811ef3160b52a27d7b413f9853ea1e60e2a5eefbc7e85f229b7252d",
+    "scripts/run_patient_triage.py": "3119a90435344333663a133e4c517493bf4e10f8d1b6320405773bdfb07b363f",
+    "qsart/inference/engine.py": "71d2007ffa87242b20c1d4c8a0cde8ab2fc10122ba928566c6a52d011e74e2ab",
+    "qsart/inference/conformal_sidecar.py": "a16677fe3666542a766411f112100ab5ad64d0776f6a9982c2003b3fc60adcee",
+    "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+    "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+    "qsart/uncertainty/conformal.py": "e8469ac637b913a984098c24fb543ae434b52d80c23647d78fa30e1d0548ffa4",
+    "requirements.txt": "f617a39ce6800a697883f018a47a5cbfeb4506ad1e67d8dde57c05f792166b2f"
+  },
+  "input_provenance": {
+    "artifact_sha256": {
+      "readiness_report": "57e77bef5d18fd154d6b0b2db80c2a6753d9a6b463037bb6b48f652c5f031d9d",
+      "readiness_audit": "8c0ec473ad9853c20dec41a3d3a5392777930d2b6429b8fcaf14af2823cbe7f7",
+      "readiness_witness": "b2d176eaf8277806c16274648cc26dc52f5bf7021de1878ebbec6f3fa4d031b8",
+      "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+      "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+      "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+      "model_card": "43830695b8362aabd06df0d5dfa65b01086db9da2db3212001ac98b8b0e4710f",
+      "selection_lock": "c2366e8ac8d369759d7431c6135bc593b5fa4623c4ce906a42cefa478928e3c2",
+      "conformal": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221"
+    },
+    "source_release": {
+      "commit": "56d8af71319803150d0e7b90533e0918c7bf85ee",
+      "tree": "8340aa4fa31819be0e6da05bb842804f40284bdf",
+      "license": "CC-BY-SA-4.0"
+    },
+    "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+    "quality_model_version": "development-v1-quality-mobilenet_v3_small-seed2026-epoch3",
+    "device": "cpu",
+    "cpu_threads": 4,
+    "inference_chunk_size": 8,
+    "probability_path": "first_pass",
+    "conformal_alpha": 0.1,
+    "calibration": {
+      "development_manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+      "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+      "conformal_split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+      "temperature_patients": 21,
+      "conformal_patients": 21,
+      "patient_groups_disjoint": true
+    },
+    "package_versions": {
+      "torch": "2.14.1+cpu",
+      "torchvision": "0.29.1+cpu",
+      "pillow": "10.4.0",
+      "numpy": "2.4.6"
+    }
+  },
+  "private_witness_sha256": "ed971465223a848790b465c647f2a4e5a0147215a0c836efbe9683300d5224f9",
+  "model_inference_performed": true,
+  "partition": "same_release_held_out",
+  "images": 396,
+  "patients": 99,
+  "prediction_metrics": {
+    "image_grading": {
+      "n": 396,
+      "accuracy": 0.6111111111111112,
+      "macro_f1": 0.5112721178932315,
+      "quadratic_weighted_kappa": 0.7151566083154102,
+      "confusion_matrix": [
+        [
+          144,
+          30,
+          16,
+          3,
+          3
+        ],
+        [
+          8,
+          13,
+          11,
+          3,
+          1
+        ],
+        [
+          5,
+          19,
+          33,
+          13,
+          2
+        ],
+        [
+          5,
+          3,
+          13,
+          42,
+          9
+        ],
+        [
+          2,
+          2,
+          0,
+          6,
+          10
+        ]
+      ],
+      "per_class": [
+        {
+          "grade": 0,
+          "precision": 0.8780487804878049,
+          "recall": 0.7346938775510204,
+          "f1": 0.8,
+          "support": 196
+        },
+        {
+          "grade": 1,
+          "precision": 0.19402985074626866,
+          "recall": 0.3611111111111111,
+          "f1": 0.2524271844660194,
+          "support": 36
+        },
+        {
+          "grade": 2,
+          "precision": 0.4520547945205479,
+          "recall": 0.4583333333333333,
+          "f1": 0.45517241379310347,
+          "support": 72
+        },
+        {
+          "grade": 3,
+          "precision": 0.6268656716417911,
+          "recall": 0.5833333333333334,
+          "f1": 0.60431654676259,
+          "support": 72
+        },
+        {
+          "grade": 4,
+          "precision": 0.4,
+          "recall": 0.5,
+          "f1": 0.4444444444444444,
+          "support": 20
+        }
+      ],
+      "referable_auroc": 0.9131623212783851,
+      "referable_auprc": 0.8966187987103457,
+      "ece": 0.09305610447519956,
+      "reliability_bins": [
+        {
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "count": 9,
+          "accuracy": 0.1111111111111111,
+          "confidence": 0.27757027082973057
+        },
+        {
+          "count": 55,
+          "accuracy": 0.5272727272727272,
+          "confidence": 0.3668146095492623
+        },
+        {
+          "count": 90,
+          "accuracy": 0.3888888888888889,
+          "confidence": 0.45156348844369254
+        },
+        {
+          "count": 65,
+          "accuracy": 0.47692307692307695,
+          "confidence": 0.540086947954618
+        },
+        {
+          "count": 51,
+          "accuracy": 0.7254901960784313,
+          "confidence": 0.6520403249591005
+        },
+        {
+          "count": 60,
+          "accuracy": 0.85,
+          "confidence": 0.7519076764583588
+        },
+        {
+          "count": 52,
+          "accuracy": 0.9230769230769231,
+          "confidence": 0.8441822127654002
+        },
+        {
+          "count": 14,
+          "accuracy": 0.7142857142857143,
+          "confidence": 0.9318939362253461
+        }
+      ],
+      "brier": 0.5191788173247504
+    },
+    "patient_grading": {
+      "n": 99,
+      "worst_grade_accuracy": 0.5252525252525253,
+      "worst_grade_confusion_matrix": [
+        [
+          28,
+          5,
+          5,
+          1,
+          3
+        ],
+        [
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          7,
+          9,
+          2
+        ],
+        [
+          0,
+          0,
+          4,
+          11,
+          3
+        ],
+        [
+          1,
+          0,
+          0,
+          4,
+          5
+        ]
+      ],
+      "referable": {
+        "n": 99,
+        "positive_count": 48,
+        "accuracy": 0.8181818181818182,
+        "confusion_matrix": [
+          [
+            36,
+            15
+          ],
+          [
+            3,
+            45
+          ]
+        ],
+        "auroc": 0.9558823529411764,
+        "auprc": 0.9651373504074727
+      }
+    },
+    "calibration": {
+      "production": {
+        "nll": 1.0217334990477356,
+        "brier": 0.5191788173247504,
+        "ece": 0.09305610447519956,
+        "reliability_bins": [
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 9,
+            "accuracy": 0.1111111111111111,
+            "confidence": 0.27757027082973057
+          },
+          {
+            "count": 55,
+            "accuracy": 0.5272727272727272,
+            "confidence": 0.3668146095492623
+          },
+          {
+            "count": 90,
+            "accuracy": 0.3888888888888889,
+            "confidence": 0.45156348844369254
+          },
+          {
+            "count": 65,
+            "accuracy": 0.47692307692307695,
+            "confidence": 0.540086947954618
+          },
+          {
+            "count": 51,
+            "accuracy": 0.7254901960784313,
+            "confidence": 0.6520403249591005
+          },
+          {
+            "count": 60,
+            "accuracy": 0.85,
+            "confidence": 0.7519076764583588
+          },
+          {
+            "count": 52,
+            "accuracy": 0.9230769230769231,
+            "confidence": 0.8441822127654002
+          },
+          {
+            "count": 14,
+            "accuracy": 0.7142857142857143,
+            "confidence": 0.9318939362253461
+          }
+        ]
+      },
+      "raw": {
+        "nll": 1.0669363202909767,
+        "brier": 0.5283415220386439,
+        "ece": 0.09996414937154212,
+        "reliability_bins": [
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 0,
+            "accuracy": null,
+            "confidence": null
+          },
+          {
+            "count": 4,
+            "accuracy": 0.0,
+            "confidence": 0.2795577272772789
+          },
+          {
+            "count": 18,
+            "accuracy": 0.3888888888888889,
+            "confidence": 0.35759030282497406
+          },
+          {
+            "count": 61,
+            "accuracy": 0.5081967213114754,
+            "confidence": 0.45510042006852197
+          },
+          {
+            "count": 72,
+            "accuracy": 0.3611111111111111,
+            "confidence": 0.5485336399740643
+          },
+          {
+            "count": 51,
+            "accuracy": 0.43137254901960786,
+            "confidence": 0.6501737061668845
+          },
+          {
+            "count": 39,
+            "accuracy": 0.7435897435897436,
+            "confidence": 0.749619111036643
+          },
+          {
+            "count": 66,
+            "accuracy": 0.803030303030303,
+            "confidence": 0.8544931231123029
+          },
+          {
+            "count": 85,
+            "accuracy": 0.8705882352941177,
+            "confidence": 0.9456511855125427
+          }
+        ]
+      }
+    },
+    "quality": {
+      "n": 396,
+      "positive_count": 180,
+      "accuracy": 0.7550505050505051,
+      "confusion_matrix": [
+        [
+          173,
+          43
+        ],
+        [
+          54,
+          126
+        ]
+      ],
+      "auroc": 0.8174125514403292,
+      "auprc": 0.7705416162755353,
+      "good_probability_threshold": 0.5,
+      "brier": 0.17483149615923071
+    },
+    "conformal": {
+      "ordinal": {
+        "n_images": 396,
+        "marginal_coverage": 1.0,
+        "mean_set_size": 5.0,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 396
+        },
+        "per_class": {
+          "0": {
+            "n": 196,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 36,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 72,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 72,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 20,
+            "coverage": 1.0
+          }
+        },
+        "n_patients": 99,
+        "patient_all_views_coverage": 1.0,
+        "covered_images": 396,
+        "covered_patients": 99
+      },
+      "lac": {
+        "n_images": 396,
+        "marginal_coverage": 0.9621212121212122,
+        "mean_set_size": 3.4318181818181817,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 0.8787878787878788,
+        "set_size_counts": {
+          "0": 0,
+          "1": 15,
+          "2": 48,
+          "3": 137,
+          "4": 143,
+          "5": 53
+        },
+        "per_class": {
+          "0": {
+            "n": 196,
+            "coverage": 0.9897959183673469
+          },
+          "1": {
+            "n": 36,
+            "coverage": 0.9166666666666666
+          },
+          "2": {
+            "n": 72,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 72,
+            "coverage": 0.9166666666666666
+          },
+          "4": {
+            "n": 20,
+            "coverage": 0.8
+          }
+        },
+        "n_patients": 99,
+        "patient_all_views_coverage": 0.898989898989899,
+        "covered_images": 381,
+        "covered_patients": 89
+      }
+    }
+  },
+  "policy": {
+    "review_budget": 0.3,
+    "recapture_budget": 0.2,
+    "minimum_quality": 0.5,
+    "review_risk": 0.5,
+    "uncertainty_threshold": 0.75,
+    "referable_grade": 2,
+    "severe_grade": 3,
+    "severe_risk": 0.25,
+    "severity_costs": [
+      0.0,
+      0.0,
+      3.0,
+      6.0,
+      10.0
+    ],
+    "review_cost": 0.25,
+    "recapture_cost": 0.2,
+    "uncertainty_weight": 0.5,
+    "quality_weight": 1.0
+  },
+  "budget_pairs": [
+    [
+      0.3,
+      0.2
+    ],
+    [
+      0.6,
+      0.4
+    ],
+    [
+      0.9,
+      0.4
+    ],
+    [
+      1.0,
+      0.4
+    ]
+  ],
+  "pointwise": {
+    "ordinal": {
+      "n_images": 396,
+      "n_patients": 99,
+      "image_actions": {
+        "AUTO_NONREFERABLE": 0,
+        "RECAPTURE": 0,
+        "SPECIALIST_REVIEW": 396
+      },
+      "patient_actions": {
+        "AUTO_NONREFERABLE": 0,
+        "RECAPTURE": 0,
+        "SPECIALIST_REVIEW": 99
+      },
+      "missed_referable_images": 0,
+      "missed_severe_images": 0,
+      "severe_recapture_patients": 0,
+      "fully_automatic_referable_patients": 0,
+      "fully_automatic_severe_patients": 0,
+      "patients_with_any_automatic_image": 0,
+      "patients_with_partial_automatic_images": 0,
+      "referable_patients_with_any_automatic_image": 0,
+      "patients_with_automatic_referable_image": 0,
+      "full_patient_clearance_miss_fraction": null,
+      "patient_weighted_missed_referral_per_patient": 0.0,
+      "patient_proxy_per_patient": 0.25,
+      "fully_automatic_patient_fraction": 0.0,
+      "fully_automatic_referable_patients_per_patient": 0.0,
+      "fully_automatic_severe_patients_per_patient": 0.0
+    },
+    "lac": {
+      "n_images": 396,
+      "n_patients": 99,
+      "image_actions": {
+        "AUTO_NONREFERABLE": 7,
+        "RECAPTURE": 21,
+        "SPECIALIST_REVIEW": 368
+      },
+      "patient_actions": {
+        "AUTO_NONREFERABLE": 0,
+        "RECAPTURE": 0,
+        "SPECIALIST_REVIEW": 99
+      },
+      "missed_referable_images": 1,
+      "missed_severe_images": 1,
+      "severe_recapture_patients": 0,
+      "fully_automatic_referable_patients": 0,
+      "fully_automatic_severe_patients": 0,
+      "patients_with_any_automatic_image": 7,
+      "patients_with_partial_automatic_images": 7,
+      "referable_patients_with_any_automatic_image": 1,
+      "patients_with_automatic_referable_image": 1,
+      "full_patient_clearance_miss_fraction": null,
+      "patient_weighted_missed_referral_per_patient": 0.0,
+      "patient_proxy_per_patient": 0.25,
+      "fully_automatic_patient_fraction": 0.0,
+      "fully_automatic_referable_patients_per_patient": 0.0,
+      "fully_automatic_severe_patients_per_patient": 0.0
+    },
+    "no_cp": {
+      "n_images": 396,
+      "n_patients": 99,
+      "image_actions": {
+        "AUTO_NONREFERABLE": 56,
+        "RECAPTURE": 131,
+        "SPECIALIST_REVIEW": 209
+      },
+      "patient_actions": {
+        "AUTO_NONREFERABLE": 1,
+        "RECAPTURE": 27,
+        "SPECIALIST_REVIEW": 71
+      },
+      "missed_referable_images": 8,
+      "missed_severe_images": 1,
+      "severe_recapture_patients": 1,
+      "fully_automatic_referable_patients": 0,
+      "fully_automatic_severe_patients": 0,
+      "patients_with_any_automatic_image": 39,
+      "patients_with_partial_automatic_images": 38,
+      "referable_patients_with_any_automatic_image": 10,
+      "patients_with_automatic_referable_image": 8,
+      "full_patient_clearance_miss_fraction": 0.0,
+      "patient_weighted_missed_referral_per_patient": 0.0,
+      "patient_proxy_per_patient": 0.3348484848484848,
+      "fully_automatic_patient_fraction": 0.010101010101010102,
+      "fully_automatic_referable_patients_per_patient": 0.0,
+      "fully_automatic_severe_patients_per_patient": 0.0
+    }
+  },
+  "scenarios": [
+    {
+      "id": "ordinal:plain:0",
+      "mode": "ordinal",
+      "method": "plain",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:confidence_only:0",
+      "mode": "ordinal",
+      "method": "confidence_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:entropy_only:0",
+      "mode": "ordinal",
+      "method": "entropy_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:severity_only:0",
+      "mode": "ordinal",
+      "method": "severity_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:quality_only:0",
+      "mode": "ordinal",
+      "method": "quality_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:single_budget:0",
+      "mode": "ordinal",
+      "method": "single_budget",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:naive:0",
+      "mode": "ordinal",
+      "method": "naive",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:dual_budget:0",
+      "mode": "ordinal",
+      "method": "dual_budget",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 278,
+        "review_shortfall_after_recapture": 278,
+        "total_shortfall": 199,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:plain:1",
+      "mode": "ordinal",
+      "method": "plain",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:confidence_only:1",
+      "mode": "ordinal",
+      "method": "confidence_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:entropy_only:1",
+      "mode": "ordinal",
+      "method": "entropy_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:severity_only:1",
+      "mode": "ordinal",
+      "method": "severity_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:quality_only:1",
+      "mode": "ordinal",
+      "method": "quality_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:single_budget:1",
+      "mode": "ordinal",
+      "method": "single_budget",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:naive:1",
+      "mode": "ordinal",
+      "method": "naive",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:dual_budget:1",
+      "mode": "ordinal",
+      "method": "dual_budget",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 159,
+        "review_shortfall_after_recapture": 159,
+        "total_shortfall": 1,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:plain:2",
+      "mode": "ordinal",
+      "method": "plain",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:confidence_only:2",
+      "mode": "ordinal",
+      "method": "confidence_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:entropy_only:2",
+      "mode": "ordinal",
+      "method": "entropy_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:severity_only:2",
+      "mode": "ordinal",
+      "method": "severity_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:quality_only:2",
+      "mode": "ordinal",
+      "method": "quality_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:single_budget:2",
+      "mode": "ordinal",
+      "method": "single_budget",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:naive:2",
+      "mode": "ordinal",
+      "method": "naive",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:dual_budget:2",
+      "mode": "ordinal",
+      "method": "dual_budget",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 396,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 396,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 40,
+        "review_shortfall_after_recapture": 40,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 0,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "ordinal:plain:3",
+      "mode": "ordinal",
+      "method": "plain",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "ordinal:confidence_only:3",
+      "mode": "ordinal",
+      "method": "confidence_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "ordinal:entropy_only:3",
+      "mode": "ordinal",
+      "method": "entropy_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "ordinal:severity_only:3",
+      "mode": "ordinal",
+      "method": "severity_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "ordinal:quality_only:3",
+      "mode": "ordinal",
+      "method": "quality_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "ordinal:single_budget:3",
+      "mode": "ordinal",
+      "method": "single_budget",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "ordinal:naive:3",
+      "mode": "ordinal",
+      "method": "naive",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "ordinal:dual_budget:3",
+      "mode": "ordinal",
+      "method": "dual_budget",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:plain:0",
+      "mode": "lac",
+      "method": "plain",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 250,
+        "review_shortfall_after_recapture": 250,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:confidence_only:0",
+      "mode": "lac",
+      "method": "confidence_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 250,
+        "review_shortfall_after_recapture": 250,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:entropy_only:0",
+      "mode": "lac",
+      "method": "entropy_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 250,
+        "review_shortfall_after_recapture": 250,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:severity_only:0",
+      "mode": "lac",
+      "method": "severity_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 250,
+        "review_shortfall_after_recapture": 250,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:quality_only:0",
+      "mode": "lac",
+      "method": "quality_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 250,
+        "review_shortfall_after_recapture": 250,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:single_budget:0",
+      "mode": "lac",
+      "method": "single_budget",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 389,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 271,
+        "review_shortfall_after_recapture": 271,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:naive:0",
+      "mode": "lac",
+      "method": "naive",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 250,
+        "review_shortfall_after_recapture": 250,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:dual_budget:0",
+      "mode": "lac",
+      "method": "dual_budget",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 250,
+        "review_shortfall_after_recapture": 250,
+        "total_shortfall": 192,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 70,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:plain:1",
+      "mode": "lac",
+      "method": "plain",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 131,
+        "review_shortfall_after_recapture": 131,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:confidence_only:1",
+      "mode": "lac",
+      "method": "confidence_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 131,
+        "review_shortfall_after_recapture": 131,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:entropy_only:1",
+      "mode": "lac",
+      "method": "entropy_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 131,
+        "review_shortfall_after_recapture": 131,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:severity_only:1",
+      "mode": "lac",
+      "method": "severity_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 131,
+        "review_shortfall_after_recapture": 131,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:quality_only:1",
+      "mode": "lac",
+      "method": "quality_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 131,
+        "review_shortfall_after_recapture": 131,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:single_budget:1",
+      "mode": "lac",
+      "method": "single_budget",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 389,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 152,
+        "review_shortfall_after_recapture": 152,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:naive:1",
+      "mode": "lac",
+      "method": "naive",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 131,
+        "review_shortfall_after_recapture": 131,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:dual_budget:1",
+      "mode": "lac",
+      "method": "dual_budget",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 131,
+        "review_shortfall_after_recapture": 131,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 40,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:plain:2",
+      "mode": "lac",
+      "method": "plain",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 12,
+        "review_shortfall_after_recapture": 12,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:confidence_only:2",
+      "mode": "lac",
+      "method": "confidence_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 12,
+        "review_shortfall_after_recapture": 12,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:entropy_only:2",
+      "mode": "lac",
+      "method": "entropy_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 12,
+        "review_shortfall_after_recapture": 12,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:severity_only:2",
+      "mode": "lac",
+      "method": "severity_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 12,
+        "review_shortfall_after_recapture": 12,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:quality_only:2",
+      "mode": "lac",
+      "method": "quality_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 12,
+        "review_shortfall_after_recapture": 12,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:single_budget:2",
+      "mode": "lac",
+      "method": "single_budget",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 389,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 33,
+        "review_shortfall_after_recapture": 33,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:naive:2",
+      "mode": "lac",
+      "method": "naive",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 12,
+        "review_shortfall_after_recapture": 12,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:dual_budget:2",
+      "mode": "lac",
+      "method": "dual_budget",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 368,
+        "needed_recapture": 21,
+        "needed_recapture_or_review": 21,
+        "needed_recapture_after_available_review": 21,
+        "needed_total": 389,
+        "review_capacity": 356,
+        "recapture_capacity": 158,
+        "total_capacity": 514,
+        "mandatory_review_shortfall": 12,
+        "review_shortfall_after_recapture": 12,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 7,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 10,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "lac:plain:3",
+      "mode": "lac",
+      "method": "plain",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 7,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 389
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 7,
+        "patients_with_partial_automatic_images": 7,
+        "referable_patients_with_any_automatic_image": 1,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:confidence_only:3",
+      "mode": "lac",
+      "method": "confidence_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 4,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 392
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 4,
+        "patients_with_partial_automatic_images": 4,
+        "referable_patients_with_any_automatic_image": 1,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:entropy_only:3",
+      "mode": "lac",
+      "method": "entropy_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 395
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 1,
+        "patients_with_partial_automatic_images": 1,
+        "referable_patients_with_any_automatic_image": 1,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:severity_only:3",
+      "mode": "lac",
+      "method": "severity_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 4,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 392
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 4,
+        "patients_with_partial_automatic_images": 4,
+        "referable_patients_with_any_automatic_image": 1,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:quality_only:3",
+      "mode": "lac",
+      "method": "quality_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:single_budget:3",
+      "mode": "lac",
+      "method": "single_budget",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:naive:3",
+      "mode": "lac",
+      "method": "naive",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "lac:dual_budget:3",
+      "mode": "lac",
+      "method": "dual_budget",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 99,
+        "recapture_only": 0,
+        "minimum_review_after_spill": 99,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 0
+      }
+    },
+    {
+      "id": "no_cp:plain:0",
+      "mode": "no_cp",
+      "method": "plain",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 209,
+        "needed_recapture": 131,
+        "needed_recapture_or_review": 131,
+        "needed_recapture_after_available_review": 131,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 91,
+        "review_shortfall_after_recapture": 143,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:confidence_only:0",
+      "mode": "no_cp",
+      "method": "confidence_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 209,
+        "needed_recapture": 131,
+        "needed_recapture_or_review": 131,
+        "needed_recapture_after_available_review": 131,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 91,
+        "review_shortfall_after_recapture": 143,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:entropy_only:0",
+      "mode": "no_cp",
+      "method": "entropy_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 209,
+        "needed_recapture": 131,
+        "needed_recapture_or_review": 131,
+        "needed_recapture_after_available_review": 131,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 91,
+        "review_shortfall_after_recapture": 143,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:severity_only:0",
+      "mode": "no_cp",
+      "method": "severity_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 209,
+        "needed_recapture": 131,
+        "needed_recapture_or_review": 131,
+        "needed_recapture_after_available_review": 131,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 91,
+        "review_shortfall_after_recapture": 143,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:quality_only:0",
+      "mode": "no_cp",
+      "method": "quality_only",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 209,
+        "needed_recapture": 131,
+        "needed_recapture_or_review": 131,
+        "needed_recapture_after_available_review": 131,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 91,
+        "review_shortfall_after_recapture": 143,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:single_budget:0",
+      "mode": "no_cp",
+      "method": "single_budget",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 340,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 222,
+        "review_shortfall_after_recapture": 222,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:naive:0",
+      "mode": "no_cp",
+      "method": "naive",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 209,
+        "needed_recapture": 131,
+        "needed_recapture_or_review": 131,
+        "needed_recapture_after_available_review": 131,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 91,
+        "review_shortfall_after_recapture": 143,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:dual_budget:0",
+      "mode": "no_cp",
+      "method": "dual_budget",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 209,
+        "needed_recapture": 131,
+        "needed_recapture_or_review": 131,
+        "needed_recapture_after_available_review": 131,
+        "needed_total": 340,
+        "review_capacity": 118,
+        "recapture_capacity": 79,
+        "total_capacity": 197,
+        "mandatory_review_shortfall": 91,
+        "review_shortfall_after_recapture": 143,
+        "total_shortfall": 143,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 29,
+        "recapture_capacity": 19,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 79,
+        "review_shortfall": 50,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:plain:1",
+      "mode": "no_cp",
+      "method": "plain",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 56,
+          "RECAPTURE": 103,
+          "SPECIALIST_REVIEW": 237
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 26,
+          "SPECIALIST_REVIEW": 72
+        },
+        "missed_referable_images": 8,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 1,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 39,
+        "patients_with_partial_automatic_images": 38,
+        "referable_patients_with_any_automatic_image": 10,
+        "patients_with_automatic_referable_image": 8,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.33535353535353524,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:confidence_only:1",
+      "mode": "no_cp",
+      "method": "confidence_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 56,
+          "RECAPTURE": 103,
+          "SPECIALIST_REVIEW": 237
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 26,
+          "SPECIALIST_REVIEW": 72
+        },
+        "missed_referable_images": 8,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 1,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 39,
+        "patients_with_partial_automatic_images": 38,
+        "referable_patients_with_any_automatic_image": 10,
+        "patients_with_automatic_referable_image": 8,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.33535353535353524,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:entropy_only:1",
+      "mode": "no_cp",
+      "method": "entropy_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 56,
+          "RECAPTURE": 103,
+          "SPECIALIST_REVIEW": 237
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 26,
+          "SPECIALIST_REVIEW": 72
+        },
+        "missed_referable_images": 8,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 1,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 39,
+        "patients_with_partial_automatic_images": 38,
+        "referable_patients_with_any_automatic_image": 10,
+        "patients_with_automatic_referable_image": 8,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.33535353535353524,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:severity_only:1",
+      "mode": "no_cp",
+      "method": "severity_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 52,
+          "RECAPTURE": 107,
+          "SPECIALIST_REVIEW": 237
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 26,
+          "SPECIALIST_REVIEW": 72
+        },
+        "missed_referable_images": 4,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 1,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 35,
+        "patients_with_partial_automatic_images": 34,
+        "referable_patients_with_any_automatic_image": 6,
+        "patients_with_automatic_referable_image": 4,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.33535353535353524,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:quality_only:1",
+      "mode": "no_cp",
+      "method": "quality_only",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 56,
+          "RECAPTURE": 103,
+          "SPECIALIST_REVIEW": 237
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 26,
+          "SPECIALIST_REVIEW": 72
+        },
+        "missed_referable_images": 8,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 1,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 39,
+        "patients_with_partial_automatic_images": 38,
+        "referable_patients_with_any_automatic_image": 10,
+        "patients_with_automatic_referable_image": 8,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.33535353535353524,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:single_budget:1",
+      "mode": "no_cp",
+      "method": "single_budget",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "overload",
+      "diagnostics": {
+        "n": 396,
+        "needed_review": 340,
+        "needed_recapture": 0,
+        "needed_recapture_or_review": 0,
+        "needed_recapture_after_available_review": 0,
+        "needed_total": 340,
+        "review_capacity": 237,
+        "recapture_capacity": 158,
+        "total_capacity": 395,
+        "mandatory_review_shortfall": 103,
+        "review_shortfall_after_recapture": 103,
+        "total_shortfall": 0,
+        "eligible_auto_nonreferable": 56,
+        "unsafe_clearance_permitted": false
+      },
+      "outcomes": null,
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:naive:1",
+      "mode": "no_cp",
+      "method": "naive",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 56,
+          "RECAPTURE": 103,
+          "SPECIALIST_REVIEW": 237
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 26,
+          "SPECIALIST_REVIEW": 72
+        },
+        "missed_referable_images": 8,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 1,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 39,
+        "patients_with_partial_automatic_images": 38,
+        "referable_patients_with_any_automatic_image": 10,
+        "patients_with_automatic_referable_image": 8,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.33535353535353524,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:dual_budget:1",
+      "mode": "no_cp",
+      "method": "dual_budget",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 45,
+          "RECAPTURE": 114,
+          "SPECIALIST_REVIEW": 237
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 25,
+          "SPECIALIST_REVIEW": 74
+        },
+        "missed_referable_images": 4,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 1,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 31,
+        "patients_with_partial_automatic_images": 31,
+        "referable_patients_with_any_automatic_image": 6,
+        "patients_with_automatic_referable_image": 4,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.33838383838383823,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 59,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 12,
+        "status": "overloaded",
+        "maximum_full_automatic_patients": null
+      }
+    },
+    {
+      "id": "no_cp:plain:2",
+      "mode": "no_cp",
+      "method": "plain",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 56,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 340
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 98
+        },
+        "missed_referable_images": 8,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 39,
+        "patients_with_partial_automatic_images": 38,
+        "referable_patients_with_any_automatic_image": 10,
+        "patients_with_automatic_referable_image": 8,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.2474747474747475,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:confidence_only:2",
+      "mode": "no_cp",
+      "method": "confidence_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 36,
+          "RECAPTURE": 4,
+          "SPECIALIST_REVIEW": 356
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 98
+        },
+        "missed_referable_images": 3,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 25,
+        "patients_with_partial_automatic_images": 24,
+        "referable_patients_with_any_automatic_image": 4,
+        "patients_with_automatic_referable_image": 3,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.2474747474747475,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:entropy_only:2",
+      "mode": "no_cp",
+      "method": "entropy_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 25,
+          "RECAPTURE": 15,
+          "SPECIALIST_REVIEW": 356
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 19,
+        "patients_with_partial_automatic_images": 19,
+        "referable_patients_with_any_automatic_image": 2,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:severity_only:2",
+      "mode": "no_cp",
+      "method": "severity_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 23,
+          "RECAPTURE": 17,
+          "SPECIALIST_REVIEW": 356
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 19,
+        "patients_with_partial_automatic_images": 19,
+        "referable_patients_with_any_automatic_image": 2,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:quality_only:2",
+      "mode": "no_cp",
+      "method": "quality_only",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 38,
+          "RECAPTURE": 2,
+          "SPECIALIST_REVIEW": 356
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 98
+        },
+        "missed_referable_images": 6,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 28,
+        "patients_with_partial_automatic_images": 27,
+        "referable_patients_with_any_automatic_image": 7,
+        "patients_with_automatic_referable_image": 6,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.2474747474747475,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:single_budget:2",
+      "mode": "no_cp",
+      "method": "single_budget",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 40,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 356
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 2,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 27,
+        "patients_with_partial_automatic_images": 27,
+        "referable_patients_with_any_automatic_image": 3,
+        "patients_with_automatic_referable_image": 2,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:naive:2",
+      "mode": "no_cp",
+      "method": "naive",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 7,
+          "RECAPTURE": 33,
+          "SPECIALIST_REVIEW": 356
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 6,
+        "patients_with_partial_automatic_images": 6,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:dual_budget:2",
+      "mode": "no_cp",
+      "method": "dual_budget",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 4,
+          "RECAPTURE": 36,
+          "SPECIALIST_REVIEW": 356
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 4,
+        "patients_with_partial_automatic_images": 4,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 89,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:plain:3",
+      "mode": "no_cp",
+      "method": "plain",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 56,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 340
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 98
+        },
+        "missed_referable_images": 8,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 39,
+        "patients_with_partial_automatic_images": 38,
+        "referable_patients_with_any_automatic_image": 10,
+        "patients_with_automatic_referable_image": 8,
+        "full_patient_clearance_miss_fraction": 0.0,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.2474747474747475,
+        "fully_automatic_patient_fraction": 0.010101010101010102,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:confidence_only:3",
+      "mode": "no_cp",
+      "method": "confidence_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 15,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 381
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 12,
+        "patients_with_partial_automatic_images": 12,
+        "referable_patients_with_any_automatic_image": 1,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:entropy_only:3",
+      "mode": "no_cp",
+      "method": "entropy_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 395
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 1,
+        "patients_with_partial_automatic_images": 1,
+        "referable_patients_with_any_automatic_image": 1,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:severity_only:3",
+      "mode": "no_cp",
+      "method": "severity_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 4,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 392
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 1,
+        "missed_severe_images": 1,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 4,
+        "patients_with_partial_automatic_images": 4,
+        "referable_patients_with_any_automatic_image": 1,
+        "patients_with_automatic_referable_image": 1,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:quality_only:3",
+      "mode": "no_cp",
+      "method": "quality_only",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 21,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 375
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 3,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 16,
+        "patients_with_partial_automatic_images": 16,
+        "referable_patients_with_any_automatic_image": 3,
+        "patients_with_automatic_referable_image": 3,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:single_budget:3",
+      "mode": "no_cp",
+      "method": "single_budget",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:naive:3",
+      "mode": "no_cp",
+      "method": "naive",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    },
+    {
+      "id": "no_cp:dual_budget:3",
+      "mode": "no_cp",
+      "method": "dual_budget",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "status": "evaluated",
+      "diagnostics": null,
+      "outcomes": {
+        "n_images": 396,
+        "n_patients": 99,
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 396
+        },
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 99
+        },
+        "missed_referable_images": 0,
+        "missed_severe_images": 0,
+        "severe_recapture_patients": 0,
+        "fully_automatic_referable_patients": 0,
+        "fully_automatic_severe_patients": 0,
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "full_patient_clearance_miss_fraction": null,
+        "patient_weighted_missed_referral_per_patient": 0.0,
+        "patient_proxy_per_patient": 0.25,
+        "fully_automatic_patient_fraction": 0.0,
+        "fully_automatic_referable_patients_per_patient": 0.0,
+        "fully_automatic_severe_patients_per_patient": 0.0
+      },
+      "patient_capacity": {
+        "review_capacity": 99,
+        "recapture_capacity": 39,
+        "mandatory_review": 71,
+        "recapture_only": 27,
+        "minimum_review_after_spill": 71,
+        "review_shortfall": 0,
+        "status": "feasible",
+        "maximum_full_automatic_patients": 1
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "ordinal:dual_budget:0",
+      "reference": "ordinal:plain:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "ordinal:dual_budget:0",
+      "reference": "ordinal:confidence_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "ordinal:dual_budget:0",
+      "reference": "ordinal:entropy_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "ordinal:dual_budget:0",
+      "reference": "ordinal:severity_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "ordinal:dual_budget:0",
+      "reference": "ordinal:quality_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "ordinal:dual_budget:0",
+      "reference": "ordinal:single_budget:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "ordinal:dual_budget:0",
+      "reference": "ordinal:naive:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:1",
+      "reference": "ordinal:plain:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:1",
+      "reference": "ordinal:confidence_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:1",
+      "reference": "ordinal:entropy_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:1",
+      "reference": "ordinal:severity_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:1",
+      "reference": "ordinal:quality_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:1",
+      "reference": "ordinal:single_budget:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:1",
+      "reference": "ordinal:naive:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:2",
+      "reference": "ordinal:plain:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:2",
+      "reference": "ordinal:confidence_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:2",
+      "reference": "ordinal:entropy_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:2",
+      "reference": "ordinal:severity_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:2",
+      "reference": "ordinal:quality_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:2",
+      "reference": "ordinal:single_budget:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:2",
+      "reference": "ordinal:naive:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:3",
+      "reference": "ordinal:plain:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:3",
+      "reference": "ordinal:confidence_only:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:3",
+      "reference": "ordinal:entropy_only:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:3",
+      "reference": "ordinal:severity_only:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:3",
+      "reference": "ordinal:quality_only:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:3",
+      "reference": "ordinal:single_budget:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "ordinal",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "ordinal:dual_budget:3",
+      "reference": "ordinal:naive:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "lac:dual_budget:0",
+      "reference": "lac:plain:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "lac:dual_budget:0",
+      "reference": "lac:confidence_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "lac:dual_budget:0",
+      "reference": "lac:entropy_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "lac:dual_budget:0",
+      "reference": "lac:severity_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "lac:dual_budget:0",
+      "reference": "lac:quality_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "lac:dual_budget:0",
+      "reference": "lac:single_budget:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "lac:dual_budget:0",
+      "reference": "lac:naive:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:1",
+      "reference": "lac:plain:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:1",
+      "reference": "lac:confidence_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:1",
+      "reference": "lac:entropy_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:1",
+      "reference": "lac:severity_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:1",
+      "reference": "lac:quality_only:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:1",
+      "reference": "lac:single_budget:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:1",
+      "reference": "lac:naive:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:2",
+      "reference": "lac:plain:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:2",
+      "reference": "lac:confidence_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:2",
+      "reference": "lac:entropy_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:2",
+      "reference": "lac:severity_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:2",
+      "reference": "lac:quality_only:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:2",
+      "reference": "lac:single_budget:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:2",
+      "reference": "lac:naive:2",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:3",
+      "reference": "lac:plain:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:3",
+      "reference": "lac:confidence_only:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:3",
+      "reference": "lac:entropy_only:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:3",
+      "reference": "lac:severity_only:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:3",
+      "reference": "lac:quality_only:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:3",
+      "reference": "lac:single_budget:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "lac",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "lac:dual_budget:3",
+      "reference": "lac:naive:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "no_cp:dual_budget:0",
+      "reference": "no_cp:plain:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "no_cp:dual_budget:0",
+      "reference": "no_cp:confidence_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "no_cp:dual_budget:0",
+      "reference": "no_cp:entropy_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "no_cp:dual_budget:0",
+      "reference": "no_cp:severity_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "no_cp:dual_budget:0",
+      "reference": "no_cp:quality_only:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "no_cp:dual_budget:0",
+      "reference": "no_cp:single_budget:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.3,
+        0.2
+      ],
+      "candidate": "no_cp:dual_budget:0",
+      "reference": "no_cp:naive:0",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:1",
+      "reference": "no_cp:plain:1",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:1",
+      "reference": "no_cp:confidence_only:1",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:1",
+      "reference": "no_cp:entropy_only:1",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:1",
+      "reference": "no_cp:severity_only:1",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:1",
+      "reference": "no_cp:quality_only:1",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:1",
+      "reference": "no_cp:single_budget:1",
+      "status": "unavailable",
+      "matched_image_workload": null,
+      "matched_patient_workload": null,
+      "identical_image_actions": null,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.6,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:1",
+      "reference": "no_cp:naive:1",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:2",
+      "reference": "no_cp:plain:2",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:2",
+      "reference": "no_cp:confidence_only:2",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:2",
+      "reference": "no_cp:entropy_only:2",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:2",
+      "reference": "no_cp:severity_only:2",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:2",
+      "reference": "no_cp:quality_only:2",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:2",
+      "reference": "no_cp:single_budget:2",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        0.9,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:2",
+      "reference": "no_cp:naive:2",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:3",
+      "reference": "no_cp:plain:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": false,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:3",
+      "reference": "no_cp:confidence_only:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:3",
+      "reference": "no_cp:entropy_only:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:3",
+      "reference": "no_cp:severity_only:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:3",
+      "reference": "no_cp:quality_only:3",
+      "status": "comparison",
+      "matched_image_workload": false,
+      "matched_patient_workload": true,
+      "identical_image_actions": false,
+      "intervals": null
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:3",
+      "reference": "no_cp:single_budget:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "mode": "no_cp",
+      "budget": [
+        1.0,
+        0.4
+      ],
+      "candidate": "no_cp:dual_budget:3",
+      "reference": "no_cp:naive:3",
+      "status": "comparison",
+      "matched_image_workload": true,
+      "matched_patient_workload": true,
+      "identical_image_actions": true,
+      "intervals": {
+        "patient_weighted_missed_referral_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "patient_proxy_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_patient_fraction": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_referable_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "fully_automatic_severe_patients_per_patient": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  ],
+  "runtime": {
+    "python": "3.11.0",
+    "system": "Windows",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "pillow": "10.4.0"
+  }
+}

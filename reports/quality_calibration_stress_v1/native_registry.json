@@ -1,0 +1,18 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "registered_records": 18,
+  "source_report_sha256": "906322ccd6a28a5a330a935573af6ac775de5e191eafa474ebd28f96c04b6bc3",
+  "actual_api_metrics_match": true,
+  "models_checked": 6,
+  "clean_model_head_role_views": 48,
+  "stress_model_state_response_views": 48,
+  "primary_model_default_verified": true,
+  "separate_fitting_role_and_absent_corrupted_truth_captions_verified": true,
+  "production_card_and_sidecar_matched": true,
+  "no_ui_exceptions": true,
+  "ui_method": "Streamlit AppTest against actual native HTTP API",
+  "new_browser_rendering_verified": false,
+  "new_container_execution_verified": false,
+  "verifier_sha256": "7dec10ff8fa51df522d4637a082d3c32fb4f2597abf13ad384abeb71b737e5e0"
+}

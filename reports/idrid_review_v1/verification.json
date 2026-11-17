@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "scope": "external_overlap_review_and_population_freeze",
+  "execution_source_commit": "d1c5968189f8bd36508b5cbb4c35220af5f0bf6b",
+  "pytest": {
+    "tests": 476,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 77.12,
+    "junit_duration_seconds": 76.757,
+    "junit_sha256": "d12da6585acd1d678f4743a353540cb0e57c90a7ea012838b03431ac3394bb70",
+    "genuine_production_model_and_conformal_integration_enabled": true,
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=reports/idrid_review_v1_tests.xml",
+    "warnings": [
+      "One upstream AnyIO BlockingPortal deprecation warning."
+    ]
+  },
+  "ruff": "passed",
+  "compose_configuration": "passed",
+  "native_http_and_streamlit_component_checks": "passed",
+  "docker_engine_available": false,
+  "new_container_execution_verified": false,
+  "new_browser_rendering_verified": false,
+  "artifact_sha256": {
+    "data_review.json": "f21a3cd6109030c6c9da96710b7af0e6a89a00365afbfc76af9cb539abdf15f7",
+    "independent_audit.json": "dfdb832f1e35c7e5a6a2be8924b70b6bb5ed2ffa722ddfcdb2ced78dcff85376",
+    "native_registry.json": "4d573eb4dc06f515937e1fae6a5f319831eab167633e5e52849069d1fded0fa4",
+    "native_deployment.json": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812"
+  },
+  "official_source_user_confirmed": true,
+  "official_archive_checksum_verified": false,
+  "historical_audit_unchanged": true,
+  "original_labels_retained": true,
+  "external_model_predictions": 0
+}

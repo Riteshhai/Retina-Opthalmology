@@ -1,0 +1,9 @@
+{
+  "near_duplicate_distance": 2,
+  "references": [
+    {"path": "data/manifests/aptos_v1/dataset_manifest.csv", "dataset": "APTOS_2019", "rows": 3514, "sha256": "1d79240d22237d1934328899d3d6624cd41f6294a15d158a3f62eacf5e7684ed"},
+    {"path": "data/manifests/aptos_v1/quarantine_report.csv", "dataset": "APTOS_2019", "rows": 148, "sha256": "4ae497251d8923f31d4e18fe1a3b8e650a8a1a8b57a59587a1486f48d7c2ef39"},
+    {"path": "data/processed/deepdrid/development_v1.csv", "dataset": "DeepDRiD_regular_fundus", "rows": 1184, "sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d"},
+    {"path": "data/processed/deepdrid/confirmation_v1.csv", "dataset": "DeepDRiD_regular_fundus", "rows": 340, "sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7"}
+  ]
+}

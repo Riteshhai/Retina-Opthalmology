@@ -1,0 +1,19 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "matched_flip_v1",
+  "source_commit": "7df75add5eb18d285abe219abb51f5fadb7f605d",
+  "evaluation_sha256": "7cba83168bbac4d9df96c3a5333a5d98fc22711d638eb8b82225d1881b926b9b",
+  "auditor_sha256": "a8afba443b0b70992353bc1d1df76a210250de6268ff046c76ab8ecda0aeff53",
+  "selection_images_verified": 168,
+  "selection_patients_verified": 42,
+  "matched_rankings_verified": 6,
+  "workload_anchors_verified": 2,
+  "exact_distributions_verified": 4,
+  "controller_rows_replayed_from_saved_paths": 168,
+  "source_photos_replayed": 8,
+  "path_predictions_replayed": 16,
+  "max_absolute_score_delta_by_path": {
+    "single": 0.0,
+    "all": 0.0
+  }
+}

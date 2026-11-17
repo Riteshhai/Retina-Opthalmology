@@ -1,0 +1,17 @@
+{
+  "scope": "Supplementary descriptive analysis after locked confirmation; no tuning or causal claim",
+  "confirmation_report_sha256": "3cbbf2b6671b1da66e9aa067acff140024d32728f8cb52f854910eb148e50918",
+  "private_prediction_file_sha256": "75ac54e6421fff698e163c9575a5c2f81e28fc32d417c5bad99d18bd8f91e4fd",
+  "images": 340,
+  "patients": 85,
+  "entropy_error_detection_auroc": 0.7652104959630911,
+  "strata_rows": 97,
+  "interval_method": "1000 patient-cluster resamples per observed stratum, seed 2026",
+  "limitations": [
+    "Natural defects are associated with disease/acquisition; not randomized damage.",
+    "Conditional subgroup intervals ignore model-fitting uncertainty and multiplicity.",
+    "Small strata are flagged; absent strata are not estimated.",
+    "Source codes retain their original meaning; artifact direction differs from clarity.",
+    "False negatives here use unselected first-pass grades; no deferred outcomes are assumed."
+  ]
+}

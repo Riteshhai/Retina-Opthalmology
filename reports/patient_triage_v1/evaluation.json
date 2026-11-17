@@ -1,0 +1,802 @@
+{
+  "schema_version": 1,
+  "experiment_id": "patient_triage_v1",
+  "dataset": "DeepDRiD",
+  "partition": "validation",
+  "scope": "development_patient_rollup_and_capacity_feasibility",
+  "source_commit": "3c9ccd47384cd8367bcf16dba29789dac791c5ee",
+  "source_sha256": {
+    "docs/research/PATIENT_TRIAGE_V1_PROTOCOL.md": "6b299658ea7a9a5af867e9436e42cbb6ce008da7875f53ce49167bb6e644dcb5",
+    "scripts/run_patient_triage.py": "3119a90435344333663a133e4c517493bf4e10f8d1b6320405773bdfb07b363f",
+    "scripts/audit_patient_triage.py": "5536dc233674e31e0ae47e7d505719ba5238fa5bdbe9e3e16496a87b90556e9a",
+    "qsart/triage_v2.py": "8c8d98ba478190439490dbae5f265637ed5a9d90dcec4c0c72b12c8ba48005ec"
+  },
+  "protocol_sha256": "6b299658ea7a9a5af867e9436e42cbb6ce008da7875f53ce49167bb6e644dcb5",
+  "input_sha256": {
+    "image_report": "53de650c64c6313cf612a355aea51dc99146ef344a4affdc5a0bed410bc33cfe",
+    "image_audit": "4e75c7e556b684f63929d2445f3e8d728d0911c9ceb7bab26b5118291dbf3b2d",
+    "action_witness": "6d416b0e6275b4b495c5213add27c13e550db7ff31a6023682fc96e33833f282",
+    "ordinal_witness": "0ef95338994b3a587dd38b3034f5c059f063a77901b5af3f17f39292d5f40b4c",
+    "manifest": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d"
+  },
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "population": {
+    "images": 168,
+    "patients": 42,
+    "views_per_eye": 2,
+    "referable_patients": 21,
+    "referable_grade": 2
+  },
+  "fits": [
+    {
+      "alpha": 0.1,
+      "method": "ordinal_projected",
+      "pointwise": {
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 168
+        },
+        "missed_referable_images": 0,
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 42
+        },
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "fully_automatic_referable_patients": 0,
+        "automatic_image_miss_fraction_among_exposed_patients": null,
+        "full_patient_clearance_miss_fraction": null
+      },
+      "scenarios": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 12,
+            "recapture_capacity": 8,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 30,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 25,
+            "recapture_capacity": 16,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 17,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 37,
+            "recapture_capacity": 16,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 5,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 168
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 42
+            },
+            "patients_with_any_automatic_image": 0,
+            "patients_with_partial_automatic_images": 0,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": null,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 0,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 42,
+            "recapture_capacity": 16,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 0,
+            "status": "feasible",
+            "maximum_full_automatic_patients": 0
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.1,
+      "method": "lac_projected",
+      "pointwise": {
+        "image_actions": {
+          "AUTO_NONREFERABLE": 6,
+          "RECAPTURE": 15,
+          "SPECIALIST_REVIEW": 147
+        },
+        "missed_referable_images": 0,
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 1,
+          "SPECIALIST_REVIEW": 40
+        },
+        "patients_with_any_automatic_image": 2,
+        "patients_with_partial_automatic_images": 1,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "fully_automatic_referable_patients": 0,
+        "automatic_image_miss_fraction_among_exposed_patients": 0.0,
+        "full_patient_clearance_miss_fraction": 0.0
+      },
+      "scenarios": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 12,
+            "recapture_capacity": 8,
+            "mandatory_review": 40,
+            "recapture_only": 1,
+            "minimum_review_after_spill": 40,
+            "review_shortfall": 28,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 25,
+            "recapture_capacity": 16,
+            "mandatory_review": 40,
+            "recapture_only": 1,
+            "minimum_review_after_spill": 40,
+            "review_shortfall": 15,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 5,
+              "RECAPTURE": 12,
+              "SPECIALIST_REVIEW": 151
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 1,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 41
+            },
+            "patients_with_any_automatic_image": 2,
+            "patients_with_partial_automatic_images": 1,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": 0.0,
+            "full_patient_clearance_miss_fraction": 0.0,
+            "review_excess_over_patient_cap": 4,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 37,
+            "recapture_capacity": 16,
+            "mandatory_review": 40,
+            "recapture_only": 1,
+            "minimum_review_after_spill": 40,
+            "review_shortfall": 3,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 168
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 42
+            },
+            "patients_with_any_automatic_image": 0,
+            "patients_with_partial_automatic_images": 0,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": null,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 0,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 42,
+            "recapture_capacity": 16,
+            "mandatory_review": 40,
+            "recapture_only": 1,
+            "minimum_review_after_spill": 40,
+            "review_shortfall": 0,
+            "status": "feasible",
+            "maximum_full_automatic_patients": 1
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.1,
+      "method": "binary_lac",
+      "pointwise": {
+        "image_actions": {
+          "AUTO_NONREFERABLE": 9,
+          "RECAPTURE": 25,
+          "SPECIALIST_REVIEW": 134
+        },
+        "missed_referable_images": 0,
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 2,
+          "SPECIALIST_REVIEW": 39
+        },
+        "patients_with_any_automatic_image": 4,
+        "patients_with_partial_automatic_images": 3,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "fully_automatic_referable_patients": 0,
+        "automatic_image_miss_fraction_among_exposed_patients": 0.0,
+        "full_patient_clearance_miss_fraction": 0.0
+      },
+      "scenarios": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 12,
+            "recapture_capacity": 8,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 27,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 25,
+            "recapture_capacity": 16,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 14,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 3,
+              "RECAPTURE": 14,
+              "SPECIALIST_REVIEW": 151
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 1,
+              "SPECIALIST_REVIEW": 41
+            },
+            "patients_with_any_automatic_image": 2,
+            "patients_with_partial_automatic_images": 2,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": 0.0,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 4,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 37,
+            "recapture_capacity": 16,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 2,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 168
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 42
+            },
+            "patients_with_any_automatic_image": 0,
+            "patients_with_partial_automatic_images": 0,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": null,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 0,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 42,
+            "recapture_capacity": 16,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 0,
+            "status": "feasible",
+            "maximum_full_automatic_patients": 1
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "method": "ordinal_projected",
+      "pointwise": {
+        "image_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 168
+        },
+        "missed_referable_images": 0,
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 0,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 42
+        },
+        "patients_with_any_automatic_image": 0,
+        "patients_with_partial_automatic_images": 0,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "fully_automatic_referable_patients": 0,
+        "automatic_image_miss_fraction_among_exposed_patients": null,
+        "full_patient_clearance_miss_fraction": null
+      },
+      "scenarios": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 12,
+            "recapture_capacity": 8,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 30,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 25,
+            "recapture_capacity": 16,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 17,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 37,
+            "recapture_capacity": 16,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 5,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 168
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 42
+            },
+            "patients_with_any_automatic_image": 0,
+            "patients_with_partial_automatic_images": 0,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": null,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 0,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 42,
+            "recapture_capacity": 16,
+            "mandatory_review": 42,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 42,
+            "review_shortfall": 0,
+            "status": "feasible",
+            "maximum_full_automatic_patients": 0
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "method": "lac_projected",
+      "pointwise": {
+        "image_actions": {
+          "AUTO_NONREFERABLE": 6,
+          "RECAPTURE": 10,
+          "SPECIALIST_REVIEW": 152
+        },
+        "missed_referable_images": 0,
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 0,
+          "SPECIALIST_REVIEW": 41
+        },
+        "patients_with_any_automatic_image": 2,
+        "patients_with_partial_automatic_images": 1,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "fully_automatic_referable_patients": 0,
+        "automatic_image_miss_fraction_among_exposed_patients": 0.0,
+        "full_patient_clearance_miss_fraction": 0.0
+      },
+      "scenarios": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 12,
+            "recapture_capacity": 8,
+            "mandatory_review": 41,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 41,
+            "review_shortfall": 29,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 25,
+            "recapture_capacity": 16,
+            "mandatory_review": 41,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 41,
+            "review_shortfall": 16,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 37,
+            "recapture_capacity": 16,
+            "mandatory_review": 41,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 41,
+            "review_shortfall": 4,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 168
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 42
+            },
+            "patients_with_any_automatic_image": 0,
+            "patients_with_partial_automatic_images": 0,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": null,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 0,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 42,
+            "recapture_capacity": 16,
+            "mandatory_review": 41,
+            "recapture_only": 0,
+            "minimum_review_after_spill": 41,
+            "review_shortfall": 0,
+            "status": "feasible",
+            "maximum_full_automatic_patients": 1
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "method": "binary_lac",
+      "pointwise": {
+        "image_actions": {
+          "AUTO_NONREFERABLE": 6,
+          "RECAPTURE": 23,
+          "SPECIALIST_REVIEW": 139
+        },
+        "missed_referable_images": 0,
+        "patient_actions": {
+          "AUTO_NONREFERABLE": 1,
+          "RECAPTURE": 2,
+          "SPECIALIST_REVIEW": 39
+        },
+        "patients_with_any_automatic_image": 2,
+        "patients_with_partial_automatic_images": 1,
+        "referable_patients_with_any_automatic_image": 0,
+        "patients_with_automatic_referable_image": 0,
+        "fully_automatic_referable_patients": 0,
+        "automatic_image_miss_fraction_among_exposed_patients": 0.0,
+        "full_patient_clearance_miss_fraction": 0.0
+      },
+      "scenarios": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 12,
+            "recapture_capacity": 8,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 27,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "image_status": "overloaded",
+          "image_allocation_patient_rollup": null,
+          "patient_capacity": {
+            "review_capacity": 25,
+            "recapture_capacity": 16,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 14,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 3,
+              "RECAPTURE": 14,
+              "SPECIALIST_REVIEW": 151
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 1,
+              "SPECIALIST_REVIEW": 41
+            },
+            "patients_with_any_automatic_image": 2,
+            "patients_with_partial_automatic_images": 2,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": 0.0,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 4,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 37,
+            "recapture_capacity": 16,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 2,
+            "status": "overloaded",
+            "maximum_full_automatic_patients": null
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "image_status": "evaluated",
+          "image_allocation_patient_rollup": {
+            "image_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 168
+            },
+            "missed_referable_images": 0,
+            "patient_actions": {
+              "AUTO_NONREFERABLE": 0,
+              "RECAPTURE": 0,
+              "SPECIALIST_REVIEW": 42
+            },
+            "patients_with_any_automatic_image": 0,
+            "patients_with_partial_automatic_images": 0,
+            "referable_patients_with_any_automatic_image": 0,
+            "patients_with_automatic_referable_image": 0,
+            "fully_automatic_referable_patients": 0,
+            "automatic_image_miss_fraction_among_exposed_patients": null,
+            "full_patient_clearance_miss_fraction": null,
+            "review_excess_over_patient_cap": 0,
+            "recapture_excess_over_patient_cap": 0
+          },
+          "patient_capacity": {
+            "review_capacity": 42,
+            "recapture_capacity": 16,
+            "mandatory_review": 39,
+            "recapture_only": 2,
+            "minimum_review_after_spill": 39,
+            "review_shortfall": 0,
+            "status": "feasible",
+            "maximum_full_automatic_patients": 1
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "pointwise_fits": 6,
+    "image_allocations_evaluated": 9,
+    "image_allocations_overloaded": 15,
+    "patient_capacity_feasible": 6,
+    "patient_capacity_overloaded": 18,
+    "image_evaluated_patient_overloaded": 3,
+    "image_rollups_exceeding_patient_caps": 3,
+    "pointwise_max_automatic_images": 9,
+    "pointwise_max_patients_with_any_automatic_image": 4,
+    "pointwise_max_fully_automatic_patients": 1,
+    "image_allocations_max_automatic_images": 5,
+    "image_allocations_max_patients_with_any_automatic_image": 2,
+    "image_allocations_max_fully_automatic_patients": 1
+  },
+  "planning": {
+    "one_sided_confidence": 0.95,
+    "counts": [
+      {
+        "target_upper_risk": 0.05,
+        "zero_misses": 59,
+        "one_miss": 93
+      },
+      {
+        "target_upper_risk": 0.02,
+        "zero_misses": 149,
+        "one_miss": 236
+      },
+      {
+        "target_upper_risk": 0.01,
+        "zero_misses": 299,
+        "one_miss": 473
+      }
+    ]
+  },
+  "limitations": [
+    "The development selection patients previously informed model choice.",
+    "Patient actions summarize frozen recommendations across four photographs.",
+    "The patient-capacity calculation uses one slot per patient and assigns no new care actions.",
+    "Prospective sample sizes assume independent fully automatic patients under one fixed rule."
+  ]
+}

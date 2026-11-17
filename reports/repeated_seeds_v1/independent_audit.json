@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "experiment_id": "repeated_seeds_v1",
+  "audit_type": "independent_saved_artifact_reconstruction",
+  "status": "passed",
+  "source_commit_verified": "99a6cbbce0204c965c8221d237cf7cf644e57ddf",
+  "summary_sha256": "1ddb1d230a53dab0c75019e73654f2ab8d17313cc586a9c70efeff29fae4bb9e",
+  "imports_project_metric_or_summary_code": false,
+  "training_or_retinal_inference_rerun": false,
+  "checks": [
+    {
+      "check": "recorded_frozen_source_commit",
+      "passed": true
+    },
+    {
+      "check": "all_source_hashes_at_recorded_commit",
+      "passed": true,
+      "files": 12
+    },
+    {
+      "check": "current_training_protocol_config_source_unchanged",
+      "passed": true
+    },
+    {
+      "check": "protocol_binding",
+      "passed": true
+    },
+    {
+      "check": "only_seed_changed_in_three_configs",
+      "passed": true
+    },
+    {
+      "check": "development_population_and_no_patient_leakage",
+      "passed": true
+    },
+    {
+      "check": "actual_fitting_selection_input_hashes",
+      "passed": true,
+      "images": 1016
+    },
+    {
+      "check": "single_frozen_cache_content_and_population",
+      "passed": true
+    },
+    {
+      "check": "official_pretrained_file_full_hash",
+      "passed": true
+    },
+    {
+      "check": "all_six_actual_runs_verified",
+      "passed": true,
+      "runs": 6,
+      "selection_prediction_rows": 1008,
+      "maximum_probability_reconstruction_error": 1.625326193632759e-07
+    },
+    {
+      "check": "all_three_seed_means_and_sample_standard_deviations",
+      "passed": true,
+      "numeric_outcomes": 21
+    },
+    {
+      "check": "three_unique_model_heads_per_task",
+      "passed": true
+    },
+    {
+      "check": "fresh_cache_then_five_reuses",
+      "passed": true
+    },
+    {
+      "check": "selected_deployment_and_sidecar_preserved",
+      "passed": true
+    },
+    {
+      "check": "public_aggregate_privacy",
+      "passed": true
+    },
+    {
+      "check": "original_result_bytes_unchanged",
+      "passed": true,
+      "original_files": 49
+    },
+    {
+      "check": "calibration_confirmation_excluded_in_saved_execution_evidence",
+      "passed": true
+    }
+  ],
+  "run_checks": [
+    {
+      "task": "dr",
+      "seed": 2026,
+      "metadata_and_provenance": true,
+      "all_eight_artifact_hashes": true,
+      "backbone_identical_to_official_and_last": true,
+      "selection_identity_only": true,
+      "probabilities_rebuilt_from_saved_heads_and_cache": true,
+      "metrics_recomputed": true,
+      "class_supports_recomputed": true,
+      "training_selection_metrics_match": true,
+      "selected_epoch_and_update_counts": true,
+      "passed": true
+    },
+    {
+      "task": "dr",
+      "seed": 2027,
+      "metadata_and_provenance": true,
+      "all_eight_artifact_hashes": true,
+      "backbone_identical_to_official_and_last": true,
+      "selection_identity_only": true,
+      "probabilities_rebuilt_from_saved_heads_and_cache": true,
+      "metrics_recomputed": true,
+      "class_supports_recomputed": true,
+      "training_selection_metrics_match": true,
+      "selected_epoch_and_update_counts": true,
+      "passed": true
+    },
+    {
+      "task": "dr",
+      "seed": 2028,
+      "metadata_and_provenance": true,
+      "all_eight_artifact_hashes": true,
+      "backbone_identical_to_official_and_last": true,
+      "selection_identity_only": true,
+      "probabilities_rebuilt_from_saved_heads_and_cache": true,
+      "metrics_recomputed": true,
+      "class_supports_recomputed": true,
+      "training_selection_metrics_match": true,
+      "selected_epoch_and_update_counts": true,
+      "passed": true
+    },
+    {
+      "task": "quality",
+      "seed": 2026,
+      "metadata_and_provenance": true,
+      "all_eight_artifact_hashes": true,
+      "backbone_identical_to_official_and_last": true,
+      "selection_identity_only": true,
+      "probabilities_rebuilt_from_saved_heads_and_cache": true,
+      "metrics_recomputed": true,
+      "class_supports_recomputed": true,
+      "training_selection_metrics_match": true,
+      "selected_epoch_and_update_counts": true,
+      "passed": true
+    },
+    {
+      "task": "quality",
+      "seed": 2027,
+      "metadata_and_provenance": true,
+      "all_eight_artifact_hashes": true,
+      "backbone_identical_to_official_and_last": true,
+      "selection_identity_only": true,
+      "probabilities_rebuilt_from_saved_heads_and_cache": true,
+      "metrics_recomputed": true,
+      "class_supports_recomputed": true,
+      "training_selection_metrics_match": true,
+      "selected_epoch_and_update_counts": true,
+      "passed": true
+    },
+    {
+      "task": "quality",
+      "seed": 2028,
+      "metadata_and_provenance": true,
+      "all_eight_artifact_hashes": true,
+      "backbone_identical_to_official_and_last": true,
+      "selection_identity_only": true,
+      "probabilities_rebuilt_from_saved_heads_and_cache": true,
+      "metrics_recomputed": true,
+      "class_supports_recomputed": true,
+      "training_selection_metrics_match": true,
+      "selected_epoch_and_update_counts": true,
+      "passed": true
+    }
+  ],
+  "head_supports_and_majority_diagnostics": {
+    "dr_grade": {
+      "train_support": [
+        378,
+        100,
+        174,
+        142,
+        54
+      ],
+      "selection_support": [
+        74,
+        20,
+        24,
+        40,
+        10
+      ],
+      "smallest_selection_class": 10,
+      "train_majority_class": 0,
+      "train_majority_selection_accuracy": 0.44047619047619047
+    },
+    "quality_grade": {
+      "train_support": [
+        438,
+        410
+      ],
+      "selection_support": [
+        98,
+        70
+      ],
+      "smallest_selection_class": 70,
+      "train_majority_class": 0,
+      "train_majority_selection_accuracy": 0.5833333333333334
+    },
+    "clarity_class": {
+      "train_support": [
+        19,
+        70,
+        188,
+        272,
+        299
+      ],
+      "selection_support": [
+        5,
+        9,
+        42,
+        61,
+        51
+      ],
+      "smallest_selection_class": 5,
+      "train_majority_class": 4,
+      "train_majority_selection_accuracy": 0.30357142857142855
+    },
+    "field_definition_class": {
+      "train_support": [
+        3,
+        33,
+        130,
+        576,
+        106
+      ],
+      "selection_support": [
+        1,
+        6,
+        21,
+        116,
+        24
+      ],
+      "smallest_selection_class": 1,
+      "train_majority_class": 3,
+      "train_majority_selection_accuracy": 0.6904761904761905
+    },
+    "artifact_class": {
+      "train_support": [
+        418,
+        31,
+        169,
+        105,
+        99,
+        26
+      ],
+      "selection_support": [
+        80,
+        6,
+        35,
+        20,
+        20,
+        7
+      ],
+      "smallest_selection_class": 6,
+      "train_majority_class": 0,
+      "train_majority_selection_accuracy": 0.47619047619047616
+    }
+  },
+  "limitations": [
+    "Reconstruction uses genuine saved probabilities, model states and frozen features; no retinal inference or training was rerun.",
+    "Exclusion checks cover recorded source, cache rows and all saved prediction rows; independent operating-system I/O tracing was not recorded.",
+    "Metrics and sample SDs describe three seeds on the same selection split; no cohort variability, clinical validation, best-seed selection or confidence claim follows.",
+    "Rare quality-defect classes and weak accuracy versus training-majority comparators limit head-level interpretation.",
+    "Frozen features and backbone hashes establish saved-state agreement; CPU execution times are not independently reproducible timing comparisons."
+  ]
+}

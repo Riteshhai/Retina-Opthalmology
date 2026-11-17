@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "scope": "Bounded CPU parameter-fine-tuning development experiment and engineering verification",
+  "execution_source_commit": "8357e9d918ef9ec00d1f66e4efadc3325790097c",
+  "pytest": {
+    "tests": 433,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 75.66,
+    "junit_duration_seconds": 75.64,
+    "junit_sha256": "24acf350a39f8907159480678de3983f7c9f2c953cdc47e808669b24ddecc824",
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=reports/aptos_finetune_v1_tests.xml",
+    "genuine_production_model_integration_enabled": true,
+    "warnings": [
+      "One upstream AnyIO BlockingPortal deprecation warning."
+    ]
+  },
+  "ruff": {
+    "status": "passed",
+    "command": ".venv/Scripts/python.exe -m ruff check ."
+  },
+  "compose_configuration": {
+    "status": "passed",
+    "command": "docker compose config --quiet"
+  },
+  "docker_engine": {
+    "status": "unavailable",
+    "command": "docker info --format",
+    "returncode": 1,
+    "reason": "Docker Desktop Linux engine named pipe is missing; no repair or reset attempted."
+  },
+  "independent_audit_sha256": "ca49616d82b9d4cf1dd99d2480d66108a2af36e9f7b1c84d68a5fbeaed493d83",
+  "evaluation_sha256": "8c6f50e93db412fc845600a4e368094c46fce041109806e37819dcd6bb70c5f4",
+  "native_registry_sha256": "d4cdfd333bda43635e319c500ddb4085fbfa3ec704414924787146ef6b4b1a0f",
+  "native_deployment_sha256": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+  "native_http_and_streamlit_component_verified": true,
+  "new_container_execution_verified": false,
+  "new_browser_rendering_verified": false,
+  "post_execution_presentation_changes": [
+    {
+      "file": "scripts/plot_aptos_finetune.py",
+      "current_sha256": "24b0e505a2a0c089822d6ea5578bdaae375326285718b183d0e59eac61cca2c1",
+      "change": "Shortened x-axis label after visual inspection; scientific inputs and results unchanged."
+    }
+  ],
+  "notes": [
+    "All three training seeds and 42 raw/fallback conformal comparisons are retained.",
+    "Primary seed2026 was predeclared; no favorable seed or checkpoint was deployed.",
+    "The four-epoch CPU pilot does not establish convergence, fresh test performance or exact paper reproduction.",
+    "Source, calibration-role, quarantine and unknown-patient limitations remain explicit."
+  ]
+}

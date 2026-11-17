@@ -1,0 +1,33 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "set_c_validation_v1",
+  "source_commit": "eafd13db260bde7ed3627252d027e0cfc2ad2582",
+  "evaluation_sha256": "14c7ed44bfec0f66ac8a5763ca093f9a70c599438fb545368918f47dc0d4069a",
+  "private_witness_sha256": "ed971465223a848790b465c647f2a4e5a0147215a0c836efbe9683300d5224f9",
+  "auditor_sha256": "311cce933cdc28f51950f54af3b9880afdd585f400d3a4cd07d181e2b6d293ba",
+  "input_artifact_sha256": {
+    "readiness_report": "57e77bef5d18fd154d6b0b2db80c2a6753d9a6b463037bb6b48f652c5f031d9d",
+    "readiness_audit": "8c0ec473ad9853c20dec41a3d3a5392777930d2b6429b8fcaf14af2823cbe7f7",
+    "readiness_witness": "b2d176eaf8277806c16274648cc26dc52f5bf7021de1878ebbec6f3fa4d031b8",
+    "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "model_card": "43830695b8362aabd06df0d5dfa65b01086db9da2db3212001ac98b8b0e4710f",
+    "selection_lock": "c2366e8ac8d369759d7431c6135bc593b5fa4623c4ce906a42cefa478928e3c2",
+    "conformal": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221"
+  },
+  "images": 396,
+  "patients": 99,
+  "pointwise_modes_verified": 3,
+  "scenarios_verified": 96,
+  "evaluated_allocations": 39,
+  "overloaded_allocations": 57,
+  "comparisons_verified": 84,
+  "unavailable_comparisons": 50,
+  "matched_image_workload_pairs": 12,
+  "matched_patient_workload_pairs": 24,
+  "exact_workload_matched_pairs": 12,
+  "identical_image_action_pairs": 12,
+  "max_abs_allocation_objective_error": 8.952838470577262e-13,
+  "model_inference_replayed": false
+}

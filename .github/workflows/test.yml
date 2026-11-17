@@ -1,0 +1,36 @@
+name: qsart-software-verification
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -e '.[dev,portal]'
+      - run: python -m ruff check .
+      - run: python -m pytest -q
+      - run: python scripts/export_qsart_x_tables.py --check
+      - run: docker compose config --quiet
+      - run: docker compose -f docker-compose.yml -f infrastructure/docker/compose.qsart-x.yml config --quiet
+        env:
+          QSART_POSTGRES_PASSWORD: test-configuration-only
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run build:workspace

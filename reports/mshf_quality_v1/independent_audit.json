@@ -1,0 +1,34 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "mshf_quality_v1",
+  "source_commit": "92b93077534eff891bbdec7c02e7afee611fb941",
+  "evaluation_sha256": "abb6f34f2e2eb39ba0936a7b1d12cadccf677820ecc4b3ab31f0c144939c5426",
+  "auditor_sha256": "6f96db9767037fecf724b0a0057ad2360f306feab24c2148266918c7635bf28b",
+  "private_output_sha256": "153cb31a2ec456ac018326ba4cb718a2cb9b4a7102183076c3abff1408ce66db",
+  "archive_sha256": "115def6513bc1516d77ceb4ac2e90a9fcf582e825604c08be9524f5fd6c4a219",
+  "images_reconstructed": 500,
+  "reference_manifest_rows": 5186,
+  "internal_candidate_pairs": 2,
+  "cross_source_candidate_pairs": 10,
+  "metric_cells_reconstructed": 30,
+  "scored_images_verified": 497,
+  "max_absolute_probability_delta": 1.1920928955078125e-07,
+  "frozen_replay": {
+    "DR-XJU": {
+      "images": 2,
+      "max_absolute_logit_delta": 0.0
+    },
+    "DR-ZJU": {
+      "images": 2,
+      "max_absolute_logit_delta": 0.0
+    },
+    "Glaucoma": {
+      "images": 2,
+      "max_absolute_logit_delta": 0.0
+    },
+    "Healthy": {
+      "images": 2,
+      "max_absolute_logit_delta": 0.0
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12500H",
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.0",
+    "torch": "2.14.1+cpu",
+    "logical_cpus": 16
+  },
+  "configuration": {
+    "model_version": "dr-mobilenet_v3_small-seed42-epoch1",
+    "backbone": "mobilenet_v3_small",
+    "image_size": 96,
+    "device": "cpu",
+    "cpu_threads": 2,
+    "data_purpose": "real_research",
+    "quality_model_version": "quality-mobilenet_v3_small-seed42-epoch2",
+    "calibration_method": "temperature_scaling",
+    "second_pass_strategy": "horizontal_flip_mean_logits",
+    "batch_size": 8,
+    "model_forward_batch_size": 1,
+    "cohort_chunk_size": 8,
+    "split": "validation",
+    "warmup_images": 1
+  },
+  "strategies": {
+    "single": {
+      "mean_ms_per_image": 230.9446833332307,
+      "median_ms_per_image": 227.1674499988876,
+      "p95_ms_per_image": 328.39301499971043,
+      "mean_batch_wall_ms": 1540.8479777773512,
+      "amortized_wall_ms_per_image": 231.12719666660269,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0,
+      "max_observed_rss_mb": 635.91796875,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 20,
+      "repeats": 3,
+      "population_second_pass_budget": 0.0
+    },
+    "all": {
+      "mean_ms_per_image": 242.83514500075398,
+      "median_ms_per_image": 233.58700000062527,
+      "p95_ms_per_image": 345.98721499642124,
+      "mean_batch_wall_ms": 1620.0725444436507,
+      "amortized_wall_ms_per_image": 243.0108816665476,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 1,
+      "max_observed_rss_mb": 636.484375,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 20,
+      "repeats": 3,
+      "population_second_pass_budget": 1.0
+    },
+    "uncertainty": {
+      "mean_ms_per_image": 289.7285083332463,
+      "median_ms_per_image": 262.7859999993234,
+      "p95_ms_per_image": 458.9484099993569,
+      "mean_batch_wall_ms": 1933.9341555549051,
+      "amortized_wall_ms_per_image": 290.0901233332358,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0.25,
+      "max_observed_rss_mb": 637.73046875,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 20,
+      "repeats": 3,
+      "population_second_pass_budget": 0.25
+    },
+    "severity": {
+      "mean_ms_per_image": 280.74594500000484,
+      "median_ms_per_image": 248.36459999824,
+      "p95_ms_per_image": 490.6303249988922,
+      "mean_batch_wall_ms": 1873.3216999996027,
+      "amortized_wall_ms_per_image": 280.9982549999404,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0.25,
+      "max_observed_rss_mb": 636.65234375,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 20,
+      "repeats": 3,
+      "population_second_pass_budget": 0.25
+    },
+    "budget": {
+      "mean_ms_per_image": 231.0512583328697,
+      "median_ms_per_image": 217.85459999955492,
+      "p95_ms_per_image": 342.37338000166346,
+      "mean_batch_wall_ms": 1541.396455555514,
+      "amortized_wall_ms_per_image": 231.2094683333271,
+      "timing_note": "Per-image times include preprocessing/model passes; batch wall also includes controller/output assembly, excluding file decode and HTTP transport.",
+      "second_pass_fraction": 0.25,
+      "max_observed_rss_mb": 636.5859375,
+      "memory_note": "RSS sampled at batch boundaries; not a continuous peak measurement",
+      "images": 20,
+      "repeats": 3,
+      "population_second_pass_budget": 0.25
+    }
+  },
+  "limitations": [
+    "CPU pilot measurements; no clinical-performance or strategy-superiority claim.",
+    "Per-image times exclude image-file decode/HTTP transport; RSS is sampled at batch boundaries."
+  ],
+  "source_artifact_sha256": "962df2dbc73e6c5c94a8e731a010edddda44cf375f56e4ebe138e37bf9ba4724"
+}

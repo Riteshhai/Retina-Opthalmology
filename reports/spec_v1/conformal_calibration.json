@@ -1,0 +1,483 @@
+{
+  "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+  "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+  "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+  "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba",
+  "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+  "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+  "data_purpose": "real_research",
+  "format_version": 1,
+  "experiment": "spec_v1_alignment",
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "independent_temperature": {
+    "first_pass": 1.2517522400366823,
+    "all_flip": 1.2620258063542213
+  },
+  "temperature_images": 84,
+  "temperature_patients": 21,
+  "conformal_images": 84,
+  "conformal_patients": 21,
+  "patient_groups_disjoint": true,
+  "models": {
+    "first_pass": {
+      "0.1": {
+        "lac": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "lac",
+          "alpha": 0.1,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 20,
+          "qhat": 0.9662718821608653,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "not_applicable",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "first_pass",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        },
+        "ordinal_greedy": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "ordinal_greedy",
+          "alpha": 0.1,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 20,
+          "qhat": 1.0,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "none_full_mass",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "first_pass",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        }
+      },
+      "0.05": {
+        "lac": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "lac",
+          "alpha": 0.05,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 21,
+          "qhat": 0.975203596196187,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "not_applicable",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "first_pass",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        },
+        "ordinal_greedy": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "ordinal_greedy",
+          "alpha": 0.05,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 21,
+          "qhat": 1.0,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "none_full_mass",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "first_pass",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        }
+      }
+    },
+    "all_flip": {
+      "0.1": {
+        "lac": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "lac",
+          "alpha": 0.1,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 20,
+          "qhat": 0.9673834221116889,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "not_applicable",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "all_flip",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        },
+        "ordinal_greedy": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "ordinal_greedy",
+          "alpha": 0.1,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 20,
+          "qhat": 1.0,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "none_full_mass",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "all_flip",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        }
+      },
+      "0.05": {
+        "lac": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "lac",
+          "alpha": 0.05,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 21,
+          "qhat": 0.9751473741529378,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "not_applicable",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "all_flip",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        },
+        "ordinal_greedy": {
+          "schema": "qsart.split_conformal.v1",
+          "method": "ordinal_greedy",
+          "alpha": 0.05,
+          "num_classes": 5,
+          "n_images": 84,
+          "n_calibration_units": 21,
+          "unit": "patient_max",
+          "rank": 21,
+          "qhat": 1.0,
+          "empty_policy": "argmax",
+          "tie_policy": "lowest_modal_grade;higher_adjacent_grade_on_equal_probability;inclusive_threshold",
+          "ordinal_randomization": "none_full_mass",
+          "coverage_scope": "exchangeable_patient_all_views",
+          "metadata": {
+            "base_calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+            "data_purpose": "real_research",
+            "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+            "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+            "probability_path": "all_flip",
+            "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+            "split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860",
+            "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+            "temperature_sha256": "8ecd9f4f42c508ff16f4939f90eeb241fd9226c3cd32ad2208b98fa72c6348ba"
+          }
+        }
+      }
+    }
+  },
+  "protocol_sha256": "7bc7f8b608d642630f3542488669f93523863f330e6fafc1f53f50cd51daa6e5",
+  "source_sha256": {
+    "scripts/calibrate_conformal.py": "02d2d7ac7525f6c276187bd35bddcd7441322cafada099e03b99b31b9b68262e",
+    "qsart/uncertainty/conformal.py": "885fbe04c00536bc4143ad5c1a9af167798b3412a8ccb05dc3247ded0ab755d1",
+    "qsart/inference/conformal_sidecar.py": "a16677fe3666542a766411f112100ab5ad64d0776f6a9982c2003b3fc60adcee"
+  },
+  "temperature_fit_diagnostics": {
+    "first_pass": {
+      "n": 84,
+      "nll": 0.9816376667203957,
+      "ece": 0.13935937109470187,
+      "brier": 0.5417356367552905,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.06666666666666667,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.06666666666666667,
+          "upper": 0.13333333333333333,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.13333333333333333,
+          "upper": 0.2,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.26666666666666666,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.26666666666666666,
+          "upper": 0.3333333333333333,
+          "count": 5,
+          "accuracy": 0.4,
+          "confidence": 0.29530983395466776
+        },
+        {
+          "lower": 0.3333333333333333,
+          "upper": 0.4,
+          "count": 6,
+          "accuracy": 0.3333333333333333,
+          "confidence": 0.36864055502211907
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.4666666666666667,
+          "count": 10,
+          "accuracy": 0.5,
+          "confidence": 0.43514892451097376
+        },
+        {
+          "lower": 0.4666666666666667,
+          "upper": 0.5333333333333333,
+          "count": 12,
+          "accuracy": 0.6666666666666666,
+          "confidence": 0.5082538928198006
+        },
+        {
+          "lower": 0.5333333333333333,
+          "upper": 0.6,
+          "count": 8,
+          "accuracy": 0.75,
+          "confidence": 0.5542272110478546
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.6666666666666666,
+          "count": 10,
+          "accuracy": 0.5,
+          "confidence": 0.637096220548967
+        },
+        {
+          "lower": 0.6666666666666666,
+          "upper": 0.7333333333333333,
+          "count": 8,
+          "accuracy": 0.75,
+          "confidence": 0.6966303087661793
+        },
+        {
+          "lower": 0.7333333333333333,
+          "upper": 0.8,
+          "count": 9,
+          "accuracy": 0.5555555555555556,
+          "confidence": 0.7561491246163079
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.8666666666666667,
+          "count": 8,
+          "accuracy": 0.625,
+          "confidence": 0.8241372142396075
+        },
+        {
+          "lower": 0.8666666666666667,
+          "upper": 0.9333333333333333,
+          "count": 7,
+          "accuracy": 1.0,
+          "confidence": 0.8997642910273694
+        },
+        {
+          "lower": 0.9333333333333333,
+          "upper": 1.0,
+          "count": 1,
+          "accuracy": 0.0,
+          "confidence": 0.9572371252934847
+        }
+      ]
+    },
+    "all_flip": {
+      "n": 84,
+      "nll": 0.9958743708542193,
+      "ece": 0.1491173819956953,
+      "brier": 0.5465892750571474,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.06666666666666667,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.06666666666666667,
+          "upper": 0.13333333333333333,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.13333333333333333,
+          "upper": 0.2,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.26666666666666666,
+          "count": 0,
+          "accuracy": null,
+          "confidence": null
+        },
+        {
+          "lower": 0.26666666666666666,
+          "upper": 0.3333333333333333,
+          "count": 3,
+          "accuracy": 0.3333333333333333,
+          "confidence": 0.2895688407333947
+        },
+        {
+          "lower": 0.3333333333333333,
+          "upper": 0.4,
+          "count": 9,
+          "accuracy": 0.4444444444444444,
+          "confidence": 0.376142598322884
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.4666666666666667,
+          "count": 12,
+          "accuracy": 0.5833333333333334,
+          "confidence": 0.4303163108772336
+        },
+        {
+          "lower": 0.4666666666666667,
+          "upper": 0.5333333333333333,
+          "count": 10,
+          "accuracy": 0.8,
+          "confidence": 0.5011804532291496
+        },
+        {
+          "lower": 0.5333333333333333,
+          "upper": 0.6,
+          "count": 8,
+          "accuracy": 0.625,
+          "confidence": 0.5581697088568358
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.6666666666666666,
+          "count": 10,
+          "accuracy": 0.4,
+          "confidence": 0.6245867561542694
+        },
+        {
+          "lower": 0.6666666666666666,
+          "upper": 0.7333333333333333,
+          "count": 10,
+          "accuracy": 0.6,
+          "confidence": 0.705019746411593
+        },
+        {
+          "lower": 0.7333333333333333,
+          "upper": 0.8,
+          "count": 6,
+          "accuracy": 0.8333333333333334,
+          "confidence": 0.7714633966907214
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.8666666666666667,
+          "count": 10,
+          "accuracy": 0.7,
+          "confidence": 0.8294593301754485
+        },
+        {
+          "lower": 0.8666666666666667,
+          "upper": 0.9333333333333333,
+          "count": 5,
+          "accuracy": 1.0,
+          "confidence": 0.9007766156486745
+        },
+        {
+          "lower": 0.9333333333333333,
+          "upper": 1.0,
+          "count": 1,
+          "accuracy": 0.0,
+          "confidence": 0.9628130593921203
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Development-only addition after v1 confirmation was consumed.",
+    "Original stratified sampling and conditional TTA do not justify a blanket coverage guarantee.",
+    "Ordinal score is an independently implemented deterministic paper-inspired variant."
+  ]
+}

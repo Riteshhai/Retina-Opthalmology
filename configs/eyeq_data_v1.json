@@ -1,0 +1,30 @@
+{
+  "dataset": "EyeQ_EyePACS",
+  "source_revision": "1dcfabb08cd31045de1a4a3ee82e48f6833697aa",
+  "scope": "external_quality_annotation_and_access_readiness_only",
+  "image_acquisition_status": "not_acquired_for_this_audit",
+  "image_source": "https://www.kaggle.com/c/diabetic-retinopathy-detection/data",
+  "binary_harmonization_selected": false,
+  "original_split_roles": {"train": "external_holdout", "test": "external_holdout"},
+  "quality_codes": {"0": "Good", "1": "Usable", "2": "Reject"},
+  "code_license_statement": "CC BY-NC-SA 4.0; author README explicitly describes code",
+  "underlying_image_terms_status": "subject_to_official_competition_rules_not_replaced_by_code_license",
+  "annotation_reuse_terms_status": "no_separate_unrestricted_annotation_license_in_pinned_readme",
+  "official_image_page_check": {
+    "checked_on": "2026-11-05",
+    "direct_text_extraction": "no_readable_body",
+    "official_indexed_page": "https://www.kaggle.com/c/diabetic-retinopathy-detection/data?select=test.zip.004",
+    "indexed_gate": "sign_in_and_accept_competition_rules",
+    "indexed_full_archive_size_gb_decimal": 88.29,
+    "size_scope": "entire competition listing, not EyeQ subset or unpacked footprint"
+  },
+  "comparative_source": {
+    "dataset": "OIA-DDR",
+    "repository": "https://github.com/nkicsl/DDR-dataset",
+    "revision": "225d56e2f49dc767896e3d38a01071cfadef4271",
+    "readme_sha256": "b8e3cfbbead3f9850bec506f454b25aebde589e96f9c4282355b2550e3dce032",
+    "code_license_sha256": "af96932cf82f4d34291dfa2dcec11364274ba699bb09b4da3424f27499153688",
+    "dataset_license_statement": "CC BY-NC-SA 4.0 for images/annotations/labels; repository code MIT",
+    "current_audit_use": "terms comparison only; no download, inspection or substitution for EyeQ quality labels"
+  }
+}

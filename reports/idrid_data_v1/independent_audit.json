@@ -1,0 +1,22 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "idrid_data_v1",
+  "source_commit": "d597daa553b58c57f8e96f1b33a2f24bf8a9e4f8",
+  "data_audit_sha256": "b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a",
+  "auditor_script_sha256": "b9de7d1e6cbaa18c152706e00e67f50ad373a2d3ca7cb9fe40430fde7eaec34e",
+  "source_images_independently_decoded_and_rehashed": 516,
+  "phash_reconstruction": "Independent scipy DCT implementation on all516 source JPEGs",
+  "within_cohort_distances_recomputed": 132870,
+  "cross_source_distances_recomputed": 2675976,
+  "reference_images": 5186,
+  "all_pair_candidates_and_components_reproduced": true,
+  "original_artifacts_preserved": 20,
+  "model_inference_performed": false,
+  "external_evaluation_completed": false,
+  "limitations": [
+    "Data integrity only; no external classifier or coverage result.",
+    "Fingerprint checks do not establish patient identity, full independence or download authenticity.",
+    "Reference image fingerprints are verified against frozen files; reference source images were not redecoded."
+  ],
+  "elapsed_seconds": 265.95965169998817
+}

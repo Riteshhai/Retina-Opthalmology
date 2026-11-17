@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-20",
+  "research_only": true,
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "quality_model_version": "development-v1-quality-mobilenet_v3_small-seed2026-epoch3",
+  "dr_checkpoint_sha256": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+  "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+  "calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+  "protocol_sha256": "aafa55336865fb3966f68d87d165e1c5939d599f58670fb43b42faca20247ca2",
+  "selection_lock_sha256": "c2366e8ac8d369759d7431c6135bc593b5fa4623c4ce906a42cefa478928e3c2",
+  "confirmation_report_sha256": "3cbbf2b6671b1da66e9aa067acff140024d32728f8cb52f854910eb148e50918",
+  "calibration_content_sha256": "73a22eaf84811deb05e38db7016f8c3fc16f0084d70275761fcf020e59ef4cca",
+  "development": {
+    "fitting_images": 848,
+    "fitting_patients": 212,
+    "selection_images": 168,
+    "selection_patients": 42,
+    "calibration_images": 168,
+    "calibration_patients": 42,
+    "initialization": "Official torchvision ImageNet; frozen backbone",
+    "selection_rule": "Selection macro-F1, then lowest unweighted NLL"
+  },
+  "confirmation": {
+    "scope": "Fresh internal DeepDRiD same-domain confirmation; not external or clinical validation",
+    "images": 340,
+    "patients": 85,
+    "dr_accuracy": 0.6,
+    "dr_accuracy_patient_bootstrap_ci95": {
+      "mean": 0.6,
+      "lower": 0.5264705882352941,
+      "upper": 0.6705882352941176
+    },
+    "dr_macro_f1": 0.531758927755637,
+    "dr_quadratic_weighted_kappa": 0.7264950557212368,
+    "referable_auroc": 0.9248157596371882,
+    "dr_ece": 0.039985965192317965,
+    "overall_quality": {
+      "n": 340,
+      "accuracy": 0.7411764705882353,
+      "macro_f1": 0.7402777777777778,
+      "confusion_matrix": [
+        [
+          136,
+          52
+        ],
+        [
+          36,
+          116
+        ]
+      ],
+      "poor_auroc": 0.8102603583426652,
+      "ece": 0.027517170064589584,
+      "nll": 0.5356068797290954,
+      "brier": 0.3558725625627376
+    },
+    "classical_quality_comparator": {
+      "n": 340,
+      "accuracy": 0.7323529411764705,
+      "macro_f1": 0.7313279899964397,
+      "confusion_matrix": [
+        [
+          135,
+          53
+        ],
+        [
+          38,
+          114
+        ]
+      ],
+      "poor_auroc": 0.7929731243001119,
+      "ece": 0.08013246144504653,
+      "nll": 0.5704620994219969,
+      "brier": 0.38335434541310454
+    },
+    "defect_heads": {
+      "clarity_class": {
+        "accuracy": 0.49411764705882355,
+        "macro_f1": 0.37789140542916755,
+        "n": 340
+      },
+      "field_definition_class": {
+        "accuracy": 0.4852941176470588,
+        "macro_f1": 0.3355795831588049,
+        "n": 340
+      },
+      "artifact_class": {
+        "accuracy": 0.3558823529411765,
+        "macro_f1": 0.2755671133501975,
+        "n": 340
+      }
+    }
+  },
+  "limitations": [
+    "Single-site/domain internal evaluation; external transport is unmeasured.",
+    "Recapture and specialist review remain unresolved recommendations.",
+    "No confirmation-based model or policy tuning was performed.",
+    "Bootstrap intervals are exploratory and not corrected for multiple comparisons.",
+    "Clarity, field-definition and artifact predictions have limited accuracy.",
+    "The artifact head is worse than a constant majority-class accuracy comparator.",
+    "The old pilot used a different cohort/protocol; no paired improvement estimate is made.",
+    "Calibration-fit diagnostics are not independent confirmation performance.",
+    "Policy confidence intervals are exploratory and conditional on fixed cohort assignments.",
+    "Not for patient care; prospective utility and clinical authorization are unestablished."
+  ]
+}

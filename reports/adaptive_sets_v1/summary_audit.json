@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "source_report_sha256": "a883d166fe7172d77ee615b300ae46e802355c19731ecf9080640c3b41fc0e88",
+  "conditional_summary_rows_reconstructed": 20,
+  "summary_mean_and_sd_cells_reconstructed": 120,
+  "uniform_variation_is_model_training_uncertainty": false
+}

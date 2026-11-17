@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "experiment_id": "spec_v1_efficientnet_frozen_deepdrid",
+  "scope": "development_selection",
+  "architecture": "efficientnet_b0",
+  "model_version": "development-v1-dr-efficientnet_b0-seed2026-epoch13",
+  "model_version_note": "development-v1 prefix denotes the reused frozen-feature trainer family; experiment_id and spec_v1 checkpoint directory identify this new alignment candidate.",
+  "protocol_sha256": "7bc7f8b608d642630f3542488669f93523863f330e6fafc1f53f50cd51daa6e5",
+  "data_source": "Official DeepDRiD conventional-fundus training annotations and authorized source images",
+  "development_manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "fitting_images": 848,
+  "selection_images": 168,
+  "fitting_patients": 212,
+  "selection_patients": 42,
+  "calibration_rows_in_manifest": 168,
+  "calibration_used_for_this_candidate": false,
+  "confirmation_used": false,
+  "external_validation_performed": false,
+  "APTOS_or_base_paper_reproduction": false,
+  "training_strategy": "frozen_imagenet_cached_features",
+  "training_config": {
+    "backbone": "efficientnet_b0",
+    "image_size": 224,
+    "extraction_batch_size": 16,
+    "batch_size": 64,
+    "epochs": 100,
+    "learning_rate": 0.01,
+    "weight_decay": 0.0001,
+    "patience": 15,
+    "seed": 2026,
+    "cpu_threads": 2,
+    "num_workers": 2,
+    "pretrained": true,
+    "class_weights": true,
+    "horizontal_flip": true
+  },
+  "training_config_sha256": "0fe0b45355986929e4178c8d7a6d1d27bf5c7224a216233d7b364342e0cf5d2b",
+  "selection_rule": "macro_f1_then_unweighted_nll",
+  "selected_epoch": 13,
+  "epochs_executed": 28,
+  "total_optimizer_steps": 756,
+  "backbone_unchanged": true,
+  "selection_metrics": {
+    "n": 168,
+    "accuracy": 0.6428571428571429,
+    "macro_f1": 0.5249243563717705,
+    "nll": 1.2711427211761475,
+    "confusion_matrix": [
+      [
+        54,
+        9,
+        5,
+        5,
+        1
+      ],
+      [
+        3,
+        10,
+        4,
+        3,
+        0
+      ],
+      [
+        2,
+        1,
+        7,
+        12,
+        2
+      ],
+      [
+        1,
+        2,
+        1,
+        34,
+        2
+      ],
+      [
+        0,
+        1,
+        1,
+        5,
+        3
+      ]
+    ]
+  },
+  "checkpoint_sha256": "f00ceb6bf23cecc3a730b548089a7dcaa39e492ec03e5427da5485fa7a954e49",
+  "pretrained_weights": {
+    "enum": "EfficientNet_B0_Weights.IMAGENET1K_V1",
+    "url": "https://download.pytorch.org/models/efficientnet_b0_rwightman-7f5810bc.pth",
+    "file_sha256": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+    "published_sha256_prefix": "7f5810bc",
+    "code_license_note": "torchvision BSD-3-Clause; pretrained data/weight terms require separate review"
+  },
+  "source_provenance": {
+    "git_revision": "cedf182846845a782bb6e30336d9c8f99b2e31fb",
+    "working_tree_dirty": true,
+    "source_file_sha256": {
+      "qsart/training/transfer.py": "166f4751a2c97e4a96b7778423e87d428add0c3f79d2a29e0781e35c12528959",
+      "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+      "qsart/training/trainer.py": "d484958dd7c5963e31998f8da13c52b11cdb855d091919e825e229c8a5f8c635",
+      "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+      "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+      "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+      "scripts/train_transfer.py": "9082cc24bf93947242087b5d01d61c60f8067f9270bad59ad386d84242e45dd6"
+    },
+    "source_sha256": "0b381907b6b121d8943193efe8ae69812ef02627fe911ff31ff7e1f8bc52156d"
+  },
+  "feature_cache_key": "c453937a105e3086d43a7ea9e63e31cf0d89b0fb0ad32154cd6bfa4dd8e04573",
+  "feature_cache_file_sha256": "249f6b6cb1112038bd26381062c78af9d25f848dd5036e20a539096433c8587e",
+  "timing": {
+    "process_started_at_utc": "2026-10-20T18:27:02.678292+00:00",
+    "training_result_written_at_utc": "2026-10-20T18:31:39.937286+00:00",
+    "observed_command_elapsed_seconds": 277.258994,
+    "feature_extraction_seconds": 239.41832279998926,
+    "scope_and_limitations": "Whole training command including startup, official weight download, manifest-byte verification, feature extraction and head fitting; shared workstation with concurrent score-cache inference. Not an architecture speed benchmark."
+  },
+  "limitations": [
+    "Selection results from previously used development data; not an independent confirmation estimate.",
+    "Architecture/selection candidate only; running v1 model, temperatures and historical reports remain unchanged.",
+    "No candidate temperature fitting, conformal calibration, policy tuning, confirmation or external evaluation performed.",
+    "A DeepDRiD frozen-feature candidate is not the specified APTOS experiment or an exact paper reproduction."
+  ],
+  "training_selection_input_content_sha256": "91c70a531bb6b2aac9835ae3aa08ba085ccda5b8825b9fcae16a23c758953678"
+}

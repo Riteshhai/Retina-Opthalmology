@@ -1,0 +1,14 @@
+backbone: mobilenet_v3_small
+image_size: 224
+batch_size: 16
+epochs: 30
+learning_rate: 0.001
+weight_decay: 0.0001
+patience: 7
+seed: 42
+cpu_threads: 2
+device: cpu
+pretrained: false
+class_weights: true
+augment: true
+mixed_precision: false

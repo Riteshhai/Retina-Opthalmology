@@ -1,0 +1,1571 @@
+{
+  "experiment_id": "paired_view_v1",
+  "source_commit": "6017d0c889d539b9d8c74ab33907015388040acf",
+  "source_sha256": {
+    "docs/research/PAIRED_VIEW_V1_PROTOCOL.md": "5dfb9692d6cfa35f88ac356878cceea15fff8577dd8fbe3ddc5bb707edb0e3f4",
+    "scripts/run_paired_view_v1.py": "e36589a3da24110d15d2617c48af8d42ced5bc963379c9e9c3220fe4772ca0ac",
+    "scripts/audit_paired_view_v1.py": "a868170262f4a75c11895618b53b76b9c9f1dda4ecd55a353695861e1693296f",
+    "qsart/paired_view_inputs.py": "a3f5c4ace9bcad02d0d1ff5b769be86fb2682dfc07f487c504a24eb5c38ed2ea",
+    "qsart/paired_view_metrics.py": "fc3c81ff259c42c27c3ef42b48dd528febdcf5281d31b31d4351c74587ab06d3",
+    "qsart/paired_view_policy.py": "29cad8c07d4e7373b6feee0503065c338ce38d8ff2edf9a603c532fe4746aac0",
+    "qsart/triage_v2.py": "8c8d98ba478190439490dbae5f265637ed5a9d90dcec4c0c72b12c8ba48005ec",
+    "qsart/inference/engine.py": "71d2007ffa87242b20c1d4c8a0cde8ab2fc10122ba928566c6a52d011e74e2ab",
+    "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+    "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+    "requirements.txt": "f617a39ce6800a697883f018a47a5cbfeb4506ad1e67d8dde57c05f792166b2f"
+  },
+  "input_provenance": {
+    "input_sha256": {
+      "manifest": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+      "dataset_report": "a1745a8c555e15b6174f2a2400cb0bc9babca9e18eb1b4eb7db55c76500e7965",
+      "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+      "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+      "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+      "model_card": "43830695b8362aabd06df0d5dfa65b01086db9da2db3212001ac98b8b0e4710f",
+      "selection_lock": "c2366e8ac8d369759d7431c6135bc593b5fa4623c4ce906a42cefa478928e3c2"
+    },
+    "source_release_commit": "56d8af71319803150d0e7b90533e0918c7bf85ee",
+    "cohort": "DeepDRiD regular Set-A development",
+    "partitions": {
+      "train": {
+        "photos": 848,
+        "eyes": 424,
+        "patients": 212,
+        "scored": true
+      },
+      "calibration": {
+        "photos": 168,
+        "eyes": 84,
+        "patients": 42,
+        "scored": false
+      },
+      "validation": {
+        "photos": 168,
+        "eyes": 84,
+        "patients": 42,
+        "scored": true
+      }
+    },
+    "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+    "quality_model_version": "development-v1-quality-mobilenet_v3_small-seed2026-epoch3",
+    "probability_path": "calibrated_first_pass_per_physical_photo",
+    "device": "cpu",
+    "cpu_threads": 4,
+    "photo_chunk_size": 8,
+    "second_pass_inference": false,
+    "first_view_suffix": 1,
+    "second_view_suffix": 2,
+    "package_versions": {
+      "torch": "2.14.1+cpu",
+      "torchvision": "0.29.1+cpu",
+      "pillow": "10.4.0",
+      "numpy": "2.4.6"
+    }
+  },
+  "private_witness_sha256": "344eba035cea7ec6ce837711c14692ff07abb89e823cb3b8c4de2f3515b4e299",
+  "model_inference_performed": true,
+  "partition": "validation",
+  "fit_population": {
+    "split": "train",
+    "photos": 848,
+    "eyes": 424,
+    "patients": 212
+  },
+  "selection_population": {
+    "split": "validation",
+    "photos": 168,
+    "eyes": 84,
+    "patients": 42
+  },
+  "model": {
+    "feature_mean": [
+      0.5123550210077807,
+      0.6584938420316371,
+      0.48657792562916824,
+      0.2629948353923162,
+      0.4693396226415094
+    ],
+    "feature_scale": [
+      0.27347298318246094,
+      0.1902053280581213,
+      0.31001569562634856,
+      0.27703454459675975,
+      0.49905905588440613
+    ],
+    "coefficients": [
+      -0.04025974454387439,
+      0.0009371959822146224,
+      0.20523702557294995,
+      -0.00416214869812253,
+      -0.2487167750543829
+    ],
+    "intercept": 0.00294811320754717,
+    "feature_names": [
+      "poor_quality",
+      "entropy",
+      "referable_risk",
+      "severe_risk",
+      "predicted_referable"
+    ],
+    "fit_gain": {
+      "mean_gross_gain": 0.00294811320754717,
+      "positive_after_cost": 16
+    }
+  },
+  "budgets": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "scenarios": [
+    {
+      "id": "first_view:0",
+      "method": "first_view",
+      "budget": 0.0,
+      "slots": 0,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 0,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 8,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5833333333333334,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": 0,
+          "severe_misses": 0,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.0
+        }
+      }
+    },
+    {
+      "id": "voi:1",
+      "method": "voi",
+      "budget": 0.1,
+      "slots": 8,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 8,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 38,
+        "ledger_per_eye": 0.45357142857142857,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 2,
+          "ledger_per_eye": -0.1297619047619048
+        }
+      }
+    },
+    {
+      "id": "quality:1",
+      "method": "quality",
+      "budget": 0.1,
+      "slots": 8,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 8,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 7,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 37,
+        "ledger_per_eye": 0.5696428571428571,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": -1,
+          "severe_misses": 0,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 1,
+          "ledger_per_eye": -0.013690476190476253
+        }
+      }
+    },
+    {
+      "id": "entropy:1",
+      "method": "entropy",
+      "budget": 0.1,
+      "slots": 8,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 8,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 7,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 37,
+        "ledger_per_eye": 0.5696428571428571,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -1,
+          "severe_misses": 0,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 1,
+          "ledger_per_eye": -0.013690476190476253
+        }
+      }
+    },
+    {
+      "id": "referable_risk:1",
+      "method": "referable_risk",
+      "budget": 0.1,
+      "slots": 8,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 8,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 8,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.6023809523809524,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": 0,
+          "severe_misses": 0,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.01904761904761898
+        }
+      }
+    },
+    {
+      "id": "random:1",
+      "method": "random",
+      "budget": 0.1,
+      "slots": 8,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 8,
+        "grade_accuracy": 0.6428571428571429,
+        "referable_misses": 7,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 37,
+        "ledger_per_eye": 0.4863095238095238,
+        "delta_vs_first": {
+          "grade_accuracy": 0.011904761904761973,
+          "referable_misses": -1,
+          "severe_misses": -1,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 1,
+          "ledger_per_eye": -0.09702380952380957
+        }
+      }
+    },
+    {
+      "id": "voi_positive:1",
+      "method": "voi_positive",
+      "budget": 0.1,
+      "slots": 8,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 4,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 8,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5928571428571429,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": 0,
+          "severe_misses": 0,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.00952380952380949
+        }
+      }
+    },
+    {
+      "id": "voi:2",
+      "method": "voi",
+      "budget": 0.25,
+      "slots": 21,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 21,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 39,
+        "ledger_per_eye": 0.48750000000000004,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 3,
+          "ledger_per_eye": -0.09583333333333333
+        }
+      }
+    },
+    {
+      "id": "quality:2",
+      "method": "quality",
+      "budget": 0.25,
+      "slots": 21,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 21,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 7,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 38,
+        "ledger_per_eye": 0.6035714285714286,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": -1,
+          "severe_misses": 0,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 2,
+          "ledger_per_eye": 0.020238095238095277
+        }
+      }
+    },
+    {
+      "id": "entropy:2",
+      "method": "entropy",
+      "budget": 0.25,
+      "slots": 21,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 21,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 37,
+        "ledger_per_eye": 0.48154761904761906,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 1,
+          "ledger_per_eye": -0.10178571428571431
+        }
+      }
+    },
+    {
+      "id": "referable_risk:2",
+      "method": "referable_risk",
+      "budget": 0.25,
+      "slots": 21,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 21,
+        "grade_accuracy": 0.6071428571428571,
+        "referable_misses": 8,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.6333333333333334,
+        "delta_vs_first": {
+          "grade_accuracy": -0.023809523809523836,
+          "referable_misses": 0,
+          "severe_misses": 0,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.050000000000000044
+        }
+      }
+    },
+    {
+      "id": "random:2",
+      "method": "random",
+      "budget": 0.25,
+      "slots": 21,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 21,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 7,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 38,
+        "ledger_per_eye": 0.5202380952380953,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": -1,
+          "severe_misses": -1,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 2,
+          "ledger_per_eye": -0.0630952380952381
+        }
+      }
+    },
+    {
+      "id": "voi_positive:2",
+      "method": "voi_positive",
+      "budget": 0.25,
+      "slots": 21,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 4,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 8,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5928571428571429,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": 0,
+          "severe_misses": 0,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.00952380952380949
+        }
+      }
+    },
+    {
+      "id": "voi:3",
+      "method": "voi",
+      "budget": 0.5,
+      "slots": 42,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 42,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 39,
+        "ledger_per_eye": 0.5375000000000001,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 3,
+          "ledger_per_eye": -0.04583333333333328
+        }
+      }
+    },
+    {
+      "id": "quality:3",
+      "method": "quality",
+      "budget": 0.5,
+      "slots": 42,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 42,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 7,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 38,
+        "ledger_per_eye": 0.6535714285714287,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": -1,
+          "severe_misses": 0,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 2,
+          "ledger_per_eye": 0.07023809523809532
+        }
+      }
+    },
+    {
+      "id": "entropy:3",
+      "method": "entropy",
+      "budget": 0.5,
+      "slots": 42,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 42,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5285714285714287,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 0,
+          "ledger_per_eye": -0.05476190476190468
+        }
+      }
+    },
+    {
+      "id": "referable_risk:3",
+      "method": "referable_risk",
+      "budget": 0.5,
+      "slots": 42,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 42,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 7,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 35,
+        "ledger_per_eye": 0.6446428571428572,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -1,
+          "severe_misses": 0,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": -1,
+          "ledger_per_eye": 0.061309523809523814
+        }
+      }
+    },
+    {
+      "id": "random:3",
+      "method": "random",
+      "budget": 0.5,
+      "slots": 42,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 42,
+        "grade_accuracy": 0.6071428571428571,
+        "referable_misses": 7,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5642857142857144,
+        "delta_vs_first": {
+          "grade_accuracy": -0.023809523809523836,
+          "referable_misses": -1,
+          "severe_misses": -1,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": -0.01904761904761898
+        }
+      }
+    },
+    {
+      "id": "voi_positive:3",
+      "method": "voi_positive",
+      "budget": 0.5,
+      "slots": 42,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 4,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 8,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5928571428571429,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": 0,
+          "severe_misses": 0,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.00952380952380949
+        }
+      }
+    },
+    {
+      "id": "voi:4",
+      "method": "voi",
+      "budget": 0.75,
+      "slots": 63,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 63,
+        "grade_accuracy": 0.5952380952380952,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 39,
+        "ledger_per_eye": 0.5875000000000001,
+        "delta_vs_first": {
+          "grade_accuracy": -0.0357142857142857,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 3,
+          "ledger_per_eye": 0.004166666666666763
+        }
+      }
+    },
+    {
+      "id": "quality:4",
+      "method": "quality",
+      "budget": 0.75,
+      "slots": 63,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 63,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 39,
+        "ledger_per_eye": 0.5875000000000001,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 3,
+          "ledger_per_eye": 0.004166666666666763
+        }
+      }
+    },
+    {
+      "id": "entropy:4",
+      "method": "entropy",
+      "budget": 0.75,
+      "slots": 63,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 63,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5785714285714286,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 0,
+          "ledger_per_eye": -0.004761904761904745
+        }
+      }
+    },
+    {
+      "id": "referable_risk:4",
+      "method": "referable_risk",
+      "budget": 0.75,
+      "slots": 63,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 63,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5785714285714286,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 0,
+          "ledger_per_eye": -0.004761904761904745
+        }
+      }
+    },
+    {
+      "id": "random:4",
+      "method": "random",
+      "budget": 0.75,
+      "slots": 63,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 63,
+        "grade_accuracy": 0.5952380952380952,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 37,
+        "ledger_per_eye": 0.5815476190476192,
+        "delta_vs_first": {
+          "grade_accuracy": -0.0357142857142857,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 1,
+          "ledger_per_eye": -0.0017857142857141683
+        }
+      }
+    },
+    {
+      "id": "voi_positive:4",
+      "method": "voi_positive",
+      "budget": 0.75,
+      "slots": 63,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 4,
+        "grade_accuracy": 0.6309523809523809,
+        "referable_misses": 8,
+        "severe_misses": 4,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 3,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.2857142857142857,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.5928571428571429,
+        "delta_vs_first": {
+          "grade_accuracy": 0.0,
+          "referable_misses": 0,
+          "severe_misses": 0,
+          "patient_referable_misses": 0,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": 0.0,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.00952380952380949
+        }
+      }
+    },
+    {
+      "id": "both_views:5",
+      "method": "both_views",
+      "budget": 1.0,
+      "slots": 84,
+      "outcomes": {
+        "eyes": 84,
+        "patients": 42,
+        "extra_views": 84,
+        "grade_accuracy": 0.6190476190476191,
+        "referable_misses": 6,
+        "severe_misses": 3,
+        "referable_eyes": 37,
+        "severe_eyes": 25,
+        "patient_referable_misses": 2,
+        "patient_severe_misses": 1,
+        "referable_patients": 21,
+        "severe_patients": 13,
+        "patient_weighted_miss_per_patient": 0.21428571428571427,
+        "review_proxy_count": 36,
+        "ledger_per_eye": 0.6285714285714288,
+        "delta_vs_first": {
+          "grade_accuracy": -0.011904761904761862,
+          "referable_misses": -2,
+          "severe_misses": -1,
+          "patient_referable_misses": -1,
+          "patient_severe_misses": 0,
+          "patient_weighted_miss_per_patient": -0.07142857142857142,
+          "review_proxy_count": 0,
+          "ledger_per_eye": 0.04523809523809541
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "candidate": "voi:1",
+      "reference": "quality:1",
+      "budget": 0.1,
+      "extra_views": 8,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.11607142857142858,
+          "ci95": [
+            -0.34821428571428575,
+            0.00952380952380953
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            -0.03571428571428571,
+            0.03571428571428571
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:1",
+      "reference": "entropy:1",
+      "budget": 0.1,
+      "extra_views": 8,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.11607142857142858,
+          "ci95": [
+            -0.35297619047619044,
+            0.00952380952380953
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.011904761904761904,
+          "ci95": [
+            -0.023809523809523808,
+            0.05952380952380952
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:1",
+      "reference": "referable_risk:1",
+      "budget": 0.1,
+      "extra_views": 8,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.1488095238095238,
+          "ci95": [
+            -0.3994047619047619,
+            0.0024404761904758734
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.023809523809523808,
+          "ci95": [
+            -0.05952380952380952,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:1",
+      "reference": "random:1",
+      "budget": 0.1,
+      "extra_views": 8,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.03273809523809523,
+          "ci95": [
+            -0.11011904761904762,
+            0.011904761904761904
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:2",
+      "reference": "quality:2",
+      "budget": 0.25,
+      "extra_views": 21,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.11607142857142855,
+          "ci95": [
+            -0.35773809523809524,
+            0.021428571428571432
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:2",
+      "reference": "entropy:2",
+      "budget": 0.25,
+      "extra_views": 21,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": 0.005952380952380956,
+          "ci95": [
+            -0.019642857142857136,
+            0.032157738095238024
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            -0.047619047619047616,
+            0.047619047619047616
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:2",
+      "reference": "referable_risk:2",
+      "budget": 0.25,
+      "extra_views": 21,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.14583333333333331,
+          "ci95": [
+            -0.3958630952380952,
+            0.012514880952380876
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.023809523809523808,
+          "ci95": [
+            -0.05952380952380952,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.011904761904761904,
+          "ci95": [
+            -0.023809523809523808,
+            0.047619047619047616
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:2",
+      "reference": "random:2",
+      "budget": 0.25,
+      "extra_views": 21,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.03273809523809523,
+          "ci95": [
+            -0.11726190476190473,
+            0.019047619047619053
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.05952380952380952,
+            0.023809523809523808
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:3",
+      "reference": "quality:3",
+      "budget": 0.5,
+      "extra_views": 42,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.11607142857142855,
+          "ci95": [
+            -0.3577976190476191,
+            0.026190476190476198
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            -0.047619047619047616,
+            0.047619047619047616
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:3",
+      "reference": "entropy:3",
+      "budget": 0.5,
+      "extra_views": 42,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": 0.008928571428571426,
+          "ci95": [
+            -0.02023809523809524,
+            0.039880952380952385
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.05952380952380952
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:3",
+      "reference": "referable_risk:3",
+      "budget": 0.5,
+      "extra_views": 42,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.1071428571428571,
+          "ci95": [
+            -0.35416666666666663,
+            0.0357291666666666
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.011904761904761904,
+          "ci95": [
+            -0.047619047619047616,
+            0.07142857142857142
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:3",
+      "reference": "random:3",
+      "budget": 0.5,
+      "extra_views": 42,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": -0.026785714285714284,
+          "ci95": [
+            -0.10775297619047619,
+            0.029166666666666664
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": -0.011904761904761904,
+          "ci95": [
+            -0.03571428571428571,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.023809523809523808,
+          "ci95": [
+            0.0,
+            0.05952380952380952
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:4",
+      "reference": "quality:4",
+      "budget": 0.75,
+      "extra_views": 63,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": 2.64338815386942e-18,
+          "ci95": [
+            -0.030952380952380953,
+            0.02857142857142858
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": -0.03571428571428571,
+          "ci95": [
+            -0.07142857142857142,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:4",
+      "reference": "entropy:4",
+      "budget": 0.75,
+      "extra_views": 63,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": 0.008928571428571428,
+          "ci95": [
+            -0.013095238095238096,
+            0.03273809523809524
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": -0.023809523809523808,
+          "ci95": [
+            -0.05952380952380952,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:4",
+      "reference": "referable_risk:4",
+      "budget": 0.75,
+      "extra_views": 63,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": 0.008928571428571432,
+          "ci95": [
+            -0.012499999999999992,
+            0.03273809523809525
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": -0.023809523809523808,
+          "ci95": [
+            -0.05952380952380952,
+            0.0
+          ]
+        }
+      }
+    },
+    {
+      "candidate": "voi:4",
+      "reference": "random:4",
+      "budget": 0.75,
+      "extra_views": 63,
+      "intervals": {
+        "ledger_per_eye": {
+          "difference_candidate_minus_reference": 0.005952380952380952,
+          "ci95": [
+            -0.020833333333333336,
+            0.03154761904761906
+          ]
+        },
+        "referable_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "severe_misses_per_eye": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "grade_accuracy": {
+          "difference_candidate_minus_reference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  ],
+  "runtime": {
+    "python": "3.11.0",
+    "system": "Windows",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "pillow": "10.4.0"
+  }
+}

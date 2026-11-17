@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "aptos": {
+    "status": "official_labeled_export_missing",
+    "official_source": "https://www.kaggle.com/competitions/aptos2019-blindness-detection/data",
+    "automatic_download_attempted": false,
+    "patient_identifiers_available_from_standard_annotations": false,
+    "quality_labels_available_from_standard_annotations": false,
+    "patient_grouping_limitation": "Official id_code/diagnosis annotations provide no authoritative patient or eye identifiers. SHA256 and central-green pHash connected components reduce detectable image overlap; they cannot establish patient-disjoint partitions or exclude every same-eye view.",
+    "next_action": "Obtain the official labeled export under Kaggle competition terms, then run this script with --aptos-root and --prepare-aptos under a frozen split protocol."
+  },
+  "deepdrid_development": {
+    "status": "local_manifest_present",
+    "role": "official-training development; fitting/selection only",
+    "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+    "images": 1184,
+    "dataset_sources": [
+      "DeepDRiD_regular_fundus"
+    ],
+    "partitions": {
+      "calibration": {
+        "images": 168,
+        "dr_grade_counts": {
+          "0": 78,
+          "1": 18,
+          "2": 32,
+          "3": 32,
+          "4": 8
+        },
+        "quality_grade_counts": {
+          "0": 82,
+          "1": 86
+        },
+        "subjects": 42
+      },
+      "train": {
+        "images": 848,
+        "dr_grade_counts": {
+          "0": 378,
+          "1": 100,
+          "2": 174,
+          "3": 142,
+          "4": 54
+        },
+        "quality_grade_counts": {
+          "0": 438,
+          "1": 410
+        },
+        "subjects": 212
+      },
+      "validation": {
+        "images": 168,
+        "dr_grade_counts": {
+          "0": 74,
+          "1": 20,
+          "2": 24,
+          "3": 40,
+          "4": 10
+        },
+        "quality_grade_counts": {
+          "0": 98,
+          "1": 70
+        },
+        "subjects": 42
+      }
+    },
+    "integrity_note": "Inventory reads manifest metadata; it does not revalidate every current image byte."
+  },
+  "deepdrid_confirmation": {
+    "status": "local_manifest_present",
+    "role": "consumed historical confirmation; no future tuning",
+    "manifest_sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7",
+    "images": 340,
+    "dataset_sources": [
+      "DeepDRiD_regular_fundus"
+    ],
+    "partitions": {
+      "holdout": {
+        "images": 340,
+        "dr_grade_counts": {
+          "0": 158,
+          "1": 38,
+          "2": 72,
+          "3": 58,
+          "4": 14
+        },
+        "quality_grade_counts": {
+          "0": 188,
+          "1": 152
+        },
+        "subjects": 85
+      }
+    },
+    "integrity_note": "Inventory reads manifest metadata; it does not revalidate every current image byte."
+  },
+  "environment": {
+    "python": "3.11.0",
+    "operating_system": "Windows",
+    "logical_cpu_count": 16,
+    "physical_memory_gib": 15.63,
+    "cuda_available": false,
+    "package_versions": {
+      "torch": "2.14.1+cpu",
+      "torchvision": "0.29.1+cpu",
+      "numpy": "2.4.6",
+      "pandas": "3.0.5",
+      "scikit-learn": "1.9.0",
+      "Pillow": "10.4.0"
+    }
+  },
+  "credential_presence_only": {
+    "kaggle_api_token_environment_present": false,
+    "kaggle_legacy_environment_pair_present": false,
+    "kaggle_credentials_file_present": false
+  },
+  "other_datasets": {
+    "EyeQ": "Annotation access alone does not establish authorized original-image access.",
+    "IDRiD": "Reserved independent evaluation; no fitting/tuning or automatic download by this script."
+  },
+  "privacy": "Aggregate inventory only. Local paths, image IDs, patient IDs, weights and secrets are omitted."
+}

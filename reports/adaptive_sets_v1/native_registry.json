@@ -1,0 +1,17 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "source_report_sha256": "a883d166fe7172d77ee615b300ae46e802355c19731ecf9080640c3b41fc0e88",
+  "registered_records": 20,
+  "api_saved_metrics_match": true,
+  "control_combinations_checked": 40,
+  "displayed_metric_cells_checked": 2200,
+  "displayed_interval_cells_checked": 1280,
+  "primary_defaults_verified": true,
+  "scope_and_rng_captions_verified": true,
+  "production_card_and_sidecar_matched": true,
+  "no_ui_exceptions": true,
+  "ui_method": "Host Streamlit AppTest against actual HTTP; container source separately matched when applicable",
+  "new_browser_rendering_verified": false,
+  "verifier_sha256": "96a58bdeabfdddf2654a10574e7b9127baab3a46d938bf169b2684006588fdc9"
+}

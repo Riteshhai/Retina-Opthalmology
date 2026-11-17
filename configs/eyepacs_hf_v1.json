@@ -1,0 +1,85 @@
+{
+  "schema": "qsart.hf_eyepacs_download.v1",
+  "repository": "bumbledeep/eyepacs",
+  "revision": "3e94599d7e41d9992a8362cc0467eb397e11210f",
+  "files": [
+    {
+      "path": "data/train-00000-of-00014.parquet",
+      "bytes": 465480910,
+      "sha256": "4383488ced627b71a56dcd4b2ce9dfa750c40a72f642cb20bb4bbd5928bf689c"
+    },
+    {
+      "path": "data/train-00001-of-00014.parquet",
+      "bytes": 466574447,
+      "sha256": "79c02168c204bbc7c7b08efa3f8b03bbbff4e95cb22a6257ab963019478a63e7"
+    },
+    {
+      "path": "data/train-00002-of-00014.parquet",
+      "bytes": 466013138,
+      "sha256": "9520dc4d002d02acaae9216f43540673218b4dd23c7b2fd6fbe8af8a219e2fe6"
+    },
+    {
+      "path": "data/train-00003-of-00014.parquet",
+      "bytes": 465229241,
+      "sha256": "824c20eb46894afa2f245b3072623df85bf76d8f4424d09575a6a6b4a4e41fcf"
+    },
+    {
+      "path": "data/train-00004-of-00014.parquet",
+      "bytes": 470269275,
+      "sha256": "68cf6ae973f36f3dc5488f4b533272fc05536cc5b039cee828f33b18348e067d"
+    },
+    {
+      "path": "data/train-00005-of-00014.parquet",
+      "bytes": 467366577,
+      "sha256": "0db9c5b093cba56818373974a8e9694548b741189175901ae1062156606cdc17"
+    },
+    {
+      "path": "data/train-00006-of-00014.parquet",
+      "bytes": 467043988,
+      "sha256": "56bbaed602b7d6b4f2065722fe1bcde62f69fdca144c94fa8a5f2bbb9efd4807"
+    },
+    {
+      "path": "data/train-00007-of-00014.parquet",
+      "bytes": 466977861,
+      "sha256": "f691467bdb4efd63de3db4ad48f5f219b50de65c12ccd6388dad6c583fa8eb26"
+    },
+    {
+      "path": "data/train-00008-of-00014.parquet",
+      "bytes": 467026324,
+      "sha256": "9b1232c655d5368509163443335213615562fdf5ee67151a4a65d67967c6b145"
+    },
+    {
+      "path": "data/train-00009-of-00014.parquet",
+      "bytes": 465228464,
+      "sha256": "50420f27319e873590844c00b650677e4adf1d6c93373769c01ac467ffbe3b76"
+    },
+    {
+      "path": "data/train-00010-of-00014.parquet",
+      "bytes": 468731696,
+      "sha256": "5ecc31b7b55bddfc058d46af7fbdba10e7f95cf4d3834b3de216877ffa9b7369"
+    },
+    {
+      "path": "data/train-00011-of-00014.parquet",
+      "bytes": 464400315,
+      "sha256": "ed46a9d031cf1fa2067865290e884be9a225746405ec57ce31511aedf13b9102"
+    },
+    {
+      "path": "data/train-00012-of-00014.parquet",
+      "bytes": 466156768,
+      "sha256": "ed3937c2283c1aa0c8407b48a17f35589c96f6fdeabec1a15498315910444698"
+    },
+    {
+      "path": "data/train-00013-of-00014.parquet",
+      "bytes": 469144873,
+      "sha256": "f3de96e71ac59cd606364f148a6482e0719cbc6a251e1bab9ecee37bef4d679d"
+    }
+  ],
+  "total_bytes": 6535643877,
+  "expected_rows": 35108,
+  "card_sha256": "b92ffa7c33b1bc9faee655bf74876eabc501a4623697ef9283bde383bd63e3a0",
+  "card_license_claim": "MIT; underlying image terms not independently established by this mirror label",
+  "image_representation": "community resized/cropped images; some nearly black/unmaskable originals removed",
+  "source_selected_by_user": true,
+  "source_annotation_release": "HzFu/EyeQ 1dcfabb08cd31045de1a4a3ee82e48f6833697aa",
+  "intended_role": "external_candidate_only; no model fitting or evaluation authorized by downloading"
+}

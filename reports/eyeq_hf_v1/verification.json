@@ -1,0 +1,95 @@
+{
+  "status": "verified",
+  "specification": "MASTER_SPEC_v1.0",
+  "execution_source_commit": "c1e52fd21f43e38de78007e1376055276be5865d",
+  "source_file_sha256": {
+    "qsart/data/hf_eyepacs.py": "0384467edbfcc5ccf98ec6e99df6df15dd0bf73536c0b4811fc81bc0d4a71a9a",
+    "scripts/fetch_eyepacs_hf.py": "7cd3454ae5e1b5da8d16c91dea46101856d4a0a49123a348b5505da68b3b9785",
+    "configs/eyepacs_hf_v1.json": "7605d3b2905cfa12456163dcfc80271e6becbccc477e904b851bcea096e026d9",
+    "requirements.txt": "f617a39ce6800a697883f018a47a5cbfeb4506ad1e67d8dde57c05f792166b2f",
+    "docs/research/EYEPACS_HF_V1_PLAN.md": "a3f5fe74cd166b9f559f6ba8a0d7cfefa23c54241d8f28cc5df22214e5a9922e",
+    ".gitignore": "1a2a97b6bdbe1e06500502cf7b837bc793e8932158b246503bc8a2b8d394a281"
+  },
+  "evidence_file_sha256": {
+    "acquisition.json": "71cfa46c0256129aeafd0c5d68185316bc6b95e21d961d63085a69a726227d9e",
+    "container_deployment.json": "33853680738fa97a8ad5b18d8404c73b97fd933a59bbf9698e237954861cf6f4",
+    "container_runtime.json": "7ce9bc0e286c980bd8c3562295b3c97ab3bd48bdd244e336230b42d65f606e6c",
+    "independent_audit.json": "61306322cc2003d6ad86d2076b1f92d9ae153a1f6aa3469360357e4340c96438",
+    "native_deployment.json": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+    "payload_and_reuse.json": "105664f0127991311f8f299f7123767906d3acdaadc2f35b42e36e843b703db4",
+    "primary_deployment.json": "33853680738fa97a8ad5b18d8404c73b97fd933a59bbf9698e237954861cf6f4",
+    "primary_runtime.json": "7bbbf1ee1190a1959ec1df45815b9730b87da4b5da2d7795f8792a30d6907327"
+  },
+  "separate_fitting_only_feasibility_file_sha256": {
+    "feasibility.json": "d43e9d5e00ed870523a90b3ee525fc6cad4a9f20d5285fd179a37f89117a1620",
+    "record_audit.json": "8b96b74a72f81d134e9460aedc07d4ca612de5782e3ab6e70379fdab500b7d3a"
+  },
+  "local_tests": {
+    "passed": 618,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_seconds": 130.82,
+    "junit_suite_seconds": 130.78,
+    "junit_sha256": "b156978c0ee8a9cd7f4370d0f9a0153dc3823745816e01852282cbdedab69fbd"
+  },
+  "targeted_tests": {
+    "passed": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_seconds": 11.29,
+    "junit_suite_seconds": 10.605,
+    "junit_sha256": "2f657fc52b36a1649f9ee9c502d21cfeb1c56620f614242b6dcabc2620c6adc8"
+  },
+  "genuine_integration_tests": [
+    "test_real_trained_pipeline_and_batch_export"
+  ],
+  "source_code_unchanged_since_tested_commit": true,
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check .",
+      "exit_code": 0
+    },
+    {
+      "command": "docker compose config --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "source_ci": {
+    "run_id": 42259048809,
+    "head_sha": "c1e52fd21f43e38de78007e1376055276be5865d",
+    "status": "completed",
+    "conclusion": "success",
+    "run_number": 56,
+    "html_url": "https://github.com/Riteshhai/Retina-Opthalmology/actions/runs/42259048809"
+  },
+  "preserved_artifacts": 307,
+  "cache_files_verified": 14,
+  "cache_parquet_bytes": 6535643877,
+  "metadata_images_decoded": 0,
+  "separate_bounded_payloads_decoded": 3,
+  "mirror_model_predictions_or_training_performed": false,
+  "source_quality_truth_revalidated": false,
+  "offline_cache_reuse_shards_verified": 14,
+  "offline_reuse_network_requests": 0,
+  "private_payloads_and_joins_git_ignored": true,
+  "tracked_external_cache_files": 0,
+  "research_registry_records": 20,
+  "new_container_execution_verified": true,
+  "container_runtime_source_files_matched": 70,
+  "primary_runtime": "docker_cpu",
+  "primary_workstation_ports": {
+    "api": 18000,
+    "dashboard": 18501
+  },
+  "temporary_verification_stack_removed": true,
+  "source_models_and_sidecar_replaced": false,
+  "new_interactive_browser_rendering_claimed": false,
+  "overall_project_status": "IN PROGRESS",
+  "verifier_sha256": "06bbfeeed6d20a7fd37bb86b227f4bdc5110736bff8b7cc2b6249a410f7bd52e"
+}

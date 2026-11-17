@@ -1,0 +1,20 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "experiment_id": "idrid_external_v1",
+  "registered_records": 15,
+  "scope": "locked_external_domain_diagnostics_consumed",
+  "source_report_sha256": "812c82d7771752fa00d076e067e6d1692da4a414c0b1207c8e6df2f21ec35282",
+  "actual_api_metrics_match": true,
+  "models_displayed": 4,
+  "comparison_rows_per_view": 7,
+  "population_classifier_alpha_controls_verified": true,
+  "all_uniform_seeds_preserved": true,
+  "consumed_and_primary_captions_verified": true,
+  "original_production_card_and_sidecar_match": true,
+  "ui_method": "Streamlit AppTest against actual native HTTP API",
+  "no_ui_exceptions": true,
+  "new_browser_rendering_verified": false,
+  "new_container_execution_verified": false,
+  "verifier_sha256": "db3e54d6f9baab2512596b8117e4a446aab3202d5d4c65f9ad16d6f13b1a7cc8"
+}

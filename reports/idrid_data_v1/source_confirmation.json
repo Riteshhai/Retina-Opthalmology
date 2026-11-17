@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "dataset": "IDRiD",
+  "confirmation_kind": "user_statement",
+  "confirmation_statement": "Yes, official IDRiD/IEEE DataPort release",
+  "confirmed_at_utc": "2026-11-04T13:42:37.112770+00:00",
+  "source_provenance_status": "official_download_user_confirmed",
+  "source_urls": [
+    "https://idrid.grand-challenge.org/Data/",
+    "https://ieee-dataport.org/open-access/indian-diabetic-retinopathy-image-dataset-idrid"
+  ],
+  "data_audit_sha256": "b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a",
+  "manifest_sha256": "9f185bf5083b68e3bdeddacb5aa127e83e9a6011ed6a0fd8990ea2bb39b17553",
+  "image_content_sha256": "5b834fbaebeab02a828e79c3a61606fe6be15e15722ac0431ca6a0e6aa2eafe0",
+  "official_archive_checksum_verified": false,
+  "note": "Append-only user source confirmation after the original audit; prior audit bytes and unresolved overlap findings remain unchanged."
+}

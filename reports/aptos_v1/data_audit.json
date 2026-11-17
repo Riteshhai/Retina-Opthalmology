@@ -1,0 +1,158 @@
+{
+  "seed": 20261020,
+  "requested_group_proportions": {
+    "train": 0.6,
+    "validation": 0.15,
+    "calibration": 0.15,
+    "test": 0.1
+  },
+  "grouping": "SHA256 or central_green_dct_phash_v1 distance connected components",
+  "near_duplicate_distance": 2,
+  "stratification": "verified DR grade per label-consistent fingerprint component",
+  "rounding": "floor per grade; minimum one held-out group per role when >=4 groups; retain training group",
+  "patient_identifiers_available": false,
+  "patient_disjointness_established": false,
+  "patient_grouping_limitation": "Official id_code/diagnosis annotations provide no authoritative patient or eye identifiers. SHA256 and central-green pHash connected components reduce detectable image overlap; they cannot establish patient-disjoint partitions or exclude every same-eye view.",
+  "images": 3514,
+  "split_groups": 3399,
+  "duplicate_components": 108,
+  "duplicate_candidate_pairs": 255,
+  "duplicate_candidate_pairs_scope": "entire original source before conflict quarantine",
+  "exact_candidate_pairs": 134,
+  "conflict_policy": "quarantine",
+  "original_images": 3662,
+  "original_split_groups": 3450,
+  "original_duplicate_components": 159,
+  "original_dr_grade_counts": {
+    "0": 1805,
+    "1": 370,
+    "2": 999,
+    "3": 193,
+    "4": 295
+  },
+  "conflicting_components": 51,
+  "quarantined_images": 148,
+  "quarantined_dr_grade_counts": {
+    "0": 42,
+    "1": 21,
+    "2": 42,
+    "3": 21,
+    "4": 22
+  },
+  "quarantined_component_size_counts": {
+    "2": 35,
+    "3": 8,
+    "4": 3,
+    "5": 3,
+    "6": 1,
+    "21": 1
+  },
+  "partitions": {
+    "train": {
+      "images": 2115,
+      "split_groups": 2048,
+      "dr_grade_counts": {
+        "0": 1059,
+        "1": 211,
+        "2": 575,
+        "3": 105,
+        "4": 165
+      }
+    },
+    "validation": {
+      "images": 521,
+      "split_groups": 507,
+      "dr_grade_counts": {
+        "0": 262,
+        "1": 51,
+        "2": 142,
+        "3": 26,
+        "4": 40
+      }
+    },
+    "calibration": {
+      "images": 527,
+      "split_groups": 507,
+      "dr_grade_counts": {
+        "0": 265,
+        "1": 52,
+        "2": 144,
+        "3": 25,
+        "4": 41
+      }
+    },
+    "test": {
+      "images": 351,
+      "split_groups": 337,
+      "dr_grade_counts": {
+        "0": 177,
+        "1": 35,
+        "2": 96,
+        "3": 16,
+        "4": 27
+      }
+    }
+  },
+  "source_url": "https://www.kaggle.com/competitions/aptos2019-blindness-detection/data",
+  "source_annotation_sha256": "b2a3479695922e62c83c94a1a9ef669b4b6d68cc26a1d7090ebedecdd7dd79a5",
+  "dataset_source": "APTOS_2019",
+  "supervision": {
+    "dr_grade": "official diagnosis 0-4",
+    "quality": "unavailable",
+    "patient_id": "unavailable",
+    "eye_id": "unavailable"
+  },
+  "schema_version": 1,
+  "experiment_id": "aptos_v1",
+  "dataset": "APTOS_2019",
+  "scope": "local_source_integrity_and_declared_split_preparation",
+  "status": "verified",
+  "source_confirmation": "User confirmed official Kaggle competition download on 2026-11-03",
+  "archive_sha256": "18036845ab76b68d305d6e2dbbaaaf5cd23926be740e1297a8972ac1c6360976",
+  "archive_bytes": 10215289875,
+  "archive_member_count": 5593,
+  "training_members_extracted": 3663,
+  "training_images_extracted": 3662,
+  "training_bytes_extracted": 8603119751,
+  "crc_verified_for_all_extracted_members": true,
+  "competition_test_extracted": false,
+  "reserved_test_inference_performed": false,
+  "manifest_sha256": "1d79240d22237d1934328899d3d6624cd41f6294a15d158a3f62eacf5e7684ed",
+  "development_manifest_sha256": "681799c7ee5f04e988dc607f6cf296fd882c5f55f2603dcd0a2ccd8148951fab",
+  "calibration_roles_sha256": "65cf2d9206f882265b75b8ce2897bd0555bd7f19d98c3b0a90541b665f2508c1",
+  "private_inspection_sha256": "f3fb280a450e2c527c904dea9bc8246daeb945015f24353a6a1c90db112bd145",
+  "private_quarantine_sha256": "4ae497251d8923f31d4e18fe1a3b8e650a8a1a8b57a59587a1486f48d7c2ef39",
+  "calibration_role_prefix": "aptos-v1-temperature-20261103:",
+  "representative_prefix": "aptos-v1-representative-20261103:",
+  "calibration_roles": {
+    "conformal": {
+      "images": 265,
+      "groups": 254,
+      "representatives": 254
+    },
+    "temperature": {
+      "images": 262,
+      "groups": 253,
+      "representatives": 253
+    }
+  },
+  "representative_counts": {
+    "calibration": 507,
+    "test": 337,
+    "train": 2048,
+    "validation": 507
+  },
+  "source_sha256": {
+    "qsart/data/aptos.py": "b5d6b1f981c4d0e3f24d1465dc2ac82ea3ddbf3567472f19b5094b19b515e9fd",
+    "qsart/data/manifests.py": "0ae85ee90b6b81b0fb4281b91b503d85c73e5665de5acb5b12a1371fcd98a6ec",
+    "scripts/prepare_aptos_archive.py": "77d7d08ad31b508dfaf6da87437abc4a288e2d239e58b59d145430e7f3b12d8c"
+  },
+  "limitations": [
+    "Official id_code/diagnosis annotations provide no authoritative patient or eye identifiers. SHA256 and central-green pHash connected components reduce detectable image overlap; they cannot establish patient-disjoint partitions or exclude every same-eye view.",
+    "Source provenance is user-confirmed; no published official archive digest was supplied.",
+    "Whole conflicting components are excluded without relabeling; this label-dependent exclusion changes the study population.",
+    "Full-source labels are read for quarantine and stratification. Reserved-test inference is prohibited.",
+    "No authoritative APTOS quality annotations are available; no quality-label or triage claim is generated."
+  ],
+  "elapsed_seconds": 856.2582992999814
+}

@@ -1,0 +1,60 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "aptos_resolution_seed2027_v1",
+  "source_commit": "0a8eb4a5f29156ebf0032b517bd809e51060c020",
+  "evaluation_sha256": "22d0603474316653b786a9f55aa21c2e3d858bc133291ed5fd5e4b10f8103c14",
+  "auditor_sha256": "59c66fb0136778361bc1b04de4733ef9d0bfb397fb9e493523e30fb5a5118fc7",
+  "replay_script_sha256": "2370b817dc1d044180b090fb759e3dbdc71d591a52712b771f3bf4b384ec5f2d",
+  "independent_replay": {
+    "head_sha256": "a4e6a0e194097e448b52c0a87998ebaee3b6b629aac9860423c56a8c3d75b6a4",
+    "seed_2026_head_reconstructed": true,
+    "replay": {
+      "224": {
+        "rows": 521,
+        "max_absolute_logit_delta": 0.0,
+        "arm_evaluation_sha256": "f9144271fcc75df7e4d08ea4d1a3f521c4a31f2c502c660ce4dd244b5542f4b5",
+        "checkpoint_sha256": "91592a9d6a9f04486dc006d5b96f2389517710ef84c0db6755e5efd2ed5c0c25",
+        "selection_scores_sha256": "83f931314a1f8e0519cfe187e867fa26cd1049385a9538ca625bd241f1c99516"
+      },
+      "384": {
+        "rows": 521,
+        "max_absolute_logit_delta": 0.0,
+        "arm_evaluation_sha256": "a872ce771a2bb8fba1252b8a42f84a0a836f8c15002313202f7b7548d6491db8",
+        "checkpoint_sha256": "bee6579adb1e2c1c9c09e68df7df823c48659469fa7280d3aa7c2f81c7201309",
+        "selection_scores_sha256": "51e4b8ca963b49e41633ea41ad2b851b81348c28a199d7b5aa4f6b9b7c84ed0a"
+      }
+    }
+  },
+  "training": {
+    "224": {
+      "epochs": 10,
+      "selected_epoch": 6,
+      "saved_selection_rows": 5210,
+      "optimizer_updates": 2650,
+      "batchnorm_updates_per_epoch": 529
+    },
+    "384": {
+      "epochs": 9,
+      "selected_epoch": 5,
+      "saved_selection_rows": 4689,
+      "optimizer_updates": 2385,
+      "batchnorm_updates_per_epoch": 529
+    }
+  },
+  "common_epochs_with_identical_rng": 9,
+  "source_fitting_selection_images_rehashed": 2636,
+  "cache": {
+    "224": {
+      "sha256": "b73fc6302c89ce6e4178b2c0cf8f544ecfd184e92da1ec8695bbc9094992673a",
+      "bytes": 396791808,
+      "independent_pixel_samples": 10
+    },
+    "384": {
+      "sha256": "aa2b341f459a2bd8ffd465d3421c22c9d6ba65dba224c55bcb9dbafb7924ffcf",
+      "bytes": 1166082048,
+      "independent_pixel_samples": 10
+    }
+  },
+  "preserved_artifacts_verified": 352,
+  "paired_intervals_reconstructed": 8
+}

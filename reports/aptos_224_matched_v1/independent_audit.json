@@ -1,0 +1,64 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "aptos_224_matched_v1",
+  "source_commit": "cc4f4450cb9b2663def6cb1e637949cdfdd50782",
+  "evaluation_sha256": "552503f95f8a049eef6d8c89226725ae2b7e3499beb5096c351a8558d029c73e",
+  "reference_evaluation_sha256": "746e47de7dba071c82e4ea15736daa19021a3a9d804ca42b2351d2554e635daf",
+  "auditor_script_sha256": "cdb6b67088e6b2713848fd163cfc965bf284a8b8362b6f3d4ad3b1d10dd9af1c",
+  "independent_epoch_helper_sha256": "83e05cf332187b5182ae96f56c31b44b6b606ca7eea0d85953cb425f2255989d",
+  "paired_intervals_reconstructed": 4,
+  "same_inputs_initialization_and_runtime_verified": true,
+  "development_images_rehashed": 3163,
+  "preserved_prior_artifacts": 350,
+  "disk_cache": {
+    "fit_selection": {
+      "images": 2636,
+      "bytes": 396791808,
+      "sha256": "b73fc6302c89ce6e4178b2c0cf8f544ecfd184e92da1ec8695bbc9094992673a",
+      "independent_pixel_samples": 10
+    },
+    "posthoc": {
+      "images": 527,
+      "bytes": 79328256,
+      "sha256": "43b96a711814492f6b12e8f26bdbca5ac3a3f1ce412d54c17ca5c52754bea66d",
+      "independent_pixel_samples": 5
+    }
+  },
+  "fresh_head": {
+    "sha256": "50906f416ea11d2cc56bb1f74c07425b2e111708c66cb1d97176561b8da8f350",
+    "reconstructed_in_pinned_training_image": true
+  },
+  "training": {
+    "epochs_verified": 15,
+    "selected_epoch": 12,
+    "optimizer_steps": 3975,
+    "batchnorm_updates_per_epoch": 529,
+    "fitting_grade_support": [
+      1059,
+      211,
+      575,
+      105,
+      165
+    ],
+    "selection_rows_reconstructed": 7815,
+    "selected_replay_max_logit_error": 0.0,
+    "maximum_epoch_accuracy_error": 0.0,
+    "imagenet_initial_state_reconstructed": true
+  },
+  "uncertainty": {
+    "comparisons": 14,
+    "individual_raw_and_fallback_sets": 14588,
+    "maximum_threshold_error": 2.220446049250313e-16,
+    "temperature_optimum_nll_gap": 2.707090107634258e-11,
+    "temperature_independent_optimum": 1.5159951213973268
+  },
+  "matched_random_streams": {
+    "common_epochs_verified": 13,
+    "shuffle_and_augmentation_states_equal": true,
+    "torch_rng_state_equal_epochs": 13,
+    "fixed_epoch_optimizer_steps_per_arm": 1325
+  },
+  "model_refitting_performed": false,
+  "additional_model_forward_pass_performed": false,
+  "elapsed_seconds": 58.71101600001566
+}

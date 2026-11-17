@@ -1,0 +1,90 @@
+{
+  "development_v1": {
+    "images": 1184,
+    "patients": 296,
+    "partitions": {
+      "calibration": {
+        "images": 168,
+        "subjects": 42,
+        "dr_grade_counts": {
+          "0": 78,
+          "1": 18,
+          "2": 32,
+          "3": 32,
+          "4": 8
+        },
+        "quality_counts": {
+          "0": 82,
+          "1": 86
+        }
+      },
+      "train": {
+        "images": 848,
+        "subjects": 212,
+        "dr_grade_counts": {
+          "0": 378,
+          "1": 100,
+          "2": 174,
+          "3": 142,
+          "4": 54
+        },
+        "quality_counts": {
+          "0": 438,
+          "1": 410
+        }
+      },
+      "validation": {
+        "images": 168,
+        "subjects": 42,
+        "dr_grade_counts": {
+          "0": 74,
+          "1": 20,
+          "2": 24,
+          "3": 40,
+          "4": 10
+        },
+        "quality_counts": {
+          "0": 98,
+          "1": 70
+        }
+      }
+    },
+    "unreadable_images": 0,
+    "quarantined_rows": 0,
+    "ready_for_training": true,
+    "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+    "source_bytes": 662873443
+  },
+  "confirmation_v1": {
+    "images": 340,
+    "patients": 85,
+    "partitions": {
+      "holdout": {
+        "images": 340,
+        "subjects": 85,
+        "dr_grade_counts": {
+          "0": 158,
+          "1": 38,
+          "2": 72,
+          "3": 58,
+          "4": 14
+        },
+        "quality_counts": {
+          "0": 188,
+          "1": 152
+        }
+      }
+    },
+    "unreadable_images": 0,
+    "quarantined_rows": 0,
+    "ready_for_training": true,
+    "manifest_sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7",
+    "source_bytes": 185972786
+  },
+  "cross_cohort_audit": {
+    "passed": true,
+    "exact_shared_hashes": 0,
+    "perceptual_candidates": 0,
+    "perceptual_distance": 2
+  }
+}

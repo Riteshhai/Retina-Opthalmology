@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "scope": "saved_record_and_input_integrity_only; no independent timing or gradient replay",
+  "source_report_sha256": "d43e9d5e00ed870523a90b3ee525fc6cad4a9f20d5285fd179a37f89117a1620",
+  "source_commit": "c1e52fd21f43e38de78007e1376055276be5865d",
+  "selected_fitting_images_verified": 32,
+  "fresh_worker_records_verified": 2,
+  "temporary_update_records": 8,
+  "original_checkpoint_unchanged": true,
+  "preserved_artifacts": 307,
+  "independent_timing_or_fitting_repeat_performed": false,
+  "verifier_sha256": "aa560de8df3bedd5c389e1dd6bf676b1742362478ee09edaee50df9fcbcd0ce7"
+}

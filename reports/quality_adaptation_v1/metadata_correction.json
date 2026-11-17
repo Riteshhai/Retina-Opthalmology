@@ -1,0 +1,25 @@
+{
+  "status": "metadata_only_correction",
+  "original_report": "evaluation.json",
+  "original_report_sha256": "18e184b5abb4c67a53a17a9887b9b4321f34a904f46e714a925c2b46fdcff188",
+  "corrected_report": "evaluation_v1_1.json",
+  "corrected_report_sha256": "b21f0305d3d2c19392d91434b7b4dedaed65c9329029b84939143ca8497f2fd8",
+  "changed_fields": [
+    "schema_version",
+    "metadata_correction",
+    "paired_changes[].seed",
+    "paired_changes[].bootstrap_seed"
+  ],
+  "training_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "bootstrap_seed": 20261107,
+  "models_epochs_predictions_metrics_intervals_unchanged": true,
+  "new_fitting_or_metric_recomputation": false,
+  "correction_script_sha256": "ca01ac7a4d273bd6957a4ed8d14e65f815f5859308e036b619f6388824410959",
+  "postexecution_source_file_sha256": {
+    "qsart/training/quality_adaptation.py": "fa20b0c6ae4c68a984eb0b6e7da9645c498eda94068eaaefb587b48dcdd7e6df"
+  }
+}

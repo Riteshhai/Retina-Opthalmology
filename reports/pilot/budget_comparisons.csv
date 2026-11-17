@@ -1,0 +1,64 @@
+method,review_budget,recapture_budget,status,n,auto_count,review_rate,recapture_rate,coverage,missed_referable_auto,missed_severe_auto,referable_deferred_to_recapture,severe_deferred_to_recapture,auto_sensitivity,auto_specificity,weighted_auto_error_per_image,selective_grade_error,review_budget_violation,recapture_budget_violation,interpretation,reason
+plain,0.2,0.1,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.2,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.2,0.2,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.2,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.2,0.4,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.2,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.4,0.1,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.4,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.4,0.2,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.4,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.4,0.4,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.4,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.6,0.1,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.6,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.6,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.6,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.6,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.6,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.6,0.1,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.6,0.2,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.6,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.6,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+severity_only,0.6,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.6,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.6,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+dual_budget,0.6,0.2,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+plain,0.6,0.4,evaluated,60.0,60.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,2.4,0.8333333333333334,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+confidence_only,0.6,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+quality_only,0.6,0.4,evaluated,60.0,0.0,0.6,0.4,0.0,0.0,0.0,4.0,0.0,,,0.0,,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+severity_only,0.6,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+single_budget,0.6,0.4,infeasible,,,,,,,,,,,,,,,,,Required quality deferrals exceed capacities
+naive,0.6,0.4,evaluated,60.0,0.0,0.6,0.4,0.0,0.0,0.0,4.0,0.0,,,0.0,,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,
+dual_budget,0.6,0.4,evaluated,60.0,0.0,0.6,0.4,0.0,0.0,0.0,12.0,7.0,,,0.0,,False,False,Sensitivity/specificity use AUTO_SCREEN only; deferral is not diagnosis.,

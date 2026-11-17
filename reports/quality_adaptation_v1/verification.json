@@ -1,0 +1,73 @@
+{
+  "status": "verified",
+  "specification": "MASTER_SPEC_v1.0",
+  "scientific_source_commit": "2d4243c977a0669776a5dc356d6d6e3166732a12",
+  "source_report_sha256": "b21f0305d3d2c19392d91434b7b4dedaed65c9329029b84939143ca8497f2fd8",
+  "independent_audit_sha256": "0c59659a34d43a8a67cb2756296731aa847eabbced48bb23b5744930d62be216",
+  "local_tests": {
+    "passed": 522,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_console_seconds": 110.17,
+    "junit_suite_seconds": 110.073,
+    "junit_sha256": "c4608386708bb2da68134b7fa386c0277dd77c7c2d91963cb72ca3c8cbadcda4",
+    "stage": "after metadata-only correction; no scientific fitting or metric rerun",
+    "genuine_integration_tests": [
+      "test_real_trained_pipeline_and_batch_export"
+    ]
+  },
+  "preexecution_tests": {
+    "passed": 521,
+    "console_seconds": 128.16,
+    "junit_sha256": "06822a4aa87356bfcf797cfff2c11c6f4d3fa7f20e7a12d617aa84b629d14d03"
+  },
+  "targeted_tests": {
+    "passed": 19,
+    "junit_sha256": "93eb82389d528fe871c64aa0dad86d3efc448a74aaf4c188060caac8bfd81172"
+  },
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check .",
+      "exit_code": 0
+    },
+    {
+      "command": "docker compose config --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "native_deployment_sha256": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+  "native_registry_sha256": "b81a5f40822d29aa28135cb877e8bca76ed4b6287a127fe08a44d2df2d7e7362",
+  "registered_records": 17,
+  "runtime": "native_python",
+  "figure_visual_inspection": {
+    "method": "local PNG inspection",
+    "files": [
+      "training_and_head_metrics.png",
+      "class_recall_and_paired_changes.png"
+    ]
+  },
+  "docker_engine_status": "unavailable_linux_engine_pipe",
+  "new_container_execution_verified": false,
+  "new_browser_rendering_verified": false,
+  "production_model_changed": false,
+  "verification_source_file_sha256": {
+    "api/research.py": "edd9b567104f6656098ad2262856c72ec051c8139c7d4547f7c7fff1e019f979",
+    "dashboard/app.py": "e688e3b1e26762a631865b25cd8e1b907a6514ed572b3f38821470ca960f4fab",
+    "qsart/training/quality_adaptation.py": "fa20b0c6ae4c68a984eb0b6e7da9645c498eda94068eaaefb587b48dcdd7e6df",
+    "scripts/run_quality_adaptation.py": "a8bfb3366a9b66cb05e7fce7286b23070c74d7f2fbecf43fd49dffacb2922a6c",
+    "scripts/plot_quality_adaptation.py": "221e5f29d1bc45b1f4c70fc8f7b8ae74eaf117f34781e2a4bb793d1801ced3b0",
+    "scripts/correct_quality_seed_metadata.py": "ca01ac7a4d273bd6957a4ed8d14e65f815f5859308e036b619f6388824410959",
+    "tests/test_quality_adaptation.py": "9b5d3bffd35743600e40152bbb09d4e1eb64d09e2485c8aac21e2e36accfd9ca",
+    "tests/test_quality_explorer.py": "3fe02fd31fdb8748e9d6a3aca517be015f7312d120c7c0fdedd237f6f3e5f55e"
+  },
+  "verification_script_sha256": "9ee32bbe7ae3b0e672f61e79a9ea9cd71de24374a239be506daf84bab3f05dc2",
+  "limitations": [
+    "Native HTTP and Streamlit AppTest are not a new browser/container proof.",
+    "Research acceptance remains in progress; development head metrics do not validate triage."
+  ]
+}

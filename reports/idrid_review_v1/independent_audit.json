@@ -1,0 +1,19 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "idrid_review_v1",
+  "source_commit": "d1c5968189f8bd36508b5cbb4c35220af5f0bf6b",
+  "data_review_sha256": "f21a3cd6109030c6c9da96710b7af0e6a89a00365afbfc76af9cb539abdf15f7",
+  "auditor_script_sha256": "bb9de793ea4e2016a15f225d3355d015df65756763b83960704bb2c340ff2c1a",
+  "all11_pair_pixel_evidence_reproduced": true,
+  "all516_population_memberships_reproduced": true,
+  "source_receipt_bindings_verified": true,
+  "all_original_labels_retained": true,
+  "byte_exact_internal_pairs_with_disagreeing_dr_labels": 3,
+  "preserved_prior_artifacts": 20,
+  "model_inference_performed": false,
+  "limitations": [
+    "Pixel and membership integrity only; no clinical grade adjudication, patient identity or external model performance.",
+    "Three cross-source candidates remain unresolved; conservative filtering is fixed regardless of pixel metrics."
+  ],
+  "elapsed_seconds": 14.792350100004114
+}

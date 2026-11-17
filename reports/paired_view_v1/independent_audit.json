@@ -1,0 +1,23 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "paired_view_v1",
+  "source_commit": "6017d0c889d539b9d8c74ab33907015388040acf",
+  "evaluation_sha256": "230c5bab0851c2ee708e3d52f5fd066bc383dcfd6168d1c0f01b14ca07becd48",
+  "private_witness_sha256": "344eba035cea7ec6ce837711c14692ff07abb89e823cb3b8c4de2f3515b4e299",
+  "auditor_sha256": "a868170262f4a75c11895618b53b76b9c9f1dda4ecd55a353695861e1693296f",
+  "input_sha256": {
+    "manifest": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+    "dataset_report": "a1745a8c555e15b6174f2a2400cb0bc9babca9e18eb1b4eb7db55c76500e7965",
+    "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "model_card": "43830695b8362aabd06df0d5dfa65b01086db9da2db3212001ac98b8b0e4710f",
+    "selection_lock": "c2366e8ac8d369759d7431c6135bc593b5fa4623c4ce906a42cefa478928e3c2"
+  },
+  "fit_patients": 212,
+  "selection_patients": 42,
+  "scenarios_verified": 26,
+  "comparisons_verified": 16,
+  "routing_reconstructed_from_first_view": true,
+  "model_inference_replayed": false
+}

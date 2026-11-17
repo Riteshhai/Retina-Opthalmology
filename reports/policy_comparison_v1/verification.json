@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "scope": "local engineering verification with genuine selected models and conformal sidecar",
+  "pytest": {
+    "tests": 371,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_duration_seconds": 61.26,
+    "junit_duration_seconds": 61.095,
+    "junit_sha256": "fadb9ea42e790387befb0d331f1cc81327dea7687aafc87e0c787497e83b707f",
+    "warnings": [
+      "One upstream AnyIO BlockingPortal deprecation warning."
+    ],
+    "command": ".venv/Scripts/python.exe -m pytest -q --junitxml=reports/policy_comparison_v1_tests.xml"
+  },
+  "ruff": {
+    "status": "passed",
+    "command": ".venv/Scripts/python.exe -m ruff check ."
+  },
+  "compose_configuration": {
+    "status": "passed",
+    "command": "docker compose config --quiet",
+    "container_execution_this_session": false
+  },
+  "independent_audit": {
+    "status": "passed",
+    "sha256": "18a18ecce477cf2860e5936ebd7661f49806c0c96a1d0e037c7fb14610a8d642"
+  },
+  "native_http": {
+    "status": "verified",
+    "sha256": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812"
+  },
+  "native_registry_and_streamlit_component": {
+    "status": "verified",
+    "sha256": "1374c2212dcbee021eeadce3f423eba7ce0bec0dce116da8d1909f301757363d"
+  },
+  "measured_evaluation_sha256": "4dfd99d535d7f7413596caab5ca1fa47629a62126a488b907563656bf5834085",
+  "integration_source_sha256": {
+    "api/research.py": "ae92513ca5522fd86d15db7d1e566a16b171f280c0f1a84115fd7ce6c329128a",
+    "dashboard/app.py": "34e4288c71bd416c9f3e1cab2e504785c4988913bda1fe328c66071807bad6a8",
+    "scripts/summarize_policy_comparison.py": "2107a5c4804dde7c988974559eaad03f1370d0412b0e42053024ca3538f2d017",
+    "tests/test_dashboard.py": "1b5c5dde44fbc331a10b6020747054e966f1e2eb5fdec27267a37429ac43452f",
+    "tests/test_research_api.py": "9ece3fb6a60faa5d981e29b4a4686a2dcf1a230ae8fca10e1dc556aec8973577",
+    "tests/test_policy_summary.py": "6cbd69e671572056094ec160a8ec3236302909deb9de0b767612f1fa66efea44"
+  },
+  "limitations": [
+    "Current Docker Desktop startup unavailable; historical container evidence is preserved.",
+    "Browser observation rejected by browser access policy; no new browser rendering proof.",
+    "Passing engineering checks do not establish clinical validity or useful triage."
+  ]
+}

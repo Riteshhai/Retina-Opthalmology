@@ -1,0 +1,87 @@
+{
+  "status": "verified",
+  "specification": "MASTER_SPEC_v1.0",
+  "metadata_source_commit": "9f7f22f79362090039369f8a34625d326189c6e2",
+  "source_report_sha256": "e0941a2319941e28052c614b68a618d5fe9ed850f71cc7b3c3e30e6b7755b645",
+  "independent_audit_sha256": "6dad75279e465b49162f4fdae85355e697d3c2989e5741a6076199e8d50d78ff",
+  "local_tests": {
+    "passed": 558,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_suite_seconds": 102.731,
+    "junit_sha256": "52aad64739997e69d715e9db863ce641ea99f93e5b33d17e90aaf629314a5398",
+    "phase": "after export guard fix; before frozen metadata execution; same source retained"
+  },
+  "targeted_tests": {
+    "passed": 22,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_suite_seconds": 11.84,
+    "junit_sha256": "fd792676a036372bc044a34183b3bb280ef4629e57a1273a608215cf052113dd",
+    "phase": "after export guard fix; before frozen metadata execution; same source retained"
+  },
+  "genuine_integration_tests": [
+    "test_real_trained_pipeline_and_batch_export"
+  ],
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check .",
+      "exit_code": 0
+    },
+    {
+      "command": "docker compose config --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "source_ci": {
+    "run_id": 42080027323,
+    "head_sha": "9f7f22f79362090039369f8a34625d326189c6e2",
+    "status": "completed",
+    "conclusion": "success",
+    "run_number": 46,
+    "html_url": "https://github.com/Riteshhai/Retina-Opthalmology/actions/runs/42080027323"
+  },
+  "runtime": "native_python",
+  "registered_records": 19,
+  "native_registry_sha256": "17b697539e700fda305778b0404afa6b13d32959f5093503e2f0d656cd48d18e",
+  "native_deployment_sha256": "110d7707d0ac20b524fe0ada693cf31fd127f709f9175203704ae03036890812",
+  "images_decoded_for_eyeq": 0,
+  "eyeq_model_inference_performed": false,
+  "production_model_changed": false,
+  "preserved_artifacts": 271,
+  "prior_attempt_preserved": true,
+  "partial_manifest_bytes_identical": true,
+  "independent_verifier_preexport_corrections": [
+    "Read literal blank CSV index header rather than pandas Unnamed: 0 alias",
+    "Read UTF-8 source text explicitly on Windows; no source bytes or measured results changed"
+  ],
+  "docker_engine_status": "available_after_initial_unavailable_probe",
+  "new_container_execution_verified": true,
+  "container_runtime_sha256": "d2054a98eb8a1cbb7947365e1bbbcb2424504edfc67aacb789f0b76500fb654e",
+  "container_registry_sha256": "1efebd160c4655a022e55c6fd6c6b4bea4c46bd544b929a2ded94c09c1348d2c",
+  "container_deployment_sha256": "33853680738fa97a8ad5b18d8404c73b97fd933a59bbf9698e237954861cf6f4",
+  "container_runtime_source_files_matched": 65,
+  "new_browser_rendering_verified": false,
+  "verification_source_file_sha256": {
+    "qsart/data/eyeq.py": "78de35dfdc5253b3d2b6aba0f8493ae847ce378b19fc516c6576dd6b3ff87556",
+    "scripts/audit_eyeq_data.py": "680ccd951068b7432cd7d5cf33dd83fcd01138f7d507a7086e2042caaa11735c",
+    "api/research.py": "81069ff0278795c126cb962d5ec41920816642816c44a705b8bc6928a0a883b3",
+    "dashboard/app.py": "75d2d41231db3220106bbd19f6dcbd4c43a4fadc7327595ecb2dbac52bd2378c",
+    "tests/test_eyeq.py": "5b95ed53eb097d934e3a7eb4ac6912854d74d03780569e2dcd9bf5db08461fbc",
+    "tests/test_eyeq_explorer.py": "ef485556407defc93350d3ea09d8071860fdac1dba877fb04f16090bf2c213db",
+    "configs/eyeq_data_v1.json": "ab786452a2abe8b293a2474c2e1565b637ff8258b3bf22cc8026f9bd377f357f",
+    "docs/research/EYEQ_DATA_V1_PROTOCOL.md": "aeef01285df24765125aaade623d76804660a74ad0ca57d88c874294c8ca6808"
+  },
+  "verification_script_sha256": "053a43277431e2fbdeb5e3cab838e948d452953d97cb754557e0d3544fd0e596",
+  "limitations": [
+    "Metadata/source-access audit only; no EyeQ model accuracy, patient independence or quality validation established.",
+    "Native and container HTTP/AppTest are verified; no new interactive browser-rendering check.",
+    "Official photographs, accepted source terms, cross-source pixel checks and locked harmonization/evaluation remain required."
+  ]
+}

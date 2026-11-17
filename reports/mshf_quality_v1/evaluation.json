@@ -1,0 +1,963 @@
+{
+  "schema_version": 1,
+  "experiment_id": "mshf_quality_v1",
+  "spec_version": "1.0",
+  "dataset": "MSHF",
+  "partition": "external",
+  "scope": "external_overall_quality_diagnostic",
+  "source_commit": "92b93077534eff891bbdec7c02e7afee611fb941",
+  "source_sha256": {
+    "docs/research/MSHF_QUALITY_V1_PROTOCOL.md": "ac957ae6a793681fedd8f10cad703c672ec1502e47587d1b6d8c4b7bbb32f090",
+    "configs/idrid_data_v1.json": "11461a9a8a10b8554f3cf35a518a3650085714ac2ca439daecec22e96e16b027",
+    "scripts/evaluate_mshf_quality.py": "03979d69129802f15aac3a63f6d9d22e5f56fc1b1b87abb5cea41fe887e11f13",
+    "scripts/prepare_idrid.py": "9f56591ac15d7b284a3e2610963dce178255c08e341708fa2f2cadb94437fe99",
+    "qsart/data/aptos.py": "b5d6b1f981c4d0e3f24d1465dc2ac82ea3ddbf3567472f19b5094b19b515e9fd",
+    "qsart/data/idrid.py": "1be85cc7dcd40c55063ee8935c37ef17959c642852bdbce5b5295884319f6ffd",
+    "qsart/data/manifests.py": "0ae85ee90b6b81b0fb4281b91b503d85c73e5665de5acb5b12a1371fcd98a6ec",
+    "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+    "qsart/models/networks.py": "c9e60313b1cccfa09551b74866a0fe2e96df03ca0bf5d14801899e25a057aedd",
+    "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8"
+  },
+  "protocol_sha256": "ac957ae6a793681fedd8f10cad703c672ec1502e47587d1b6d8c4b7bbb32f090",
+  "archive": {
+    "article_id": 21507564,
+    "version": 2,
+    "file_id": 39485878,
+    "doi": "10.6084/m9.figshare.21507564.v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "download_url": "https://ndownloader.figshare.com/files/39485878",
+    "bytes": 1136891149,
+    "publisher_md5": "58203e6c2e064dafc800f5b83887487b",
+    "archive_sha256": "115def6513bc1516d77ceb4ac2e90a9fcf582e825604c08be9524f5fd6c4a219",
+    "metadata_sha256": "8ca82df161c72718a2aa1513551fb9cc90526239eb5907308f800acc5b11c026",
+    "receipt_sha256": "05eb2524e5f3070aeac2318fd15d14c06bdc1b931e5db52e110739542c2561be"
+  },
+  "workbook_sha256": {
+    "individual": "299d331e7e252385fe413661d0b471a8342d45115cdab189a19eb21159ed8407",
+    "summary": "40481a6f207bcd8f2e0daa8bd4c1da6a5a41c3161a5b97fa5c74d499970381f7"
+  },
+  "reference_manifest_bindings": [
+    {
+      "dataset": "APTOS_2019",
+      "rows": 3514,
+      "sha256": "1d79240d22237d1934328899d3d6624cd41f6294a15d158a3f62eacf5e7684ed"
+    },
+    {
+      "dataset": "APTOS_2019",
+      "rows": 148,
+      "sha256": "4ae497251d8923f31d4e18fe1a3b8e650a8a1a8b57a59587a1486f48d7c2ef39"
+    },
+    {
+      "dataset": "DeepDRiD_regular_fundus",
+      "rows": 1184,
+      "sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d"
+    },
+    {
+      "dataset": "DeepDRiD_regular_fundus",
+      "rows": 340,
+      "sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7"
+    }
+  ],
+  "witness_sha256": "153cb31a2ec456ac018326ba4cb718a2cb9b4a7102183076c3abff1408ce66db",
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.0",
+    "openpyxl": "3.1.5",
+    "Pillow": "10.4.0",
+    "torch": "2.14.1+cpu"
+  },
+  "inventory": {
+    "images": 500,
+    "images_decoded": 500,
+    "groups": {
+      "DR-XJU": {
+        "images": 235,
+        "poor": 117,
+        "good": 118,
+        "unanimous": 204,
+        "summary_cached_poor": 117,
+        "summary_cached_good": 118,
+        "summary_disagreements": 16,
+        "summary_stem_joins": 2,
+        "summary_formula_rows": 0,
+        "summary_blank_formula_inputs": 0,
+        "paper_poor": 117,
+        "paper_good": 118
+      },
+      "DR-ZJU": {
+        "images": 187,
+        "poor": 41,
+        "good": 146,
+        "unanimous": 168,
+        "summary_cached_poor": 187,
+        "summary_cached_good": 0,
+        "summary_disagreements": 146,
+        "summary_stem_joins": 0,
+        "summary_formula_rows": 187,
+        "summary_blank_formula_inputs": 187,
+        "paper_poor": 40,
+        "paper_good": 147
+      },
+      "Glaucoma": {
+        "images": 52,
+        "poor": 51,
+        "good": 1,
+        "unanimous": 50,
+        "summary_cached_poor": 50,
+        "summary_cached_good": 2,
+        "summary_disagreements": 1,
+        "summary_stem_joins": 0,
+        "summary_formula_rows": 0,
+        "summary_blank_formula_inputs": 0,
+        "paper_poor": 50,
+        "paper_good": 2
+      },
+      "Healthy": {
+        "images": 26,
+        "poor": 0,
+        "good": 26,
+        "unanimous": 26,
+        "summary_cached_poor": 0,
+        "summary_cached_good": 26,
+        "summary_disagreements": 0,
+        "summary_stem_joins": 0,
+        "summary_formula_rows": 0,
+        "summary_blank_formula_inputs": 0,
+        "paper_poor": 0,
+        "paper_good": 26
+      }
+    },
+    "formats": {
+      "JPEG": 422,
+      "TIFF": 78
+    },
+    "dimensions": [
+      {
+        "width": 412,
+        "height": 310,
+        "images": 215
+      },
+      {
+        "width": 496,
+        "height": 470,
+        "images": 1
+      },
+      {
+        "width": 496,
+        "height": 474,
+        "images": 1
+      },
+      {
+        "width": 555,
+        "height": 418,
+        "images": 4
+      },
+      {
+        "width": 555,
+        "height": 419,
+        "images": 14
+      },
+      {
+        "width": 1534,
+        "height": 1534,
+        "images": 78
+      },
+      {
+        "width": 1924,
+        "height": 1556,
+        "images": 131
+      },
+      {
+        "width": 3216,
+        "height": 2136,
+        "images": 56
+      }
+    ]
+  },
+  "overlap": {
+    "near_duplicate_distance": 2,
+    "fingerprint_method": "central_green_dct_phash_v1",
+    "internal_components": 498,
+    "internal_repeat_components": 2,
+    "internal_candidate_pairs": 2,
+    "internal_exact_pairs": 0,
+    "conflicting_components": 0,
+    "cross_source_candidate_pairs": 10,
+    "cross_source_exact_pairs": 0,
+    "cross_source_candidate_images": 3,
+    "cross_source_components": 3,
+    "excluded_conflict_images": 0,
+    "excluded_cross_source_images": 3,
+    "excluded_images": 3,
+    "reference_datasets": {
+      "APTOS_2019": {
+        "rows": 3662,
+        "unique_identities": 3662,
+        "candidate_pairs": 10,
+        "exact_pairs": 0
+      },
+      "DeepDRiD_regular_fundus": {
+        "rows": 1524,
+        "unique_identities": 1524,
+        "candidate_pairs": 0,
+        "exact_pairs": 0
+      }
+    }
+  },
+  "model": {
+    "quality_checkpoint_sha256": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "calibration_sha256": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "model_version": "development-v1-quality-mobilenet_v3_small-seed2026-epoch3",
+    "temperature": 1.0349426972146167,
+    "cpu_threads": 2,
+    "image_size": 224,
+    "poor_probability_threshold": 0.5,
+    "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+    "selected_epoch": 3
+  },
+  "populations": {
+    "main": {
+      "overall": {
+        "images": 497,
+        "poor": 208,
+        "good": 289,
+        "always_good_accuracy": 0.5814889336016097,
+        "raw": {
+          "confusion_matrix": [
+            [
+              181,
+              27
+            ],
+            [
+              98,
+              191
+            ]
+          ],
+          "poor_sensitivity": 0.8701923076923077,
+          "good_specificity": 0.6608996539792388,
+          "balanced_accuracy": 0.7655459808357732,
+          "poor_auroc": 0.8972750865051903,
+          "poor_average_precision": 0.8817918427028887,
+          "nll": 0.45555307535624645,
+          "brier": 0.3041800405700807,
+          "ece": 0.07111285917715766,
+          "accuracy": 0.7484909456740443
+        },
+        "calibrated": {
+          "confusion_matrix": [
+            [
+              181,
+              27
+            ],
+            [
+              98,
+              191
+            ]
+          ],
+          "poor_sensitivity": 0.8701923076923077,
+          "good_specificity": 0.6608996539792388,
+          "balanced_accuracy": 0.7655459808357732,
+          "poor_auroc": 0.8972750865051903,
+          "poor_average_precision": 0.8817918427028887,
+          "nll": 0.4564636316211359,
+          "brier": 0.3039756832941734,
+          "ece": 0.07423761984711921,
+          "accuracy": 0.7484909456740443
+        }
+      },
+      "groups": {
+        "DR-XJU": {
+          "images": 235,
+          "poor": 117,
+          "good": 118,
+          "always_good_accuracy": 0.502127659574468,
+          "raw": {
+            "confusion_matrix": [
+              [
+                114,
+                3
+              ],
+              [
+                87,
+                31
+              ]
+            ],
+            "poor_sensitivity": 0.9743589743589743,
+            "good_specificity": 0.2627118644067797,
+            "balanced_accuracy": 0.618535419382877,
+            "poor_auroc": 0.868535419382877,
+            "poor_average_precision": 0.8703129413444908,
+            "nll": 0.6292270694902061,
+            "brier": 0.44741203486767855,
+            "ece": 0.13129007892405734,
+            "accuracy": 0.6170212765957447
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                114,
+                3
+              ],
+              [
+                87,
+                31
+              ]
+            ],
+            "poor_sensitivity": 0.9743589743589743,
+            "good_specificity": 0.2627118644067797,
+            "balanced_accuracy": 0.618535419382877,
+            "poor_auroc": 0.868535419382877,
+            "poor_average_precision": 0.8703129413444908,
+            "nll": 0.6259740481455949,
+            "brier": 0.4446734310192929,
+            "ece": 0.12273198112528377,
+            "accuracy": 0.6170212765957447
+          }
+        },
+        "DR-ZJU": {
+          "images": 185,
+          "poor": 41,
+          "good": 144,
+          "always_good_accuracy": 0.7783783783783784,
+          "raw": {
+            "confusion_matrix": [
+              [
+                21,
+                20
+              ],
+              [
+                10,
+                134
+              ]
+            ],
+            "poor_sensitivity": 0.5121951219512195,
+            "good_specificity": 0.9305555555555556,
+            "balanced_accuracy": 0.7213753387533876,
+            "poor_auroc": 0.9153116531165313,
+            "poor_average_precision": 0.763990944402844,
+            "nll": 0.34189532784428367,
+            "brier": 0.2066009616977235,
+            "ece": 0.09140749235410947,
+            "accuracy": 0.8378378378378378
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                21,
+                20
+              ],
+              [
+                10,
+                134
+              ]
+            ],
+            "poor_sensitivity": 0.5121951219512195,
+            "good_specificity": 0.9305555555555556,
+            "balanced_accuracy": 0.7213753387533876,
+            "poor_auroc": 0.9153116531165313,
+            "poor_average_precision": 0.763990944402844,
+            "nll": 0.34622849894816854,
+            "brier": 0.20854911623111116,
+            "ece": 0.10339949614292868,
+            "accuracy": 0.8378378378378378
+          }
+        },
+        "Glaucoma": {
+          "images": 51,
+          "poor": 50,
+          "good": 1,
+          "always_good_accuracy": 0.0196078431372549,
+          "raw": {
+            "confusion_matrix": [
+              [
+                46,
+                4
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "poor_sensitivity": 0.92,
+            "good_specificity": 1.0,
+            "balanced_accuracy": 0.96,
+            "poor_auroc": 0.96,
+            "poor_average_precision": 0.9992078431372549,
+            "nll": 0.162123272128971,
+            "brier": 0.0873478582686739,
+            "ece": 0.07211943818073646,
+            "accuracy": 0.9215686274509803
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                46,
+                4
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "poor_sensitivity": 0.92,
+            "good_specificity": 1.0,
+            "balanced_accuracy": 0.96,
+            "poor_auroc": 0.96,
+            "poor_average_precision": 0.9992078431372549,
+            "nll": 0.166231863116689,
+            "brier": 0.08833496134113397,
+            "ece": 0.07556430031271544,
+            "accuracy": 0.9215686274509803
+          }
+        },
+        "Healthy": {
+          "images": 26,
+          "poor": 0,
+          "good": 26,
+          "always_good_accuracy": 1.0,
+          "raw": {
+            "confusion_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                25
+              ]
+            ],
+            "poor_sensitivity": null,
+            "good_specificity": 0.9615384615384616,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.2700997920033099,
+            "brier": 0.12922051090940162,
+            "ece": 0.1927490234375,
+            "accuracy": 0.9615384615384616
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                25
+              ]
+            ],
+            "poor_sensitivity": null,
+            "good_specificity": 0.9615384615384616,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.27801639527413147,
+            "brier": 0.1342687990968068,
+            "ece": 0.198869356742272,
+            "accuracy": 0.9615384615384616
+          }
+        }
+      }
+    },
+    "representative": {
+      "overall": {
+        "images": 495,
+        "poor": 208,
+        "good": 287,
+        "always_good_accuracy": 0.5797979797979798,
+        "raw": {
+          "confusion_matrix": [
+            [
+              181,
+              27
+            ],
+            [
+              98,
+              189
+            ]
+          ],
+          "poor_sensitivity": 0.8701923076923077,
+          "good_specificity": 0.6585365853658537,
+          "balanced_accuracy": 0.7643644465290806,
+          "poor_auroc": 0.8966262396140444,
+          "poor_average_precision": 0.8818186942660643,
+          "nll": 0.45652269903748277,
+          "brier": 0.30506059627773996,
+          "ece": 0.071743772005794,
+          "accuracy": 0.7474747474747475
+        },
+        "calibrated": {
+          "confusion_matrix": [
+            [
+              181,
+              27
+            ],
+            [
+              98,
+              189
+            ]
+          ],
+          "poor_sensitivity": 0.8701923076923077,
+          "good_specificity": 0.6585365853658537,
+          "balanced_accuracy": 0.7643644465290806,
+          "poor_auroc": 0.8966262396140444,
+          "poor_average_precision": 0.8818186942660643,
+          "nll": 0.45740270671593064,
+          "brier": 0.30483454766547924,
+          "ece": 0.07488035180351951,
+          "accuracy": 0.7474747474747475
+        }
+      },
+      "groups": {
+        "DR-XJU": {
+          "images": 235,
+          "poor": 117,
+          "good": 118,
+          "always_good_accuracy": 0.502127659574468,
+          "raw": {
+            "confusion_matrix": [
+              [
+                114,
+                3
+              ],
+              [
+                87,
+                31
+              ]
+            ],
+            "poor_sensitivity": 0.9743589743589743,
+            "good_specificity": 0.2627118644067797,
+            "balanced_accuracy": 0.618535419382877,
+            "poor_auroc": 0.868535419382877,
+            "poor_average_precision": 0.8703129413444908,
+            "nll": 0.6292270694902061,
+            "brier": 0.44741203486767855,
+            "ece": 0.13129007892405734,
+            "accuracy": 0.6170212765957447
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                114,
+                3
+              ],
+              [
+                87,
+                31
+              ]
+            ],
+            "poor_sensitivity": 0.9743589743589743,
+            "good_specificity": 0.2627118644067797,
+            "balanced_accuracy": 0.618535419382877,
+            "poor_auroc": 0.868535419382877,
+            "poor_average_precision": 0.8703129413444908,
+            "nll": 0.6259740481455949,
+            "brier": 0.4446734310192929,
+            "ece": 0.12273198112528377,
+            "accuracy": 0.6170212765957447
+          }
+        },
+        "DR-ZJU": {
+          "images": 185,
+          "poor": 41,
+          "good": 144,
+          "always_good_accuracy": 0.7783783783783784,
+          "raw": {
+            "confusion_matrix": [
+              [
+                21,
+                20
+              ],
+              [
+                10,
+                134
+              ]
+            ],
+            "poor_sensitivity": 0.5121951219512195,
+            "good_specificity": 0.9305555555555556,
+            "balanced_accuracy": 0.7213753387533876,
+            "poor_auroc": 0.9153116531165313,
+            "poor_average_precision": 0.763990944402844,
+            "nll": 0.34189532784428367,
+            "brier": 0.2066009616977235,
+            "ece": 0.09140749235410947,
+            "accuracy": 0.8378378378378378
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                21,
+                20
+              ],
+              [
+                10,
+                134
+              ]
+            ],
+            "poor_sensitivity": 0.5121951219512195,
+            "good_specificity": 0.9305555555555556,
+            "balanced_accuracy": 0.7213753387533876,
+            "poor_auroc": 0.9153116531165313,
+            "poor_average_precision": 0.763990944402844,
+            "nll": 0.34622849894816854,
+            "brier": 0.20854911623111116,
+            "ece": 0.10339949614292868,
+            "accuracy": 0.8378378378378378
+          }
+        },
+        "Glaucoma": {
+          "images": 51,
+          "poor": 50,
+          "good": 1,
+          "always_good_accuracy": 0.0196078431372549,
+          "raw": {
+            "confusion_matrix": [
+              [
+                46,
+                4
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "poor_sensitivity": 0.92,
+            "good_specificity": 1.0,
+            "balanced_accuracy": 0.96,
+            "poor_auroc": 0.96,
+            "poor_average_precision": 0.9992078431372549,
+            "nll": 0.162123272128971,
+            "brier": 0.0873478582686739,
+            "ece": 0.07211943818073646,
+            "accuracy": 0.9215686274509803
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                46,
+                4
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "poor_sensitivity": 0.92,
+            "good_specificity": 1.0,
+            "balanced_accuracy": 0.96,
+            "poor_auroc": 0.96,
+            "poor_average_precision": 0.9992078431372549,
+            "nll": 0.166231863116689,
+            "brier": 0.08833496134113397,
+            "ece": 0.07556430031271544,
+            "accuracy": 0.9215686274509803
+          }
+        },
+        "Healthy": {
+          "images": 24,
+          "poor": 0,
+          "good": 24,
+          "always_good_accuracy": 1.0,
+          "raw": {
+            "confusion_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                23
+              ]
+            ],
+            "poor_sensitivity": null,
+            "good_specificity": 0.9583333333333334,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.27464384014939763,
+            "brier": 0.13280201157481794,
+            "ece": 0.19302427768707273,
+            "accuracy": 0.9583333333333334
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                23
+              ]
+            ],
+            "poor_sensitivity": null,
+            "good_specificity": 0.9583333333333334,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.28251421607535704,
+            "brier": 0.1378406364052087,
+            "ece": 0.19908939053614935,
+            "accuracy": 0.9583333333333334
+          }
+        }
+      }
+    },
+    "unanimous": {
+      "overall": {
+        "images": 445,
+        "poor": 188,
+        "good": 257,
+        "always_good_accuracy": 0.5775280898876405,
+        "raw": {
+          "confusion_matrix": [
+            [
+              170,
+              18
+            ],
+            [
+              76,
+              181
+            ]
+          ],
+          "poor_sensitivity": 0.9042553191489362,
+          "good_specificity": 0.7042801556420234,
+          "balanced_accuracy": 0.8042677373954799,
+          "poor_auroc": 0.9346593261031542,
+          "poor_average_precision": 0.9288084246121311,
+          "nll": 0.39562385791334537,
+          "brier": 0.25508626655766886,
+          "ece": 0.07622743068116433,
+          "accuracy": 0.7887640449438202
+        },
+        "calibrated": {
+          "confusion_matrix": [
+            [
+              170,
+              18
+            ],
+            [
+              76,
+              181
+            ]
+          ],
+          "poor_sensitivity": 0.9042553191489362,
+          "good_specificity": 0.7042801556420234,
+          "balanced_accuracy": 0.8042677373954799,
+          "poor_auroc": 0.9346593261031542,
+          "poor_average_precision": 0.9288084246121311,
+          "nll": 0.3983745290999981,
+          "brier": 0.25594285306506465,
+          "ece": 0.0798274669754371,
+          "accuracy": 0.7887640449438202
+        }
+      },
+      "groups": {
+        "DR-XJU": {
+          "images": 204,
+          "poor": 107,
+          "good": 97,
+          "always_good_accuracy": 0.47549019607843135,
+          "raw": {
+            "confusion_matrix": [
+              [
+                106,
+                1
+              ],
+              [
+                67,
+                30
+              ]
+            ],
+            "poor_sensitivity": 0.9906542056074766,
+            "good_specificity": 0.30927835051546393,
+            "balanced_accuracy": 0.6499662780614703,
+            "poor_auroc": 0.9341940456691396,
+            "poor_average_precision": 0.9432316838515598,
+            "nll": 0.544454457078147,
+            "brier": 0.3786344519368757,
+            "ece": 0.12253709926324731,
+            "accuracy": 0.6666666666666666
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                106,
+                1
+              ],
+              [
+                67,
+                30
+              ]
+            ],
+            "poor_sensitivity": 0.9906542056074766,
+            "good_specificity": 0.30927835051546393,
+            "balanced_accuracy": 0.6499662780614703,
+            "poor_auroc": 0.9341940456691396,
+            "poor_average_precision": 0.9432316838515598,
+            "nll": 0.5441126405670028,
+            "brier": 0.37750731628703704,
+            "ece": 0.13005397863247814,
+            "accuracy": 0.6666666666666666
+          }
+        },
+        "DR-ZJU": {
+          "images": 166,
+          "poor": 32,
+          "good": 134,
+          "always_good_accuracy": 0.8072289156626506,
+          "raw": {
+            "confusion_matrix": [
+              [
+                18,
+                14
+              ],
+              [
+                8,
+                126
+              ]
+            ],
+            "poor_sensitivity": 0.5625,
+            "good_specificity": 0.9402985074626866,
+            "balanced_accuracy": 0.7513992537313433,
+            "poor_auroc": 0.9323694029850746,
+            "poor_average_precision": 0.7977803574672575,
+            "nll": 0.30970525753173384,
+            "brier": 0.1792985232741942,
+            "ece": 0.1148133331752685,
+            "accuracy": 0.8674698795180723
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                18,
+                14
+              ],
+              [
+                8,
+                126
+              ]
+            ],
+            "poor_sensitivity": 0.5625,
+            "good_specificity": 0.9402985074626866,
+            "balanced_accuracy": 0.7513992537313433,
+            "poor_auroc": 0.9323694029850746,
+            "poor_average_precision": 0.7977803574672575,
+            "nll": 0.314911635315129,
+            "brier": 0.18181636428960307,
+            "ece": 0.12032436247331547,
+            "accuracy": 0.8674698795180723
+          }
+        },
+        "Glaucoma": {
+          "images": 49,
+          "poor": 49,
+          "good": 0,
+          "always_good_accuracy": 0.0,
+          "raw": {
+            "confusion_matrix": [
+              [
+                46,
+                3
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "poor_sensitivity": 0.9387755102040817,
+            "good_specificity": null,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.13367837112536443,
+            "brier": 0.06425861787508792,
+            "ece": 0.08365831813033746,
+            "accuracy": 0.9387755102040817
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                46,
+                3
+              ],
+              [
+                0,
+                0
+              ]
+            ],
+            "poor_sensitivity": 0.9387755102040817,
+            "good_specificity": null,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.13824344968146363,
+            "brier": 0.06552187434300312,
+            "ece": 0.1000923903620973,
+            "accuracy": 0.9387755102040817
+          }
+        },
+        "Healthy": {
+          "images": 26,
+          "poor": 0,
+          "good": 26,
+          "always_good_accuracy": 1.0,
+          "raw": {
+            "confusion_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                25
+              ]
+            ],
+            "poor_sensitivity": null,
+            "good_specificity": 0.9615384615384616,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.2700997920033099,
+            "brier": 0.12922051090940162,
+            "ece": 0.1927490234375,
+            "accuracy": 0.9615384615384616
+          },
+          "calibrated": {
+            "confusion_matrix": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                25
+              ]
+            ],
+            "poor_sensitivity": null,
+            "good_specificity": 0.9615384615384616,
+            "balanced_accuracy": null,
+            "poor_auroc": null,
+            "poor_average_precision": null,
+            "nll": 0.27801639527413147,
+            "brier": 0.1342687990968068,
+            "ece": 0.198869356742272,
+            "accuracy": 0.9615384615384616
+          }
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Original conventional color photographs and majority overall-quality ratings from MSHF v2.",
+    "Source-specific grading criteria and unresolved patient linkage limit interpretation.",
+    "Fingerprint components are not patient identities. Related images can remain undetected.",
+    "The main population excludes whole components with a source-overlap candidate or label conflict.",
+    "The quality endpoint does not establish DR grading, triage utility, or clinical performance."
+  ]
+}

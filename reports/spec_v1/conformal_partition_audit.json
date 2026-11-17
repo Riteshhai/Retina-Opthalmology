@@ -1,0 +1,15 @@
+{
+  "temperature_images": 84,
+  "temperature_patients": 21,
+  "conformal_images": 84,
+  "conformal_patients": 21,
+  "patient_overlap": 0,
+  "image_overlap_audit": {
+    "exact_shared_hashes": 0,
+    "perceptual_candidates": [],
+    "perceptual_distance": 2,
+    "passed": true
+  },
+  "actual_input_sha256_checked": true,
+  "scope": "Independent-temperature/conformal calibration subsets, not independent test evidence"
+}

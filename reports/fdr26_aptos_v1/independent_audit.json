@@ -1,0 +1,45 @@
+{
+  "audit_status": "passed",
+  "experiment_id": "fdr26_aptos_v1",
+  "source_commit": "799f70874b0fab00284f1dcb31d9e4fe474d7a12",
+  "evaluation_sha256": "b4c99b90111246c40f0d50021970938f5934ebeb517ca60530f849c17575e2a1",
+  "auditor_sha256": "4c20d564913564ab3bfad374bb2249c26241baca7d9a3de5e361143c5a44982e",
+  "private_witness_sha256": "17d66c2aa9254083144fa32c864f08bdc942675e58bc7572493f5c9c15c2072a",
+  "input_sha256": {
+    "configs/idrid_external_v1.json": "63473f75e7404a6bed811b6abbec1fd6eb1099730b23dd40dd01a603ce433189",
+    "reports/fdr26_grading_v1/evaluation.json": "52ddaf00408c988601d11dcb6161e1aab6e2553ed769881521616b994a395455",
+    "reports/fdr26_grading_v1/independent_audit.json": "ec090dcf8de5bfa41b45d451fb656f12f6c5f7c3caec268b68c04cc67dcb28da",
+    "artifacts/fdr26_grading_v1/witness.json": "f7871753b433a797a2c8c164b6916862957a772dda9135dbdd551deba04f249b",
+    "data/raw/fdr26_v3/Fundus_FDR26.zip": "6c5517d60f24cbd310a1ab0607b8c90dbb4b88b61aee57840fc2e823b753dadb",
+    "reports/fdr26_readiness_v1/evaluation.json": "b9692d9db75ff0f8113f348e944ca62d64e699335f773c2c900852d513c1e2b9",
+    "reports/fdr26_readiness_v1/independent_audit.json": "4d16a03e781f501a1aa52fee9cf6958605e86599be483c83e1413f02e636fae5",
+    "artifacts/fdr26_readiness_v1/witness.json": "556e47ad165f76e5586c2936423b2a933985ff266c69135706c9c8f9ba8192b2",
+    "checkpoints/aptos_finetune_v1/seed2026/best.pt": "53cdad8295aca6941431a3c321815c10ec3c9fdd5544abc0d8d83094863ead1c",
+    "artifacts/aptos_finetune_v1/scores/seed2026/validation_scores.csv": "e4deeee308ebcaf0663d05305e5493c7f21d7ad47182dedcc07462ff122b4c04",
+    "reports/aptos_finetune_v1/evaluation.json": "8c6f50e93db412fc845600a4e368094c46fce041109806e37819dcd6bb70c5f4",
+    "artifacts/aptos_finetune_v1/inputs/canonical_uint8_2e091d56319a2ca27ee87e4e7e75f9e4c6913fe93bb986ea531ed93f82f78ec3.pt": "2ac8de257140cea3cbcd8f10d3140f984f63416c7daf1e2af2e6a74e94df510d",
+    "artifacts/aptos_finetune_v1/runtime_development.csv": "dff7122d9cb496f3610e5dca0fab6acdafb6e1309f548f299287c5041cee963d"
+  },
+  "population_images": {
+    "primary": 2849,
+    "representative": 2742,
+    "prefix": 2761,
+    "prefix_representative": 2673
+  },
+  "scores_verified_per_model": 2849,
+  "paired_correctness_cells_verified": 16,
+  "population_probability_views_reconstructed": 16,
+  "max_absolute_probability_delta": {
+    "aptos": {
+      "raw": 3.3306690738754696e-16,
+      "calibrated": 2.220446049250313e-16
+    },
+    "deepdrid": {
+      "raw": 1.7881393432617188e-07,
+      "calibrated": 1.7881393432617188e-07
+    }
+  },
+  "replay_images": 10,
+  "replay_batch_size": 16,
+  "max_absolute_logit_delta": 0.0
+}

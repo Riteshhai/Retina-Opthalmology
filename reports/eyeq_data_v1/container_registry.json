@@ -1,0 +1,19 @@
+{
+  "status": "verified",
+  "runtime": "docker_cpu",
+  "registered_records": 19,
+  "source_report_sha256": "e0941a2319941e28052c614b68a618d5fe9ed850f71cc7b3c3e30e6b7755b645",
+  "actual_api_metrics_match": true,
+  "source_split_rows_verified": 2,
+  "quality_categories_verified": 3,
+  "displayed_table_disagreements_verified": 3,
+  "no_quality_accuracy_claim_verified": true,
+  "zero_image_and_incomplete_readiness_labels_verified": true,
+  "production_card_and_sidecar_matched": true,
+  "production_model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "no_ui_exceptions": true,
+  "ui_method": "Host Streamlit AppTest against actual container HTTP API; container dashboard source bytes separately matched",
+  "new_browser_rendering_verified": false,
+  "new_container_execution_verified": true,
+  "verifier_sha256": "b1c8fd0ed542988f88a04f2dd30f9f1a914596a6238c2ba2a15a5b8e8c4d66e7"
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "experiment_id": "aptos_finetune_v1",
+  "audit_status": "passed",
+  "source_commit": "8357e9d918ef9ec00d1f66e4efadc3325790097c",
+  "evaluation_sha256": "8c6f50e93db412fc845600a4e368094c46fce041109806e37819dcd6bb70c5f4",
+  "auditor_script_sha256": "15b659e8f57a04c89615683b7a4d3b079b827fc1ec43785812d2762f241e546a",
+  "independent_math_helpers_sha256": "dec9adfcf3a373b63b048afed3d7badc44f03d1f3ba1c6f78c3ca78255226e43",
+  "pre_execution_snapshot_sha256": "4df3a9ec4ad125c5aff6ced7bb1fc582ec507a03c8b9b5c5976d9da7b6a069d4",
+  "verified_runtime_images": 3163,
+  "canonical_cache": {
+    "cache_images": 2636,
+    "shape": [
+      2636,
+      224,
+      224,
+      3
+    ],
+    "tensor_sha256": "3c8b4d63a338b42001a4dd60735b2d61b26ec26c51a9fe111c6173061ed240e3",
+    "independently_preprocessed_train_selection_images": 10,
+    "cache_file_sha256": "2ac8de257140cea3cbcd8f10d3140f984f63416c7daf1e2af2e6a74e94df510d"
+  },
+  "posthoc_calibration_cache": {
+    "images": 527,
+    "file_sha256": "5fea631a926d6c0231cc35615054cc2ebfc9059c0a407dbd58c9c9e49af6443f",
+    "tensor_sha256": "5273347690ac511956a3ce32b1e63956039a660c4f19db95af747e9e0959379b",
+    "independently_preprocessed_calibration_images": 5
+  },
+  "verified_candidates": [
+    {
+      "training_seed": 2026,
+      "epochs_executed": 4,
+      "selected_epoch": 4,
+      "optimizer_updates": 532,
+      "backbone_parameter_tensors": 211,
+      "fixed_batchnorm_buffer_tensors": 147,
+      "changed_selected_parameter_tensors": 211,
+      "changed_last_parameter_tensors": 211,
+      "all_epoch_selection_metrics_recomputed": true,
+      "batch_order_flip_rng_reconstructed": true
+    },
+    {
+      "training_seed": 2027,
+      "epochs_executed": 4,
+      "selected_epoch": 4,
+      "optimizer_updates": 532,
+      "backbone_parameter_tensors": 211,
+      "fixed_batchnorm_buffer_tensors": 147,
+      "changed_selected_parameter_tensors": 211,
+      "changed_last_parameter_tensors": 211,
+      "all_epoch_selection_metrics_recomputed": true,
+      "batch_order_flip_rng_reconstructed": true
+    },
+    {
+      "training_seed": 2028,
+      "epochs_executed": 4,
+      "selected_epoch": 4,
+      "optimizer_updates": 532,
+      "backbone_parameter_tensors": 211,
+      "fixed_batchnorm_buffer_tensors": 147,
+      "changed_selected_parameter_tensors": 211,
+      "changed_last_parameter_tensors": 211,
+      "all_epoch_selection_metrics_recomputed": true,
+      "batch_order_flip_rng_reconstructed": true
+    }
+  ],
+  "uncertainty_reconstruction": {
+    "comparisons_reconstructed": 42,
+    "raw_fallback_sets_reconstructed": 43764,
+    "maximum_threshold_error": 1.522524295527461e-08,
+    "temperature_optimum_nll_gaps": [
+      2.634004125923184e-12,
+      3.141931159689193e-13,
+      1.9479973190072997e-12
+    ],
+    "paired_bootstrap_intervals_reconstructed": 6
+  },
+  "preserved_original_artifact_hashes_match": true,
+  "checks": [
+    "Original and relocated runtime identities/labels/groups/roles and all development image bytes verified.",
+    "Canonical cache keys, contents, tensor digests and deterministic independently preprocessed samples verified.",
+    "All private epoch logits independently reproduce metrics and checkpoint choice; order/flip generator state reconstructed.",
+    "Selected/last backbone parameters changed; every BatchNorm running buffer remains identical to warm start.",
+    "All optimizer parameter groups/step counts and cosine learning-rate schedules verified.",
+    "Independent temperature optima, grading, paired fixed-group bootstrap intervals and all42 raw/fallback comparisons reconstructed.",
+    "Conditional seed summaries, primary seed2026, source bindings, public privacy and preserved artifact bytes verified."
+  ],
+  "limitations": [
+    "No classifier fitting or independent retinal forward pass was executed; metrics are reconstructed from saved logits.",
+    "Canonical pixels are independently reconstructed on one train/selection image per grade/partition; all cache tensor bytes and source hashes are verified.",
+    "All seeds share a previously selected warm start; variability is conditional and selection outcomes remain development diagnostics.",
+    "Fingerprint components are not patients, quarantine is label dependent and no formal exchangeability/clinical guarantee is established."
+  ],
+  "elapsed_seconds": 28.604966999962926
+}

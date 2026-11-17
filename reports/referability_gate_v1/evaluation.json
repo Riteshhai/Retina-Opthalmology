@@ -1,0 +1,1785 @@
+{
+  "schema_version": 1,
+  "experiment_id": "referability_gate_v1",
+  "spec_version": "1.0",
+  "dataset": "DeepDRiD",
+  "partition": "validation",
+  "scope": "development_referability_gate_diagnostic",
+  "images": 168,
+  "patients": 42,
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "source_commit": "b457a14baa93767e3e0f52f5d28fad196205c87e",
+  "source_sha256": {
+    "docs/research/REFERABILITY_GATE_V1_PROTOCOL.md": "1357f1135f53302086ce245dec6c0fae0a6275ebbe4b29cc454f003d0ac60110",
+    "scripts/run_referability_gate.py": "2b8bdcc33eecc6d07cc9c8e156c712f81712ce6dcd74f27a8066913635be0ec6",
+    "qsart/inference/conformal_sidecar.py": "a16677fe3666542a766411f112100ab5ad64d0776f6a9982c2003b3fc60adcee",
+    "qsart/models/checkpoint.py": "e28c94281603feb48f5f3ab27acc523ce8b6e21bf1978468fd21280cc3a9b41b",
+    "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+    "qsart/triage.py": "9ec579bf0811ef3160b52a27d7b413f9853ea1e60e2a5eefbc7e85f229b7252d",
+    "qsart/triage_v2.py": "8c8d98ba478190439490dbae5f265637ed5a9d90dcec4c0c72b12c8ba48005ec",
+    "qsart/uncertainty/conformal.py": "e8469ac637b913a984098c24fb543ae434b52d80c23647d78fa30e1d0548ffa4"
+  },
+  "protocol_sha256": "1357f1135f53302086ce245dec6c0fae0a6275ebbe4b29cc454f003d0ac60110",
+  "input_sha256": {
+    "ordinal_report": "657359119b33a6639328052c898c761c3330be577cd01e14c9b5f3eeb4f1e9a2",
+    "ordinal_cache": "0ef95338994b3a587dd38b3034f5c059f063a77901b5af3f17f39292d5f40b4c",
+    "robustness_report": "f63848e4c68f18a5b4c1197e48fff6c7acf61412f6ffd0ec85a640228493e8cb",
+    "robustness_cache": "3a5a7b3bee6092223d564666173652f9092a3437bbc48ceda6c9660817f759d6",
+    "manifest": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+    "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "conformal": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221"
+  },
+  "private_output_sha256": "6d416b0e6275b4b495c5213add27c13e550db7ff31a6023682fc96e33833f282",
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scipy": "1.17.1"
+  },
+  "calibration": {
+    "temperature_images": 84,
+    "temperature_patients": 21,
+    "conformal_images": 84,
+    "conformal_patients": 21,
+    "independent_first_pass_temperature": 1.2517522400366823,
+    "temperature_fit_split_sha256": "e2fcaa57b5d8a827bec846de5b153e4a527b06cccd711c95b24b79a6871c93a5",
+    "conformal_split_sha256": "6dfa4e5afe813568e6e00dd0c43411a056b8d5097200814eb185f7a4941bd860"
+  },
+  "policy": {
+    "review_budget": 0.3,
+    "recapture_budget": 0.2,
+    "minimum_quality": 0.5,
+    "review_risk": 0.5,
+    "uncertainty_threshold": 0.75,
+    "referable_grade": 2,
+    "severe_grade": 3,
+    "severe_risk": 0.25,
+    "severity_costs": [
+      0.0,
+      0.0,
+      3.0,
+      6.0,
+      10.0
+    ],
+    "review_cost": 0.25,
+    "recapture_cost": 0.2,
+    "uncertainty_weight": 0.5,
+    "quality_weight": 1.0
+  },
+  "budget_pairs": [
+    [
+      0.3,
+      0.2
+    ],
+    [
+      0.6,
+      0.4
+    ],
+    [
+      0.9,
+      0.4
+    ],
+    [
+      1.0,
+      0.4
+    ]
+  ],
+  "fits": [
+    {
+      "alpha": 0.1,
+      "method": "ordinal_projected",
+      "rank": 20,
+      "qhat": 1.0,
+      "set_metrics": {
+        "n_images": 168,
+        "marginal_coverage": 1.0,
+        "mean_set_size": 2.0,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 168
+        },
+        "per_class": {
+          "0": {
+            "n": 94,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 74,
+            "coverage": 1.0
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 1.0,
+        "nonreferable_singleton_count": 0,
+        "referable_singleton_count": 0,
+        "by_true_grade": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        }
+      },
+      "pointwise_metrics": {
+        "n": 168,
+        "unit": "image",
+        "referable_count": 74,
+        "severe_count": 50,
+        "auto_nonreferable_count": 0,
+        "review_count": 168,
+        "recapture_count": 0,
+        "coverage": 0.0,
+        "review_rate": 1.0,
+        "recapture_rate": 0.0,
+        "missed_referable_auto": 0,
+        "missed_referable_per_1000_all": 0.0,
+        "missed_referable_fraction_of_referable": 0.0,
+        "false_omission_fraction_of_auto": null,
+        "missed_severe_auto": 0,
+        "referable_deferred_to_recapture": 0,
+        "severe_deferred_to_recapture": 0,
+        "severe_recapture_fraction_of_severe": 0.0,
+        "proxy_missed_referable_cost": 0.0,
+        "proxy_severe_recapture_cost": 0.0,
+        "proxy_review_cost": 42.0,
+        "proxy_recapture_cost": 0.0,
+        "proxy_total_cost_per_image": 0.25,
+        "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+        "by_true_grade": {
+          "0": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 74
+          },
+          "1": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 20
+          },
+          "2": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 24
+          },
+          "3": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 40
+          },
+          "4": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 10
+          }
+        }
+      },
+      "allocations": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 50,
+            "recapture_capacity": 33,
+            "total_capacity": 83,
+            "mandatory_review_shortfall": 118,
+            "review_shortfall_after_recapture": 118,
+            "total_shortfall": 85,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 100,
+            "recapture_capacity": 67,
+            "total_capacity": 167,
+            "mandatory_review_shortfall": 68,
+            "review_shortfall_after_recapture": 68,
+            "total_shortfall": 1,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "total_capacity": 218,
+            "mandatory_review_shortfall": 17,
+            "review_shortfall_after_recapture": 17,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "total_capacity": 235,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 0,
+            "review_count": 168,
+            "recapture_count": 0,
+            "coverage": 0.0,
+            "review_rate": 1.0,
+            "recapture_rate": 0.0,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": null,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 42.0,
+            "proxy_recapture_cost": 0.0,
+            "proxy_total_cost_per_image": 0.25,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 74
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 20
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.1,
+      "method": "lac_projected",
+      "rank": 20,
+      "qhat": 0.9662718821608653,
+      "set_metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9702380952380952,
+        "mean_set_size": 1.7321428571428572,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 45,
+          "2": 123
+        },
+        "per_class": {
+          "0": {
+            "n": 94,
+            "coverage": 0.9680851063829787
+          },
+          "1": {
+            "n": 74,
+            "coverage": 0.972972972972973
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9285714285714286,
+        "nonreferable_singleton_count": 21,
+        "referable_singleton_count": 24,
+        "by_true_grade": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.95
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        }
+      },
+      "pointwise_metrics": {
+        "n": 168,
+        "unit": "image",
+        "referable_count": 74,
+        "severe_count": 50,
+        "auto_nonreferable_count": 6,
+        "review_count": 147,
+        "recapture_count": 15,
+        "coverage": 0.03571428571428571,
+        "review_rate": 0.875,
+        "recapture_rate": 0.08928571428571429,
+        "missed_referable_auto": 0,
+        "missed_referable_per_1000_all": 0.0,
+        "missed_referable_fraction_of_referable": 0.0,
+        "false_omission_fraction_of_auto": 0.0,
+        "missed_severe_auto": 0,
+        "referable_deferred_to_recapture": 2,
+        "severe_deferred_to_recapture": 2,
+        "severe_recapture_fraction_of_severe": 0.04,
+        "proxy_missed_referable_cost": 0.0,
+        "proxy_severe_recapture_cost": 12.0,
+        "proxy_review_cost": 36.75,
+        "proxy_recapture_cost": 3.0,
+        "proxy_total_cost_per_image": 0.3080357142857143,
+        "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+        "by_true_grade": {
+          "0": {
+            "AUTO_NONREFERABLE": 2,
+            "RECAPTURE": 13,
+            "SPECIALIST_REVIEW": 59
+          },
+          "1": {
+            "AUTO_NONREFERABLE": 4,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 16
+          },
+          "2": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 24
+          },
+          "3": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 2,
+            "SPECIALIST_REVIEW": 38
+          },
+          "4": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 10
+          }
+        }
+      },
+      "allocations": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 147,
+            "needed_recapture": 15,
+            "needed_recapture_or_review": 15,
+            "needed_recapture_after_available_review": 15,
+            "needed_total": 162,
+            "review_capacity": 50,
+            "recapture_capacity": 33,
+            "total_capacity": 83,
+            "mandatory_review_shortfall": 97,
+            "review_shortfall_after_recapture": 97,
+            "total_shortfall": 79,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 147,
+            "needed_recapture": 15,
+            "needed_recapture_or_review": 15,
+            "needed_recapture_after_available_review": 15,
+            "needed_total": 162,
+            "review_capacity": 100,
+            "recapture_capacity": 67,
+            "total_capacity": 167,
+            "mandatory_review_shortfall": 47,
+            "review_shortfall_after_recapture": 47,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 147,
+            "needed_recapture": 15,
+            "needed_recapture_or_review": 15,
+            "needed_recapture_after_available_review": 11,
+            "needed_total": 162,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "total_capacity": 218,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 5,
+            "review_count": 151,
+            "recapture_count": 12,
+            "coverage": 0.02976190476190476,
+            "review_rate": 0.8988095238095238,
+            "recapture_rate": 0.07142857142857142,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": 0.0,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 37.75,
+            "proxy_recapture_cost": 2.4000000000000004,
+            "proxy_total_cost_per_image": 0.23898809523809522,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 1,
+                "RECAPTURE": 12,
+                "SPECIALIST_REVIEW": 61
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 4,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 16
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 147,
+            "needed_recapture": 15,
+            "needed_recapture_or_review": 15,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 162,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "total_capacity": 235,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 0,
+            "review_count": 168,
+            "recapture_count": 0,
+            "coverage": 0.0,
+            "review_rate": 1.0,
+            "recapture_rate": 0.0,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": null,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 42.0,
+            "proxy_recapture_cost": 0.0,
+            "proxy_total_cost_per_image": 0.25,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 74
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 20
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.1,
+      "method": "binary_lac",
+      "rank": 20,
+      "qhat": 0.9151796209693159,
+      "set_metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9702380952380952,
+        "mean_set_size": 1.6071428571428572,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 66,
+          "2": 102
+        },
+        "per_class": {
+          "0": {
+            "n": 94,
+            "coverage": 0.9680851063829787
+          },
+          "1": {
+            "n": 74,
+            "coverage": 0.972972972972973
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9285714285714286,
+        "nonreferable_singleton_count": 34,
+        "referable_singleton_count": 32,
+        "by_true_grade": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.95
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        }
+      },
+      "pointwise_metrics": {
+        "n": 168,
+        "unit": "image",
+        "referable_count": 74,
+        "severe_count": 50,
+        "auto_nonreferable_count": 9,
+        "review_count": 134,
+        "recapture_count": 25,
+        "coverage": 0.05357142857142857,
+        "review_rate": 0.7976190476190477,
+        "recapture_rate": 0.1488095238095238,
+        "missed_referable_auto": 0,
+        "missed_referable_per_1000_all": 0.0,
+        "missed_referable_fraction_of_referable": 0.0,
+        "false_omission_fraction_of_auto": 0.0,
+        "missed_severe_auto": 0,
+        "referable_deferred_to_recapture": 2,
+        "severe_deferred_to_recapture": 2,
+        "severe_recapture_fraction_of_severe": 0.04,
+        "proxy_missed_referable_cost": 0.0,
+        "proxy_severe_recapture_cost": 12.0,
+        "proxy_review_cost": 33.5,
+        "proxy_recapture_cost": 5.0,
+        "proxy_total_cost_per_image": 0.3005952380952381,
+        "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+        "by_true_grade": {
+          "0": {
+            "AUTO_NONREFERABLE": 4,
+            "RECAPTURE": 22,
+            "SPECIALIST_REVIEW": 48
+          },
+          "1": {
+            "AUTO_NONREFERABLE": 5,
+            "RECAPTURE": 1,
+            "SPECIALIST_REVIEW": 14
+          },
+          "2": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 24
+          },
+          "3": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 2,
+            "SPECIALIST_REVIEW": 38
+          },
+          "4": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 10
+          }
+        }
+      },
+      "allocations": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 134,
+            "needed_recapture": 25,
+            "needed_recapture_or_review": 25,
+            "needed_recapture_after_available_review": 25,
+            "needed_total": 159,
+            "review_capacity": 50,
+            "recapture_capacity": 33,
+            "total_capacity": 83,
+            "mandatory_review_shortfall": 84,
+            "review_shortfall_after_recapture": 84,
+            "total_shortfall": 76,
+            "eligible_auto_nonreferable": 9,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 134,
+            "needed_recapture": 25,
+            "needed_recapture_or_review": 25,
+            "needed_recapture_after_available_review": 25,
+            "needed_total": 159,
+            "review_capacity": 100,
+            "recapture_capacity": 67,
+            "total_capacity": 167,
+            "mandatory_review_shortfall": 34,
+            "review_shortfall_after_recapture": 34,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 9,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 134,
+            "needed_recapture": 25,
+            "needed_recapture_or_review": 25,
+            "needed_recapture_after_available_review": 8,
+            "needed_total": 159,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "total_capacity": 218,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 9,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 3,
+            "review_count": 151,
+            "recapture_count": 14,
+            "coverage": 0.017857142857142856,
+            "review_rate": 0.8988095238095238,
+            "recapture_rate": 0.08333333333333333,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": 0.0,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 37.75,
+            "proxy_recapture_cost": 2.8000000000000003,
+            "proxy_total_cost_per_image": 0.2413690476190476,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 1,
+                "RECAPTURE": 13,
+                "SPECIALIST_REVIEW": 60
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 2,
+                "RECAPTURE": 1,
+                "SPECIALIST_REVIEW": 17
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 134,
+            "needed_recapture": 25,
+            "needed_recapture_or_review": 25,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 159,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "total_capacity": 235,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 9,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 0,
+            "review_count": 168,
+            "recapture_count": 0,
+            "coverage": 0.0,
+            "review_rate": 1.0,
+            "recapture_rate": 0.0,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": null,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 42.0,
+            "proxy_recapture_cost": 0.0,
+            "proxy_total_cost_per_image": 0.25,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 74
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 20
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "method": "ordinal_projected",
+      "rank": 21,
+      "qhat": 1.0,
+      "set_metrics": {
+        "n_images": 168,
+        "marginal_coverage": 1.0,
+        "mean_set_size": 2.0,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 168
+        },
+        "per_class": {
+          "0": {
+            "n": 94,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 74,
+            "coverage": 1.0
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 1.0,
+        "nonreferable_singleton_count": 0,
+        "referable_singleton_count": 0,
+        "by_true_grade": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        }
+      },
+      "pointwise_metrics": {
+        "n": 168,
+        "unit": "image",
+        "referable_count": 74,
+        "severe_count": 50,
+        "auto_nonreferable_count": 0,
+        "review_count": 168,
+        "recapture_count": 0,
+        "coverage": 0.0,
+        "review_rate": 1.0,
+        "recapture_rate": 0.0,
+        "missed_referable_auto": 0,
+        "missed_referable_per_1000_all": 0.0,
+        "missed_referable_fraction_of_referable": 0.0,
+        "false_omission_fraction_of_auto": null,
+        "missed_severe_auto": 0,
+        "referable_deferred_to_recapture": 0,
+        "severe_deferred_to_recapture": 0,
+        "severe_recapture_fraction_of_severe": 0.0,
+        "proxy_missed_referable_cost": 0.0,
+        "proxy_severe_recapture_cost": 0.0,
+        "proxy_review_cost": 42.0,
+        "proxy_recapture_cost": 0.0,
+        "proxy_total_cost_per_image": 0.25,
+        "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+        "by_true_grade": {
+          "0": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 74
+          },
+          "1": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 20
+          },
+          "2": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 24
+          },
+          "3": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 40
+          },
+          "4": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 10
+          }
+        }
+      },
+      "allocations": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 50,
+            "recapture_capacity": 33,
+            "total_capacity": 83,
+            "mandatory_review_shortfall": 118,
+            "review_shortfall_after_recapture": 118,
+            "total_shortfall": 85,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 100,
+            "recapture_capacity": 67,
+            "total_capacity": 167,
+            "mandatory_review_shortfall": 68,
+            "review_shortfall_after_recapture": 68,
+            "total_shortfall": 1,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "total_capacity": 218,
+            "mandatory_review_shortfall": 17,
+            "review_shortfall_after_recapture": 17,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 168,
+            "needed_recapture": 0,
+            "needed_recapture_or_review": 0,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 168,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "total_capacity": 235,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 0,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 0,
+            "review_count": 168,
+            "recapture_count": 0,
+            "coverage": 0.0,
+            "review_rate": 1.0,
+            "recapture_rate": 0.0,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": null,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 42.0,
+            "proxy_recapture_cost": 0.0,
+            "proxy_total_cost_per_image": 0.25,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 74
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 20
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "method": "lac_projected",
+      "rank": 21,
+      "qhat": 0.975203596196187,
+      "set_metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9940476190476191,
+        "mean_set_size": 1.8035714285714286,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 33,
+          "2": 135
+        },
+        "per_class": {
+          "0": {
+            "n": 94,
+            "coverage": 0.9893617021276596
+          },
+          "1": {
+            "n": 74,
+            "coverage": 1.0
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9761904761904762,
+        "nonreferable_singleton_count": 16,
+        "referable_singleton_count": 17,
+        "by_true_grade": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        }
+      },
+      "pointwise_metrics": {
+        "n": 168,
+        "unit": "image",
+        "referable_count": 74,
+        "severe_count": 50,
+        "auto_nonreferable_count": 6,
+        "review_count": 152,
+        "recapture_count": 10,
+        "coverage": 0.03571428571428571,
+        "review_rate": 0.9047619047619048,
+        "recapture_rate": 0.05952380952380952,
+        "missed_referable_auto": 0,
+        "missed_referable_per_1000_all": 0.0,
+        "missed_referable_fraction_of_referable": 0.0,
+        "false_omission_fraction_of_auto": 0.0,
+        "missed_severe_auto": 0,
+        "referable_deferred_to_recapture": 0,
+        "severe_deferred_to_recapture": 0,
+        "severe_recapture_fraction_of_severe": 0.0,
+        "proxy_missed_referable_cost": 0.0,
+        "proxy_severe_recapture_cost": 0.0,
+        "proxy_review_cost": 38.0,
+        "proxy_recapture_cost": 2.0,
+        "proxy_total_cost_per_image": 0.23809523809523808,
+        "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+        "by_true_grade": {
+          "0": {
+            "AUTO_NONREFERABLE": 2,
+            "RECAPTURE": 10,
+            "SPECIALIST_REVIEW": 62
+          },
+          "1": {
+            "AUTO_NONREFERABLE": 4,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 16
+          },
+          "2": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 24
+          },
+          "3": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 40
+          },
+          "4": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 10
+          }
+        }
+      },
+      "allocations": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 152,
+            "needed_recapture": 10,
+            "needed_recapture_or_review": 10,
+            "needed_recapture_after_available_review": 10,
+            "needed_total": 162,
+            "review_capacity": 50,
+            "recapture_capacity": 33,
+            "total_capacity": 83,
+            "mandatory_review_shortfall": 102,
+            "review_shortfall_after_recapture": 102,
+            "total_shortfall": 79,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 152,
+            "needed_recapture": 10,
+            "needed_recapture_or_review": 10,
+            "needed_recapture_after_available_review": 10,
+            "needed_total": 162,
+            "review_capacity": 100,
+            "recapture_capacity": 67,
+            "total_capacity": 167,
+            "mandatory_review_shortfall": 52,
+            "review_shortfall_after_recapture": 52,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 152,
+            "needed_recapture": 10,
+            "needed_recapture_or_review": 10,
+            "needed_recapture_after_available_review": 10,
+            "needed_total": 162,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "total_capacity": 218,
+            "mandatory_review_shortfall": 1,
+            "review_shortfall_after_recapture": 1,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 152,
+            "needed_recapture": 10,
+            "needed_recapture_or_review": 10,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 162,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "total_capacity": 235,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 0,
+            "review_count": 168,
+            "recapture_count": 0,
+            "coverage": 0.0,
+            "review_rate": 1.0,
+            "recapture_rate": 0.0,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": null,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 42.0,
+            "proxy_recapture_cost": 0.0,
+            "proxy_total_cost_per_image": 0.25,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 74
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 20
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "method": "binary_lac",
+      "rank": 21,
+      "qhat": 0.9339180995075489,
+      "set_metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9702380952380952,
+        "mean_set_size": 1.6607142857142858,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 57,
+          "2": 111
+        },
+        "per_class": {
+          "0": {
+            "n": 94,
+            "coverage": 0.9680851063829787
+          },
+          "1": {
+            "n": 74,
+            "coverage": 0.972972972972973
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9285714285714286,
+        "nonreferable_singleton_count": 29,
+        "referable_singleton_count": 28,
+        "by_true_grade": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.95
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        }
+      },
+      "pointwise_metrics": {
+        "n": 168,
+        "unit": "image",
+        "referable_count": 74,
+        "severe_count": 50,
+        "auto_nonreferable_count": 6,
+        "review_count": 139,
+        "recapture_count": 23,
+        "coverage": 0.03571428571428571,
+        "review_rate": 0.8273809523809523,
+        "recapture_rate": 0.13690476190476192,
+        "missed_referable_auto": 0,
+        "missed_referable_per_1000_all": 0.0,
+        "missed_referable_fraction_of_referable": 0.0,
+        "false_omission_fraction_of_auto": 0.0,
+        "missed_severe_auto": 0,
+        "referable_deferred_to_recapture": 2,
+        "severe_deferred_to_recapture": 2,
+        "severe_recapture_fraction_of_severe": 0.04,
+        "proxy_missed_referable_cost": 0.0,
+        "proxy_severe_recapture_cost": 12.0,
+        "proxy_review_cost": 34.75,
+        "proxy_recapture_cost": 4.6000000000000005,
+        "proxy_total_cost_per_image": 0.30565476190476193,
+        "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+        "by_true_grade": {
+          "0": {
+            "AUTO_NONREFERABLE": 2,
+            "RECAPTURE": 20,
+            "SPECIALIST_REVIEW": 52
+          },
+          "1": {
+            "AUTO_NONREFERABLE": 4,
+            "RECAPTURE": 1,
+            "SPECIALIST_REVIEW": 15
+          },
+          "2": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 24
+          },
+          "3": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 2,
+            "SPECIALIST_REVIEW": 38
+          },
+          "4": {
+            "AUTO_NONREFERABLE": 0,
+            "RECAPTURE": 0,
+            "SPECIALIST_REVIEW": 10
+          }
+        }
+      },
+      "allocations": [
+        {
+          "review_budget": 0.3,
+          "recapture_budget": 0.2,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 139,
+            "needed_recapture": 23,
+            "needed_recapture_or_review": 23,
+            "needed_recapture_after_available_review": 23,
+            "needed_total": 162,
+            "review_capacity": 50,
+            "recapture_capacity": 33,
+            "total_capacity": 83,
+            "mandatory_review_shortfall": 89,
+            "review_shortfall_after_recapture": 89,
+            "total_shortfall": 79,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.6,
+          "recapture_budget": 0.4,
+          "status": "overloaded",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 139,
+            "needed_recapture": 23,
+            "needed_recapture_or_review": 23,
+            "needed_recapture_after_available_review": 23,
+            "needed_total": 162,
+            "review_capacity": 100,
+            "recapture_capacity": 67,
+            "total_capacity": 167,
+            "mandatory_review_shortfall": 39,
+            "review_shortfall_after_recapture": 39,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": null
+        },
+        {
+          "review_budget": 0.9,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 139,
+            "needed_recapture": 23,
+            "needed_recapture_or_review": 23,
+            "needed_recapture_after_available_review": 11,
+            "needed_total": 162,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "total_capacity": 218,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 3,
+            "review_count": 151,
+            "recapture_count": 14,
+            "coverage": 0.017857142857142856,
+            "review_rate": 0.8988095238095238,
+            "recapture_rate": 0.08333333333333333,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": 0.0,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 37.75,
+            "proxy_recapture_cost": 2.8000000000000003,
+            "proxy_total_cost_per_image": 0.2413690476190476,
+            "review_capacity": 151,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 1,
+                "RECAPTURE": 13,
+                "SPECIALIST_REVIEW": 60
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 2,
+                "RECAPTURE": 1,
+                "SPECIALIST_REVIEW": 17
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        },
+        {
+          "review_budget": 1.0,
+          "recapture_budget": 0.4,
+          "status": "evaluated",
+          "diagnostics": {
+            "n": 168,
+            "needed_review": 139,
+            "needed_recapture": 23,
+            "needed_recapture_or_review": 23,
+            "needed_recapture_after_available_review": 0,
+            "needed_total": 162,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "total_capacity": 235,
+            "mandatory_review_shortfall": 0,
+            "review_shortfall_after_recapture": 0,
+            "total_shortfall": 0,
+            "eligible_auto_nonreferable": 6,
+            "unsafe_clearance_permitted": false
+          },
+          "metrics": {
+            "n": 168,
+            "unit": "image",
+            "referable_count": 74,
+            "severe_count": 50,
+            "auto_nonreferable_count": 0,
+            "review_count": 168,
+            "recapture_count": 0,
+            "coverage": 0.0,
+            "review_rate": 1.0,
+            "recapture_rate": 0.0,
+            "missed_referable_auto": 0,
+            "missed_referable_per_1000_all": 0.0,
+            "missed_referable_fraction_of_referable": 0.0,
+            "false_omission_fraction_of_auto": null,
+            "missed_severe_auto": 0,
+            "referable_deferred_to_recapture": 0,
+            "severe_deferred_to_recapture": 0,
+            "severe_recapture_fraction_of_severe": 0.0,
+            "proxy_missed_referable_cost": 0.0,
+            "proxy_severe_recapture_cost": 0.0,
+            "proxy_review_cost": 42.0,
+            "proxy_recapture_cost": 0.0,
+            "proxy_total_cost_per_image": 0.25,
+            "review_capacity": 168,
+            "recapture_capacity": 67,
+            "review_budget_violation": false,
+            "recapture_budget_violation": false,
+            "interpretation": "AUTO_NONREFERABLE is provisional clearance; every true referable clearance is a miss. Deferrals are recommendations, not completed care. Costs are unvalidated research proxies.",
+            "by_true_grade": {
+              "0": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 74
+              },
+              "1": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 20
+              },
+              "2": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 24
+              },
+              "3": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 40
+              },
+              "4": {
+                "AUTO_NONREFERABLE": 0,
+                "RECAPTURE": 0,
+                "SPECIALIST_REVIEW": 10
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "default_ordinal_sets_replayed": true,
+  "limitations": [
+    "Exploratory development comparison on selection patients already used for model choice.",
+    "Coverage is empirical on a small reused cohort and establishes no grade-conditional, shifted-domain, or clinical guarantee.",
+    "Binary sets describe referability rather than inclusion of the exact disease grade.",
+    "Pointwise results have no cohort budget. Cohort allocations use one frozen selection batch.",
+    "No new model forwards, probability-temperature fitting, policy tuning, or held-out evaluation.",
+    "Decisions are research recommendations and proxy costs are unvalidated."
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "status": "verified_complete_for_cache_and_annotation_compatibility_only",
+  "source_commit": "c1e52fd21f43e38de78007e1376055276be5865d",
+  "dr_label_conflicts": 0,
+  "eligible_for_training": false,
+  "eyeq_annotation_rows": 28792,
+  "image_representation": "user_selected_community_cropped_resized_mirror",
+  "images_decoded": 0,
+  "matched_eyeq_rows": 12529,
+  "matched_quality_counts": {
+    "0": 8347,
+    "1": 1876,
+    "2": 2306
+  },
+  "mirror_rows": 35108,
+  "missing_eyeq_rows": 16263,
+  "missing_quality_counts": {
+    "0": 8471,
+    "1": 4558,
+    "2": 3234
+  },
+  "model_inference_performed": false,
+  "original_image_bytes_verified": false,
+  "quality_annotations_revalidated_after_transform": false,
+  "ready_for_model_evaluation": false,
+  "repository": "bumbledeep/eyepacs",
+  "revision": "3e94599d7e41d9992a8362cc0467eb397e11210f",
+  "source_terms_independently_verified": false,
+  "verified_parquet_files": 14,
+  "verified_parquet_bytes": 6535643877,
+  "dataset_card_sha256": "b92ffa7c33b1bc9faee655bf74876eabc501a4623697ef9283bde383bd63e3a0",
+  "all_cache_files_sha256_verified": true,
+  "all_original_names_unique": true,
+  "mirror_dr_counts": {
+    "0": 25802,
+    "1": 2438,
+    "2": 5288,
+    "3": 872,
+    "4": 708
+  },
+  "original_author_splits": {
+    "train": {
+      "source_rows": 12543,
+      "matched": 12529,
+      "missing": 14,
+      "matched_quality_counts": {
+        "0": 8347,
+        "1": 1876,
+        "2": 2306
+      },
+      "missing_quality_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 14
+      }
+    },
+    "test": {
+      "source_rows": 16249,
+      "matched": 0,
+      "missing": 16249,
+      "matched_quality_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 0
+      },
+      "missing_quality_counts": {
+        "0": 8471,
+        "1": 4558,
+        "2": 3220
+      }
+    }
+  },
+  "mirror_rows_without_eyeq_annotation": 22579,
+  "full_eyeq_author_test_available": false,
+  "quality_code_names": {
+    "0": "Good",
+    "1": "Usable",
+    "2": "Reject"
+  },
+  "source_partition_roles": {
+    "train": "external_holdout",
+    "test": "external_holdout"
+  },
+  "patient_or_pixel_independence_verified": false,
+  "shard_integrity_and_rows": [
+    {
+      "shard": "data/train-00000-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 465480910,
+      "sha256": "4383488ced627b71a56dcd4b2ce9dfa750c40a72f642cb20bb4bbd5928bf689c"
+    },
+    {
+      "shard": "data/train-00001-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 466574447,
+      "sha256": "79c02168c204bbc7c7b08efa3f8b03bbbff4e95cb22a6257ab963019478a63e7"
+    },
+    {
+      "shard": "data/train-00002-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 466013138,
+      "sha256": "9520dc4d002d02acaae9216f43540673218b4dd23c7b2fd6fbe8af8a219e2fe6"
+    },
+    {
+      "shard": "data/train-00003-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 465229241,
+      "sha256": "824c20eb46894afa2f245b3072623df85bf76d8f4424d09575a6a6b4a4e41fcf"
+    },
+    {
+      "shard": "data/train-00004-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 470269275,
+      "sha256": "68cf6ae973f36f3dc5488f4b533272fc05536cc5b039cee828f33b18348e067d"
+    },
+    {
+      "shard": "data/train-00005-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 467366577,
+      "sha256": "0db9c5b093cba56818373974a8e9694548b741189175901ae1062156606cdc17"
+    },
+    {
+      "shard": "data/train-00006-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 467043988,
+      "sha256": "56bbaed602b7d6b4f2065722fe1bcde62f69fdca144c94fa8a5f2bbb9efd4807"
+    },
+    {
+      "shard": "data/train-00007-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 466977861,
+      "sha256": "f691467bdb4efd63de3db4ad48f5f219b50de65c12ccd6388dad6c583fa8eb26"
+    },
+    {
+      "shard": "data/train-00008-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 467026324,
+      "sha256": "9b1232c655d5368509163443335213615562fdf5ee67151a4a65d67967c6b145"
+    },
+    {
+      "shard": "data/train-00009-of-00014.parquet",
+      "rows": 2508,
+      "bytes": 465228464,
+      "sha256": "50420f27319e873590844c00b650677e4adf1d6c93373769c01ac467ffbe3b76"
+    },
+    {
+      "shard": "data/train-00010-of-00014.parquet",
+      "rows": 2507,
+      "bytes": 468731696,
+      "sha256": "5ecc31b7b55bddfc058d46af7fbdba10e7f95cf4d3834b3de216877ffa9b7369"
+    },
+    {
+      "shard": "data/train-00011-of-00014.parquet",
+      "rows": 2507,
+      "bytes": 464400315,
+      "sha256": "ed46a9d031cf1fa2067865290e884be9a225746405ec57ce31511aedf13b9102"
+    },
+    {
+      "shard": "data/train-00012-of-00014.parquet",
+      "rows": 2507,
+      "bytes": 466156768,
+      "sha256": "ed3937c2283c1aa0c8407b48a17f35589c96f6fdeabec1a15498315910444698"
+    },
+    {
+      "shard": "data/train-00013-of-00014.parquet",
+      "rows": 2507,
+      "bytes": 469144873,
+      "sha256": "f3de96e71ac59cd606364f148a6482e0719cbc6a251e1bab9ecee37bef4d679d"
+    }
+  ],
+  "source_url": "https://huggingface.co/datasets/bumbledeep/eyepacs",
+  "representation_note": "Cropped/resized community mirror, with some rows removed; original photographs not substituted."
+}

@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-20",
+  "tests": 89,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "seconds": 39.053,
+  "real_integration": "Enabled with selected development-v1 models and reserved real manifest",
+  "ruff": "passed",
+  "scope": "Software verification and real-artifact execution; not clinical validation"
+}

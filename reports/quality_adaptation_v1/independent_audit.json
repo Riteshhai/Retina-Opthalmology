@@ -1,0 +1,81 @@
+{
+  "status": "passed",
+  "source_report_sha256": "b21f0305d3d2c19392d91434b7b4dedaed65c9329029b84939143ca8497f2fd8",
+  "scientific_source_commit": "2d4243c977a0669776a5dc356d6d6e3166732a12",
+  "preserved_artifacts": 171,
+  "source_images_sha256_verified": 1016,
+  "canonical_cache_bytes_verified": true,
+  "independent_geometry_samples": 26,
+  "runs": [
+    {
+      "seed": 2026,
+      "arm": "frozen",
+      "epochs_reconstructed": 15,
+      "selected_epoch": 5,
+      "changed_backbone_tensors": 0,
+      "unchanged_bn_buffers": 102,
+      "selected_forward_images": 168,
+      "maximum_forward_logit_delta": 0.0
+    },
+    {
+      "seed": 2026,
+      "arm": "adapted",
+      "epochs_reconstructed": 15,
+      "selected_epoch": 13,
+      "changed_backbone_tensors": 135,
+      "unchanged_bn_buffers": 102,
+      "selected_forward_images": 168,
+      "maximum_forward_logit_delta": 0.0
+    },
+    {
+      "seed": 2027,
+      "arm": "frozen",
+      "epochs_reconstructed": 15,
+      "selected_epoch": 6,
+      "changed_backbone_tensors": 0,
+      "unchanged_bn_buffers": 102,
+      "selected_forward_images": 168,
+      "maximum_forward_logit_delta": 0.0
+    },
+    {
+      "seed": 2027,
+      "arm": "adapted",
+      "epochs_reconstructed": 15,
+      "selected_epoch": 8,
+      "changed_backbone_tensors": 135,
+      "unchanged_bn_buffers": 102,
+      "selected_forward_images": 168,
+      "maximum_forward_logit_delta": 0.0
+    },
+    {
+      "seed": 2028,
+      "arm": "frozen",
+      "epochs_reconstructed": 15,
+      "selected_epoch": 10,
+      "changed_backbone_tensors": 0,
+      "unchanged_bn_buffers": 102,
+      "selected_forward_images": 168,
+      "maximum_forward_logit_delta": 0.0
+    },
+    {
+      "seed": 2028,
+      "arm": "adapted",
+      "epochs_reconstructed": 15,
+      "selected_epoch": 8,
+      "changed_backbone_tensors": 135,
+      "unchanged_bn_buffers": 102,
+      "selected_forward_images": 168,
+      "maximum_forward_logit_delta": 0.0
+    }
+  ],
+  "trained_epoch_metrics_reconstructed": 90,
+  "warm_epoch_metrics_reconstructed": 6,
+  "paired_intervals_reconstructed": 27,
+  "production_changed": false,
+  "new_fitting_performed": false,
+  "metadata_only_seed_correction_verified": true,
+  "original_report_preserved_sha256": "18e184b5abb4c67a53a17a9887b9b4321f34a904f46e714a925c2b46fdcff188",
+  "audit_method": "independent scipy/sklearn metrics and vectorized whole-component bootstrap; saved states and byte/geometry audit",
+  "verifier_sha256": "d734adae7d15c20c5c60a10c301b30c24892e40adf61e7320d03ae6c8910303e",
+  "elapsed_seconds": 24.05782139999792
+}

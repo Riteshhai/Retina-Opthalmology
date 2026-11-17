@@ -1,0 +1,2104 @@
+{
+  "schema_version": 1,
+  "experiment_id": "ordinal_randomization_v1",
+  "spec_version": "1.0",
+  "dataset": "DeepDRiD",
+  "partition": "validation",
+  "scope": "development_ordinal_diagnostics",
+  "images": 168,
+  "patients": 42,
+  "model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "artifact_sha256": {
+    "dr": "f530056c27f83dbff8bba4ebb481cf7a9d82289947c4eda655a69ed22685a527",
+    "quality": "a600872ce8e2b256205350a5ef6c99b77d71f679d217c20c26810a3ed76eff43",
+    "calibration": "674821e445490c209fab99e56b0e9915ac406ca4ec8694e5efdbed63e456a737",
+    "conformal": "15a98f6bfe93f81156c5592701995d08796dd889e3a5e43bcbde7ab5aa61c221"
+  },
+  "manifest_sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d",
+  "protocol_sha256": "ac15041fb2ae5cfa8e4230b13202be5f174107cbe3a82af917f11a4f7a6b3f13",
+  "selection_cache_sha256": "3a5a7b3bee6092223d564666173652f9092a3437bbc48ceda6c9660817f759d6",
+  "selection_report_sha256": "f63848e4c68f18a5b4c1197e48fff6c7acf61412f6ffd0ec85a640228493e8cb",
+  "source_commit": "16bd809d49f8727d5e100410aa835427d12c0999",
+  "source_sha256": {
+    "scripts/run_ordinal_study.py": "22f315394674628f52300548b5fb2104dc61876d3fc331a2e2eb894d2d1de5ca",
+    "qsart/uncertainty/randomized_ordinal.py": "c8350d55f41d7abc21215d0979a8d9d385f7f4cff6350ba8c9e4697ac76bc030",
+    "qsart/uncertainty/conformal.py": "e8469ac637b913a984098c24fb543ae434b52d80c23647d78fa30e1d0548ffa4",
+    "qsart/inference/conformal_sidecar.py": "a16677fe3666542a766411f112100ab5ad64d0776f6a9982c2003b3fc60adcee",
+    "qsart/training/data.py": "6fbb87adf5402e270bdaf9779582fac845e2323568a3d1eb27d5411e2548ccf4",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+    "qsart/triage_v2.py": "8c8d98ba478190439490dbae5f265637ed5a9d90dcec4c0c72b12c8ba48005ec"
+  },
+  "package_versions": {
+    "numpy": "2.4.6",
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "pandas": "3.0.5"
+  },
+  "temperature_fitted_in_this_study": false,
+  "independent_temperature": 1.2517522400366823,
+  "randomization_seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "randomization_generator": "NumPy default_rng(seed), PCG64",
+  "deterministic_score_diagnostics": {
+    "image_true_label_scores": {
+      "n": 84,
+      "minimum": 0.3302207644845316,
+      "median": 0.8159330096434034,
+      "p90": 0.9694465243323038,
+      "maximum": 1.0,
+      "exact_score_one_count": 3
+    },
+    "patient_max_true_label_scores": {
+      "n": 21,
+      "minimum": 0.7954084157203307,
+      "median": 0.9242182306501249,
+      "p90": 0.9865142344229005,
+      "maximum": 1.0,
+      "exact_score_one_count": 2
+    },
+    "true_grade_is_last_in_greedy_order_count": 3,
+    "calibration_images": 84,
+    "calibration_patients": 21
+  },
+  "baseline_reproduction": [
+    {
+      "method": "lac",
+      "alpha": 0.1,
+      "threshold_absolute_error": 0.0,
+      "selection_sets_match": true,
+      "rank": 20
+    },
+    {
+      "method": "ordinal_greedy",
+      "alpha": 0.1,
+      "threshold_absolute_error": 0.0,
+      "selection_sets_match": true,
+      "rank": 20
+    },
+    {
+      "method": "lac",
+      "alpha": 0.05,
+      "threshold_absolute_error": 0.0,
+      "selection_sets_match": true,
+      "rank": 21
+    },
+    {
+      "method": "ordinal_greedy",
+      "alpha": 0.05,
+      "threshold_absolute_error": 0.0,
+      "selection_sets_match": true,
+      "rank": 21
+    }
+  ],
+  "comparisons": [
+    {
+      "method": "lac",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "threshold": 0.9662718821608653,
+      "rank": 20,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.09766212917945027,
+        "median": 0.8135198992233477,
+        "p90": 0.9545577083514067,
+        "maximum": 0.975203596196187,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9464285714285714,
+        "mean_set_size": 3.3452380952380953,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 0.8571428571428571,
+        "set_size_counts": {
+          "0": 0,
+          "1": 11,
+          "2": 25,
+          "3": 50,
+          "4": 59,
+          "5": 23
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.9
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.8
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8571428571428571,
+        "full_size_fraction": 0.13690476190476192,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 21,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 147,
+          "RECAPTURE": 15,
+          "AUTO_NONREFERABLE": 6
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "threshold": 1.0,
+      "rank": 20,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.7954084157203307,
+        "median": 0.9242182306501249,
+        "p90": 0.9865142344229005,
+        "maximum": 1.0,
+        "exact_score_one_count": 2
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 1.0,
+        "mean_set_size": 5.0,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 168
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 1.0,
+        "full_size_fraction": 1.0,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 0,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 168
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2026,
+      "threshold": 0.9674628073343555,
+      "rank": 20,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.30346065939189304,
+        "median": 0.7951123022203698,
+        "p90": 0.9656002022463854,
+        "maximum": 0.9925612895354223,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9404761904761905,
+        "mean_set_size": 3.386904761904762,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 2,
+          "2": 32,
+          "3": 50,
+          "4": 67,
+          "5": 17
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9594594594594594
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9583333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.925
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.8
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8095238095238095,
+        "full_size_fraction": 0.10119047619047619,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 24,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 18,
+          "SPECIALIST_REVIEW": 144,
+          "AUTO_NONREFERABLE": 6
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2027,
+      "threshold": 0.9895603751425132,
+      "rank": 20,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.3957755558345463,
+        "median": 0.8525203802903629,
+        "p90": 0.9748440223386488,
+        "maximum": 0.9948191443523647,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9821428571428571,
+        "mean_set_size": 3.9642857142857144,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 10,
+          "3": 37,
+          "4": 70,
+          "5": 51
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.8
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9285714285714286,
+        "full_size_fraction": 0.30357142857142855,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 6,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 162,
+          "RECAPTURE": 4,
+          "AUTO_NONREFERABLE": 2
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2028,
+      "threshold": 0.9777880219849908,
+      "rank": 20,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.5533566101609336,
+        "median": 0.842160247935073,
+        "p90": 0.9734941187964558,
+        "maximum": 0.9852673564903822,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9583333333333334,
+        "mean_set_size": 3.5714285714285716,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 24,
+          "3": 50,
+          "4": 68,
+          "5": 26
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9583333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.975
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8571428571428571,
+        "full_size_fraction": 0.15476190476190477,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 19,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 149,
+          "RECAPTURE": 12,
+          "AUTO_NONREFERABLE": 7
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2029,
+      "threshold": 0.9812609911252388,
+      "rank": 20,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.5225447308251482,
+        "median": 0.8697925619897544,
+        "p90": 0.9707334712273125,
+        "maximum": 0.988417200663769,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9583333333333334,
+        "mean_set_size": 3.6904761904761907,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 20,
+          "3": 43,
+          "4": 74,
+          "5": 31
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.972972972972973
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.95
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.8
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8571428571428571,
+        "full_size_fraction": 0.18452380952380953,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 17,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 12,
+          "SPECIALIST_REVIEW": 151,
+          "AUTO_NONREFERABLE": 5
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.1,
+      "randomization_seed": 2030,
+      "threshold": 0.9783919194215385,
+      "rank": 20,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.5007674771320612,
+        "median": 0.8487447568672819,
+        "p90": 0.9730515171935186,
+        "maximum": 0.9898033009401974,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9642857142857143,
+        "mean_set_size": 3.607142857142857,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 25,
+          "3": 42,
+          "4": 75,
+          "5": 26
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.972972972972973
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.975
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.8
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8571428571428571,
+        "full_size_fraction": 0.15476190476190477,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 21,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 14,
+          "SPECIALIST_REVIEW": 147,
+          "AUTO_NONREFERABLE": 7
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "lac",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "threshold": 0.9164154218551406,
+      "rank": 77,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.0237560440659782,
+        "median": 0.6636913526263827,
+        "p90": 0.9153834475675564,
+        "maximum": 0.975203596196187,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.8571428571428571,
+        "mean_set_size": 2.4702380952380953,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 0.8214285714285714,
+        "set_size_counts": {
+          "0": 0,
+          "1": 34,
+          "2": 50,
+          "3": 56,
+          "4": 27,
+          "5": 1
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.8783783783783784
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.8333333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.875
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.6
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.6428571428571429,
+        "full_size_fraction": 0.005952380952380952,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 44,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 33,
+          "SPECIALIST_REVIEW": 124,
+          "AUTO_NONREFERABLE": 11
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": null,
+      "threshold": 0.9762439559340218,
+      "rank": 77,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.3302207644845316,
+        "median": 0.8159330096434034,
+        "p90": 0.9694465243323038,
+        "maximum": 1.0,
+        "exact_score_one_count": 3
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.8809523809523809,
+        "mean_set_size": 2.9107142857142856,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 9,
+          "2": 45,
+          "3": 66,
+          "4": 48,
+          "5": 0
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9054054054054054
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9583333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.825
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.6
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.6666666666666666,
+        "full_size_fraction": 0.0,
+        "raw_empty_count_before_modal_fallback": 1,
+        "sets_wholly_below_grade2": 37,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 26,
+          "AUTO_NONREFERABLE": 11,
+          "SPECIALIST_REVIEW": 131
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2026,
+      "threshold": 0.931460097155464,
+      "rank": 77,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.02646749804628648,
+        "median": 0.5879437795720494,
+        "p90": 0.902499108868658,
+        "maximum": 0.9925612895354223,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.8452380952380952,
+        "mean_set_size": 2.7916666666666665,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 20,
+          "2": 45,
+          "3": 59,
+          "4": 38,
+          "5": 6
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.8648648648648649
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.8333333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.825
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.6190476190476191,
+        "full_size_fraction": 0.03571428571428571,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 40,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 31,
+          "SPECIALIST_REVIEW": 128,
+          "AUTO_NONREFERABLE": 9
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2027,
+      "threshold": 0.9432123090751838,
+      "rank": 77,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.0038707672953992443,
+        "median": 0.5978364251361294,
+        "p90": 0.9197325250527411,
+        "maximum": 0.9948191443523647,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.8869047619047619,
+        "mean_set_size": 2.9583333333333335,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 17,
+          "2": 36,
+          "3": 63,
+          "4": 41,
+          "5": 11
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9054054054054054
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9166666666666666
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.875
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7380952380952381,
+        "full_size_fraction": 0.06547619047619048,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 33,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 25,
+          "SPECIALIST_REVIEW": 135,
+          "AUTO_NONREFERABLE": 8
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2028,
+      "threshold": 0.9570944165185594,
+      "rank": 77,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.014715678557534926,
+        "median": 0.6433709388867217,
+        "p90": 0.9253775334144178,
+        "maximum": 0.9852673564903822,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9166666666666666,
+        "mean_set_size": 3.1547619047619047,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 9,
+          "2": 35,
+          "3": 58,
+          "4": 53,
+          "5": 13
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9459459459459459
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9583333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.9
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7619047619047619,
+        "full_size_fraction": 0.07738095238095238,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 30,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 21,
+          "SPECIALIST_REVIEW": 138,
+          "AUTO_NONREFERABLE": 9
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2029,
+      "threshold": 0.9435954444796832,
+      "rank": 77,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.012500589689329846,
+        "median": 0.5661581595078604,
+        "p90": 0.9293826654029507,
+        "maximum": 0.988417200663769,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.8928571428571429,
+        "mean_set_size": 2.9523809523809526,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 17,
+          "2": 38,
+          "3": 58,
+          "4": 46,
+          "5": 9
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.918918918918919
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.825
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7380952380952381,
+        "full_size_fraction": 0.05357142857142857,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 39,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 29,
+          "AUTO_NONREFERABLE": 10,
+          "SPECIALIST_REVIEW": 129
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.1,
+      "randomization_seed": 2030,
+      "threshold": 0.9445694600743774,
+      "rank": 77,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.011597661363015972,
+        "median": 0.6152267227118366,
+        "p90": 0.9221309779805414,
+        "maximum": 0.9898033009401974,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.8869047619047619,
+        "mean_set_size": 2.9523809523809526,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 21,
+          "2": 32,
+          "3": 58,
+          "4": 48,
+          "5": 9
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.918918918918919
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9166666666666666
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.875
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.6
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7380952380952381,
+        "full_size_fraction": 0.05357142857142857,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 34,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 26,
+          "SPECIALIST_REVIEW": 134,
+          "AUTO_NONREFERABLE": 8
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "lac",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "threshold": 0.975203596196187,
+      "rank": 21,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.09766212917945027,
+        "median": 0.8135198992233477,
+        "p90": 0.9545577083514067,
+        "maximum": 0.975203596196187,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9642857142857143,
+        "mean_set_size": 3.625,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 0.8809523809523809,
+        "set_size_counts": {
+          "0": 0,
+          "1": 5,
+          "2": 18,
+          "3": 47,
+          "4": 63,
+          "5": 35
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.925
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.8
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8809523809523809,
+        "full_size_fraction": 0.20833333333333334,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 16,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 152,
+          "RECAPTURE": 10,
+          "AUTO_NONREFERABLE": 6
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "threshold": 1.0,
+      "rank": 21,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.7954084157203307,
+        "median": 0.9242182306501249,
+        "p90": 0.9865142344229005,
+        "maximum": 1.0,
+        "exact_score_one_count": 2
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 1.0,
+        "mean_set_size": 5.0,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 168
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 1.0
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 1.0,
+        "full_size_fraction": 1.0,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 0,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 168
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2026,
+      "threshold": 0.9925612895354223,
+      "rank": 21,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.30346065939189304,
+        "median": 0.7951123022203698,
+        "p90": 0.9656002022463854,
+        "maximum": 0.9925612895354223,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9940476190476191,
+        "mean_set_size": 4.125,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 3,
+          "3": 32,
+          "4": 74,
+          "5": 59
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.9
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9761904761904762,
+        "full_size_fraction": 0.35119047619047616,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 2,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 1,
+          "SPECIALIST_REVIEW": 166,
+          "AUTO_NONREFERABLE": 1
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2027,
+      "threshold": 0.9948191443523647,
+      "rank": 21,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.3957755558345463,
+        "median": 0.8525203802903629,
+        "p90": 0.9748440223386488,
+        "maximum": 0.9948191443523647,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9940476190476191,
+        "mean_set_size": 4.255952380952381,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 3,
+          "3": 25,
+          "4": 66,
+          "5": 74
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.9
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9761904761904762,
+        "full_size_fraction": 0.44047619047619047,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 1,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 167,
+          "RECAPTURE": 1
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2028,
+      "threshold": 0.9852673564903822,
+      "rank": 21,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.5533566101609336,
+        "median": 0.842160247935073,
+        "p90": 0.9734941187964558,
+        "maximum": 0.9852673564903822,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9702380952380952,
+        "mean_set_size": 3.7916666666666665,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 11,
+          "3": 48,
+          "4": 74,
+          "5": 35
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 1.0
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.975
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9047619047619048,
+        "full_size_fraction": 0.20833333333333334,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 9,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 159,
+          "RECAPTURE": 6,
+          "AUTO_NONREFERABLE": 3
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2029,
+      "threshold": 0.988417200663769,
+      "rank": 21,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.5225447308251482,
+        "median": 0.8697925619897544,
+        "p90": 0.9707334712273125,
+        "maximum": 0.988417200663769,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9761904761904762,
+        "mean_set_size": 3.9523809523809526,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 6,
+          "3": 42,
+          "4": 74,
+          "5": 46
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.972972972972973
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.9
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9047619047619048,
+        "full_size_fraction": 0.27380952380952384,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 5,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 163,
+          "RECAPTURE": 4,
+          "AUTO_NONREFERABLE": 1
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "patient_max",
+      "alpha": 0.05,
+      "randomization_seed": 2030,
+      "threshold": 0.9898033009401974,
+      "rank": 21,
+      "calibration_units": 21,
+      "calibration_score_distribution": {
+        "n": 21,
+        "minimum": 0.5007674771320612,
+        "median": 0.8487447568672819,
+        "p90": 0.9730515171935186,
+        "maximum": 0.9898033009401974,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9880952380952381,
+        "mean_set_size": 4.017857142857143,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 0,
+          "2": 3,
+          "3": 44,
+          "4": 68,
+          "5": 53
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 1.0
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 1.0
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.9
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.9523809523809523,
+        "full_size_fraction": 0.31547619047619047,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 2,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 166,
+          "RECAPTURE": 1,
+          "AUTO_NONREFERABLE": 1
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "lac",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "threshold": 0.9490855524809119,
+      "rank": 81,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.0237560440659782,
+        "median": 0.6636913526263827,
+        "p90": 0.9153834475675564,
+        "maximum": 0.975203596196187,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9047619047619048,
+        "mean_set_size": 2.9464285714285716,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 0.8273809523809523,
+        "set_size_counts": {
+          "0": 0,
+          "1": 18,
+          "2": 38,
+          "3": 56,
+          "4": 47,
+          "5": 9
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9324324324324325
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.9
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9166666666666666
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.9
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7380952380952381,
+        "full_size_fraction": 0.05357142857142857,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 30,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 24,
+          "SPECIALIST_REVIEW": 138,
+          "AUTO_NONREFERABLE": 6
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": null,
+      "threshold": 0.9865142344229006,
+      "rank": 81,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.3302207644845316,
+        "median": 0.8159330096434034,
+        "p90": 0.9694465243323038,
+        "maximum": 1.0,
+        "exact_score_one_count": 3
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9107142857142857,
+        "mean_set_size": 3.1964285714285716,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 1,
+          "2": 37,
+          "3": 58,
+          "4": 72,
+          "5": 0
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.918918918918919
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.875
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7380952380952381,
+        "full_size_fraction": 0.0,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 27,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 18,
+          "AUTO_NONREFERABLE": 9,
+          "SPECIALIST_REVIEW": 141
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2026,
+      "threshold": 0.9634925486104318,
+      "rank": 81,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.02646749804628648,
+        "median": 0.5879437795720494,
+        "p90": 0.902499108868658,
+        "maximum": 0.9925612895354223,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9226190476190477,
+        "mean_set_size": 3.2976190476190474,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 8,
+          "2": 30,
+          "3": 49,
+          "4": 66,
+          "5": 15
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9594594594594594
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9583333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.875
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7619047619047619,
+        "full_size_fraction": 0.08928571428571429,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 28,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 21,
+          "SPECIALIST_REVIEW": 140,
+          "AUTO_NONREFERABLE": 7
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2027,
+      "threshold": 0.9642429099728375,
+      "rank": 81,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.0038707672953992443,
+        "median": 0.5978364251361294,
+        "p90": 0.9197325250527411,
+        "maximum": 0.9948191443523647,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9345238095238095,
+        "mean_set_size": 3.261904761904762,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 9,
+          "2": 31,
+          "3": 52,
+          "4": 59,
+          "5": 17
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9459459459459459
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.925
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.7857142857142857,
+        "full_size_fraction": 0.10119047619047619,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 26,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 19,
+          "SPECIALIST_REVIEW": 142,
+          "AUTO_NONREFERABLE": 7
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2028,
+      "threshold": 0.9689992111399619,
+      "rank": 81,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.014715678557534926,
+        "median": 0.6433709388867217,
+        "p90": 0.9253775334144178,
+        "maximum": 0.9852673564903822,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9464285714285714,
+        "mean_set_size": 3.4047619047619047,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 4,
+          "2": 31,
+          "3": 48,
+          "4": 63,
+          "5": 22
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9864864864864865
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 0.9583333333333334
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.925
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8333333333333334,
+        "full_size_fraction": 0.13095238095238096,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 25,
+        "guarded_pointwise_action_counts": {
+          "SPECIALIST_REVIEW": 143,
+          "RECAPTURE": 17,
+          "AUTO_NONREFERABLE": 8
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2029,
+      "threshold": 0.9631786412555552,
+      "rank": 81,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.012500589689329846,
+        "median": 0.5661581595078604,
+        "p90": 0.9293826654029507,
+        "maximum": 0.988417200663769,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9345238095238095,
+        "mean_set_size": 3.2857142857142856,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 7,
+          "2": 32,
+          "3": 46,
+          "4": 72,
+          "5": 11
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.9594594594594594
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.9
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8095238095238095,
+        "full_size_fraction": 0.06547619047619048,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 27,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 20,
+          "SPECIALIST_REVIEW": 141,
+          "AUTO_NONREFERABLE": 7
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "unit": "image",
+      "alpha": 0.05,
+      "randomization_seed": 2030,
+      "threshold": 0.9706556854285278,
+      "rank": 81,
+      "calibration_units": 84,
+      "calibration_score_distribution": {
+        "n": 84,
+        "minimum": 0.011597661363015972,
+        "median": 0.6152267227118366,
+        "p90": 0.9221309779805414,
+        "maximum": 0.9898033009401974,
+        "exact_score_one_count": 0
+      },
+      "metrics": {
+        "n_images": 168,
+        "marginal_coverage": 0.9523809523809523,
+        "mean_set_size": 3.4583333333333335,
+        "empty_set_count": 0,
+        "contiguous_nonempty_fraction": 1.0,
+        "set_size_counts": {
+          "0": 0,
+          "1": 3,
+          "2": 28,
+          "3": 45,
+          "4": 73,
+          "5": 19
+        },
+        "per_class": {
+          "0": {
+            "n": 74,
+            "coverage": 0.972972972972973
+          },
+          "1": {
+            "n": 20,
+            "coverage": 0.95
+          },
+          "2": {
+            "n": 24,
+            "coverage": 1.0
+          },
+          "3": {
+            "n": 40,
+            "coverage": 0.95
+          },
+          "4": {
+            "n": 10,
+            "coverage": 0.7
+          }
+        },
+        "n_patients": 42,
+        "patient_all_views_coverage": 0.8571428571428571,
+        "full_size_fraction": 0.1130952380952381,
+        "raw_empty_count_before_modal_fallback": 0,
+        "sets_wholly_below_grade2": 22,
+        "guarded_pointwise_action_counts": {
+          "RECAPTURE": 15,
+          "SPECIALIST_REVIEW": 146,
+          "AUTO_NONREFERABLE": 7
+        },
+        "true_referable_auto_count": 0,
+        "capacity_feasibility_evaluated": false
+      }
+    }
+  ],
+  "randomization_summaries": [
+    {
+      "method": "ordinal_greedy_randomized",
+      "alpha": 0.1,
+      "unit": "patient_max",
+      "seeds": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "marginal_coverage": {
+        "mean": 0.9607142857142857,
+        "minimum": 0.9404761904761905,
+        "maximum": 0.9821428571428571
+      },
+      "patient_all_views_coverage": {
+        "mean": 0.8619047619047618,
+        "minimum": 0.8095238095238095,
+        "maximum": 0.9285714285714286
+      },
+      "mean_set_size": {
+        "mean": 3.644047619047619,
+        "minimum": 3.386904761904762,
+        "maximum": 3.9642857142857144
+      },
+      "full_size_fraction": {
+        "mean": 0.17976190476190476,
+        "minimum": 0.10119047619047619,
+        "maximum": 0.30357142857142855
+      },
+      "sets_wholly_below_grade2": {
+        "mean": 17.4,
+        "minimum": 6.0,
+        "maximum": 24.0
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "alpha": 0.1,
+      "unit": "image",
+      "seeds": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "marginal_coverage": {
+        "mean": 0.8857142857142858,
+        "minimum": 0.8452380952380952,
+        "maximum": 0.9166666666666666
+      },
+      "patient_all_views_coverage": {
+        "mean": 0.719047619047619,
+        "minimum": 0.6190476190476191,
+        "maximum": 0.7619047619047619
+      },
+      "mean_set_size": {
+        "mean": 2.961904761904762,
+        "minimum": 2.7916666666666665,
+        "maximum": 3.1547619047619047
+      },
+      "full_size_fraction": {
+        "mean": 0.05714285714285714,
+        "minimum": 0.03571428571428571,
+        "maximum": 0.07738095238095238
+      },
+      "sets_wholly_below_grade2": {
+        "mean": 35.2,
+        "minimum": 30.0,
+        "maximum": 40.0
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "alpha": 0.05,
+      "unit": "patient_max",
+      "seeds": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "marginal_coverage": {
+        "mean": 0.9845238095238095,
+        "minimum": 0.9702380952380952,
+        "maximum": 0.9940476190476191
+      },
+      "patient_all_views_coverage": {
+        "mean": 0.9428571428571428,
+        "minimum": 0.9047619047619048,
+        "maximum": 0.9761904761904762
+      },
+      "mean_set_size": {
+        "mean": 4.0285714285714285,
+        "minimum": 3.7916666666666665,
+        "maximum": 4.255952380952381
+      },
+      "full_size_fraction": {
+        "mean": 0.31785714285714284,
+        "minimum": 0.20833333333333334,
+        "maximum": 0.44047619047619047
+      },
+      "sets_wholly_below_grade2": {
+        "mean": 3.8,
+        "minimum": 1.0,
+        "maximum": 9.0
+      }
+    },
+    {
+      "method": "ordinal_greedy_randomized",
+      "alpha": 0.05,
+      "unit": "image",
+      "seeds": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "marginal_coverage": {
+        "mean": 0.9380952380952381,
+        "minimum": 0.9226190476190477,
+        "maximum": 0.9523809523809523
+      },
+      "patient_all_views_coverage": {
+        "mean": 0.8095238095238095,
+        "minimum": 0.7619047619047619,
+        "maximum": 0.8571428571428571
+      },
+      "mean_set_size": {
+        "mean": 3.3416666666666663,
+        "minimum": 3.261904761904762,
+        "maximum": 3.4583333333333335
+      },
+      "full_size_fraction": {
+        "mean": 0.09999999999999999,
+        "minimum": 0.06547619047619048,
+        "maximum": 0.13095238095238096
+      },
+      "sets_wholly_below_grade2": {
+        "mean": 25.6,
+        "minimum": 22.0,
+        "maximum": 28.0
+      }
+    }
+  ],
+  "limitations": [
+    "Method exploration follows inspected development failures; not fresh confirmation.",
+    "Selection data informed model choice; no formal or shifted-data coverage guarantee.",
+    "Pooled-image diagnostics contain correlated views and change the patient-all-views target.",
+    "Five randomization seeds are not five training seeds or independent cohorts.",
+    "No seed/method/alpha is selected for deployment; original sidecar remains unchanged.",
+    "Pointwise actions do not establish cohort capacities, specialist outcomes or clinical utility.",
+    "This score-construction study is not exact APTOS/backbone/base-paper reproduction."
+  ],
+  "private_output_sha256": "0ef95338994b3a587dd38b3034f5c059f063a77901b5af3f17f39292d5f40b4c",
+  "elapsed_seconds": 15.608313400007319
+}

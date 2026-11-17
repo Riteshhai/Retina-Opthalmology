@@ -1,0 +1,81 @@
+x-portal-environment: &portal-environment
+  QSART_PORTAL_DATABASE_URL: postgresql+psycopg://qsart:${QSART_POSTGRES_PASSWORD:?Set QSART_POSTGRES_PASSWORD in the local QSART-X environment file}@db:5432/qsart
+
+x-portal-image: &portal-image
+  image: &portal-image-name qsart-x-api:local
+  build:
+    context: .
+    target: portal
+
+x-web-runtime: &web-runtime
+  depends_on:
+    api:
+      condition: service_healthy
+  read_only: true
+  tmpfs:
+    - /tmp
+  healthcheck:
+    test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1:8080/']
+    interval: 5s
+    timeout: 3s
+    retries: 12
+
+services:
+  db:
+    image: postgres:17.12-alpine@sha256:34261f594522cf41dfcb76aefd42b9d201098b0e6b23c9c68733f169e4218b6f
+    environment:
+      POSTGRES_DB: qsart
+      POSTGRES_USER: qsart
+      POSTGRES_PASSWORD: ${QSART_POSTGRES_PASSWORD:?Set QSART_POSTGRES_PASSWORD in the local QSART-X environment file}
+    volumes:
+      - portal-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-h', '127.0.0.1', '-U', 'qsart', '-d', 'qsart']
+      interval: 3s
+      timeout: 3s
+      retries: 15
+
+  migrate:
+    <<: *portal-image
+    command: ['python', '-m', 'alembic', '-c', 'services/api/portal_db/alembic.ini', 'upgrade', 'head']
+    environment: *portal-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  api:
+    <<: *portal-image
+    environment:
+      <<: *portal-environment
+      QSART_PORTAL_IMAGE_DIR: /var/lib/qsart/portal-images
+    volumes:
+      - portal-images:/var/lib/qsart/portal-images
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  dashboard:
+    image: *portal-image-name
+
+  web:
+    <<: *web-runtime
+    build: ./apps/web
+    image: qsart-x-web:local
+    ports:
+      - '127.0.0.1:${QSART_WEB_PORT:-18700}:8080'
+
+  workspace:
+    <<: *web-runtime
+    build:
+      context: ./apps/web
+      target: local-workspace
+    image: qsart-x-workspace:local
+    ports:
+      - '127.0.0.1:${QSART_WORKSPACE_PORT:-18701}:8080'
+
+volumes:
+  portal-data:
+  portal-images:

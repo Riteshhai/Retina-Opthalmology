@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "experiment_id": "idrid_review_v1",
+  "dataset": "IDRiD",
+  "partition": "external_holdout",
+  "scope": "external_overlap_review_and_population_freeze",
+  "images": 516,
+  "summary": {
+    "populations": {
+      "full_source": {
+        "images": 516,
+        "fingerprint_components": 508,
+        "dr_grade_counts": {
+          "0": 168,
+          "1": 25,
+          "2": 168,
+          "3": 93,
+          "4": 62
+        },
+        "label_conflicting_components": 4
+      },
+      "cross_source_filtered": {
+        "images": 513,
+        "fingerprint_components": 505,
+        "dr_grade_counts": {
+          "0": 167,
+          "1": 24,
+          "2": 168,
+          "3": 92,
+          "4": 62
+        },
+        "label_conflicting_components": 4
+      },
+      "cross_source_filtered_representatives": {
+        "images": 505,
+        "fingerprint_components": 505,
+        "dr_grade_counts": {
+          "0": 167,
+          "1": 23,
+          "2": 164,
+          "3": 91,
+          "4": 60
+        },
+        "label_conflicting_components": 4
+      }
+    },
+    "cross_source_flagged_components": 3,
+    "cross_source_flagged_observations": 3,
+    "representative_rule": "Minimum SHA256(idrid-review-v1: + namespaced identity), independent of labels/order/outcomes",
+    "clinical_label_adjudication_performed": false,
+    "source_labels_modified": false,
+    "full_source_observations_deleted": 0,
+    "model_inference_performed": false,
+    "pixel_evidence": {
+      "internal": {
+        "pairs": 8,
+        "evidence_categories": {
+          "byte_exact": 6,
+          "fingerprint_candidate_unresolved": 2
+        },
+        "decoded_rgb_exact_pairs": 6,
+        "canonical_224_exact_pairs": 6,
+        "dr_disagreeing_pairs": 5,
+        "dme_disagreeing_pairs": 2
+      },
+      "cross_source": {
+        "pairs": 3,
+        "evidence_categories": {
+          "fingerprint_candidate_unresolved": 3
+        },
+        "decoded_rgb_exact_pairs": 0,
+        "canonical_224_exact_pairs": 0
+      }
+    }
+  },
+  "source_provenance_status": "official_download_user_confirmed",
+  "source_confirmation": {
+    "status": "official_origin_user_confirmed",
+    "confirmed_at_utc": "2026-11-04T13:42:37.112770+00:00",
+    "receipt_sha256": "641d763bb294093824d7565be62855dc7108627556cc223be653c5a351607b49",
+    "official_archive_checksum_verified": false
+  },
+  "source_commit": "d1c5968189f8bd36508b5cbb4c35220af5f0bf6b",
+  "execution_source_sha256": {
+    "scripts/review_idrid.py": "974e59931c5f1e9933823e3a229d92ad8d50e896b50078653bceb2a8d34624b7",
+    "qsart/data/idrid_review.py": "dd9ab7cc07cb7cfe0294e57d9369f48b4a5e79fdb656ffdf8cc0f40f462cd09e",
+    "qsart/data/idrid_provenance.py": "52b83908099beb5e11d62582af2b565408ace426802ca3240c323e852066a20d",
+    "qsart/data/idrid.py": "1be85cc7dcd40c55063ee8935c37ef17959c642852bdbce5b5295884319f6ffd",
+    "qsart/data/aptos.py": "b5d6b1f981c4d0e3f24d1465dc2ac82ea3ddbf3567472f19b5094b19b515e9fd",
+    "configs/idrid_data_v1.json": "11461a9a8a10b8554f3cf35a518a3650085714ac2ca439daecec22e96e16b027",
+    "qsart/data/manifests.py": "0ae85ee90b6b81b0fb4281b91b503d85c73e5665de5acb5b12a1371fcd98a6ec",
+    "qsart/preprocessing/fundus.py": "49ed4aee5836783da4af1a4aa412a73836485ed7a4d136ba8b07200dda77fcc8",
+    "scripts/inspect_datasets.py": "54694735980190df8fdc59814b86882d11bd59833402bfe36191f2939b869e3d",
+    "scripts/prepare_idrid.py": "9f56591ac15d7b284a3e2610963dce178255c08e341708fa2f2cadb94437fe99",
+    "docs/research/IDRID_REVIEW_V1_PROTOCOL.md": "330471db40e1829dec0c643a3410b22f0b400c541a6507043d609df0027375c9"
+  },
+  "input_bindings": {
+    "data_audit_sha256": "b31891fc14c5c52ab1e638821a5e014762e20d2add6a936ab18d093ef165f88a",
+    "private_audit_outputs": {
+      "external_manifest.csv": "9f185bf5083b68e3bdeddacb5aa127e83e9a6011ed6a0fd8990ea2bb39b17553",
+      "internal_candidates.csv": "01bddaa0bb42d09df6d1586148dcb4feee24a779b72a82bae2b2e8598fa28ac5",
+      "cross_source_candidates.csv": "f47f9b0b28bd4203570359b1d0aed2cffb201be8ee55452bff560644c572d1f5"
+    },
+    "reference_manifests": [
+      {
+        "path": "data/manifests/aptos_v1/dataset_manifest.csv",
+        "dataset": "APTOS_2019",
+        "rows": 3514,
+        "sha256": "1d79240d22237d1934328899d3d6624cd41f6294a15d158a3f62eacf5e7684ed"
+      },
+      {
+        "path": "data/manifests/aptos_v1/quarantine_report.csv",
+        "dataset": "APTOS_2019",
+        "rows": 148,
+        "sha256": "4ae497251d8923f31d4e18fe1a3b8e650a8a1a8b57a59587a1486f48d7c2ef39"
+      },
+      {
+        "path": "data/processed/deepdrid/development_v1.csv",
+        "dataset": "DeepDRiD_regular_fundus",
+        "rows": 1184,
+        "sha256": "45e9f2d34ed54a12056b57a808d03cfaf29ccc970d148e9eb107b79cf5ac3e0d"
+      },
+      {
+        "path": "data/processed/deepdrid/confirmation_v1.csv",
+        "dataset": "DeepDRiD_regular_fundus",
+        "rows": 340,
+        "sha256": "21cfd7aa43660a236903430207b27cc3a8366a9129cbcbfa513eee0666baa9b7"
+      }
+    ],
+    "source_confirmation_sha256": "641d763bb294093824d7565be62855dc7108627556cc223be653c5a351607b49"
+  },
+  "private_output_sha256": {
+    "external_population.csv": "88b2b35aa68cd59cf86973465e7acf1e3411778de3aa5171fa84e1de9bd167db",
+    "pair_evidence.csv": "69499d29775583404c119abd774e725d3f87d7d70c9d8a628ed766f016317807"
+  },
+  "original_artifacts_preserved": 25,
+  "model_inference_performed": false,
+  "external_model_evaluation_completed": false,
+  "elapsed_seconds": 13.484850900014862,
+  "limitations": [
+    "Pixel-identical evidence establishes same displayed image content, not patient identity or the correct clinical grade.",
+    "Canonical pixel statistics are descriptive and never establish original-pixel identity or inclusion decisions.",
+    "All original cross-source candidates are conservatively flagged regardless of pixel similarity or labels.",
+    "No source label is changed; retained representatives of label-conflicting components remain ambiguous.",
+    "Populations are sensitivity views under a fixed rule, not independent-patient or complete decontamination guarantees.",
+    "Source origin is user-confirmed; official archive checksum authentication has not been performed.",
+    "No classifier, temperature, conformal threshold, policy fitting or external performance was computed."
+  ]
+}

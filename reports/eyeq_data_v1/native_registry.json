@@ -1,0 +1,19 @@
+{
+  "status": "verified",
+  "runtime": "native_python",
+  "registered_records": 19,
+  "source_report_sha256": "e0941a2319941e28052c614b68a618d5fe9ed850f71cc7b3c3e30e6b7755b645",
+  "actual_api_metrics_match": true,
+  "source_split_rows_verified": 2,
+  "quality_categories_verified": 3,
+  "displayed_table_disagreements_verified": 3,
+  "no_quality_accuracy_claim_verified": true,
+  "zero_image_and_incomplete_readiness_labels_verified": true,
+  "production_card_and_sidecar_matched": true,
+  "production_model_version": "development-v1-dr-mobilenet_v3_small-seed2026-epoch15",
+  "no_ui_exceptions": true,
+  "ui_method": "Streamlit AppTest against actual native HTTP API",
+  "new_browser_rendering_verified": false,
+  "new_container_execution_verified": false,
+  "verifier_sha256": "67d97e7e500ac6717addd8dc9ac61357768b07fcaee861f79d32ba2f643524a7"
+}

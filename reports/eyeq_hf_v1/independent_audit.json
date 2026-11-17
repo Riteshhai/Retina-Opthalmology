@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "full local cache hashes, metadata, raw author CSV join and saved-record integrity; no JPEG decoding or neural replay",
+  "source_commit": "c1e52fd21f43e38de78007e1376055276be5865d",
+  "parquet_files_verified": 14,
+  "parquet_bytes_verified": 6535643877,
+  "unique_metadata_rows_reconstructed": 35108,
+  "raw_author_annotation_rows_reconstructed": 28792,
+  "private_join_rows_verified": 28792,
+  "remote_range_identity_rows_matched_exactly": 35108,
+  "remote_range_bytes_fetched": 1291755,
+  "remote_range_scope_note": "Only name/DR columns selected. Footer read-ahead may include adjacent compressed image payload; no JPEG decoded.",
+  "preserved_artifacts": 307,
+  "source_csv_sha256": {
+    "train": "34f39f8923f62a13fcaeccef7e5da7ec607b45805e7736042fa274b2731b9480",
+    "test": "209135bb0dff2d6203c445ee010cbdcb925edb5338a040dc6ae62c06649047b3"
+  },
+  "dataset_card_verified": true,
+  "download_receipt_verified": true,
+  "all_source_partition_roles_retained": true,
+  "quality_truth_revalidation_performed": false,
+  "acquisition_report_sha256": "71cfa46c0256129aeafd0c5d68185316bc6b95e21d961d63085a69a726227d9e",
+  "verifier_sha256": "4ac523db194cb4ed3baa33846f79b551a59ed19ff28635a3266fe6d0f2f46553"
+}
