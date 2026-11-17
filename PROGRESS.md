@@ -1,5 +1,19 @@
 # Execution log
 
+## 2026-11-17 — prepared the M.Tech panel review
+
+- Created a nine-slide local review deck with editable evidence tables and
+  speaker notes linked to the audit-bound studies. Checked every rendered
+  slide, reopened the exported PowerPoint package with the authoring runtime,
+  and verified the three native tables. The deck is under
+  `artifacts/qsart_x_panel_review/output/`.
+- Added a [five-minute panel runbook](docs/QSART_X_PANEL_DEMO.md) with preflight
+  checks, synthetic demonstration instructions, and offline figures. Started
+  the existing local Docker Compose project. Verified the public and private
+  site entry points, API and portal readiness, and both audited lab studies.
+  No new scoring ran during the rehearsal preflight. Ruff and seven focused
+  Experiment Explorer and release-verifier tests passed.
+
 ## 2026-11-16 — linked audited results from the QSART-X website
 
 - Updated the public-facing home and Research pages to show the Set-C review

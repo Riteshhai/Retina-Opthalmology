@@ -82,6 +82,12 @@ the tested host and workload. The benchmark includes peak process and
 container memory.
 [CPU benchmark](../reports/qsart_x_release_v1/cpu_profiles.json).
 
+## Panel demonstration
+
+The [five-minute panel runbook](QSART_X_PANEL_DEMO.md) covers the local
+screening and reviewer workflow, the two audited studies in Experiment Explorer,
+and the figures and tables to use for an offline review.
+
 ## Manuscript materials
 
 Use the [manuscript draft](research/QSART_X_MANUSCRIPT.md) and the
